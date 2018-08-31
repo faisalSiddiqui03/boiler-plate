@@ -13,8 +13,6 @@ import {
   LogoutWidgetActions,
   Action
 } from '@capillarytech/pwa-framework';
-import { SignInPage } from './components/signin/signin.page';
-import { SignUpPage } from './components/signup/signup.page';
 
 @Component({
   selector: 'app-root',

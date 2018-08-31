@@ -13,8 +13,6 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateMessageFormatCompiler } from "ngx-translate-messageformat-compiler";
-import { SignInPageModule } from "./components/signin/signin.module";
-import { SignUpPageModule } from "./components/signup/signup.module";
 import { AlertServiceModule, AlertService, LoaderServiceModule, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 import {
@@ -31,7 +29,6 @@ import {
   LogoutWidgetModule,
 } from '@capillarytech/pwa-framework';
 import { HttpLoaderFactory } from './translation.loader';
-import { SidebarModule } from './components/sidebar/sidebar.module';
 const configInitializer = (appConfig: ConfigService) => {
   const env = environment.env;
   return () => {
@@ -56,9 +53,6 @@ const configInitializer = (appConfig: ConfigService) => {
     ImagePreloadModule,
     UserProfileWidgetModule,
     LogoutWidgetModule,
-    SidebarModule,
-    SignInPageModule,
-    SignUpPageModule,
     EventTrackModule.forRoot([EventTrackModule.Tracker.GTM]),
     LanguageServiceModule.forRoot([
       { name: 'English', code: 'en', isDefault: false, alignment: 'ltr' },
