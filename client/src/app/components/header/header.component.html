@@ -1,3 +1,17 @@
-<p>
-  header works!
-</p>
+
+<ion-navbar [hideBackButton]="true" >
+  <div> 
+    <div class="center-align logo_bg edge-shadow brd-radius">
+        <img src="../../assets/imgs/pizzahut-logo.svg" alt="Pizza Hut"  class="header-img">
+    </div>
+    <!-- <div class="lang-selection">English</div>     -->
+    <div (click)="goToProfile()">
+        <div class="profile-icon" >
+            <ion-icon name="my-profile"></ion-icon>
+        </div>
+    </div>
+    <div class="halal-logo" >
+        <img src="../../assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal"/>
+    </div>
+  </div>
+</ion-navbar>
