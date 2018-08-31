@@ -1,9 +1,9 @@
 {
-  "merchantId": "e04386d8-7ca8-4fa3-b8b8-6c606844d257", 
+  "merchantId": "2002cbfe-9adf-42ac-9bfd-8e013fee7c18",
   "developerApiUrl": "http://stageln.martjack.com/DeveloperAPI",
   "base_dev_url": "http://stageln.martjack.com/DeveloperAPI",
   "frontendApiUrl" : "http://stageln.martjack.com/FrontendApi/V2/",
-  "publicKey": "RTDHFV9B", 
+  "publicKey": "RTDHFV9B",
   "secretKey": "UDD3GGMEYDOGPQ5MR9UK4NL9",
   "googleMapsApiKey": "AIzaSyCcy4RPa9rv-S3780tImXmM3Xw5i1PvVTI",
   "countryCode": "SA",
@@ -27,7 +27,7 @@
   },
   "enableRedisCaching": false,
   "redis": {
-    "host": "192.168.33.101",
+    "host": "nightly-pwa-redis.8xcpns.ng.0001.euc1.cache.amazonaws.com",
     "port": "6379",
     "database": "1"
   },
