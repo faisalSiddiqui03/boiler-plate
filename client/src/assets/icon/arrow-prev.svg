@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 81 81">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ffffff;
+        stroke: #ffffff;
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Back_arrow_icon" data-name="Back arrow icon" transform="translate(-18 -110)">
+    <path id="Path_7712" data-name="Path 7712" class="cls-1" d="M3.484.614a2.074,2.074,0,0,0-2.871,0,2.183,2.183,0,0,0,0,2.871L21.12,23.992a1.982,1.982,0,0,0,2.871,0L44.5,3.485a2.074,2.074,0,0,0,0-2.871,2.183,2.183,0,0,0-2.871,0L22.555,19.583Z" transform="translate(70.831 128.425) rotate(90)"/>
+    <rect id="Rectangle_2836" data-name="Rectangle 2836" class="cls-2" width="81" height="81" transform="translate(18 110)"/>
+  </g>
+</svg>

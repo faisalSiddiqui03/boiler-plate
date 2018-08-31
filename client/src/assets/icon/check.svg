@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67 67">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #d84528;
+        stroke: #d84528;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Check_icon" data-name="Check icon" transform="translate(-945 -462)">
+    <path id="Path_7946" data-name="Path 7946" class="cls-1" d="M79.883,14.493l6.628,6.628L101.783,5.848a2.914,2.914,0,0,1,4.034,0,3.068,3.068,0,0,1,0,4.034l-17.29,17.29a2.786,2.786,0,0,1-4.034,0l-8.645-8.645a2.914,2.914,0,0,1,0-4.034A2.786,2.786,0,0,1,79.883,14.493Z" transform="translate(888 479.463)"/>
+    <rect id="Rectangle_2855" data-name="Rectangle 2855" class="cls-2" width="67" height="67" transform="translate(945 462)"/>
+  </g>
+</svg>

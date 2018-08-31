@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67 67">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #404040;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Close_icon" data-name="Close icon" transform="translate(-445 -1798)">
+    <g id="Group_199" data-name="Group 199" transform="translate(11 -182)">
+      <rect id="Rectangle_63" data-name="Rectangle 63" class="cls-1" width="36.365" height="6.061" rx="3" transform="translate(456.286 1998) rotate(45)"/>
+      <rect id="Rectangle_64" data-name="Rectangle 64" class="cls-1" width="36.365" height="6.061" rx="3" transform="translate(452 2023.714) rotate(-45)"/>
+    </g>
+    <rect id="Rectangle_2856" data-name="Rectangle 2856" class="cls-2" width="67" height="67" transform="translate(445 1798)"/>
+  </g>
+</svg>

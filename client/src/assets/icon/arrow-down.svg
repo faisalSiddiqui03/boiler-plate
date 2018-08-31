@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67 67">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #3a3847;
+        stroke: #3a3847;
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Down_arrow_icon" data-name="Down arrow icon" transform="translate(-944 -438)">
+    <path id="Path_8206" data-name="Path 8206" class="cls-1" d="M2.156.389A1.266,1.266,0,0,0,.4.389a1.333,1.333,0,0,0,0,1.753L12.923,14.661a1.21,1.21,0,0,0,1.753,0L27.195,2.142a1.266,1.266,0,0,0,0-1.753,1.333,1.333,0,0,0-1.753,0L13.8,11.97Z" transform="translate(963.926 463.463)"/>
+    <rect id="Rectangle_2857" data-name="Rectangle 2857" class="cls-2" width="67" height="67" transform="translate(944 438)"/>
+  </g>
+</svg>

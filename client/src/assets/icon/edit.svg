@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #58595b;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Edit_" data-name="Edit " transform="translate(-968 -348)">
+    <path id="Path_7710" data-name="Path 7710" class="cls-1" d="M41.746-3.736a2.133,2.133,0,0,0,.629-1.572,2.133,2.133,0,0,0-.629-1.572l-5.241-5.241a2.133,2.133,0,0,0-1.572-.629,2.133,2.133,0,0,0-1.572.629L29.273-8.033,37.658.352ZM2.125,19.115V27.5H10.51L35.247,2.763,26.862-5.622Z" transform="translate(996 390.75)"/>
+    <rect id="Rectangle_2819" data-name="Rectangle 2819" class="cls-2" width="100" height="100" transform="translate(968 348)"/>
+  </g>
+</svg>

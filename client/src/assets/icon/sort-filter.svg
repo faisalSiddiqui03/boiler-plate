@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67 67">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #383839;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Sort_Filter_icon" data-name="Sort Filter icon" transform="translate(-386 -1797)">
+    <g id="Group_1755" data-name="Group 1755" transform="translate(1496 -6534)">
+      <path id="Path_512" data-name="Path 512" class="cls-1" d="M9.5,30h-7a2.5,2.5,0,0,0,0,5h7a2.5,2.5,0,0,0,0-5Z" transform="translate(-1098 8389) rotate(-90)"/>
+      <path id="Path_513" data-name="Path 513" class="cls-1" d="M47.5,30h-13a2.5,2.5,0,0,0,0,5h13a2.5,2.5,0,0,0,0-5Z" transform="translate(-1098 8389) rotate(-90)"/>
+      <path id="Path_514" data-name="Path 514" class="cls-1" d="M18.5,23A9.5,9.5,0,1,0,28,32.5,9.56,9.56,0,0,0,18.5,23Zm0,14A4.5,4.5,0,1,1,23,32.5,4.481,4.481,0,0,1,18.5,37Z" transform="translate(-1098 8389) rotate(-90)"/>
+      <path id="Path_510" data-name="Path 510" class="cls-1" d="M40.5,12h7a2.5,2.5,0,0,0,0-5h-7a2.5,2.5,0,0,0,0,5Z" transform="translate(-1098 8389) rotate(-90)"/>
+      <path id="Path_511" data-name="Path 511" class="cls-1" d="M15.5,7H2.5a2.5,2.5,0,0,0,0,5h13a2.5,2.5,0,0,0,0-5Z" transform="translate(-1098 8389) rotate(-90)"/>
+      <path id="Path_515" data-name="Path 515" class="cls-1" d="M31.5,0A9.56,9.56,0,0,0,22,9.5a9.5,9.5,0,0,0,19,0A9.56,9.56,0,0,0,31.5,0Zm0,14A4.5,4.5,0,1,1,36,9.5,4.481,4.481,0,0,1,31.5,14Z" transform="translate(-1098 8389) rotate(-90)"/>
+    </g>
+    <rect id="Rectangle_2854" data-name="Rectangle 2854" class="cls-2" width="67" height="67" transform="translate(386 1797)"/>
+  </g>
+</svg>

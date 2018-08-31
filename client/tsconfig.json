@@ -1,0 +1,54 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@theme/*": [
+        "theme/*"
+      ],
+      "@angular/*": [
+        "../node_modules/@angular/*"
+      ],
+      "@ionic-native/*": [
+        "../node_modules/@ionic-native/*"
+      ],
+      "@ionic/*": [
+        "../node_modules/@ionic/*"
+      ],
+      "@ngx-meta/*": [
+        "../node_modules/@ngx-meta/*"
+      ],
+      "@ngx-translate/*": [
+        "../node_modules/@ngx-translate/*"
+      ],
+      "rxjs/*": [
+        "../node_modules/rxjs/*"
+      ],
+      "@cap-service/*": [
+        "../node_modules/@capillarytech/pwa-framework/services/*"
+      ],
+      "@app/config": [
+        "config/app/*.config"
+      ],
+      "@cap-core/*":[
+        "../node_modules/@capillarytech/pwa-framework/core/*"
+      ]
+    }
+  }
+}

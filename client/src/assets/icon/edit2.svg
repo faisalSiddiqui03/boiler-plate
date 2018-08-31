@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86 86">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #404040;
+      }
+
+      .cls-2 {
+        fill: #f15a29;
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Edit_icon" data-name="Edit icon" transform="translate(-705 -426)">
+    <g id="Group_73" data-name="Group 73" transform="translate(730 444.002)">
+      <g id="Group_71" data-name="Group 71">
+        <path id="Path_504" data-name="Path 504" class="cls-1" d="M34.5,7,26.3.6a2.737,2.737,0,0,0-3.9.5L3.5,25.1A2.22,2.22,0,0,0,3,26.2L.2,38.1a2.608,2.608,0,0,0,1,2.8,2.9,2.9,0,0,0,3,.3l10.9-5.5a3.915,3.915,0,0,0,1-.8L35,11A2.951,2.951,0,0,0,34.5,7Zm-22,24.5L6.2,34.7l1.6-6.9L18.9,13.7l4.7,3.7Zm14.1-18L21.9,9.8,25,5.9l4.7,3.7Z"/>
+      </g>
+      <g id="Group_72" data-name="Group 72">
+        <path id="Path_505" data-name="Path 505" class="cls-2" d="M32.5,49H2.5A2.476,2.476,0,0,1,0,46.5H0A2.476,2.476,0,0,1,2.5,44h30A2.476,2.476,0,0,1,35,46.5h0A2.476,2.476,0,0,1,32.5,49Z"/>
+      </g>
+    </g>
+    <rect id="Rectangle_2863" data-name="Rectangle 2863" class="cls-3" width="86" height="86" transform="translate(705 426)"/>
+  </g>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 60">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #404040;
+      }
+
+      .cls-2 {
+        fill: #f15a29;
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Settings_icon" data-name="Settings icon" transform="translate(-61 -1406)">
+    <g id="Group_1439" data-name="Group 1439" transform="translate(0 -480)">
+      <g id="Group_76" data-name="Group 76" transform="translate(68 1895)">
+        <path id="Path_510" data-name="Path 510" class="cls-1" d="M40.5,12h7a2.5,2.5,0,0,0,0-5h-7a2.5,2.5,0,0,0,0,5Z"/>
+        <path id="Path_511" data-name="Path 511" class="cls-1" d="M15.5,7H2.5a2.5,2.5,0,0,0,0,5h13a2.5,2.5,0,0,0,0-5Z"/>
+        <path id="Path_512" data-name="Path 512" class="cls-1" d="M9.5,30h-7a2.5,2.5,0,0,0,0,5h7a2.5,2.5,0,0,0,0-5Z"/>
+        <path id="Path_513" data-name="Path 513" class="cls-1" d="M47.5,30h-13a2.5,2.5,0,0,0,0,5h13a2.5,2.5,0,0,0,0-5Z"/>
+      </g>
+      <g id="Group_77" data-name="Group 77" transform="translate(68 1895)">
+        <path id="Path_514" data-name="Path 514" class="cls-2" d="M18.5,23A9.5,9.5,0,1,0,28,32.5,9.56,9.56,0,0,0,18.5,23Zm0,14A4.5,4.5,0,1,1,23,32.5,4.481,4.481,0,0,1,18.5,37Z"/>
+        <path id="Path_515" data-name="Path 515" class="cls-2" d="M31.5,0A9.56,9.56,0,0,0,22,9.5a9.5,9.5,0,0,0,19,0A9.56,9.56,0,0,0,31.5,0Zm0,14A4.5,4.5,0,1,1,36,9.5,4.481,4.481,0,0,1,31.5,14Z"/>
+      </g>
+    </g>
+    <rect id="Rectangle_2869" data-name="Rectangle 2869" class="cls-3" width="64" height="60" transform="translate(61 1406)"/>
+  </g>
+</svg>

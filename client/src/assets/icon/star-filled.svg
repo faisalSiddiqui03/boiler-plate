@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #659134;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Rating_star_filled_icon" data-name="Rating star filled icon" transform="translate(-44 -1244)">
+    <path id="Path_7731" data-name="Path 7731" class="cls-1" d="M42.911,14.05l-10.619-1.5L27.572,3C25.642-.967,21.458-.967,19.528,3l-4.72,9.547L4.189,14.05c-4.4.644-5.685,4.612-2.467,7.616l7.616,7.4L7.514,39.579c-.751,4.291,2.574,6.758,6.543,4.72L23.5,39.365h0L32.936,44.3c3.862,2.038,7.294-.429,6.543-4.72L37.655,29.067l7.616-7.4C48.6,18.555,47.309,14.694,42.911,14.05Z" transform="translate(52.072 1252.975)"/>
+    <rect id="Rectangle_2841" data-name="Rectangle 2841" class="cls-2" width="64" height="64" transform="translate(44 1244)"/>
+  </g>
+</svg>

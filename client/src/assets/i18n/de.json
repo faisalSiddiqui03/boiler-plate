@@ -1,0 +1,52 @@
+{
+	"cart": {
+		"title": ""
+	},
+	"home": {
+		"delivering_to": "",
+		"select_delivery_location": "",
+		"trending_searches": ""
+	},
+	"navigation": {
+		"all_departments": "",
+		"categories": "",
+		"navigation_ref_code_not_provided": ""
+	},
+	"product": {
+		"add_to_cart": "",
+		"add_to_wishlist": "",
+		"added_to_wishlist": "",
+		"buy_now": "",
+		"delivery_to": "",
+		"description": "",
+		"enter_description": "",
+		"enter_title": "",
+		"item_out_of_stock": "",
+		"no_description": "",
+		"ratings": "",
+		"reviews": "",
+		"share": "",
+		"submit": "",
+		"write_review_rate": ""
+	},
+	"search": {
+		"no_results_found": ""
+	},
+	"sign_up": {
+		"OTPFailure": "",
+		"loginSuccess": "",
+		"regSuccessDesc1": "",
+		"regSuccessDesc2": "",
+		"resendOTP": "",
+		"sendOTPDescription": "",
+		"signInSignUp": "",
+		"success": "",
+		"termsDesc1": "",
+		"termsDesc2": "",
+		"termsDesc3": "",
+		"termsDesc5": "",
+		"verifyOTP": "",
+		"verifyOTPDesc1": "",
+		"verifyOTPDesc2": ""
+	}
+}
