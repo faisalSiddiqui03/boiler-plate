@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 import { BannerModule } from '../../components/banner/banner.module';
+import { HeaderModule } from '../../components/header/header.module';
 
 import { HomePage } from './home.page';
 
@@ -21,7 +22,8 @@ const routes: Routes = [
     FormsModule,
     BannerModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    HeaderModule
   ],
   declarations: [HomePage]
 })
