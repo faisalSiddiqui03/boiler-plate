@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-import { BannerModule } from '../../components/banner/banner.module';
 
 import { HomePage } from './home.page';
+import { BannerModule } from '../../components/banner/banner.module';
 import { FooterModule } from '../../components/footer/footer.module';
 import { HeaderModule } from '../../components/header/header.module';
 
