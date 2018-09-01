@@ -1,5 +1,23 @@
 .footer-content{
-    background: #000;
+    background: #000; width: 100%;
     ion-title, ion-item{color: #fff}
+    ion-list{display: flex; align-content: center; justify-content: center;}
+    .h2-label {padding: 14px 0px 8px 0px;font-size: 14px; font-weight: 600; color: #fff}
+    
+    .f-menu .item-block{ width: auto; padding: 0px 10px;}
+    .item-md{background:transparent;}
+    .item.item-block.item-md{background:#000; color: #fff; font-size: 13px; min-height: 2.2rem;}
+    .item.item-block.item-md + ion-title{margin-top:14px;}
+    .list-md .item-block .item-inner {border: none;margin: 0;padding: 0;}
+    .item.item-block.item-md  .item-inner{border-bottom:none;}
+    
+    .label-md{margin:0px; color: #fff;}
+    .social-icons {width: 80%;margin: 0px auto 5px auto;}
+    .downloads {width: 80%;margin: 0px auto 5px auto;}
     .copyrights p{font-size: 12px; color: #fff;}    
-  }
+    .toolbar-title-md{color:#fff;font-size: 14px; font-weight: 600;
+      padding:0px;
+    }
+    .top-space{margin-top: 14px;}
+    
+}
