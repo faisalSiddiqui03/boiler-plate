@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
+import { BannerModule } from '../../components/banner/banner.module';
 
 import { HomePage } from './home.page';
 import { FooterModule } from '../../components/footer/footer.module';
@@ -20,6 +21,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    BannerModule,
     IonicModule,
     RouterModule.forChild(routes),
     FooterModule,

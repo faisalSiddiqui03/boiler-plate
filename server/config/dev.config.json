@@ -1,18 +1,18 @@
 {
   "merchantId": "2002cbfe-9adf-42ac-9bfd-8e013fee7c18",
-  "developerApiUrl": "http://stageln.martjack.com/DeveloperAPI",
-  "base_dev_url": "http://stageln.martjack.com/DeveloperAPI",
-  "frontendApiUrl" : "http://stageln.martjack.com/FrontendApi/V2/",
-  "publicKey": "RTDHFV9B",
-  "secretKey": "UDD3GGMEYDOGPQ5MR9UK4NL9",
+  "developerApiUrl": "https://stageph.martjack.com/DeveloperAPI/",
+  "base_dev_url": "https://stageph.martjack.com/DeveloperAPI/",
+  "frontendApiUrl" : "http://sfapi-stageph.martjack.com/V2/",
+  "publicKey": "VN7KYX8P",
+  "secretKey": "PQL3CDHHQQXSNGDO7EVSJ9CN",
   "googleMapsApiKey": "AIzaSyCcy4RPa9rv-S3780tImXmM3Xw5i1PvVTI",
-  "countryCode": "SA",
+  "countryCode": "KWT",
   "redirects": {
 
   },
-  "media_agility_url": "https://dista-ai.appspot.com/_ah/api/storeApi/v1/getStoresMapping",
-  "media_agility_clientid": "8888844444",
-  "media_agility_secretid": "hfjhuwey7467237rufhhgdsyftqtj",
+  "media_agility_url": "https://yum-india.appspot.com/_ah/api/storeApi/v1/getStoresMapping",
+  "media_agility_clientid": "5649391675244544",
+  "media_agility_secretid": "V:}Q|IzuZL,k[YG%k\\@F",
   "media_agility_userid": "2746274274",
   "mongodb": {
     "host": "kishoret99:k0019625871@ds133627.mlab.com",

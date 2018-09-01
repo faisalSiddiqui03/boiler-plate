@@ -1,0 +1,11 @@
+<banner-widget pfWidgetImpressionTrack [type]="'tag'" [value]="value" [executor]="bundleWidgetExecutor" [action]="bundleWidgetAction" (lifecycle)="null">
+  <ng-template let-widget="widget">
+    <div *ngIf="widget.model != undefined && widget.model.length > 0">
+      <!--<ion-slides [options]="slideOptions" pager="isPager" class="bannerClass">-->
+        <div *ngFor="let banner of widget.model" (click)="onBannerClicked(banner)">
+          <img src="{{getFullBannerUrl(banner.contentUrl)}}" img-preloader="{{getFullBannerUrl(banner.contentUrl)}}" defaultImage="assets/imgs/default/no-preview.jpeg"/>
+        </div>
+      <!--</ion-slides>-->
+    </div>
+  </ng-template>
+</banner-widget>
