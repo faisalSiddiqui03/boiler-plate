@@ -2,10 +2,10 @@
 <ion-navbar [hideBackButton]="true" >
   <div> 
     <div class="center-align logo_bg edge-shadow brd-radius">
-        <img src="../../assets/imgs/pizzahut-logo.svg" alt="Pizza Hut"  class="header-img">
+        <img src="../../assets/imgs/pizzahut-logo.svg" alt="Pizza Hut"  class="header-img" (click)="goToPage('home')">
     </div>
     <div class="lang-selection">العربية</div>    
-    <div (click)="goToProfile()">
+    <div (click)="goToPage('login')">
         <div class="profile-icon" >
             <ion-icon name="my-profile"></ion-icon>
         </div>
