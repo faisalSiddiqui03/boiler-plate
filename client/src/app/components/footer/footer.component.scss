@@ -1,6 +1,6 @@
 .footer-content{
     background: #000; width: 100%;
-    ion-title, ion-item{color: #fff}
+    ion-title, ion-item{color: #fff; font-size: 14px}
     ion-list{display: flex; align-content: center; justify-content: center;}
     .h2-label {padding: 14px 0px 8px 0px;font-size: 14px; font-weight: 600; color: #fff}
     
@@ -21,3 +21,6 @@
     .top-space{margin-top: 14px;}
     
 }
+.card-md{margin:0px; width: 100%;}
+.float{flex: 1}
+.social-links.social-links{display:block;}
