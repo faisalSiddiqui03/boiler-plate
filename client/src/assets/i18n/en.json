@@ -1,5 +1,29 @@
 {
   "footer": {
-    "FOLLOW_US": "Follow Us"
+    "follow_us": "Follow Us",
+    "about_us" : "About us",
+    "contact_us" : "Contact Us",
+    "nutrition" : "Nutrition",
+    "copyright": "2018, Pizza Hut Kuwait, All Rights Reserved",
+    "user_message" : "Order a delicious pizza on the go, anywhere, anytime. Pizza Hut is happy to assist you with your home delivery. Every time you order, you get a hot and fresh pizza delivered at your doorstep in less than thirty minutes. *T&C Apply.",
+    "hurry_up" : "Hurry up and place your order now!",
+    "privacy_policy":"Privacy Policy",
+    "faqs":"FAQs",
+    "customer_service":"Customer Service",
+    "my_account":"My Account",
+    "menu":"Menu",
+    "deals": "Deals",
+    "pizzas": "Pizzas",
+    "sides": "Sides",
+    "wings": "Wings",
+    "pastas": "Pastas",
+    "salads": "Salads",
+    "desserts": "Desserts",
+    "drinks": "Drinks",
+    "signin":"Signin",
+    "create_your_account": "Create Your Account",
+    "policies": "Policies",
+    "feedback": "Feedback",
+    "terms_and_conditions": "Terms & Conditions"
   }
 }
