@@ -13,6 +13,7 @@ import {
   LogoutWidgetActions,
   Action
 } from '@capillarytech/pwa-framework';
+import { Utils } from './helpers/utils';
 
 @Component({
   selector: 'app-root',
@@ -35,11 +36,11 @@ export class AppComponent extends BasePage {
     super();
 
     this.sharedService = this.globalSharedService;
-    this.translate.setDefaultLang('en');
-    this.translate.use('en');
+    const langCode = 'en';
     this.initializeApp();
+    this.setLanguage(langCode);
     this.eventService.GetEvent("HttpError").subscribe(event => {
-      this.handleError(event)
+      this.handleError(event);
     });
   }
 
@@ -54,6 +55,12 @@ export class AppComponent extends BasePage {
     //this.isLoggedIn = false;
     // const userProfile = this.globalSharedService.getUserModel();
     // setInterval(() => console.log(this.globalSharedService.getUserModel()), 3000);
+  }
+
+  setLanguage(langCode: string) {
+    Utils.setLanguageCode(langCode);
+    this.translate.setDefaultLang(langCode);
+    this.translate.use(langCode);
   }
 
   private handleError(event) {
