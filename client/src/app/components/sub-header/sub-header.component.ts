@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../helpers/utils';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sub-header',
@@ -13,12 +14,18 @@ export class SubHeaderComponent implements OnInit {
   @Input() title: string;
 
   constructor(
-    private translate: TranslateService
+    private translate: TranslateService,
+    private location: Location
   ) {
     this.translate.use(Utils.getLanguageCode());
   }
 
   ngOnInit() {
+  }
+
+  /** Function to go to previous page */
+  goBack() {
+    this.location.back();
   }
 
 }
