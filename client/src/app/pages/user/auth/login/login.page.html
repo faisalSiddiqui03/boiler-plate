@@ -1,9 +1,44 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+<ion-hide-when size="lg">
+  <ion-header>
+    <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
+  </ion-header>
+</ion-hide-when>
+<ion-content>
+  <ion-toolbar class="page-header">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" ios="ios-arrow-back" md="ios-arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-title text-center text-uppercase>sign in</ion-title>
   </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
+  <div class="main-content">
+    <form class="form-section">
+      <div class="form-group">
+        <ion-label for="email" text-capitalize>Email</ion-label>
+        <div class="form-input">
+          <ion-input id="email" placeholder="Enter your Email" inputmode="email"></ion-input>
+          <div class="icons">
+            <ion-icon name="alert"></ion-icon>
+          </div>
+        </div>
+        <div class="error-msg">Please provide your email</div>
+      </div>
+      <div class="form-group">
+        <ion-label for="password" text-capitalize>Password</ion-label>
+        <div class="form-input">
+          <ion-input id="password" placeholder="Enter your Password" inputmode="password"></ion-input>
+          <div class="icons">
+            <ion-icon name="eye-off"></ion-icon>
+            <ion-icon name="alert"></ion-icon>
+          </div>
+        </div>
+        <div class="error-msg">We need your password: We won’t tell anyone. Promise.</div>
+      </div>
+      <div class="remember-block" flex align-items-center justify-content-between>
+        <ion-item class="remember-me" no-padding>
+          <ion-checkbox color="dark"></ion-checkbox> Remember me
+        </ion-item>
+        <a class="forgot-pwd">Forgot Password?</a>
+      </div>
+    </form>
+  </div>
 </ion-content>
