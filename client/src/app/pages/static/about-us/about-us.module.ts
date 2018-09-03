@@ -27,6 +27,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     HeaderModule,
+    SubHeaderModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
