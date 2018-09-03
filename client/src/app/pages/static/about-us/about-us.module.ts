@@ -7,6 +7,11 @@ import { IonicModule } from '@ionic/angular';
 
 import { AboutUsPage } from './about-us.page';
 
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../../../translation.loader';
+import { HttpClient } from '@angular/common/http';
+import { HeaderModule } from '../../../components/header/header.module';
+
 const routes: Routes = [
   {
     path: '',
@@ -19,7 +24,15 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    HeaderModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   declarations: [AboutUsPage]
 })
