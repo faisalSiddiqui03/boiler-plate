@@ -3,6 +3,7 @@
   "developerApiUrl": "http://stageln.martjack.com/DeveloperAPI",
   "base_dev_url": "http://stageln.martjack.com/DeveloperAPI",
   "frontendApiUrl" : "http://stageln.martjack.com/FrontendApi/V2/",
+  "frontendApiUrlV3": "http://yum-stagefapi.martjack.com/v3/",
   "publicKey": "RTDHFV9B",
   "secretKey": "UDD3GGMEYDOGPQ5MR9UK4NL9",
   "googleMapsApiKey": "AIzaSyCcy4RPa9rv-S3780tImXmM3Xw5i1PvVTI",

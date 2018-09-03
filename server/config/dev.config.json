@@ -3,6 +3,7 @@
   "developerApiUrl": "https://stageph.martjack.com/DeveloperAPI/",
   "base_dev_url": "https://stageph.martjack.com/DeveloperAPI/",
   "frontendApiUrl" : "http://sfapi-stageph.martjack.com/V2/",
+  "frontendApiUrlV3": "http://yum-stagefapi.martjack.com/v3/",
   "publicKey": "VN7KYX8P",
   "secretKey": "PQL3CDHHQQXSNGDO7EVSJ9CN",
   "googleMapsApiKey": "AIzaSyCcy4RPa9rv-S3780tImXmM3Xw5i1PvVTI",
@@ -15,9 +16,9 @@
   "media_agility_secretid": "V:}Q|IzuZL,k[YG%k\\@F",
   "media_agility_userid": "2746274274",
   "mongodb": {
-    "host": "kishoret99:k0019625871@ds133627.mlab.com",
-    "port": "33627",
-    "db": "kt99-loopback"
+    "host": "localhost",
+    "port": "27017",
+    "db": "phkuwait"
   },
   "baseUrl": "http://localhost:3000/api/",
   "server": {

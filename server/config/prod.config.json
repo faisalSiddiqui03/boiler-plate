@@ -3,6 +3,7 @@
   "developerApiUrl": "http://www9.martjack.com/DeveloperAPI/",
   "base_dev_url": "http://www9.martjack.com/DeveloperAPI/",
   "frontendApiUrl": "https://sfapi-yum.martjack.com/V2/",
+  "frontendApiUrlV3": "http://yum-stagefapi.martjack.com/v3/",
   "publicKey": "DQIT6SJJ",
   "secretKey": "NEOV9AGGGLYHERHRBSOTBROD",
   "googleMapsApiKey": "AIzaSyBw9J8qANj6wmVir3wu0vuFJHhwXiZDZk0",
