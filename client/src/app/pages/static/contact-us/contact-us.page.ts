@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from "@ngx-translate/core";
+import { Utils } from '../../../helpers/utils';
 
 @Component({
   selector: 'app-contact-us',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactUsPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private translate: TranslateService
+  ) {
+    this.translate.use(Utils.getLanguageCode());
+  }
 
   ngOnInit() {
   }
