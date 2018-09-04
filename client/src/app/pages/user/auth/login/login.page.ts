@@ -1,10 +1,11 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { pwaLifeCycle, LifeCycle, Action, UserIdPwdSigninWidgetActions, pageView, GoogleSignInWidgetActions } from '@capillarytech/pwa-framework';
+import { pwaLifeCycle, LifeCycle, Action, UserIdPwdSigninWidgetActions, pageView, GoogleSignInWidgetActions, ConfigService } from '@capillarytech/pwa-framework';
 import { BasePage } from '../../../../base/base-page';
 import { Router } from '@angular/router';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
+import { Utils } from '../../../../helpers/utils';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -25,15 +26,16 @@ export class LoginPage extends BasePage implements OnInit {
   widgetModels: { [name: string]: any };
 
   googleSignInActionEmitter = new EventEmitter();
-  googleClientId = '1040149251979-d892097h8nf8mnuitkv2acdf91vt9dq0.apps.googleusercontent.com';
+  googleClientId:string = '';
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private config: ConfigService) {
     super();
+
+    this.googleClientId = this.config.getConfig()['googleClientId'];
 
     this.loaderService.startLoading();
 
-    this.translate.setDefaultLang('en');
-    this.translate.use('en');
+    this.translate.use(Utils.getLanguageCode());
 
     this.widgetModels = {};
 
