@@ -1,0 +1,24 @@
+.store-selection-wrap {
+    padding: 40px 15px;
+    .select-store-block {
+        border: 1px solid var(--ion-color-medium-shade);
+        h5 {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 22px;
+        }
+        .store-content{
+            font-size: 13px;
+        }
+        &+.select-store-block{
+            margin-top: 10px;
+        }
+        .store-times {
+            white-space: nowrap;
+        }
+        ion-button{
+            font-size: 12px;
+            --height: 25px;
+        }
+    }
+}

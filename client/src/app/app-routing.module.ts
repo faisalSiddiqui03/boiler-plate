@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'nutrition', loadChildren: './pages/static/nutrition/nutrition.module#NutritionPageModule' },
   { path: 'terms', loadChildren: './pages/static/terms/terms.module#TermsPageModule' },
   { path: 'privacy-policy', loadChildren: './pages/static/privacy-policy/privacy-policy.module#PrivacyPolicyPageModule' },
+  { path: 'store-selection', loadChildren: './pages/checkout/store-selection/store-selection.module#StoreSelectionPageModule' },
 ];
 
 @NgModule({

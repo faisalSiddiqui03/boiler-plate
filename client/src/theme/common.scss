@@ -108,6 +108,11 @@
     --border-color: var(--ion-color-light-shade);
 }
 
+.btn-success {
+    --border-radius: 5px;
+    font-size: 15px;
+}
+
 .form-search {
     padding: 0;
     .searchbar-input.sc-ion-searchbar-md {
@@ -121,5 +126,12 @@
     .searchbar-search-icon.sc-ion-searchbar-md,
     .searchbar-clear-button.sc-ion-searchbar-md {
         display: none !important;
+    }
+}
+
+@media (min-width:992px){
+    .w-700{
+        max-width: 700px;
+        margin: auto;
     }
 }
