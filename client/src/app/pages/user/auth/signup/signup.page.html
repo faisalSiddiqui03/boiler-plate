@@ -1,9 +1,85 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>signup</ion-title>
+<ion-hide-when size="lg">
+  <ion-header>
+    <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
+  </ion-header>
+</ion-hide-when>
+<ion-content>
+  <ion-toolbar class="page-header">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" ios="ios-arrow-back" md="ios-arrow-back" (click)="goToPage('login')"></ion-icon>
+    </ion-buttons>
+    <ion-title text-center text-uppercase>Sign up</ion-title>
   </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
+  <div class="main-content">
+    <form class="form-section" padding [formGroup]="signUpForm">
+      <div class="form-group" [class.error]="signUpForm.get('fname').touched && !signUpForm.get('fname').valid">
+        <ion-label for="fname" text-capitalize>First Name
+          <sup>*</sup>
+        </ion-label>
+        <div class="form-input">
+          <ion-input id="fname" placeholder="So we know what to call you" inputmode="text" formControlName="fname"></ion-input>
+          <div class="icons">
+            <ion-icon name="alert"></ion-icon>
+          </div>
+        </div>
+        <div class="error-msg">First Name Please</div>
+      </div>
+      <div class="form-group">
+        <ion-label for="lname" text-capitalize>Last Name</ion-label>
+        <div class="form-input">
+          <ion-input id="lname" placeholder="So we know what to call you" inputmode="text" formControlName="lname"></ion-input>
+        </div>
+      </div>
+      <div class="form-group" [class.error]="signUpForm.get('mobile').touched && !signUpForm.get('mobile').valid">
+        <ion-label for="mobile" text-capitalize>Mobile
+          <sup>*</sup>
+        </ion-label>
+        <div class="form-input mobile-input">
+          <span>965</span>
+          <ion-input id="mobile" placeholder="So we can contact you for pizza updates" inputmode="text" formControlName="mobile"></ion-input>
+          <div class="icons">
+            <ion-icon name="alert"></ion-icon>
+          </div>
+        </div>
+        <div class="error-msg">Your Number Please</div>
+      </div>
+      <div class="form-group" [class.error]="signUpForm.get('email').touched && !signUpForm.get('email').valid">
+        <ion-label for="email" text-capitalize>Email
+          <sup>*</sup>
+        </ion-label>
+        <div class="form-input">
+          <ion-input id="email" placeholder="So we can contact you for pizza updates" inputmode="email" formControlName="email"></ion-input>
+          <div class="icons">
+            <ion-icon name="alert"></ion-icon>
+          </div>
+        </div>
+        <div class="error-msg">Please provide your Email</div>
+      </div>
+      <div class="form-group" [class.error]="signUpForm.get('password').touched && !signUpForm.get('password').valid">
+        <ion-label for="password" text-capitalize>Password
+          <sup>*</sup>
+        </ion-label>
+        <div class="form-input">
+          <ion-input id="password" placeholder="It will be our little secret" inputmode="password" formControlName="password"></ion-input>
+          <div class="icons">
+            <ion-icon name="alert"></ion-icon>
+          </div>
+        </div>
+        <div class="error-msg">It will be our little secret</div>
+      </div>
+      <div class="form-group" [class.error]="signUpForm.get('confirmPassword').touched && !signUpForm.get('confirmPassword').valid">
+        <ion-label for="confirmPassword" text-capitalize>Confirm Password
+          <sup>*</sup>
+        </ion-label>
+        <div class="form-input">
+          <ion-input id="confirmPassword" placeholder="Please confirm your password" inputmode="password" formControlName="password"></ion-input>
+          <div class="icons">
+            <ion-icon name="alert"></ion-icon>
+          </div>
+        </div>
+        <div class="error-msg">Please confirm your password</div>
+      </div>
+      <ion-button color="medium" class="btn-signin" text-capitalize expand="block" mode="ios" (click)="signUp()" [disabled]="!signUpForm.valid">Submit</ion-button>
+    </form>
+  </div>
 </ion-content>

@@ -1,17 +1,94 @@
-.form-section{
-    padding: 10px;
-}
-.remember-block{
-    margin-top: 10px;
-    ion-item{
+.remember-block {
+    margin: 10px 0 5px;
+    ion-item {
         --min-height: 1px;
         font-size: 13px;
     }
-    ion-checkbox{
-        margin: 0 10px 0 0;
+    ion-checkbox {
+        margin: 0 8px 0 0;
         --border-width: 1px;
         --border-color: var(--ion-color-secondary);
         --background-checked: transparent;
         --ion-color-contrast: var(--ion-color-secondary) !important;
+    }
+    .forgot-pwd {
+        font-size: 13px;
+        color: var(--ion-color-dark-shade);
+        text-decoration: underline;
+        &:hover {
+            color: var(--ion-color-secondary);
+        }
+    }
+}
+
+.login-with-google {
+    padding: 12px;
+    border-top: 1px solid var(--ion-color-medium-tint);
+    border-bottom: 1px solid var(--ion-color-medium-tint);
+    .btn-google {
+        display: inline-block;
+        background-color: transparent;
+        border: 1px solid var(--ion-color-medium-tint);
+        border-radius: 4px;
+        background-image: url('assets/imgs/google.png');
+        background-repeat: no-repeat;
+        background-position: left 10px center;
+        padding: 10px 10px 10px 50px;
+        background-size: 35px;
+        color: var(--ion-color-medium-shade);
+        line-height: 18px;
+        &:focus {
+            outline: none;
+            border-color: var(--ion-color-secondary);
+        }
+    }
+}
+
+.login-footer {
+    .dont-have-account {
+        margin: 10px 0 30px;
+        font-weight: 600;
+        font-size: 13px;
+        color: var(--ion-color-secondary);
+        span {
+            text-decoration: underline;
+            color: var(--ion-color-dark-shade);
+            font-weight: 400;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .main-content {
+        max-width: 700px;
+        margin: 40px auto;
+        border: 1px solid var(--ion-color-medium-tint);
+        userid-password-signin-widget {
+            max-width: 400px;
+            margin: 10px auto;
+            display: block;
+        }
+    }
+    .login-footer{
+        .dont-have-account{
+            font-size: 15px;
+        }
+    }
+    .form-group{
+        ion-label{
+            font-size: 15px;
+        }
+    }
+    .remember-block{
+        ion-item,.forgot-pwd{
+            font-size: 15px;
+        }
+        .forgot-pwd{
+            font-weight: 700;
+        }
+    } 
+    .btn-signin{
+        max-width: 140px;
+        margin: auto;
     }
 }

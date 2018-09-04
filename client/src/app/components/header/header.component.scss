@@ -43,3 +43,14 @@
   left: 43px;
   top: 10%;
 }
+.desktop-logo{
+  display: none;
+}
+
+@media (min-width:992px){
+  .desktop-logo{
+    display: block;
+    max-width: 150px;
+    margin: 7px auto 2px;
+  }
+}

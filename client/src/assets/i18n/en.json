@@ -40,5 +40,21 @@
     "address_2":"Al Soor Street, Al Homaizi bldg",
     "address_3":"Kuwait",
     "phone_number":"Phone Number"
+  },
+  "sign_in_page": {
+    "sign_in" : "Sign In",
+    "email":"Email",
+    "email_placeholder":"Enter your Email",
+    "email_required":"Please provide your email",
+    "email_valid":"Please provide the correct email address",
+    "password":"password",
+    "password_placeholder":"Enter your Password",
+    "password_required":"We need your password: We won’t tell anyone. Promise.",
+    "password_minlength":"Password minimum length is 6 characters",
+    "remember_me":"Remember me",
+    "forgot_password":"Forgot Password",
+    "signin_google":"Sign in with Google",
+    "dont_have_account":"Don't have an account",
+    "register":"Register"
   }
 }
