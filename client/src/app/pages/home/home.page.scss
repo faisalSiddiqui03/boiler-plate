@@ -1,0 +1,24 @@
+.button{width: 100%;}
+.has-errors{
+    // background: url(../assets/imgs/error.icon.svg);
+    background-size: 18px;
+    background-repeat: no-repeat;
+   
+    background-color: #fff;
+    position: absolute;
+    height: 44px;
+    border: 1px solid #ff0000;
+    width: 100%;
+    top: 0px;   
+    line-height: 44px;
+    border-radius: 5px;   
+    padding-left: 10px;
+    background-position: right 10px center;
+    
+}
+.location-button{text-transform: none;}
+.citydrp{
+  z-index:2000!important;
+}
+// @media (min-width: 768px){
+.has-errors{height: 50px; line-height: 50px;}
