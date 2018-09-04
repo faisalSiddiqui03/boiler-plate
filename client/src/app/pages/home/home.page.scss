@@ -40,24 +40,18 @@
             top: 100%;
             left: 0;
             right: 0;
-        }
-        ion-searchbar {
-            padding: 0;
-            .searchbar-input.sc-ion-searchbar-md {
-                padding: 6px 55px 6px 10px !important;
+            border: 1px solid #cecece;
+            padding: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 0 0 5px 5px;
+            z-index: 100;
+            margin-top: -4px;
+            ion-item {
+                border-bottom: 1px solid #cecece;
+                padding-left: 6px;
+                font-size: 13px;
             }
         }
-    }
-    .searchbar-input.sc-ion-searchbar-md {
-        box-shadow: none;
-        padding: 0 0 0 50px;
-        border-left: 1px solid var(--ion-border-color-light);
-        font-size: 14px;
-        color: var(--ion-color-medium);
-        font-weight: 700;
-        background: transparent;
-    }
-    .searchbar-search-icon.sc-ion-searchbar-md {
-        top: 5px;
     }
 }

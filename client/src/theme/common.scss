@@ -30,13 +30,15 @@
         font-weight: 500;
         color: var(--ion-color-secondary-shade);
     }
-    .sc-ion-buttons-md-h{
+    .sc-ion-buttons-md-h {
         pointer-events: all;
     }
 }
-[flex]{
+
+[flex] {
     display: flex;
 }
+
 .form-group {
     padding-bottom: 5px;
     ion-label {
@@ -45,62 +47,79 @@
         font-size: 13px;
         color: var(--ion-color-secondary);
     }
-    ion-input{
+    ion-input {
         font-size: 13px;
-        border: 2px solid rgba(var(--ion-color-secondary-rgb),0.5);
+        border: 2px solid rgba(var(--ion-color-secondary-rgb), 0.5);
         border-radius: 4px;
         transition: all 0.3s ease-in-out;
-        &.has-focus{
+        &.has-focus {
             border-color: var(--ion-color-dark);
         }
         --padding-top: 13px;
         --padding-bottom: 13px;
     }
-    .form-input{
+    .form-input {
         position: relative;
-        .icons{
+        .icons {
             position: absolute;
             right: 10px;
             top: 50%;
             transform: translateY(-50%);
             margin-top: 2px;
             font-size: 20px;
-            ion-icon[name="alert"]{
+            ion-icon[name="alert"] {
                 color: var(--ion-color-danger);
                 display: none;
             }
-            ion-icon{
+            ion-icon {
                 color: var(--ion-color-secondary-tint);
             }
-            ion-icon{
-                &+ion-icon{
+            ion-icon {
+                &+ion-icon {
                     margin-left: 10px;
                 }
             }
         }
     }
-    .error-msg{
+    .error-msg {
         margin: 5px 8px 0;
         font-size: 12px;
         color: var(--ion-color-danger);
     }
-    &.error{
-        .form-input{
-            ion-input{
+    &.error {
+        .form-input {
+            ion-input {
                 border-color: var(--ion-color-danger);
             }
-            .icons{
-                ion-icon[name="alert"]{
+            .icons {
+                ion-icon[name="alert"] {
                     display: inline-block;
                 }
             }
         }
     }
 }
+
 .btn-signin {
     --border-radius: 5px;
     font-size: 15px;
     --border-width: 1px;
     --border-style: solid;
     --border-color: var(--ion-color-light-shade);
+}
+
+.form-search {
+    padding: 0;
+    .searchbar-input.sc-ion-searchbar-md {
+        box-shadow: none;
+        padding: 6px 55px 6px 10px;
+        font-size: 14px;
+        border: 1px solid var(--ion-color-medium-shade);
+        border-radius: 5px;
+        background: url('assets/imgs/select-arrow-down.svg') no-repeat right 10px center / 12px;
+    }
+    .searchbar-search-icon.sc-ion-searchbar-md,
+    .searchbar-clear-button.sc-ion-searchbar-md {
+        display: none !important;
+    }
 }

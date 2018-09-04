@@ -4,6 +4,19 @@
     </ion-header>
 </ion-hide-when>
 <ion-content>
+    <div class="banner-home">
+        <banner-widget pfWidgetImpressionTrack [type]="'tag'" [executor]="bundleWidgetExecutor" [action]="bundleWidgetAction"
+            (lifecycle)="null">
+            <ng-template let-widget="widget">
+                <div *ngIf="widget.model != undefined && widget.model.length > 0">
+                    <div>
+                        <img src="{{getFullBannerUrl(widget.model[0].contentUrl)}}" img-preloader="{{getFullBannerUrl(widget.model[0].contentUrl)}}" defaultImage="assets/imgs/default/no-preview.jpeg"
+                        />
+                    </div>
+                </div>
+            </ng-template>
+        </banner-widget>
+    </div>
     <div padding>
         <div class="delivery-take-away">
             <ion-segment>
@@ -20,7 +33,8 @@
                     <div *ngIf="widget.model != undefined">
                         <div class="location-bar">
                             <div class="form-control">
-                                <ion-searchbar [debounce]="1000" [(ngModel)]="selectedCity" #focusInput showCancelButton="false" placeholder="'please select area'" (click)="toggleDropDown('city');" (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')">
+                                <ion-searchbar class="form-search" [debounce]="1000" [(ngModel)]="selectedCity" #focusInput showCancelButton="false" placeholder="Select Area"
+                                    (click)="toggleDropDown('city');" (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')">
                                 </ion-searchbar>
                                 <ion-list *ngIf="isDropDownShown" class="location-block-list">
                                     <ion-item text-center>
@@ -29,7 +43,7 @@
                                     </ion-item>
                                 </ion-list>
                                 <ion-list *ngIf="isDropDownShown" class="location-block-list citydrp">
-                                    <ion-item *ngFor="let city of widget.model.cities">
+                                    <ion-item no-padding *ngFor="let city of widget.model.cities">
                                         <span (click)="selectCity(city.name)">{{ city.name }}</span>
                                     </ion-item>
                                 </ion-list>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1502 663.529 22.656 14">
+  <defs>
+    <style>
+      .cls-1 {
+        fill-rule: evenodd;
+		fill:#cecece;
+		
+      }
+    </style>
+  </defs>
+  <path id="Down_Arrow" data-name="Down Arrow" class="cls-1" d="M37.287-7.25,27.579-18.162a.893.893,0,0,0-1.415.071,1.384,1.384,0,0,0,.04,1.707L36.381-4.946a.926.926,0,0,0,.468.289.879.879,0,0,0,1.207-.135L48.232-16.23a1.384,1.384,0,0,0,.04-1.707.893.893,0,0,0-1.415-.071Z" transform="translate(1476.11 682.006)"/>
+</svg>

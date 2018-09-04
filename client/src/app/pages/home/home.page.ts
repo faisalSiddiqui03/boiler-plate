@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { LifeCycle, Action, pwaLifeCycle, OnWidgetActionsLifecyle, OnWidgetLifecyle } from '@capillarytech/pwa-framework';
+import { LifeCycle, Action, pwaLifeCycle, OnWidgetActionsLifecyle, OnWidgetLifecyle, ConfigService } from '@capillarytech/pwa-framework';
 import { LocationWidgetActions } from '@capillarytech/pwa-framework';
 
 @Component({
@@ -10,11 +10,18 @@ import { LocationWidgetActions } from '@capillarytech/pwa-framework';
 
 @pwaLifeCycle()
 export class HomePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+  
+  loaded = false;
+  bundleWidgetAction = new EventEmitter();
+  bundleWidgetExecutor = new EventEmitter();
+  bannerUrl: string;
 
   slideOpts = {
     effect: 'flip'
   };
-  constructor() { }
+  constructor(private config: ConfigService) { 
+    this.bannerUrl = this.config.getConfig()['banner_base_url'];
+  }
   orderMode = 'DELIVERY';
   locationsWidgetAction = new EventEmitter();
   dataLoaded: any = {};
@@ -25,11 +32,7 @@ export class HomePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecy
   }
 
   widgetLoadingSuccess(name, data) {
-
     console.log('home page -> location widget', name, data);
-    // let getAllCities = new Action(LocationWidgetActions.ACTION_FETCH_ALL_CITIES);
-
-    // this.locationsWidgetAction.emit(getAllCities);
   }
 
   handleWidgetLifecycle(x: LifeCycle) {
@@ -68,4 +71,11 @@ export class HomePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecy
     this.isDropDownShown = false;
   }
 
+  locateMe(){
+    console.log('locate me');
+  }
+
+  getFullBannerUrl(src) {
+    return src ? this.bannerUrl + src + '?height=170&width=340&builder=freeimage' : null;
+  }
 }
