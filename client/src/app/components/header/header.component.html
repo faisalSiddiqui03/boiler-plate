@@ -1,17 +1,21 @@
-
-<ion-navbar [hideBackButton]="true" >
-  <div> 
-    <div class="center-align logo_bg edge-shadow brd-radius">
-        <img src="assets/imgs/pizzahut-logo.svg" alt="Pizza Hut"  class="header-img" (click)="goToPage('home')">
-    </div>
-    <div *ngIf="showLanguage" class="lang-selection">العربية</div>    
-    <div (click)="goToPage('login')">
-        <div class="profile-icon" >
-            <ion-icon name="contact"></ion-icon>
+<ion-navbar [hideBackButton]="true">
+    <ion-hide-when size="lg">
+        <div>
+            <div class="center-align logo_bg edge-shadow brd-radius">
+                <img src="assets/imgs/pizzahut-logo.svg" alt="Pizza Hut" class="header-img" (click)="goToPage('home')">
+            </div>
+            <div *ngIf="showLanguage" class="lang-selection">العربية</div>
+            <div (click)="goToPage('login')">
+                <div class="profile-icon">
+                    <ion-icon name="contact"></ion-icon>
+                </div>
+            </div>
+            <div *ngIf="showHalalTag" class="halal-logo">
+                <img src="assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal" />
+            </div>
         </div>
+    </ion-hide-when>
+    <div class="center-align desktop-logo">
+        <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
     </div>
-    <div *ngIf="showHalalTag" class="halal-logo" >
-        <img src="assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal"/>
-    </div>
-  </div>
 </ion-navbar>

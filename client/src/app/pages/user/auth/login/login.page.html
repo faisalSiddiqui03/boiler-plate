@@ -1,44 +1,71 @@
-<ion-hide-when size="lg">
-  <ion-header>
-    <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
-  </ion-header>
-</ion-hide-when>
+<ion-header>
+  <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
+</ion-header>
 <ion-content>
   <ion-toolbar class="page-header">
     <ion-buttons slot="start">
-      <ion-icon name="arrow-back" ios="ios-arrow-back" md="ios-arrow-back"></ion-icon>
+      <ion-icon name="arrow-back" ios="ios-arrow-back" md="ios-arrow-back" (click)="goToPage('home')"></ion-icon>
     </ion-buttons>
-    <ion-title text-center text-uppercase>sign in</ion-title>
+    <ion-title text-center text-uppercase>{{ 'sign_in_page.sign_in' | translate }}</ion-title>
   </ion-toolbar>
   <div class="main-content">
-    <form class="form-section">
-      <div class="form-group">
-        <ion-label for="email" text-capitalize>Email</ion-label>
-        <div class="form-input">
-          <ion-input id="email" placeholder="Enter your Email" inputmode="email"></ion-input>
-          <div class="icons">
-            <ion-icon name="alert"></ion-icon>
+    <userid-password-signin-widget pfWidgetImpressionTrack [executor]="useridPasswordSigninExecutor" [action]="useridPasswordSigninAction"
+      (lifecycle)="handleWidgetLifecycle($event)">
+      <ng-template let-widget="widget">
+        <ng-container *ngIf="widget.model">
+          <form class="form-section" padding [formGroup]="userIdSigninForm">
+            <div class="form-group" [class.error]="userIdSigninForm.get('email').touched && !userIdSigninForm.get('email').valid">
+              <ion-label for="email" text-capitalize>{{ 'sign_in_page.email' | translate }}</ion-label>
+              <div class="form-input">
+                <ion-input id="email" placeholder="{{ 'sign_in_page.email_placeholder' | translate }}" inputmode="email" formControlName="email"></ion-input>
+                <div class="icons">
+                  <ion-icon name="alert"></ion-icon>
+                </div>
+              </div>
+              <div *ngIf="userIdSigninForm.get('email').touched">
+                <div class="error-msg" *ngIf="userIdSigninForm.get('email').errors?.required">{{ 'sign_in_page.email_required' | translate }}</div>
+                <div class="error-msg" *ngIf="userIdSigninForm.get('email').errors?.email">{{ 'sign_in_page.email_valid' | translate }}</div>
+              </div>
+            </div>
+            <div class="form-group" [class.error]="userIdSigninForm.get('password').touched && !userIdSigninForm.get('password').valid">
+              <ion-label for="password" text-capitalize>{{ 'sign_in_page.password' | translate }}</ion-label>
+              <div class="form-input">
+                <ion-input [type]="isPasswordFiled ? 'password' : 'text'" [inputmode]="isPasswordFiled ? 'password' : 'text'" no-border placeholder="{{ 'sign_in_page.password_placeholder' | translate }}"
+                  formControlName="password" id="password"></ion-input>
+                <div class="icons">
+                  <ion-icon (click)="changeTextPassword()" [name]="isPasswordFiled ? 'eye' : 'eye-off'" margin-end-half></ion-icon>
+                  <ion-icon name="alert"></ion-icon>
+                </div>
+              </div>
+              <div *ngIf="userIdSigninForm.get('password').touched">
+                <div class="error-msg" *ngIf="userIdSigninForm.get('password').errors?.required">{{ 'sign_in_page.password_required' | translate }}</div>
+                <div class="error-msg" *ngIf="userIdSigninForm.get('password').errors?.minlength">{{ 'sign_in_page.password_minlength' | translate }}</div>
+              </div>
+            </div>
+            <div class="remember-block" flex align-items-center justify-content-between>
+              <ion-item class="remember-me" no-padding>
+                <ion-checkbox color="dark" checked></ion-checkbox> {{ 'sign_in_page.remember_me' | translate }}
+              </ion-item>
+              <a class="forgot-pwd" (click)="goToPage('password-reset')">{{ 'sign_in_page.forgot_password' | translate }}?</a>
+            </div>
+          </form>
+          <google-signin-widget [executor]="null" [action]="googleSignInActionEmitter" (lifecycle)="handleGoogleSignInAction($event)"
+            [appId]="googleClientId">
+            <ng-template let-widget="widget">
+              <div class="login-with-google" text-center>
+                <button class="btn-google" (click)="googleSignIn()">{{ 'sign_in_page.signin_google' | translate }}</button>
+              </div>
+              <div *ngIf="showGoogleSigninMessage">{{showGoogleSigninMessage}}</div>
+            </ng-template>
+          </google-signin-widget>
+          <div class="login-footer" padding>
+            <p class="dont-have-account" text-center>{{ 'sign_in_page.dont_have_account' | translate }}?
+              <span text-capitalize (click)="goToPage('signup')">{{ 'sign_in_page.register' | translate }}</span>
+            </p>
+            <ion-button color="medium" class="btn-signin" text-capitalize expand="block" mode="ios" (click)="signIn()" [disabled]="!userIdSigninForm.valid">{{ 'sign_in_page.sign_in' | translate }}</ion-button>
           </div>
-        </div>
-        <div class="error-msg">Please provide your email</div>
-      </div>
-      <div class="form-group">
-        <ion-label for="password" text-capitalize>Password</ion-label>
-        <div class="form-input">
-          <ion-input id="password" placeholder="Enter your Password" inputmode="password"></ion-input>
-          <div class="icons">
-            <ion-icon name="eye-off"></ion-icon>
-            <ion-icon name="alert"></ion-icon>
-          </div>
-        </div>
-        <div class="error-msg">We need your password: We won’t tell anyone. Promise.</div>
-      </div>
-      <div class="remember-block" flex align-items-center justify-content-between>
-        <ion-item class="remember-me" no-padding>
-          <ion-checkbox color="dark"></ion-checkbox> Remember me
-        </ion-item>
-        <a class="forgot-pwd">Forgot Password?</a>
-      </div>
-    </form>
+        </ng-container>
+      </ng-template>
+    </userid-password-signin-widget>
   </div>
 </ion-content>

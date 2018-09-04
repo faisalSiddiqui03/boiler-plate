@@ -1,0 +1,63 @@
+.delivery-take-away {
+    box-shadow: 0 2px 2px 0 rgba(var(--ion-color-dark-rgb), .14), 0 3px 1px -2px rgba(var(--ion-color-dark-rgb), .2), 0 2px 5px 0 rgba(var(--ion-color-dark-rgb), .12);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    max-width: 400px;
+    margin: auto;
+    ion-segment-button {
+        --padding-start: 5px;
+        --padding-end: 5px;
+        --padding-top: 11px;
+        --padding-bottom: 11px;
+        --border-width: 0;
+        --background: var(--ion-color-light-tint);
+        color: var(--ion-tabs-color);
+        font-size: 16px;
+        --border-radius: 5px 5px 0 0;
+        font-weight: 700;
+        --opacity: 1;
+        height: auto;
+        align-self: flex-end;
+        transition: all 0.3s ease-in-out;
+        &+ion-segment-button {
+            margin-left: 2px;
+        }
+        &.segment-checked {
+            --padding-top: 21px;
+            --padding-bottom: 21px;
+            color: var(--ion-color-danger);
+            --background: var(--ion-color-light);
+        }
+    }
+}
+
+.location-bar {
+    padding: 10px;
+    .form-control {
+        position: relative;
+        ion-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+        ion-searchbar {
+            padding: 0;
+            .searchbar-input.sc-ion-searchbar-md {
+                padding: 6px 55px 6px 10px !important;
+            }
+        }
+    }
+    .searchbar-input.sc-ion-searchbar-md {
+        box-shadow: none;
+        padding: 0 0 0 50px;
+        border-left: 1px solid var(--ion-border-color-light);
+        font-size: 14px;
+        color: var(--ion-color-medium);
+        font-weight: 700;
+        background: transparent;
+    }
+    .searchbar-search-icon.sc-ion-searchbar-md {
+        top: 5px;
+    }
+}
