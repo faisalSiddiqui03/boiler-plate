@@ -11,6 +11,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
 import { HeaderModule } from '../../../components/header/header.module';
+import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     HeaderModule,
+    SubHeaderModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
