@@ -40,15 +40,7 @@
     "address_1":"Al-Homaizi Foodstuff Co.",
     "address_2":"Al Soor Street, Al Homaizi bldg",
     "address_3":"Kuwait",
-    "phone_number":"Phone Number",
-    "contact_us": "CONTACT US",
-    "contact_page_help_message": "We are happy to answer your questions and we are glad to take your feedback into consideration",
-    "email": "Email",
-    "address_main_office": "Address (Main Office)",
-    "address_1": "Al-Homaizi Foodstuff Co.",
-    "address_2": "Al Soor Street, Al Homaizi bldg",
-    "address_3": "Kuwait",
-    "phone_number": "Phone Number"
+    "phone_number":"Phone Number"
   },
   "sign_in_page": {
     "sign_in" : "Sign In",
@@ -71,5 +63,46 @@
     "take_away": "Take away",
     "find_my_nearest_hut": "Find my nearest Hut",
     "start_my_order": "Start my order"
+  },
+  "my_account_page": {
+    "my_account": "My Account",
+    "my_profile": "My Profile",
+    "change_password": "Change Password",
+    "order_history": "My Order history",
+    "saved_address": "My saved address",
+    "my_favourites": "My Favourites",
+    "logout": "Logout"
+  },
+  "user_profile_page":{
+    "my_profile": "My Profile",
+    "fname":"First name",
+    "fname_placeholder":"So we know what to call you",
+    "fname_required":"First name please",
+    "lname":"Last name",
+    "lname_placeholder":"So we know what to call you",
+    "mobile":"Mobile",
+    "mobile_placeholder":"So we can contact you for pizza updates",
+    "mobile_required":"Your number please",
+    "mobile_valid":"Mobile numbers should start with 2,5,6 or 9",
+    "mobile_digits": "Mobile should consist of 8 digits",
+    "email":"Email",
+    "email_placeholder":"Enter your Email",
+    "save_profile": "Save Profile"
+  },
+  "change_password_page": {
+    "change_password": "Change Password",
+    "enter_password": "Enter new password",
+    "enter_password_placeholder": "Enter your Password",
+    "enter_password_required": "It will be our little secret",
+    "enter_password_length": "Password minimum length is 6 characters",
+    "re_enter_password": "Re-enter new password",
+    "re_enter_password_placeholder": "Please confirm your password",
+    "re_enter_password_required": "Please confirm your password",
+    "re_enter_password_notmatch": "Password do not match",
+    "submit":"submit"
+  },
+  "favorites_page":{
+    "my_favorites" : "my Favorites",
+    "no_favorites": "You have not favourited any product!!!"
   }
 }

@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-
-import { ChangePasswordPage } from './change-password.page';
 import { HeaderModule } from '../../../../components/header/header.module';
+import { MyAccountPage } from './my-account.page';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../../translation.loader';
@@ -14,7 +13,7 @@ import { HttpLoaderFactory } from '../../../../translation.loader';
 const routes: Routes = [
   {
     path: '',
-    component: ChangePasswordPage
+    component: MyAccountPage
   }
 ];
 
@@ -22,10 +21,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
     HeaderModule,
+    RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -34,6 +32,6 @@ const routes: Routes = [
       }
     })
   ],
-  declarations: [ChangePasswordPage]
+  declarations: [MyAccountPage]
 })
-export class ChangePasswordPageModule {}
+export class MyAccountPageModule {}

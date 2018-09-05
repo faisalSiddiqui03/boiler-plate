@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'terms', loadChildren: './pages/static/terms/terms.module#TermsPageModule' },
   { path: 'privacy-policy', loadChildren: './pages/static/privacy-policy/privacy-policy.module#PrivacyPolicyPageModule' },
   { path: 'store-selection', loadChildren: './pages/checkout/store-selection/store-selection.module#StoreSelectionPageModule' },
+  { path: 'my-account', loadChildren: './pages/user/profile/my-account/my-account.module#MyAccountPageModule' },
 ];
 
 @NgModule({

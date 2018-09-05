@@ -1,0 +1,9 @@
+.buttons-group{
+    margin-top: 30px;
+}
+
+@media (min-width:992px) {
+    .btn-signin{
+        text-transform: uppercase !important;
+    }
+}

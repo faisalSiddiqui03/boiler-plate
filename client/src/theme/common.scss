@@ -24,6 +24,7 @@
     background: url('assets/imgs/backdrop.jpg');
     ion-icon {
         font-size: 24px;
+        cursor: pointer;
     }
     ion-title {
         font-size: 22px;
@@ -35,6 +36,11 @@
     }
 }
 
+.page-bg {
+    background: url('assets/imgs/backdrop.jpg');
+    background-attachment: fixed;
+}
+
 [flex] {
     display: flex;
 }
@@ -42,13 +48,25 @@
 .form-group {
     padding-bottom: 5px;
     ion-label {
-        margin: 5px 0;
-        font-weight: 600;
-        font-size: 13px;
-        color: var(--ion-color-secondary);
+        margin: 10px 0 5px;
+        font-size: 15px;
+        color: var(--ion-color-dark);
+        &.login-label {
+            margin: 5px 0;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--ion-color-secondary);
+            sup {
+                font-size: 18px;
+            }
+        }
+        sup {
+            font-size: 24px;
+            top: 0.1em;
+        }
     }
     ion-input {
-        font-size: 13px;
+        font-size: 15px;
         border: 2px solid rgba(var(--ion-color-secondary-rgb), 0.5);
         border-radius: 4px;
         transition: all 0.3s ease-in-out;
@@ -57,6 +75,9 @@
         }
         --padding-top: 13px;
         --padding-bottom: 13px;
+        &[disabled] {
+            border-color: rgba(var(--ion-color-secondary-rgb), 0.3);
+        }
     }
     .form-input {
         position: relative;
@@ -78,6 +99,22 @@
                 &+ion-icon {
                     margin-left: 10px;
                 }
+            }
+        }
+        &.mobile-input {
+            ion-input {
+                --padding-start: 68px;
+            }
+            span {
+                position: absolute;
+                left: 2px;
+                top: 2px;
+                bottom: 2px;
+                background: var(--ion-color-medium);
+                width: 60px;
+                line-height: 40px;
+                text-align: center;
+                font-size: 15px;
             }
         }
     }
@@ -111,6 +148,19 @@
 .btn-success {
     --border-radius: 5px;
     font-size: 15px;
+    &.disabled {
+        cursor: default;
+        pointer-events: none;
+        --ion-color-base: var(--ion-color-medium) !important;
+        --ion-color-base-rgb: var(--ion-color-medium-rgb) !important;
+        --ion-color-contrast: var(--ion-color-medium-contrast) !important;
+        --ion-color-contrast-rgb: var(--ion-color-medium-contrast-rgb) !important;
+        --ion-color-shade: var(--ion-color-medium-shade) !important;
+        --ion-color-tint: var(--ion-color-medium-shade) !important;
+        --border-width: 1px;
+        --border-style: solid;
+        --border-color: var(--ion-color-light-shade);
+    }
 }
 
 .form-search {
@@ -129,9 +179,22 @@
     }
 }
 
-@media (min-width:992px){
-    .w-700{
+@media (min-width:992px) {
+    .w-700 {
         max-width: 700px;
+        margin: auto;
+    }
+    .main-content {
+        margin: 40px auto;
+        border: 1px solid var(--ion-color-medium-tint);
+        .w-400 {
+            max-width: 400px;
+            margin: 10px auto;
+            display: block;
+        }
+    }
+    .btn-signin {
+        max-width: 140px;
         margin: auto;
     }
 }
