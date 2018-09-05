@@ -75,6 +75,14 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     this.isDropDownShown = true;
   }
 
+  locateMe() {
+
+  }
+
+  filterEntity(e, type) {
+
+  }
+
   selectCity(cityName) {
     this.selectedCity = cityName;
     this.isDropDownShown = false;

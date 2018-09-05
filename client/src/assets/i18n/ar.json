@@ -35,5 +35,27 @@
 		"signin": "",
 		"terms_and_conditions": "",
 		"user_message": ""
+	},
+	"home_page": {
+		"delivery": "",
+		"find_my_nearest_hut": "",
+		"start_my_order": "",
+		"take_away": ""
+	},
+	"sign_in_page": {
+		"dont_have_account": "",
+		"email": "",
+		"email_placeholder": "",
+		"email_required": "",
+		"email_valid": "",
+		"forgot_password": "",
+		"password": "",
+		"password_minlength": "",
+		"password_placeholder": "",
+		"password_required": "",
+		"register": "",
+		"remember_me": "",
+		"sign_in": "",
+		"signin_google": ""
 	}
 }
