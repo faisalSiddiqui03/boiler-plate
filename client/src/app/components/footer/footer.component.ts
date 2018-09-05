@@ -24,4 +24,7 @@ export class FooterComponent implements OnInit {
     this.router.navigateByUrl(page);
   }
 
+  navigateToCategory(navigationItem) {
+    console.log(navigationItem);
+  }
 }

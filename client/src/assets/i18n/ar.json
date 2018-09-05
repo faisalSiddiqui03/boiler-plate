@@ -1,0 +1,39 @@
+{
+	"about_us_page": {
+		"description_part_one": "",
+		"description_part_three": "",
+		"description_part_two": "",
+		"our_history": ""
+	},
+	"category_listing": {
+		"price_tag": ""
+	},
+	"contact_page": {
+		"address_1": "",
+		"address_2": "",
+		"address_3": "",
+		"address_main_office": "",
+		"contact_page_help_message": "",
+		"email": "",
+		"phone_number": ""
+	},
+	"footer": {
+		"about_us": "",
+		"contact_us": "",
+		"copyright": "",
+		"create_your_account": "",
+		"customer_service": "",
+		"faqs": "",
+		"feedback": "",
+		"follow_us": "",
+		"hurry_up": "",
+		"menu": "",
+		"my_account": "",
+		"nutrition": "",
+		"policies": "",
+		"privacy_policy": "",
+		"signin": "",
+		"terms_and_conditions": "",
+		"user_message": ""
+	}
+}

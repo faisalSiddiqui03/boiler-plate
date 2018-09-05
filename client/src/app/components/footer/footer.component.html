@@ -3,16 +3,18 @@
     <ion-row>
       <ion-col size-lg='2' size-xs='6'>
         <ion-title no-padding no-margin>{{ 'footer.menu' | translate }}</ion-title>
-        <ion-list>
-          <ion-item no-padding (click)="navigatePage('category-listing')">{{ 'footer.deals' | translate }}</ion-item>
-          <ion-item no-padding (click)="navigatePage('category-listing')">{{ 'footer.pizzas' | translate }}</ion-item>
-          <ion-item no-padding (click)="navigatePage('category-listing')">{{ 'footer.sides' | translate }}</ion-item>
-          <ion-item no-padding (click)="navigatePage('category-listing')">{{ 'footer.wings' | translate }}</ion-item>
-          <ion-item no-padding (click)="navigatePage('category-listing')">{{ 'footer.pastas' | translate }}</ion-item>
-          <ion-item no-padding (click)="navigatePage('category-listing')">{{ 'footer.salads' | translate }}</ion-item>
-          <ion-item no-padding (click)="navigatePage('category-listing')">{{ 'footer.desserts' | translate }}</ion-item>
-          <ion-item no-padding (click)="navigatePage('category-listing')">{{ 'footer.drinks' | translate }}</ion-item>
-        </ion-list>
+        <navigation-widget pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
+                           [action]="null"
+                           (lifecycle)="null">
+
+          <ng-template let-widget="widget">
+            <div *ngIf="widget.model">
+              <ion-list>
+                <ion-item *ngFor="let navigationItem of widget.model.items" no-padding (click)="navigateToCategory(navigationItem)">{{navigationItem.name}}</ion-item>
+              </ion-list>
+            </div>
+          </ng-template>
+        </navigation-widget>
         <ion-hide-when size="lg">
           <ion-list>
             <ion-title no-padding>{{ 'footer.nutrition' | translate }}</ion-title>

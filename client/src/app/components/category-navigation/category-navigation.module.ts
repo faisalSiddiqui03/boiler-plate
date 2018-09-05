@@ -1,19 +1,20 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigationWidgetModule } from '@capillarytech/pwa-framework';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { FooterComponent } from './footer.component';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../translation.loader';
+import { NavigationWidgetModule, EventTrackModule } from "@capillarytech/pwa-framework";
+import { CategoryNavigationComponent } from './category-navigation.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpLoaderFactory } from '../../translation.loader';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    NavigationWidgetModule,
     IonicModule,
+    NavigationWidgetModule,
+    EventTrackModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -23,13 +24,13 @@ import { HttpClient } from '@angular/common/http';
     })
   ],
   declarations: [
-    FooterComponent,
+    CategoryNavigationComponent
   ],
   exports: [
-    FooterComponent
+    CategoryNavigationComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 
-export class FooterModule {
+export class CategoryNavigationModule {
 }

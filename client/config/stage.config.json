@@ -7,6 +7,7 @@
   "secretKey": "UDD3GGMEYDOGPQ5MR9UK4NL9",
   "googleMapsApiKey": "AIzaSyCcy4RPa9rv-S3780tImXmM3Xw5i1PvVTI",
   "countryCode": "SA",
+  "currencyCode": "KD",
   "redirects": {
   },
   "media_agility_url": "https://dista-ai.appspot.com/_ah/api/storeApi/v1/getStoresMapping",

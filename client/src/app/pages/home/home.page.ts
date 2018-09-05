@@ -1,6 +1,14 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { LifeCycle, Action, pwaLifeCycle, OnWidgetActionsLifecyle, OnWidgetLifecyle } from '@capillarytech/pwa-framework';
+import {
+  LifeCycle,
+  Action,
+  pwaLifeCycle,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle
+} from '@capillarytech/pwa-framework';
 import { LocationWidgetActions } from '@capillarytech/pwa-framework';
+import { BasePage } from '../../base/base-page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +17,16 @@ import { LocationWidgetActions } from '@capillarytech/pwa-framework';
 })
 
 @pwaLifeCycle()
-export class HomePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   slideOpts = {
     effect: 'flip'
   };
-  constructor() { }
+
+  constructor(private router: Router) {
+    super();
+  }
+
   orderMode = 'DELIVERY';
   locationsWidgetAction = new EventEmitter();
   dataLoaded: any = {};
@@ -42,17 +54,17 @@ export class HomePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecy
 
   widgetActionSuccess(name: string, data: any) {
 
-    console.log('name = ', name, ' data = ', data );
+    console.log('name = ', name, ' data = ', data);
   }
 
   widgetLoadingFailed(name: string, data: any) {
 
-    console.log('name = ', name, ' data = ', data );
+    console.log('name = ', name, ' data = ', data);
   }
 
   widgetLoadingStarted(name: string, data: any) {
 
-    console.log('name = ', name, ' data = ', data );
+    console.log('name = ', name, ' data = ', data);
   }
 
   /**
@@ -68,4 +80,7 @@ export class HomePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecy
     this.isDropDownShown = false;
   }
 
+  navigateToDeals() {
+    this.router.navigateByUrl('/product/deals/CU00215646');
+  }
 }

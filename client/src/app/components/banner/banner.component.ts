@@ -27,20 +27,8 @@ export class BannerComponent implements OnInit {
   bannerClass: string = "";
 
   bannerUrl: string;
-  slideOptions = {
-    centeredSlides: true,
-    slidesPerView: 1,
-    spaceBetween: 10,
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets'
-    },
-    speed: 500,
-    initialSlide: 1
-  };
 
   constructor(private router: Router, private config: ConfigService) {
-    console.log("IA MA ", this.config.getConfig());
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
   }
 
@@ -74,6 +62,10 @@ export class BannerComponent implements OnInit {
         console.log("URL")
         break;
     }
+  }
+
+  navigateToDeals() {
+    this.router.navigateByUrl('/category/deals/all');
   }
 
   getFullBannerUrl(src) {

@@ -1,55 +1,64 @@
 <ion-hide-when size="lg">
-    <ion-header>
-        <app-header [showHalalTag]="true" [showLanguage]="true"></app-header>
-    </ion-header>
+  <ion-header>
+    <app-header [showHalalTag]="true" [showLanguage]="true"></app-header>
+  </ion-header>
 </ion-hide-when>
 <ion-content>
-    <div padding>
-        <div class="delivery-take-away">
-            <ion-segment>
-                <ion-segment-button text-capitalize value="DELIVERY" class="segment-selection-button margin-right-2px">
-                    <span>{{'home_page.delivery' | translate}}</span>
-                </ion-segment-button>
-                <ion-segment-button text-capitalize value="TAKEAWAY" class="margin-left segment-selection-button">
-                    <span>{{'home_page.take_away' | translate}}</span>
-                </ion-segment-button>
-            </ion-segment>
+  <div padding>
+    <div class="delivery-take-away">
+      <ion-segment>
+        <ion-segment-button text-capitalize value="DELIVERY" class="segment-selection-button margin-right-2px">
+          <span>{{'home_page.delivery' | translate}}</span>
+        </ion-segment-button>
+        <ion-segment-button text-capitalize value="TAKEAWAY" class="margin-left segment-selection-button">
+          <span>{{'home_page.take_away' | translate}}</span>
+        </ion-segment-button>
+      </ion-segment>
 
-            <location-widget [mode]="'geography'" [locator]="'city'" [deliveryMode]="'DELIVERY'" [action]="locationsWidgetAction" (lifecycle)="null">
-                <ng-template let-widget="widget">
-                    <div *ngIf="widget.model != undefined">
-                        <div class="location-bar">
-                            <div class="form-control">
-                                <ion-searchbar [debounce]="1000" [(ngModel)]="selectedCity" #focusInput showCancelButton="false" placeholder="'please select area'" (click)="toggleDropDown('city');" (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')">
-                                </ion-searchbar>
-                                <ion-list *ngIf="isDropDownShown" class="location-block-list">
-                                    <ion-item text-center>
-                                        <ion-spinner color="green" name="bubbles">
-                                        </ion-spinner>
-                                    </ion-item>
-                                </ion-list>
-                                <ion-list *ngIf="isDropDownShown" class="location-block-list citydrp">
-                                    <ion-item *ngFor="let city of widget.model.cities">
-                                        <span (click)="selectCity(city.name)">{{ city.name }}</span>
-                                    </ion-item>
-                                </ion-list>
-                            </div>
+      <location-widget [mode]="'geography'" [locator]="'city'" [deliveryMode]="'DELIVERY'"
+                       [action]="locationsWidgetAction" (lifecycle)="null">
+        <ng-template let-widget="widget">
+          <div *ngIf="widget.model != undefined">
+            <div class="location-bar">
+              <div class="form-control">
+                <ion-searchbar [debounce]="1000" [(ngModel)]="selectedCity" #focusInput showCancelButton="false"
+                               placeholder="'please select area'" (click)="toggleDropDown('city');"
+                               (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')">
+                </ion-searchbar>
+                <ion-list *ngIf="isDropDownShown" class="location-block-list">
+                  <ion-item text-center>
+                    <ion-spinner color="green" name="bubbles">
+                    </ion-spinner>
+                  </ion-item>
+                </ion-list>
+                <ion-list *ngIf="isDropDownShown" class="location-block-list citydrp">
+                  <ion-item *ngFor="let city of widget.model.cities">
+                    <span (click)="selectCity(city.name)">{{ city.name }}</span>
+                  </ion-item>
+                </ion-list>
+              </div>
 
-                            <ion-button full round class="location-button" color="success">
-                                {{'home_page.start_my_order' | translate}}
-                            </ion-button>
+              <ion-button full round class="location-button" color="success">
+                {{'home_page.start_my_order' | translate}}
+              </ion-button>
 
-                        </div>
-                    </div>
-                </ng-template>
-            </location-widget>
-
-            <div class="find-hut" (click)="locateMe()">
-                <span> {{'home_page.find_my_nearest_hut' | translate}}</span>
             </div>
+          </div>
+        </ng-template>
+      </location-widget>
 
-        </div>
+      <div class="find-hut" (click)="locateMe()">
+        <span> {{'home_page.find_my_nearest_hut' | translate}}</span>
+      </div>
+
     </div>
-    <app-banner></app-banner>
-    <app-footer></app-footer>
+  </div>
+  <app-banner></app-banner>
+  <ion-row margin-bottom justify-content-center padding>
+    <ion-col size-lg='6' size-xs='12'>
+      <ion-button color="success" (click)="navigateToDeals()" text-capitalize expand="block" mode="ios">view all deals
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <app-footer></app-footer>
 </ion-content>

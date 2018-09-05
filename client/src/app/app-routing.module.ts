@@ -4,11 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
+  { path: 'product/:categoryName/:categoryId', loadChildren: './pages/product/category-listing/category-listing.module#CategoryListingPageModule' },
   { path: 'login', loadChildren: './pages/user/auth/login/login.module#LoginPageModule' },
   { path: 'signup', loadChildren: './pages/user/auth/signup/signup.module#SignupPageModule' },
   { path: 'password-reset', loadChildren: './pages/user/auth/password-reset/password-reset.module#PasswordResetPageModule' },
   { path: 'product-details', loadChildren: './pages/product/product-details/product-details.module#ProductDetailsPageModule' },
-  { path: 'category-listing', loadChildren: './pages/product/category-listing/category-listing.module#CategoryListingPageModule' },
   { path: 'cart', loadChildren: './pages/checkout/cart/cart.module#CartPageModule' },
   { path: 'user-profile', loadChildren: './pages/user/profile/user-profile/user-profile.module#UserProfilePageModule' },
   { path: 'change-password', loadChildren: './pages/user/profile/change-password/change-password.module#ChangePasswordPageModule' },

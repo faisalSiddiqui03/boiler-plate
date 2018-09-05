@@ -2,7 +2,6 @@
   (lifecycle)="null">
   <ng-template let-widget="widget">
     <div *ngIf="widget.model != undefined && widget.model.length > 0" padding>
-      <!--<ion-slides [options]="slideOptions" pager="isPager" class="bannerClass">-->
       <div class="coomon-heading" text-center text-uppercase margin-bottom>
         <h2 no-margin> OUR MOST POPULAR DEALS </h2>
       </div>
@@ -12,8 +11,6 @@
           />
         </ion-col>
       </ion-row>
-      <ion-button color="success" text-capitalize expand="block" mode="ios">view all deals</ion-button>
-      <!--</ion-slides>-->
     </div>
   </ng-template>
 </banner-widget>

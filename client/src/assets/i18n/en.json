@@ -1,31 +1,4 @@
 {
-  "footer": {
-    "follow_us": "Follow Us",
-    "about_us" : "About us",
-    "contact_us" : "Contact Us",
-    "nutrition" : "Nutrition",
-    "copyright": "2018, Pizza Hut Kuwait, All Rights Reserved",
-    "user_message" : "Order a delicious pizza on the go, anywhere, anytime. Pizza Hut is happy to assist you with your home delivery. Every time you order, you get a hot and fresh pizza delivered at your doorstep in less than thirty minutes. *T&C Apply.",
-    "hurry_up" : "Hurry up and place your order now!",
-    "privacy_policy":"Privacy Policy",
-    "faqs":"FAQs",
-    "customer_service":"Customer Service",
-    "my_account":"My Account",
-    "menu":"Menu",
-    "deals": "Deals",
-    "pizzas": "Pizzas",
-    "sides": "Sides",
-    "wings": "Wings",
-    "pastas": "Pastas",
-    "salads": "Salads",
-    "desserts": "Desserts",
-    "drinks": "Drinks",
-    "signin":"Signin",
-    "create_your_account": "Create Your Account",
-    "policies": "Policies",
-    "feedback": "Feedback",
-    "terms_and_conditions": "Terms & Conditions"
-  },
   "about_us_page": {
     "about_us": "ABOUT US",
     "our_history": "Our History",
@@ -42,13 +15,6 @@
     "address_3":"Kuwait",
     "phone_number":"Phone Number",
     "contact_us": "CONTACT US",
-    "contact_page_help_message": "We are happy to answer your questions and we are glad to take your feedback into consideration",
-    "email": "Email",
-    "address_main_office": "Address (Main Office)",
-    "address_1": "Al-Homaizi Foodstuff Co.",
-    "address_2": "Al Soor Street, Al Homaizi bldg",
-    "address_3": "Kuwait",
-    "phone_number": "Phone Number"
   },
   "sign_in_page": {
     "sign_in" : "Sign In",
@@ -71,5 +37,27 @@
     "take_away": "Take away",
     "find_my_nearest_hut": "Find my nearest Hut",
     "start_my_order": "Start my order"
+  },
+  "footer": {
+    "about_us": "About us",
+    "contact_us": "Contact Us",
+    "copyright": "2018, Pizza Hut Kuwait, All Rights Reserved",
+    "create_your_account": "Create Your Account",
+    "customer_service": "Customer Service",
+    "faqs": "FAQs",
+    "feedback": "Feedback",
+    "follow_us": "Follow Us",
+    "hurry_up": "Hurry up and place your order now!",
+    "menu": "Menu",
+    "my_account": "My Account",
+    "nutrition": "Nutrition",
+    "policies": "Policies",
+    "privacy_policy": "Privacy Policy",
+    "signin": "Signin",
+    "terms_and_conditions": "Terms & Conditions",
+    "user_message": "Order a delicious pizza on the go, anywhere, anytime. Pizza Hut is happy to assist you with your home delivery. Every time you order, you get a hot and fresh pizza delivered at your doorstep in less than thirty minutes. *T&C Apply."
+  },
+  "category_listing": {
+    "price_tag": "From"
   }
 }
