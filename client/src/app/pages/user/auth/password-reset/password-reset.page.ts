@@ -31,6 +31,6 @@ export class PasswordResetPage extends BasePage implements OnInit {
   }
 
   signIn() {
-    
+
   }
 }

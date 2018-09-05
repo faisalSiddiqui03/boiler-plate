@@ -67,7 +67,7 @@
       <ng-template let-widget="widget">
         <div *ngIf="widget.model">
           <ion-tabs [scrollable]="true" [color]="'dark'" [tabbarHighlight]="true" [useRouter]="true">
-            <ion-tab *ngFor="let item of widget.model.items" label="{{item.categoryId}}" [active]="item.categoryId === categoryId" href="/product/{{item.name}}/{{item.itemvalue}}">
+            <ion-tab *ngFor="let item of widget.model.items" label="{{item.name}}" [active]="item.categoryId === categoryId" href="/product/{{item.name}}/{{item.categoryId}}">
               <!--<ion-router-outlet stack name="{{item.name}}"></ion-router-outlet>-->
             </ion-tab>
           </ion-tabs>
