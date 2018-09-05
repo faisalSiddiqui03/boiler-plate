@@ -10,7 +10,7 @@
   border-top: 1px solid #ccc;
   display: block;
   .label-price {
-    font-weight: 600;
+    font-weight: bold;
   }
   padding: 10px 0;
 }
@@ -26,7 +26,7 @@ ion-card-header {
 }
 
 ion-card-content {
-  --ion-padding: 5px;
+  --ion-padding: 10px 10px 0 10px;
 }
 
 ion-row {

@@ -46,7 +46,7 @@ export class CategoryListingPage extends BasePage implements OnInit {
 
   getProductImageUrl(product) {
     if (product && product.multipleImages && product.multipleImages.length) {
-      const imageUrl = `https://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
+      const imageUrl = `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
       // console.log(imageUrl);
       return imageUrl;
     }
