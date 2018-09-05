@@ -90,121 +90,80 @@
       font-size: 20px;
       ion-icon[name="alert"] {
         color: var(--ion-color-danger);
-        display: none;
       }
-      ion-icon {
-        color: var(--ion-color-secondary-tint);
-      }
-      ion-icon {
-        & + ion-icon {
-          margin-left: 10px;
+      &.error {
+        .form-input {
+          ion-input {
+            border-color: var(--ion-color-danger);
+          }
+          .icons {
+            ion-icon[name="alert"] {
+              display: inline-block;
+            }
+          }
         }
       }
     }
-    &.mobile-input {
-      ion-input {
-        --padding-start: 68px;
-      }
-      span {
-        position: absolute;
-        left: 2px;
-        top: 2px;
-        bottom: 2px;
-        background: var(--ion-color-medium);
-        width: 60px;
-        line-height: 40px;
-        text-align: center;
-        font-size: 15px;
-      }
-    }
   }
-  .error-msg {
-    margin: 5px 8px 0;
-    font-size: 12px;
-    color: var(--ion-color-danger);
-    display: none;
-  }
-  ion-icon {
-    color: var(--ion-color-secondary-tint);
-  }
-  ion-icon {
-    & + ion-icon {
-      margin-left: 10px;
-    }
-  }
-}
 
-&.error {
-  .form-input {
-    ion-input {
-      border-color: var(--ion-color-danger);
-    }
-    .icons {
-      ion-icon[name="alert"] {
-        display: inline-block;
-      }
-    }
-  }
-}
-
-.btn-signin {
-  --border-radius: 5px;
-  font-size: 15px;
-  --border-width: 1px;
-  --border-style: solid;
-  --border-color: var(--ion-color-light-shade);
-}
-
-.btn-success {
-  --border-radius: 5px;
-  font-size: 15px;
-  &.disabled {
-    cursor: default;
-    pointer-events: none;
-    --ion-color-base: var(--ion-color-medium) !important;
-    --ion-color-base-rgb: var(--ion-color-medium-rgb) !important;
-    --ion-color-contrast: var(--ion-color-medium-contrast) !important;
-    --ion-color-contrast-rgb: var(--ion-color-medium-contrast-rgb) !important;
-    --ion-color-shade: var(--ion-color-medium-shade) !important;
-    --ion-color-tint: var(--ion-color-medium-shade) !important;
+  .btn-signin {
+    --border-radius: 5px;
+    font-size: 15px;
     --border-width: 1px;
     --border-style: solid;
     --border-color: var(--ion-color-light-shade);
   }
-}
 
-.form-search {
-  padding: 0;
-  .searchbar-input.sc-ion-searchbar-md {
-    box-shadow: none;
-    padding: 6px 55px 6px 10px;
-    font-size: 14px;
-    border: 1px solid var(--ion-color-medium-shade);
-    border-radius: 5px;
-    background: url('assets/imgs/select-arrow-down.svg') no-repeat right 10px center / 12px;
-  }
-  .searchbar-search-icon.sc-ion-searchbar-md,
-  .searchbar-clear-button.sc-ion-searchbar-md {
-    display: none !important;
-  }
-}
-
-@media (min-width: 992px) {
-  .w-700 {
-    max-width: 700px;
-    margin: auto;
-  }
-  .main-content {
-    margin: 40px auto;
-    border: 1px solid var(--ion-color-medium-tint);
-    .w-400 {
-      max-width: 400px;
-      margin: 10px auto;
-      display: block;
+  .btn-success {
+    --border-radius: 5px;
+    font-size: 15px;
+    &.disabled {
+      cursor: default;
+      pointer-events: none;
+      --ion-color-base: var(--ion-color-medium) !important;
+      --ion-color-base-rgb: var(--ion-color-medium-rgb) !important;
+      --ion-color-contrast: var(--ion-color-medium-contrast) !important;
+      --ion-color-contrast-rgb: var(--ion-color-medium-contrast-rgb) !important;
+      --ion-color-shade: var(--ion-color-medium-shade) !important;
+      --ion-color-tint: var(--ion-color-medium-shade) !important;
+      --border-width: 1px;
+      --border-style: solid;
+      --border-color: var(--ion-color-light-shade);
     }
   }
-  .btn-signin {
-    max-width: 140px;
-    margin: auto;
+
+  .form-search {
+    padding: 0;
+    .searchbar-input.sc-ion-searchbar-md {
+      box-shadow: none;
+      padding: 6px 55px 6px 10px;
+      font-size: 14px;
+      border: 1px solid var(--ion-color-medium-shade);
+      border-radius: 5px;
+      background: url('assets/imgs/select-arrow-down.svg') no-repeat right 10px center / 12px;
+    }
+    .searchbar-search-icon.sc-ion-searchbar-md,
+    .searchbar-clear-button.sc-ion-searchbar-md {
+      display: none !important;
+    }
   }
-}
+
+  @media (min-width: 992px) {
+    .w-700 {
+      max-width: 700px;
+      margin: auto;
+    }
+    .main-content {
+      margin: 40px auto;
+      border: 1px solid var(--ion-color-medium-tint);
+      .w-400 {
+        max-width: 400px;
+        margin: 10px auto;
+        display: block;
+      }
+    }
+    .btn-signin {
+      max-width: 140px;
+      margin: auto;
+    }
+  }
