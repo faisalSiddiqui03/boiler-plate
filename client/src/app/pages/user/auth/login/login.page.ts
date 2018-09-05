@@ -33,7 +33,7 @@ export class LoginPage extends BasePage implements OnInit {
 
     this.googleClientId = this.config.getConfig()['googleClientId'];
 
-    this.loaderService.startLoading();
+    // this.loaderService.startLoading();
 
     this.translate.use(Utils.getLanguageCode());
 
@@ -53,7 +53,7 @@ export class LoginPage extends BasePage implements OnInit {
   }
 
   signIn() {
-    this.loaderService.startLoading();
+    // this.loaderService.startLoading();
     this.widgetModels.USERID_PWD_SIGNIN.userName = this.userIdSigninForm.value.email;
     this.widgetModels.USERID_PWD_SIGNIN.password = this.userIdSigninForm.value.password;
     this.useridPasswordSigninAction.emit(new Action(UserIdPwdSigninWidgetActions.ACTION_SIGN_IN));
@@ -64,8 +64,8 @@ export class LoginPage extends BasePage implements OnInit {
   }
 
   googleSignIn() {
-    this.loaderService.startLoading();
-    // this.googleSignInActionEmitter.emit(new Action(GoogleSignInWidgetActions.ACTION_GPLUS_SIGN_IN));
+    // this.loaderService.startLoading();
+    this.googleSignInActionEmitter.emit(new Action(GoogleSignInWidgetActions.ACTION_GPLUS_SIGN_IN));
   }
 
   handleGoogleSignInResponse(data) {

@@ -179,6 +179,10 @@
     }
 }
 
+ion-header {
+    z-index: 11;
+}
+
 @media (min-width:992px) {
     .w-700 {
         max-width: 700px;
