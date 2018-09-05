@@ -13,6 +13,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
 import { HttpClient } from '@angular/common/http';
 import { LocationWidgetModule } from '@capillarytech/pwa-framework';
+import { BannerWidgetModule, EventTrackModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
 
 const routes: Routes = [
   {
@@ -31,6 +32,9 @@ const routes: Routes = [
     FooterModule,
     HeaderModule,
     LocationWidgetModule,
+    BannerWidgetModule,
+    EventTrackModule,
+    ImagePreloadModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

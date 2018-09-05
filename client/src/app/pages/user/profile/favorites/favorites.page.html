@@ -1,9 +1,118 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>favorites</ion-title>
-  </ion-toolbar>
+  <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
-
-<ion-content padding>
-
+<ion-content class="page-bg">
+  <ion-toolbar class="page-header">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" ios="ios-arrow-back" md="ios-arrow-back" (click)="goToPage('home')"></ion-icon>
+    </ion-buttons>
+    <ion-title text-center text-uppercase>{{'favorites_page.my_favorites' | translate}}</ion-title>
+  </ion-toolbar>
+  <div class="no-favorites" *ngIf="false" text-center>{{'favorites_page.no_favorites' | translate}}</div>
+  <ion-row class="favorites-list">
+    <ion-col size-lg="3" size-md="4" size-xs="6">
+      <div class="favorite-item">
+        <ion-icon name="heart" ios="ios-heart" md="ios-heart"></ion-icon>
+        <img src="assets/imgs/fav1.png" class="fav-img">
+        <div class="fav-text">
+          <h5>Foot Long Beef Lasagna</h5>
+          <div class="price" text-right>
+            <span>KD</span>
+            <strong>2.500</strong>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size-lg="3" size-md="4" size-xs="6">
+      <div class="favorite-item">
+        <ion-icon name="heart" ios="ios-heart" md="ios-heart"></ion-icon>
+        <img src="assets/imgs/fav1.png" class="fav-img">
+        <div class="fav-text">
+          <h5>Foot Long Beef Lasagna</h5>
+          <div class="price" text-right>
+            <span>KD</span>
+            <strong>2.500</strong>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size-lg="3" size-md="4" size-xs="6">
+      <div class="favorite-item">
+        <ion-icon name="heart" ios="ios-heart" md="ios-heart"></ion-icon>
+        <img src="assets/imgs/fav1.png" class="fav-img">
+        <div class="fav-text">
+          <h5>Foot Long Beef Lasagna</h5>
+          <div class="price" text-right>
+            <span>KD</span>
+            <strong>2.500</strong>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size-lg="3" size-md="4" size-xs="6">
+      <div class="favorite-item">
+        <ion-icon name="heart" ios="ios-heart" md="ios-heart"></ion-icon>
+        <img src="assets/imgs/fav1.png" class="fav-img">
+        <div class="fav-text">
+          <h5>Foot Long Beef Lasagna</h5>
+          <div class="price" text-right>
+            <span>KD</span>
+            <strong>2.500</strong>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size-lg="3" size-md="4" size-xs="6">
+      <div class="favorite-item">
+        <ion-icon name="heart" ios="ios-heart" md="ios-heart"></ion-icon>
+        <img src="assets/imgs/fav1.png" class="fav-img">
+        <div class="fav-text">
+          <h5>Foot Long Beef Lasagna</h5>
+          <div class="price" text-right>
+            <span>KD</span>
+            <strong>2.500</strong>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size-lg="3" size-md="4" size-xs="6">
+      <div class="favorite-item">
+        <ion-icon name="heart" ios="ios-heart" md="ios-heart"></ion-icon>
+        <img src="assets/imgs/fav1.png" class="fav-img">
+        <div class="fav-text">
+          <h5>Foot Long Beef Lasagna</h5>
+          <div class="price" text-right>
+            <span>KD</span>
+            <strong>2.500</strong>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size-lg="3" size-md="4" size-xs="6">
+      <div class="favorite-item">
+        <ion-icon name="heart" ios="ios-heart" md="ios-heart"></ion-icon>
+        <img src="assets/imgs/fav1.png" class="fav-img">
+        <div class="fav-text">
+          <h5>Foot Long Beef Lasagna</h5>
+          <div class="price" text-right>
+            <span>KD</span>
+            <strong>2.500</strong>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size-lg="3" size-md="4" size-xs="6">
+      <div class="favorite-item">
+        <ion-icon name="heart" ios="ios-heart" md="ios-heart"></ion-icon>
+        <img src="assets/imgs/fav1.png" class="fav-img">
+        <div class="fav-text">
+          <h5>Foot Long Beef Lasagna</h5>
+          <div class="price" text-right>
+            <span>KD</span>
+            <strong>2.500</strong>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
 </ion-content>

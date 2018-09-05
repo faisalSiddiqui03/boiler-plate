@@ -1,0 +1,21 @@
+<ion-header>
+  <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
+</ion-header>
+<ion-content>
+  <ion-toolbar class="page-header">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" ios="ios-arrow-back" md="ios-arrow-back" (click)="goToPage('home')"></ion-icon>
+    </ion-buttons>
+    <ion-title text-center text-uppercase>{{'my_account_page.my_account' | translate}}</ion-title>
+  </ion-toolbar>
+   <div class="my-account-wrap w-700">
+     <ion-list no-margin>
+       <ion-item (click)="goToPage('user-profile')" no-padding text-capitalize>{{'my_account_page.my_profile' | translate}} <ion-icon name="arrow-forward" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></ion-item>
+       <ion-item (click)="goToPage('change-password')" no-padding text-capitalize>{{'my_account_page.change_password' | translate}} <ion-icon name="arrow-forward" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></ion-item>
+       <ion-item (click)="goToPage('order-history')" no-padding text-capitalize>{{'my_account_page.order_history' | translate}} <ion-icon name="arrow-forward" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></ion-item>
+       <ion-item (click)="goToPage('saved-address')" no-padding text-capitalize>{{'my_account_page.saved_address' | translate}} <ion-icon name="arrow-forward" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></ion-item>
+       <ion-item (click)="goToPage('favorites')" no-padding text-capitalize>{{'my_account_page.my_favourites' | translate}} <ion-icon name="arrow-forward" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></ion-item>
+       <ion-item (click)="goToPage('home')" no-padding text-capitalize>{{'my_account_page.logout' | translate}} <ion-icon name="arrow-forward" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon></ion-item>
+     </ion-list>
+   </div>
+</ion-content> 

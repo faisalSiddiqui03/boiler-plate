@@ -7,15 +7,15 @@ import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-favorites',
-  templateUrl: './favorites.page.html',
-  styleUrls: ['./favorites.page.scss'],
+  selector: 'app-my-account',
+  templateUrl: './my-account.page.html',
+  styleUrls: ['./my-account.page.scss'],
 })
 
 @pwaLifeCycle()
 @pageView()
 
-export class FavoritesPage extends BasePage implements OnInit {
+export class MyAccountPage extends BasePage implements OnInit {
 
   constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();

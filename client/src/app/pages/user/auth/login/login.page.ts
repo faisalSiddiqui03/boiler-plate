@@ -65,7 +65,7 @@ export class LoginPage extends BasePage implements OnInit {
 
   googleSignIn() {
     this.loaderService.startLoading();
-    this.googleSignInActionEmitter.emit(new Action(GoogleSignInWidgetActions.ACTION_GPLUS_SIGN_IN));
+    // this.googleSignInActionEmitter.emit(new Action(GoogleSignInWidgetActions.ACTION_GPLUS_SIGN_IN));
   }
 
   handleGoogleSignInResponse(data) {
