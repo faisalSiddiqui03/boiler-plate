@@ -122,16 +122,26 @@
         margin: 5px 8px 0;
         font-size: 12px;
         color: var(--ion-color-danger);
+        display: none;
     }
-    &.error {
-        .form-input {
-            ion-input {
-                border-color: var(--ion-color-danger);
-            }
-            .icons {
-                ion-icon[name="alert"] {
-                    display: inline-block;
-                }
+    ion-icon {
+        color: var(--ion-color-secondary-tint);
+    }
+    ion-icon {
+        &+ion-icon {
+            margin-left: 10px;
+        }
+    }
+}
+
+&.error {
+    .form-input {
+        ion-input {
+            border-color: var(--ion-color-danger);
+        }
+        .icons {
+            ion-icon[name="alert"] {
+                display: inline-block;
             }
         }
     }

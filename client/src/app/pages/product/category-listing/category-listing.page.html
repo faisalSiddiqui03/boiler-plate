@@ -1,9 +1,78 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>category-listing</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-hide-when size="lg">
+  <ion-header>
+    <app-header [showHalalTag]="true" [showLanguage]="true"></app-header>
+  </ion-header>
+</ion-hide-when>
 
-<ion-content padding>
+<ion-content class="content-with-backdrop">
+  <product-showcase-widget
+    pfWidgetImpressionTrack
+    [categories]="[categoryId]"
+    [executor]="productShowcaseWidgetExecutor"
+    [action]="productShowcaseWidgetAction"
+    [useMJData]=true [from]="1"
+    [limit]="15">
+    <ng-template let-widget="widget">
+      <div *ngIf="widget.model != undefined && widget.model.length">
+        <div class="ribbon lg-hide">
+          <div class="ribbon__side--left"><span></span></div>
+          <div class="ribbon__side--title" text-uppercase><span class="cond caps">{{categoryName}}</span></div>
+          <div class="ribbon__side--right"><span></span></div>
+          <div class="ribbon__shadow"><span></span></div>
+        </div>
+        <div *ngIf="categoryName.toLocaleLowerCase() === 'deals'">
+          <ion-card *ngFor="let prod of widget.model" class="product-card deal-card">
+            <ion-card-header>
+              <img height="170" width="340" (click)="navigateToProduct(prod)" src="{{getProductImageUrl(prod)}}"
+                   img-preloader="{{prod?.smallImage}}" defaultImage="assets/imgs/default/no-preview.jpeg"/>
+            </ion-card-header>
 
+            <ion-card-content>
+              <p class="deal-item-name">{{prod.title}}</p>
+              <p class="deal-item-desc">{{prod.shortDescription}}</p>
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <div *ngIf="categoryName.toLocaleLowerCase() !== 'deals'">
+          <ion-grid>
+            <ion-row>
+              <ion-col *ngFor="let prod of widget.model" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
+                <ion-card class="product-card" no-padding>
+                  <ion-card-header no-padding>
+                    <img height="100" (click)="navigateToProduct(prod)" src="{{getProductImageUrl(prod)}}"
+                         img-preloader="{{prod?.smallImage}}" defaultImage="assets/imgs/default/no-preview.jpeg"/>
+                  </ion-card-header>
+
+                  <ion-card-content padding>
+                    <ion-card-subtitle color="dark">{{prod.title}}</ion-card-subtitle>
+                    <div class="price-segment" text-end>
+                      <p>{{'category_listing.price_tag' | translate }} <span class="label-price">{{currencyCode}} {{prod.webPrice}}</span></p>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+    </ng-template>
+  </product-showcase-widget>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <navigation-widget pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
+                       [action]="null"
+                       (lifecycle)="null">
+
+      <ng-template let-widget="widget">
+        <div *ngIf="widget.model">
+          <ion-tabs [scrollable]="true" [color]="'dark'" [tabbarHighlight]="true" [useRouter]="true">
+            <ion-tab *ngFor="let item of widget.model.items" label="{{item.name}}" [active]="item.categoryId === categoryId" href="/product/{{item.name}}/{{item.categoryId}}">
+              <!--<ion-router-outlet stack name="{{item.name}}"></ion-router-outlet>-->
+            </ion-tab>
+          </ion-tabs>
+        </div>
+      </ng-template>
+    </navigation-widget>
+  </ion-toolbar>
+</ion-footer>

@@ -3,38 +3,92 @@
   z-index: -1;
   width: 100%;
   top: -3px !important;
-  left:0px;
+  left: 0;
 }
 
-.toolbar{overflow: visible; contain:style; }
+.toolbar {
+  overflow: visible;
+  contain: style;
+}
 
-.toolbar-background-md{-webkit-box-shadow: 0 0 2px rgba(0,0,0,.2);  box-shadow:0 0 2px rgba(0,0,0,.2);background-color: #fff;}
-.brd-radius {border-radius: 50%;}
-.edge-shadow {-webkit-box-shadow: 0 6px 6px -6px #d5d5d5; box-shadow:0 6px 6px -6px #d5d5d5; background-color:#fff;}
-.header-md::after{background: none;}
-.logo_bg {background-color: #fff; width: 65px; height: 50px; margin: 0 auto; position: relative; bottom: -10px;text-align: center; z-index: 1; }
-.logo_bg img {position: relative;display:inline-block}
+.toolbar-background-md {
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+  box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+  background-color: #fff;
+}
+
+.brd-radius {
+  border-radius: 50%;
+}
+
+.toolbar-background-md {
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+  box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+  background-color: #fff;
+}
+
+.brd-radius {
+  border-radius: 50%;
+}
+
+.edge-shadow {
+  -webkit-box-shadow: 0 6px 6px -6px #d5d5d5;
+  box-shadow: 0 6px 6px -6px #d5d5d5;
+  background-color: #fff;
+}
+
+.header-md::after {
+  background: none;
+}
+
+.logo_bg {
+  background-color: #fff;
+  width: 65px;
+  height: 50px;
+  margin: 0 auto;
+  position: relative;
+  bottom: -10px;
+  text-align: center;
+  z-index: 1;
+}
+
+.logo_bg img {
+  position: relative;
+  display: inline-block
+}
+
 // .header-img{width: 40px;}
-.header-img{width: 48px;}
-
-.center-align-icon { margin-left: -30px; margin-right: auto; }
-.profile-icon ion-icon{font-size:35px;}
-.profile-icon { 
-  position: absolute; 
-  top: 54%; 
-  transform: translateY(-50%);
-  font-size: 16px; 
-  font-weight: bold; 
-  left:10px;
+.header-img {
+  width: 48px;
 }
-.halal-logo { 
-  position: absolute; 
-  top: 50%; 
+
+.center-align-icon {
+  margin-left: -30px;
+  margin-right: auto;
+}
+
+.profile-icon ion-icon {
+  font-size: 35px;
+}
+
+.profile-icon {
+  position: absolute;
+  top: 54%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  font-weight: bold;
+  left: 10px;
+}
+
+.halal-logo {
+  position: absolute;
+  top: 50%;
   transform: translateY(-50%);
   width: 35px;
   right: 6px;
 }
-.lang-selection{
+
+.lang-selection {
   position: absolute;
   height: 52px;
   line-height: 52px;
@@ -43,12 +97,13 @@
   left: 43px;
   top: 10%;
 }
-.desktop-logo{
+
+.desktop-logo {
   display: none;
 }
 
-@media (min-width:992px){
-  .desktop-logo{
+@media (min-width: 992px) {
+  .desktop-logo {
     display: block;
     max-width: 150px;
     margin: 7px auto 2px;

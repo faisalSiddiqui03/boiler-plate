@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class PasswordResetPage extends BasePage implements OnInit {
   passwordResetForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { 
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     super();
     this.passwordResetForm = this.formBuilder.group({
       email: ['', Validators.required]
@@ -30,4 +30,7 @@ export class PasswordResetPage extends BasePage implements OnInit {
     this.router.navigateByUrl(pageName);
   }
 
+  signIn() {
+
+  }
 }
