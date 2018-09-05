@@ -97,7 +97,9 @@
   left: 43px;
   top: 10%;
 }
-
+ion-header{
+  z-index: 11;
+}
 .desktop-logo {
   display: none;
 }
