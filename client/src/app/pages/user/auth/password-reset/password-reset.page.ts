@@ -3,6 +3,9 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { pwaLifeCycle, pageView, Action, ForgotPasswordWidgetActions } from '@capillarytech/pwa-framework';
 import { BasePage } from '../../../../base/base-page';
 import { Router } from '@angular/router';
+import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { TranslateService } from '@ngx-translate/core';
+import { Utils } from '../../../../helpers/utils';
 
 @Component({
   selector: 'app-password-reset',
@@ -15,16 +18,15 @@ import { Router } from '@angular/router';
 
 export class PasswordResetPage extends BasePage implements OnInit {
   resetPasswordForm: FormGroup;
-  showResetPasswordMessage: string;
   resetPasswordActionEmitter = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
 
-    this.showResetPasswordMessage = '';
+    this.translate.use(Utils.getLanguageCode());
 
     this.resetPasswordForm = this.formBuilder.group({
-      email: ['', Validators.required]
+      email: ['', Validators.compose([Validators.required, Validators.email])]
     });
   }
 
@@ -36,17 +38,17 @@ export class PasswordResetPage extends BasePage implements OnInit {
   }
 
   resetPassword() {
-    this.showResetPasswordMessage = '';
     this.resetPasswordActionEmitter.emit(new Action(
       ForgotPasswordWidgetActions.ACTION_SEND_PASSWORD_RESET_LINK, this.resetPasswordForm.value.email
     ));
   }
 
   handleResetPasswordResponse(data) {
+    this.router.navigateByUrl('login');
     if (data.isSuccessful) {
-      this.showResetPasswordMessage = 'Successfully sent link';
+      this.alertService.presentToast('Successfully sent link', 1000, top);
     } else {
-      this.showResetPasswordMessage = data.message;
+      this.alertService.presentToast(data.message, 1000, top);
     }
   }
 
@@ -60,7 +62,7 @@ export class PasswordResetPage extends BasePage implements OnInit {
 
   widgetActionFailed(name, data) {
     switch (name) {
-      case 'FORGOT_PASSWORD':
+      case 'SEND_PASSWORD_RESET_LINK':
         this.handleResetPasswordResponse({
           isSuccessful: false,
           message: 'Something went wrong please try again.'
