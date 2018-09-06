@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'privacy-policy', loadChildren: './pages/static/privacy-policy/privacy-policy.module#PrivacyPolicyPageModule' },
   { path: 'store-selection/:cityId', loadChildren: './pages/checkout/store-selection/store-selection.module#StoreSelectionPageModule' },
   { path: 'my-account', loadChildren: './pages/user/profile/my-account/my-account.module#MyAccountPageModule' },
+  { path: 'dealer-selection', loadChildren: './pages/checkout/dealer-selection/dealer-selection.module#DealerSelectionPageModule' },
 ];
 
 @NgModule({

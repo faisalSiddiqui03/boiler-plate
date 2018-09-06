@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"about_us_page": {
 		"description_part_one": "The Pizza Hut story begins in May 1958. Dan and Frank Carney opened their 550-squarefoot pizza restaurant in Wichita, Kansas. Dan and Frank, with friends Richard Beemer and John Bender, made the pizza themselves. Frank rolled the dough with a rolling pin. Richard tossed the dough in the air from the pie tin. Dan filled the unbaked crust with sauce. John flipped the pie from the tin during the baking process. Dan Carney recalled, 'The people were enchanted with the product, watching us tossing the dough over our heads. They were really enjoying themselves….'",
 		"description_part_three": "Pizza Hut was always an entrepreneurial, innovative, fast-thinking place. It was the kind of organization where everyone shared the learning. As Frank Carney said, To me, the biggest strength of Pizza Hut was that we had an awful lot of people who came up with great ideas.Pizza Hut grew rapidly. Pizza Hut introduced Pan Pizza in 1980 throughout its network. The product, with a thicker crust made in deep pans, soon became popular. However, the basic internal philosophy was and still is Take care of the customer. The Pizza Hut brand experience resonates today: generosity, hard work, friendships, innovation, naturalness, and fun. It was and always will be more than just the pizza.",
@@ -132,5 +133,13 @@
 		"mobile_required": "Your number please",
 		"my_profile": "My Profile",
 		"save_profile": "Save Profile"
-	}
+	},
+  "delivery_slot_selection_page":{
+    "order_for": "Order for",
+    "delivery": "Delivery",
+    "delivery_hut": "Your local delivery Hut is",
+    "as_soon_as_possible": "As soon as Possible",
+    "order_for_later": "You can order for later. Just",
+    "pick_a_time": "pick a time"
+  }
 }

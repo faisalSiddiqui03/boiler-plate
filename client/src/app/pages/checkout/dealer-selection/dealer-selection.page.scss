@@ -1,0 +1,67 @@
+.full-height {
+    background: rgba(var(--ion-color-dark-rgb), 0.7);
+}
+
+ion-footer {
+    padding: 10px;
+    ion-button {
+        span {
+            padding: 0 3px;
+        }
+    }
+}
+
+.btn-light {
+    --border-radius: 5px;
+    font-size: 15px;
+}
+
+[color-light] {
+    color: var(--ion-color-light);
+}
+
+.modal-close {
+    margin-bottom: 40px;
+    font-size: 25px;
+}
+
+.delivery-hut {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.as-soon-possible {
+    ion-checkbox {
+        pointer-events: none;
+        margin-right: 10px;
+    }
+}
+
+.order-for-later {
+    margin: 20px auto;
+    font-size: 15px;
+}
+
+.available-slots-list {
+    margin: 0 -5px;
+    ion-button {
+        --margin-top: 5px;
+        --margin-bottom: 5px;
+        margin-right: 5px;
+        margin-left: 5px;
+        width: 95px;
+        display: inline-block;
+    }
+}
+
+@media (min-width:992px) {
+    .available-slots-list {
+        margin: 0 -3px;
+        ion-button {
+            --margin-top: 3px;
+            --margin-bottom: 3px;
+            margin-right: 3px;
+            margin-left: 3px;
+        }
+    }
+}
