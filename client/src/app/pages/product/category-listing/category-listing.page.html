@@ -6,12 +6,14 @@
 
 <ion-content class="content-with-backdrop">
   <ion-toolbar class="tabs-nav-head">
-    <navigation-widget pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null" [action]="null" (lifecycle)="null">
+    <navigation-widget pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null" [action]="null"
+                       (lifecycle)="null">
       <ng-template let-widget="widget">
         <div *ngIf="widget.model">
           <ion-tabs [scrollable]="true" [color]="'dark'" [tabbarHighlight]="true" [useRouter]="true">
-            <ion-tab *ngFor="let item of widget.model.items" label="{{item.name}}" [selected]="item.categoryId === categoryId" [active]="item.categoryId === categoryId"
-              href="/product/{{item.name}}/{{item.categoryId}}">
+            <ion-tab *ngFor="let item of widget.model.items" label="{{item.name}}"
+                     [selected]="item.categoryId === categoryId" [active]="item.categoryId === categoryId"
+                     href="/product/{{item.name}}/{{item.categoryId}}">
               <ion-router-outlet stack name="{{item.name}}"></ion-router-outlet>
             </ion-tab>
           </ion-tabs>
@@ -19,8 +21,9 @@
       </ng-template>
     </navigation-widget>
   </ion-toolbar>
-  <product-showcase-widget pfWidgetImpressionTrack [categories]="[categoryId]" [executor]="productShowcaseWidgetExecutor" [action]="productShowcaseWidgetAction"
-    [useMJData]=true [from]="1" [limit]="100">
+  <product-showcase-widget pfWidgetImpressionTrack [categories]="[categoryId]"
+                           [executor]="productShowcaseWidgetExecutor" [action]="productShowcaseWidgetAction"
+                           [useMJData]=true [from]="1" [limit]="100">
     <ng-template let-widget="widget">
       <div *ngIf="widget.model != undefined && widget.model.length">
         <div class="ribbon lg-hide">
