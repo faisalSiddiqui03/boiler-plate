@@ -58,7 +58,7 @@
 		}
 	},
 	"home_page": {
-		"block": "Block",
+		"block_": "Block ",
 		"delivery": "Delivery",
 		"find_my_nearest_hut": "Find my nearest Hut",
 		"select_area": "Select Area",
