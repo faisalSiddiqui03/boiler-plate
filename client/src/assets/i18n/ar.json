@@ -52,11 +52,20 @@
 		"terms_and_conditions": "",
 		"user_message": ""
 	},
+	"home": {
+		"page": {
+			"view_all_deals": ""
+		}
+	},
 	"home_page": {
+		"block": "",
 		"delivery": "",
 		"find_my_nearest_hut": "",
+		"select_area": "",
+		"select_block": "",
 		"start_my_order": "",
-		"take_away": ""
+		"take_away": "",
+		"your_pickup_hut_is": ""
 	},
 	"my_account_page": {
 		"change_password": "",
