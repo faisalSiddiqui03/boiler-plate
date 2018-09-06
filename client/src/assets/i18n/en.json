@@ -1,108 +1,101 @@
 {
-  "footer": {
-    "follow_us": "Follow Us",
-    "about_us" : "About us",
-    "contact_us" : "Contact Us",
-    "nutrition" : "Nutrition",
-    "copyright": "2018, Pizza Hut Kuwait, All Rights Reserved",
-    "user_message" : "Order a delicious pizza on the go, anywhere, anytime. Pizza Hut is happy to assist you with your home delivery. Every time you order, you get a hot and fresh pizza delivered at your doorstep in less than thirty minutes. *T&C Apply.",
-    "hurry_up" : "Hurry up and place your order now!",
-    "privacy_policy":"Privacy Policy",
-    "faqs":"FAQs",
-    "customer_service":"Customer Service",
-    "my_account":"My Account",
-    "menu":"Menu",
-    "deals": "Deals",
-    "pizzas": "Pizzas",
-    "sides": "Sides",
-    "wings": "Wings",
-    "pastas": "Pastas",
-    "salads": "Salads",
-    "desserts": "Desserts",
-    "drinks": "Drinks",
-    "signin":"Signin",
-    "create_your_account": "Create Your Account",
-    "policies": "Policies",
-    "feedback": "Feedback",
-    "terms_and_conditions": "Terms & Conditions"
-  },
-  "about_us_page": {
-    "about_us": "ABOUT US",
-    "our_history": "Our History",
-    "description_part_one": "The Pizza Hut story begins in May 1958. Dan and Frank Carney opened their 550-squarefoot pizza restaurant in Wichita, Kansas. Dan and Frank, with friends Richard Beemer and John Bender, made the pizza themselves. Frank rolled the dough with a rolling pin. Richard tossed the dough in the air from the pie tin. Dan filled the unbaked crust with sauce. John flipped the pie from the tin during the baking process. Dan Carney recalled, 'The people were enchanted with the product, watching us tossing the dough over our heads. They were really enjoying themselves….'",
-    "description_part_two": "The Carneys created an innovative, high quality, engaging, informal eating experience in a friendly neighborhood restaurant. Pizza Hut became a popular place with the teenage and college crowd. Pizza Hut attracted families that enjoyed a night out eating a meal that they would not be having at home. After the families left, Pizza Hut transformed itself into a hangout for college-age kids. Having a good time was an essential part of Pizza Hut. The idea caught on. A second Pizza Hut opened in December 1958 in downtown Wichita. By 1963, there were forty-two Pizza Hut restaurants.",
-    "description_part_three": "Pizza Hut was always an entrepreneurial, innovative, fast-thinking place. It was the kind of organization where everyone shared the learning. As Frank Carney said, To me, the biggest strength of Pizza Hut was that we had an awful lot of people who came up with great ideas.Pizza Hut grew rapidly. Pizza Hut introduced Pan Pizza in 1980 throughout its network. The product, with a thicker crust made in deep pans, soon became popular. However, the basic internal philosophy was and still is Take care of the customer. The Pizza Hut brand experience resonates today: generosity, hard work, friendships, innovation, naturalness, and fun. It was and always will be more than just the pizza."
-  },
-  "contact_page": {
-    "contact_page_help_message":"We are happy to answer your questions and we are glad to take your feedback into consideration",
-    "email":"Email",
-    "address_main_office":"Address (Main Office)",
-    "address_1":"Al-Homaizi Foodstuff Co.",
-    "address_2":"Al Soor Street, Al Homaizi bldg",
-    "address_3":"Kuwait",
-    "phone_number":"Phone Number"
-  },
-  "sign_in_page": {
-    "sign_in" : "Sign In",
-    "email":"Email",
-    "email_placeholder":"Enter your Email",
-    "email_required":"Please provide your email",
-    "email_valid":"Please provide the correct email address",
-    "password":"password",
-    "password_placeholder":"Enter your Password",
-    "password_required":"We need your password: We won’t tell anyone. Promise.",
-    "password_minlength":"Password minimum length is 6 characters",
-    "remember_me":"Remember me",
-    "forgot_password":"Forgot Password",
-    "signin_google":"Sign in with Google",
-    "dont_have_account":"Don't have an account",
-    "register":"Register"
-  },
-  "home_page": {
-    "delivery": "Delivery",
-    "take_away": "Take away",
-    "find_my_nearest_hut": "Find my nearest Hut",
-    "start_my_order": "Start my order"
-  },
-  "my_account_page": {
-    "my_account": "My Account",
-    "my_profile": "My Profile",
-    "change_password": "Change Password",
-    "order_history": "My Order history",
-    "saved_address": "My saved address",
-    "my_favourites": "My Favourites",
-    "logout": "Logout"
-  },
-  "user_profile_page":{
-    "my_profile": "My Profile",
-    "fname":"First name",
-    "fname_placeholder":"So we know what to call you",
-    "fname_required":"First name please",
-    "lname":"Last name",
-    "lname_placeholder":"So we know what to call you",
-    "mobile":"Mobile",
-    "mobile_placeholder":"So we can contact you for pizza updates",
-    "mobile_required":"Your number please",
-    "mobile_valid":"Mobile numbers should start with 2,5,6 or 9",
-    "mobile_digits": "Mobile should consist of 8 digits",
-    "email":"Email",
-    "email_placeholder":"Enter your Email",
-    "save_profile": "Save Profile"
-  },
-  "change_password_page": {
-    "change_password": "Change Password",
-    "enter_password": "Enter new password",
-    "enter_password_placeholder": "Enter your Password",
-    "enter_password_required": "It will be our little secret",
-    "enter_password_length": "Password minimum length is 6 characters",
-    "re_enter_password": "Re-enter new password",
-    "re_enter_password_placeholder": "Please confirm your password",
-    "re_enter_password_required": "Please confirm your password",
-    "re_enter_password_notmatch": "Password do not match",
-    "submit":"submit"
-  },
-  "favorites_page":{
-    "my_favorites" : "my Favorites",
-    "no_favorites": "You have not favourited any product!!!"
-  }
+	"about_us_page": {
+		"description_part_one": "The Pizza Hut story begins in May 1958. Dan and Frank Carney opened their 550-squarefoot pizza restaurant in Wichita, Kansas. Dan and Frank, with friends Richard Beemer and John Bender, made the pizza themselves. Frank rolled the dough with a rolling pin. Richard tossed the dough in the air from the pie tin. Dan filled the unbaked crust with sauce. John flipped the pie from the tin during the baking process. Dan Carney recalled, 'The people were enchanted with the product, watching us tossing the dough over our heads. They were really enjoying themselves….'",
+		"description_part_three": "Pizza Hut was always an entrepreneurial, innovative, fast-thinking place. It was the kind of organization where everyone shared the learning. As Frank Carney said, To me, the biggest strength of Pizza Hut was that we had an awful lot of people who came up with great ideas.Pizza Hut grew rapidly. Pizza Hut introduced Pan Pizza in 1980 throughout its network. The product, with a thicker crust made in deep pans, soon became popular. However, the basic internal philosophy was and still is Take care of the customer. The Pizza Hut brand experience resonates today: generosity, hard work, friendships, innovation, naturalness, and fun. It was and always will be more than just the pizza.",
+		"description_part_two": "The Carneys created an innovative, high quality, engaging, informal eating experience in a friendly neighborhood restaurant. Pizza Hut became a popular place with the teenage and college crowd. Pizza Hut attracted families that enjoyed a night out eating a meal that they would not be having at home. After the families left, Pizza Hut transformed itself into a hangout for college-age kids. Having a good time was an essential part of Pizza Hut. The idea caught on. A second Pizza Hut opened in December 1958 in downtown Wichita. By 1963, there were forty-two Pizza Hut restaurants.",
+		"our_history": "Our History"
+	},
+	"category_listing": {
+		"price_tag": "From"
+	},
+	"change_password_page": {
+		"change_password": "Change Password",
+		"enter_password": "Enter new password",
+		"enter_password_length": "Password minimum length is 6 characters",
+		"enter_password_placeholder": "Enter your Password",
+		"enter_password_required": "It will be our little secret",
+		"re_enter_password": "Re-enter new password",
+		"re_enter_password_notmatch": "Password do not match",
+		"re_enter_password_placeholder": "Please confirm your password",
+		"re_enter_password_required": "Please confirm your password",
+		"submit": "submit"
+	},
+	"contact_page": {
+		"address_1": "Al-Homaizi Foodstuff Co.",
+		"address_2": "Al Soor Street, Al Homaizi bldg",
+		"address_3": "Kuwait",
+		"address_main_office": "Address (Main Office)",
+		"contact_page_help_message": "We are happy to answer your questions and we are glad to take your feedback into consideration",
+		"email": "Email",
+		"phone_number": "Phone Number"
+	},
+	"favorites_page": {
+		"my_favorites": "my Favorites",
+		"no_favorites": "You have not favourited any product!!!"
+	},
+	"footer": {
+		"about_us": "About us",
+		"contact_us": "Contact Us",
+		"copyright": "2018, Pizza Hut Kuwait, All Rights Reserved",
+		"create_your_account": "Create Your Account",
+		"customer_service": "Customer Service",
+		"faqs": "FAQs",
+		"feedback": "Feedback",
+		"follow_us": "Follow Us",
+		"hurry_up": "Hurry up and place your order now!",
+		"menu": "Menu",
+		"my_account": "My Account",
+		"nutrition": "Nutrition",
+		"policies": "Policies",
+		"privacy_policy": "Privacy Policy",
+		"signin": "Signin",
+		"terms_and_conditions": "Terms & Conditions",
+		"user_message": "Order a delicious pizza on the go, anywhere, anytime. Pizza Hut is happy to assist you with your home delivery. Every time you order, you get a hot and fresh pizza delivered at your doorstep in less than thirty minutes. *T&C Apply."
+	},
+	"home_page": {
+		"delivery": "Delivery",
+		"find_my_nearest_hut": "Find my nearest Hut",
+		"start_my_order": "Start my order",
+		"take_away": "Take away"
+	},
+	"my_account_page": {
+		"change_password": "Change Password",
+		"logout": "Logout",
+		"my_account": "My Account",
+		"my_favourites": "My Favourites",
+		"my_profile": "My Profile",
+		"order_history": "My Order history",
+		"saved_address": "My saved address"
+	},
+	"sign_in_page": {
+		"dont_have_account": "Don't have an account",
+		"email": "Email",
+		"email_placeholder": "Enter your Email",
+		"email_required": "Please provide your email",
+		"email_valid": "Please provide the correct email address",
+		"forgot_password": "Forgot Password",
+		"password": "password",
+		"password_minlength": "Password minimum length is 6 characters",
+		"password_placeholder": "Enter your Password",
+		"password_required": "We need your password: We won’t tell anyone. Promise.",
+		"register": "Register",
+		"remember_me": "Remember me",
+		"sign_in": "Sign In",
+		"signin_google": "Sign in with Google"
+	},
+	"user_profile_page": {
+		"email": "Email",
+		"email_placeholder": "Enter your Email",
+		"fname": "First name",
+		"fname_placeholder": "So we know what to call you",
+		"fname_required": "First name please",
+		"lname": "Last name",
+		"lname_placeholder": "So we know what to call you",
+		"mobile": "Mobile",
+		"mobile_digits": "Mobile should consist of 8 digits",
+		"mobile_placeholder": "So we can contact you for pizza updates",
+		"mobile_required": "Your number please",
+		"my_profile": "My Profile",
+		"save_profile": "Save Profile"
+	}
 }

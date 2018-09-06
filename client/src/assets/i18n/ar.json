@@ -8,6 +8,18 @@
 	"category_listing": {
 		"price_tag": ""
 	},
+	"change_password_page": {
+		"change_password": "",
+		"enter_password": "",
+		"enter_password_length": "",
+		"enter_password_placeholder": "",
+		"enter_password_required": "",
+		"re_enter_password": "",
+		"re_enter_password_notmatch": "",
+		"re_enter_password_placeholder": "",
+		"re_enter_password_required": "",
+		"submit": ""
+	},
 	"contact_page": {
 		"address_1": "",
 		"address_2": "",
@@ -16,6 +28,10 @@
 		"contact_page_help_message": "",
 		"email": "",
 		"phone_number": ""
+	},
+	"favorites_page": {
+		"my_favorites": "",
+		"no_favorites": ""
 	},
 	"footer": {
 		"about_us": "",
@@ -42,6 +58,15 @@
 		"start_my_order": "",
 		"take_away": ""
 	},
+	"my_account_page": {
+		"change_password": "",
+		"logout": "",
+		"my_account": "",
+		"my_favourites": "",
+		"my_profile": "",
+		"order_history": "",
+		"saved_address": ""
+	},
 	"sign_in_page": {
 		"dont_have_account": "",
 		"email": "",
@@ -57,5 +82,20 @@
 		"remember_me": "",
 		"sign_in": "",
 		"signin_google": ""
+	},
+	"user_profile_page": {
+		"email": "",
+		"email_placeholder": "",
+		"fname": "",
+		"fname_placeholder": "",
+		"fname_required": "",
+		"lname": "",
+		"lname_placeholder": "",
+		"mobile": "",
+		"mobile_digits": "",
+		"mobile_placeholder": "",
+		"mobile_required": "",
+		"my_profile": "",
+		"save_profile": ""
 	}
 }
