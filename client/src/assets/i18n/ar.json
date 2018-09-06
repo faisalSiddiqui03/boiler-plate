@@ -67,6 +67,23 @@
 		"order_history": "",
 		"saved_address": ""
 	},
+	"order_history_page": {
+		"no_orders": "",
+		"order_history": ""
+	},
+	"reset_password_page": {
+		"email": "",
+		"email_placeholder": "",
+		"email_required": "",
+		"email_valid": "",
+		"reset_password": "",
+		"submit": ""
+	},
+	"saved_address_page": {
+		"add_new_address": "",
+		"no_saved_address": "",
+		"saved_address": ""
+	},
 	"sign_in_page": {
 		"dont_have_account": "",
 		"email": "",
