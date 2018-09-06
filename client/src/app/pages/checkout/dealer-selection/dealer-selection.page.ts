@@ -16,20 +16,54 @@ import { BasePage } from '../../../base/base-page';
 
 export class DealerSelectionPage extends BasePage implements OnInit {
 
-  asSoonPossible:boolean = false;
-  constructor( private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
+  asSoonPossible: boolean = true;
+  slotSelected: boolean = false;
+  slotContent: string = "";
+  activeTimeSlot: number;
+  data = ['10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '02:00 PM'];
+
+  constructor(private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
 
     // this.loaderService.startLoading();
+    this.slotSelected = this.asSoonPossible;
+    this.slotContent = this.asSoonPossible ? "ASAP" : "";
+    this.activeTimeSlot = this.asSoonPossible ? 0 : null;
 
     this.translate.use(Utils.getLanguageCode());
   }
-  
+
   ngOnInit() {
   }
 
-  toggleCheckbox(){
+  toggleCheckbox() {
     this.asSoonPossible = !this.asSoonPossible;
+    this.slotSelected = this.asSoonPossible;
+    this.slotContent = this.asSoonPossible ? "ASAP" : "";
+    this.activeTimeSlot = this.asSoonPossible ? 0 : null;
+  }
+
+  selectTime(time, index) {
+    this.asSoonPossible = (time == 'ASAP') ? true : false;
+    this.slotSelected = true;
+    this.slotContent = time;
+    this.activeTimeSlot = index;
+  }
+
+  widgetActionSuccess(name, data) {
+    console.log('action success ' + name, data);
+  }
+
+  widgetLoadingSuccess(name, data) {
+    console.log('loaded ' + name, data);
+  }
+
+  widgetLoadingFailed(name, data) {
+    console.log('loading failed' + name, data);
+  }
+
+  widgetActionFailure(name, data) {
+    console.log('action failed ' + name, data);
   }
 
 }
