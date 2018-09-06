@@ -37,7 +37,7 @@
           <ion-grid>
             <ion-row>
               <ion-col *ngFor="let prod of widget.model" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
-                <ion-card class="product-card" no-padding>
+                <ion-card class="product-card non-deal-card" no-padding>
                   <ion-card-header no-padding>
                     <img height="100" (click)="navigateToProduct(prod)" src="{{getProductImageUrl(prod)}}"
                          img-preloader="{{prod?.smallImage}}" defaultImage="assets/imgs/default/no-preview.jpeg"/>

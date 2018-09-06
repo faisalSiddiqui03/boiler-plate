@@ -6,6 +6,24 @@
   background-color: white;
 }
 
+.non-deal-card {
+  img {
+    display: block;
+    width: auto;
+    margin: 10px auto;
+    height: 120px;
+  }
+}
+
+.deal-card {
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+
 .price-segment {
   border-top: 1px solid #ccc;
   display: block;
