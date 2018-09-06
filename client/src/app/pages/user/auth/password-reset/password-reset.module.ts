@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderModule } from '../../../../components/header/header.module';
 import { PasswordResetPage } from './password-reset.page';
 import { ForgotPasswordWidgetModule } from '@capillarytech/pwa-framework';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../../../../translation.loader';
+import { HttpClient } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -23,7 +26,14 @@ const routes: Routes = [
     ReactiveFormsModule,
     HeaderModule,
     ForgotPasswordWidgetModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   declarations: [PasswordResetPage]
 })

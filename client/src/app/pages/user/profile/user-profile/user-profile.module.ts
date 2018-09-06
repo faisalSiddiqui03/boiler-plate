@@ -10,6 +10,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../../translation.loader';
 import { HeaderModule } from '../../../../components/header/header.module';
+import { UserProfileWidgetModule } from '@capillarytech/pwa-framework';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes),
+    UserProfileWidgetModule,
     HeaderModule,
     TranslateModule.forRoot({
       loader: {
