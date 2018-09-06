@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ProductDetailsPageModule } from './pages/product/product-details/product-details.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'product/:categoryName/:categoryId', loadChildren: './pages/product/category-listing/category-listing.module#CategoryListingPageModule' },
+  { path: 'product/:categoryName/:productName/:productId', loadChildren: './pages/product/product-details/product-details.module#ProductDetailsPageModule'},
   { path: 'login', loadChildren: './pages/user/auth/login/login.module#LoginPageModule' },
   { path: 'signup', loadChildren: './pages/user/auth/signup/signup.module#SignupPageModule' },
   { path: 'password-reset', loadChildren: './pages/user/auth/password-reset/password-reset.module#PasswordResetPageModule' },

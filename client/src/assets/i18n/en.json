@@ -6,7 +6,7 @@
 		"our_history": "Our History"
 	},
 	"category_listing": {
-		"price_tag": ""
+		"price_tag": "From"
 	},
 	"change_password_page": {
 		"change_password": "Change Password",
@@ -54,7 +54,7 @@
 	},
 	"home": {
 		"page": {
-			"view_all_deals": ""
+			"view_all_deals": "View All Deals"
 		}
 	},
 	"home_page": {

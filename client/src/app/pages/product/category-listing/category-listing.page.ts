@@ -55,4 +55,9 @@ export class CategoryListingPage extends BasePage implements OnInit {
   getCategoryUrl(categoryName, categoryId) {
     return '/product/' + categoryName + '/' + categoryId;
   }
+
+  openProductDetails(product) {
+    console.log(product)
+    this.router.navigateByUrl('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
+  }
 }
