@@ -9,6 +9,9 @@ import { HeaderModule } from '../../../../components/header/header.module';
 import { HttpLoaderFactory } from '../../../../translation.loader';
 import { PasswordResetPage } from './password-reset.page';
 import { ForgotPasswordWidgetModule } from '@capillarytech/pwa-framework';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../../../../translation.loader';
+import { HttpClient } from '@angular/common/http';
 
 const routes: Routes = [
   {
