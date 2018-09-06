@@ -137,7 +137,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     this.toggleDropDown('city', true, false);
     console.log('selected city ', city);
 
-    if (this.orderMode === 'S') {
+    if (this.orderMode === this.deliveryModes.PICKUP) {
       this.router.navigateByUrl('store-selection');
       return;
     }
