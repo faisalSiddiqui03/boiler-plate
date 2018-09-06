@@ -199,4 +199,8 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
     this.fullfillmentModeWidgetAction.emit(changemode);
   }
+
+  filterEmptyCities(cityList) {
+    return cityList.filter(city => city.name !== '');
+  }
 }

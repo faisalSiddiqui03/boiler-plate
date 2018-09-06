@@ -40,7 +40,7 @@ export class StoreSelectionPage extends BasePage implements OnInit {
 
   ngOnInit() {
     if (this.cityId) {
-      let getStoreByCityName = new Action(
+      const getStoreByCityName = new Action(
         StoreLocatorWidgetActions.FIND_BY_CITY,
         [
           this.cityId,
