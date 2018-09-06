@@ -82,9 +82,6 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
         console.log('store selected', data);
         this.navigateToDeals();
         break;
-      case 'FIND_BY_CITY':
-        console.log('show stores for takeaway', data);
-        this.router.navigateByUrl('store-selection');
     }
   }
 
@@ -145,9 +142,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     console.log('selected city ', city);
 
     if (this.orderMode === this.deliveryModes.PICKUP) {
-      this.router.navigateByUrl('store-selection');
-      // let getStoreByCityName = new Action(StoreLocatorWidgetActions.FIND_BY_CITY, city);
-      // this.locationsWidgetAction.emit(getStoreByCityName);
+      this.router.navigate(['/store-selection', { cityId: this.selectedCityCode }]);
       return;
     }
 
