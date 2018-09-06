@@ -1,6 +1,29 @@
 <ion-content no-padding>
-
-
+  <product-display-widget
+    pfWidgetImpressionTrack
+    [executor]="productWidgetExecutor"
+    [action]="productWidgetAction"
+    (lifecycle)="null"
+    [productId]="productId"
+  >
+    <ng-template let-widget="widget">
+      <div *ngIf="widget.model && loaded">
+        <ion-card no-padding no-margin>
+          <ion-card-header no-padding>
+            <ion-item text-center>
+              <ion-icon name="close-circle" slot="start"></ion-icon>
+              <ion-label>{{widget.model.title}}</ion-label>
+            </ion-item>
+            <img alt="{{widget.model.title}}" class="product-main-image" height="170" width="340" src="{{getProductImageUrl(widget.model)}}"
+                 img-preloader="{{widget.model.smallImage}}" defaultImage="assets/imgs/default/no-preview.jpeg"/>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{widget.model.shortDescription}}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ng-template>
+  </product-display-widget>
 </ion-content>
 <ion-footer>
   <ion-button color="success">Add To My Basket</ion-button>
