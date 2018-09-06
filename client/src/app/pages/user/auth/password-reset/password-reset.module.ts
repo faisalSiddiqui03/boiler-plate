@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HeaderModule } from '../../../../components/header/header.module';
 import { PasswordResetPage } from './password-reset.page';
+import { ForgotPasswordWidgetModule } from '@capillarytech/pwa-framework';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     HeaderModule,
+    ForgotPasswordWidgetModule,
     RouterModule.forChild(routes)
   ],
   declarations: [PasswordResetPage]
