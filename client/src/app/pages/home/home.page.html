@@ -27,7 +27,7 @@
                               <small class="delivery-icon"></small>
                               <span>{{'home_page.delivery' | translate}}</span>
                           </ion-segment-button>
-                          <ion-segment-button text-capitalize value="S" [class.segment-checked]="orderMode == 'S'" (click)="changeOrderMode('H')">
+                          <ion-segment-button text-capitalize value="S" [class.segment-checked]="orderMode == 'S'" (click)="changeOrderMode('S')">
                               <small class="takeaway-icon"></small>
                               <span>{{'home_page.take_away' | translate}}</span>
                           </ion-segment-button>
@@ -41,7 +41,7 @@
                     <div *ngIf="widget.model != undefined">
                         <div class="location-bar">
                             <div class="form-control">
-                                <ion-searchbar class="form-search" [debounce]="1000" [(ngModel)]="selectedCity" #focusInput showCancelButton="false" placeholder="Select Area"
+                                <ion-searchbar class="form-search" [debounce]="1000" [(ngModel)]="selectedCity" #focusInput showCancelButton="false" placeholder="{{'home_page.select_area' | translate}}"
                                     (click)="toggleDropDown('city');" (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')">
                                 </ion-searchbar>
                                 <div *ngIf="isDropDownShown('city')" text-center class="location-block-list">
@@ -55,7 +55,7 @@
                                 </ion-list>
                             </div>
                             <div class="form-control">
-                                <ion-searchbar class="form-search" [debounce]="1000" [(ngModel)]="selectedArea" #focusInput showCancelButton="false" placeholder="Select Block"
+                                <ion-searchbar class="form-search" [debounce]="1000" [(ngModel)]="selectedArea" #focusInput showCancelButton="false" placeholder="{{'home_page.select_block' | translate}}"
                                     (click)="toggleDropDown('area');" (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'city')">
                                 </ion-searchbar>
                                 <div *ngIf="isDropDownShown('area')" text-center class="location-block-list">
@@ -76,7 +76,7 @@
                 <ng-template let-widget="widget">
                     <div *ngIf="widget.model != undefined">
                       <div class="take-away-block" (click)="findStore()">
-                          <span>Your pickup hut is </span>
+                          <span *ngIf="orderMode == 'S'">{{'home_page.your_pickup_hut_is' | translate}} </span>
                           <ion-button color="success" class="btn-success" text-capitalize expand="block" mode="ios">{{'home_page.start_my_order' | translate}}</ion-button>
                       </div>
                     </div>

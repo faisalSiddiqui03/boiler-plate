@@ -55,8 +55,11 @@
 	"home_page": {
 		"delivery": "Delivery",
 		"find_my_nearest_hut": "Find my nearest Hut",
+		"select_area": "Select Area",
+		"select_block": "Select Block",
 		"start_my_order": "Start my order",
-		"take_away": "Take away"
+		"take_away": "Take away",
+		"your_pickup_hut_is": "Your pickup hut is"
 	},
 	"my_account_page": {
 		"change_password": "Change Password",
