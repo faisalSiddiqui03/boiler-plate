@@ -1,9 +1,15 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>saved-address</ion-title>
-  </ion-toolbar>
+  <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
-
-<ion-content padding>
-
+<ion-content>
+  <ion-toolbar class="page-header">
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back" ios="ios-arrow-back" md="ios-arrow-back" (click)="goToPage('my-account')"></ion-icon>
+    </ion-buttons>
+    <ion-title text-center text-uppercase>{{'saved_address_page.saved_address' | translate}}</ion-title>
+  </ion-toolbar>
+  <div class="no-address">{{'saved_address_page.no_saved_address' | translate}}</div>
 </ion-content>
+<ion-footer no-border>
+  <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success">{{'saved_address_page.add_new_address' | translate}}</ion-button>
+</ion-footer>
