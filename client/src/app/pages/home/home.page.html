@@ -54,7 +54,7 @@
                                     </ion-item>
                                 </ion-list>
                             </div>
-                            <div class="form-control">
+                            <div class="form-control" *ngIf="orderMode == 'H'">
                                 <ion-searchbar class="form-search" [debounce]="1000" [(ngModel)]="selectedArea" #focusInput showCancelButton="false" placeholder="{{'home_page.select_block' | translate}}"
                                     (click)="toggleDropDown('area');" (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'city')">
                                 </ion-searchbar>
@@ -92,7 +92,7 @@
     <app-banner></app-banner>
     <ion-row margin-bottom justify-content-center padding>
         <ion-col size-lg='6' size-xs='12'>
-            <ion-button color="success" (click)="navigateToDeals()" text-capitalize expand="block" mode="ios">view all deals
+            <ion-button color="success" (click)="navigateToDeals()" text-capitalize expand="block" mode="ios">{{'home.page.view_all_deals' | translate}}
             </ion-button>
         </ion-col>
     </ion-row>

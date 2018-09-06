@@ -52,6 +52,11 @@
 		"terms_and_conditions": "",
 		"user_message": ""
 	},
+	"home": {
+		"page": {
+			"view_all_deals": ""
+		}
+	},
 	"home_page": {
 		"delivery": "",
 		"find_my_nearest_hut": "",

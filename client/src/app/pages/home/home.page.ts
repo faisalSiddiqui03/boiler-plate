@@ -128,6 +128,12 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     this.selectedCityCode = city.code;
     this.toggleDropDown('city', true, false);
     console.log('selected city ', city);
+
+    if (this.orderMode === 'S') {
+      this.router.navigateByUrl('store-selection');
+      return;
+    }
+
     let getAreasByCityName = new Action(LocationWidgetActions.ACTION_FETCH_AREAS_BY_CITY_CODE, city);
     this.locationsWidgetAction.emit(getAreasByCityName);
   }
