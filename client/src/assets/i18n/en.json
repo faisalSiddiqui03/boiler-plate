@@ -121,5 +121,13 @@
     "email_required": "Please provide your email",
     "email_valid": "Please provide the correct email address",
     "submit": "Submit"
+  },
+  "dealer_selection_page":{
+    "order_for": "Order for", 
+    "delivery": "Delivery",
+    "delivery_hut": "Your local delivery Hut is",
+    "as_soon_as_possible": "As soon as Possible",
+    "order_for_later": "You can order for later. Just",
+    "pick_a_time": "pick a time"
   }
 }
