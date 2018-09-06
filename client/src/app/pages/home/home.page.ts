@@ -61,7 +61,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     switch (name) {
       case 'FIND_BY_CITY_AREA':
         console.log('unable to find store', data);
-        this.router.navigateByUrl('product');
+        this.navigateToDeals();
         break;
     }
   }
@@ -72,7 +72,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     switch (name) {
       case 'FIND_BY_CITY_AREA':
         console.log('store selected', data);
-        this.router.navigateByUrl('product');
+        this.navigateToDeals();
         break;
     }
   }
@@ -177,6 +177,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   getFullBannerUrl(src) {
     return src ? this.bannerUrl + src + '?height=170&width=340&builder=freeimage' : null;
   }
+
   navigateToDeals() {
     this.router.navigateByUrl('/product/deals/CU00215646');
   }
