@@ -8,8 +8,10 @@ import {
   FulfilmentModeWidget,
   FulfilmentModeWidgetActions,
   StoreLocatorWidget,
-  StoreLocatorWidgetActions
+  StoreLocatorWidgetActions,
+  DeliveryModes
 } from '@capillarytech/pwa-framework';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +29,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   storeLocatorWidgetAction = new EventEmitter();
 
   /**default order mode is delivery */
-  orderMode = 'H';
+  orderMode = DeliveryModes.HOME_DELIVERY;
   dataLoaded: any = {};
   selectedCity = '';
   selectedCityCode;
@@ -39,13 +41,19 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   slideOpts = {
     effect: 'flip'
   };
-  constructor(private config: ConfigService, private router: Router) {
+
+  deliveryModes = DeliveryModes;
+  constructor(
+    private config: ConfigService,
+    private router: Router,
+    private translate: TranslateService
+  ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
   }
 
   ngOnInit() {
-    this. orderMode = this.globalSharedService.getFulfilmentMode().mode;
+    this.orderMode = this.globalSharedService.getFulfilmentMode().mode;
   }
 
   widgetLoadingSuccess(name, data) {
@@ -160,7 +168,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   // We shouldget displayname from api
   getAreaDisplayName(area) {
-      return 'Block ' + area.pincode;
+      return this.translate.instant('home_page.block') + area.pincode;
   }
 
   findStore() {
@@ -183,9 +191,8 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   changeOrderMode(mode) {
-    let changemode = new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE,
-      [this.selectedCityCode, this.selectedAreaCode, this.orderMode]);
+    let changemode = new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, this.orderMode);
 
-    this.locationsWidgetAction.emit(changemode);
+    this.fullfillmentModeWidgetAction.emit(changemode);
   }
 }

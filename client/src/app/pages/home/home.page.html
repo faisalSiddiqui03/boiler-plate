@@ -19,15 +19,15 @@
 
     <div class="delivery-wrap">
         <div class="delivery-take-away">
-            <fulfilment-mode-widget pfWidgetImpressionTrack [action]="fullfillmentModeAction">
+            <fulfilment-mode-widget pfWidgetImpressionTrack [action]="fullfillmentModeWidgetAction">
                 <ng-template let-widget="widget">
                     <div *ngIf="widget.model != undefined">
                       <ion-segment [(ngModel)]="orderMode">
-                          <ion-segment-button text-capitalize value="H" [class.segment-checked]="orderMode == 'H'" (click)="changeOrderMode('H')">
+                          <ion-segment-button text-capitalize value="{{deliveryModes?.HOME_DELIVERY}}" [class.segment-checked]="orderMode == deliveryModes?.HOME_DELIVERY" (click)="changeOrderMode(deliveryModes.HOME_DELIVERY)">
                               <small class="delivery-icon"></small>
                               <span>{{'home_page.delivery' | translate}}</span>
                           </ion-segment-button>
-                          <ion-segment-button text-capitalize value="S" [class.segment-checked]="orderMode == 'S'" (click)="changeOrderMode('S')">
+                          <ion-segment-button text-capitalize value="{{deliveryModes?.PICKUP}}" [class.segment-checked]="orderMode == deliveryModes?.PICKUP" (click)="changeOrderMode(deliveryModes.PICKUP)">
                               <small class="takeaway-icon"></small>
                               <span>{{'home_page.take_away' | translate}}</span>
                           </ion-segment-button>
@@ -54,7 +54,7 @@
                                     </ion-item>
                                 </ion-list>
                             </div>
-                            <div class="form-control" *ngIf="orderMode == 'H'">
+                            <div class="form-control" *ngIf="orderMode == deliveryModes?.HOME_DELIVERY">
                                 <ion-searchbar class="form-search" [debounce]="1000" [(ngModel)]="selectedArea" #focusInput showCancelButton="false" placeholder="{{'home_page.select_block' | translate}}"
                                     (click)="toggleDropDown('area');" (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'city')">
                                 </ion-searchbar>

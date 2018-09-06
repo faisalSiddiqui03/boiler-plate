@@ -58,6 +58,7 @@
 		}
 	},
 	"home_page": {
+		"block": "",
 		"delivery": "",
 		"find_my_nearest_hut": "",
 		"select_area": "",
