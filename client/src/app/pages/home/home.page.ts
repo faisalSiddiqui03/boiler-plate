@@ -82,6 +82,9 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
         console.log('store selected', data);
         this.navigateToDeals();
         break;
+      case 'FIND_BY_CITY':
+        console.log('show stores for takeaway', data);
+        this.router.navigateByUrl('store-selection');
     }
   }
 
@@ -104,6 +107,10 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   toggleDropDown(name: string, force: boolean = false, forceValue?: boolean) {
+
+      if (name === 'area' && !this.selectedCityCode ) {
+        return;
+      }
 
       let nameExists = this.dropdownViewStatus.has(name);
 
@@ -138,7 +145,8 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     console.log('selected city ', city);
 
     if (this.orderMode === this.deliveryModes.PICKUP) {
-      this.router.navigateByUrl('store-selection');
+      let getStoreByCityName = new Action(StoreLocatorWidgetActions.FIND_BY_CITY, city);
+      this.locationsWidgetAction.emit(getStoreByCityName);
       return;
     }
 
@@ -168,7 +176,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   // We shouldget displayname from api
   getAreaDisplayName(area) {
-      return this.translate.instant('home_page.block') + area.pincode;
+      return this.translate.instant('home_page.block_') + area.pincode;
   }
 
   findStore() {
