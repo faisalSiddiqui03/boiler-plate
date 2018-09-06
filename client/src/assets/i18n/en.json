@@ -110,7 +110,8 @@
 		"signin_google": "Sign in with Google"
 	},
 	"store_selection_page": {
-		"take_away_now": "Take Away Now"
+    "stores_selection": "Stores",
+    "take_away_now": "Take Away Now"
 	},
 	"user_profile_page": {
 		"email": "Email",
