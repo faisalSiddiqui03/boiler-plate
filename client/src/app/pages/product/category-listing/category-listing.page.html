@@ -23,7 +23,7 @@
         <div *ngIf="categoryName.toLocaleLowerCase() === 'deals'">
           <ion-card *ngFor="let prod of widget.model" class="product-card deal-card">
             <ion-card-header>
-              <img height="170" width="340" (click)="navigateToProduct(prod)" src="{{getProductImageUrl(prod)}}"
+              <img height="170" width="340" (click)="openProductDetails(prod)" src="{{getProductImageUrl(prod)}}"
                    img-preloader="{{prod?.smallImage}}" defaultImage="assets/imgs/default/no-preview.jpeg"/>
             </ion-card-header>
 
@@ -39,7 +39,7 @@
               <ion-col *ngFor="let prod of widget.model" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
                 <ion-card class="product-card non-deal-card" no-padding (click)="openProductDetails(prod)">
                   <ion-card-header no-padding>
-                    <img height="100" (click)="navigateToProduct(prod)" src="{{getProductImageUrl(prod)}}"
+                    <img height="100" (click)="openProductDetails(prod)" src="{{getProductImageUrl(prod)}}"
                          img-preloader="{{prod?.smallImage}}" defaultImage="assets/imgs/default/no-preview.jpeg"/>
                   </ion-card-header>
 
