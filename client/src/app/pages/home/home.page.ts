@@ -145,8 +145,9 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     console.log('selected city ', city);
 
     if (this.orderMode === this.deliveryModes.PICKUP) {
-      let getStoreByCityName = new Action(StoreLocatorWidgetActions.FIND_BY_CITY, city);
-      this.locationsWidgetAction.emit(getStoreByCityName);
+      this.router.navigateByUrl('store-selection');
+      // let getStoreByCityName = new Action(StoreLocatorWidgetActions.FIND_BY_CITY, city);
+      // this.locationsWidgetAction.emit(getStoreByCityName);
       return;
     }
 
