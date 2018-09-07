@@ -109,6 +109,10 @@
 		"sign_in": "Sign In",
 		"signin_google": "Sign in with Google"
 	},
+	"store_selection_page": {
+    "stores_selection": "Stores Selection",
+    "take_away_now": "Take Away Now"
+	},
 	"user_profile_page": {
 		"email": "Email",
 		"email_placeholder": "Enter your Email",
@@ -123,13 +127,5 @@
 		"mobile_required": "Your number please",
 		"my_profile": "My Profile",
 		"save_profile": "Save Profile"
-  },
-  "dealer_selection_page":{
-    "order_for": "Order for", 
-    "delivery": "Delivery",
-    "delivery_hut": "Your local delivery Hut is",
-    "as_soon_as_possible": "As soon as Possible",
-    "order_for_later": "You can order for later. Just",
-    "pick_a_time": "pick a time"
-  }
+	}
 }
