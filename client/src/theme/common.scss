@@ -45,12 +45,19 @@
     display: flex;
 }
 
-.full-height{
+[flex-center] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.full-height {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
-[bg-transparent]{
+
+[bg-transparent] {
     background: transparent;
 }
 
@@ -187,7 +194,7 @@
         display: none !important;
     }
 }
- 
+
 ion-header {
     z-index: 11;
 }

@@ -14,10 +14,7 @@ ion-footer {
 .btn-light {
     --border-radius: 5px;
     font-size: 15px;
-<<<<<<< HEAD
     cursor: pointer;
-=======
->>>>>>> cadc1a8dca0517f68e8090b48b5e697369f2ef62
 }
 
 [color-light] {
@@ -27,10 +24,7 @@ ion-footer {
 .modal-close {
     margin-bottom: 40px;
     font-size: 25px;
-<<<<<<< HEAD
     cursor: pointer;
-=======
->>>>>>> cadc1a8dca0517f68e8090b48b5e697369f2ef62
 }
 
 .delivery-hut {
@@ -51,7 +45,6 @@ ion-footer {
 }
 
 .available-slots-list {
-<<<<<<< HEAD
     margin: 0 -3px;
     ion-button {
         --margin-top: 3px;
@@ -84,27 +77,6 @@ ion-button{
             --margin-bottom: 5px;
             margin-right: 5px;
             margin-left: 5px;
-=======
-    margin: 0 -5px;
-    ion-button {
-        --margin-top: 5px;
-        --margin-bottom: 5px;
-        margin-right: 5px;
-        margin-left: 5px;
-        width: 95px;
-        display: inline-block;
-    }
-}
-
-@media (min-width:992px) {
-    .available-slots-list {
-        margin: 0 -3px;
-        ion-button {
-            --margin-top: 3px;
-            --margin-bottom: 3px;
-            margin-right: 3px;
-            margin-left: 3px;
->>>>>>> cadc1a8dca0517f68e8090b48b5e697369f2ef62
         }
     }
 }

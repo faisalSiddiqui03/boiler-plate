@@ -9,10 +9,7 @@ import { DealerSelectionPage } from './dealer-selection.page';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
-<<<<<<< HEAD
 import { DeliverySlotsWidgetModule } from "@capillarytech/pwa-framework";
-=======
->>>>>>> cadc1a8dca0517f68e8090b48b5e697369f2ef62
 
 const routes: Routes = [
   {
@@ -26,10 +23,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-<<<<<<< HEAD
     DeliverySlotsWidgetModule,
-=======
->>>>>>> cadc1a8dca0517f68e8090b48b5e697369f2ef62
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {

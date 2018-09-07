@@ -21,6 +21,10 @@ export class ProductDetailsPage extends BasePage implements OnInit {
   productId: string;
   loaded = false;
   clientProduct: Product;
+  variants = ['Can', "Bottle (2L)"];
+  selectedVariant: number;
+  variantContent:string = "";
+  toggleSelectedBlock:boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +43,15 @@ export class ProductDetailsPage extends BasePage implements OnInit {
     this.productName = this.route.snapshot.params.productName;
   }
 
+  selectVariant(variant, index){
+    this.selectedVariant = index;
+    this.variantContent = variant;
+    this.toggleSelectedVariant();
+  }
+  toggleSelectedVariant(){
+    this.toggleSelectedBlock = this.variantContent ? !this.toggleSelectedBlock : false;
+  }
+
   widgetLoadingSuccess(name, data) {
     if (name == WidgetNames.PRODUCT_DISPLAY) {
       this.loaded = true;
@@ -54,6 +67,10 @@ export class ProductDetailsPage extends BasePage implements OnInit {
       // console.log(imageUrl);
       return imageUrl;
     }
+  }
+
+  getData(data){
+    console.log(data);
   }
 
 }
