@@ -85,9 +85,6 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
         console.log('store selected', data);
         this.navigateToDeals();
         break;
-      case 'FIND_BY_CITY':
-        console.log('show stores for takeaway', data);
-        this.router.navigateByUrl('store-selection');
     }
   }
 
@@ -115,7 +112,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
         return;
       }
 
-      let nameExists = this.dropdownViewStatus.has(name);
+      const nameExists = this.dropdownViewStatus.has(name);
 
       if (!nameExists) {
 
@@ -124,7 +121,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
       }
 
       let dropdownViewStatus = this.dropdownViewStatus;
-      let value = !dropdownViewStatus.get(name);
+      const value = !dropdownViewStatus.get(name);
       this.dropdownViewStatus.forEach(function ( value, key) {
 
           dropdownViewStatus.set(key, false);
@@ -148,13 +145,11 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     console.log('selected city ', city);
 
     if (this.orderMode === this.deliveryModes.PICKUP) {
-      this.router.navigateByUrl('store-selection');
-      // let getStoreByCityName = new Action(StoreLocatorWidgetActions.FIND_BY_CITY, city);
-      // this.locationsWidgetAction.emit(getStoreByCityName);
+      this.router.navigate(['/store-selection', { cityId: this.selectedCityCode }]);
       return;
     }
 
-    let getAreasByCityName = new Action(LocationWidgetActions.ACTION_FETCH_AREAS_BY_CITY_CODE, city);
+    const getAreasByCityName = new Action(LocationWidgetActions.ACTION_FETCH_AREAS_BY_CITY_CODE, city);
     this.locationsWidgetAction.emit(getAreasByCityName);
   }
 
@@ -170,7 +165,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   isDropDownShown(name: string) {
 
-      let nameExists = this.dropdownViewStatus.has(name);
+      const nameExists = this.dropdownViewStatus.has(name);
       if (!nameExists) {
           return false;
       }
@@ -184,7 +179,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   findStore() {
-      let findStore = new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
+      const findStore = new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
         [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]);
 
       this.storeLocatorWidgetAction.emit(findStore);
@@ -203,7 +198,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   changeOrderMode(mode) {
-    let changemode = new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, this.orderMode);
+    const changemode = new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, this.orderMode);
 
     this.fullfillmentModeWidgetAction.emit(changemode);
   }
@@ -217,5 +212,9 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   changeSelectedStore() {
     this.changeRequested = true;
+  }
+  
+  filterEmptyCities(cityList) {
+    return cityList.filter(city => city.name !== '');
   }
 }

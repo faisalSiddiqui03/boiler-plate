@@ -49,7 +49,7 @@
                                     </ion-spinner>
                                 </div>
                                 <ion-list *ngIf="isDropDownShown('city')" class="location-block-list citydrp">
-                                    <ion-item no-padding *ngFor="let city of widget.model.cities">
+                                    <ion-item no-padding *ngFor="let city of filterEmptyCities(widget.model.cities)">
                                         <span (click)="selectCity(city)">{{ city.name }}</span>
                                     </ion-item>
                                 </ion-list>
