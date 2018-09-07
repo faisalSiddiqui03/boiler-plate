@@ -109,6 +109,9 @@
 		"sign_in": "",
 		"signin_google": ""
 	},
+	"store_selection_page": {
+		"take_away_now": ""
+	},
 	"user_profile_page": {
 		"email": "",
 		"email_placeholder": "",

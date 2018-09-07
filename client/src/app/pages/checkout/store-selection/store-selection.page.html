@@ -2,52 +2,25 @@
   <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
-  <ion-toolbar class="page-header">
-    <ion-buttons slot="start">
-      <ion-icon name="arrow-back" ios="ios-arrow-back" md="ios-arrow-back" (click)="goToPage('home')"></ion-icon>
-    </ion-buttons>
-    <ion-title text-center text-uppercase>Store Selection</ion-title>
-  </ion-toolbar>
-  <div class="store-selection-wrap w-700">
-    <div class="select-store-block" padding>
-      <h5 no-margin text-uppercase>FAHAHEEL</h5>
-      <div class="store-content" flex justify-content-between>
-        <div class="store-address">Coastal Road, Opp Al Kout Mall </div>
-        <div class="store-times">11:00 AM - 11:30 AM</div>
-      </div>
-      <div text-right class="take-away-now">
-        <ion-button color="success" size="small" class="btn-success" text-uppercase mode="ios">Take Away Now</ion-button>
-      </div>
-    </div>
-    <div class="select-store-block" padding>
-      <h5 no-margin text-uppercase>FAHAHEEL</h5>
-      <div class="store-content" flex justify-content-between>
-        <div class="store-address">Coastal Road, Opp Al Kout Mall </div>
-        <div class="store-times">11:00 AM - 11:30 AM</div>
-      </div>
-      <div text-right class="take-away-now">
-        <ion-button color="success" size="small" class="btn-success" text-uppercase mode="ios">Take Away Now</ion-button>
-      </div>
-    </div>
-    <div class="select-store-block" padding>
-      <h5 no-margin text-uppercase>FAHAHEEL</h5>
-      <div class="store-content" flex justify-content-between>
-        <div class="store-address">Coastal Road, Opp Al Kout Mall </div>
-        <div class="store-times">11:00 AM - 11:30 AM</div>
-      </div>
-      <div text-right class="take-away-now">
-        <ion-button color="success" size="small" class="btn-success" text-uppercase mode="ios">Take Away Now</ion-button>
-      </div>
-    </div>
-    <div class="select-store-block" padding>
-      <h5 no-margin text-uppercase>FAHAHEEL</h5>
-      <div class="store-content" flex justify-content-between>
-        <div class="store-address">Coastal Road, Opp Al Kout Mall </div>
-        <div class="store-times">11:00 AM - 11:30 AM</div>
-      </div>
-      <div text-right class="take-away-now">
-        <ion-button color="success" size="small" class="btn-success" text-uppercase mode="ios">Take Away Now</ion-button>
-      </div>
-    </div>
-  </div>
+  <app-sub-header [title]="'store_selection_page.stores_selection'"></app-sub-header>    
+
+  <store-locator-widget pfWidgetImpressionTrack [action]="storeLocatorWidgetAction">
+      <ng-template let-widget="widget">
+          <div *ngIf="widget.model != undefined">
+              <div class="store-selection-wrap w-700">
+                  <div class="select-store-block" *ngFor="let store of widget.model" padding>
+                    <h5 no-margin text-uppercase>{{store.name}}</h5>
+                    <div class="store-content" flex justify-content-between>
+                      <div class="store-address">{{store.address}}</div>
+                      <div class="store-times">11:00 AM - 11:30 AM</div>
+                    </div>
+                    <div text-right class="take-away-now">
+                      <ion-button color="success" size="small" class="btn-success" text-uppercase mode="ios">{{'store_selection_page.take_away_now' | translate}}</ion-button>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </ng-template>
+  </store-locator-widget>
+
 </ion-content>

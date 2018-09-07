@@ -148,6 +148,7 @@
 .btn-success {
     --border-radius: 5px;
     font-size: 15px;
+    margin: 10px;
     &.disabled {
         cursor: default;
         pointer-events: none;
