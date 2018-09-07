@@ -38,6 +38,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   selectedStore;
   dropdownViewStatus: Map<string, boolean> = new Map();
   bannerUrl: string;
+  changeRequested: boolean = false;
 
   slideOpts = {
     effect: 'flip'
@@ -211,11 +212,11 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   isStoreSelected() {
     console.log('Utkarsha ', this.getCurrentStore())
 
-    return this.selectedStore && !this.selectedStore.isDefaultLocation
+    return this.selectedStore && !this.selectedStore.isDefaultLocation && !this.changeRequested
     // return true;
   }
 
   changeSelectedStore() {
-
+    this.changeRequested = true;
   }
 }
