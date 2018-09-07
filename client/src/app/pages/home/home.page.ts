@@ -29,7 +29,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   storeLocatorWidgetAction = new EventEmitter();
 
   /**default order mode is delivery */
-  orderMode;
+  orderMode = DeliveryModes.HOME_DELIVERY;
   dataLoaded: any = {};
   selectedCity = '';
   selectedCityCode;
@@ -51,12 +51,11 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     private translate: TranslateService
   ) {
     super();
-    this.orderMode = DeliveryModes.HOME_DELIVERY
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
   }
 
   ngOnInit() {
-    this.orderMode = this.globalSharedService.getFulfilmentMode().mode;
+    this.orderMode = this.getFulfilmentMode().mode;
     this.selectedStore = this.getCurrentStore();
   }
 
