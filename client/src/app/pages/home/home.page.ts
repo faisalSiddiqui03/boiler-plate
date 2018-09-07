@@ -211,8 +211,8 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   isStoreSelected() {
     console.log('Utkarsha ', this.getCurrentStore())
 
-    // return this.selectedStore && this.selectedStore.isDefaultLocation
-    return true;
+    return this.selectedStore && !this.selectedStore.isDefaultLocation
+    // return true;
   }
 
   changeSelectedStore() {
