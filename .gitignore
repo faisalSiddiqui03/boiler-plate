@@ -1,3 +1,5 @@
+.env.js
+.env.ts
 .idea/
 node_modules/
 dist/

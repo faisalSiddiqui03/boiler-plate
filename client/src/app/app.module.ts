@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TranslateMessageFormatCompiler } from "ngx-translate-messageformat-compiler";
 import { AlertServiceModule, AlertService, LoaderServiceModule, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import {
-  ConfigService,
+  ConfigServiceModule,
   HttpService,
   CacheStorageServiceImpl,
   GlobalServiceModule,
@@ -29,14 +29,11 @@ import {
   FulfilmentModeModule,
 } from '@capillarytech/pwa-framework';
 import { HttpLoaderFactory } from './translation.loader';
-const configInitializer = (appConfig: ConfigService) => {
-  const env = environment.env;
-  return () => {
-    return appConfig.loadAppConfig(env);
-  };
-};
+import { appConfig } from '../../config/config';
 
-// required for AOT compilation
+export function getAppConfig(): Object {
+  return appConfig || {};
+}
 
 @NgModule({
   declarations: [
@@ -46,6 +43,7 @@ const configInitializer = (appConfig: ConfigService) => {
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    ConfigServiceModule.forRoot(getAppConfig),
     GlobalServiceModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
@@ -83,13 +81,6 @@ const configInitializer = (appConfig: ConfigService) => {
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
-    },
-    ConfigService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: configInitializer,
-      multi: true,
-      deps: [ConfigService]
     },
     AlertService,
     LoaderService,
