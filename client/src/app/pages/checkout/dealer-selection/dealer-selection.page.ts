@@ -19,9 +19,7 @@ export class DealerSelectionPage extends BasePage implements OnInit {
   asSoonPossible: boolean = true;
   slotSelected: boolean = false;
   slotContent: string = "";
-  activeTimeSlot: number;
-  data = ['10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '02:00 PM'];
-
+  activeTimeSlot : number;
   constructor(private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
 
@@ -29,19 +27,18 @@ export class DealerSelectionPage extends BasePage implements OnInit {
     this.slotSelected = this.asSoonPossible;
     this.slotContent = this.asSoonPossible ? "ASAP" : "";
     this.activeTimeSlot = this.asSoonPossible ? 0 : null;
-
     this.translate.use(Utils.getLanguageCode());
   }
 
   ngOnInit() {
   }
 
-  toggleCheckbox() {
-    this.asSoonPossible = !this.asSoonPossible;
-    this.slotSelected = this.asSoonPossible;
-    this.slotContent = this.asSoonPossible ? "ASAP" : "";
-    this.activeTimeSlot = this.asSoonPossible ? 0 : null;
-  }
+  // toggleCheckbox() {
+  //   this.asSoonPossible = !this.asSoonPossible;
+  //   this.slotSelected = this.asSoonPossible;
+  //   this.slotContent = this.asSoonPossible ? "ASAP" : "";
+  //   this.activeTimeSlot = this.asSoonPossible ? 0 : null;
+  // }
 
   selectTime(time, index) {
     this.asSoonPossible = (time == 'ASAP') ? true : false;

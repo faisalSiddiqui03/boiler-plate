@@ -4,6 +4,7 @@ import { appInjector } from '@cap-core/app.injector';
 export class BasePage {
 
   isModalOpen: boolean;
+  private componentID;
   protected globalSharedService: GlobalSharedService;
   private componentID;
 
