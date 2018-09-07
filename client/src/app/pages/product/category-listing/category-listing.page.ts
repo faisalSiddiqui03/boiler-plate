@@ -36,14 +36,6 @@ export class CategoryListingPage extends BasePage implements OnInit {
     this.categoryName = this.route.snapshot.params.categoryName;
   }
 
-  navigateToProduct(some) {
-    console.log(some);
-  }
-
-  getCategoryIdByName() {
-
-  }
-
   getProductImageUrl(product) {
     if (product && product.multipleImages && product.multipleImages.length) {
       const imageUrl = `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
