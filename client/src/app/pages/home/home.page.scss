@@ -152,6 +152,24 @@
     top: 5px;
 }
 
+.collection-details{
+    text-align: center;
+    font-size: 14px;
+    padding: 16px!important;
+    border-radius: 5px;background:#fff;
+    .store-name{
+        font-size: 18px;font-weight: 700
+    }
+    p{
+        margin-bottom: 10px;
+        margin-bottom: 10px;
+            
+    }
+    .btn-signin{
+        margin-bottom: 10px;
+    }
+   .button{text-transform: none;}
+}
 
 ion-row {
     margin: 0 -5px;

@@ -65,7 +65,12 @@
 		"select_block": "Select Block",
 		"start_my_order": "Start my order",
 		"take_away": "Take away",
-		"your_pickup_hut_is": "Your pickup hut is"
+        "your_pickup_hut_is": "Your pickup hut is",
+        "collection": "Pickup from",
+        "delivery_name": "Delivering from",
+        "see_deals_menu": "See all deals & menus",
+        "change": "Change"
+
 	},
 	"my_account_page": {
 		"change_password": "Change Password",

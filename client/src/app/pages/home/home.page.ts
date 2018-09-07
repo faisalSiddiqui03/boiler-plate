@@ -29,12 +29,13 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   storeLocatorWidgetAction = new EventEmitter();
 
   /**default order mode is delivery */
-  orderMode = DeliveryModes.HOME_DELIVERY;
+  orderMode;
   dataLoaded: any = {};
   selectedCity = '';
   selectedCityCode;
   selectedArea = '';
   selectedAreaCode;
+  selectedStore;
   dropdownViewStatus: Map<string, boolean> = new Map();
   bannerUrl: string;
 
@@ -49,11 +50,13 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     private translate: TranslateService
   ) {
     super();
+    this.orderMode = DeliveryModes.HOME_DELIVERY
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
   }
 
   ngOnInit() {
     this.orderMode = this.globalSharedService.getFulfilmentMode().mode;
+    this.selectedStore = this.getCurrentStore();
   }
 
   widgetLoadingSuccess(name, data) {
@@ -203,5 +206,16 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     let changemode = new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, this.orderMode);
 
     this.fullfillmentModeWidgetAction.emit(changemode);
+  }
+
+  isStoreSelected() {
+    console.log('Utkarsha ', this.getCurrentStore())
+
+    // return this.selectedStore && this.selectedStore.isDefaultLocation
+    return true;
+  }
+
+  changeSelectedStore() {
+
   }
 }
