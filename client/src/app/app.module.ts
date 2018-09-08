@@ -26,6 +26,7 @@ import {
   ImagePreloadModule,
   UserProfileWidgetModule,
   LogoutWidgetModule,
+  FulfilmentModeModule,
 } from '@capillarytech/pwa-framework';
 import { HttpLoaderFactory } from './translation.loader';
 const configInitializer = (appConfig: ConfigService) => {
@@ -49,6 +50,7 @@ const configInitializer = (appConfig: ConfigService) => {
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    FulfilmentModeModule,
     ImagePreloadModule,
     UserProfileWidgetModule,
     LogoutWidgetModule,

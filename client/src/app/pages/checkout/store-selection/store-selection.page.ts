@@ -23,6 +23,7 @@ export class StoreSelectionPage extends BasePage implements OnInit {
   storeLocatorWidgetAction = new EventEmitter();
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private activateRoute: ActivatedRoute,
     private loaderService: LoaderService,
@@ -33,26 +34,31 @@ export class StoreSelectionPage extends BasePage implements OnInit {
 
     // this.loaderService.startLoading();
     this.translate.use(Utils.getLanguageCode());
-    this.activateRoute.paramMap.subscribe(params => {
-      this.cityId = params['cityId'];
-    });
+    // this.activateRoute.paramMap.subscribe(params => {
+    //   this.cityId = params['cityId'];
+    // });
   }
 
   ngOnInit() {
+    this.cityId = this.route.snapshot.params.cityId;
+    // console.log("vivek", this.getFulfilmentMode());
+    const deliveryMode = 'S';
+    // this.getFulfilmentMode() ? this.getFulfilmentMode().mode : 'S';
     if (this.cityId) {
       const getStoreByCityName = new Action(
         StoreLocatorWidgetActions.FIND_BY_CITY,
         [
-          this.cityId,
-          this.globalSharedService.getFulfilmentMode().mode
+          '37675',
+          'S'
         ]);
+      console.log("chek", this.cityId);
       this.storeLocatorWidgetAction.emit(getStoreByCityName);
     }
   }
 
   widgetActionFailed(name: string, data: any) {
 
-    console.log('failed name = ', name, ' data = ', data);
+    console.log('chek failed name = ', name, ' data = ', data);
   }
 
   widgetActionSuccess(name: string, data: any) {
@@ -60,7 +66,7 @@ export class StoreSelectionPage extends BasePage implements OnInit {
     console.log('name = ', name, ' data = ', data);
     switch (name) {
       case 'FIND_BY_CITY':
-        console.log('store list', data);
+        console.log('chek store list', data);
         break;
     }
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { BasePage } from '../../base/base-page';
 import { Utils } from '../../helpers/utils';
 
 @Component({
@@ -8,12 +9,13 @@ import { Utils } from '../../helpers/utils';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent extends BasePage implements OnInit {
 
   constructor(
     private translate: TranslateService,
     private router: Router
   ) {
+    super();
     this.translate.use(Utils.getLanguageCode());
   }
 

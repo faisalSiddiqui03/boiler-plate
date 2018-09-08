@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { Action, LifeCycle, pwaLifeCycle, WidgetNames } from "@capillarytech/pwa-framework";
 import { Router } from '@angular/router';
 import { TranslateService } from "@ngx-translate/core";
+import { BasePage } from '../../base/base-page';
 
 @Component({
   selector: 'app-category-navigation',
@@ -9,7 +10,7 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ['./category-navigation.component.scss']
 })
 @pwaLifeCycle()
-export class CategoryNavigationComponent implements OnInit {
+export class CategoryNavigationComponent extends BasePage implements OnInit {
   @Input('refcode')
   refcode: string;
 
@@ -22,6 +23,7 @@ export class CategoryNavigationComponent implements OnInit {
 
   showDepartmentsPopup = false;
   constructor(private router: Router, private translate: TranslateService) {
+    super();
   }
 
   ngOnInit() {

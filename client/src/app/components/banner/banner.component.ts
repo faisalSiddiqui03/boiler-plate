@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { pwaLifeCycle, LifeCycle, WidgetNames, ConfigService } from "@capillarytech/pwa-framework";
 import { Router } from '@angular/router';
+import { BasePage } from '../../base/base-page';
 
 @Component({
   selector: 'app-banner',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 
 @pwaLifeCycle()
-export class BannerComponent implements OnInit {
+export class BannerComponent extends BasePage implements OnInit {
   loaded = false;
   bundleWidgetAction = new EventEmitter();
   bundleWidgetExecutor = new EventEmitter();
@@ -29,6 +30,7 @@ export class BannerComponent implements OnInit {
   bannerUrl: string;
 
   constructor(private router: Router, private config: ConfigService) {
+    super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
   }
 

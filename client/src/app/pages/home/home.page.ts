@@ -1,8 +1,14 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { LifeCycle, Action, pwaLifeCycle, OnWidgetActionsLifecyle, OnWidgetLifecyle, ConfigService } from '@capillarytech/pwa-framework';
+import {
+  LifeCycle,
+  Action,
+  pwaLifeCycle,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  ConfigService
+} from '@capillarytech/pwa-framework';
 import { BasePage } from '../../base/base-page';
 import { Router } from '@angular/router';
-import { FulfilmentMode } from '@capillarytech/pwa-framework/services/fulfilment-mode/fulfilment-mode';
 import {
   LocationWidgetActions,
   FulfilmentModeWidget,
@@ -29,7 +35,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   storeLocatorWidgetAction = new EventEmitter();
 
   /**default order mode is delivery */
-  orderMode = DeliveryModes.HOME_DELIVERY;
+    // orderMode = DeliveryModes.HOME_DELIVERY; //fulfilment widget has this
   dataLoaded: any = {};
   selectedCity = '';
   selectedCityCode;
@@ -40,11 +46,8 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   bannerUrl: string;
   changeRequested: boolean = false;
 
-  slideOpts = {
-    effect: 'flip'
-  };
-
   deliveryModes = DeliveryModes;
+
   constructor(
     private config: ConfigService,
     private router: Router,
@@ -55,7 +58,6 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   ngOnInit() {
-    this.orderMode = this.getFulfilmentMode().mode;
     this.selectedStore = this.getCurrentStore();
   }
 
@@ -78,10 +80,9 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   widgetActionSuccess(name: string, data: any) {
-
     console.log('name = ', name, ' data = ', data);
     switch (name) {
-      case 'FIND_BY_CITY_AREA':
+      case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
         console.log('store selected', data);
         this.navigateToDeals();
         break;
@@ -89,12 +90,10 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   widgetLoadingFailed(name: string, data: any) {
-
     console.log('name = ', name, ' data = ', data);
   }
 
   widgetLoadingStarted(name: string, data: any) {
-
     console.log('name = ', name, ' data = ', data);
   }
 
@@ -108,43 +107,44 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   toggleDropDown(name: string, force: boolean = false, forceValue?: boolean) {
 
-      if (name === 'area' && !this.selectedCityCode ) {
-        return;
-      }
+    if (name === 'area' && !this.selectedCityCode) {
+      return;
+    }
 
-      const nameExists = this.dropdownViewStatus.has(name);
+    const nameExists = this.dropdownViewStatus.has(name);
 
-      if (!nameExists) {
+    if (!nameExists) {
 
-          this.dropdownViewStatus.set(name, true)
-          return;
-      }
+      this.dropdownViewStatus.set(name, true)
+      return;
+    }
 
-      let dropdownViewStatus = this.dropdownViewStatus;
-      const value = !dropdownViewStatus.get(name);
-      this.dropdownViewStatus.forEach(function ( value, key) {
+    let dropdownViewStatus = this.dropdownViewStatus;
+    const value = !dropdownViewStatus.get(name);
+    this.dropdownViewStatus.forEach(function (value, key) {
 
-          dropdownViewStatus.set(key, false);
-      });
+      dropdownViewStatus.set(key, false);
+    });
 
-      this.dropdownViewStatus = dropdownViewStatus;
-      this.dropdownViewStatus.set(name, value);
+    this.dropdownViewStatus = dropdownViewStatus;
+    this.dropdownViewStatus.set(name, value);
 
-      if (force) {
+    if (force) {
 
-          console.log(name, force, forceValue);
-          this.dropdownViewStatus.set(name, forceValue);
-          return;
-      }
+      console.log(name, force, forceValue);
+      this.dropdownViewStatus.set(name, forceValue);
+      return;
+    }
   }
 
-  selectCity(city) {
+  selectCity(city, deliveryMode) {
     this.selectedCity = city.name;
     this.selectedCityCode = city.code;
     this.toggleDropDown('city', true, false);
     console.log('selected city ', city);
 
-    if (this.orderMode === this.deliveryModes.PICKUP) {
+    console.log(this.getFulfilmentMode(), "full", this.getCurrentStore())
+    if (deliveryMode === this.deliveryModes.PICKUP) {
       this.router.navigate(['/store-selection', { cityId: this.selectedCityCode }]);
       return;
     }
@@ -165,24 +165,24 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   isDropDownShown(name: string) {
 
-      const nameExists = this.dropdownViewStatus.has(name);
-      if (!nameExists) {
-          return false;
-      }
+    const nameExists = this.dropdownViewStatus.has(name);
+    if (!nameExists) {
+      return false;
+    }
 
-      return this.dropdownViewStatus.get(name);
+    return this.dropdownViewStatus.get(name);
   }
 
   // We shouldget displayname from api
   getAreaDisplayName(area) {
-      return this.translate.instant('home_page.block_') + area.pincode;
+    return this.translate.instant('home_page.block_') + area.pincode;
   }
 
   findStore() {
-      const findStore = new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
-        [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]);
+    const findStore = new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
+      [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]);
 
-      this.storeLocatorWidgetAction.emit(findStore);
+    this.storeLocatorWidgetAction.emit(findStore);
   }
 
   locateMe() {
@@ -198,7 +198,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   changeOrderMode(mode) {
-    const changemode = new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, this.orderMode);
+    const changemode = new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, this.getFulfilmentMode().mode);
 
     this.fullfillmentModeWidgetAction.emit(changemode);
   }
@@ -213,7 +213,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   changeSelectedStore() {
     this.changeRequested = true;
   }
-  
+
   filterEmptyCities(cityList) {
     return cityList.filter(city => city.name !== '');
   }
