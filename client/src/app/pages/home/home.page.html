@@ -17,7 +17,7 @@
         </banner-widget>
     </div>
 
-    <div class="delivery-wrap">
+    <div class="delivery-wrap" *ngIf="!isStoreSelected()">
         <div class="delivery-take-away">
             <fulfilment-mode-widget pfWidgetImpressionTrack [action]="fullfillmentModeWidgetAction">
                 <ng-template let-widget="widget">
@@ -88,6 +88,25 @@
             </div>
 
         </div>
+    </div>
+    <div class="delivery-wrap" *ngIf="isStoreSelected()">
+        <ion-card>
+            <ion-card-content class="mode-selection bx-shadow-4 card-content 
+                card-content-md box-shadow-card collection-details">
+                
+                    <div *ngIf="orderMode == deliveryModes?.PICKUP">{{'home_page.collection'|translate}}</div>
+                    <div *ngIf="orderMode == deliveryModes?.HOME_DELIVERY">{{'home_page.delivery_name'|translate}}</div>
+                    <div class="store-name">{{selectedStore?.name}}</div>
+                    <p>{{selectedStore?.address}}</p>
+                    <ion-button  color="medium" class="btn-signin" expand="block" mode="ios" (click)="changeSelectedStore()" class="btn-signin">
+                    {{'home_page.change'|translate}}
+                    </ion-button>
+                    <ion-button expand="block" color="success" (click)="goToStorePage(payload.store)" class="button">
+                        {{'home_page.see_deals_menu' | translate}}
+                    </ion-button>
+                
+            </ion-card-content>
+        </ion-card>
     </div>
     <app-banner></app-banner>
     <ion-row margin-bottom justify-content-center padding>

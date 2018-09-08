@@ -35,8 +35,10 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   selectedCityCode;
   selectedArea = '';
   selectedAreaCode;
+  selectedStore;
   dropdownViewStatus: Map<string, boolean> = new Map();
   bannerUrl: string;
+  changeRequested: boolean = false;
 
   slideOpts = {
     effect: 'flip'
@@ -53,7 +55,8 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   ngOnInit() {
-    this.orderMode = this.globalSharedService.getFulfilmentMode().mode;
+    this.orderMode = this.getFulfilmentMode().mode;
+    this.selectedStore = this.getCurrentStore();
   }
 
   widgetLoadingSuccess(name, data) {
@@ -200,6 +203,17 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     this.fullfillmentModeWidgetAction.emit(changemode);
   }
 
+  isStoreSelected() {
+    console.log('Utkarsha ', this.getCurrentStore())
+
+    return this.selectedStore && !this.selectedStore.isDefaultLocation && !this.changeRequested
+    // return true;
+  }
+
+  changeSelectedStore() {
+    this.changeRequested = true;
+  }
+  
   filterEmptyCities(cityList) {
     return cityList.filter(city => city.name !== '');
   }
