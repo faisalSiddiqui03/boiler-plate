@@ -1,4 +1,4 @@
-<banner-widget pfWidgetImpressionTrack [type]="'tag'" [value]="value" [executor]="bundleWidgetExecutor" [action]="bundleWidgetAction"
+<banner-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [type]="'tag'" [value]="value" [executor]="bundleWidgetExecutor" [action]="bundleWidgetAction"
   (lifecycle)="null">
   <ng-template let-widget="widget">
     <div *ngIf="widget.model != undefined && widget.model.length > 0" padding>

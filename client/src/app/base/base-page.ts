@@ -20,6 +20,10 @@ export class BasePage {
     return this.globalSharedService.getCurrentLanguage();
   }
 
+  setCurrentLanguage(language) {
+    return this.globalSharedService.updateLanguage(language)
+  }
+
   getFulfilmentMode() {
     return this.globalSharedService.getFulfilmentMode();
   }

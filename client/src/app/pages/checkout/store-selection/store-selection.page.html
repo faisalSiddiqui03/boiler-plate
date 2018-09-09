@@ -2,25 +2,25 @@
   <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
-  <app-sub-header [title]="'store_selection_page.stores_selection'"></app-sub-header>    
+  <app-sub-header [title]="'store_selection_page.stores_selection'"></app-sub-header>
 
-  <store-locator-widget pfWidgetImpressionTrack [action]="storeLocatorWidgetAction">
-      <ng-template let-widget="widget">
-          <div *ngIf="widget.model != undefined">
-              <div class="store-selection-wrap w-700">
-                  <div class="select-store-block" *ngFor="let store of widget.model" padding>
-                    <h5 no-margin text-uppercase>{{store.name}}</h5>
-                    <div class="store-content" flex justify-content-between>
-                      <div class="store-address">{{store.address}}</div>
-                      <div class="store-times">11:00 AM - 11:30 AM</div>
-                    </div>
-                    <div text-right class="take-away-now">
-                      <ion-button color="success" size="small" class="btn-success" text-uppercase mode="ios">{{'store_selection_page.take_away_now' | translate}}</ion-button>
-                    </div>
-                  </div>
-              </div>
+  <store-locator-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [action]="storeLocatorWidgetAction">
+    <ng-template let-widget="widget">
+      <div class="store-selection-wrap w-700">
+        <div class="select-store-block" *ngFor="let store of stores" padding>
+          <h5 no-margin text-uppercase>{{store.name}}</h5>
+          <div class="store-content" flex justify-content-between>
+            <div class="store-address">{{store.address}}</div>
+            <div class="store-times">11:00 AM - 11:30 AM</div>
           </div>
-      </ng-template>
+          <div text-right class="take-away-now">
+            <ion-button color="success" size="small" class="btn-success" text-uppercase mode="ios">
+              {{'store_selection_page.take_away_now' | translate}}
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </store-locator-widget>
 
 </ion-content>

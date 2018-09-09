@@ -11,9 +11,7 @@ import { BasePage } from '../../base/base-page';
 import { Router } from '@angular/router';
 import {
   LocationWidgetActions,
-  FulfilmentModeWidget,
   FulfilmentModeWidgetActions,
-  StoreLocatorWidget,
   StoreLocatorWidgetActions,
   DeliveryModes
 } from '@capillarytech/pwa-framework';
@@ -28,14 +26,14 @@ import { TranslateService } from '@ngx-translate/core';
 @pwaLifeCycle()
 export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
-  bundleWidgetAction = new EventEmitter();
-  bundleWidgetExecutor = new EventEmitter();
-  fullfillmentModeWidgetAction = new EventEmitter();
+  bannerWidgetAction = new EventEmitter();
+  bannerWidgetExecutor = new EventEmitter();
+  fulfilmentModeWidgetAction = new EventEmitter();
   locationsWidgetAction = new EventEmitter();
   storeLocatorWidgetAction = new EventEmitter();
 
   /**default order mode is delivery */
-    // orderMode = DeliveryModes.HOME_DELIVERY; //fulfilment widget has this
+    // orderMode = DeliveryModes.HOME_DELIVERY;
   dataLoaded: any = {};
   selectedCity = '';
   selectedCityCode;
@@ -62,10 +60,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   widgetLoadingSuccess(name, data) {
-    console.log('home page -> location widget', name, data);
-  }
-
-  handleWidgetLifecycle(x: LifeCycle) {
+    console.log('name = ', name, ' data = ', data);
   }
 
   widgetActionFailed(name: string, data: any) {
@@ -115,7 +110,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
     if (!nameExists) {
 
-      this.dropdownViewStatus.set(name, true)
+      this.dropdownViewStatus.set(name, true);
       return;
     }
 
@@ -137,15 +132,12 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     }
   }
 
-  selectCity(city, deliveryMode) {
+  selectCity(city) {
     this.selectedCity = city.name;
     this.selectedCityCode = city.code;
     this.toggleDropDown('city', true, false);
-    console.log('selected city ', city);
-
-    console.log(this.getFulfilmentMode(), "full", this.getCurrentStore())
-    if (deliveryMode === this.deliveryModes.PICKUP) {
-      this.router.navigate(['/store-selection', { cityId: this.selectedCityCode }]);
+    if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+      this.router.navigateByUrl('/store-selection/' + this.selectedCityCode);
       return;
     }
 
@@ -173,16 +165,17 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     return this.dropdownViewStatus.get(name);
   }
 
-  // We shouldget displayname from api
+  // We should get display name from api
   getAreaDisplayName(area) {
     return this.translate.instant('home_page.block_') + area.pincode;
   }
 
   findStore() {
-    const findStore = new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
-      [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]);
-
-    this.storeLocatorWidgetAction.emit(findStore);
+    // const findStore = new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
+    //   [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]);
+    console.log('vivek', this.globalSharedService.getFulfilmentMode().mode);
+    this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
+      [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
   }
 
   locateMe() {
@@ -198,14 +191,14 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   changeOrderMode(mode) {
-    const changemode = new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, this.getFulfilmentMode().mode);
-
-    this.fullfillmentModeWidgetAction.emit(changemode);
+    this.fulfilmentModeWidgetAction.emit(new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, mode));
+    this.selectedCity = '';
+    this.selectedCityCode = '';
+    this.selectedArea = '';
+    this.selectedAreaCode = '';
   }
 
   isStoreSelected() {
-    console.log('Utkarsha ', this.getCurrentStore())
-
     return this.selectedStore && !this.selectedStore.isDefaultLocation && !this.changeRequested
     // return true;
   }
@@ -216,5 +209,9 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   filterEmptyCities(cityList) {
     return cityList.filter(city => city.name !== '');
+  }
+
+  getDeliveryMode() {
+    return this.globalSharedService.getFulfilmentMode() ? this.globalSharedService.getFulfilmentMode().mode : null;
   }
 }

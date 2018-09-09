@@ -6,7 +6,7 @@
 
 <ion-content class="content-with-backdrop">
   <ion-toolbar class="tabs-nav-head">
-    <navigation-widget pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null" [action]="null"
+    <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null" [action]="null"
                        (lifecycle)="null">
       <ng-template let-widget="widget">
         <div *ngIf="widget.model">
@@ -21,7 +21,7 @@
       </ng-template>
     </navigation-widget>
   </ion-toolbar>
-  <product-showcase-widget pfWidgetImpressionTrack [categories]="[categoryId]"
+  <product-showcase-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [categories]="[categoryId]"
                            [executor]="productShowcaseWidgetExecutor" [action]="productShowcaseWidgetAction"
                            [useMJData]=true [from]="1" [limit]="100">
     <ng-template let-widget="widget">
