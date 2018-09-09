@@ -3,7 +3,7 @@
     <ion-row>
       <ion-col size-lg='2' size-xs='6'>
         <ion-title no-padding no-margin>{{ 'footer.menu' | translate }}</ion-title>
-        <navigation-widget pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
+        <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
                            [action]="null"
                            (lifecycle)="null">
 

@@ -5,6 +5,7 @@
     [action]="productWidgetAction"
     (lifecycle)="null"
     [productId]="productId"
+    [componentId]="getComponentId()"
   >
     <ng-template let-widget="widget">
       <div *ngIf="widget.model && loaded">

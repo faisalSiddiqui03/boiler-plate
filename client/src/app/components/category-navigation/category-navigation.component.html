@@ -1,4 +1,4 @@
-<navigation-widget pfWidgetImpressionTrack [refCode]="refcode" [level]=1 [executor]="navigationWidgetExecutor"
+<navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="refcode" [level]=1 [executor]="navigationWidgetExecutor"
                    [action]="navigationWidgetAction"
                    (lifecycle)="handleWidgetLifecycle($event)">
 
