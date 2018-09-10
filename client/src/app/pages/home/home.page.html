@@ -13,6 +13,9 @@
       [action]="bannerWidgetAction"
     >
       <ng-template let-widget="widget">
+        <div *ngIf="widget.model == undefined || widget.model.length == 0">
+            <app-skeleton></app-skeleton>
+        </div>
         <div *ngIf="widget.model != undefined && widget.model.length > 0">
           <div>
             <img src="{{getFullBannerUrl(widget.model[0].contentUrl)}}"
