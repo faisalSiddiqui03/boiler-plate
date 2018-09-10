@@ -18,6 +18,15 @@
         border-bottom: 1px solid var(--ion-color-secondary-tint);
     }
 }
+.common-heading-dotted{
+    @extend .coomon-heading;
+    h2{
+        font-size: 24px;
+    }
+    &::before {
+        border-bottom-style: dotted;
+    }
+}
 
 .page-header {
     --ion-toolbar-background-color: transparent;
