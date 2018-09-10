@@ -2,7 +2,7 @@
   <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
-  <app-sub-header [title]="'store_selection_page.stores_selection'"></app-sub-header>
+  <app-sub-header [title]="titleValue"></app-sub-header>
 
   <store-locator-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [action]="storeLocatorWidgetAction">
     <ng-template let-widget="widget">
