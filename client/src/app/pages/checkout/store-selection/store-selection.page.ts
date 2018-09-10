@@ -19,7 +19,6 @@ export class StoreSelectionPage extends BasePage implements OnInit, OnWidgetLife
   cityId;
   storeLocatorWidgetAction = new EventEmitter();
   stores: Array<any>;
-  titleKey = 'store_selection_page.stores_selection';
   titleValue = '';
   constructor(
     private route: ActivatedRoute,
@@ -44,7 +43,7 @@ export class StoreSelectionPage extends BasePage implements OnInit, OnWidgetLife
     //   );
     // }
 
-    this.translate.get(this.titleKey).subscribe(value => {
+    this.translate.get('store_selection_page.stores_selection').subscribe(value => {
       this.titleValue = value;
     });
   }

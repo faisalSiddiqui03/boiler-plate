@@ -15,11 +15,10 @@ export class ContactUsPage implements OnInit {
     this.translate.use(Utils.getLanguageCode());
   }
 
-  titleKey = 'contact_page.contact_us';
   titleValue = '';
 
   ngOnInit() {
-    this.translate.get(this.titleKey).subscribe(value => {
+    this.translate.get('contact_page.contact_us').subscribe(value => {
       this.titleValue = value;
     });
   }
