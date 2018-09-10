@@ -44,7 +44,7 @@ export class DealerSelectionPage extends BasePage implements OnInit {
   }
 
   selectTime(timeslot, index) {
-    this.asSoonPossible = timeslot.id != -1;
+    this.asSoonPossible = !(timeslot.id != -1);
     this.slotSelected = true;
     this.slotContent = timeslot.time;
     this.activeTimeSlot = index;
