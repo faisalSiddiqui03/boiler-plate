@@ -1,66 +1,62 @@
-<ion-content>
-  <cart-widget [componentId]="getComponentId()" [action]="cartWidgetActions">
-    <ng-template let-widget="widget">
-      <ng-container *ngIf="widget.model">
-        <div *ngIf="widget.model.items && widget.model.items.length">
-          <div *ngFor="let item of widget.model.items">
-            <img src="{{'http://' + item.client.image}}">
-            <p>{{item.client.title}}</p>
-            <p>{{item.client.price}}</p>
+<cart-widget class="full-height" [componentId]="getComponentId()" [action]="cartWidgetActions">
+  <ng-template let-widget="widget">
+    <ng-container *ngIf="widget.model">
+      <div class="full-height" *ngIf="widget.model.items && widget.model.items.length">
+        <ion-content>
+          <!-- <p>{{widget.model | json }}</p> -->
+          <div class="basket-container">
+            <div class="basket">
+              <div class="basket-close">Close</div>
+              <div class="common-heading-dotted" text-center>
+                <h2 text-uppercase no-margin>your cart</h2>
+              </div>
+              <ion-list no-margin>
+                <ion-item no-padding *ngFor="let item of widget.model.items">
+                  <ion-label no-margin>
+                    <div flex-center>
+                      <div class="product-title">{{item.client.title}}</div>
+                      <div class="add-remove">
+                        <ion-icon name="remove-circle" (click)="updateCartItemQuantity(item, -1)"></ion-icon>
+                        <span>{{item.client.quantity}}</span>
+                        <ion-icon name="add-circle" (click)="updateCartItemQuantity(item, 1)"></ion-icon>
+                      </div>
+                      <div class="product-price">{{item.client.price | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+                      <ion-icon class="remove-icon" name="close-circle" (click)="removeCartItem(item)"></ion-icon>
+                    </div>
+                  </ion-label>
+                  <div class="tooltip">Want to make changes? Just tap any item.</div>
+                </ion-item>
+              </ion-list>
+              <div flex-center class="total-bill-block">
+                <div class="total-bill">Your Total</div>
+                <div class="total-price">{{widget.model.productCost | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+              </div>
+              <div class="promotion-button">
+                <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher" (click)="showVoucherModal()">Got a voucher code?</ion-button>
+              </div>
+            </div>
           </div>
-        </div>
-      </ng-container>
-    </ng-template>
-  </cart-widget>
-  <div class="basket-container">
-    <div class="basket">
-      <div class="basket-close">Close</div>
-      <div class="common-heading-dotted" text-center>
-        <h2 text-uppercase no-margin>your cart</h2>
+        </ion-content>
+        <ion-footer>
+          <ion-button color="success" text-capitalize expand="block" mode="ios" class="btn-success">continue
+            <span>{{widget.model.productCost | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+          </ion-button>
+        </ion-footer>
       </div>
-      <ion-list no-margin>
-        <ion-item no-padding>
-          <ion-label no-margin>
-            <div flex-center>
-              <div class="product-title">Chicken Lemon Bake</div>
-              <div class="add-remove">
-                <ion-icon name="remove-circle"></ion-icon>
-                <span>1</span>
-                <ion-icon name="add-circle"></ion-icon>
-              </div>
-              <div class="product-price">KD 2.250</div>
-              <ion-icon class="remove-icon" name="close-circle"></ion-icon>
-            </div>
-          </ion-label>
-          <div class="tooltip">Want to make changes? Just tap any item.</div>
-        </ion-item>
-        <ion-item no-padding>
-          <ion-label no-margin>
-            <div flex-center>
-              <div class="product-title">Chicken Lemon Bake</div>
-              <div class="add-remove">
-                <ion-icon name="remove-circle"></ion-icon>
-                <span>1</span>
-                <ion-icon name="add-circle"></ion-icon>
-              </div>
-              <div class="product-price">KD 2.250</div>
-              <ion-icon class="remove-icon" name="close-circle"></ion-icon>
-            </div>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-      <div flex-center class="total-bill-block">
-        <div class="total-bill">Your Total</div>
-        <div class="total-price">KD 2.250</div>
-      </div>
-      <div class="promotion-button">
-        <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher">Got a voucher code?</ion-button>
-      </div>
+    </ng-container>
+  </ng-template>
+</cart-widget>
+
+<div class="voucher-modal-wrap" *ngIf="enableVoucherModal">
+  <div class="voucher-modal" padding>
+    <ion-icon class="close-icon" name="close-circle" (click)="showVoucherModal()"></ion-icon>
+    <h3 text-uppercase text-center> GOT A VOUCHER CODE? </h3>
+    <p>Our top deals are always available online on our Deals page.
+      <a>exclusive offers</a>
+    </p>
+    <div class="form-section" flex-center>
+      <ion-input placeholder="Voucher code" inputmode="text"></ion-input>
+      <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success">apply</ion-button>
     </div>
   </div>
-</ion-content>
-<ion-footer>
-  <ion-button color="success" text-capitalize expand="block" mode="ios" class="btn-success">continue
-    <span>KD 2.400</span>
-  </ion-button>
-</ion-footer>
+</div>

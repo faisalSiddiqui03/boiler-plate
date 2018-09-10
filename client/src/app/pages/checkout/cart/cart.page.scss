@@ -31,7 +31,7 @@
             position: relative;
             font-size: 13px;
             ion-label {
-                padding: 30px 16px 16px 16px;
+                padding: 40px 16px 16px 16px;
                 white-space: normal;
                 .product-title {
                     font-size: 14px;
@@ -73,7 +73,7 @@
         }
         .tooltip {
             position: absolute;
-            top: 0;
+            top: 5px;
             left: 10px;
             padding: 0 10px;
             font-size: 12px;
@@ -101,14 +101,14 @@
     .promotion-button {
         padding: 20px;
         margin-top: 30px;
-        .btn-voucher{
-          --box-shadow: none;
-          --border-radius: 0;
-          --border-width: 1px;
-          --border-style: dashed;
-          --border-color: var(--ion-block-header-color);
-          --ion-color-contrast: var(--ion-color-secondary) !important;
-          font-size: 13px;
+        .btn-voucher {
+            --box-shadow: none;
+            --border-radius: 0;
+            --border-width: 1px;
+            --border-style: dashed;
+            --border-color: var(--ion-block-header-color);
+            --ion-color-contrast: var(--ion-color-secondary) !important;
+            font-size: 13px;
         }
     }
 }
@@ -118,6 +118,54 @@ ion-footer {
         span {
             position: absolute;
             right: 30px;
+        }
+    }
+}
+
+.voucher-modal-wrap {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(var(--ion-color-dark-rgb), 0.7);
+    padding: 60px 16px;
+    overflow: auto;
+    .voucher-modal {
+        position: relative;
+        background: var(--ion-color-light);
+        h3 {
+            margin: 0 0 10px;
+            font-family: 'Open Sans Condensed';
+            font-size: 20px;
+            font-weight: 700;
+        }
+        p {
+            font-size: 12px;
+            margin: 0 0 20px;
+            a {
+                color: var(--ion-color-dark);
+                text-decoration: underline;
+            }
+        }
+        .close-icon {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            color: var(--ion-color-medium-shade);
+            font-size: 22px;
+        }
+        .form-section {
+            .btn-success {
+                margin: 0;
+            }
+            ion-input {
+                border: 1px solid rgba(var(--ion-color-secondary-rgb), 0.5);
+                border-radius: 5px;
+                margin-right: 10px;
+                font-size: 15px;
+                color: var(--ion-color-dark-shade);
+            }
         }
     }
 }

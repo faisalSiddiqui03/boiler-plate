@@ -6,7 +6,8 @@ import {
   OnWidgetLifecyle,
   WidgetNames,
   Action,
-  CartWidgetActions
+  CartWidgetActions,
+  ConfigService
 } from '@capillarytech/pwa-framework';
 import { BasePage } from '../../../base/base-page';
 import { TranslateService } from "@ngx-translate/core";
@@ -27,17 +28,21 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   cartWidgetAction = new EventEmitter();
   loaded = false;
   vouchersLoaded = false;
+  enableVoucherModal:boolean = false;
+  currencyCode: string;
 
   constructor(
     private translateService: TranslateService,
     private router: Router,
     private alertService: AlertService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private config: ConfigService
   ) {
     super();
     this.translateService.use(Utils.getLanguageCode());
     this.loaderService.startLoading();
     this.loaded = false;
+    this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   ngOnInit() {
@@ -148,6 +153,10 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
         this.vouchersLoaded = true;
         break;
     }
+  }
+
+  showVoucherModal(){
+    this.enableVoucherModal = !this.enableVoucherModal;
   }
 
 }
