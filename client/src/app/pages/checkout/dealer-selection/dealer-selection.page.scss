@@ -1,5 +1,5 @@
 .full-height {
-    background: rgba(var(--ion-color-dark-rgb), 0.7);
+    background: rgba(var(--ion-color-dark-rgb), 0.4);
 }
 
 ion-footer {
@@ -37,6 +37,15 @@ ion-footer {
         pointer-events: none;
         margin-right: 10px;
     }
+    &.disabled {
+        pointer-events: none;
+        ion-checkbox {
+            opacity: 0.3;
+        }
+        span {
+            opacity: 0.3;
+        }
+    }
 }
 
 .order-for-later {
@@ -61,7 +70,8 @@ ion-footer {
         }
     }
 }
-ion-button{
+
+ion-button {
     &.button-solid {
         &:hover {
             --opacity: 1;
