@@ -10,8 +10,9 @@
       <ng-container *ngIf="widget.model">
         <div *ngIf="widget.model.items && widget.model.items.length">
           <div *ngFor="let item of widget.model.items">
-            <p>{{item | json}}</p>
+            <img src="{{'http://' + item.client.image}}">
             <p>{{item.client.title}}</p>
+            <p>{{item.client.price}}</p>
           </div>
         </div>
       </ng-container>
