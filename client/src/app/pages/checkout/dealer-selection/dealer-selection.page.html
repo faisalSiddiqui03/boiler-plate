@@ -19,7 +19,7 @@
           </div>
           <div class="available-slots-list">
             <ion-button *ngFor="let slot of widget.model; let i = index;" [class.selected]="activeTimeSlot == i" color="warning"
-              class="btn-light" expand="block" text-uppercase mode="ios" (click)="selectTime(slot.time, i)">
+              class="btn-light" expand="block" text-uppercase mode="ios" (click)="selectTime(slot, i)">
               <span *ngIf="slot.id != -1">{{slot.time | date:'hh:mm a'}}</span>
               <span *ngIf="slot.id == -1">ASAP</span>
             </ion-button>

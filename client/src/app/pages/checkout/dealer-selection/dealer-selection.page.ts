@@ -21,6 +21,7 @@ export class DealerSelectionPage extends BasePage implements OnInit {
   slotSelected: boolean = false;
   slotContent: string = "";
   activeTimeSlot: number;
+  timeSlotObj;
 
   constructor(private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, public modalController: ModalController) {
     super();
@@ -42,11 +43,12 @@ export class DealerSelectionPage extends BasePage implements OnInit {
     this.activeTimeSlot = this.asSoonPossible ? 0 : null;
   }
 
-  selectTime(time, index) {
-    this.asSoonPossible = (time == 'ASAP') ? true : false;
+  selectTime(timeslot, index) {
+    this.asSoonPossible = !(timeslot.id != -1);
     this.slotSelected = true;
-    this.slotContent = time;
+    this.slotContent = timeslot.time;
     this.activeTimeSlot = index;
+    this.timeSlotObj = timeslot;
   }
 
   widgetActionSuccess(name, data) {
@@ -59,6 +61,7 @@ export class DealerSelectionPage extends BasePage implements OnInit {
       case 'DELIVERYSLOTS':
         this.asSoonPossible = data[0].id === -1;
         this.slotContent = this.asSoonPossible ? "ASAP" : data[0].time;
+        this.timeSlotObj = data[0];
     }
   }
 
@@ -75,6 +78,7 @@ export class DealerSelectionPage extends BasePage implements OnInit {
   }
 
   selectTimeSlot() {
+    this.setDeliverySlot(this.timeSlotObj);
     this.closeModal();
   }
 

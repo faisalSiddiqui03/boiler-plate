@@ -30,12 +30,12 @@
 		"phone_number": "Phone Number"
 	},
 	"dealer_selection_page": {
-		"as_soon_as_possible": "",
-		"delivery": "",
-		"delivery_hut": "",
-		"order_for": "",
-		"order_for_later": "",
-		"pick_a_time": ""
+		"as_soon_as_possible": "As soon as Possible",
+		"delivery": "Delivery",
+		"delivery_hut": "Your local delivery Hut is",
+		"order_for": "Order for",
+		"order_for_later": "You can order for later. Just",
+		"pick_a_time": "pick a time"
 	},
 	"favorites_page": {
 		"my_favorites": "my Favorites",
