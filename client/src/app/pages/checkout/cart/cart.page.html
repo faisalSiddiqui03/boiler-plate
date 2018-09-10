@@ -5,5 +5,17 @@
 </ion-header>
 
 <ion-content padding>
+  <cart-widget [componentId]="getComponentId()" [action]="cartWidgetActions">
+    <ng-template let-widget="widget">
+      <ng-container *ngIf="widget.model">
+        <div *ngIf="widget.model.items && widget.model.items.length">
+          <div *ngFor="let item of widget.model.items">
+            <p>{{item | json}}</p>
+          </div>
+        </div>
+      </ng-container>
+    </ng-template>
+
+  </cart-widget>
 
 </ion-content>

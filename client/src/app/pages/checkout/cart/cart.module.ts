@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { CartWidgetModule } from '@capillarytech/pwa-framework';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -19,8 +20,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    CartWidgetModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [CartPage]
+  declarations: [CartPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CartPageModule {}
