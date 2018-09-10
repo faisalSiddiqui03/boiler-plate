@@ -10,7 +10,9 @@
           <ng-template let-widget="widget">
             <div *ngIf="!widget.model">
               <ion-list *ngFor="let category of categoryArray">
-                  <ion-skeleton-text class="skeleton-text"></ion-skeleton-text>
+                <div class="skeleton-warpper">
+                  <ion-skeleton-text class="skeleton-text"></ion-skeleton-text>                    
+                </div>
               </ion-list>
             </div>
             <div *ngIf="widget.model">
