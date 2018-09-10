@@ -53,8 +53,7 @@
         [mode]="'geography'"
         [locator]="'city'"
         [deliveryMode]="globalSharedService.getFulfilmentMode()?.mode"
-        [action]="locationsWidgetAction"
-      >
+        [action]="locationsWidgetAction">
         <ng-template let-widget="widget">
           <div *ngIf="widget.model != undefined">
             <div class="location-bar">
@@ -64,13 +63,13 @@
                                (click)="toggleDropDown('city');"
                                (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')">
                 </ion-searchbar>
-                <div *ngIf="isDropDownShown('city')" text-center class="location-block-list">
+                <ion-list *ngIf="isDropDownShown('city')" text-center class="location-block-list">
                   <ion-spinner color="success" name="bubbles">
                   </ion-spinner>
-                </div>
+                </ion-list>
                 <ion-list *ngIf="isDropDownShown('city')" class="location-block-list citydrp">
-                  <ion-item no-padding *ngFor="let city of filterEmptyCities(widget.model.cities)">
-                    <span (click)="selectCity(city)">{{ city.name }}</span>
+                  <ion-item  (click)="selectCity(city)" no-padding *ngFor="let city of filterEmptyCities(widget.model.cities)">
+                    <span>{{ city.name }}</span>
                   </ion-item>
                 </ion-list>
               </div>
@@ -81,13 +80,13 @@
                                (click)="toggleDropDown('area');"
                                (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'city')">
                 </ion-searchbar>
-                <div *ngIf="isDropDownShown('area')" text-center class="location-block-list">
+                <ion-list *ngIf="isDropDownShown('area')" text-center class="location-block-list">
                   <ion-spinner color="success" name="bubbles">
                   </ion-spinner>
-                </div>
-                <ion-list *ngIf="isDropDownShown('area')" class="location-block-list">
-                  <ion-item no-padding *ngFor="let area of widget.model.areas">
-                    <span (click)="selectArea(area)">{{ getAreaDisplayName(area) }}</span>
+                </ion-list>
+                <ion-list *ngIf="isDropDownShown('area')" class="location-block-list citydrp">
+                  <ion-item (click)="selectArea(area)" no-padding *ngFor="let area of widget.model.areas">
+                    <span>{{ getAreaDisplayName(area) }}</span>
                   </ion-item>
                 </ion-list>
               </div>
@@ -98,19 +97,31 @@
       <store-locator-widget [componentId]="getComponentId()" [action]="storeLocatorWidgetAction">
         <ng-template let-widget="widget">
           <div *ngIf="widget.model != undefined">
-            <div class="take-away-block">
-              <span *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP">{{'home_page.your_pickup_hut_is' | translate}} </span>
-              <ion-button (click)="findStore()" color="success" class="btn-success" text-capitalize expand="block">
-                {{'home_page.start_my_order' | translate}}
-              </ion-button>
+            <div *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP && selectedStore && !selectedStore.isDefaultLocation" class="take-away-block">
+              <span >{{'home_page.your_pickup_hut_is' | translate}} </span>
+              <div class="store-name">{{selectedStore?.name}}</div>
+                <p>{{selectedStore?.address}}</p>
+              
             </div>
+            <ion-button (click)="findStore()" color="success" class="btn-success" text-capitalize expand="block">
+                {{'home_page.start_my_order' | translate}}
+            </ion-button>
           </div>
         </ng-template>
       </store-locator-widget>
 
-      <div class="find-hut" (click)="locateMe()">
-        <span> {{'home_page.find_my_nearest_hut' | translate}}</span>
-      </div>
+      <location-widget
+        [componentId]="getComponentId()"
+        [mode]="'geometry'"
+        [deliveryMode]="globalSharedService.getFulfilmentMode()?.mode"
+        [action]="locationsWidgetActionGeometry"
+        [instanceId]="1">
+        <ng-template let-widget="widget">
+            <div class="find-hut" (click)="locateMe(widget.model.geometry.latitude, widget.model.geometry.longitude)">
+                <span> {{'home_page.find_my_nearest_hut' | translate}}</span>
+            </div>
+        </ng-template>
+        </location-widget>
 
     </div>
   </div>
@@ -131,7 +142,7 @@
                     class="btn-signin">
           {{'home_page.change'|translate}}
         </ion-button>
-        <ion-button expand="block" color="success" (click)="goToStorePage(payload.store)" class="button">
+        <ion-button expand="block" color="success" (click)="navigateToDeals()" class="button">
           {{'home_page.see_deals_menu' | translate}}
         </ion-button>
 

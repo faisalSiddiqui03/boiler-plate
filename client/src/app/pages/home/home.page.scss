@@ -84,9 +84,11 @@
             z-index: 100;
             margin-top: -4px;
             ion-item {
-                border-bottom: 1px solid var(--ion-color-medium-shade);
                 padding-left: 6px;
                 font-size: 13px;
+                &+ion-item{
+                    border-top: 1px solid var(--ion-color-medium-shade);
+                }
             }
         }
     }
@@ -116,12 +118,21 @@
 }
 
 .take-away-block {
-    margin-top: 30px;
+    margin: 30px 10px 0;
     span {
         display: block;
-        margin-bottom: 20px;
+        margin-bottom: 5px;
         font-size: 12px;
         color: var(--ion-color-dark-tint);
+    }
+    .store-name{
+        font-size: 18px;
+        font-weight: 700;
+    }
+    p{
+        margin: 5px 0 10px;
+        font-size: 14px;
+        color: #666;
     }
 }
 
@@ -163,7 +174,6 @@
     p{
         margin-bottom: 10px;
         margin-bottom: 10px;
-            
     }
     .btn-signin{
         margin-bottom: 10px;

@@ -25,6 +25,10 @@ export class BasePage {
     return this.globalSharedService.updateLanguage(language)
   }
 
+  setCurrentStore(store) {
+      return this.globalSharedService.saveSelectedStore(store);
+  }
+
   getFulfilmentMode() {
     return this.globalSharedService.getFulfilmentMode();
   }

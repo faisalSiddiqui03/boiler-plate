@@ -30,6 +30,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   bannerWidgetExecutor = new EventEmitter();
   fulfilmentModeWidgetAction = new EventEmitter();
   locationsWidgetAction = new EventEmitter();
+  locationsWidgetActionGeometry = new EventEmitter();
   storeLocatorWidgetAction = new EventEmitter();
 
   /**default order mode is delivery */
@@ -56,7 +57,13 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   ngOnInit() {
+    
+  }
+
+  ionViewDidEnter() {
+      console.log('Utkarsha ', this.getCurrentStore())
     this.selectedStore = this.getCurrentStore();
+    this.changeRequested = false;
   }
 
   widgetLoadingSuccess(name, data) {
@@ -67,7 +74,8 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
-      case 'FIND_BY_CITY_AREA':
+      case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
+      case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         console.log('unable to find store', data);
         this.navigateToDeals();
         break;
@@ -78,7 +86,11 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     console.log('name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
+      case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         console.log('store selected', data);
+        if(data.length > 0) {
+            this.setCurrentStore(data[0])
+        }
         this.navigateToDeals();
         break;
     }
@@ -137,7 +149,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     this.selectedCityCode = city.code;
     this.toggleDropDown('city', true, false);
     if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
-      this.router.navigateByUrl('/store-selection/' + this.selectedCityCode);
+      this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
       return;
     }
 
@@ -178,8 +190,16 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
       [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
   }
 
-  locateMe() {
-    console.log('locate me');
+  locateMe(lat, lng) {
+    console.log('locate me ', lat, lng);
+
+    if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+        this.router.navigate(['/store-selection'], { queryParams: { 'latitude': lat, 'longitude': lng } });
+        return;
+    }
+    
+    this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_LOCATION,
+        [lat, lng, this.globalSharedService.getFulfilmentMode().mode]));
   }
 
   getFullBannerUrl(src) {

@@ -17,6 +17,8 @@ import { StoreLocatorWidgetActions, OnWidgetLifecyle, OnWidgetActionsLifecyle } 
 export class StoreSelectionPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   cityId;
+  latitude;
+  longitude;
   storeLocatorWidgetAction = new EventEmitter();
   stores: Array<any>;
   constructor(
@@ -34,7 +36,11 @@ export class StoreSelectionPage extends BasePage implements OnInit, OnWidgetLife
   }
 
   ngOnInit() {
-    this.cityId = this.route.snapshot.params.cityId;
+    this.route.queryParams.subscribe(params => {
+        this.cityId = params.cityId;
+        this.latitude = params.latitude;
+        this.longitude = params.longitude;
+    });
     // if (this.cityId) {
     //   console.log('suno', this.cityId);
     //   this.storeLocatorWidgetAction.emit(new Action(
@@ -59,10 +65,18 @@ export class StoreSelectionPage extends BasePage implements OnInit, OnWidgetLife
     console.log('success name: ', name, ' data: ', data );
     if (name === 'STORE_SELECTOR' && this.globalSharedService.getFulfilmentMode()) {
       console.log("HAALO", this.globalSharedService);
-      const stores = this.storeLocatorWidgetAction.emit(new Action(
-        StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.globalSharedService.getFulfilmentMode().mode])
-      );
-      console.log(stores);
+      if(this.cityId) {
+        const stores = this.storeLocatorWidgetAction.emit(new Action(
+            StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.globalSharedService.getFulfilmentMode().mode])
+        );
+        console.log(stores);
+
+      } else if(this.latitude && this.longitude) {
+        const stores = this.storeLocatorWidgetAction.emit(new Action(
+            StoreLocatorWidgetActions.FIND_BY_LOCATION, [this.latitude, this.longitude, this.globalSharedService.getFulfilmentMode().mode])
+        );
+        console.log(stores);
+      }
     }
   }
 
@@ -74,8 +88,14 @@ export class StoreSelectionPage extends BasePage implements OnInit, OnWidgetLife
     console.log('success action name: ', name, ' data: ', data );
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY:
+      case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         this.stores = data;
         break;
     }
+  }
+
+  selectStore(store) {
+    this.setCurrentStore(store)
+    this.navigateToDeals();
   }
 }
