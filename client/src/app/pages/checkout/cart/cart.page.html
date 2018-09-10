@@ -11,6 +11,7 @@
         <div *ngIf="widget.model.items && widget.model.items.length">
           <div *ngFor="let item of widget.model.items">
             <p>{{item | json}}</p>
+            <p>{{item.client.title}}</p>
           </div>
         </div>
       </ng-container>
