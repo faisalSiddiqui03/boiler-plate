@@ -1,10 +1,4 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>cart</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
+<ion-content>
   <cart-widget [componentId]="getComponentId()" [action]="cartWidgetActions">
     <ng-template let-widget="widget">
       <ng-container *ngIf="widget.model">
@@ -17,7 +11,56 @@
         </div>
       </ng-container>
     </ng-template>
-
   </cart-widget>
-
+  <div class="basket-container">
+    <div class="basket">
+      <div class="basket-close">Close</div>
+      <div class="common-heading-dotted" text-center>
+        <h2 text-uppercase no-margin>your cart</h2>
+      </div>
+      <ion-list no-margin>
+        <ion-item no-padding>
+          <ion-label no-margin>
+            <div flex-center>
+              <div class="product-title">Chicken Lemon Bake</div>
+              <div class="add-remove">
+                <ion-icon name="remove-circle"></ion-icon>
+                <span>1</span>
+                <ion-icon name="add-circle"></ion-icon>
+              </div>
+              <div class="product-price">KD 2.250</div>
+              <ion-icon class="remove-icon" name="close-circle"></ion-icon>
+            </div>
+          </ion-label>
+          <div class="tooltip">Want to make changes? Just tap any item.</div>
+        </ion-item>
+        <ion-item no-padding>
+          <ion-label no-margin>
+            <div flex-center>
+              <div class="product-title">Chicken Lemon Bake</div>
+              <div class="add-remove">
+                <ion-icon name="remove-circle"></ion-icon>
+                <span>1</span>
+                <ion-icon name="add-circle"></ion-icon>
+              </div>
+              <div class="product-price">KD 2.250</div>
+              <ion-icon class="remove-icon" name="close-circle"></ion-icon>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <div flex-center class="total-bill-block">
+        <div class="total-bill">Your Total</div>
+        <div class="total-price">KD 2.250</div>
+      </div>
+      <div class="promotion-button">
+        <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher">Got a voucher code?</ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>
+<ion-footer>
+  <ion-button color="success" text-capitalize expand="block" mode="ios" class="btn-success">continue
+    <span>KD 2.400</span>
+  </ion-button>
+</ion-footer>
