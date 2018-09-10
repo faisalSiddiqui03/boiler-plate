@@ -13,6 +13,7 @@ import {pwaLifeCycle} from "@cap-core/lifecycle";
 @pwaLifeCycle()
 export class FooterComponent extends BasePage implements OnInit {
 
+  categoryArray = Array(5);
   constructor(
     private translate: TranslateService,
     private router: Router
