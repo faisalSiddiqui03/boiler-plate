@@ -8,6 +8,13 @@
                            (lifecycle)="null">
 
           <ng-template let-widget="widget">
+            <div *ngIf="!widget.model">
+              <ion-list *ngFor="let category of categoryArray">
+                <div class="skeleton-warpper">
+                  <ion-skeleton-text class="skeleton-text"></ion-skeleton-text>                    
+                </div>
+              </ion-list>
+            </div>
             <div *ngIf="widget.model">
               <ion-list>
                 <ion-item *ngFor="let navigationItem of widget.model.items" no-padding (click)="navigateToCategory(navigationItem)">{{navigationItem.name}}</ion-item>

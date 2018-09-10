@@ -13,6 +13,9 @@
       [action]="bannerWidgetAction"
     >
       <ng-template let-widget="widget">
+        <div *ngIf="widget.model == undefined">
+            <app-skeleton></app-skeleton>
+        </div>
         <div *ngIf="widget.model != undefined && widget.model.length > 0">
           <div>
             <img src="{{getFullBannerUrl(widget.model[0].contentUrl)}}"
@@ -29,6 +32,18 @@
       <fulfilment-mode-widget [componentId]="getComponentId()" pfWidgetImpressionTrack
                               [action]="fulfilmentModeWidgetAction">
         <ng-template let-widget="widget">
+            <div *ngIf="widget.model == undefined">
+              <ion-segment style="visibility: hidden">
+                <ion-segment-button>
+                  <small class="delivery-icon segment-checked"></small>
+                  <span>{{'home_page.delivery' | translate}}</span>
+                </ion-segment-button>
+                <ion-segment-button>
+                  <small class="takeaway-icon"></small>
+                  <span>{{'home_page.take_away' | translate}}</span>
+                </ion-segment-button>
+              </ion-segment>
+            </div>
           <div *ngIf="widget.model != undefined">
             <ion-segment>
               <ion-segment-button text-capitalize value="{{deliveryModes?.HOME_DELIVERY}}"
@@ -56,6 +71,22 @@
         [action]="locationsWidgetAction"
       >
         <ng-template let-widget="widget">
+          <div *ngIf="widget.model == undefined">
+            <div class="location-bar">
+              <div class="form-control">
+                <ion-searchbar class="form-search"  #focusInput
+                                showCancelButton="false"
+                                placeholder="{{'home_page.select_area' | translate}}">
+                </ion-searchbar>
+              </div>
+              <div class="form-control">
+                <ion-searchbar class="form-search" [debounce]="1000" #focusInput
+                                showCancelButton="false"
+                                placeholder="{{'home_page.select_block' | translate}}">
+                </ion-searchbar>
+              </div>
+            </div>
+          </div>
           <div *ngIf="widget.model != undefined">
             <div class="location-bar">
               <div class="form-control">

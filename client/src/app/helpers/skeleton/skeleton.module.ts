@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { BannerWidgetModule, EventTrackModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
-import { BannerComponent } from './banner.component';
-import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
+import { SkeletonComponent } from './skeleton.component';
 
 @NgModule({
   imports: [
@@ -13,17 +12,16 @@ import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
     IonicModule,
     BannerWidgetModule,
     EventTrackModule,
-    ImagePreloadModule,
-    SkeletonModule
+    ImagePreloadModule
   ],
   declarations: [
-    BannerComponent,
+    SkeletonComponent,
   ],
   exports: [
-    BannerComponent
+    SkeletonComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 
-export class BannerModule {
+export class SkeletonModule {
 }
