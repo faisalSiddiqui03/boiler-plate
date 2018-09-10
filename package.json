@@ -5,12 +5,11 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
-    "build": "cap-ionic build",
-    "dist": "cap-ionic dist"
+    "build": "bro build --disable-env",
+    "build:prod": "bro build"
   },
   "dependencies": {
-    "@capillarytech/cap-ionic": "1.4.10",
-    "@capillarytech/cap-pwa-seed": "0.3.10",
+    "@capillarytech/pwa-cli": "0.2.10",
     "path": "^0.12.7"
   },
   "description": "Build Script for PWA",

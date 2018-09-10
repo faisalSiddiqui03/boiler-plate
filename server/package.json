@@ -34,7 +34,7 @@
     "@capillarytech/loopback-connector-mongodb": "0.1.1",
     "@capillarytech/loopback-connector-rest": "0.4.7",
     "@capillarytech/mw-redirects": "0.0.3",
-    "@capillarytech/pwa-config": "1.0.3",
+    "@capillarytech/pwa-config": "1.0.4",
     "azure-storage": "2.10.1",
     "base-64": "0.1.0",
     "cls-hooked": "4.2.2",

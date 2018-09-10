@@ -117,6 +117,7 @@ export const config = {
     "googleClientId" : "1040149251979-d892097h8nf8mnuitkv2acdf91vt9dq0.apps.googleusercontent.com"
   };
 
+
 export const appConfig = {
   ...config,
   ...envConfig
