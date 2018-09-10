@@ -41,6 +41,10 @@ export class BasePage {
     return this.globalSharedService.getDeliverySlot();
   }
 
+  setDeliverySlot(slot) {
+    return this.globalSharedService.selectDeliverySlot(slot);
+  }
+
   getComponentId() {
     return this.componentID;
   }
