@@ -6,7 +6,6 @@ export class BasePage {
   isModalOpen: boolean;
   private componentID;
   protected globalSharedService: GlobalSharedService;
-  private componentID;
 
   constructor() {
     this.componentID = Math.random().toString(36).substr(2, 9);
