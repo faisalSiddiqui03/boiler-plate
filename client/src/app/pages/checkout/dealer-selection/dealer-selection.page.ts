@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { pwaLifeCycle, pageView } from '@capillarytech/pwa-framework';
+import { pwaLifeCycle, pageView, Action, DeliverySlotsWidget } from '@capillarytech/pwa-framework';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../helpers/utils';
@@ -57,7 +57,7 @@ export class DealerSelectionPage extends BasePage implements OnInit {
     console.log('loaded ' + name, data);
     switch (name) {
       case 'DELIVERYSLOTS':
-        this.asSoonPossible = data[0].id == -1 ? true : false;
+        this.asSoonPossible = data[0].id === -1;
         this.slotContent = this.asSoonPossible ? "ASAP" : data[0].time;
     }
   }
