@@ -1,31 +1,277 @@
-<ion-content no-padding>
-  <product-display-widget
-    pfWidgetImpressionTrack
-    [executor]="productWidgetExecutor"
-    [action]="productWidgetAction"
-    (lifecycle)="null"
-    [productId]="productId"
-    [componentId]="getComponentId()"
-  >
-    <ng-template let-widget="widget">
-      <div *ngIf="widget.model && loaded">
-        <ion-card no-padding no-margin>
-          <ion-card-header no-padding>
-            <ion-item text-center>
-              <ion-icon name="close-circle" slot="start"></ion-icon>
-              <ion-label>{{widget.model.title}}</ion-label>
-            </ion-item>
-            <img alt="{{widget.model.title}}" class="product-main-image" height="170" width="340" src="{{getProductImageUrl(widget.model)}}"
-                 img-preloader="{{widget.model.smallImage}}" defaultImage="assets/imgs/default/no-preview.jpeg"/>
-          </ion-card-header>
-          <ion-card-content>
-            <p>{{widget.model.shortDescription}}</p>
-          </ion-card-content>
-        </ion-card>
-      </div>
-    </ng-template>
-  </product-display-widget>
-</ion-content>
-<ion-footer>
-  <ion-button color="success">Add To My Basket</ion-button>
-</ion-footer>
+<div class="full-height popup-wrap">
+  <div class="popup-inner full-height">
+    <product-display-widget class="full-height" pfWidgetImpressionTrack [executor]="productWidgetExecutor" [action]="productWidgetAction"
+      (lifecycle)="null" [productId]="productId" [componentId]="getComponentId()">
+      <ng-template let-widget="widget">
+        <ng-container *ngIf="widget.model">
+          <ion-content no-padding>
+            <p [innerHtml]="getData(widget.model)" style="display: none;"></p>
+            <ion-card no-padding no-margin>
+              <ion-card-header no-padding class="product-img-block">
+                <ion-item text-center class="popup-title" no-margin>
+                  <ion-icon name="close-circle" slot="start"></ion-icon>
+                  <ion-label>{{widget.model.title}}</ion-label>
+                </ion-item>
+                <img alt="{{widget.model.title}}" class="product-main-image" height="170" width="340" src="{{getProductImageUrl(widget.model)}}"
+                  img-preloader="{{widget.model.smallImage}}" defaultImage="assets/imgs/default/no-preview.jpeg" />
+              </ion-card-header>
+              <ion-card-content *ngIf="widget.model.shortDescription">
+                <p>{{widget.model.shortDescription}}</p>
+              </ion-card-content>
+            </ion-card>
+            <div *ngIf="widget.model.variantProducts.length">
+              <div class="drinks-choose-block" margin style="display: none;">
+                <div *ngIf="!toggleSelectedBlock">
+                  <div class="block-header" text-capitalize (click)="toggleSelectedVariant()">Choose</div>
+                  <ul>
+                    <li flex-center text-capitalize *ngFor="let variant of variants; let i = index;" (click)="selectVariant(variant, i)">
+                      <span class="block-text">{{variant}}</span>
+                      <span class="block-icon">
+                      <ion-icon *ngIf="selectedVariant != i" color="success" name="add"></ion-icon>
+                      <ion-icon *ngIf="selectedVariant == i" color="dark" name="checkmark"></ion-icon>
+                    </span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="selected-variant" flex-center *ngIf="toggleSelectedBlock" (click)="toggleSelectedVariant()">
+                  <span class="block-text">{{variantContent}}</span>
+                  <span class="block-icon">
+                  <ion-icon color="dark" name="checkmark"></ion-icon>
+                </span>
+                </div>
+              </div>
+              <div class="pizza-sizes-wrap" style="display: none;">
+                <div class="block-header">Select your size and crust</div>
+                <div class="block-subheader" text-capitalize>Large</div>
+                <div class="pizza-list">
+                  <ul>
+                    <li flex-center>
+                      <figure class="pizza-img">
+                        <img src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
+                             alt="">
+                      </figure>
+                      <div class="pizza-content">
+                        <h5 text-capitalize>Classic</h5>
+                        <p>Traditional handmade dough; not too thick, not too thin.</p>
+                      </div>
+                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+                    </li>
+                    <li flex-center>
+                      <figure class="pizza-img">
+                        <img src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
+                             alt="">
+                      </figure>
+                      <div class="pizza-content">
+                        <h5 text-capitalize>Classic</h5>
+                        <p>Traditional handmade dough; not too thick, not too thin.</p>
+                      </div>
+                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+                    </li>
+                    <li flex-center>
+                      <figure class="pizza-img">
+                        <img src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
+                             alt="">
+                      </figure>
+                      <div class="pizza-content">
+                        <h5 text-capitalize>Classic</h5>
+                        <p>Traditional handmade dough; not too thick, not too thin.</p>
+                      </div>
+                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+                    </li>
+                    <li flex-center>
+                      <figure class="pizza-img">
+                        <img src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
+                             alt="">
+                      </figure>
+                      <div class="pizza-content">
+                        <h5 text-capitalize>Classic</h5>
+                        <p>Traditional handmade dough; not too thick, not too thin.</p>
+                      </div>
+                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="sub-modal-wrap">
+                <div class="sub-modal-head" flex-center>
+                  <p no-margin>
+                    <span>Large</span>
+                    <span>Classic</span>
+                  </p>
+                  <a class="change" text-capitalize>Change</a>
+                </div>
+                <div class="drinks-choose-block" margin>
+                  <div class="block-header" flex-center text-capitalize>Change toppings, sauce or cheese
+                    <ion-icon class="arrow" ios="ios-arrow-down" md="ios-arrow-down" name="arrow-down"></ion-icon>
+                  </div>
+                  <div class="selected-variant" flex-center>
+                    <span class="block-text">Pizza sauce</span>
+                    <span class="block-icon">
+                    <ion-icon color="dark" name="checkmark"></ion-icon>
+                  </span>
+                  </div>
+                  <div class="block-header" text-capitalize flex-center>Your Toppings stro
+                    <strong class="extra">Extra</strong>
+                  </div>
+                  <ul>
+                    <li flex-center text-capitalize>
+                      <figure class="toppings-img">
+                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                             alt="">
+                      </figure>
+                      <span class="block-text">Beef</span>
+                      <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                      <ion-checkbox color="success"></ion-checkbox>
+                      <span class="block-icon">
+                      <ion-icon color="success" style="display: none;" name="add"></ion-icon>
+                      <ion-icon class="close" name="close-circle"></ion-icon>
+                    </span>
+                    </li>
+                    <li flex-center text-capitalize>
+                      <figure class="toppings-img">
+                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                             alt="">
+                      </figure>
+                      <span class="block-text">Beef</span>
+                      <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                      <ion-checkbox color="success"></ion-checkbox>
+                      <span class="block-icon">
+                      <ion-icon color="success" style="display: none;" name="add"></ion-icon>
+                      <ion-icon class="close" name="close-circle"></ion-icon>
+                    </span>
+                    </li>
+                    <li flex-center text-capitalize>
+                      <figure class="toppings-img">
+                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                             alt="">
+                      </figure>
+                      <span class="block-text">Beef</span>
+                      <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                      <ion-checkbox color="success"></ion-checkbox>
+                      <span class="block-icon">
+                      <ion-icon color="success" style="display: none;" name="add"></ion-icon>
+                      <ion-icon class="close" name="close-circle"></ion-icon>
+                    </span>
+                    </li>
+                    <li flex-center text-capitalize>
+                      <figure class="toppings-img">
+                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                             alt="">
+                      </figure>
+                      <span class="block-text">Beef</span>
+                      <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                      <ion-checkbox color="success"></ion-checkbox>
+                      <span class="block-icon">
+                      <ion-icon color="success" style="display: none;" name="add"></ion-icon>
+                      <ion-icon class="close" name="close-circle"></ion-icon>
+                    </span>
+                    </li>
+                    <li flex-center text-capitalize>
+                      <figure class="toppings-img">
+                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                             alt="">
+                      </figure>
+                      <span class="block-text">Beef</span>
+                      <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                      <ion-checkbox color="success"></ion-checkbox>
+                      <span class="block-icon">
+                      <ion-icon color="success" style="display: none;" name="add"></ion-icon>
+                      <ion-icon class="close" name="close-circle"></ion-icon>
+                    </span>
+                    </li>
+                    <li flex-center text-capitalize>
+                      <figure class="toppings-img">
+                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                             alt="">
+                      </figure>
+                      <span class="block-text">Beef</span>
+                      <span class="block-price" style="display: none;">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                      <ion-checkbox color="success" style="display: none;"></ion-checkbox>
+                      <span class="block-icon">
+                      <ion-icon color="success" name="add"></ion-icon>
+                      <ion-icon class="close" style="display: none;" name="close-circle"></ion-icon>
+                    </span>
+                    </li>
+                    <li flex-center text-capitalize>
+                      <figure class="toppings-img">
+                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                             alt="">
+                      </figure>
+                      <span class="block-text">Beef</span>
+                      <span class="block-price" style="display: none;">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                      <ion-checkbox color="success" style="display: none;"></ion-checkbox>
+                      <span class="block-icon">
+                      <ion-icon color="success" name="add"></ion-icon>
+                      <ion-icon class="close" style="display: none;" name="close-circle"></ion-icon>
+                    </span>
+                    </li>
+                  </ul>
+                  <div class="block-header" text-capitalize flex-center>Add something extra</div>
+                  <ul>
+                    <li flex-center text-capitalize>
+                      <figure class="toppings-img">
+                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                             alt="">
+                      </figure>
+                      <span class="block-text">Beef</span>
+                      <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                      <span class="block-icon">
+                      <ion-icon color="success" name="add"></ion-icon>
+                    </span>
+                    </li>
+                    <li flex-center text-capitalize>
+                      <figure class="toppings-img">
+                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                             alt="">
+                      </figure>
+                      <span class="block-text">Beef</span>
+                      <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                      <span class="block-icon">
+                      <ion-icon color="success" name="add"></ion-icon>
+                    </span>
+                    </li>
+                    <li flex-center text-capitalize>
+                      <figure class="toppings-img">
+                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                             alt="">
+                      </figure>
+                      <span class="block-text">Beef</span>
+                      <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                      <span class="block-icon">
+                      <ion-icon color="success" name="add"></ion-icon>
+                    </span>
+                    </li>
+                    <li flex-center text-capitalize>
+                      <figure class="toppings-img">
+                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                             alt="">
+                      </figure>
+                      <span class="block-text">Beef</span>
+                      <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                      <span class="block-icon">
+                      <ion-icon color="success" name="add"></ion-icon>
+                    </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </ion-content>
+          <ion-footer>
+            <!--<div class="quantity-block" flex align-items-center justify-content-between>-->
+              <!--<p no-margin>Quantity</p>-->
+              <!--<div class="add-remove">-->
+                <!--<ion-icon name="remove-circle"></ion-icon>-->
+                <!--<span>1</span>-->
+                <!--<ion-icon name="add-circle"></ion-icon>-->
+              <!--</div>-->
+            <!--</div>-->
+            <ion-button (click)="addToCart(widget.model.client)" color="success" text-uppercase expand="block" mode="ios" class="btn-success">Add To My Basket
+              <span>{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+            </ion-button>
+          </ion-footer>
+        </ng-container>
+      </ng-template>
+    </product-display-widget>
+  </div>
+</div>

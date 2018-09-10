@@ -1,9 +1,15 @@
 {
 	"about_us_page": {
+		"about_us": "",
 		"description_part_one": "",
 		"description_part_three": "",
 		"description_part_two": "",
 		"our_history": ""
+	},
+	"cart": {
+		"cart_clear": "",
+		"remove_item": "",
+		"updating_quantity": ""
 	},
 	"category_listing": {
 		"price_tag": ""
@@ -26,8 +32,17 @@
 		"address_3": "",
 		"address_main_office": "",
 		"contact_page_help_message": "",
+		"contact_us": "",
 		"email": "",
 		"phone_number": ""
+	},
+	"dealer_selection_page": {
+		"as_soon_as_possible": "",
+		"delivery": "",
+		"delivery_hut": "",
+		"order_for": "",
+		"order_for_later": "",
+		"pick_a_time": ""
 	},
 	"favorites_page": {
 		"my_favorites": "",
@@ -59,8 +74,12 @@
 	},
 	"home_page": {
 		"block_": "",
+		"change": "",
+		"collection": "",
 		"delivery": "",
+		"delivery_name": "",
 		"find_my_nearest_hut": "",
+		"see_deals_menu": "",
 		"select_area": "",
 		"select_block": "",
 		"start_my_order": "",
@@ -110,6 +129,7 @@
 		"signin_google": ""
 	},
 	"store_selection_page": {
+		"stores_selection": "",
 		"take_away_now": ""
 	},
 	"user_profile_page": {

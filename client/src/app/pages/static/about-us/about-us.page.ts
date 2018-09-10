@@ -15,7 +15,12 @@ export class AboutUsPage implements OnInit {
     this.translate.use(Utils.getLanguageCode());
   }
 
+  titleValue = '';
+
   ngOnInit() {
+    this.translate.get('about_us_page.about_us').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
 }

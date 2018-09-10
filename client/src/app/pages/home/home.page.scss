@@ -1,70 +1,69 @@
 .delivery-wrap {
-    padding: 0 15px 15px;
-    margin-top: -40px;
-    .delivery-take-away {
-        box-shadow: 0 2px 2px 0 rgba(var(--ion-color-dark-rgb), .14), 0 3px 1px -2px rgba(var(--ion-color-dark-rgb), .2), 0 2px 5px 0 rgba(var(--ion-color-dark-rgb), .12);
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        max-width: 400px;
-        margin: auto;
-        ion-segment {
-            min-height: 55px;
-        }
-        ion-segment-button {
-            --padding-start: 5px;
-            --padding-end: 5px;
-            --padding-top: 10px;
-            --padding-bottom: 10px;
-            --border-width: 0;
-            --background: var(--ion-color-light-tint);
-            color: var(--ion-tabs-color);
-            font-size: 16px;
-            --border-radius: 5px;
-            font-weight: 700;
-            opacity: 1;
-            height: auto;
-            align-self: flex-end;
-            transition: all 0.3s ease-in-out;
-            filter: grayscale(100%) contrast(80%);
-            &+ion-segment-button {
-                margin-left: 2px;
-            }
-            &.segment-checked {
-                color: var(--ion-color-danger);
-                --background: var(--ion-color-light);
-                filter: none;
-                span {
-                    line-height: 35px;
-                }
-            }
-            span {
-                line-height: 25px;
-            }
-            small {
-                display: inline-block;
-                vertical-align: middle;
-                margin-right: 5px;
-                width: 25px;
-                height: 25px;
-                background-repeat: no-repeat;
-                background-size: 100%;
-                &.delivery-icon {
-                    background-image: url('assets/imgs/delivery-bike-icon.gif');
-                }
-                &.takeaway-icon {
-                    background-image: url('assets/imgs/collection-icon.gif');
-                }
-            }
-        }
+  padding: 0 15px 15px;
+  margin-top: -15px;
+  .delivery-take-away {
+    box-shadow: 0 2px 2px 0 rgba(var(--ion-color-dark-rgb), .14), 0 3px 1px -2px rgba(var(--ion-color-dark-rgb), .2), 0 2px 5px 0 rgba(var(--ion-color-dark-rgb), .12);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    max-width: 400px;
+    margin: auto;
+    ion-segment {
+      min-height: 55px;
     }
-    &.segment-checked {
-        --padding-top: 21px;
-        --padding-bottom: 21px;
+    ion-segment-button {
+      --padding-start: 5px;
+      --padding-end: 5px;
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+      --border-width: 0;
+      --background: var(--ion-color-light-tint);
+      color: var(--ion-tabs-color);
+      font-size: 16px;
+      --border-radius: 5px;
+      font-weight: 700;
+      opacity: 1;
+      height: auto;
+      align-self: flex-end;
+      transition: all 0.3s ease-in-out;
+      filter: grayscale(100%) contrast(80%);
+      & + ion-segment-button {
+        margin-left: 2px;
+      }
+      &.segment-checked {
         color: var(--ion-color-danger);
         --background: var(--ion-color-light);
+        filter: none;
+        span {
+          line-height: 35px;
+        }
+      }
+      span {
+        line-height: 25px;
+      }
+      small {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+        width: 25px;
+        height: 25px;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        &.delivery-icon {
+          background-image: url('assets/imgs/delivery-bike-icon.gif');
+        }
+        &.takeaway-icon {
+          background-image: url('assets/imgs/collection-icon.gif');
+        }
+      }
     }
+  }
+  &.segment-checked {
+    --padding-top: 21px;
+    --padding-bottom: 21px;
+    color: var(--ion-color-danger);
+    --background: var(--ion-color-light);
+  }
 }
-
 
 .location-bar {
     padding: 10px;
@@ -92,29 +91,30 @@
             }
         }
     }
-}
+  }
+
 
 .loaction-btn {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .banner-home {
-    img {
-        display: block;
-        width: 100%;
-    }
+  img {
+    display: block;
+    width: 100%;
+  }
 }
 
 .find-hut {
-    padding: 15px;
-    font-size: 14px;
-    border-top: 1px solid var(--ion-color-medium-shade);
-    span {
-        color: var(--ion-color-tertiary);
-        display: block;
-        padding-left: 20px;
-        background: url('assets/imgs/icon-geo.svg') no-repeat left / 14px;
-    }
+  padding: 15px;
+  font-size: 14px;
+  border-top: 1px solid var(--ion-color-medium-shade);
+  span {
+    color: var(--ion-color-tertiary);
+    display: block;
+    padding-left: 20px;
+    background: url('assets/imgs/icon-geo.svg') no-repeat left / 14px;
+  }
 }
 
 .take-away-block {
@@ -136,56 +136,61 @@
     }
 }
 
-@media (max-width:991px) {
-    .delivery-wrap {
-        .delivery-take-away {
-            ion-segment-button {
-                filter: none;
-                small {
-                    display: none;
-                }
-            }
+@media (max-width: 991px) {
+  .delivery-wrap {
+    .delivery-take-away {
+      ion-segment-button {
+        filter: none;
+        small {
+          display: none;
         }
+      }
     }
+  }
 }
 
 .searchbar-input.sc-ion-searchbar-md {
-    box-shadow: none;
-    padding: 0 0 0 50px;
-    border-left: 1px solid var(--ion-border-color-light);
-    font-size: 14px;
-    color: var(--ion-color-medium);
-    font-weight: 700;
-    background: transparent;
+  box-shadow: none;
+  padding: 0 0 0 50px;
+  border-left: 1px solid var(--ion-border-color-light);
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  font-weight: 700;
+  background: transparent;
 }
 
 .searchbar-search-icon.sc-ion-searchbar-md {
-    top: 5px;
+  top: 5px;
 }
 
-.collection-details{
-    text-align: center;
-    font-size: 14px;
-    padding: 16px!important;
-    border-radius: 5px;background:#fff;
-    .store-name{
-        font-size: 18px;font-weight: 700
-    }
-    p{
-        margin-bottom: 10px;
-        margin-bottom: 10px;
-    }
-    .btn-signin{
-        margin-bottom: 10px;
-    }
-   .button{text-transform: none;}
+.collection-details {
+  text-align: center;
+  font-size: 14px;
+  padding: 16px !important;
+  border-radius: 5px;
+  background: #fff;
+  .store-name {
+    font-size: 18px;
+    font-weight: 700
+  }
+  p {
+    margin-bottom: 10px;
+    margin-bottom: 10px;
+
+  }
+  .btn-signin {
+    margin-bottom: 10px;
+  }
+  .button {
+    text-transform: none;
+  }
 }
 
 ion-row {
-    margin: 0 -5px;
+  margin: 0 -5px;
 }
 
 ion-button {
-    --border-radius: 5px;
-    font-size: 15px;
+  --border-radius: 5px;
+  font-size: 15px;
 }

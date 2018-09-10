@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UserProfilePage } from './user-profile.page';
+import { DealerSelectionPage } from './dealer-selection.page';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from '../../../../translation.loader';
-import { HeaderModule } from '../../../../components/header/header.module';
-import { UserProfileWidgetModule } from '@capillarytech/pwa-framework';
+import { DeliverySlotsWidgetModule } from "@capillarytech/pwa-framework";
 
 const routes: Routes = [
   {
     path: '',
-    component: UserProfilePage
+    component: DealerSelectionPage
   }
 ];
 
@@ -23,11 +22,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
+    DeliverySlotsWidgetModule,
     RouterModule.forChild(routes),
-    UserProfileWidgetModule,
-    HeaderModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -36,6 +33,6 @@ const routes: Routes = [
       }
     })
   ],
-  declarations: [UserProfilePage]
+  declarations: [DealerSelectionPage]
 })
-export class UserProfilePageModule { }
+export class DealerSelectionPageModule {}

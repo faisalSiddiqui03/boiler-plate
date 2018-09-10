@@ -9,6 +9,7 @@ import { HomePage } from './home.page';
 import { BannerModule } from '../../components/banner/banner.module';
 import { FooterModule } from '../../components/footer/footer.module';
 import { HeaderModule } from '../../components/header/header.module';
+import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
 import { HttpClient } from '@angular/common/http';
@@ -35,6 +36,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FooterModule,
     HeaderModule,
+    SkeletonModule,
     LocationWidgetModule,
     BannerWidgetModule,
     EventTrackModule,

@@ -4,8 +4,8 @@ import { appInjector } from '@cap-core/app.injector';
 export class BasePage {
 
   isModalOpen: boolean;
-  protected globalSharedService: GlobalSharedService;
   private componentID;
+  protected globalSharedService: GlobalSharedService;
 
   constructor() {
     this.componentID = Math.random().toString(36).substr(2, 9);
@@ -43,6 +43,10 @@ export class BasePage {
 
   getDeliverySlot() {
     return this.globalSharedService.getDeliverySlot();
+  }
+
+  setDeliverySlot(slot) {
+    return this.globalSharedService.selectDeliverySlot(slot);
   }
 
   getComponentId() {

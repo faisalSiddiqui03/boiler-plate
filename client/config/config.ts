@@ -23,7 +23,7 @@ export const config = {
       "port": "33627",
       "db": "kt99-loopback"
     },
-    "baseUrl": "/api/",
+    "baseUrl": "http://localhost:3000/api/",
     "server": {
       "mw-static": {
         "maxAge": "1 day"

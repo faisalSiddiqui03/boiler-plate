@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../helpers/utils';
 import { Location } from '@angular/common';
 
@@ -14,11 +13,8 @@ export class SubHeaderComponent implements OnInit {
   @Input() title: string;
 
   constructor(
-    private translate: TranslateService,
     private location: Location
-  ) {
-    this.translate.use(Utils.getLanguageCode());
-  }
+  ) {}
 
   ngOnInit() {
   }

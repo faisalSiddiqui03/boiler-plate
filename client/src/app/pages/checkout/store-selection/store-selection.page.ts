@@ -21,6 +21,7 @@ export class StoreSelectionPage extends BasePage implements OnInit, OnWidgetLife
   longitude;
   storeLocatorWidgetAction = new EventEmitter();
   stores: Array<any>;
+  titleValue = '';
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -47,6 +48,10 @@ export class StoreSelectionPage extends BasePage implements OnInit, OnWidgetLife
     //     StoreLocatorWidgetActions.FIND_ALL, 'S')
     //   );
     // }
+
+    this.translate.get('store_selection_page.stores_selection').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   navigateToDeals() {

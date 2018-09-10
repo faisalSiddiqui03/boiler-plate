@@ -1,11 +1,14 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
+import { CartWidgetModule, VoucherWidgetModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
-
+import { HttpClient } from '@angular/common/http';
+import { HttpLoaderFactory } from '../../../translation.loader';
 import { CartPage } from './cart.page';
+import { AlertServiceModule, AlertService, LoaderServiceModule, LoaderService, DebounceClickDirective } from '@capillarytech/pwa-ui-helpers';
 
 const routes: Routes = [
   {
@@ -19,8 +22,23 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    CartWidgetModule,
+    VoucherWidgetModule,
+    ImagePreloadModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     RouterModule.forChild(routes)
   ],
-  declarations: [CartPage]
+  declarations: [CartPage],
+  providers: [
+    AlertService,
+    LoaderService,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CartPageModule {}

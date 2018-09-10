@@ -45,6 +45,22 @@
     display: flex;
 }
 
+[flex-center] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.full-height {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+[bg-transparent] {
+    background: transparent;
+}
+
 .form-group {
     padding-bottom: 5px;
     ion-label {
@@ -179,7 +195,7 @@
         display: none !important;
     }
 }
- 
+
 ion-header {
     z-index: 11;
 }

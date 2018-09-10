@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { BannerWidgetModule, EventTrackModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
 import { BannerComponent } from './banner.component';
+import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { BannerComponent } from './banner.component';
     IonicModule,
     BannerWidgetModule,
     EventTrackModule,
-    ImagePreloadModule
+    ImagePreloadModule,
+    SkeletonModule
   ],
   declarations: [
     BannerComponent,
