@@ -1,7 +1,7 @@
 <banner-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [type]="'tag'" [value]="value" [executor]="bundleWidgetExecutor" [action]="bundleWidgetAction"
   (lifecycle)="null">
   <ng-template let-widget="widget">
-    <div *ngIf="widget.model == undefined || widget.model.length == 0" padding>
+    <div *ngIf="widget.model == undefined" padding>
       <div class="coomon-heading" text-center text-uppercase margin-bottom>
         <h2 no-margin> OUR MOST POPULAR DEALS </h2>
       </div>

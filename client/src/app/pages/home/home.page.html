@@ -13,7 +13,7 @@
       [action]="bannerWidgetAction"
     >
       <ng-template let-widget="widget">
-        <div *ngIf="widget.model == undefined || widget.model.length == 0">
+        <div *ngIf="widget.model == undefined">
             <app-skeleton></app-skeleton>
         </div>
         <div *ngIf="widget.model != undefined && widget.model.length > 0">
