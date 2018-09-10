@@ -29,6 +29,14 @@
 		"email": "",
 		"phone_number": ""
 	},
+	"dealer_selection_page": {
+		"as_soon_as_possible": "",
+		"delivery": "",
+		"delivery_hut": "",
+		"order_for": "",
+		"order_for_later": "",
+		"pick_a_time": ""
+	},
 	"favorites_page": {
 		"my_favorites": "",
 		"no_favorites": ""
@@ -59,8 +67,12 @@
 	},
 	"home_page": {
 		"block_": "",
+		"change": "",
+		"collection": "",
 		"delivery": "",
+		"delivery_name": "",
 		"find_my_nearest_hut": "",
+		"see_deals_menu": "",
 		"select_area": "",
 		"select_block": "",
 		"start_my_order": "",
