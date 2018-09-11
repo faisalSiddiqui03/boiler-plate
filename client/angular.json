@@ -34,7 +34,8 @@
                 "glob": "**/robots.txt",
                 "input": "src/",
                 "output": "./"
-              }
+              },
+              "src/manifest.json"
             ],
             "styles": [
               {
@@ -66,7 +67,8 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": true,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "serviceWorker": true
             }
           }
         },
@@ -113,7 +115,8 @@
                 "glob": "**/robots.txt",
                 "input": "src/",
                 "output": "./"
-              }
+              },
+              "src/manifest.json"
             ]
           }
         },

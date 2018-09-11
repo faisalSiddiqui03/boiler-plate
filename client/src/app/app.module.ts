@@ -30,6 +30,7 @@ import {
 } from '@capillarytech/pwa-framework';
 import { HttpLoaderFactory } from './translation.loader';
 import { appConfig } from '../../config/config';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 export function getAppConfig(): Object {
   return appConfig || {};
@@ -68,7 +69,8 @@ export function getAppConfig(): Object {
       }
     }),
     LoaderServiceModule,
-    AlertServiceModule
+    AlertServiceModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,
