@@ -1,6 +1,6 @@
 <cart-widget class="full-height" [componentId]="getComponentId()" [action]="cartWidgetAction">
   <ng-template let-widget="widget">
-      <ng-container *ngIf="!widget.model || !widget.model.items || widget.model.items.length == 0">
+      <ng-container *ngIf="!widget.model || !widget.model.items">
           <div class="full-height">
             <ion-content>
               <!-- <p>{{widget.model | json }}</p> -->
@@ -62,6 +62,31 @@
             </ion-footer>
           </div>
         </ng-container>
+
+        <ng-container *ngIf="widget.model && widget.model.items && widget.model.items.length == 0">
+            <div class="full-height">
+              <ion-content>
+                <!-- <p>{{widget.model | json }}</p> -->
+                <div class="basket-container">
+                  <div class="basket">
+                    <div class="basket-close" (click)="goBack()">{{ 'cart.close' | translate}}</div>
+                    <div class="common-heading-dotted" text-center>
+                      <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
+                    </div>
+                    <div class="product-title">
+                      <p>{{ 'cart.empty_cart_message_1' | translate}}</p>
+                      <p class="underline" (click)="goToDeals()">{{ 'cart.empty_cart_message_2' | translate}}</p>
+                    </div>
+                    <div class="promotion-button">
+                      <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher" (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}</ion-button>
+                    </div>
+                  </div>
+                </div>
+              </ion-content>
+            </div>
+          </ng-container>
+
+          
         <ng-container *ngIf="widget.model">
           <div class="full-height" *ngIf="widget.model.items && widget.model.items.length">
             <ion-content>
@@ -114,7 +139,7 @@
     <ion-icon class="close-icon" name="close-circle" (click)="showVoucherModal()"></ion-icon>
     <h3 text-uppercase text-center>{{ 'cart.got_a_voucher_code_?' | translate}}</h3>
     <p>{{ 'cart.voucher_description' | translate}}
-      <a>{{ 'cart.exclusive_offers' | translate}}</a>
+      <a (click)="goToDeals()">{{ 'cart.exclusive_offers' | translate}}</a>
     </p>
     <div class="form-section" flex-center>
       <ion-input placeholder="Voucher code" inputmode="text"></ion-input>

@@ -166,4 +166,8 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     this.location.back();
   }
 
+  goToDeals() {
+    this.router.navigateByUrl('/product/deals/CU00215646');
+  }
+
 }
