@@ -1,4 +1,4 @@
-<cart-widget class="full-height" [componentId]="getComponentId()" [action]="cartWidgetActions">
+<cart-widget class="full-height" [componentId]="getComponentId()" [action]="cartWidgetAction">
   <ng-template let-widget="widget">
     <ng-container *ngIf="widget.model">
       <div class="full-height" *ngIf="widget.model.items && widget.model.items.length">
