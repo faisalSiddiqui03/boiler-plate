@@ -30,7 +30,6 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   @Input() headerClass = '';
 
   ngOnInit() {
-    console.log('veiev', this.globalSharedService.getDeliverySlot());
   }
 
   goToPage(pageName) {
