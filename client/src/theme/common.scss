@@ -1,14 +1,19 @@
 body{
     --ion-font-family: 'Open Sans';
     font-family: 'Open Sans';
-    background: var(--ion-color-change-link);
+    background: var(--ion-color-primary-contrast);
 }
-ion-app{
-    max-width: 1360px;
-    margin: auto;
-    background: var(--ion-color-light);
+//ion-app{
+//    max-width: 1360px;
+//    margin: auto;
+//    background: var(--ion-color-primary-contrast);
+//}
+
+.container {
+  max-width: 1360px;
+  margin: auto;
 }
-.coomon-heading {
+.common-heading {
     position: relative;
     h2 {
         position: relative;
@@ -30,7 +35,7 @@ ion-app{
     }
 }
 .common-heading-dotted{
-    @extend .coomon-heading;
+    @extend .common-heading;
     h2{
         font-size: 24px;
         font-family: 'Conv_UnitedSansCond-Bold';

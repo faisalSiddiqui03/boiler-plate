@@ -9,7 +9,7 @@
             <ion-card no-padding no-margin>
               <ion-card-header no-padding class="product-img-block">
                 <ion-item text-center class="popup-title" no-margin>
-                  <ion-icon name="close-circle" slot="start"></ion-icon>
+                  <ion-icon (click)="goBack()" name="close-circle" slot="start"></ion-icon>
                   <ion-label>{{widget.model.title}}</ion-label>
                 </ion-item>
                 <img alt="{{widget.model.title}}" class="product-main-image" height="170" width="340" src="{{getProductImageUrl(widget.model)}}"

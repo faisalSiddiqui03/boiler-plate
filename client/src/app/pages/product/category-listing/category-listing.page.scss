@@ -4,9 +4,12 @@
 
 .product-card {
   background-color: white;
+  margin-bottom: 10px;
 }
 
 .non-deal-card {
+  padding: 0;
+  margin: 5px;
   img {
     display: block;
     width: auto;
@@ -15,7 +18,12 @@
   }
 }
 
+.product-card-holder {
+  padding: 0;
+}
+
 .deal-card {
+  padding: 0;
   img {
     display: block;
     width: 100%;

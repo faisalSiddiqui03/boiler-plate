@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import {
   ConfigService,
   pwaLifeCycle,
@@ -12,6 +13,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
 import { Utils } from '../../../helpers/utils';
+import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-product-details',
@@ -37,11 +39,14 @@ export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidge
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private translate: TranslateService,
-    private config: ConfigService
+    private translateService: TranslateService,
+    private config: ConfigService,
+    private loadingService: LoaderService,
+    private alertService: AlertService,
+    private location: Location,
   ) {
     super();
-    this.translate.use(Utils.getLanguageCode());
+    this.translateService.use(Utils.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
@@ -70,9 +75,7 @@ export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidge
 
   getProductImageUrl(product) {
     if (product && product.multipleImages && product.multipleImages.length) {
-      const imageUrl = `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
-      // console.log(imageUrl);
-      return imageUrl;
+      return `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
     }
   }
 
@@ -88,8 +91,16 @@ export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidge
     console.log('name action failed: ' + name + ' data: ' + data);
   }
 
-  widgetActionSuccess(name: string, data: any): any {
+  async widgetActionSuccess(name: string, data: any) {
     console.log('name action success: ' + name + ' data: ' + data);
+    // loading service and alert service
+    switch (name) {
+      case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
+        this.loadingService.stopLoading();
+        // let str = await this.translateService.instant('product.added_to_cart');
+        this.alertService.presentToast('Added to Cart', 3000, 'top');
+        break;
+    }
   }
 
   widgetLoadingFailed(name: string, data: any): any {
@@ -98,5 +109,9 @@ export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidge
 
   widgetLoadingStarted(name: string, data: any): any {
     console.log('name loading success: ' + name + ' data: ' + data);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

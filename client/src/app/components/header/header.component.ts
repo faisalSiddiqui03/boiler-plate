@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { BasePage } from '../../base/base-page';
+import { BaseComponent } from '../../base/base-component';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-selection/delivery-slot-selection.page';
 
@@ -9,7 +9,7 @@ import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-se
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent extends BasePage implements OnInit {
+export class HeaderComponent extends BaseComponent implements OnInit {
 
   constructor(
     private router: Router,

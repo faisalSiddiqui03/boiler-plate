@@ -1,6 +1,6 @@
 <div class="footer-content" padding>
   <ion-grid>
-    <ion-row>
+    <ion-row class="container">
       <ion-col size-lg='2' size-xs='6'>
         <ion-title no-padding no-margin>{{ 'footer.menu' | translate }}</ion-title>
         <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
@@ -11,7 +11,7 @@
             <div *ngIf="!widget.model">
               <ion-list *ngFor="let category of categoryArray">
                 <div class="skeleton-warpper">
-                  <ion-skeleton-text class="skeleton-text"></ion-skeleton-text>                    
+                  <ion-skeleton-text class="skeleton-text"></ion-skeleton-text>
                 </div>
               </ion-list>
             </div>

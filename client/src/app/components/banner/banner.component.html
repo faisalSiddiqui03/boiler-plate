@@ -1,23 +1,25 @@
-<banner-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [type]="'tag'" [value]="value" [executor]="bundleWidgetExecutor" [action]="bundleWidgetAction"
-  (lifecycle)="null">
+<banner-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [type]="'tag'" [value]="value"
+               [executor]="bundleWidgetExecutor" [action]="bundleWidgetAction"
+               (lifecycle)="null">
   <ng-template let-widget="widget">
     <div *ngIf="widget.model == undefined" padding>
-      <div class="coomon-heading" text-center text-uppercase margin-bottom>
+      <div class="common-heading" text-center text-uppercase margin-bottom>
         <h2 no-margin> OUR MOST POPULAR DEALS </h2>
       </div>
       <ion-row margin-bottom justify-content-center>
         <ion-col size-lg='6' size-xs='12'>
-            <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
+          <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
         </ion-col>
       </ion-row>
     </div>
     <div *ngIf="widget.model != undefined && widget.model.length > 0" padding>
-      <div class="coomon-heading" text-center text-uppercase margin-bottom>
+      <div class="common-heading" text-center text-uppercase margin-bottom>
         <h2 no-margin> OUR MOST POPULAR DEALS </h2>
       </div>
       <ion-row margin-bottom justify-content-center>
         <ion-col size-lg='6' size-xs='12' *ngFor="let banner of widget.model" (click)="onBannerClicked(banner)">
-          <img src="{{getFullBannerUrl(banner.contentUrl)}}" img-preloader="{{getFullBannerUrl(banner.contentUrl)}}" defaultImage="assets/imgs/default/no-preview.jpeg"
+          <img src="{{getFullBannerUrl(banner.contentUrl)}}" img-preloader="{{getFullBannerUrl(banner.contentUrl)}}"
+               defaultImage="assets/imgs/default/default.png"
           />
         </ion-col>
       </ion-row>
