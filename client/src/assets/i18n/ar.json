@@ -8,6 +8,8 @@
 	},
 	"cart": {
 		"cart_clear": "",
+		"close": "",
+		"continue": "",
 		"exclusive_offers": "",
 		"got_a_voucher_code_?": "",
 		"remove_item": "",

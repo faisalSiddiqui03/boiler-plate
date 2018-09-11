@@ -14,6 +14,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router } from '@angular/router';
 import { Utils } from '../../../helpers/utils';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
@@ -36,11 +37,12 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     private router: Router,
     private alertService: AlertService,
     private loaderService: LoaderService,
-    private config: ConfigService
+    private config: ConfigService,
+    private location: Location
   ) {
     super();
     this.translateService.use(Utils.getLanguageCode());
-    this.loaderService.startLoading();
+    // this.loaderService.startLoading();
     this.loaded = false;
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
@@ -131,7 +133,7 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   widgetLoadingFailed(name: string, data: any): any {
-    this.loaderService.stopLoading();
+    // this.loaderService.stopLoading();
     console.log('name loading failed: ' + name + ' data: ' + data);
   }
 
@@ -141,7 +143,7 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   widgetLoadingSuccess(name, data) {
     console.log('name loading success: ' + name + ' data: ' + data);
-    this.loaderService.stopLoading();
+    // this.loaderService.stopLoading();
     switch (name) {
       case WidgetNames.CART:
         this.loaded = true;
@@ -155,8 +157,13 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     }
   }
 
-  showVoucherModal(){
+  showVoucherModal() {
     this.enableVoucherModal = !this.enableVoucherModal;
+  }
+
+  /** Function to go to previous page */
+  goBack() {
+    this.location.back();
   }
 
 }
