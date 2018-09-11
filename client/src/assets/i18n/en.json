@@ -8,9 +8,14 @@
 	},
 	"cart": {
 		"cart_clear": "",
+		"exclusive_offers": "exclusive offers",
+		"got_a_voucher_code_?": "Got a voucher code?",
 		"remove_item": "",
+		"update_cart_message": "Want to make changes? Just tap any item.",
 		"updating_quantity": "",
-		"your_cart": "Your Cart"
+		"voucher_description": "",
+		"your_cart": "Your Cart",
+		"your_total": "Your Total"
 	},
 	"category_listing": {
 		"price_tag": "From"
