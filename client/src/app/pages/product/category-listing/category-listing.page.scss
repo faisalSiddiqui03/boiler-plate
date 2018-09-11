@@ -9,7 +9,7 @@
 
 .non-deal-card {
   padding: 0;
-  margin: 5px;
+  margin: 0;
   img {
     display: block;
     width: auto;
@@ -19,11 +19,12 @@
 }
 
 .product-card-holder {
-  padding: 0;
+  padding: 0 5px 10px 5px;
 }
 
 .deal-card {
   padding: 0;
+  margin: 0;
   img {
     display: block;
     width: 100%;
@@ -52,14 +53,6 @@ ion-card-header {
 
 ion-card-content {
   --ion-padding: 10px 10px 0 10px;
-}
-
-ion-row {
-
-}
-
-ion-col {
-
 }
 
 .deal-item-name {
