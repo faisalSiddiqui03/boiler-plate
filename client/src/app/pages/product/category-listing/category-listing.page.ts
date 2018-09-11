@@ -70,4 +70,8 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   widgetLoadingSuccess(name: string, data: any): any {
   }
+
+  goToCart() {
+    this.router.navigateByUrl('/cart');
+  }
 }

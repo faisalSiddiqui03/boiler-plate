@@ -21,27 +21,37 @@
 @media (max-width: 991px) {
   .tabs-nav-head {
     position: fixed;
-    bottom: 70px;
+    bottom: 60px;
     --min-height: 44px;
   }
   ion-content {
-    --offset-top: -60px !important;
+    --offset-bottom: -55px !important;
   }
 }
 
 @media (min-width: 992px) {
   .top-header-container {
     position: fixed;
-    z-index: 41;
-    width: calc(100% - 310px);
+    width: calc(100% - 380px);
   }
 
+  .common-heading-dotted {
+    background-color: transparent;
+    margin: 10px;
+  }
   .sidebar-cart {
     width: 350px;
     flex-direction: column;
     display: inline-flex;
     //position: fixed;
     height: 100vh;
+  }
+
+  .fixed-sidebar {
+    position: fixed;
+    width: 350px;
+    height: 100%;
+    background: white;
   }
 
   .product-content {
@@ -57,8 +67,7 @@
     position: fixed;
     margin-top: 56px;
     --min-height: 44px;
-    z-index: 41;
-    width: calc(100% - 310px);
+    width: calc(100% - 380px);
   }
 
   .showcase-container {
@@ -151,7 +160,7 @@ ion-card-content {
   padding-right: 30px;
   padding-left: 30px;
   position: relative;
-  z-index: 40;
+  z-index: 10;
   text-align: center;
   white-space: nowrap;
   background-color: #fff;

@@ -1,9 +1,16 @@
+<ion-hide-when size="lg">
+  <ion-header>
+    <app-header [showCart]="true" [showTime]="true" [headerClass]="'category-header'"></app-header>
+  </ion-header>
+</ion-hide-when>
 <ion-content class="content-with-backdrop">
   <div class="product-main-container">
     <div class="product-content">
-      <ion-toolbar class="top-header-container">
-        <app-header [showCart]="true" [showTime]="true" [headerClass]="'category-header'"></app-header>
-      </ion-toolbar>
+      <ion-show-when size="lg">
+        <ion-toolbar class="top-header-container">
+          <app-header [showCart]="true" [showTime]="true" [headerClass]="'category-header'"></app-header>
+        </ion-toolbar>
+      </ion-show-when>
       <ion-toolbar class="tabs-nav-head">
         <div class="container">
           <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1
@@ -30,7 +37,7 @@
                                  [action]="productShowcaseWidgetAction" [useMJData]=true [from]="1" [limit]="100">
           <ng-template let-widget="widget">
             <div *ngIf="widget.model != undefined && widget.model.length">
-              <!--<ion-hide-when size="lg">-->
+              <ion-hide-when size="lg">
               <div class="ribbon">
                 <div class="ribbon__side--left">
                   <span></span>
@@ -45,7 +52,12 @@
                   <span></span>
                 </div>
               </div>
-              <!--</ion-hide-when>-->
+              </ion-hide-when>
+              <ion-show-when size="lg">
+                <div class="common-heading-dotted" text-center>
+                  <h2 text-uppercase no-margin>{{categoryName}}</h2>
+                </div>
+              </ion-show-when>
               <div *ngIf="categoryName.toLocaleLowerCase() === 'deals'">
                 <ion-grid>
                   <ion-row>
@@ -97,15 +109,21 @@
 
       </div>
     </div>
-    <div class="sidebar-cart">
-      <app-cart></app-cart>
-    </div>
+    <ion-show-when size="lg">
+      <div class="sidebar-cart">
+        <div class="fixed-sidebar">
+          <app-cart></app-cart>
+        </div>
+      </div>
+    </ion-show-when>
   </div>
 </ion-content>
 <ion-hide-when size="lg">
   <ion-footer no-border>
     <div class="checkout-btn">
-      <ion-button color="success" text-capitalize expand="block" mode="ios" class="btn-success">checkout</ion-button>
+      <ion-button (click)="goToCart()" color="success" text-capitalize expand="block" mode="ios" class="btn-success">
+        checkout
+      </ion-button>
     </div>
   </ion-footer>
 </ion-hide-when>
