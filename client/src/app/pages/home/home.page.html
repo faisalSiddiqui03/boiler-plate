@@ -14,8 +14,8 @@
     >
       <ng-template let-widget="widget">
         <div *ngIf="widget.model == undefined">
-            <app-skeleton></app-skeleton>
-        </div>
+            <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
+          </div>
         <div *ngIf="widget.model != undefined && widget.model.length > 0">
           <div>
             <img src="{{getFullBannerUrl(widget.model[0].contentUrl)}}"

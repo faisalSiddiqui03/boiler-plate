@@ -9,7 +9,8 @@
 	"cart": {
 		"cart_clear": "",
 		"remove_item": "",
-		"updating_quantity": ""
+		"updating_quantity": "",
+		"your_cart": "Your Cart"
 	},
 	"category_listing": {
 		"price_tag": "From"
