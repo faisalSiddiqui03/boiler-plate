@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { pwaLifeCycle, pageView } from '@capillarytech/pwa-framework';
-import { BasePage } from '../../../../base/base-page';
+import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle } from '@capillarytech/pwa-framework';
+import { BaseComponent } from '../../../../base/base-component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 @pwaLifeCycle()
 @pageView()
 
-export class SignupPage extends BasePage implements OnInit {
+export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   signUpForm:FormGroup;
 
@@ -38,6 +38,21 @@ export class SignupPage extends BasePage implements OnInit {
 
   goToPage(pageName) {
     this.router.navigateByUrl(pageName);
+  }
+
+  widgetActionFailed(name: string, data: any): any {
+  }
+
+  widgetActionSuccess(name: string, data: any): any {
+  }
+
+  widgetLoadingFailed(name: string, data: any): any {
+  }
+
+  widgetLoadingStarted(name: string, data: any): any {
+  }
+
+  widgetLoadingSuccess(name: string, data: any): any {
   }
 
 }

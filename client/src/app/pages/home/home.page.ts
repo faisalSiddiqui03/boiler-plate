@@ -7,7 +7,7 @@ import {
   OnWidgetLifecyle,
   ConfigService
 } from '@capillarytech/pwa-framework';
-import { BasePage } from '../../base/base-page';
+import { BaseComponent } from '../../base/base-component';
 import { Router } from '@angular/router';
 import {
   LocationWidgetActions,
@@ -24,7 +24,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 @pwaLifeCycle()
-export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   bannerWidgetAction = new EventEmitter();
   bannerWidgetExecutor = new EventEmitter();
@@ -57,7 +57,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   ngOnInit() {
-    
+
   }
 
   ionViewDidEnter() {
@@ -197,7 +197,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
         this.router.navigate(['/store-selection'], { queryParams: { 'latitude': lat, 'longitude': lng } });
         return;
     }
-    
+
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_LOCATION,
         [lat, lng, this.globalSharedService.getFulfilmentMode().mode]));
   }

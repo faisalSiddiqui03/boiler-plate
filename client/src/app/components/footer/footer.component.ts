@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { BasePage } from '../../base/base-page';
+import { BaseComponent } from '../../base/base-component';
 import { Utils } from '../../helpers/utils';
 import {pwaLifeCycle} from "@cap-core/lifecycle";
 
@@ -11,7 +11,7 @@ import {pwaLifeCycle} from "@cap-core/lifecycle";
   styleUrls: ['./footer.component.scss']
 })
 @pwaLifeCycle()
-export class FooterComponent extends BasePage implements OnInit {
+export class FooterComponent extends BaseComponent implements OnInit {
 
   categoryArray = Array(5);
   constructor(

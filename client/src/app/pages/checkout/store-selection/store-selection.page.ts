@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { BasePage } from '../../../base/base-page';
+import { BaseComponent } from '../../../base/base-component';
 import { ConfigService, pwaLifeCycle, Action } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
@@ -14,7 +14,7 @@ import { StoreLocatorWidgetActions, OnWidgetLifecyle, OnWidgetActionsLifecyle } 
 })
 
 @pwaLifeCycle()
-export class StoreSelectionPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   cityId;
   latitude;

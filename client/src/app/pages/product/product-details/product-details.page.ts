@@ -10,7 +10,7 @@ import {
   OnWidgetActionsLifecyle, OnWidgetLifecyle
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
-import { BasePage } from '../../../base/base-page';
+import { BaseComponent } from '../../../base/base-component';
 import { Utils } from '../../../helpers/utils';
 
 @Component({
@@ -20,7 +20,7 @@ import { Utils } from '../../../helpers/utils';
 })
 
 @pwaLifeCycle()
-export class ProductDetailsPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   productWidgetExecutor = new EventEmitter();
   productWidgetAction = new EventEmitter();
   currencyCode: string;

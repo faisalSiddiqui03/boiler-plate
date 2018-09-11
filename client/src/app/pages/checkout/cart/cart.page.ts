@@ -9,7 +9,7 @@ import {
   CartWidgetActions,
   ConfigService
 } from '@capillarytech/pwa-framework';
-import { BasePage } from '../../../base/base-page';
+import { BaseComponent } from '../../../base/base-component';
 import { TranslateService } from "@ngx-translate/core";
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router } from '@angular/router';
@@ -25,7 +25,7 @@ import { Location } from '@angular/common';
 @pwaLifeCycle()
 @pageView()
 
-export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   cartWidgetAction = new EventEmitter();
   loaded = false;
   vouchersLoaded = false;
