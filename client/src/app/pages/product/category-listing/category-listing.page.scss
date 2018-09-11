@@ -247,7 +247,7 @@ ion-col {
   --ion-toolbar-background-color : transparent;
 }
 
-@media (max-width:992px){
+@media (max-width:991px){
   .tabs-nav-head{
     position: fixed;
     bottom: 70px;
@@ -255,5 +255,16 @@ ion-col {
   }
   ion-content{
     --offset-bottom:-60px !important;
+  }
+}
+
+@media (min-width:992px){
+  ion-tabs{
+    --ion-color-base: var(--ion-color-light) !important;
+    --ion-color-base-rgb: var(--ion-color-light-rgb) !important;
+    --ion-color-contrast: var(--ion-color-dark) !important;
+    --ion-color-contrast-rgb: var(--ion-color-dark-rgb) !important;
+    --ion-color-shade: var(--ion-color-dark-shade) !important;
+    --ion-color-tint: var(--ion-color-dark-tint) !important;
   }
 }

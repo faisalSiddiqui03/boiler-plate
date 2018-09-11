@@ -1,7 +1,3 @@
-.full-height {
-  background: rgba(var(--ion-color-dark-rgb), 0.4);
-}
-
 ion-footer {
   padding: 10px;
   ion-button {
@@ -88,5 +84,10 @@ ion-button {
       margin-right: 5px;
       margin-left: 5px;
     }
+  }
+}
+@media (max-width: 768px) {
+  .full-height {
+    background: rgba(var(--ion-color-dark-rgb), 0.8);
   }
 }

@@ -1,19 +1,16 @@
-<ion-hide-when size="lg">
-  <ion-header>
-    <app-header [showHalalTag]="true" [showLanguage]="true"></app-header>
-  </ion-header>
-</ion-hide-when>
+<ion-header>
+  <app-header [showCart]="true" [showTime]="true" [headerClass]="'category-header'"></app-header>
+</ion-header>
 
 <ion-content class="content-with-backdrop">
   <ion-toolbar class="tabs-nav-head">
-    <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null" [action]="null"
-                       (lifecycle)="null">
+    <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
+      [action]="null" (lifecycle)="null">
       <ng-template let-widget="widget">
         <div *ngIf="widget.model">
           <ion-tabs [scrollable]="true" [color]="'dark'" [tabbarHighlight]="true" [useRouter]="true">
-            <ion-tab *ngFor="let item of widget.model.items" label="{{item.name}}"
-                     [selected]="item.categoryId === categoryId" [active]="item.categoryId === categoryId"
-                     href="/product/{{item.name}}/{{item.categoryId}}">
+            <ion-tab *ngFor="let item of widget.model.items" label="{{item.name}}" [selected]="item.categoryId === categoryId" [active]="item.categoryId === categoryId"
+              href="/product/{{item.name}}/{{item.categoryId}}">
               <ion-router-outlet stack name="{{item.name}}"></ion-router-outlet>
             </ion-tab>
           </ion-tabs>
@@ -21,9 +18,8 @@
       </ng-template>
     </navigation-widget>
   </ion-toolbar>
-  <product-showcase-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [categories]="[categoryId]"
-                           [executor]="productShowcaseWidgetExecutor" [action]="productShowcaseWidgetAction"
-                           [useMJData]=true [from]="1" [limit]="100">
+  <product-showcase-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [categories]="[categoryId]" [executor]="productShowcaseWidgetExecutor"
+    [action]="productShowcaseWidgetAction" [useMJData]=true [from]="1" [limit]="100">
     <ng-template let-widget="widget">
       <div *ngIf="widget.model != undefined && widget.model.length">
         <div class="ribbon lg-hide">
@@ -41,17 +37,22 @@
           </div>
         </div>
         <div *ngIf="categoryName.toLocaleLowerCase() === 'deals'">
-          <ion-card *ngFor="let prod of widget.model" class="product-card deal-card">
-            <ion-card-header>
-              <img height="170" width="340" (click)="openProductDetails(prod)" src="{{getProductImageUrl(prod)}}"
-                   img-preloader="{{prod?.smallImage}}" defaultImage="assets/imgs/default/no-preview.jpeg"/>
-            </ion-card-header>
-
-            <ion-card-content>
-              <p class="deal-item-name">{{prod.title}}</p>
-              <p class="deal-item-desc">{{prod.shortDescription}}</p>
-            </ion-card-content>
-          </ion-card>
+          <ion-grid>
+            <ion-row>
+              <ion-col *ngFor="let prod of widget.model" class="product-card deal-card" size-md="4" size-sm="6" size-xs="12">
+                <ion-card>
+                  <ion-card-header>
+                    <img height="170" width="340" (click)="openProductDetails(prod)" src="{{getProductImageUrl(prod)}}" img-preloader="{{prod?.smallImage}}"
+                      defaultImage="assets/imgs/default/no-preview.jpeg" />
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p class="deal-item-name">{{prod.title}}</p>
+                    <p class="deal-item-desc">{{prod.shortDescription}}</p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </div>
         <div *ngIf="categoryName.toLocaleLowerCase() !== 'deals'">
           <ion-grid>
@@ -59,8 +60,8 @@
               <ion-col *ngFor="let prod of widget.model" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
                 <ion-card class="product-card non-deal-card" no-padding (click)="openProductDetails(prod)">
                   <ion-card-header no-padding>
-                    <img height="100" (click)="openProductDetails(prod)" src="{{getProductImageUrl(prod)}}"
-                         img-preloader="{{prod?.smallImage}}" defaultImage="assets/imgs/default/no-preview.jpeg"/>
+                    <img height="100" (click)="openProductDetails(prod)" src="{{getProductImageUrl(prod)}}" img-preloader="{{prod?.smallImage}}"
+                      defaultImage="assets/imgs/default/no-preview.jpeg" />
                   </ion-card-header>
 
                   <ion-card-content padding>
