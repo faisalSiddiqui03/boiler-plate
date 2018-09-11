@@ -8,9 +8,14 @@
 	},
 	"cart": {
 		"cart_clear": "",
+		"exclusive_offers": "",
+		"got_a_voucher_code_?": "",
 		"remove_item": "",
+		"update_cart_message": "",
 		"updating_quantity": "",
-		"your_cart": ""
+		"voucher_description": "",
+		"your_cart": "",
+		"your_total": ""
 	},
 	"category_listing": {
 		"price_tag": ""
