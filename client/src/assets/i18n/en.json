@@ -7,6 +7,7 @@
 		"our_history": "Our History"
 	},
 	"cart": {
+		"apply": "apply",
 		"cart_clear": "",
 		"close": "Close",
 		"continue": "Continue",
@@ -14,6 +15,9 @@
 		"empty_cart_message_2": "check out some of our unbeatable deals?",
 		"exclusive_offers": "exclusive offers",
 		"got_a_voucher_code_?": "Got a voucher code?",
+		"no_voucher_message_1": "Sorry, we don't currently support that voucher code. Don't worry, you can ",
+		"no_voucher_message_2": "Find our best deals on our deals page,",
+		"no_voucher_message_3": " or call your Hut to find out more",
 		"remove_item": "",
 		"update_cart_message": "Want to make changes? Just tap any item.",
 		"updating_quantity": "",

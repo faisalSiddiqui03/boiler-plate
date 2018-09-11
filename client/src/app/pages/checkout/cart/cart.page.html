@@ -64,27 +64,27 @@
         </ng-container>
 
         <ng-container *ngIf="widget.model && widget.model.items && widget.model.items.length == 0">
-            <div class="full-height">
-              <ion-content>
-                <!-- <p>{{widget.model | json }}</p> -->
-                <div class="basket-container">
-                  <div class="basket">
-                    <div class="basket-close" (click)="goBack()">{{ 'cart.close' | translate}}</div>
-                    <div class="common-heading-dotted" text-center>
-                      <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
-                    </div>
-                    <div class="product-title">
-                      <p>{{ 'cart.empty_cart_message_1' | translate}}</p>
-                      <p class="underline" (click)="goToDeals()">{{ 'cart.empty_cart_message_2' | translate}}</p>
-                    </div>
-                    <div class="promotion-button">
-                      <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher" (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}</ion-button>
-                    </div>
+          <div class="full-height">
+            <ion-content>
+              <!-- <p>{{widget.model | json }}</p> -->
+              <div class="basket-container">
+                <div class="basket">
+                  <div class="basket-close" (click)="goBack()">{{ 'cart.close' | translate}}</div>
+                  <div class="common-heading-dotted" text-center>
+                    <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
+                  </div>
+                  <div class="product-title">
+                    <p>{{ 'cart.empty_cart_message_1' | translate}}</p>
+                    <p class="underline" (click)="goToDeals()">{{ 'cart.empty_cart_message_2' | translate}}</p>
+                  </div>
+                  <div class="promotion-button">
+                    <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher" (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}</ion-button>
                   </div>
                 </div>
-              </ion-content>
-            </div>
-          </ng-container>
+              </div>
+            </ion-content>
+          </div>
+        </ng-container>
 
           
         <ng-container *ngIf="widget.model">
@@ -142,8 +142,13 @@
       <a (click)="goToDeals()">{{ 'cart.exclusive_offers' | translate}}</a>
     </p>
     <div class="form-section" flex-center>
-      <ion-input placeholder="Voucher code" inputmode="text"></ion-input>
-      <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success">apply</ion-button>
+      <ion-input placeholder="Voucher code" inputmode="text" [(ngModel)]="voucherCode"></ion-input>
+      <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success" (click)="applyVoucher()">{{ 'cart.apply' | translate}}</ion-button>
     </div>
+    <br>
+    <p *ngIf="isWrongVoucher">{{ 'cart.no_voucher_message_1' | translate}}
+      <a class="underline" (click)="goToDeals()">{{ 'cart.no_voucher_message_2' | translate}}</a>
+      {{ 'cart.no_voucher_message_3' | translate}}
+    </p>
   </div>
 </div>

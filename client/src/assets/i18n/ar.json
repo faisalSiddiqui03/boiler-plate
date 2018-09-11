@@ -7,6 +7,7 @@
 		"our_history": ""
 	},
 	"cart": {
+		"apply": "",
 		"cart_clear": "",
 		"close": "",
 		"continue": "",
@@ -14,6 +15,9 @@
 		"empty_cart_message_2": "",
 		"exclusive_offers": "",
 		"got_a_voucher_code_?": "",
+		"no_voucher_message_1": "",
+		"no_voucher_message_2": "",
+		"no_voucher_message_3": "",
 		"remove_item": "",
 		"update_cart_message": "",
 		"updating_quantity": "",

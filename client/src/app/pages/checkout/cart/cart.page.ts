@@ -30,7 +30,9 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   loaded = false;
   vouchersLoaded = false;
   enableVoucherModal:boolean = false;
+  isWrongVoucher = false;
   currencyCode: string;
+  voucherCode: string;
 
   constructor(
     private translateService: TranslateService,
@@ -168,6 +170,13 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   goToDeals() {
     this.router.navigateByUrl('/product/deals/CU00215646');
+  }
+
+  applyVoucher() {
+    if (!this.voucherCode) {
+      this.isWrongVoucher = true;
+      return;
+    }
   }
 
 }
