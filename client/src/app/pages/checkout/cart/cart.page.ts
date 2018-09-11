@@ -17,7 +17,7 @@ import { Utils } from '../../../helpers/utils';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-cart',
+  selector: 'app-cart-page',
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
 })

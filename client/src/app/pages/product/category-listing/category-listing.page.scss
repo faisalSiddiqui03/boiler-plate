@@ -18,6 +18,62 @@
   }
 }
 
+@media (max-width: 991px) {
+  .tabs-nav-head {
+    position: fixed;
+    bottom: 70px;
+    --min-height: 44px;
+  }
+  ion-content {
+    --offset-top: -60px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .top-header-container {
+    position: fixed;
+    z-index: 41;
+    width: calc(100% - 310px);
+  }
+
+  .sidebar-cart {
+    width: 350px;
+    flex-direction: column;
+    display: inline-flex;
+    //position: fixed;
+    height: 100vh;
+  }
+
+  .product-content {
+    width: 100%;
+    margin-right: 20px;
+  }
+  .product-main-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tabs-nav-head {
+    position: fixed;
+    margin-top: 56px;
+    --min-height: 44px;
+    z-index: 41;
+    width: calc(100% - 310px);
+  }
+
+  .showcase-container {
+    margin-top: 120px;
+  }
+  ion-tabs {
+    --ion-color-base: var(--ion-color-light) !important;
+    --ion-color-base-rgb: var(--ion-color-light-rgb) !important;
+    --ion-color-contrast: var(--ion-color-dark) !important;
+    --ion-color-contrast-rgb: var(--ion-color-dark-rgb) !important;
+    --ion-color-shade: var(--ion-color-dark-shade) !important;
+    --ion-color-tint: var(--ion-color-dark-tint) !important;
+  }
+}
+
 .product-card-holder {
   padding: 0 5px 10px 5px;
 }
@@ -95,7 +151,7 @@ ion-card-content {
   padding-right: 30px;
   padding-left: 30px;
   position: relative;
-  z-index: 400;
+  z-index: 40;
   text-align: center;
   white-space: nowrap;
   background-color: #fff;
@@ -241,31 +297,13 @@ ion-card-content {
   height: 3px;
   border-radius: 50%
 }
-.checkout-btn{
+
+.checkout-btn {
   padding: 6px 10px;
 }
-.tabs-nav-head{
-  --ion-toolbar-background-color : transparent;
+
+.tabs-nav-head {
+  --ion-toolbar-background-color: transparent;
 }
 
-@media (max-width:991px){
-  .tabs-nav-head{
-    position: fixed;
-    bottom: 70px;
-    --min-height: 44px;
-  }
-  ion-content{
-    --offset-bottom:-60px !important;
-  }
-}
 
-@media (min-width:992px){
-  ion-tabs{
-    --ion-color-base: var(--ion-color-light) !important;
-    --ion-color-base-rgb: var(--ion-color-light-rgb) !important;
-    --ion-color-contrast: var(--ion-color-dark) !important;
-    --ion-color-contrast-rgb: var(--ion-color-dark-rgb) !important;
-    --ion-color-shade: var(--ion-color-dark-shade) !important;
-    --ion-color-tint: var(--ion-color-dark-tint) !important;
-  }
-}

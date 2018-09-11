@@ -44,9 +44,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   getProductImageUrl(product) {
     if (product && product.multipleImages && product.multipleImages.length) {
-      const imageUrl = `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
-      // console.log(imageUrl);
-      return imageUrl;
+      return `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
     }
   }
 
@@ -55,7 +53,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   openProductDetails(product) {
-    console.log(product)
     this.router.navigateByUrl('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
   }
 

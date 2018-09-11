@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../base/base-component';
 import { Utils } from '../../helpers/utils';
-import {pwaLifeCycle} from "@cap-core/lifecycle";
+import { pwaLifeCycle } from "@cap-core/lifecycle";
 
 @Component({
   selector: 'app-footer',
@@ -14,6 +14,7 @@ import {pwaLifeCycle} from "@cap-core/lifecycle";
 export class FooterComponent extends BaseComponent implements OnInit {
 
   categoryArray = Array(5);
+
   constructor(
     private translate: TranslateService,
     private router: Router
