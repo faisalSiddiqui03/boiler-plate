@@ -23,6 +23,11 @@
         font-size: 14px;
         color: var(--ion-color-dark-shade);
     }
+    .empty-cart {
+      padding: 5px 10px 10px 10px;
+      font-size: 14px;
+      color: var(--ion-color-dark-shade);
+    }
     .common-heading-dotted {
         margin-bottom: 10px;
     }
@@ -168,4 +173,36 @@ ion-footer {
             }
         }
     }
+}
+
+@keyframes placeHolderShimmer{
+  0%{
+      background-position: -468px 0
+  }
+  100%{
+      background-position: 468px 0
+  }
+}
+
+.skeleton-text {
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  position: relative;
+  background: #ffffff;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+}
+
+.h2-skeleton{
+  width: 200px;
+}
+
+.p-skeleton{
+  width: 150px;
+}
+
+.underline{
+  text-decoration: underline
 }

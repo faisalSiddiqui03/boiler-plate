@@ -14,6 +14,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router } from '@angular/router';
 import { Utils } from '../../../helpers/utils';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
@@ -29,18 +30,21 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   loaded = false;
   vouchersLoaded = false;
   enableVoucherModal:boolean = false;
+  isWrongVoucher = false;
   currencyCode: string;
+  couponCode: string;
 
   constructor(
     private translateService: TranslateService,
     private router: Router,
     private alertService: AlertService,
     private loaderService: LoaderService,
-    private config: ConfigService
+    private config: ConfigService,
+    private location: Location
   ) {
     super();
     this.translateService.use(Utils.getLanguageCode());
-    this.loaderService.startLoading();
+    // this.loaderService.startLoading();
     this.loaded = false;
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
@@ -48,10 +52,12 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   ngOnInit() {
   }
 
-  applyCoupon(couponCode) {
-    if (couponCode) {
-      let action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, couponCode);
+  applyCoupon() {
+    if (this.couponCode) {
+      let action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
+    } else {
+      this.isWrongVoucher = true;
     }
   }
 
@@ -99,7 +105,9 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   widgetActionFailed(name: string, data: any): any {
     this.loaderService.stopLoading();
-    console.log('name action failed: ' + name + ' data: ' + data);
+    if (name === CartWidgetActions.ACTION_APPLY_COUPON) {
+      this.isWrongVoucher = true;
+    }
   }
 
   async widgetActionSuccess(name: string, data: any) {
@@ -107,22 +115,30 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     this.loaderService.stopLoading();
     switch (name) {
       case CartWidgetActions.ACTION_REMOVE_COUPON:
-        if (data)
-          alert('Coupon removed successfully');
-        else
-          alert('Coupon could not be removed');
+        if (data) {
+          const coupon_remove_success = await this.translateService.instant('cart.coupon_removed_successfully');
+          this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
+        } else {
+          const coupon_remove_error = await this.translateService.instant('cart.unable_to_remove_coupon');
+          this.alertService.presentToast(coupon_remove_error, 3000, 'bottom');
+        }
         break;
       case CartWidgetActions.ACTION_APPLY_COUPON:
-        if (data)
-          alert('Coupon applied successfully');
-        else
-          alert('Unable to apply coupon');
+        if (data) {
+          const coupon_success = await this.translateService.instant('cart.coupon_applied_successfully');
+          this.alertService.presentToast(coupon_success, 3000, 'bottom');
+          this.showVoucherModal();
+        } else {
+          const coupon_error = await this.translateService.instant('cart.unable_to_apply_coupon');
+          this.alertService.presentToast(coupon_error, 3000, 'bottom');
+          this.isWrongVoucher = true;
+        }
         break;
       case CartWidgetActions.ACTION_UPDATE_CART:
         console.log('Item updated successfully');
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
-        let cartClear = await
+        const cartClear = await
         this.translateService.instant('cart.cart_clear');
         this.alertService.presentToast(cartClear, 3000, 'bottom');
         this.router.navigate(['/home']);
@@ -131,7 +147,7 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   widgetLoadingFailed(name: string, data: any): any {
-    this.loaderService.stopLoading();
+    // this.loaderService.stopLoading();
     console.log('name loading failed: ' + name + ' data: ' + data);
   }
 
@@ -141,7 +157,7 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   widgetLoadingSuccess(name, data) {
     console.log('name loading success: ' + name + ' data: ' + data);
-    this.loaderService.stopLoading();
+    // this.loaderService.stopLoading();
     switch (name) {
       case WidgetNames.CART:
         this.loaded = true;
@@ -155,8 +171,17 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     }
   }
 
-  showVoucherModal(){
+  showVoucherModal() {
     this.enableVoucherModal = !this.enableVoucherModal;
+  }
+
+  /** Function to go to previous page */
+  goBack() {
+    this.location.back();
+  }
+
+  goToDeals() {
+    this.router.navigateByUrl('/product/deals/CU00215646');
   }
 
 }
