@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DealerSelectionPage } from './dealer-selection.page';
+import { DeliverySlotSelectionPage } from './delivery-slot-selection.page';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
@@ -14,7 +14,7 @@ import { DeliverySlotsWidgetModule } from "@capillarytech/pwa-framework";
 const routes: Routes = [
   {
     path: '',
-    component: DealerSelectionPage
+    component: DeliverySlotSelectionPage
   }
 ];
 
@@ -33,6 +33,6 @@ const routes: Routes = [
       }
     })
   ],
-  declarations: [DealerSelectionPage]
+  declarations: [DeliverySlotSelectionPage]
 })
-export class DealerSelectionPageModule {}
+export class DeliverySlotSelectionModule {}

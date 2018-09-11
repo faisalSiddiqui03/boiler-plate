@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { pwaLifeCycle, pageView, Action, DeliverySlotsWidget } from '@capillarytech/pwa-framework';
+import {
+  pwaLifeCycle,
+  pageView,
+  Action,
+  DeliverySlotsWidget,
+  OnWidgetActionsLifecyle, OnWidgetLifecyle
+} from '@capillarytech/pwa-framework';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../helpers/utils';
@@ -7,15 +13,15 @@ import { BasePage } from '../../../base/base-page';
 import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-dealer-selection',
-  templateUrl: './dealer-selection.page.html',
-  styleUrls: ['./dealer-selection.page.scss'],
+  selector: 'app-delivery-slot-selection',
+  templateUrl: './delivery-slot-selection.page.html',
+  styleUrls: ['./delivery-slot-selection.page.scss'],
 })
 
 @pwaLifeCycle()
 @pageView()
 
-export class DealerSelectionPage extends BasePage implements OnInit {
+export class DeliverySlotSelectionPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle  {
 
   asSoonPossible: boolean = false;
   slotSelected: boolean = false;
@@ -69,10 +75,6 @@ export class DealerSelectionPage extends BasePage implements OnInit {
     console.log('loading failed' + name, data);
   }
 
-  widgetActionFailure(name, data) {
-    console.log('action failed ' + name, data);
-  }
-
   closeModal() {
     this.modalController.dismiss();
   }
@@ -80,6 +82,12 @@ export class DealerSelectionPage extends BasePage implements OnInit {
   selectTimeSlot() {
     this.setDeliverySlot(this.timeSlotObj);
     this.closeModal();
+  }
+
+  widgetActionFailed(name: string, data: any): any {
+  }
+
+  widgetLoadingStarted(name: string, data: any): any {
   }
 
 }

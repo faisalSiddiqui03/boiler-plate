@@ -6,16 +6,16 @@
           <ion-icon name="close" (click)="closeModal()" color-light></ion-icon>
         </div>
         <div class="w-700">
-          <div class="delivery-hut" color-light>{{'dealer_selection_page.delivery_hut' | translate}}
+          <div class="delivery-hut" color-light>{{'delivery_slot_selection_page.delivery_hut' | translate}}
             <strong [innerHtml]="getCurrentStore()?.name" text-capitalize></strong>
           </div>
           <div class="as-soon-possible" [class.disabled]="!asSoonPossible">
             <ion-button color="warning" class="btn-light" text-capitalize mode="ios" (click)="toggleCheckbox()">
-              <ion-checkbox [checked]="asSoonPossible" color="light"></ion-checkbox> <span>{{'dealer_selection_page.as_soon_as_possible' | translate}}</span></ion-button>
+              <ion-checkbox [checked]="asSoonPossible" color="light"></ion-checkbox> <span>{{'delivery_slot_selection_page.as_soon_as_possible' | translate}}</span></ion-button>
           </div>
           <div class="order-for-later" color-light>
-            {{'dealer_selection_page.order_for_later' | translate}}
-            <strong>{{'dealer_selection_page.pick_a_time' | translate}}</strong>
+            {{'delivery_slot_selection_page.order_for_later' | translate}}
+            <strong>{{'delivery_slot_selection_page.pick_a_time' | translate}}</strong>
           </div>
           <div class="available-slots-list">
             <ion-button *ngFor="let slot of widget.model; let i = index;" [class.selected]="activeTimeSlot == i" color="warning"
@@ -27,9 +27,9 @@
         </div>
       </ion-content>
       <ion-footer no-border>
-        <ion-button color="success" [class.disabled]="!slotSelected" text-capitalize expand="block" mode="ios" class="btn-success" (click)="selectTimeSlot()">{{'dealer_selection_page.order_for' | translate}}
+        <ion-button color="success" [class.disabled]="!slotSelected" text-capitalize expand="block" mode="ios" class="btn-success" (click)="selectTimeSlot()">{{'delivery_slot_selection_page.order_for' | translate}}
           <span text-uppercase *ngIf="slotContent && widget.model[0].id != -1">{{slotContent | date:'hh:mm a'}}</span>
-          <span text-uppercase *ngIf="slotContent && widget.model[0].id == -1">{{slotContent}}</span> {{'dealer_selection_page.delivery' | translate}}</ion-button>
+          <span text-uppercase *ngIf="slotContent && widget.model[0].id == -1">{{slotContent}}</span> {{'delivery_slot_selection_page.delivery' | translate}}</ion-button>
       </ion-footer>
     </ng-container>
   </ng-template>

@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DealerSelectionPage } from './dealer-selection.page';
+import { DeliverySlotSelectionPage } from './delivery-slot-selection.page';
 
-describe('DealerSelectionPage', () => {
-  let component: DealerSelectionPage;
-  let fixture: ComponentFixture<DealerSelectionPage>;
+describe('Delivery Slot selection', () => {
+  let component: DeliverySlotSelectionPage;
+  let fixture: ComponentFixture<DeliverySlotSelectionPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DealerSelectionPage ],
+      declarations: [ DeliverySlotSelectionPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DealerSelectionPage);
+    fixture = TestBed.createComponent(DeliverySlotSelectionPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
