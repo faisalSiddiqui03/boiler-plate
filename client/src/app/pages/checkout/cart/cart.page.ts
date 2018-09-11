@@ -56,6 +56,8 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     if (couponCode) {
       let action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, couponCode);
       this.cartWidgetAction.emit(action);
+    } else {
+      this.isWrongVoucher = true;
     }
   }
 
@@ -170,13 +172,6 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   goToDeals() {
     this.router.navigateByUrl('/product/deals/CU00215646');
-  }
-
-  applyVoucher() {
-    if (!this.voucherCode) {
-      this.isWrongVoucher = true;
-      return;
-    }
   }
 
 }

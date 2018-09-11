@@ -143,7 +143,7 @@
     </p>
     <div class="form-section" flex-center>
       <ion-input placeholder="Voucher code" inputmode="text" [(ngModel)]="voucherCode"></ion-input>
-      <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success" (click)="applyVoucher()">{{ 'cart.apply' | translate}}</ion-button>
+      <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success" (click)="applyCoupon()">{{ 'cart.apply' | translate}}</ion-button>
     </div>
     <br>
     <p *ngIf="isWrongVoucher">{{ 'cart.no_voucher_message_1' | translate}}
