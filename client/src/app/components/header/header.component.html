@@ -27,18 +27,20 @@
         <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
         <div class="header-right" text-right>
             <div class="delivery-mode">
-                <div class="icon icon-delivery"></div>
+                <div [ngClass]="{'icon icon-delivery': globalSharedService.getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon icon-takeaway': globalSharedService.getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
                 <span text-capitalize>Mode:</span>
-                <small text-capitalize>Delivery</small>
+                <small *ngIf="globalSharedService.getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY" text-capitalize>Delivery</small>
+                <small *ngIf="globalSharedService.getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>Take away</small>
             </div>
             <div class="delivery-location" (click)="goToPage('home')">
                 <span text-capitalize>Location:</span>
-                <small text-uppercase>MAGHATHEIR MALL FARWANIYA</small>
+                <small text-uppercase>{{globalSharedService.getCurrentStore()?.address}}</small>
                 <div class="icon icon-arrow-down-2"></div>
             </div>
             <div class="delivery-time-large" (click)="presentSlotModal()">
                 <ion-icon name="time" ios="ios-time-outline" md="md-time"></ion-icon>
-                <span>ASAP</span>
+                <span *ngIf="globalSharedService.getDeliverySlot()?.deliverySlotId != -1">{{globalSharedService.getDeliverySlot()?.time | date:'hh:mm a'}}</span>
+                <span *ngIf="globalSharedService.getDeliverySlot()?.deliverySlotId == -1">ASAP</span>
             </div>
             <div class="signin-register">
                 <div class="icon icon-user-circle"></div>
