@@ -67,8 +67,10 @@
   margin-right: auto;
 }
 
-.profile-icon ion-icon {
-  font-size: 35px;
+.profile-icon {
+  .icon{
+    font-size: 27px;
+  }
 }
 
 .profile-icon {

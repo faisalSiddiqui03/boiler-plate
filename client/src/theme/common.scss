@@ -1,3 +1,6 @@
+body{
+    --ion-font-family: 'Open Sans';
+}
 .coomon-heading {
     position: relative;
     h2 {
@@ -5,6 +8,7 @@
         padding: 0 10px;
         display: inline-block;
         font-size: 20px;
+        font-family: 'Open Sans Condensed';
         color: var(--ion-color-secondary-shade);
         font-weight: 700;
         background: var(--ion-color-light);
@@ -22,6 +26,7 @@
     @extend .coomon-heading;
     h2{
         font-size: 24px;
+        font-family: 'Conv_UnitedSansCond-Bold';
     }
     &::before {
         border-bottom-style: dotted;
@@ -31,12 +36,15 @@
 .page-header {
     --ion-toolbar-background-color: transparent;
     background: url('assets/imgs/backdrop.jpg');
-    ion-icon {
-        font-size: 24px;
+    .icon {
+        font-size: 21px;
         cursor: pointer;
+        position: absolute;
+        left: 5px;
     }
     ion-title {
-        font-size: 22px;
+        font-family: 'Open Sans Condensed';
+        font-size: 18px;
         font-weight: 500;
         color: var(--ion-color-secondary-shade);
     }
