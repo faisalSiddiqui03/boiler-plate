@@ -1,38 +1,43 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { BasePage } from '../../base/base-page';
+import { ModalController } from '@ionic/angular';
+import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-selection/delivery-slot-selection.page';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent extends BasePage implements OnInit {
 
   constructor(
-    private router: Router
-  ) { }
+    private router: Router,
+    public modalController: ModalController
+  ) {
+    super();
+   }
 
   /** Inputs to show only required tags in header */
   @Input() showHalalTag = false;
   @Input() showLanguage = false;
+  @Input() showTime = false;
+  @Input() showCart = false;
+  @Input() headerClass = '';
 
   ngOnInit() {
   }
 
   goToPage(pageName) {
-    console.log(pageName);
-    switch (pageName) {
-      case 'home':
-        this.router.navigateByUrl('/home');
-        break;
-      case 'login':
-        this.router.navigateByUrl('/login');
-        break;
-      default:
-        console.log('default');
-        this.router.navigateByUrl('/home');
-        break;
-    }
+    this.router.navigateByUrl(pageName);
+  }
+
+  async presentSlotModal() {
+    const modal = await this.modalController.create({
+      component: DeliverySlotSelectionPage,
+      componentProps: { value: 123 }
+    });
+    return await modal.present();
   }
 
 }

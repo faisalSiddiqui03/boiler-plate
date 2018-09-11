@@ -1,10 +1,14 @@
-<ion-navbar [hideBackButton]="true">
+<ion-navbar [hideBackButton]="true" [class]="headerClass">
     <ion-hide-when size="lg">
         <div>
             <div class="center-align logo_bg edge-shadow brd-radius">
                 <img src="assets/imgs/pizzahut-logo.svg" alt="Pizza Hut" class="header-img" (click)="goToPage('home')">
             </div>
             <div *ngIf="showLanguage" class="lang-selection">العربية</div>
+            <div *ngIf="showTime" class="delivery-time" (click)="presentSlotModal()">
+                <ion-icon name="time" ios="ios-time-outline" md="md-time"></ion-icon>
+                <span>ASAP</span>
+            </div>
             <div (click)="goToPage('login')">
                 <div class="profile-icon">
                     <div class="icon icon-user-circle"></div>
@@ -13,9 +17,34 @@
             <div *ngIf="showHalalTag" class="halal-logo">
                 <img src="assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal" />
             </div>
+            <div *ngIf="showCart" (click)="goToPage('cart')">
+                <div class="icon icon-cart cart-logo"></div>
+                <div class="cart-count" *ngIf="getCart()?.items.length" [innerHtml]="getCart()?.items.length | number:'2.0-0'"></div>
+            </div>
         </div>
     </ion-hide-when>
-    <div class="center-align desktop-logo">
+    <div class="center-align desktop-logo" flex-center>
         <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
+        <div class="header-right" text-right>
+            <div class="delivery-mode">
+                <div class="icon icon-delivery"></div>
+                <span text-capitalize>Mode:</span>
+                <small text-capitalize>Delivery</small>
+            </div>
+            <div class="delivery-location" (click)="goToPage('home')">
+                <span text-capitalize>Location:</span>
+                <small text-uppercase>MAGHATHEIR MALL FARWANIYA</small>
+                <div class="icon icon-arrow-down-2"></div>
+            </div>
+            <div class="delivery-time-large" (click)="presentSlotModal()">
+                <ion-icon name="time" ios="ios-time-outline" md="md-time"></ion-icon>
+                <span>ASAP</span>
+            </div>
+            <div class="signin-register">
+                <div class="icon icon-user-circle"></div>
+                <span text-uppercase (click)="goToPage('login')">sign in /</span>
+                <span text-uppercase (click)="goToPage('signup')">register</span>
+            </div>
+        </div>
     </div>
 </ion-navbar>
