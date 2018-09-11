@@ -32,7 +32,7 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   enableVoucherModal:boolean = false;
   isWrongVoucher = false;
   currencyCode: string;
-  voucherCode: string;
+  couponCode: string;
 
   constructor(
     private translateService: TranslateService,
@@ -52,9 +52,9 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   ngOnInit() {
   }
 
-  applyCoupon(couponCode) {
-    if (couponCode) {
-      let action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, couponCode);
+  applyCoupon() {
+    if (this.couponCode) {
+      let action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
     } else {
       this.isWrongVoucher = true;
@@ -105,7 +105,9 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   widgetActionFailed(name: string, data: any): any {
     this.loaderService.stopLoading();
-    console.log('name action failed: ' + name + ' data: ' + data);
+    if (name === CartWidgetActions.ACTION_APPLY_COUPON) {
+      this.isWrongVoucher = true;
+    }
   }
 
   async widgetActionSuccess(name: string, data: any) {
@@ -113,22 +115,30 @@ export class CartPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     this.loaderService.stopLoading();
     switch (name) {
       case CartWidgetActions.ACTION_REMOVE_COUPON:
-        if (data)
-          alert('Coupon removed successfully');
-        else
-          alert('Coupon could not be removed');
+        if (data) {
+          const coupon_remove_success = await this.translateService.instant('cart.coupon_removed_successfully');
+          this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
+        } else {
+          const coupon_remove_error = await this.translateService.instant('cart.unable_to_remove_coupon');
+          this.alertService.presentToast(coupon_remove_error, 3000, 'bottom');
+        }
         break;
       case CartWidgetActions.ACTION_APPLY_COUPON:
-        if (data)
-          alert('Coupon applied successfully');
-        else
-          alert('Unable to apply coupon');
+        if (data) {
+          const coupon_success = await this.translateService.instant('cart.coupon_applied_successfully');
+          this.alertService.presentToast(coupon_success, 3000, 'bottom');
+          this.showVoucherModal();
+        } else {
+          const coupon_error = await this.translateService.instant('cart.unable_to_apply_coupon');
+          this.alertService.presentToast(coupon_error, 3000, 'bottom');
+          this.isWrongVoucher = true;
+        }
         break;
       case CartWidgetActions.ACTION_UPDATE_CART:
         console.log('Item updated successfully');
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
-        let cartClear = await
+        const cartClear = await
         this.translateService.instant('cart.cart_clear');
         this.alertService.presentToast(cartClear, 3000, 'bottom');
         this.router.navigate(['/home']);
