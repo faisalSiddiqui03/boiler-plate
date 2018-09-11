@@ -8,7 +8,7 @@
             <div class="basket">
               <div class="basket-close">Close</div>
               <div class="common-heading-dotted" text-center>
-                <h2 text-uppercase no-margin>your cart</h2>
+                <h2 text-uppercase no-margin>{{your_cart | translate}}</h2>
               </div>
               <ion-list no-margin>
                 <ion-item no-padding *ngFor="let item of widget.model.items">
