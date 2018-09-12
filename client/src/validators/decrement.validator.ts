@@ -20,6 +20,7 @@ export class DecrementValidator implements IValidator {
             return true;
         }
         let validToRemoveItem = false;
+        let allowNextRemoval = false;
         clientProduct.setSelectedItemsCount();
         let limit = this.itemRemovalLimit;
         let selectedCount = clientProduct.selectedItemCount;
@@ -29,7 +30,14 @@ export class DecrementValidator implements IValidator {
         }
         if(selectedCount > limit){
             validToRemoveItem = true;
+            clientProduct.allowAddition(true);
         }
+
+        allowNextRemoval = validToRemoveItem;
+        if(!(selectedCount - 1 > limit)){
+            allowNextRemoval = false;
+        }
+        clientProduct.allowRemoval(allowNextRemoval);
         clientProduct.resetSelectedItemsCount();
         return validToRemoveItem;
     }

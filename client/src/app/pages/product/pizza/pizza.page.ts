@@ -15,7 +15,7 @@ import {
   DecrementValidator,
 } from '../../../../validators/index';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { BasePage } from '../../../base/base-page';
+import { BaseComponent } from '../../../base/base-component';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
@@ -25,7 +25,7 @@ import { AlertService } from '@capillarytech/pwa-ui-helpers';
 })
 
 @pwaLifeCycle()
-export class PizzaPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   loaded = false;
   productWidgetExecutor = new EventEmitter();
@@ -34,8 +34,6 @@ export class PizzaPage extends BasePage implements OnInit, OnWidgetLifecyle, OnW
   clientProduct: Product;
   productId: number;
   showToppingsView: boolean = false;
-  disableAdd: boolean = false;
-  disableRemove: boolean = true;
   updatingPrice: boolean = false;
 
   constructor(
@@ -138,7 +136,7 @@ export class PizzaPage extends BasePage implements OnInit, OnWidgetLifecyle, OnW
     } 
     if(!isExtra){
       isRemoved = item.remove();
-    } 
+    }
     if(!isRemoved){
       this.alertService.presentToast('Minimum topping count reached', 1000, 'top');
       return;

@@ -18,12 +18,19 @@ export class IncrementValidator implements IValidator {
         let validToAddItem = false;
         clientProduct.setSelectedItemsCount();
         let limit = this.itemAdditionLimit;
+        let allowNextAddition = false;
         if(this.basedOnDefault){
             limit = clientProduct.defaultItemCount + this.itemAdditionLimit;
         }
         if(clientProduct.selectedItemCount < limit){
             validToAddItem = true;
         }
+
+        allowNextAddition = validToAddItem;
+        if(!(clientProduct.selectedItemCount + 1 < limit)){
+            allowNextAddition = false;
+        }
+        clientProduct.allowAddition(allowNextAddition);
         clientProduct.resetSelectedItemsCount();
         return validToAddItem;
     }

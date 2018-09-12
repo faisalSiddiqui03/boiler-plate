@@ -137,6 +137,10 @@ ion-card {
             &:empty{
                 display: none;
             }
+            &.disable {
+                pointer-events: none;
+                opacity: 0.6;
+            }
         }
     }
 }
@@ -161,6 +165,10 @@ figure {
             border-bottom: 1px solid var(--ion-color-medium-shade);
             &:empty{
                 display: none;
+            }
+            &.disable {
+                pointer-events: none;
+                opacity: 0.6;
             }
             .pizza-img {
                 margin-right: 10px;
