@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { BasePage } from '../../../base/base-page';
+import { BaseComponent } from '../../../base/base-component';
 import { ConfigService, pwaLifeCycle, Action } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
@@ -14,7 +14,7 @@ import { StoreLocatorWidgetActions, OnWidgetLifecyle, OnWidgetActionsLifecyle } 
 })
 
 @pwaLifeCycle()
-export class StoreSelectionPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   cityId;
   latitude;
@@ -69,18 +69,15 @@ export class StoreSelectionPage extends BasePage implements OnInit, OnWidgetLife
   widgetLoadingSuccess(name: string, data: any): any {
     console.log('success name: ', name, ' data: ', data );
     if (name === 'STORE_SELECTOR' && this.globalSharedService.getFulfilmentMode()) {
-      console.log("HAALO", this.globalSharedService);
       if(this.cityId) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
             StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.globalSharedService.getFulfilmentMode().mode])
         );
-        console.log(stores);
 
       } else if(this.latitude && this.longitude) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
             StoreLocatorWidgetActions.FIND_BY_LOCATION, [this.latitude, this.longitude, this.globalSharedService.getFulfilmentMode().mode])
         );
-        console.log(stores);
       }
     }
   }

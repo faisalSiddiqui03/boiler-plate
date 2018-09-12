@@ -7,7 +7,7 @@ import {
   OnWidgetLifecyle,
   ConfigService
 } from '@capillarytech/pwa-framework';
-import { BasePage } from '../../base/base-page';
+import { BaseComponent } from '../../base/base-component';
 import { Router } from '@angular/router';
 import {
   LocationWidgetActions,
@@ -24,7 +24,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 @pwaLifeCycle()
-export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   bannerWidgetAction = new EventEmitter();
   bannerWidgetExecutor = new EventEmitter();
@@ -44,6 +44,7 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   dropdownViewStatus: Map<string, boolean> = new Map();
   bannerUrl: string;
   changeRequested: boolean = false;
+  hasError: { [name:string] : string | boolean } = {};
 
   deliveryModes = DeliveryModes;
 
@@ -54,14 +55,16 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
+    this.hasError = {
+      selectAreaInput: false
+    };
   }
 
   ngOnInit() {
-    
   }
 
   ionViewDidEnter() {
-      console.log('Utkarsha ', this.getCurrentStore())
+    console.log('Utkarsha ', this.getCurrentStore())
     this.selectedStore = this.getCurrentStore();
     this.changeRequested = false;
   }
@@ -88,8 +91,8 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         console.log('store selected', data);
-        if(data.length > 0) {
-            this.setCurrentStore(data[0])
+        if (data.length > 0) {
+          this.setCurrentStore(data[0])
         }
         this.navigateToDeals();
         break;
@@ -112,6 +115,10 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
 
   }
 
+  isCitySelected() {
+    this.hasError.selectAreaInput = !this.selectedCity;
+  }
+
   toggleDropDown(name: string, force: boolean = false, forceValue?: boolean) {
 
     if (name === 'area' && !this.selectedCityCode) {
@@ -121,7 +128,6 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     const nameExists = this.dropdownViewStatus.has(name);
 
     if (!nameExists) {
-
       this.dropdownViewStatus.set(name, true);
       return;
     }
@@ -145,10 +151,15 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   }
 
   selectCity(city) {
+    let previousCity = this.selectedCity ? this.selectedCity : '';
     this.selectedCity = city.name;
     this.selectedCityCode = city.code;
     this.toggleDropDown('city', true, false);
-    if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+    if (previousCity !== this.selectedCity) {
+      this.selectedArea = '';
+      this.toggleDropDown('area');
+    }
+    if (this.getFulfilmentMode() && this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
       this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
       return;
     }
@@ -165,7 +176,6 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
     this.toggleDropDown('area', true, false);
 
   }
-
 
   isDropDownShown(name: string) {
 
@@ -185,7 +195,6 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   findStore() {
     // const findStore = new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
     //   [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]);
-    console.log('vivek', this.globalSharedService.getFulfilmentMode().mode);
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
       [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
   }
@@ -193,13 +202,13 @@ export class HomePage extends BasePage implements OnInit, OnWidgetLifecyle, OnWi
   locateMe(lat, lng) {
     console.log('locate me ', lat, lng);
 
-    if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
-        this.router.navigate(['/store-selection'], { queryParams: { 'latitude': lat, 'longitude': lng } });
-        return;
+    if (this.getFulfilmentMode() && this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+      this.router.navigate(['/store-selection'], { queryParams: { 'latitude': lat, 'longitude': lng } });
+      return;
     }
-    
+
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_LOCATION,
-        [lat, lng, this.globalSharedService.getFulfilmentMode().mode]));
+      [lat, lng, this.globalSharedService.getFulfilmentMode().mode]));
   }
 
   getFullBannerUrl(src) {

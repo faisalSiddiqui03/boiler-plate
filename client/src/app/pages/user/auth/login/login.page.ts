@@ -1,7 +1,16 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { pwaLifeCycle, LifeCycle, Action, UserIdPwdSigninWidgetActions, pageView, GoogleSignInWidgetActions, ConfigService } from '@capillarytech/pwa-framework';
-import { BasePage } from '../../../../base/base-page';
+import {
+  pwaLifeCycle,
+  LifeCycle,
+  Action,
+  UserIdPwdSigninWidgetActions,
+  pageView,
+  GoogleSignInWidgetActions,
+  ConfigService,
+  OnWidgetActionsLifecyle, OnWidgetLifecyle
+} from '@capillarytech/pwa-framework';
+import { BaseComponent } from '../../../../base/base-component';
 import { Router } from '@angular/router';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,7 +24,7 @@ import { Utils } from '../../../../helpers/utils';
 @pwaLifeCycle()
 @pageView()
 
-export class LoginPage extends BasePage implements OnInit {
+export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   isPasswordFiled: boolean = true;
   userIdSigninForm: FormGroup;
   isLoginSuccessful: boolean = false;
@@ -156,6 +165,9 @@ export class LoginPage extends BasePage implements OnInit {
       console.log(x);
 
     }
+  }
+
+  widgetLoadingStarted(name: string, data: any): any {
   }
 
 }

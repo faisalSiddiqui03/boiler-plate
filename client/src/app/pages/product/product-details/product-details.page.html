@@ -1,19 +1,48 @@
 <div class="full-height popup-wrap">
   <div class="popup-inner full-height">
-    <product-display-widget class="full-height" pfWidgetImpressionTrack [executor]="productWidgetExecutor" [action]="productWidgetAction"
-      (lifecycle)="null" [productId]="productId" [componentId]="getComponentId()">
+    <product-display-widget class="full-height" pfWidgetImpressionTrack [executor]="productWidgetExecutor"
+                            [action]="productWidgetAction"
+                            (lifecycle)="null" [productId]="productId" [componentId]="getComponentId()">
       <ng-template let-widget="widget">
+        <ion-content *ngIf="!widget.model">
+          <p [innerHtml]="getData(widget.model)" style="display: none;"></p>
+          <ion-card no-padding no-margin>
+            <ion-card-header no-padding class="product-img-block">
+              <ion-item text-center class="popup-title" no-margin>
+                <ion-icon (click)="goBack()" name="close-circle" slot="start"></ion-icon>
+                <ion-label>
+                  <div class="skeleton-warpper">
+                    <ion-skeleton-text class="skeleton-text p-skeleton"></ion-skeleton-text>
+                  </div>
+                </ion-label>
+              </ion-item>
+              <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="skeleton-warpper">
+                <ion-skeleton-text class="skeleton-text p-skeleton"></ion-skeleton-text>
+                <ion-skeleton-text class="skeleton-text p-skeleton"></ion-skeleton-text>
+              </div>
+            </ion-card-content>
+          </ion-card>
+          <ion-footer>
+            <ion-button disabled color="success" text-uppercase expand="block"
+                        mode="ios" class="btn-success">Add To My Basket
+            </ion-button>
+          </ion-footer>
+        </ion-content>
         <ng-container *ngIf="widget.model">
           <ion-content no-padding>
             <p [innerHtml]="getData(widget.model)" style="display: none;"></p>
             <ion-card no-padding no-margin>
               <ion-card-header no-padding class="product-img-block">
                 <ion-item text-center class="popup-title" no-margin>
-                  <ion-icon name="close-circle" slot="start"></ion-icon>
+                  <ion-icon (click)="goBack()" name="close-circle" slot="start"></ion-icon>
                   <ion-label>{{widget.model.title}}</ion-label>
                 </ion-item>
-                <img alt="{{widget.model.title}}" class="product-main-image" height="170" width="340" src="{{getProductImageUrl(widget.model)}}"
-                  img-preloader="{{widget.model.smallImage}}" defaultImage="assets/imgs/default/no-preview.jpeg" />
+                <img alt="{{widget.model.title}}" class="product-main-image" height="170" width="340"
+                     src="{{getProductImageUrl(widget.model)}}"
+                     img-preloader="{{widget.model.smallImage}}" defaultImage="assets/imgs/default/default.png"/>
               </ion-card-header>
               <ion-card-content *ngIf="widget.model.shortDescription">
                 <p>{{widget.model.shortDescription}}</p>
@@ -24,7 +53,8 @@
                 <div *ngIf="!toggleSelectedBlock">
                   <div class="block-header" text-capitalize (click)="toggleSelectedVariant()">Choose</div>
                   <ul>
-                    <li flex-center text-capitalize *ngFor="let variant of variants; let i = index;" (click)="selectVariant(variant, i)">
+                    <li flex-center text-capitalize *ngFor="let variant of variants; let i = index;"
+                        (click)="selectVariant(variant, i)">
                       <span class="block-text">{{variant}}</span>
                       <span class="block-icon">
                       <ion-icon *ngIf="selectedVariant != i" color="success" name="add"></ion-icon>
@@ -47,47 +77,59 @@
                   <ul>
                     <li flex-center>
                       <figure class="pizza-img">
-                        <img src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
-                             alt="">
+                        <img
+                          src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
+                          alt="">
                       </figure>
                       <div class="pizza-content">
                         <h5 text-capitalize>Classic</h5>
                         <p>Traditional handmade dough; not too thick, not too thin.</p>
                       </div>
-                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ')
+                        :'1.3-3'}}
+                      </div>
                     </li>
                     <li flex-center>
                       <figure class="pizza-img">
-                        <img src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
-                             alt="">
+                        <img
+                          src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
+                          alt="">
                       </figure>
                       <div class="pizza-content">
                         <h5 text-capitalize>Classic</h5>
                         <p>Traditional handmade dough; not too thick, not too thin.</p>
                       </div>
-                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ')
+                        :'1.3-3'}}
+                      </div>
                     </li>
                     <li flex-center>
                       <figure class="pizza-img">
-                        <img src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
-                             alt="">
+                        <img
+                          src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
+                          alt="">
                       </figure>
                       <div class="pizza-content">
                         <h5 text-capitalize>Classic</h5>
                         <p>Traditional handmade dough; not too thick, not too thin.</p>
                       </div>
-                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ')
+                        :'1.3-3'}}
+                      </div>
                     </li>
                     <li flex-center>
                       <figure class="pizza-img">
-                        <img src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
-                             alt="">
+                        <img
+                          src="http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Swatch/Large_Icon/Icon_Classic-Crust-draw.png"
+                          alt="">
                       </figure>
                       <div class="pizza-content">
                         <h5 text-capitalize>Classic</h5>
                         <p>Traditional handmade dough; not too thick, not too thin.</p>
                       </div>
-                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+                      <div class="pizza-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ')
+                        :'1.3-3'}}
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -116,8 +158,9 @@
                   <ul>
                     <li flex-center text-capitalize>
                       <figure class="toppings-img">
-                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
-                             alt="">
+                        <img
+                          src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                          alt="">
                       </figure>
                       <span class="block-text">Beef</span>
                       <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
@@ -129,8 +172,9 @@
                     </li>
                     <li flex-center text-capitalize>
                       <figure class="toppings-img">
-                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
-                             alt="">
+                        <img
+                          src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                          alt="">
                       </figure>
                       <span class="block-text">Beef</span>
                       <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
@@ -142,8 +186,9 @@
                     </li>
                     <li flex-center text-capitalize>
                       <figure class="toppings-img">
-                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
-                             alt="">
+                        <img
+                          src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                          alt="">
                       </figure>
                       <span class="block-text">Beef</span>
                       <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
@@ -155,8 +200,9 @@
                     </li>
                     <li flex-center text-capitalize>
                       <figure class="toppings-img">
-                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
-                             alt="">
+                        <img
+                          src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                          alt="">
                       </figure>
                       <span class="block-text">Beef</span>
                       <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
@@ -168,8 +214,9 @@
                     </li>
                     <li flex-center text-capitalize>
                       <figure class="toppings-img">
-                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
-                             alt="">
+                        <img
+                          src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                          alt="">
                       </figure>
                       <span class="block-text">Beef</span>
                       <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
@@ -181,8 +228,9 @@
                     </li>
                     <li flex-center text-capitalize>
                       <figure class="toppings-img">
-                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
-                             alt="">
+                        <img
+                          src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                          alt="">
                       </figure>
                       <span class="block-text">Beef</span>
                       <span class="block-price" style="display: none;">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
@@ -194,8 +242,9 @@
                     </li>
                     <li flex-center text-capitalize>
                       <figure class="toppings-img">
-                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
-                             alt="">
+                        <img
+                          src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                          alt="">
                       </figure>
                       <span class="block-text">Beef</span>
                       <span class="block-price" style="display: none;">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
@@ -210,8 +259,9 @@
                   <ul>
                     <li flex-center text-capitalize>
                       <figure class="toppings-img">
-                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
-                             alt="">
+                        <img
+                          src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                          alt="">
                       </figure>
                       <span class="block-text">Beef</span>
                       <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
@@ -221,8 +271,9 @@
                     </li>
                     <li flex-center text-capitalize>
                       <figure class="toppings-img">
-                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
-                             alt="">
+                        <img
+                          src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                          alt="">
                       </figure>
                       <span class="block-text">Beef</span>
                       <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
@@ -232,8 +283,9 @@
                     </li>
                     <li flex-center text-capitalize>
                       <figure class="toppings-img">
-                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
-                             alt="">
+                        <img
+                          src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                          alt="">
                       </figure>
                       <span class="block-text">Beef</span>
                       <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
@@ -243,8 +295,9 @@
                     </li>
                     <li flex-center text-capitalize>
                       <figure class="toppings-img">
-                        <img src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
-                             alt="">
+                        <img
+                          src="https://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/ProductImages/Large/MincedBeef-drwicon230418.png"
+                          alt="">
                       </figure>
                       <span class="block-text">Beef</span>
                       <span class="block-price">{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
@@ -259,14 +312,15 @@
           </ion-content>
           <ion-footer>
             <!--<div class="quantity-block" flex align-items-center justify-content-between>-->
-              <!--<p no-margin>Quantity</p>-->
-              <!--<div class="add-remove">-->
-                <!--<ion-icon name="remove-circle"></ion-icon>-->
-                <!--<span>1</span>-->
-                <!--<ion-icon name="add-circle"></ion-icon>-->
-              <!--</div>-->
+            <!--<p no-margin>Quantity</p>-->
+            <!--<div class="add-remove">-->
+            <!--<ion-icon name="remove-circle"></ion-icon>-->
+            <!--<span>1</span>-->
+            <!--<ion-icon name="add-circle"></ion-icon>-->
             <!--</div>-->
-            <ion-button (click)="addToCart(widget.model.client)" color="success" text-uppercase expand="block" mode="ios" class="btn-success">Add To My Basket
+            <!--</div>-->
+            <ion-button (click)="addToCart(widget.model.client)" color="success" text-uppercase expand="block"
+                        mode="ios" class="btn-success">Add To My Basket
               <span>{{widget.model.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
             </ion-button>
           </ion-footer>

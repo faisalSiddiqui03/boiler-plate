@@ -68,7 +68,7 @@
 }
 
 .profile-icon {
-  .icon{
+  .icon {
     font-size: 27px;
   }
 }
@@ -90,6 +90,13 @@
   right: 6px;
 }
 
+.cart-logo {
+  @extend .halal-logo;
+  right: 10px;
+  font-size: 32px;
+  color: var(--ion-color-danger);
+}
+
 .lang-selection {
   position: absolute;
   height: 52px;
@@ -97,17 +104,150 @@
   width: 104px;
   text-align: center;
   left: 43px;
-  top: 10%;
+  top: 0;
+}
+
+.delivery-time {
+  @extend .lang-selection;
+  font-size: 14px;
+  ion-icon {
+    font-size: 18px;
+    vertical-align: sub;
+    margin-right: 3px;
+  }
+}
+
+.cart-count {
+  position: absolute;
+  top: 18px;
+  right: 14px;
+  width: 31px;
+  text-align: center;
+  color: red;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .desktop-logo {
   display: none;
 }
 
+.header-right {
+  display: none;
+}
+
 @media (min-width: 992px) {
   .desktop-logo {
-    display: block;
-    max-width: 150px;
-    margin: 7px auto 2px;
+    display: flex;
+    img {
+      max-width: 150px;
+      margin: 7px auto 2px;
+    }
+  }
+  .category-header {
+    .desktop-logo {
+      padding: 0 16px;
+      img {
+        margin: 7px 0 6px;
+      }
+    }
+    .header-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex: 1;
+      .delivery-time-large {
+        padding: 4px 15px;
+        margin: 0 10px;
+        position: relative;
+        font-size: 12px;
+        border-left: 1px solid var(--ion-color-medium-tint);
+        border-right: 1px solid var(--ion-color-medium-tint);
+        cursor: pointer;
+        ion-icon{
+          font-size: 20px;
+          margin-right: 4px;
+          vertical-align: bottom;
+        }
+      }
+      .delivery-mode {
+        margin-right: 10px;
+        .icon {
+          display: inline-block;
+          vertical-align: middle;
+          font-size: 20px;
+          color: var(--ion-color-secondary-tint);
+        }
+        span {
+          color: var(--ion-color-popup-list);
+          font-size: 14px;
+          margin: 0 4px;
+        }
+        small{
+          font-size: 14px;
+          cursor: pointer;
+        }
+      }
+      .delivery-location {
+        .icon {
+          display: inline-block;
+          font-size: 12px;
+          cursor: pointer;
+        }
+        span {
+          color: var(--ion-color-popup-list);
+          font-size: 14px;
+          margin: 0 4px;
+        }
+        small{
+          display: inline-block;
+          vertical-align: middle;
+          text-align: left;
+          font-size: 14px;
+          cursor: pointer;
+          max-width: 150px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      .signin-register{
+        font-weight: 500;
+        font-family: 'Open Sans Condensed';
+        font-size: 15px;
+        .icon{
+          display: inline-block;
+          font-size: 24px;
+          vertical-align: middle;
+        }
+        span{
+          margin-left: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width:992px) and (max-width:1190px){
+  .category-header {
+    .desktop-logo{
+      padding: 0 3px;
+    }
+    .header-right {
+      .signin-register{
+        span{
+          display: none;
+        }
+      }
+      .delivery-location {
+        small{
+          max-width: 100px;
+        }
+      }
+      .delivery-time-large{
+        padding: 4px;
+      }
+    }
   }
 }

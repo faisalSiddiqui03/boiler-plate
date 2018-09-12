@@ -1,31 +1,27 @@
+import { Location } from '@angular/common';
 import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
-  OnWidgetActionsLifecyle,
-  pwaLifeCycle,
-  pageView,
-  OnWidgetLifecyle,
-  WidgetNames,
   Action,
   CartWidgetActions,
-  ConfigService
+  ConfigService,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  pwaLifeCycle, WidgetNames
 } from '@capillarytech/pwa-framework';
-import { BaseComponent } from '../../../base/base-component';
-import { TranslateService } from "@ngx-translate/core";
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
-import { Router } from '@angular/router';
-import { Utils } from '../../../helpers/utils';
-import { Location } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+import { BaseComponent } from '../../base/base-component';
+import { Utils } from '../../helpers/utils';
 
 @Component({
-  selector: 'app-cart-page',
-  templateUrl: './cart.page.html',
-  styleUrls: ['./cart.page.scss'],
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.scss']
 })
 
 @pwaLifeCycle()
-@pageView()
-
-export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class CartComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   cartWidgetAction = new EventEmitter();
   loaded = false;
   vouchersLoaded = false;
@@ -44,7 +40,6 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ) {
     super();
     this.translateService.use(Utils.getLanguageCode());
-    // this.loaderService.startLoading();
     this.loaded = false;
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
@@ -140,7 +135,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
         const cartClear = await
-        this.translateService.instant('cart.cart_clear');
+          this.translateService.instant('cart.cart_clear');
         this.alertService.presentToast(cartClear, 3000, 'bottom');
         this.router.navigate(['/home']);
         break;
@@ -184,5 +179,4 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   goToDeals() {
     this.router.navigateByUrl('/product/deals/CU00215646');
   }
-
 }

@@ -2,11 +2,10 @@
   <ng-template let-widget="widget">
     <ng-container *ngIf="!widget.model || !widget.model.items">
       <div class="full-height">
-        <ion-content>
+        <div>
           <!-- <p>{{widget.model | json }}</p> -->
           <div class="basket-container">
             <div class="basket">
-              <div class="basket-close" (click)="goBack()">{{ 'cart.close' | translate}}</div>
               <div class="common-heading-dotted" text-center>
                 <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
               </div>
@@ -51,28 +50,24 @@
                 </div>
               </div>
               <div class="promotion-button">
-                <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher"
-                            (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}
-                </ion-button>
+                <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher" (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}</ion-button>
               </div>
             </div>
           </div>
-        </ion-content>
-        <ion-footer>
-          <ion-button color="success" disabled="true" text-capitalize expand="block" mode="ios" class="btn-success">{{
-            'cart.continue' | translate}}
-          </ion-button>
-        </ion-footer>
+        </div>
+        <div class="bottom-footer">
+            <ion-button color="success" disabled="true" text-capitalize expand="block" mode="ios" class="btn-success">{{ 'cart.continue' | translate}}
+            </ion-button>
+        </div>
       </div>
     </ng-container>
 
     <ng-container *ngIf="widget.model && widget.model.items && widget.model.items.length == 0">
       <div class="full-height">
-        <ion-content>
+        <div>
           <!-- <p>{{widget.model | json }}</p> -->
           <div class="basket-container">
             <div class="basket">
-              <div class="basket-close" (click)="goBack()">{{ 'cart.close' | translate}}</div>
               <div class="common-heading-dotted" text-center>
                 <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
               </div>
@@ -81,24 +76,21 @@
                 <p class="underline" (click)="goToDeals()">{{ 'cart.empty_cart_message_2' | translate}}</p>
               </div>
               <div class="promotion-button">
-                <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher"
-                            (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}
-                </ion-button>
+                <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher" (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}</ion-button>
               </div>
             </div>
           </div>
-        </ion-content>
+        </div>
       </div>
     </ng-container>
 
 
     <ng-container *ngIf="widget.model">
       <div class="full-height" *ngIf="widget.model.items && widget.model.items.length">
-        <ion-content>
+        <div>
           <!-- <p>{{widget.model | json }}</p> -->
           <div class="basket-container">
             <div class="basket">
-              <div class="basket-close" (click)="goBack()">{{ 'cart.close' | translate}}</div>
               <div class="common-heading-dotted" text-center>
                 <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
               </div>
@@ -128,25 +120,22 @@
                 <div class="total-price">{{globalSharedService.getCart()?.productCost | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
               </div>
               <div class="promotion-button">
-                <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher"
-                            (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}
-                </ion-button>
+                <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher" (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}</ion-button>
               </div>
             </div>
           </div>
-        </ion-content>
-        <ion-footer>
-          <ion-button color="success" text-capitalize expand="block" mode="ios" class="btn-success">{{ 'cart.continue' |
-            translate}}
-            &nbsp;<span>{{ globalSharedService.getCart()?.total | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
-          </ion-button>
-        </ion-footer>
+        </div>
+        <div class="bottom-footer">
+            <ion-button color="success" text-capitalize expand="block" mode="ios" class="btn-success">{{ 'cart.continue' | translate}}
+              &nbsp;<span>{{ globalSharedService.getCart()?.total | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+            </ion-button>
+        </div>
       </div>
     </ng-container>
   </ng-template>
 </cart-widget>
 
-<div class="voucher-modal-wrap" *ngIf="enableVoucherModal">
+<div flex-center class="voucher-modal-wrap" *ngIf="enableVoucherModal">
   <div class="voucher-modal" padding>
     <ion-icon class="close-icon" name="close-circle" (click)="showVoucherModal()"></ion-icon>
     <h3 text-uppercase text-center>{{ 'cart.got_a_voucher_code_?' | translate}}</h3>
@@ -155,9 +144,7 @@
     </p>
     <div class="form-section" flex-center>
       <ion-input placeholder="Voucher code" inputmode="text" [(ngModel)]="couponCode"></ion-input>
-      <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success" (click)="applyCoupon()">
-        {{ 'cart.apply' | translate}}
-      </ion-button>
+      <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success" (click)="applyCoupon()">{{ 'cart.apply' | translate}}</ion-button>
     </div>
     <br>
     <p *ngIf="isWrongVoucher">{{ 'cart.no_voucher_message_1' | translate}}

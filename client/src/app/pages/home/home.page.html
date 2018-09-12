@@ -4,7 +4,7 @@
   </ion-header>
 </ion-hide-when>
 <ion-content>
-  <div class="banner-home">
+  <div class="banner-home container">
     <banner-widget
       [componentId]="getComponentId()"
       pfWidgetImpressionTrack
@@ -14,13 +14,13 @@
     >
       <ng-template let-widget="widget">
         <div *ngIf="widget.model == undefined">
-            <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
-          </div>
+          <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
+        </div>
         <div *ngIf="widget.model != undefined && widget.model.length > 0">
           <div>
             <img src="{{getFullBannerUrl(widget.model[0].contentUrl)}}"
                  img-preloader="{{getFullBannerUrl(widget.model[0].contentUrl)}}"
-                 defaultImage="assets/imgs/default/no-preview.jpeg"/>
+                 defaultImage="assets/imgs/default/default.png"/>
           </div>
         </div>
       </ng-template>
@@ -32,18 +32,18 @@
       <fulfilment-mode-widget [componentId]="getComponentId()" pfWidgetImpressionTrack
                               [action]="fulfilmentModeWidgetAction">
         <ng-template let-widget="widget">
-            <div *ngIf="widget.model == undefined">
-              <ion-segment style="visibility: hidden">
-                <ion-segment-button>
-                  <small class="delivery-icon segment-checked"></small>
-                  <span>{{'home_page.delivery' | translate}}</span>
-                </ion-segment-button>
-                <ion-segment-button>
-                  <small class="takeaway-icon"></small>
-                  <span>{{'home_page.take_away' | translate}}</span>
-                </ion-segment-button>
-              </ion-segment>
-            </div>
+          <div *ngIf="widget.model == undefined">
+            <ion-segment style="visibility: hidden">
+              <ion-segment-button>
+                <small class="delivery-icon segment-checked"></small>
+                <span>{{'home_page.delivery' | translate}}</span>
+              </ion-segment-button>
+              <ion-segment-button>
+                <small class="takeaway-icon"></small>
+                <span>{{'home_page.take_away' | translate}}</span>
+              </ion-segment-button>
+            </ion-segment>
+          </div>
           <div *ngIf="widget.model != undefined">
             <ion-segment>
               <ion-segment-button text-capitalize value="{{deliveryModes?.HOME_DELIVERY}}"
@@ -73,15 +73,15 @@
           <div *ngIf="widget.model == undefined">
             <div class="location-bar">
               <div class="form-control">
-                <ion-searchbar class="form-search"  #focusInput
-                                showCancelButton="false"
-                                placeholder="{{'home_page.select_area' | translate}}">
+                <ion-searchbar class="form-search" #focusInput
+                               showCancelButton="false"
+                               placeholder="{{'home_page.select_area' | translate}}">
                 </ion-searchbar>
               </div>
               <div class="form-control">
                 <ion-searchbar class="form-search" [debounce]="1000" #focusInput
-                                showCancelButton="false"
-                                placeholder="{{'home_page.select_block' | translate}}">
+                               showCancelButton="false"
+                               placeholder="{{'home_page.select_block' | translate}}">
                 </ion-searchbar>
               </div>
             </div>
@@ -99,7 +99,8 @@
                   </ion-spinner>
                 </ion-list>
                 <ion-list *ngIf="isDropDownShown('city')" class="location-block-list citydrp">
-                  <ion-item  (click)="selectCity(city)" no-padding *ngFor="let city of filterEmptyCities(widget.model.cities)">
+                  <ion-item (click)="selectCity(city)" no-padding
+                            *ngFor="let city of filterEmptyCities(widget.model.cities)">
                     <span>{{ city.name }}</span>
                   </ion-item>
                 </ion-list>
@@ -108,7 +109,7 @@
                    *ngIf="getDeliveryMode() === deliveryModes?.HOME_DELIVERY">
                 <ion-searchbar class="form-search" [debounce]="1000" [(ngModel)]="selectedArea" #focusInput
                                showCancelButton="false" placeholder="{{'home_page.select_block' | translate}}"
-                               (click)="toggleDropDown('area');"
+                               (click)="isCitySelected();toggleDropDown('area');"
                                (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'city')">
                 </ion-searchbar>
                 <ion-list *ngIf="isDropDownShown('area')" text-center class="location-block-list">
@@ -128,15 +129,35 @@
       <store-locator-widget [componentId]="getComponentId()" [action]="storeLocatorWidgetAction">
         <ng-template let-widget="widget">
           <div *ngIf="widget.model != undefined">
-            <div *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP && selectedStore && !selectedStore.isDefaultLocation" class="take-away-block">
-              <span >{{'home_page.your_pickup_hut_is' | translate}} </span>
+            <div
+              *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP && selectedStore && !selectedStore.isDefaultLocation"
+              class="take-away-block">
+              <span>{{'home_page.your_pickup_hut_is' | translate}} </span>
               <div class="store-name">{{selectedStore?.name}}</div>
-                <p>{{selectedStore?.address}}</p>
-              
+              <p>{{selectedStore?.address}}</p>
+
             </div>
-            <ion-button (click)="findStore()" color="success" class="btn-success" text-capitalize expand="block">
+            <div style="padding: 0 10px; margin-bottom: 10px;">
+              <ion-button
+                      (click)="findStore()"
+                      color="success"
+                      mode="ios"
+                      class="btn-success"
+                      text-capitalize
+                      [disabled]="!(
+                        (
+                          globalSharedService.getFulfilmentMode() &&
+                          globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP &&
+                          (selectedCity || (selectedStore && !selectedStore.isDefaultLocation))
+                        ) || (
+                          selectedCity && selectedArea
+                        )
+                      )"
+                      expand="block">
                 {{'home_page.start_my_order' | translate}}
-            </ion-button>
+              </ion-button>
+            </div>
+
           </div>
         </ng-template>
       </store-locator-widget>
@@ -148,11 +169,11 @@
         [action]="locationsWidgetActionGeometry"
         [instanceId]="1">
         <ng-template let-widget="widget">
-            <div class="find-hut" (click)="locateMe(widget.model.geometry.latitude, widget.model.geometry.longitude)">
-                <span> {{'home_page.find_my_nearest_hut' | translate}}</span>
-            </div>
+          <div class="find-hut" (click)="locateMe(widget.model.geometry.latitude, widget.model.geometry.longitude)">
+            <span> {{'home_page.find_my_nearest_hut' | translate}}</span>
+          </div>
         </ng-template>
-        </location-widget>
+      </location-widget>
 
     </div>
   </div>
@@ -161,10 +182,12 @@
       <ion-card-content class="mode-selection bx-shadow-4 card-content
                 card-content-md box-shadow-card collection-details">
 
-        <div *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes?.PICKUP">
+        <div
+          *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes?.PICKUP">
           {{'home_page.collection'|translate}}
         </div>
-        <div *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes?.HOME_DELIVERY">
+        <div
+          *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes?.HOME_DELIVERY">
           {{'home_page.delivery_name'|translate}}
         </div>
         <div class="store-name">{{selectedStore?.name}}</div>
@@ -173,20 +196,22 @@
                     class="btn-signin">
           {{'home_page.change'|translate}}
         </ion-button>
-        <ion-button expand="block" color="success" (click)="navigateToDeals()" class="button">
+        <ion-button expand="block" mode="ios" color="success" (click)="navigateToDeals()" class="button">
           {{'home_page.see_deals_menu' | translate}}
         </ion-button>
 
       </ion-card-content>
     </ion-card>
   </div>
-  <app-banner></app-banner>
-  <ion-row margin-bottom justify-content-center padding>
-    <ion-col size-lg='6' size-xs='12'>
-      <ion-button color="success" (click)="navigateToDeals()" text-capitalize expand="block" mode="ios">
-        {{'home.page.view_all_deals' | translate}}
-      </ion-button>
-    </ion-col>
-  </ion-row>
+  <div class="container">
+    <app-banner></app-banner>
+    <ion-row margin-bottom justify-content-center padding>
+      <ion-col size-xs='12'>
+        <ion-button color="success" (click)="navigateToDeals()" text-capitalize expand="block" mode="ios">
+          {{'home.page.view_all_deals' | translate}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
   <app-footer></app-footer>
 </ion-content>

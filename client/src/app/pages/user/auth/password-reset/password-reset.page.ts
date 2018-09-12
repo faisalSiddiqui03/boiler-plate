@@ -1,7 +1,13 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { pwaLifeCycle, pageView, Action, ForgotPasswordWidgetActions } from '@capillarytech/pwa-framework';
-import { BasePage } from '../../../../base/base-page';
+import {
+  pwaLifeCycle,
+  pageView,
+  Action,
+  ForgotPasswordWidgetActions,
+  OnWidgetActionsLifecyle, OnWidgetLifecyle
+} from '@capillarytech/pwa-framework';
+import { BaseComponent } from '../../../../base/base-component';
 import { Router } from '@angular/router';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,7 +22,7 @@ import { Utils } from '../../../../helpers/utils';
 @pwaLifeCycle()
 @pageView()
 
-export class PasswordResetPage extends BasePage implements OnInit {
+export class PasswordResetPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   resetPasswordForm: FormGroup;
   resetPasswordActionEmitter = new EventEmitter();
 
@@ -77,5 +83,14 @@ export class PasswordResetPage extends BasePage implements OnInit {
 
   signIn() {
 
+  }
+
+  widgetLoadingFailed(name: string, data: any): any {
+  }
+
+  widgetLoadingStarted(name: string, data: any): any {
+  }
+
+  widgetLoadingSuccess(name: string, data: any): any {
   }
 }

@@ -9,7 +9,7 @@ import {
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../helpers/utils';
-import { BasePage } from '../../../base/base-page';
+import { BaseComponent } from '../../../base/base-component';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -21,7 +21,7 @@ import { ModalController } from '@ionic/angular';
 @pwaLifeCycle()
 @pageView()
 
-export class DeliverySlotSelectionPage extends BasePage implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle  {
+export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle  {
 
   asSoonPossible: boolean = false;
   slotSelected: boolean = false;

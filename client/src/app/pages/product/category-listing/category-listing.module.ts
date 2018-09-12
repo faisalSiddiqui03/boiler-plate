@@ -3,12 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { NavigationWidgetModule, ProductShowcaseWidgetModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
+import { CartComponentModule } from '../../../components/cart/cart.component.module';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { CategoryListingPage } from './category-listing.page';
 import { HeaderModule } from '../../../components/header/header.module';
+// import { CartModule } from '../../../components/cart/cart.module';
+import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
 
 const routes: Routes = [
   {
@@ -22,8 +25,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     HeaderModule,
+    SkeletonModule,
     ImagePreloadModule,
     NavigationWidgetModule,
+    CartComponentModule,
     ProductShowcaseWidgetModule,
     TranslateModule.forRoot({
       loader: {

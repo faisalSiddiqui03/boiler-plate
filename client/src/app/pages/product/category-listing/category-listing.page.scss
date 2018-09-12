@@ -4,9 +4,12 @@
 
 .product-card {
   background-color: white;
+  margin-bottom: 10px;
 }
 
 .non-deal-card {
+  padding: 0;
+  margin: 0;
   img {
     display: block;
     width: auto;
@@ -15,7 +18,82 @@
   }
 }
 
+@media (max-width: 991px) {
+  .tabs-nav-head {
+    position: fixed;
+    bottom: 60px;
+    --min-height: 44px;
+  }
+  ion-content {
+    --offset-bottom: -55px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .top-header-container {
+    position: fixed;
+    width: calc(100% - 380px);
+  }
+
+  .common-heading-dotted {
+    background-color: transparent;
+    margin: 10px;
+  }
+  .sidebar-cart {
+    width: 350px;
+    flex-direction: column;
+    display: inline-flex;
+    //position: fixed;
+    height: 100vh;
+  }
+
+  .fixed-sidebar {
+    position: fixed;
+    width: 350px;
+    height: 100%;
+    background: white;
+  }
+
+  .product-content {
+    width: 100%;
+    margin-right: 20px;
+  }
+  .product-main-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tabs-nav-head {
+    position: fixed;
+    margin-top: 56px;
+    --min-height: 44px;
+    width: calc(100% - 380px);
+  }
+
+  .showcase-container {
+    margin-top: 120px;
+  }
+  ion-tabs {
+    --ion-color-base: var(--ion-color-light) !important;
+    --ion-color-base-rgb: var(--ion-color-light-rgb) !important;
+    --ion-color-contrast: var(--ion-color-dark) !important;
+    --ion-color-contrast-rgb: var(--ion-color-dark-rgb) !important;
+    --ion-color-shade: var(--ion-color-dark-shade) !important;
+    --ion-color-tint: var(--ion-color-dark-tint) !important;
+  }
+}
+
+.product-title {
+  min-height: 50px;
+}
+
+.product-card-holder {
+  padding: 0 5px 10px 5px;
+}
+
 .deal-card {
+  padding: 0;
+  margin: 0;
   img {
     display: block;
     width: 100%;
@@ -44,14 +122,6 @@ ion-card-header {
 
 ion-card-content {
   --ion-padding: 10px 10px 0 10px;
-}
-
-ion-row {
-
-}
-
-ion-col {
-
 }
 
 .deal-item-name {
@@ -94,7 +164,7 @@ ion-col {
   padding-right: 30px;
   padding-left: 30px;
   position: relative;
-  z-index: 400;
+  z-index: 10;
   text-align: center;
   white-space: nowrap;
   background-color: #fff;
@@ -240,20 +310,13 @@ ion-col {
   height: 3px;
   border-radius: 50%
 }
-.checkout-btn{
+
+.checkout-btn {
   padding: 6px 10px;
 }
-.tabs-nav-head{
-  --ion-toolbar-background-color : transparent;
+
+.tabs-nav-head {
+  --ion-toolbar-background-color: transparent;
 }
 
-@media (max-width:992px){
-  .tabs-nav-head{
-    position: fixed;
-    bottom: 70px;
-    --min-height: 44px;
-  }
-  ion-content{
-    --offset-bottom:-60px !important;
-  }
-}
+

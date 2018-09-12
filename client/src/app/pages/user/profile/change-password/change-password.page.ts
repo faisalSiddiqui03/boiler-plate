@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BasePage } from '../../../../base/base-page';
-import { pwaLifeCycle, pageView } from '@capillarytech/pwa-framework';
+import { BaseComponent } from '../../../../base/base-component';
+import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle } from '@capillarytech/pwa-framework';
 import { Utils } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -16,7 +16,7 @@ import { FormGroup, FormBuilder, Validator, Validators } from '@angular/forms';
 @pwaLifeCycle()
 @pageView()
 
-export class ChangePasswordPage extends BasePage implements OnInit {
+export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   resetPasswordForm: FormGroup;
   constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private formBuilder: FormBuilder) {
@@ -48,5 +48,20 @@ export class ChangePasswordPage extends BasePage implements OnInit {
   changePassword() {
     console.log('Password change');
     this.router.navigateByUrl('my-account');
+  }
+
+  widgetActionFailed(name: string, data: any): any {
+  }
+
+  widgetActionSuccess(name: string, data: any): any {
+  }
+
+  widgetLoadingFailed(name: string, data: any): any {
+  }
+
+  widgetLoadingStarted(name: string, data: any): any {
+  }
+
+  widgetLoadingSuccess(name: string, data: any): any {
   }
 }

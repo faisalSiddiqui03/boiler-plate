@@ -6,3 +6,33 @@
 ion-footer{
     padding: 10px;
 }
+.saved-addresses{
+    padding: 0 10px 50px;
+    ion-list{
+        border-bottom: 1px solid var(--ion-color-medium-shade);
+        ion-label{
+            margin-right: 0;
+        }
+        h6{
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            ion-icon{
+                float: right;
+                font-size: 20px;
+                color: var(--ion-color-medium-shade);
+                cursor: pointer;
+                margin-top: 3px;
+            }
+        }
+        .address-details {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--ion-color-medium-contrast);
+            .edit{
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
+}

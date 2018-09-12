@@ -3,16 +3,8 @@ import { Platform, NavController, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
-import { BasePage } from './base/base-page';
-import {
-  EventService,
-  pwaLifeCycle,
-  GlobalSharedService,
-  UserProfileWidget,
-  LogoutWidget,
-  LogoutWidgetActions,
-  Action
-} from '@capillarytech/pwa-framework';
+import { BaseComponent } from './base/base-component';
+import { EventService, pwaLifeCycle } from '@capillarytech/pwa-framework';
 import { Utils } from './helpers/utils';
 
 @Component({
@@ -20,7 +12,7 @@ import { Utils } from './helpers/utils';
   templateUrl: 'app.component.html'
 })
 @pwaLifeCycle()
-export class AppComponent extends BasePage {
+export class AppComponent extends BaseComponent {
   // logoutActionEmitter = new EventEmitter();
   sharedService: any;
 

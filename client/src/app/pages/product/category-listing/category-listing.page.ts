@@ -1,8 +1,14 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfigService, pageView, pwaLifeCycle } from '@capillarytech/pwa-framework';
+import {
+  ConfigService,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  pageView,
+  pwaLifeCycle
+} from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
-import { BasePage } from '../../../base/base-page';
+import { BaseComponent } from '../../../base/base-component';
 import { Utils } from '../../../helpers/utils';
 
 @Component({
@@ -13,7 +19,7 @@ import { Utils } from '../../../helpers/utils';
 
 @pwaLifeCycle()
 @pageView()
-export class CategoryListingPage extends BasePage implements OnInit {
+export class CategoryListingPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   categoryId: string;
   categoryName: string;
   productShowcaseWidgetAction = new EventEmitter();
@@ -38,9 +44,7 @@ export class CategoryListingPage extends BasePage implements OnInit {
 
   getProductImageUrl(product) {
     if (product && product.multipleImages && product.multipleImages.length) {
-      const imageUrl = `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
-      // console.log(imageUrl);
-      return imageUrl;
+      return `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
     }
   }
 
@@ -49,7 +53,25 @@ export class CategoryListingPage extends BasePage implements OnInit {
   }
 
   openProductDetails(product) {
-    console.log(product)
     this.router.navigateByUrl('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
+  }
+
+  widgetActionFailed(name: string, data: any): any {
+  }
+
+  widgetActionSuccess(name: string, data: any): any {
+  }
+
+  widgetLoadingFailed(name: string, data: any): any {
+  }
+
+  widgetLoadingStarted(name: string, data: any): any {
+  }
+
+  widgetLoadingSuccess(name: string, data: any): any {
+  }
+
+  goToCart() {
+    this.router.navigateByUrl('/cart');
   }
 }

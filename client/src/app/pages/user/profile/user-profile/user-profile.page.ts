@@ -1,6 +1,12 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { BasePage } from '../../../../base/base-page';
-import { pwaLifeCycle, pageView, UserProfileWidgetActions, Action } from '@capillarytech/pwa-framework';
+import { BaseComponent } from '../../../../base/base-component';
+import {
+  pwaLifeCycle,
+  pageView,
+  UserProfileWidgetActions,
+  Action,
+  OnWidgetActionsLifecyle, OnWidgetLifecyle
+} from '@capillarytech/pwa-framework';
 import { Utils } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -16,7 +22,7 @@ import { FormGroup, FormBuilder, Validator, Validators } from '@angular/forms';
 @pwaLifeCycle()
 @pageView()
 
-export class UserProfilePage extends BasePage implements OnInit {
+export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   updateProfileActionEmitter = new EventEmitter();
   profileForm: FormGroup;
   widgetModel: any;
@@ -65,6 +71,12 @@ export class UserProfilePage extends BasePage implements OnInit {
 
   widgetActionFailure(name, data) {
     console.log('action failed ' + name, data);
+  }
+
+  widgetActionFailed(name: string, data: any): any {
+  }
+
+  widgetLoadingStarted(name: string, data: any): any {
   }
 
 }
