@@ -1,6 +1,6 @@
 <cart-widget class="full-height" [componentId]="getComponentId()" [action]="cartWidgetAction">
   <ng-template let-widget="widget">
-    <ng-container *ngIf="!widget.model || !widget.model.items">
+    <ng-container *ngIf="!globalSharedService.getCart() || !globalSharedService.getCart()?.items">
       <div class="full-height">
         <ion-content>
           <!-- <p>{{widget.model | json }}</p> -->
@@ -66,7 +66,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="widget.model && widget.model.items && widget.model.items.length == 0">
+    <ng-container *ngIf="globalSharedService.getCart() && globalSharedService.getCart()?.items && globalSharedService.getCart()?.length == 0">
       <div class="full-height">
         <ion-content>
           <!-- <p>{{widget.model | json }}</p> -->
@@ -93,7 +93,7 @@
 
 
     <ng-container *ngIf="widget.model">
-      <div class="full-height" *ngIf="widget.model.items && widget.model.items.length">
+      <div class="full-height" *ngIf="globalSharedService.getCart().items && globalSharedService.getCart()?.items.length">
         <ion-content>
           <!-- <p>{{widget.model | json }}</p> -->
           <div class="basket-container">
