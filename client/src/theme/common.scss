@@ -56,6 +56,7 @@ body {
     cursor: pointer;
     position: absolute;
     left: 5px;
+    pointer-events: all;
   }
   ion-title {
     font-family: 'Open Sans Condensed';
@@ -123,6 +124,8 @@ body {
     }
     --padding-top: 13px;
     --padding-bottom: 13px;
+    --padding-start:10px;
+    --padding-end:10px;
     &[disabled] {
       border-color: rgba(var(--ion-color-secondary-rgb), 0.3);
     }
@@ -226,7 +229,7 @@ body {
   .searchbar-search-icon.sc-ion-searchbar-md,
   .searchbar-clear-button.sc-ion-searchbar-md,
   .searchbar-search-icon.sc-ion-searchbar-ios,
-  .searchbar-search-icon.sc-ion-searchbar-ios {
+  .searchbar-clear-icon.sc-ion-searchbar-ios {
     display: none !important;
   }
   .searchbar-input-container.sc-ion-searchbar-ios,
@@ -249,7 +252,10 @@ ion-backdrop {
   width: 100%;
   height: 100%;
 }
-
+ion-item{
+  --border-width: 0;
+  --inner-border-width: 0;
+}
 @media (min-width: 992px) {
   .w-700 {
     max-width: 700px;

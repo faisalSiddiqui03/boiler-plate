@@ -21,8 +21,10 @@ ion-footer {
 
 .modal-close {
   margin-bottom: 40px;
-  font-size: 25px;
   cursor: pointer;
+  ion-icon{
+    font-size: 25px;
+  }
 }
 
 .delivery-hut {
