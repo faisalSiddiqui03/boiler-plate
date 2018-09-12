@@ -109,7 +109,7 @@
                    *ngIf="getDeliveryMode() === deliveryModes?.HOME_DELIVERY">
                 <ion-searchbar class="form-search" [debounce]="1000" [(ngModel)]="selectedArea" #focusInput
                                showCancelButton="false" placeholder="{{'home_page.select_block' | translate}}"
-                               (click)="toggleDropDown('area');"
+                               (click)="isCitySelected();toggleDropDown('area');"
                                (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'city')">
                 </ion-searchbar>
                 <ion-list *ngIf="isDropDownShown('area')" text-center class="location-block-list">
@@ -138,7 +138,22 @@
 
             </div>
             <div style="padding: 0 10px; margin-bottom: 10px;">
-              <ion-button (click)="findStore()" color="success" mode="ios" class="btn-success" text-capitalize expand="block">
+              <ion-button
+                      (click)="findStore()"
+                      color="success"
+                      mode="ios"
+                      class="btn-success"
+                      text-capitalize
+                      [disabled]="!(
+                        (
+                          globalSharedService.getFulfilmentMode() &&
+                          globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP &&
+                          (selectedCity || (selectedStore && !selectedStore.isDefaultLocation))
+                        ) || (
+                          selectedCity && selectedArea
+                        )
+                      )"
+                      expand="block">
                 {{'home_page.start_my_order' | translate}}
               </ion-button>
             </div>

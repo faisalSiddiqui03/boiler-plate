@@ -44,6 +44,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   dropdownViewStatus: Map<string, boolean> = new Map();
   bannerUrl: string;
   changeRequested: boolean = false;
+  hasError: { [name:string] : string | boolean } = {};
 
   deliveryModes = DeliveryModes;
 
@@ -54,10 +55,12 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
+    this.hasError = {
+      selectAreaInput: false
+    };
   }
 
   ngOnInit() {
-
   }
 
   ionViewDidEnter() {
@@ -110,6 +113,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
    */
   filterEntity(e, type) {
 
+  }
+
+  isCitySelected() {
+    this.hasError.selectAreaInput = !this.selectedCity;
   }
 
   toggleDropDown(name: string, force: boolean = false, forceValue?: boolean) {
