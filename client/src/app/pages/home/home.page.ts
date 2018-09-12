@@ -7,6 +7,7 @@ import {
   OnWidgetLifecyle,
   ConfigService
 } from '@capillarytech/pwa-framework';
+import { ModalController } from '@ionic/angular';
 import { BaseComponent } from '../../base/base-component';
 import { Router } from '@angular/router';
 import {
@@ -16,6 +17,8 @@ import {
   DeliveryModes
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
+import { Utils } from '../../helpers/utils';
+import { DeliverySlotSelectionPage } from '../checkout/delivery-slot-selection/delivery-slot-selection.page';
 
 @Component({
   selector: 'app-home',
@@ -51,7 +54,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   constructor(
     private config: ConfigService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public modalController: ModalController
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
@@ -77,10 +81,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
-      case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         console.log('unable to find store', data);
-        this.navigateToDeals();
+        // this.navigateToDeals();
         break;
     }
   }
@@ -89,12 +92,24 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     console.log('name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
-      case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        console.log('store selected', data);
-        if (data.length > 0) {
-          this.setCurrentStore(data[0])
+        if (data.length) {
+          this.setCurrentStore(data[0]);
+          if (Utils.isEmpty(this.getDeliverySlot())) {
+            this.presentSlotModal()
+          } else {
+            this.navigateToDeals();
+          }
         }
-        this.navigateToDeals();
+        break;
+      case StoreLocatorWidgetActions.FIND_BY_LOCATION:
+        if (data.length) {
+          this.setCurrentStore(data[0]);
+          if (Utils.isEmpty(this.getDeliverySlot())) {
+            this.presentSlotModal()
+          } else {
+            this.navigateToDeals();
+          }
+        }
         break;
     }
   }
@@ -193,8 +208,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   findStore() {
-    // const findStore = new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
-    //   [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]);
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
       [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
   }
@@ -216,7 +229,12 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   navigateToDeals() {
-    this.router.navigateByUrl('/product/deals/CU00215646');
+    if (Utils.isEmpty(this.getDeliverySlot())) {
+      this.presentSlotModal()
+    } else {
+      this.router.navigateByUrl('/product/deals/CU00215646');
+    }
+
   }
 
   changeOrderMode(mode) {
@@ -236,8 +254,19 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.changeRequested = true;
   }
 
+  async presentSlotModal() {
+    const modal = await this.modalController.create({
+      component: DeliverySlotSelectionPage,
+    });
+    return await modal.present();
+  }
+
   filterEmptyCities(cityList) {
     return cityList.filter(city => city.name !== '');
+  }
+
+  filterEntires(cityList, searchTerm) {
+    return cityList.filter(city => (city.name || '').includes(searchTerm) && city.name);
   }
 
   getDeliveryMode() {

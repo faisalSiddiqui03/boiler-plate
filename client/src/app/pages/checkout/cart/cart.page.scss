@@ -25,8 +25,11 @@
   }
   .empty-cart {
     padding: 5px 10px 10px 10px;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--ion-color-dark-shade);
+    a{
+      color: var(--ion-color-dark-shade);
+    }
   }
   .common-heading-dotted {
     margin-bottom: 10px;
@@ -125,6 +128,7 @@
 }
 
 ion-footer {
+  padding: 6px 10px;
   ion-button {
     span {
       position: absolute;
@@ -142,12 +146,12 @@ ion-footer {
   background: rgba(var(--ion-color-dark-rgb), 0.7);
   padding: 60px 16px;
   overflow: auto;
+  z-index: 99;
   .voucher-modal {
     position: relative;
     background: var(--ion-color-light);
-    left: calc(50% - (378px / 2));
-    top: calc(50% - (392px / 2));
-    max-width: 320px;
+    max-width: 600px;
+    margin: auto;
     h3 {
       margin: 0 0 10px;
       font-family: 'Open Sans Condensed';
@@ -171,7 +175,7 @@ ion-footer {
     }
     .form-section {
       .btn-success {
-        margin: 0;
+        min-width: 30%;
       }
       ion-input {
         border: 1px solid rgba(var(--ion-color-secondary-rgb), 0.5);
@@ -179,6 +183,8 @@ ion-footer {
         margin-right: 10px;
         font-size: 15px;
         color: var(--ion-color-dark-shade);
+        --padding-start: 8px;
+        --padding-end: 8px;
       }
     }
   }

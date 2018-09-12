@@ -6,7 +6,7 @@
       </div>
       <div *ngIf="showLanguage" class="lang-selection">العربية</div>
       <div *ngIf="showTime" text-uppercase class="delivery-time" (click)="presentSlotModal()">
-        <ion-icon name="time" ios="ios-time-outline" md="md-time"></ion-icon>
+        <ion-icon name="time" ios="md-time" md="md-time"></ion-icon>
         <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
         <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">ASAP</span>
       </div>
@@ -39,7 +39,7 @@
         <div class="icon icon-arrow-down-2"></div>
       </div>
       <div text-uppercase class="delivery-time-large" (click)="presentSlotModal()">
-        <ion-icon name="time" ios="ios-time-outline" md="md-time"></ion-icon>
+        <ion-icon name="time" ios="md-time" md="md-time"></ion-icon>
         <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
         <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">ASAP</span>
       </div>
