@@ -54,6 +54,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   applyCoupon() {
     if (this.couponCode) {
+      this.loaderService.startLoading();
       let action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
     } else {

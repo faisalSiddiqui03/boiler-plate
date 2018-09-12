@@ -157,6 +157,8 @@ ion-footer {
     position: relative;
     max-width: 320px;
     //margin: auto;
+    left: calc(50% - (378px / 2));
+    top: calc(10% - (392px / 2));
     background: var(--ion-color-light);
     h3 {
       margin: 0 0 10px;
