@@ -265,6 +265,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     return cityList.filter(city => city.name !== '');
   }
 
+  filterEntires(cityList, searchTerm) {
+    return cityList.filter(city => (city.name || '').includes(searchTerm) && city.name);
+  }
+
   getDeliveryMode() {
     return this.globalSharedService.getFulfilmentMode() ? this.globalSharedService.getFulfilmentMode().mode : null;
   }
