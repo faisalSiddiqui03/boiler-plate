@@ -144,9 +144,14 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   selectCity(city) {
+    let previousCity = this.selectedCity ? this.selectedCity : '';
     this.selectedCity = city.name;
     this.selectedCityCode = city.code;
     this.toggleDropDown('city', true, false);
+    if (previousCity !== this.selectedCity) {
+      this.selectedArea = '';
+      this.toggleDropDown('area');
+    }
     if (this.getFulfilmentMode() && this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
       this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
       return;
@@ -164,7 +169,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.toggleDropDown('area', true, false);
 
   }
-
 
   isDropDownShown(name: string) {
 
