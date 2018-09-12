@@ -1,13 +1,13 @@
 {
   "merchantId": "2002cbfe-9adf-42ac-9bfd-8e013fee7c18",
-  "developerApiUrl": "https://stageph.martjack.com/DeveloperAPI/",
-  "base_dev_url": "https://stageph.martjack.com/DeveloperAPI/",
-  "frontendApiUrl" : "http://sfapi-stageph.martjack.com/V2/",
-  "frontendApiUrlV3": "http://yum-stagefapi.martjack.com/v3/",
-  "publicKey": "VN7KYX8P",
-  "secretKey": "PQL3CDHHQQXSNGDO7EVSJ9CN",
-  "googleMapsApiKey": "AIzaSyCcy4RPa9rv-S3780tImXmM3Xw5i1PvVTI",
-  "defaultStoreId": "13264",
+  "developerApiUrl": "http://www9.martjack.com/DeveloperAPI/",
+  "base_dev_url": "http://www9.martjack.com/DeveloperAPI/",
+  "frontendApiUrl": "https://sfapi-yum.martjack.com/V2/",
+  "frontendApiUrlV3": "https://sfapi-yum.martjack.com/V2/",
+  "publicKey": "DQIT6SJJ",
+  "secretKey": "NEOV9AGGGLYHERHRBSOTBROD",
+  "googleMapsApiKey": "AIzaSyBw9J8qANj6wmVir3wu0vuFJHhwXiZDZk0",
+  "defaultStoreId": 13264,
   "countryCode": "KWT",
   "redirects": {
 
@@ -17,11 +17,11 @@
   "media_agility_secretid": "V:}Q|IzuZL,k[YG%k\\@F",
   "media_agility_userid": "2746274274",
   "mongodb": {
-    "host": "localhost",
-    "port": "27017",
-    "db": "phkuwait"
+    "host": "kishoret99:k0019625871@ds133627.mlab.com",
+    "port": "33627",
+    "db": "kt99-loopback"
   },
-  "baseUrl": "http://localhost:3000/api/",
+  "baseUrl": "/api/",
   "server": {
     "mw-static": {
       "maxAge": "1 day"
@@ -29,7 +29,7 @@
   },
   "enableRedisCaching": false,
   "redis": {
-    "host": "nightly-pwa-redis.8xcpns.ng.0001.euc1.cache.amazonaws.com",
+    "host": "production-pwa-redis.8xcpns.ng.0001.euc1.cache.amazonaws.com",
     "port": "6379",
     "database": "1"
   },

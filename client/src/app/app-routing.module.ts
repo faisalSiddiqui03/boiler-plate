@@ -28,7 +28,8 @@ const routes: Routes = [
   { path: 'store-selection', loadChildren: './pages/checkout/store-selection/store-selection.module#StoreSelectionPageModule' },
   { path: 'my-account', loadChildren: './pages/user/profile/my-account/my-account.module#MyAccountPageModule' },
   { path: 'delivery-slot-selection', loadChildren: './pages/checkout/delivery-slot-selection/delivery-slot-selection.module#DeliverySlotSelectionModule' },
-  { path: 'products-base', loadChildren: './pages/product/products-base/products-base.module#ProductsBasePageModule' },
+  { path: 'pizza/:productId', loadChildren: './pages/product/pizza/pizza.module#PizzaPageModule' },
+  // { path: 'products-base', loadChildren: './pages/product/products-base/products-base.module#ProductsBasePageModule' },
 ];
 
 @NgModule({
