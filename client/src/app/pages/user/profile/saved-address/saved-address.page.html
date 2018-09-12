@@ -8,7 +8,31 @@
     </ion-buttons>
     <ion-title text-center text-uppercase>{{'saved_address_page.saved_address' | translate}}</ion-title>
   </ion-toolbar>
-  <div class="no-address">{{'saved_address_page.no_saved_address' | translate}}</div>
+  <div class="saved-addresses w-700">
+    <!-- <user-address-widget [componentId]="getComponentId()" >
+      <ng-template let-widget="widget">
+        <ng-container *ngIf="widget.model">
+          <p>{{widget.model | json}}</p>
+        </ng-container>
+      </ng-template>
+    </user-address-widget> -->
+    <div class="no-address" style="display: none;">{{'saved_address_page.no_saved_address' | translate}}</div>
+    <ion-list no-margin>
+      <ion-item no-padding>
+        <ion-label>
+          <h6>Home
+            <ion-icon class="close" name="close-circle"></ion-icon>
+          </h6>
+          <div class="address-details">
+            <p text-capitalize>way, building, flat</p>
+            <p text-capitalize>, Batangas City</p>
+            <p>landmark</p>
+            <p text-right class="edit">Edit</p>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
 <ion-footer no-border>
   <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success">{{'saved_address_page.add_new_address' | translate}}</ion-button>

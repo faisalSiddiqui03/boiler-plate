@@ -5,13 +5,19 @@
 	}
 	ion-list {
 		background: transparent;
+		margin: 0 0 16px;
 	}
 	ion-item {
+		--inner-border-width: 0;
+		--border-width: 0 !important;
 		color: var(--ion-color-light);
 		font-size: 13px;
 		--min-height: 30px;
 	}
 	ion-title {
+		position: static;
+		height: auto;
+		text-align: left;
 		font-weight: 600;
 		text-transform: uppercase;
 		font-size: 14px;
@@ -22,6 +28,9 @@
 		color: var(--ion-color-light);
   }
   .social-links{
+		ion-title{
+			text-align: center;
+		}
     ul{
       li{
         display: inline-block;
