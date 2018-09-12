@@ -99,9 +99,15 @@
       }
     }
   }
-  .total-bill-block {
+  .delivery-bill-block {
     padding: 14px 40px 14px 16px;
     border-top: 1px solid var(--ion-color-light-shade);
+    color: var(--ion-color-dark);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .total-bill-block {
+    padding: 0px 40px 14px 16px;
     color: var(--ion-color-dark);
     font-size: 14px;
     font-weight: 700;
@@ -149,7 +155,7 @@ ion-footer {
   overflow: auto;
   .voucher-modal {
     position: relative;
-    //max-width: 320px;
+    max-width: 320px;
     //margin: auto;
     background: var(--ion-color-light);
     h3 {
