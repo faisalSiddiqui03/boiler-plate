@@ -77,10 +77,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
-      case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         console.log('unable to find store', data);
-        this.navigateToDeals();
+        // this.navigateToDeals();
         break;
     }
   }
@@ -89,9 +88,17 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     console.log('name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
+        if (data.length) {
+          this.setCurrentStore(data[0])
+          if (this.getDeliverySlot()) {
+            this.navigateToDeals();
+          } else {
+            // present modal to select delivery slot
+          }
+        }
+        break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        console.log('store selected', data);
-        if (data.length > 0) {
+        if (data.length) {
           this.setCurrentStore(data[0])
         }
         this.navigateToDeals();
@@ -193,8 +200,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   findStore() {
-    // const findStore = new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
-    //   [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]);
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
       [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
   }

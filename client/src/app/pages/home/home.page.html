@@ -89,10 +89,11 @@
           <div *ngIf="widget.model != undefined">
             <div class="location-bar">
               <div class="form-control">
-                <ion-searchbar class="form-search" [debounce]="1000" [(ngModel)]="selectedCity" #focusInput
-                               showCancelButton="false" placeholder="{{'home_page.select_area' | translate}}"
-                               (click)="toggleDropDown('city');"
-                               (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')">
+                <ion-searchbar
+                  class="form-search" [debounce]="1000" [(ngModel)]="selectedCity" #focusInput
+                  showCancelButton="false" placeholder="{{'home_page.select_area' | translate}}"
+                  (click)="toggleDropDown('city');"
+                  (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')">
                 </ion-searchbar>
                 <ion-list *ngIf="isDropDownShown('city')" text-center class="location-block-list">
                   <ion-spinner color="success" name="bubbles">
