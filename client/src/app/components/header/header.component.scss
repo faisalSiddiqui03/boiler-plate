@@ -192,6 +192,7 @@
         .icon {
           display: inline-block;
           font-size: 12px;
+          cursor: pointer;
         }
         span {
           color: var(--ion-color-popup-list);
@@ -223,6 +224,29 @@
           margin-left: 5px;
           cursor: pointer;
         }
+      }
+    }
+  }
+}
+
+@media (min-width:992px) and (max-width:1190px){
+  .category-header {
+    .desktop-logo{
+      padding: 0 3px;
+    }
+    .header-right {
+      .signin-register{
+        span{
+          display: none;
+        }
+      }
+      .delivery-location {
+        small{
+          max-width: 100px;
+        }
+      }
+      .delivery-time-large{
+        padding: 4px;
       }
     }
   }

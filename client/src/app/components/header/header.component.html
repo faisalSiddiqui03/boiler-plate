@@ -1,52 +1,53 @@
 <ion-navbar [hideBackButton]="true" [class]="headerClass">
-    <ion-hide-when size="lg">
-        <div>
-            <div class="center-align logo_bg edge-shadow brd-radius">
-                <img src="assets/imgs/pizzahut-logo.svg" alt="Pizza Hut" class="header-img" (click)="goToPage('home')">
-            </div>
-            <div *ngIf="showLanguage" class="lang-selection">العربية</div>
-            <div *ngIf="showTime" class="delivery-time" (click)="presentSlotModal()">
-                <ion-icon name="time" ios="ios-time-outline" md="md-time"></ion-icon>
-                <span>ASAP</span>
-            </div>
-            <div (click)="goToPage('login')">
-                <div class="profile-icon">
-                    <div class="icon icon-user-circle"></div>
-                </div>
-            </div>
-            <div *ngIf="showHalalTag" class="halal-logo">
-                <img src="assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal" />
-            </div>
-            <div *ngIf="showCart" (click)="goToPage('cart')">
-                <div class="icon icon-cart cart-logo"></div>
-                <div class="cart-count" *ngIf="getCart()?.items.length" [innerHtml]="getCart()?.items.length | number:'2.0-0'"></div>
-            </div>
+  <ion-hide-when size="lg">
+    <div>
+      <div class="center-align logo_bg edge-shadow brd-radius">
+        <img src="assets/imgs/pizzahut-logo.svg" alt="Pizza Hut" class="header-img" (click)="goToPage('home')">
+      </div>
+      <div *ngIf="showLanguage" class="lang-selection">العربية</div>
+      <div *ngIf="showTime" text-uppercase class="delivery-time" (click)="presentSlotModal()">
+        <ion-icon name="time" ios="ios-time-outline" md="md-time"></ion-icon>
+        <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
+        <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">ASAP</span>
+      </div>
+      <div (click)="goToPage('login')">
+        <div class="profile-icon">
+          <div class="icon icon-user-circle"></div>
         </div>
-    </ion-hide-when>
-    <div class="container center-align desktop-logo" flex-center>
-        <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
-        <div class="header-right" text-right>
-            <div class="delivery-mode">
-                <div [ngClass]="{'icon icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
-                <span text-capitalize>Mode:</span>
-                <small *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY" text-capitalize>Delivery</small>
-                <small *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>Take away</small>
-            </div>
-            <div class="delivery-location" (click)="goToPage('home')">
-                <span text-capitalize>Location:</span>
-                <small text-uppercase>{{getCurrentStore()?.address}}</small>
-                <div class="icon icon-arrow-down-2"></div>
-            </div>
-            <div class="delivery-time-large" (click)="presentSlotModal()">
-                <ion-icon name="time" ios="ios-time-outline" md="md-time"></ion-icon>
-                <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
-                <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">ASAP</span>
-            </div>
-            <div class="signin-register">
-                <div class="icon icon-user-circle"></div>
-                <span text-uppercase (click)="goToPage('login')">sign in /</span>
-                <span text-uppercase (click)="goToPage('signup')">register</span>
-            </div>
-        </div>
+      </div>
+      <div *ngIf="showHalalTag" class="halal-logo">
+        <img src="assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal" />
+      </div>
+      <div *ngIf="showCart" (click)="goToPage('cart')">
+        <div class="icon icon-cart cart-logo"></div>
+        <div class="cart-count" *ngIf="getCart()?.items.length" [innerHtml]="getCart()?.items.length | number:'2.0-0'"></div>
+      </div>
     </div>
+  </ion-hide-when>
+  <div class="container center-align desktop-logo" flex-center>
+    <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
+    <div class="header-right" text-right>
+      <div class="delivery-mode">
+        <div class="icon" [ngClass]="{'icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
+        <span text-capitalize>Mode:</span>
+        <small *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY" text-capitalize>Delivery</small>
+        <small *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>Take away</small>
+      </div>
+      <div class="delivery-location" (click)="goToPage('home')">
+        <span text-capitalize>Location:</span>
+        <small text-uppercase>{{getCurrentStore()?.address}}</small>
+        <div class="icon icon-arrow-down-2"></div>
+      </div>
+      <div text-uppercase class="delivery-time-large" (click)="presentSlotModal()">
+        <ion-icon name="time" ios="ios-time-outline" md="md-time"></ion-icon>
+        <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
+        <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">ASAP</span>
+      </div>
+      <div class="signin-register">
+        <div class="icon icon-user-circle" (click)="goToPage('login')"></div>
+        <span text-uppercase (click)="goToPage('login')">sign in /</span>
+        <span text-uppercase (click)="goToPage('signup')">register</span>
+      </div>
+    </div>
+  </div>
 </ion-navbar>
