@@ -61,7 +61,7 @@ export class BannerComponent extends BaseComponent implements OnInit {
         this.router.navigateByUrl('/category/' + banner.targetId);
         break;
       case 'URL':
-        console.log("URL")
+        this.navigateToDeals();
         break;
     }
   }
