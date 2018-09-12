@@ -39,7 +39,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   async presentSlotModal() {
     const modal = await this.modalController.create({
       component: DeliverySlotSelectionPage,
-      componentProps: { value: 123 }
+      // componentProps: { value: 123 }
     });
     return await modal.present();
   }

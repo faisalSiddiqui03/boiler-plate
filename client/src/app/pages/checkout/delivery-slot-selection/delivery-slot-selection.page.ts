@@ -80,6 +80,7 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
   }
 
   selectTimeSlot() {
+    console.log('slot is: ', this.timeSlotObj)
     this.setDeliverySlot(this.timeSlotObj);
     this.closeModal();
   }

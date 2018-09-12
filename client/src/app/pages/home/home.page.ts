@@ -7,6 +7,7 @@ import {
   OnWidgetLifecyle,
   ConfigService
 } from '@capillarytech/pwa-framework';
+import { ModalController } from '@ionic/angular';
 import { BaseComponent } from '../../base/base-component';
 import { Router } from '@angular/router';
 import {
@@ -16,6 +17,8 @@ import {
   DeliveryModes
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
+import { Utils } from '../../helpers/utils';
+import { DeliverySlotSelectionPage } from '../checkout/delivery-slot-selection/delivery-slot-selection.page';
 
 @Component({
   selector: 'app-home',
@@ -51,7 +54,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   constructor(
     private config: ConfigService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public modalController: ModalController
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
@@ -89,19 +93,23 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
         if (data.length) {
-          this.setCurrentStore(data[0])
-          if (this.getDeliverySlot()) {
-            this.navigateToDeals();
+          this.setCurrentStore(data[0]);
+          if (Utils.isEmpty(this.getDeliverySlot())) {
+            this.presentSlotModal()
           } else {
-            // present modal to select delivery slot
+            this.navigateToDeals();
           }
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         if (data.length) {
-          this.setCurrentStore(data[0])
+          this.setCurrentStore(data[0]);
+          if (Utils.isEmpty(this.getDeliverySlot())) {
+            this.presentSlotModal()
+          } else {
+            this.navigateToDeals();
+          }
         }
-        this.navigateToDeals();
         break;
     }
   }
@@ -221,7 +229,12 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   navigateToDeals() {
-    this.router.navigateByUrl('/product/deals/CU00215646');
+    if (Utils.isEmpty(this.getDeliverySlot())) {
+      this.presentSlotModal()
+    } else {
+      this.router.navigateByUrl('/product/deals/CU00215646');
+    }
+
   }
 
   changeOrderMode(mode) {
@@ -239,6 +252,13 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   changeSelectedStore() {
     this.changeRequested = true;
+  }
+
+  async presentSlotModal() {
+    const modal = await this.modalController.create({
+      component: DeliverySlotSelectionPage,
+    });
+    return await modal.present();
   }
 
   filterEmptyCities(cityList) {

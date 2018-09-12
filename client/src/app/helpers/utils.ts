@@ -8,4 +8,8 @@ export class Utils {
   static getLanguageCode(): string {
     return Utils._languageCode;
   }
+
+  static isEmpty(obj): boolean {
+    return Object.getOwnPropertyNames(obj).length === 0
+  }
 }

@@ -140,12 +140,12 @@
             </div>
             <div style="padding: 0 10px; margin-bottom: 10px;">
               <ion-button
-                      (click)="findStore()"
-                      color="success"
-                      mode="ios"
-                      class="btn-success"
-                      text-capitalize
-                      [disabled]="!(
+                (click)="findStore()"
+                color="success"
+                mode="ios"
+                class="btn-success"
+                text-capitalize
+                [disabled]="!(
                         (
                           globalSharedService.getFulfilmentMode() &&
                           globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP &&
@@ -154,7 +154,7 @@
                           selectedCity && selectedArea
                         )
                       )"
-                      expand="block">
+                expand="block">
                 {{'home_page.start_my_order' | translate}}
               </ion-button>
             </div>
