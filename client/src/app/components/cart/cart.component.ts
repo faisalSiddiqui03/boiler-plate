@@ -49,6 +49,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
 
   applyCoupon() {
     if (this.couponCode) {
+      this.loaderService.startLoading();
       let action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
     } else {

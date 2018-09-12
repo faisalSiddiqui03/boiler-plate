@@ -27,6 +27,7 @@ import {
   UserProfileWidgetModule,
   LogoutWidgetModule,
   FulfilmentModeModule,
+  SEOModule
 } from '@capillarytech/pwa-framework';
 import { HttpLoaderFactory } from './translation.loader';
 import { appConfig } from '../../config/config';
@@ -48,6 +49,7 @@ export function getAppConfig(): Object {
     ConfigServiceModule.forRoot(getAppConfig),
     GlobalServiceModule.forRoot(),
     IonicStorageModule.forRoot(),
+    SEOModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     FulfilmentModeModule,
