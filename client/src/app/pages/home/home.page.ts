@@ -170,18 +170,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   }
 
-  // selectOneArea(area) {
-  //   if (!area) {
-  //     return;
-  //   }
-  //   this.selectedArea = this.getAreaDisplayName(area);
-  //   this.selectedAreaCode = area.code;
-
-  //   console.log('selected area ', area);
-  //   this.toggleDropDown('area', true, false);
-  //   return this.selectedArea;
-  // }
-
   isDropDownShown(name: string) {
 
     const nameExists = this.dropdownViewStatus.has(name);
