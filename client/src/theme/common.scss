@@ -214,17 +214,25 @@ body {
 
 .form-search {
   padding: 0;
-  .searchbar-input.sc-ion-searchbar-md {
+  .searchbar-input.sc-ion-searchbar-md,
+  .searchbar-input.sc-ion-searchbar-ios {
     box-shadow: none;
-    padding: 6px 55px 6px 10px;
+    padding: 6px 55px 6px 10px !important;
     font-size: 14px;
     border: 1px solid var(--ion-color-medium-shade);
     border-radius: 5px;
     background: url('assets/imgs/select-arrow-down.svg') no-repeat right 10px center / 12px;
   }
   .searchbar-search-icon.sc-ion-searchbar-md,
-  .searchbar-clear-button.sc-ion-searchbar-md {
+  .searchbar-clear-button.sc-ion-searchbar-md,
+  .searchbar-search-icon.sc-ion-searchbar-ios,
+  .searchbar-search-icon.sc-ion-searchbar-ios {
     display: none !important;
+  }
+  .searchbar-input-container.sc-ion-searchbar-ios,
+  &.sc-ion-searchbar-ios-h,
+  .searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios {
+    height: 44px;
   }
 }
 
