@@ -145,6 +145,8 @@ ion-footer {
   .voucher-modal {
     position: relative;
     background: var(--ion-color-light);
+    left: calc(50% - (378px / 2));
+    top: calc(50% - (392px / 2));
     max-width: 320px;
     h3 {
       margin: 0 0 10px;
