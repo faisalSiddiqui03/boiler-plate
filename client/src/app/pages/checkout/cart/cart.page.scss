@@ -142,10 +142,10 @@ ion-footer {
   background: rgba(var(--ion-color-dark-rgb), 0.7);
   padding: 60px 16px;
   overflow: auto;
-  max-width: 300px;
   .voucher-modal {
     position: relative;
     background: var(--ion-color-light);
+    max-width: 320px;
     h3 {
       margin: 0 0 10px;
       font-family: 'Open Sans Condensed';
