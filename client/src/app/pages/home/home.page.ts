@@ -61,7 +61,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   ionViewDidEnter() {
-      console.log('Utkarsha ', this.getCurrentStore())
+    console.log('Utkarsha ', this.getCurrentStore())
     this.selectedStore = this.getCurrentStore();
     this.changeRequested = false;
   }
@@ -88,8 +88,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         console.log('store selected', data);
-        if(data.length > 0) {
-            this.setCurrentStore(data[0])
+        if (data.length > 0) {
+          this.setCurrentStore(data[0])
         }
         this.navigateToDeals();
         break;
@@ -121,7 +121,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     const nameExists = this.dropdownViewStatus.has(name);
 
     if (!nameExists) {
-
       this.dropdownViewStatus.set(name, true);
       return;
     }
@@ -148,7 +147,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.selectedCity = city.name;
     this.selectedCityCode = city.code;
     this.toggleDropDown('city', true, false);
-    if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+    if (this.getFulfilmentMode() && this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
       this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
       return;
     }
@@ -185,7 +184,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   findStore() {
     // const findStore = new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
     //   [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]);
-    console.log('vivek', this.globalSharedService.getFulfilmentMode().mode);
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
       [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
   }
@@ -193,13 +191,13 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   locateMe(lat, lng) {
     console.log('locate me ', lat, lng);
 
-    if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
-        this.router.navigate(['/store-selection'], { queryParams: { 'latitude': lat, 'longitude': lng } });
-        return;
+    if (this.getFulfilmentMode() && this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+      this.router.navigate(['/store-selection'], { queryParams: { 'latitude': lat, 'longitude': lng } });
+      return;
     }
 
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_LOCATION,
-        [lat, lng, this.globalSharedService.getFulfilmentMode().mode]));
+      [lat, lng, this.globalSharedService.getFulfilmentMode().mode]));
   }
 
   getFullBannerUrl(src) {

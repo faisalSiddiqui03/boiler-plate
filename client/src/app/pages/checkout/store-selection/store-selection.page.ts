@@ -69,18 +69,15 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   widgetLoadingSuccess(name: string, data: any): any {
     console.log('success name: ', name, ' data: ', data );
     if (name === 'STORE_SELECTOR' && this.globalSharedService.getFulfilmentMode()) {
-      console.log("HAALO", this.globalSharedService);
       if(this.cityId) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
             StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.globalSharedService.getFulfilmentMode().mode])
         );
-        console.log(stores);
 
       } else if(this.latitude && this.longitude) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
             StoreLocatorWidgetActions.FIND_BY_LOCATION, [this.latitude, this.longitude, this.globalSharedService.getFulfilmentMode().mode])
         );
-        console.log(stores);
       }
     }
   }
