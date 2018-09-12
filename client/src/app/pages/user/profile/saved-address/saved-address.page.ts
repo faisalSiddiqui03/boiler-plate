@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
-import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle } from '@capillarytech/pwa-framework';
+import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle, UserAddressWidgetActions } from '@capillarytech/pwa-framework';
 import { Utils } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -33,18 +33,23 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   widgetActionFailed(name: string, data: any): any {
+    console.log(name, 'Action Failed');
   }
 
   widgetActionSuccess(name: string, data: any): any {
+    console.log(name, 'Action Success');
   }
 
   widgetLoadingFailed(name: string, data: any): any {
+    console.log(name, 'Loading Failed');
   }
 
   widgetLoadingStarted(name: string, data: any): any {
+    console.log(name, 'Loading Started');
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
+    console.log(name, 'Loading Success');
   }
 
 }
