@@ -95,25 +95,29 @@
                 <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
               </div>
               <ion-list no-margin>
-                <ion-item no-padding *ngFor="let item of widget.model.items; let i = index">
+                <ion-item no-padding *ngFor="let item of globalSharedService.getCart()?.items; let i = index">
                   <ion-label no-margin>
                     <div flex-center>
-                      <div class="product-title">{{item.client.title}}</div>
+                      <div class="product-title">{{item.description}}</div>
                       <div class="add-remove">
                         <ion-icon name="remove-circle" (click)="updateCartItemQuantity(item, -1)"></ion-icon>
-                        <span>{{item.client.quantity}}</span>
+                        <span>{{item.quantity}}</span>
                         <ion-icon name="add-circle" (click)="updateCartItemQuantity(item, 1)"></ion-icon>
                       </div>
-                      <div class="product-price">{{item.client.price | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+                      <div class="product-price">{{item.mrp | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
                       <ion-icon class="remove-icon" name="close-circle" (click)="removeCartItem(item)"></ion-icon>
                     </div>
                   </ion-label>
                   <div *ngIf="i === 0" class="tooltip">{{ 'cart.update_cart_message' | translate}}</div>
                 </ion-item>
               </ion-list>
+              <div flex-center class="delivery-bill-block">
+                <div class="total-bill">{{ 'cart.delivery_fee' | translate}} </div>
+                <div class="total-price">{{globalSharedService.getCart()?.shippingCost | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
+              </div>
               <div flex-center class="total-bill-block">
                 <div class="total-bill">{{ 'cart.your_total' | translate}} </div>
-                <div class="total-price">{{widget.model.productCost | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
+                <div class="total-price">{{globalSharedService.getCart()?.productCost | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
               </div>
               <div class="promotion-button">
                 <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher" (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}</ion-button>
@@ -123,7 +127,7 @@
         </div>
         <div class="bottom-footer">
             <ion-button color="success" text-capitalize expand="block" mode="ios" class="btn-success">{{ 'cart.continue' | translate}}
-              <span>{{widget.model.productCost | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+              &nbsp;<span>{{ globalSharedService.getCart()?.total | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
             </ion-button>
         </div>
       </div>
@@ -131,7 +135,7 @@
   </ng-template>
 </cart-widget>
 
-<div class="voucher-modal-wrap" *ngIf="enableVoucherModal">
+<div flex-center class="voucher-modal-wrap" *ngIf="enableVoucherModal">
   <div class="voucher-modal" padding>
     <ion-icon class="close-icon" name="close-circle" (click)="showVoucherModal()"></ion-icon>
     <h3 text-uppercase text-center>{{ 'cart.got_a_voucher_code_?' | translate}}</h3>
