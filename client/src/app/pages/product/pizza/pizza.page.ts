@@ -17,8 +17,10 @@ import {
 } from '../../../../validators/index';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BaseComponent } from '../../../base/base-component';
-import { AlertService } from '@capillarytech/pwa-ui-helpers';
+import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
+import { Utils } from '../../../helpers/utils';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-pizza',
@@ -38,6 +40,9 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   showToppingsView: boolean;
   updatingPrice: boolean;
   sizePropertyId: number;
+  currencyCode: string;
+  categoryId: string;
+  productName: string;
 
   constructor(
     private router: Router,
@@ -45,13 +50,19 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     private alertService: AlertService,
     private translate: TranslateService,
     private config: ConfigService,
+    private location: Location,
+    private loaderService: LoaderService,
   ) {
     super();
+    this.translate.use(Utils.getLanguageCode());
+    this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   ngOnInit() {
     this.productId = this.route.snapshot.params.productId;
-    this.sizePropertyId = this.config.getConfig()['sizePropertyId'];
+    this.productName = this.route.snapshot.params.productName;
+
+    this.sizePropertyId = parseInt(this.config.getConfig()['sizePropertyId']);
   }
 
   widgetLoadingStarted(name, data){
@@ -75,6 +86,9 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     switch(name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
+        this.loaderService.stopLoading();
+        this.alertService.presentToast(this.translate.instant('added_to_cart'), 1000, 'top');
+        this.goBack();
         break;
       case ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE:
         this.updatingPrice = false;
@@ -84,6 +98,8 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   widgetActionFailed(name: string, data: any) {
+    this.updatingPrice = false;
+    this.loaderService.stopLoading();
     console.log('Widget action failed' + name, data);
   }
 
@@ -183,6 +199,7 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   } 
 
   addToCart() {
+    this.loaderService.startLoading();
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
     );
@@ -230,5 +247,9 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       }
     });
     return sizeAndCrust.reverse().join(' ');
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
