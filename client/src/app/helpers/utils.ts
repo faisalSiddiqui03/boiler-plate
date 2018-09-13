@@ -10,6 +10,6 @@ export class Utils {
   }
 
   static isEmpty(obj): boolean {
-    return Object.getOwnPropertyNames(obj).length === 0
+    return !obj || Object.getOwnPropertyNames(obj).length === 0
   }
 }
