@@ -1,0 +1,244 @@
+.product-main-image {
+    display: block;
+    width: 100%;
+    height: 210px;
+}
+
+ion-card {
+    box-shadow: none;
+    border-radius: 0;
+    .product-img-block {
+        background: var(--ion-color-medium);
+    }
+    .border-block {
+        border-bottom: 1px solid var(--ion-color-light-shade);
+        margin: 16px;
+    }
+}
+
+.popup-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgba(var(--ion-color-dark-rgb), .5) 0, rgba(var(--ion-color-dark-rgb), .2) 70%, transparent);
+    ion-label {
+        color: var(--ion-color-light);
+        font-size: 18px;
+        font-weight: 600;
+    }
+    ion-icon {
+        color: var(--ion-color-light);
+        cursor: pointer;
+    }
+}
+
+.block-header {
+    background: var(--ion-block-header-color);
+    color: var(--ion-color-secondary-shade);
+    line-height: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0 10px 0 16px;
+    cursor: pointer;
+    .arrow {
+        font-size: 20px;
+    }
+    .extra {
+        font-size: 11px;
+        padding-right: 30px;
+    }
+}
+
+.block-subheader {
+    @extend .block-header;
+    background: var(--ion-color-light);
+}
+
+.sub-modal-head {
+    padding: 15px;
+    color: var(--ion-color-secondary-shade);
+    font-size: 14px;
+    line-height: 18px;
+    border-top: 1px solid var(--ion-color-medium-shade);
+    border-bottom: 1px solid var(--ion-color-medium-shade);
+    p {
+        flex: 1;
+        span {
+            margin-right: 3px;
+        }
+    }
+    .change {
+        color: var(--ion-color-change-link);
+        border-bottom: 1px solid;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        &:hover {
+            color: var(--ion-color-secondary-shade);
+        }
+    }
+}
+
+.drinks-choose-block {
+    border: 1px solid var(--ion-color-light-shade);
+    border-radius: 5px;
+    border-bottom: none;
+    .selected-variant {
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 18px;
+        padding: 15px 10px 15px 16px;
+        border-bottom: 1px solid var(--ion-color-medium-shade);
+        .block-text {
+            flex: 1;
+            margin-right: 10px;
+        }
+        .block-icon {
+            font-size: 22px;
+            line-height: 1;
+            ion-icon[name="checkmark"] {
+                font-size: 18px;
+            }
+            .close {
+                color: var(--ion-color-medium-shade);
+            }
+        }
+        ion-checkbox {
+            margin: 0 8px;
+            --border-radius: 4px;
+            --ion-color-base: transparent !important;
+            --ion-color-contrast: var(--ion-color-success) !important;
+            --ion-color-shade: transparent !important;
+            --ion-color-tint: transparent !important;
+            --border-color-checked: var(--ion-color-medium-shade);
+            --border-color: var(--ion-color-medium-shade);
+            --background-checked: var(--ion-color-light);
+        }
+        .block-price {
+            min-width: 70px;
+        }
+        .toppings-img {
+            margin-right: 10px;
+            min-width: 25px;
+            height: 25px;
+            img {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    }
+    ul {
+        &:first-child{
+            border-top: 1px solid var(--ion-color-medium-shade);
+        }
+        background: var(--ion-color-medium);
+        li {
+            @extend .selected-variant;
+            &:empty{
+                display: none;
+            }
+            &.disable {
+                pointer-events: none;
+                opacity: 0.6;
+            }
+        }
+    }
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+figure {
+    margin: 0;
+}
+
+.pizza-sizes-wrap {
+    margin-bottom: 40px;
+    ul {
+        background: var(--ion-color-medium);
+        border-top: 1px solid var(--ion-color-medium-shade);
+        li {
+            padding: 13px 15px;
+            border-bottom: 1px solid var(--ion-color-medium-shade);
+            &:empty{
+                display: none;
+            }
+            &.disable {
+                pointer-events: none;
+                opacity: 0.6;
+            }
+            .pizza-img {
+                margin-right: 10px;
+                min-width: 40px;
+                align-self: flex-start;
+                img {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+            .pizza-content {
+                flex: 1;
+                h5 {
+                    margin: 0 0 2px;
+                    font-size: 14px;
+                    color: var(--ion-color-medium-contrast);
+                }
+                p {
+                    margin: 0;
+                    color: var(--ion-color-popup-list);
+                    font-size: 13px;
+                    line-height: 1.2;
+                }
+            }
+            .pizza-price {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+ion-footer {
+    background: var(--ion-color-light);
+    padding: 10px;
+    .quantity-block {
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 10px;
+        .add-remove {
+            align-items: center;
+            display: inline-flex;
+            span {
+                min-width: 22px;
+                text-align: center;
+                display: inline-block;
+            }
+            ion-icon {
+                color: var(--ion-color-medium-shade);
+                font-size: 20px;
+                cursor: pointer;
+            }
+        }
+    }
+    ion-button {
+        span {
+            position: absolute;
+            right: 15px;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .popup-wrap {
+        background: rgba(var(--ion-color-dark-rgb), 0.8);
+        .popup-inner {
+            height: 80%;
+            margin: auto;
+            width: 100%;
+            max-width: 460px;
+        }
+    }
+}
