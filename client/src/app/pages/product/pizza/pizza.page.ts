@@ -17,6 +17,7 @@ import {
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BaseComponent } from '../../../base/base-component';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pizza',
@@ -33,13 +34,14 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   serverProduct;
   clientProduct: Product;
   productId: number;
-  showToppingsView: boolean = false;
-  updatingPrice: boolean = false;
+  showToppingsView: boolean;
+  updatingPrice: boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private alertService: AlertService,
+    private translate: TranslateService,
   ) {
     super();
   }
@@ -108,7 +110,6 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   setSelectedPropertyvalue(propVal) {
     this.clientProduct.setSelectedPropertyValueId(propVal.propertyId, propVal.id);
-    propVal['abc'] = propVal.name;
     this.getPrice();
   }
 
@@ -121,10 +122,10 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     const item = this.clientProduct.bundleItems.get(serverItem.id);
     const isAdded = item.increment();
     if(!isAdded){
-      this.alertService.presentToast('Exceeded maximum topping count', 1000, 'top');
+      this.alertService.presentToast(this.translate.instant('pizza.add_topping_error'), 1000, 'top');
       return;
     }
-    this.alertService.presentToast('Topping successfuly added', 1000, 'top');
+    this.alertService.presentToast(this.translate.instant('pizza.add_topping_success'), 1000, 'top');
     this.getPrice();
   }
 
@@ -138,17 +139,16 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       isRemoved = item.remove();
     }
     if(!isRemoved){
-      this.alertService.presentToast('Minimum topping count reached', 1000, 'top');
+      this.alertService.presentToast(this.translate.instant('pizza.remove_topping_error'), 1000, 'top');
       return;
     }
-    this.alertService.presentToast('Topping successfuly removed', 1000, 'top');
+    this.alertService.presentToast(this.translate.instant('pizza.remove_topping_success'), 1000, 'top');
     this.getPrice();
   }
 
   isExtraItem(serverItem){
     const item = this.clientProduct.bundleItems.get(serverItem.id);
-    if(item.count === 2) return true;
-    return false;
+    return item.count === 2;
   }
 
   getItemType(item){
@@ -171,7 +171,7 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   getUrl(url: string){
-    return `http://${url}`;
+    return `https://${url}`;
   }
 
   toggleToppingsView(){
@@ -179,14 +179,16 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   } 
 
   addToCart() {
-    let action = new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct);
-    this.productWidgetAction.emit(action);
+    this.productWidgetAction.emit(
+      new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
+    );
   }
 
   getPrice() {
     this.updatingPrice = true;
-    const action = new Action(ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE, this.clientProduct);
-    this.productWidgetAction.emit(action);
+    this.productWidgetAction.emit(
+      new Action(ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE, this.clientProduct)
+    );
   }
 
   getSizeCrustCombinationPrice(crustPropertyValueId, sizeProeprtyValueId){
