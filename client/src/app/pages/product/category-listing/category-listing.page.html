@@ -350,7 +350,7 @@
                       <ion-card no-margin no-padding no-border class="product-card deal-card">
                         <ion-card-header>
                           <img height="170" (click)="openProductDetails(prod)" src="{{getProductImageUrl(prod)}}"
-                               img-preloader="{{prod?.smallImage}}"
+                               img-preloader="{{getProductImageUrl(prod)}}"
                                defaultImage="assets/imgs/default/default.png"/>
                         </ion-card-header>
                         <ion-card-content>
@@ -370,7 +370,7 @@
                       <ion-card class="product-card non-deal-card" no-padding (click)="openProductDetails(prod)">
                         <ion-card-header no-padding>
                           <img height="100" (click)="openProductDetails(prod)" src="{{getProductImageUrl(prod)}}"
-                               img-preloader="{{prod?.smallImage}}"
+                               img-preloader="{{getProductImageUrl(prod)}}"
                                defaultImage="assets/imgs/default/default.png"/>
                         </ion-card-header>
 
