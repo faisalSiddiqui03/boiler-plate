@@ -43,7 +43,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   getProductImageUrl(product) {
-    console.log('dekho', product);
     if (product && product.multipleImages && product.multipleImages.length) {
       return `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
     }

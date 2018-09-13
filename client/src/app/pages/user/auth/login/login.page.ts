@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Location } from '@angular/common';
 import {
   pwaLifeCycle,
   LifeCycle,
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../../helpers/utils';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -35,9 +37,17 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   widgetModels: { [name: string]: any };
 
   googleSignInActionEmitter = new EventEmitter();
-  googleClientId:string = '';
+  googleClientId: string = '';
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private config: ConfigService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private loaderService: LoaderService,
+    private alertService: AlertService,
+    private translate: TranslateService,
+    private config: ConfigService,
+    private location: Location
+  ) {
     super();
 
     this.googleClientId = this.config.getConfig()['googleClientId'];
@@ -168,6 +178,10 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   widgetLoadingStarted(name: string, data: any): any {
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }
