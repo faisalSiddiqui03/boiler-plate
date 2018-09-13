@@ -67,7 +67,7 @@ export class BannerComponent extends BaseComponent implements OnInit {
   }
 
   navigateToDeals() {
-    this.router.navigateByUrl('/category/deals/all');
+    this.router.navigateByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
   }
 
   getFullBannerUrl(src) {

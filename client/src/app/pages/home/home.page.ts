@@ -232,7 +232,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     if (Utils.isEmpty(this.getDeliverySlot())) {
       this.presentSlotModal()
     } else {
-      this.router.navigateByUrl('/product/deals/CU00215646');
+      this.router.navigateByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
     }
 
   }

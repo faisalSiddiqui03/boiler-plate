@@ -31,6 +31,6 @@ export class FooterComponent extends BaseComponent implements OnInit {
   }
 
   navigateToCategory(item) {
-    this.router.navigateByUrl('/product/' + item.name + '/' + item.categoryId)
+    this.router.navigateByUrl('/products/listing/(' + (item.sequence - 1) + ':' + (item.sequence - 1) +')?category=' + item.name + '&id=' + item.categoryId);
   }
 }

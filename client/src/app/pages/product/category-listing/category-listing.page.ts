@@ -56,11 +56,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       return `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
     }
   }
-
-  getCategoryUrl(categoryName, categoryId) {
-    return '/product/' + categoryName + '/' + categoryId;
-  }
-
   openProductDetails(product) {
     if(product.productType === 'B'){
       this.router.navigateByUrl('/pizza/' + product.title + '/' + product.id);
