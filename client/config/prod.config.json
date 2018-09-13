@@ -21,6 +21,7 @@
     "port": "33627",
     "db": "kt99-loopback"
   },
+  "sizePropertyId": "1940",
   "baseUrl": "/api/",
   "server": {
     "mw-static": {

@@ -9,6 +9,7 @@ import {
   ProductDetailsWidgetActions,
   OnWidgetLifecyle,
   OnWidgetActionsLifecyle,
+  ConfigService,
 } from '@capillarytech/pwa-framework';
 import {   
   IncrementValidator,
@@ -36,18 +37,21 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   productId: number;
   showToppingsView: boolean;
   updatingPrice: boolean;
+  sizePropertyId: number;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private alertService: AlertService,
     private translate: TranslateService,
+    private config: ConfigService,
   ) {
     super();
   }
 
   ngOnInit() {
     this.productId = this.route.snapshot.params.productId;
+    this.sizePropertyId = this.config.getConfig()['sizePropertyId'];
   }
 
   widgetLoadingStarted(name, data){
