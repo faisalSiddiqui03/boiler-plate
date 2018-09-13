@@ -17,7 +17,12 @@
 		"your_toppings": "Your Toppings",
 		"extra": "Extra",
 		"add_extra": "Add something extra",
-		"add_to_basket": "Add To My Basket"
+		"add_to_basket": "Add To My Basket",
+		"added_to_cart": "'Added to cart'"
+	},
+	"product_details": {
+		"add_to_basket": "Add To My Basket",
+		"added_to_cart": "'Added to cart'"
 	},
 	"cart": {
 		"apply": "apply",
