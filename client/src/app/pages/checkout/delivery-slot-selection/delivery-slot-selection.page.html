@@ -1,4 +1,4 @@
-<delivery-slots-widget class="full-height" [globalSlots]="true" [componentId]="getComponentId()">
+<delivery-slots-widget class="full-height" [globalSlots]="false" [deliveryMode]="getFulfilmentMode()?.mode" [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
   <ng-template let-widget="widget">
     <ng-container *ngIf="widget.model">
       <ion-content bg-transparent padding>

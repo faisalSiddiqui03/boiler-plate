@@ -90,6 +90,7 @@
             <div class="location-bar">
               <div class="form-control">
                 <ion-searchbar
+                  value="abs"
                   class="form-search" [debounce]="1000" [(ngModel)]="selectedCity" #focusInput
                   showCancelButton="false" placeholder="{{'home_page.select_area' | translate}}"
                   (click)="toggleDropDown('city');"
@@ -112,7 +113,7 @@
               </div>
               <div class="form-control"
                    *ngIf="getDeliveryMode() === deliveryModes?.HOME_DELIVERY">
-                <ion-searchbar class="form-search" [debounce]="1000" [(ngModel)]="selectedArea" #focusInput
+                <ion-searchbar [disabled]="!selectedCity || selectedCity === ''" class="form-search" [debounce]="1000" [(ngModel)]="selectedArea" #focusInput
                                showCancelButton="false" placeholder="{{'home_page.select_block' | translate}}"
                                (click)="isCitySelected();toggleDropDown('area');"
                                (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'area')">

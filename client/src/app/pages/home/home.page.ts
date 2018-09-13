@@ -65,10 +65,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   ngOnInit() {
+    console.log('------>', this.getCurrentStore());
   }
 
   ionViewDidEnter() {
-    console.log('Utkarsha ', this.getCurrentStore())
     this.selectedStore = this.getCurrentStore();
     this.changeRequested = false;
   }
@@ -94,21 +94,13 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
         if (data.length) {
           this.setCurrentStore(data[0]);
-          if (Utils.isEmpty(this.getDeliverySlot())) {
-            this.presentSlotModal()
-          } else {
-            this.navigateToDeals();
-          }
+          this.navigateToDeals();
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         if (data.length) {
           this.setCurrentStore(data[0]);
-          if (Utils.isEmpty(this.getDeliverySlot())) {
-            this.presentSlotModal()
-          } else {
-            this.navigateToDeals();
-          }
+          this.navigateToDeals();
         }
         break;
     }
