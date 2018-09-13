@@ -1,21 +1,21 @@
 <ion-header>
-    <app-header></app-header>
-  </ion-header>
-
-<ion-content no-padding>
-    <ion-card class="content" no-padding no-margin>
-        <app-sub-header [title]="titleValue"></app-sub-header>
-        <ion-card-content class="lg-container xs-width-700 content-area" no-padding margin-top>
-          <p>{{'contact_page.contact_page_help_message' | translate}}</p>
-          <div class="subheading">{{'contact_page.address_main_office' | translate}}</div>
-          <p >{{'contact_page.address_1' | translate}}<br>
-          {{'contact_page.address_2' | translate}}<br>
-          {{'contact_page.address_3' | translate}}</p>
-          <div class="subheading">{{'contact_page.phone_number' | translate}}</div>
-          <p ><a href="tel:+965 181 50 50">+965 181 50 50</a></p>
-          <div class="subheading">{{'contact_page.email' | translate}}</div>
-          <p><a href="mailto:phonlineorders@koutfood.com">phonlineorders@koutfood.com</a></p>
-    
-        </ion-card-content>
-      </ion-card>
+  <app-header></app-header>
+</ion-header>
+<ion-content>
+  <app-sub-header [title]="titleValue"></app-sub-header>
+  <div class="contact-content w-700">
+    <p>{{'contact_page.contact_page_help_message' | translate}}</p>
+    <h6>{{'contact_page.address_main_office' | translate}}</h6>
+    <p>{{'contact_page.address_1' | translate}}
+      <br> {{'contact_page.address_2' | translate}}
+      <br> {{'contact_page.address_3' | translate}}</p>
+    <h6>{{'contact_page.phone_number' | translate}}</h6>
+    <p>
+      <a href="tel:+9651815050">+965 181 50 50</a>
+    </p>
+    <h6>{{'contact_page.email' | translate}}</h6>
+    <p>
+      <a href="mailto:phonlineorders@koutfood.com">phonlineorders@koutfood.com</a>
+    </p>
+  </div>
 </ion-content>
