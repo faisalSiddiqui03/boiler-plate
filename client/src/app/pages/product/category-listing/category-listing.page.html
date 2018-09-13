@@ -19,10 +19,9 @@
             <ng-template let-widget="widget">
               <div *ngIf="widget.model">
                 <ion-tabs [scrollable]="true" [color]="'dark'" [tabbarHighlight]="true" [useRouter]="true">
-                  <ion-tab *ngFor="let item of widget.model.items" label="{{item.name}}"
-                           [selected]="item.categoryId === categoryId" [active]="item.categoryId === categoryId"
-                           href="/product/{{item.name}}/{{item.categoryId}}">
-                    <ion-router-outlet stack name="{{item.name}}"></ion-router-outlet>
+                  <ion-tab *ngFor="let item of widget.model.items; let i = index;" label="{{item.name}}"
+                           href="/products/listing/({{i}}:{{i}})?category={{item.name}}&id={{item.categoryId}}">
+                    <ion-router-outlet stack name="{{i}}"></ion-router-outlet>
                   </ion-tab>
                 </ion-tabs>
               </div>
@@ -32,9 +31,9 @@
       </ion-toolbar>
 
       <div class="container showcase-container">
-        <product-showcase-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [categories]="[categoryId]"
+        <product-showcase-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [filters]="showcaseFilter"
                                  [executor]="productShowcaseWidgetExecutor"
-                                 [action]="productShowcaseWidgetAction" [useMJData]=true [from]="1" [limit]="100">
+                                 [action]="productShowcaseWidgetAction">
           <ng-template let-widget="widget">
             <div *ngIf="widget.model == undefined">
               <div *ngIf="categoryName.toLocaleLowerCase() === 'deals'">

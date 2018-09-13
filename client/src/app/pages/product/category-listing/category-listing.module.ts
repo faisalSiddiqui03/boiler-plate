@@ -12,18 +12,13 @@ import { CategoryListingPage } from './category-listing.page';
 import { HeaderModule } from '../../../components/header/header.module';
 // import { CartModule } from '../../../components/cart/cart.module';
 import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: CategoryListingPage
-  }
-];
+import { CategoryRouterModule } from './category.router.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    CategoryRouterModule,
     HeaderModule,
     SkeletonModule,
     ImagePreloadModule,
@@ -38,7 +33,6 @@ const routes: Routes = [
       }
     }),
     IonicModule,
-    RouterModule.forChild(routes)
   ],
   declarations: [CategoryListingPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

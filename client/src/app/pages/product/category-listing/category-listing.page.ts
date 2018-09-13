@@ -25,7 +25,11 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   productShowcaseWidgetAction = new EventEmitter();
   productShowcaseWidgetExecutor = new EventEmitter();
   currencyCode: string;
-
+  showcaseFilter = {
+    from: 0,
+    limit: 100,
+    categoryIds: [this.categoryId],
+  };
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -38,8 +42,13 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   ngOnInit() {
-    this.categoryId = this.route.snapshot.params.categoryId;
-    this.categoryName = this.route.snapshot.params.categoryName;
+    this.route.queryParams
+      .subscribe((data) => {
+        this.categoryId = data.id;
+        this.showcaseFilter.categoryIds = [data.id];
+        this.showcaseFilter = Object.assign({}, this.showcaseFilter)
+        this.categoryName = data.category;
+      });
   }
 
   getProductImageUrl(product) {

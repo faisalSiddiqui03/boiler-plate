@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
-  { path: 'product/:categoryName/:categoryId', loadChildren: './pages/product/category-listing/category-listing.module#CategoryListingPageModule' },
   { path: 'product/:categoryName/:productName/:productId', loadChildren: './pages/product/product-details/product-details.module#ProductDetailsPageModule'},
   { path: 'login', loadChildren: './pages/user/auth/login/login.module#LoginPageModule' },
   { path: 'signup', loadChildren: './pages/user/auth/signup/signup.module#SignupPageModule' },
@@ -28,6 +27,7 @@ const routes: Routes = [
   { path: 'my-account', loadChildren: './pages/user/profile/my-account/my-account.module#MyAccountPageModule' },
   { path: 'delivery-slot-selection', loadChildren: './pages/checkout/delivery-slot-selection/delivery-slot-selection.module#DeliverySlotSelectionModule' },
   { path: 'pizza/:productId', loadChildren: './pages/product/pizza/pizza.module#PizzaPageModule' },
+  { path: 'products', loadChildren: './pages/product/category-listing/category-listing.module#CategoryListingPageModule' },
 ];
 
 @NgModule({
