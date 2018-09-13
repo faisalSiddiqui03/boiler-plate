@@ -1,9 +1,228 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>privacy-policy</ion-title>
-  </ion-toolbar>
+  <app-header></app-header>
 </ion-header>
-
-<ion-content padding>
-
+<ion-content>
+  <app-sub-header [title]="titleValue"></app-sub-header>
+  <div class="privacy-content w-700">
+    <div class="privacy-text">
+      <p>Pizza Hut MENAPAK S.à r.l. or any of its subsidiaries, affiliates and its franchisees (hereinafter referred to as either,
+        “Pizza Hut”, “we”, “us” or “our”) are committed to protecting the privacy of any personal information you may provide
+        us on this website and any other websites of ours (including www.pizzahut.me, together the “Sites”) and on any of
+        our mobile applications (the “App(s)”). </p>
+      <p> We believe it is important for you to know how we treat your personal information. The terms of this Privacy Policy
+        apply to all users of the Sites and all users of the App(s). If you do not agree with the terms of this Privacy Policy,
+        you should immediately cease the use of the Sites or the App(s), as applicable. Below you will find answers to questions
+        regarding our Privacy Policy. </p>
+      <ul>
+        <li>What information does Pizza Hut collect about me?</li>
+        <li>What does Pizza Hut do with the information collected?</li>
+        <li>With whom does Pizza Hut share the information?</li>
+        <li>How can I stop receiving notices about future offers or to stop my Personal Information from being shared with third
+          parties?
+        </li>
+        <li>How do I correct or update my Personal Information?</li>
+        <li>How does Pizza Hut protect the security of my Personal Information?</li>
+        <li>Do Pizza Hut's Sites and App(s) link to other sites?</li>
+        <li>How will Pizza Hut notify me of changes to its Privacy Policy?</li>
+        <li>How does Pizza Hut handle children’s privacy on the Sites and on the App(s)?</li>
+        <li>How do I contact Pizza Hut?</li>
+      </ul>
+    </div>
+    <div class="accordion-block">
+      <h5 (click)="openAccordion(1)" [class.active]="activeAccordion == 1">
+        WHAT INFORMATION DOES PIZZA HUT COLLECT ABOUT ME?
+        <div class="icon icon-arrow-down-2"></div>
+      </h5>
+      <div class="accordion-content" *ngIf="activeAccordion == 1">
+        <p> Personal Information means information which on its own or in combination with other information, allows identification
+          of an individual. We will collect personal information about you which you voluntarily provide, for example, in
+          the context of completing online forms on the Sites or within the App(s) or by corresponding with us.</p>
+        <p> Sensitive personal information means personal information relating to physical or mental health, race or ethnicity,
+          sexual life/preference, political opinions, religious or philosophical beliefs and/or criminal allegations or convictions.</p>
+        <p> Where you choose to provide personal details to us either in person, at a store, through the Site(s) or the App(s),
+          we may collect the following personal information from you:</p>
+        <ul>
+          <li>your full name, title and gender;</li>
+          <li>your work and home contact details eg address, telephone numbers and e-mail address; the reason for your contact,
+            which may be an enquiry, a request or enquiry on behalf of someone else, guest comment, promotion and/or competition;</li>
+          <li>if you create an account with us (whether through a Site or an App) - further details including your password and
+            account preferences;</li>
+          <li>your contact and marketing preferences;</li>
+          <li>if you take a survey or interact with us in various other ways - demographics information and information about
+            subjects that may interest you;</li>
+          <li>should you choose to create an account with us on our Site(s) using (or linking to) your Facebook or other social
+            media profile(s) - information contained within your social media account such as contacts, friends, likes, posts
+            and other information that you choose to share with us through the privacy settings on your social media account(s);</li>
+          <li>information you provide to us which reports a problem(s) with any of the Site(s) or App(s) and any further details
+            requested from you to help us deal with such problem(s);</li>
+          <li>information necessary for legal compliance;</li>
+          <li>where you “like” us or make posts on our pages on social networking websites;</li>
+          <li>technical information about the device which you use (for example the device type), log information (details of
+            your use of our Sites and App(s));</li>
+          <li>details of your location (where you visit us in person in store, or choose to activate the location related functions
+            of any Site or App);</li>
+          <li>your order information and history; and/or</li>
+          <li>any other information you may voluntarily provide to us.</li>
+        </ul>
+        <p> Depending on the Site(s) you are browsing, when you voluntarily provide us with your Personal Information, you may
+          be given the option to receive future offers and updates from Pizza Hut by e-mail and SMS marketing by checking
+          the appropriate opt-in box. If you choose to opt-in, your Personal Information will be kept in a secured database
+          and we will alert you via e-mail or SMS (as indicated by you) with information about our great Pizza Hut offers
+          and services. You can change your preferences in this regard at any time, as set out below.</p>
+        <p> You do not have to provide us with any sensitive personal information. Where you choose to provide us with such sensitive
+          personal information, by submitting that information to us, you are providing your consent to those details being
+          collected and otherwise processed by Us.</p>
+      </div>
+    </div>
+    <div class="accordion-block">
+      <h5 (click)="openAccordion(2)" [class.active]="activeAccordion == 2">
+        WHAT DOES PIZZA HUT DO WITH THE INFORMATION COLLECTED?
+        <div class="icon icon-arrow-down-2"></div>
+      </h5>
+      <div class="accordion-content" *ngIf="activeAccordion == 2">
+        <p> Pizza Hut may use your Personal Information for any of the following purposes (or as otherwise notified to you from
+          time to time):</p>
+        <ul>
+          <li>your full name, title and gender;</li>
+          <li>your work and home contact details eg address, telephone numbers and e-mail address; the reason for your contact,
+            which may be an enquiry, a request or enquiry on behalf of someone else, guest comment, promotion and/or competition;</li>
+          <li>if you create an account with us (whether through a Site or an App) - further details including your password and
+            account preferences;
+          </li>
+          <li>your contact and marketing preferences;</li>
+          <li>if you take a survey or interact with us in various other ways - demographics information and information about
+            subjects that may interest you;</li>
+          <li>should you choose to create an account with us on our Site(s) using (or linking to) your Facebook or other social
+            media profile(s) - information contained within your social media account such as contacts, friends, likes, posts
+            and other information that you choose to share with us through the privacy settings on your social media account(s);</li>
+          <li>information you provide to us which reports a problem(s) with any of the Site(s) or App(s) and any further details
+            requested from you to help us deal with such problem(s);</li>
+          <li>information necessary for legal compliance;</li>
+          <li>where you “like” us or make posts on our pages on social networking websites;</li>
+          <li>technical information about the device which you use (for example the device type), log information (details of
+            your use of our Sites and App(s));</li>
+        </ul>
+        <p> This list is not intended to be exhaustive and may be updated from time to time as business needs and legal requirements
+          dictate.
+        </p>
+      </div>
+    </div>
+    <div class="accordion-block">
+      <h5 (click)="openAccordion(3)" [class.active]="activeAccordion == 3">
+        WITH WHOM DOES PIZZA HUT SHARE THE INFORMATION?
+        <div class="icon icon-arrow-down-2"></div>
+      </h5>
+      <div class="accordion-content" *ngIf="activeAccordion == 3">
+        <p> Pizza Hut may share any Personal Information which it collects with any of its group companies or with its franchisees.
+          Your personal information will be made available for the purposes mentioned above (or as otherwise notified to
+          you from time to time), on a ‘need-to-know' basis and only to responsible corporate staff who properly need to
+          know these details to carry out our functions.</p>
+        <p> As part of achieving the processing purposes set out above, your personal information may also be made available
+          to third party organisations providing relevant services to us under contract. For example, this may include working
+          with third party data processing companies to support the Sites’ technical operations or execute a specific promotion
+          or program (such as providing responses to the guest comments page, conduct surveys, or maintain a database of
+          visitor information, etc). These companies may use information about you to perform their functions on our behalf.</p>
+        <p> As Pizza Hut and its group companies operate globally, it may be necessary to transfer your Personal Information
+          cross-border for the purposes set out above. We will ensure that adequate safeguards are in place to protect your
+          Personal Information. By submitting your Personal Information, you agree to this transfer, storing and other processing.</p>
+        <p> This policy applies if Pizza Hut shares your Personal Information with any of its group companies. If you choose
+          to provide your Personal Information directly to Pizza Hut’s group companies through their respective websites,
+          then their additional Privacy Policies will apply and should also be reviewed by you.</p>
+      </div>
+    </div>
+    <div class="accordion-block">
+      <h5 (click)="openAccordion(4)" [class.active]="activeAccordion == 4">
+        HOW CAN I STOP RECEIVING NOTICES ABOUT FUTURE OFFERS OR TO STOP MY PERSONAL INFORMATION FROM BEING SHARED WITH THIRD PARTIES?
+        <div
+          class="icon icon-arrow-down-2"></div>
+      </h5>
+      <div class="accordion-content" *ngIf="activeAccordion == 4">
+        <p> Please let us know by writing to us at the address given at the bottom of this policy. In addition, each time we
+          send you marketing information by e-mail or SMS text messaging, we will provide an opportunity for you to unsubscribe
+          from receiving further information from us.</p>
+      </div>
+    </div>
+    <div class="accordion-block">
+      <h5 (click)="openAccordion(5)" [class.active]="activeAccordion == 5">
+        HOW DO I CORRECT OR UPDATE MY PERSONAL INFORMATION?
+        <div class="icon icon-arrow-down-2"></div>
+      </h5>
+      <div class="accordion-content" *ngIf="activeAccordion == 5">
+        <p> You control the accuracy of your Personal Information. If your Personal Information changes, please correct, update
+          or delete/deactivate it by writing to us at the address given at the bottom of this policy.</p>
+      </div>
+    </div>
+    <div class="accordion-block">
+      <h5 (click)="openAccordion(6)" [class.active]="activeAccordion == 6">
+        HOW DOES PIZZA HUT PROTECT THE SECURITY OF MY PERSONAL INFORMATION?
+        <div class="icon icon-arrow-down-2"></div>
+      </h5>
+      <div class="accordion-content" *ngIf="activeAccordion == 6">
+        <p> Pizza Hut uses appropriate security measures to protect all Personal Information collected in a secure, controlled
+          environment.
+        </p>
+        <p> Where we have given you (or where you have chosen) a password that enables you to access certain parts of our Sites
+          or App(s), you are responsible for keeping this password confidential. We ask you not to share your password with
+          anyone.
+        </p>
+        <p> Unfortunately, the transmission of information via the internet is not completely secure. Although we will do our
+          best to protect your Personal Information, We cannot guarantee the security of your data transmitted to our Sites
+          or App(s); any transmission is at your own risk. Once we have received your information, We will use strict procedures
+          and security features to try to prevent unauthorised access.</p>
+      </div>
+    </div>
+    <div class="accordion-block">
+      <h5 (click)="openAccordion(7)" [class.active]="activeAccordion == 7">
+        DO PIZZA HUT'S SITES AND APP(S) LINK TO OTHER SITES?
+        <div class="icon icon-arrow-down-2"></div>
+      </h5>
+      <div class="accordion-content" *ngIf="activeAccordion == 7">
+        <p> Yes. The Sites and App(s) may contain links to other websites that may not be owned or operated by Pizza Hut. Pizza
+          Hut cannot control nor is responsible for the privacy practices or content of such other websites. Pizza Hut encourages
+          you to read the privacy statements of each and every website that collects personally identifiable information.
+          This Privacy Policy applies solely to Personal Information collected on the Sites and App(s).</p>
+      </div>
+    </div>
+    <div class="accordion-block">
+      <h5 (click)="openAccordion(8)" [class.active]="activeAccordion == 8">
+        HOW WILL PIZZA HUT NOTIFY ME OF CHANGES TO ITS PRIVACY POLICY?
+        <div class="icon icon-arrow-down-2"></div>
+      </h5>
+      <div class="accordion-content" *ngIf="activeAccordion == 8">
+        <p> Pizza Hut will post any changes to the Policy on the Sites homepages so visitors are always aware of any changes
+          to what information we collect, how we use it, and under what circumstances we disclose it. The new terms may be
+          displayed on-screen and you may be required to read and accept them to continue your use of the Sites or the App(s).
+          If we decide to use your Personal Information in a manner different than first communicated, Pizza Hut will notify
+          users by e-mail to the e-mail addresses on record. Users of the Sites / Apps will then be given a choice as to
+          whether or not their Personal Information can be used in the new manner.</p>
+      </div>
+    </div>
+    <div class="accordion-block">
+      <h5 (click)="openAccordion(9)" [class.active]="activeAccordion == 9">
+        HOW DOES PIZZA HUT HANDLE CHILDREN'S PRIVACY ON THE SITES AND ON THE APP(S)?
+        <div class="icon icon-arrow-down-2"></div>
+      </h5>
+      <div class="accordion-content" *ngIf="activeAccordion == 9">
+        <p> We take great care to protect the privacy of all of our customers and we are especially careful in relation to any
+          communications with children. It is important to us that children can enjoy our Sites and App(s) responsibly. Our
+          policy is not to collect Personal Information from children who are under the age of 12. If you are under 12, please
+          do not use our Sites or App(s).</p>
+        <p> We encourage parents to regularly monitor and supervise their children's online activities, for example, by adopting
+          parental control tools. If you are a parent and have any concerns about the collection or use of your child's Personal
+          Information then you may contact us using the contact details below.</p>
+      </div>
+    </div>
+    <div class="accordion-block">
+      <h5 (click)="openAccordion(10)" [class.active]="activeAccordion == 10">
+        HOW DO I CONTACT PIZZA HUT?
+        <div class="icon icon-arrow-down-2"></div>
+      </h5>
+      <div class="accordion-content" *ngIf="activeAccordion == 10">
+        <p> If you have any further questions concerning the Pizza Hut's Privacy Policy and the use of your Personal Information,
+          please contact
+          <a href="mailto:info@pizzahut.me">info@pizzahut.me</a>
+        </p>
+      </div>
+    </div>
+  </div>
 </ion-content>

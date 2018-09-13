@@ -17,7 +17,12 @@
 		"your_toppings": "Your Toppings",
 		"extra": "Extra",
 		"add_extra": "Add something extra",
-		"add_to_basket": "Add To My Basket"
+		"add_to_basket": "Add To My Basket",
+		"added_to_cart": "'Added to cart'"
+	},
+	"product_details": {
+		"add_to_basket": "Add To My Basket",
+		"added_to_cart": "'Added to cart'"
 	},
 	"cart": {
 		"apply": "apply",
@@ -75,6 +80,9 @@
 		"order_for": "Order for",
 		"order_for_later": "You can order for later. Just",
 		"pick_a_time": "pick a time"
+	},
+	"faq_page":{
+		"faq":"Frequently asked questions"
 	},
 	"favorites_page": {
 		"my_favorites": "my Favorites",
@@ -134,6 +142,9 @@
 		"no_orders": "No Orders Found",
 		"order_history": "My Order history"
 	},
+	"privacy_page":{
+		"privacy_policy": "Privacy Policy"
+	},
 	"reset_password_page": {
 		"email": "Email",
 		"email_placeholder": "Please Enter your Email",
@@ -166,6 +177,9 @@
 	"store_selection_page": {
 		"stores_selection": "Stores Selection",
 		"take_away_now": "Take Away Now"
+	},
+	"terms_page":{
+		"terms_conditions": "Terms & Conditions"
 	},
 	"user_profile_page": {
 		"email": "Email",

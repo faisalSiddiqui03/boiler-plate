@@ -6,6 +6,23 @@
 		"description_part_two": "",
 		"our_history": ""
 	},
+	"pizza": {
+		"add_topping_error": "Exceeded maximum topping count",
+		"add_topping_success": "Topping successfuly added",
+		"remove_topping_error": "Minimum topping count reached",
+		"remove_topping_success": "Topping successfuly removed",
+		"slect_size_crust": "Select your size and crust",
+		"change": "Change",
+		"change_cheese_sauce_etc": "Change toppings, sauce or cheese",
+		"your_toppings": "Your Toppings",
+		"extra": "Extra",
+		"add_extra": "Add something extra",
+		"add_to_basket": "Add To My Basket"
+	},
+	"product_details": {
+		"add_to_basket": "Add To My Basket",
+		"added_to_cart": "'Added to cart'"
+	},
 	"cart": {
 		"apply": "",
 		"cart_clear": "",

@@ -62,6 +62,10 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   openProductDetails(product) {
+    if(product.productType === 'B'){
+      this.router.navigateByUrl('/pizza/' + product.title + '/' + product.id);
+      return;
+    }
     this.router.navigateByUrl('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
   }
 

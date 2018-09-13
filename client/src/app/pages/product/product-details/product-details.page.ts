@@ -23,30 +23,32 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @pwaLifeCycle()
 export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+  loaded = false;
   productWidgetExecutor = new EventEmitter();
   productWidgetAction = new EventEmitter();
+  serverProduct;
+  clientProduct: Product;
+  productId: number;
   currencyCode: string;
   categoryId: string;
   productName: string;
-  productId: string;
-  loaded = false;
-  clientProduct: Product;
-  variants = ['Can', "Bottle (2L)"];
-  selectedVariant: number;
-  variantContent: string = "";
-  toggleSelectedBlock: boolean = false;
+  showAddToCart: boolean;
+  noOfProperties: number;
+  noOfSelectedProperties: number;
+  showVariants: boolean;
+  addingToCart: boolean;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
-    private translateService: TranslateService,
-    private config: ConfigService,
-    private loadingService: LoaderService,
+    private route: ActivatedRoute,
     private alertService: AlertService,
+    private translate: TranslateService,
+    private config: ConfigService,
     private location: Location,
+    private loaderService: LoaderService,
   ) {
     super();
-    this.translateService.use(Utils.getLanguageCode());
+    this.translate.use(Utils.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
@@ -56,62 +58,97 @@ export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidge
     this.productName = this.route.snapshot.params.productName;
   }
 
-  selectVariant(variant, index) {
-    this.selectedVariant = index;
-    this.variantContent = variant;
-    this.toggleSelectedVariant();
-  }
-
-  toggleSelectedVariant() {
-    this.toggleSelectedBlock = this.variantContent ? !this.toggleSelectedBlock : false;
+  widgetLoadingStarted(name, data){
+    console.log('Widget loading started' + name, data);
   }
 
   widgetLoadingSuccess(name, data) {
     if (name == WidgetNames.PRODUCT_DISPLAY) {
       this.loaded = true;
-      this.clientProduct = data.client;
+      this.serverProduct = data;
+      this.clientProduct = this.serverProduct.client;
+      this.setClient();
     }
   }
 
-  getProductImageUrl(product) {
-    if (product && product.multipleImages && product.multipleImages.length) {
-      return `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
-    }
+  widgetLoadingFailed(name, data) {
+    console.log('Widget loading failed' + name, data);
   }
 
-  getData(data) {
-    // console.log(data);
-  }
-
-  addToCart(product) {
-    this.productWidgetAction.emit(new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, product));
-  }
-
-  widgetActionFailed(name: string, data: any): any {
-    console.log('name action failed: ' + name + ' data: ' + data);
-  }
-
-  async widgetActionSuccess(name: string, data: any) {
-    console.log('name action success: ' + name + ' data: ' + data);
-    // loading service and alert service
-    switch (name) {
+  widgetActionSuccess(name: string, data: any) {
+    switch(name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
-        this.loadingService.stopLoading();
-        // let str = await this.translateService.instant('product.added_to_cart');
-        this.alertService.presentToast('Added to Cart', 3000, 'top');
+        console.log('Item added to cart : ', data);
+        this.loaderService.stopLoading();
+        this.alertService.presentToast(this.translate.instant('added_to_cart'), 1000, 'top');
+        this.goBack();
         break;
     }
   }
 
-  widgetLoadingFailed(name: string, data: any): any {
-    console.log('name loading failed: ' + name + ' data: ' + data);
+  widgetActionFailed(name: string, data: any) {
+    this.loaderService.stopLoading();
+    console.log('Widget action failed' + name, data);
   }
 
-  widgetLoadingStarted(name: string, data: any): any {
-    console.log('name loading success: ' + name + ' data: ' + data);
+  setClient(){
+    this.noOfProperties = 0;
+    this.noOfSelectedProperties = 0;
+    this.clientProduct.selectedPropertyValueIdMap.forEach((valueId, propId) => {
+      this.noOfProperties = this.noOfProperties + 1;
+      this.clientProduct.selectedPropertyValueIdMap.set(propId, 0);
+    });
+    this.showAddToCart = false;
+    this.serverProduct.variantProperties.map((prop) => {
+      prop.showProperty = true;
+    });
+  }
+
+  isPropertyValueSelected(propertyId: number, propertyvalueId: number) {
+    return this.clientProduct.selectedPropertyValueIdMap.get(propertyId) === propertyvalueId;
+  }
+
+  setSelectedPropertyvalue(propVal, prop) {
+    if(this.clientProduct.selectedPropertyValueIdMap.get(propVal.propertyId) === 0){
+      this.noOfSelectedProperties = this.noOfSelectedProperties + 1;
+    }
+    if(this.noOfSelectedProperties === this.noOfProperties) this.showAddToCart = true;
+    prop.showProperty = false;
+    this.clientProduct.setSelectedPropertyValueId(propVal.propertyId, propVal.id);
+  }
+
+  getSelectedPropValueName(property){
+    let selectedValue = '';
+    let propValueId = this.clientProduct.selectedPropertyValueIdMap.get(property.id);
+    property.values.map((propVal) => {
+      if(propVal.id === propValueId) selectedValue = propVal.name;
+    });
+    return selectedValue;
+  }
+
+  getProductImageUrl() {
+    if(!this.serverProduct 
+      || !this.serverProduct.multipleImages 
+      || !this.serverProduct.multipleImages.length){
+      return;
+    }
+    const imageUrl = this.getUrl(this.serverProduct.multipleImages[1].largeImage);
+    return imageUrl;
+  }
+
+  getUrl(url: string){
+    return `https://${url}`;
+  }
+
+  addToCart() {
+    this.loaderService.startLoading();
+    this.productWidgetAction.emit(
+      new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
+    );
   }
 
   goBack() {
+    this.setClient();
     this.location.back();
   }
 }
