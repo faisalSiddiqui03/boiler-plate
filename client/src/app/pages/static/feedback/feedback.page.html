@@ -1,9 +1,22 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>feedback</ion-title>
-  </ion-toolbar>
+  <app-header></app-header>
 </ion-header>
-
-<ion-content padding>
-
+<ion-content>
+  <app-sub-header [title]="titleValue"></app-sub-header>
+  <div class="feedback-content w-700">
+    <form class="form-section" padding [formGroup]="feedBackForm">
+      <div class="form-group" [class.error]="feedBackForm.get('name').touched && !feedBackForm.get('name').valid">
+        <ion-label for="name" text-capitalize>{{ 'feedback_page.name' | translate }}
+          <sup>*</sup>
+        </ion-label>
+        <div class="form-input">
+          <ion-input id="name" placeholder="{{ 'feedback_page.name_placeholder' | translate }}" inputmode="text" formControlName="name"></ion-input>
+        </div>
+        <div *ngIf="feedBackForm.get('name').touched">
+          <div class="error-msg" *ngIf="feedBackForm.get('name').errors?.required">{{ 'feedback_page.name_required' | translate }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </ion-content>
