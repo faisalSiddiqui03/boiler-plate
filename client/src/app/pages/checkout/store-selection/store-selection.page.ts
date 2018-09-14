@@ -123,4 +123,19 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   goToHome() {
     this.router.navigateByUrl('/home');
   }
+
+  getTime(store, time) {
+    let storeTiming;
+    if (time === 'onTime') {
+      storeTiming = store.currentDateStoreTime.get(this.deliveryModes.PICKUP).onTime;
+    } else if (time === 'offTime') {
+      storeTiming = store.currentDateStoreTime.get(this.deliveryModes.PICKUP).offTime;
+    }
+    const min = storeTiming.getMinutes() === 0 ? '00' : '0' + storeTiming.getMinutes();
+    const hours = storeTiming.getHours() > 10 ? storeTiming.getHours() : '0' + storeTiming.getHours();
+    const meridiem = storeTiming.getHours() < 12 ? 'AM' : 'PM';
+
+    return hours + ':' + min + ' ' + meridiem;
+  }
+
 }
