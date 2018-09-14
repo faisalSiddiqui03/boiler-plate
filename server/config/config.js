@@ -54,7 +54,12 @@ const config = {
           "maxFiles": "10d",
           "maxsize": 100000000,
           "json": false
-        }
+        },
+          "console": {
+              "level": "debug",
+              "colorize": true,
+              "timestamp": true
+          }
       },
       "ACCESS": {
         "dailyRotateFile": {
@@ -66,7 +71,12 @@ const config = {
           "maxFiles": "1d",
           "maxsize": 100000000,
           "json": false
-        }
+        },
+          "console": {
+              "level": "debug",
+              "colorize": true,
+              "timestamp": true
+          }
       },
       "BACKEND": {
         "dailyRotateFile": {
@@ -78,7 +88,12 @@ const config = {
           "maxFiles": "1d",
           "maxsize": 100000000,
           "json": false
-        }
+        },
+          "console": {
+              "level": "debug",
+              "colorize": true,
+              "timestamp": true
+          }
       },
       "ERROR": {
         "dailyRotateFile": {
@@ -90,7 +105,12 @@ const config = {
           "maxFiles": "1d",
           "maxsize": 100000000,
           "json": false
-        }
+        },
+          "console": {
+              "level": "debug",
+              "colorize": true,
+              "timestamp": true
+          }
       },
       "FORENSIC": {
         "dailyRotateFile": {
@@ -102,7 +122,12 @@ const config = {
           "maxFiles": "1d",
           "maxsize": 100000000,
           "json": false
-        }
+        },
+          "console": {
+              "level": "debug",
+              "colorize": true,
+              "timestamp": true
+          }
       }
     }
   },
