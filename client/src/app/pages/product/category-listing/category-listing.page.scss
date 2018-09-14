@@ -33,6 +33,7 @@
   .top-header-container {
     position: fixed;
     width: calc(100% - 380px);
+    z-index: 0;
   }
 
   .common-heading-dotted {
@@ -68,6 +69,7 @@
     margin-top: 56px;
     --min-height: 44px;
     width: calc(100% - 380px);
+    z-index: 0;
   }
 
   .showcase-container {
