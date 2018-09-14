@@ -6,7 +6,47 @@
 
   <store-locator-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [action]="storeLocatorWidgetAction">
     <ng-template let-widget="widget">
-      <div class="store-selection-wrap w-700">
+      
+      <div class="store-selection-wrap w-700" *ngIf="!stores">
+        <div class="select-store-block" padding>
+          <h5 no-margin text-uppercase>
+            <ion-skeleton-text class="h5-skeleton"></ion-skeleton-text>
+          </h5>
+          <div class="store-content" flex justify-content-between>
+            <div class="store-address">
+              <ion-skeleton-text class="address-skeleton"></ion-skeleton-text>
+              <br>
+              <ion-skeleton-text class="address-skeleton"></ion-skeleton-text>
+            </div>
+            <div class="store-times"><ion-skeleton-text class="p-skeleton"></ion-skeleton-text></div>
+          </div>
+          <div text-right class="take-away-now">
+            <ion-button color="success" size="small" class="btn-success" text-uppercase mode="ios" (click)="selectStore(store)">
+              {{'store_selection_page.take_away_now' | translate}}
+            </ion-button>
+          </div>
+        </div>
+        <div class="select-store-block" padding>
+          <h5 no-margin text-uppercase>
+            <ion-skeleton-text class="h5-skeleton"></ion-skeleton-text>
+          </h5>
+          <div class="store-content" flex justify-content-between>
+            <div class="store-address">
+              <ion-skeleton-text class="address-skeleton"></ion-skeleton-text>
+              <br>
+              <ion-skeleton-text class="address-skeleton"></ion-skeleton-text>
+            </div>
+            <div class="store-times"><ion-skeleton-text class="p-skeleton"></ion-skeleton-text></div>
+          </div>
+          <div text-right class="take-away-now">
+            <ion-button color="success" size="small" class="btn-success" text-uppercase mode="ios" (click)="selectStore(store)">
+              {{'store_selection_page.take_away_now' | translate}}
+            </ion-button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="store-selection-wrap w-700" *ngIf="stores">
         <div class="select-store-block" *ngFor="let store of stores" padding>
           <h5 no-margin text-uppercase>{{store.name}}</h5>
           <div class="store-content" flex justify-content-between>

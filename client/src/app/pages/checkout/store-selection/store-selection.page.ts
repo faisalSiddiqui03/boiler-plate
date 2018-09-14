@@ -6,6 +6,7 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Utils } from '../../../helpers/utils';
 import { StoreLocatorWidgetActions, OnWidgetLifecyle, OnWidgetActionsLifecyle } from '@capillarytech/pwa-framework';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-store-selection',
@@ -29,7 +30,9 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
-    private config: ConfigService) {
+    private config: ConfigService,
+    private location: Location
+  ) {
     super();
 
     // this.loaderService.startLoading();
@@ -69,12 +72,12 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   widgetLoadingSuccess(name: string, data: any): any {
     console.log('success name: ', name, ' data: ', data );
     if (name === 'STORE_SELECTOR' && this.globalSharedService.getFulfilmentMode()) {
-      if(this.cityId) {
+      if (this.cityId) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
             StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.globalSharedService.getFulfilmentMode().mode])
         );
 
-      } else if(this.latitude && this.longitude) {
+      } else if (this.latitude && this.longitude) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
             StoreLocatorWidgetActions.FIND_BY_LOCATION, [this.latitude, this.longitude, this.globalSharedService.getFulfilmentMode().mode])
         );
@@ -91,13 +94,16 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY:
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
+        if (!data || data.length === 0) {
+          this.router.navigate(['/home']);
+        }
         this.stores = data;
         break;
     }
   }
 
   selectStore(store) {
-    this.setCurrentStore(store)
+    this.setCurrentStore(store);
     this.navigateToDeals();
   }
 }
