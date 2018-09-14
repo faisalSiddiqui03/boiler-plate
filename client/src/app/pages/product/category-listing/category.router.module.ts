@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DummyPage } from '../dummy/dummy.page';
-import { SunnyPage } from '../sunny/sunny.page';
 import {CategoryListingPage } from './category-listing.page';
 
 const routes: Routes = [
