@@ -5,221 +5,141 @@
   <app-sub-header [title]="titleValue"></app-sub-header>
   <div class="terms-content w-700">
     <div class="terms-text">
-      <h4 text-uppercase text-center>PIZZA HUT TERMS OF USE</h4>
-      <p>These terms and conditions (the “Terms“) apply to www.pizzahut.me and any other websites operated by Pizza Hut Middle
-        East, North Africa and Pakistan LLC. Or any of its subsidiaries and affiliates (hereinafter referred to as “Pizza
-        Hut“, “We“ and “Na“) (the “Locations“). Please read these terms carefully, and if you do not wish to comply with
-        these terms, you should not access these sites. Your access to these websites is proof of your acceptance of these
-        terms.
-      </p>
-      <p>All promotions placed on the sites are subject to the terms and conditions set for this promotional award.</p>
-      <p>Your rights under these terms may not be waived or sublicensed or otherwise granted.</p>
-      <h6>Access to sites</h6>
-      <p>You can access our sites for free, and you are solely responsible for making all necessary arrangements to access our
-        sites, as well as ensuring that all persons who access our sites through your Internet connection are aware of these
-        terms and conditions, And ensure their compliance with these conditions.</p>
+      <h4 text-uppercase text-center>{{ 'terms_page.terms_text_head' | translate }}</h4>
+      <p>{{ 'terms_page.terms_text_p1' | translate }}</p>
+      <p>{{ 'terms_page.terms_text_p2' | translate }}</p>
+      <p>{{ 'terms_page.terms_text_p3' | translate }}</p>
+      <h6>{{ 'terms_page.terms_text_smallhead' | translate }}</h6>
+      <p>{{ 'terms_page.terms_text_p4' | translate }}</p>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(1)" [class.active]="activeAccordion == 1">
-        Site-specific information
+        {{ 'terms_page.terms_accordion1_head1' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 1">
-        <p>Pizza Hut seeks to ensure the accuracy and reliability of the information contained in its sites. However, Pizza
-          Hut and the World Wide Web (or web host) are not infallible and sometimes errors may occur. Therefore, appropriate
-          steps must be taken to verify all information contained in the sites before acting on them. From time to time,
-          Pizza Hut may review the information, services and resources contained in the Sites and reserve the right to make
-          any changes without obligation to notify any previous or prospective users or visitors. We do not guarantee that
-          the sites or any of the contents contained therein are free from error or omission.</p>
-        <p>Sites are linked to Pizza Hut in (a) in the Middle East and North Africa and (b) Pakistan, unless otherwise stated
-          or required by the context.</p>
+        <p>{{ 'terms_page.terms_accordion1_p1' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion1_p2' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(2)" [class.active]="activeAccordion == 2">
-        Intellectual property
+        {{ 'terms_page.terms_accordion2_head1' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 2">
-        <p>This site contains many valuable brands owned and used by Pizza Hut and its subsidiaries and affiliates around the
-          world to differentiate the quality of its services and products. These trademarks and copyrights are protected
-          from copying and imitation in accordance with local and international laws and may not be copied or photocopied
-          without the written permission of Pizza Hut or any of its subsidiaries and subsidiaries.</p>
-        <p>All graphic images, buttons and text contained in the Sites (and Web Design) are exclusive property of Pizza Hut,
-          except for personal use, and may not be copied, distributed, photographed or transmitted in any form or by any
-          electronic, mechanical, photocopying, recording or otherwise So, without the written permission of Pizza Hut. The
-          content of the Sites shall also be considered, arranged and coordinated, including but not limited to trademarks,
-          service marks, cover designs, text and content, from registered property and protected from copying, imitation,
-          publishing or counterfeiting in accordance with local and international laws. Or display or distribute it without
-          the written permission of Pizza Hut.
-        </p>
-        <p>Any unauthorized use, structure, serialization, arrangement, design, branding, service marks, or trade mark of the
-          Site Materials is in violation of civil or criminal laws, including but not limited to copyright laws Trademark
-          laws, privacy and publicity laws, communications legislation and regulations.</p>
-        <p>By visiting the sites you do not acquire or obtain implicitly or otherwise any license or right to use or make additional
-          copies of any of the materials or information contained in the sites.</p>
-        <p>If you violate these terms by copying or downloading any part of our sites, your right to use our sites will immediately
-          cease and, at our option, you must return or destroy any copies you have received.</p>
+        <p>{{ 'terms_page.terms_accordion2_p1' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion2_p2' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion2_p3' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion2_p4' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion2_p5' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(3)" [class.active]="activeAccordion == 3">
-        Viruses
+        {{ 'terms_page.terms_accordion3_head1' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 3">
-        <p>We do not guarantee that websites are free from viruses or malware.</p>
-        <p>You are responsible for the creation of your information technology, software and platform in order to access our
-          sites. You must use your antivirus software.</p>
-        <p>You should not misuse our sites by deliberately infecting viruses, Trojans, worms, computer bombs, logical bombs,
-          or other malicious or technologically harmful substances. You must not attempt to gain unauthorized access to our
-          sites or the server stored in our sites or any server, computer or database connected to our sites. You should
-          not attack our sites to interrupt service or conduct a denial of service attack. We will report any such breach
-          to relevant law enforcement authorities and we will cooperate with these authorities by disclosing your identity
-          to them. In the event of such a breach, your right to browse our site will cease immediately.</p>
+        <p>{{ 'terms_page.terms_accordion3_p1' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion3_p2' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion3_p3' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(4)" [class.active]="activeAccordion == 4">
-        Link to our site
+        {{ 'terms_page.terms_accordion4_head1' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 4">
-        <p>You can link to our main page www.pizzahut.me, provided you do so fairly and legally without damaging or exploiting
-          our reputation.</p>
-        <p>You should not create, imply or endorse, any link that suggests, in any way, our participation, consent or endorsement.</p>
-        <p>You should not create a link to our sites in any of the other websites that you do not own.</p>
-        <p>You do not need to frame our sites on any other site, nor may you link to any part of our sites other than www.pizzahut.me.</p>
-        <p>We reserve the right to withdraw the link permission without any notice.</p>
-        <p>The resources and links of others in our sites</p>
-        <p>Our sites may be linked to non-Pizza Hut sites. Hypertext links are provided as a service to users but are not supported
-          or related to our sites or Pizza Hut. Pizza Hut has not reviewed any of the site hyperlinks and is not responsible
-          for the content of any other sites. These sites may be accessed at your own risk, and Pizza Hut does not guarantee
-          or assume responsibility for the content, accuracy or completeness of these links or the hyperlink sites of our
-          sites. In addition, Pizza Hut does not implicitly endorse the hyperlinks of our sites. Pizza Hut will not in any
-          way assume any liability for advertising content or third party sponsorship that may appear on Pizza Hut's websites
-          in compliance with any laws or regulations.</p>
-        <p>Our websites may contain references to companies, brands, or other product names. The names of these companies, trademarks
-          and products listed below are used for identification purposes only and may be trademarks of their respective owners.
-          The images of people, places, charts, or forms displayed or posted on our sites are either owned by Pizza Hut or
-          used with the permission of Pizza Hut. Pizza Hut may be, but is not necessarily, affiliated with or under the patronage
-          of any of the owners, brands or other products appearing on the Site and makes no representations about any of
-          these companies, trademarks, owners, products or services. Your use of any of these trademarks or their names or
-          logos may constitute a violation of their rights.</p>
+        <p>{{ 'terms_page.terms_accordion4_p1' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion4_p2' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion4_p3' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion4_p4' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion4_p5' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion4_p6' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion4_p7' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion4_p8' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(5)" [class.active]="activeAccordion == 5">
-        Defining responsibility
+        {{ 'terms_page.terms_accordion5_head1' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 5">
-        <p>Nothing in these Terms excludes or limits our liability for death or personal injury arising from negligence, fraud,
-          fraud, or any other liability that can not be excluded or restricted by law.</p>
-        <p>As mentioned above, our websites can be accessed free of charge. By continuing to access the Sites, you acknowledge
-          and agree that you are responsible for your use of the Sites to the extent permitted by law. We also exclude all
-          terms, warranties, representations or other terms that may apply to the Sites or any Content contained therein,
-          whether express or implied .</p>
-        <p>We will not be liable to any user for any loss or damage, whether in connection with contractual or tortious liability
-          (including negligence), breach of legal or other obligations, even if foreseeable, arising out of or in connection
-          with:
-        </p>
-        <p>Use or inability to use our sites, </p>
-        <p>use or rely on any of the content displayed on our sites,</p>
-        <p>If you are a commercial user, please note that we will not be responsible for:</p>
+        <p>{{ 'terms_page.terms_accordion5_p1' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p2' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p3' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p4' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p5' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p6' | translate }}</p>
         <ul>
-          <li>Loss of profits, sales, business or revenue</li>
-          <li>the work is stopped,</li>
-          <li>Loss of expected savings,</li>
-          <li>Loss of business opportunity, goodwill or reputation,</li>
-          <li>Any direct or consequential loss or damage.</li>
-
+          <li>{{ 'terms_page.terms_accordion5_list1' | translate }}</li>
+          <li>{{ 'terms_page.terms_accordion5_list2' | translate }}</li>
+          <li>{{ 'terms_page.terms_accordion5_list3' | translate }}</li>
+          <li>{{ 'terms_page.terms_accordion5_list4' | translate }}</li>
+          <li>{{ 'terms_page.terms_accordion5_list5' | translate }}</li>
         </ul>
-        <p>If you are a consumer user, please note that we provide our sites for private and local use only. No part of the
-          material on our sites should be used for commercial purposes, and we are not responsible for any loss of revenue,
-          loss of work, interruption of work or loss of employment.</p>
-        <p>We will not be liable for any loss or damage caused by viruses, any distributed denial of service attack, or technology
-          that may affect your computer, computer software, data or other special material as a result of your browsing of
-          our sites or as a result of downloading any material The material published on it or any website connected to it.</p>
-        <p>We do not take any responsibility for the content of websites linked to our sites. Such links should not be adopted
-          as part of the links to our sites. We will therefore not be liable for any loss or damage that may arise as a result
-          of your use of it.</p>
-        <p>Any software will be downloaded at your own risk. If you have doubts about the validity of the software that will
-          be downloaded to your computer, it is recommended that you get specialist advice before downloading it.</p>
-        <p>Terms and Conditions of Use of K-NET Payment Method:</p>
-        <p>Please note that the connection is via a protected network and there is no room to leak any private information.</p>
-        <p>Please read the following terms and conditions before proceeding with the K-NET Payment Wizard:</p>
-        <p>After completing the application you will receive a text message stating that the application has been completed.
-          A second text message will be sent to confirm that the order has been received by the restaurant. Any cancellation
-          of the order must be made within five minutes of receipt of confirmation of payment from the bank.</p>
-        <p>If the request is canceled within five minutes, the order will be returned within three business days. In the event
-          of any delay in the return of the value of the application, the user must review his bank to pursue the banking
-          process. A text message will be sent as soon as the request is canceled to the user.</p>
-        <p>Customers using the K-NET payment method are required to be available on their telephone numbers for any review.
-          To inquire or amend the application, please call:</p>
+        <p>{{ 'terms_page.terms_accordion5_p7' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p8' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p9' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p10' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p11' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p12' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p13' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p14' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p15' | translate }}</p>
+        <p>{{ 'terms_page.terms_accordion5_p16' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(6)" [class.active]="activeAccordion == 6">
-        Revocation and independence of texts
+        {{ 'terms_page.terms_accordion6_head1' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 6">
-        <p>If any court, tribunal or any competent court at any time rules that these conditions are not in force or not enforceable,
-          such decision shall not invalidate or cancel the rest of the conditions. These conditions must be corrected by
-          modifying or separating noncommercial parts if necessary, so that the rest of the conditions remain valid, valid
-          and applicable with due regard to the original intent of the parties concerned, or if this is not available, another
-          valid and legal text may be developed and Wanted by all parties. Any non-standard or non-applicable parts shall
-          be excluded, otherwise the validity of the parts concerned in any other jurisdiction shall not be affected by those
-          parts.</p>
+          <p>{{ 'terms_page.terms_accordion6_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(7)" [class.active]="activeAccordion == 7">
-        Applicable laws
+        {{ 'terms_page.terms_accordion7_head1' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 7">
-        <p>These Terms are governed by the laws of England and Wales and you agree that English courts are exclusively entitled
-          to jurisdiction in any dispute. These sites are only used by people who have access through (a) the Middle East
-          and North Africa and (b) Pakistan. The goods advertised, displayed or provided on our websites are available to
-          residents of (or companies based in) (a) the Middle East and North Africa region and (b) Pakistan. We make no representations
-          that any of the materials contained in this site is appropriate for any other jurisdiction.</p>
+          <p>{{ 'terms_page.terms_accordion7_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(8)" [class.active]="activeAccordion == 8">
-        Change these conditions
+        {{ 'terms_page.terms_accordion8_head1' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 8">
-        <p>We may review these terms at any time by editing this page. Please review this page from time to time to see any
-          changes, as per our commitment to you.</p>
+          <p>{{ 'terms_page.terms_accordion8_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(9)" [class.active]="activeAccordion == 9">
-        Your privacy
+        {{ 'terms_page.terms_accordion9_head1' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 9">
-        <p>The Privacy Policy of Pizza Hut applies to the use of personal information obtained from you. These policies should
-          be regularly reviewed and verified regularly and kept informed of the latest issue. Pizza Hut will not send any
-          of your personal information to others for marketing purposes without your consent.</p>
-        <p>All payment transactions are made through the Payment Gateway Provider and not through Pizza Hut.</p>
+          <p>{{ 'terms_page.terms_accordion9_p1' | translate }}</p>
+          <p>{{ 'terms_page.terms_accordion9_p2' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(10)" [class.active]="activeAccordion == 10">
-        To contact us
+        {{ 'terms_page.terms_accordion10_head1' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
-      <div class="accordion-content" *ngIf="activeAccordion == 1"0>
-        <p>If there are any general inquiries, or contest any transaction conducted on the sites, please feel free to contact
-          us at
+      <div class="accordion-content" *ngIf="activeAccordion == 10">
+        <p>{{ 'terms_page.terms_accordion10_p1' | translate }}
           <a href="mailto:info@pizzahut.me">info@pizzahut.me</a>
         </p>
-        <p>Thank you for visiting our sites.</p>
+        <p>{{ 'terms_page.terms_accordion10_p2' | translate }}</p>
       </div>
     </div>
   </div>

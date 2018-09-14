@@ -5,286 +5,260 @@
   <app-sub-header [title]="titleValue"></app-sub-header>
   <div class="faq-content w-700">
     <div class="accordion-block">
-      <h5 (click)="openAccordion(1)" [class.active]="activeAccordion == 1">Why should I place an order online?
+      <h5 (click)="openAccordion(1)" [class.active]="activeAccordion == 1">
+        {{ 'faq_page.faq_accordion1_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 1">
-        <p>Placing an online order means that you can place the order at your convenience, never a busy signal or an incorrect
-          order due to miscommunication.</p>
+        <p>{{ 'faq_page.faq_accordion1_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(2)" [class.active]="activeAccordion == 2">
-        How do I place an order on pizzahut.me?
+          {{ 'faq_page.faq_accordion2_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 2">
-        <p>Simply click on ‘add to order’ when you have chosen your pizza and click on check-out when you have added all the
-          products you want.</p>
+          <p>{{ 'faq_page.faq_accordion2_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(3)" [class.active]="activeAccordion == 3">
-        Can I place multiple orders?
+          {{ 'faq_page.faq_accordion3_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 3">
-        <p>Yes, you can. As soon as you have clicked ‘place my order’ and see a page that confirms that we have received your
-          order you can place another order.</p>
+          <p>{{ 'faq_page.faq_accordion3_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(4)" [class.active]="activeAccordion == 4">
-        Can I re-order a previous order?
+          {{ 'faq_page.faq_accordion4_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 4">
-        <p>Yes you can, as long as you are signed in to your account when you placed the previous order. To see your previous
-          orders go to the ‘Order history’ section under
-          <a (click)="goToPage('my-account')">My account</a>
-        </p>
+          <p>{{ 'faq_page.faq_accordion4_p1' | translate }} <a (click)="goToPage('my-account')">{{ 'faq_page.faq_accordion4_p1link' | translate }}</a></p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(5)" [class.active]="activeAccordion == 5">
-        What is a future order?
+          {{ 'faq_page.faq_accordion5_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 5">
-        <p>If you want your pizza to be delivered on a specific time instead of as soon as possible this is a future order.
-          You can place orders to be delivered later on the same day (at least 1 hour from when you are placing the order)
-          or in the next two days. If you place a future order you will receive a confirmation as soon as you place the order
-          as well as a reminder on the day the delivery is due.</p>
-        <p>Choose ‘now’ if you want your order delivered as soon as possible.</p>
+          <p>{{ 'faq_page.faq_accordion5_p1' | translate }}</p>
+          <p>{{ 'faq_page.faq_accordion5_p2' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(6)" [class.active]="activeAccordion == 6">
-        How long will the order take to reach me?
+          {{ 'faq_page.faq_accordion6_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 6">
-        <p>Our orders usually take about 30 minutes to be delivered; however, there are instances, due to traffic or high demand
-          during Ramadan for example that it may take longer, for which we inform about accordingly.</p>
+          <p>{{ 'faq_page.faq_accordion6_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(7)" [class.active]="activeAccordion == 7">
-        What payment options are available through Internet Ordering?
+          {{ 'faq_page.faq_accordion7_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 7">
-        <p>We currently accept KNET payments and cash on delivery.</p>
+          <p>{{ 'faq_page.faq_accordion7_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(8)" [class.active]="activeAccordion == 8">
-        Can I save my credit card information for future online purchases?
+          {{ 'faq_page.faq_accordion8_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 8">
-        <p>No. For security purposes, all your credit card information are handled through a secured bank gateway and are never
-          saved on the Pizza Hut website.</p>
+          <p>{{ 'faq_page.faq_accordion8_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(9)" [class.active]="activeAccordion == 9">
-        Why is there a minimum amount for orders?
+          {{ 'faq_page.faq_accordion9_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 9">
-        <p>For orders placed online or by phone there is a minimum order amount. For most locations this is KWD 1.700, but it
-          can be higher if you are located further away.</p>
+          <p>{{ 'faq_page.faq_accordion9_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(10)" [class.active]="activeAccordion == 10">
-        Are delivery charges higher for customers who order from Pizza Hut online?
+          {{ 'faq_page.faq_accordion10_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 10">
-        <p>No, the delivery fee is always the same online as it is offline for the restaurant taking and delivering your order.</p>
+          <p>{{ 'faq_page.faq_accordion10_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(11)" [class.active]="activeAccordion == 11">
-        How can I tell how much I’m being charged for delivery service?
+          {{ 'faq_page.faq_accordion11_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 11">
-        <p>The delivery fee is listed at checkout in the itemized portion of the cart summary.</p>
+          <p>{{ 'faq_page.faq_accordion11_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(12)" [class.active]="activeAccordion == 12">
-        How will I know when the restaurant received my Internet Order?
+          {{ 'faq_page.faq_accordion12_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 12">
-        <p>Once you submit your order, the Order Confirmation page will show the time your order was received along with an
-          estimated time that your order will be ready for pick-up or delivery. You will also receive a confirmation email
-          at the email address you provided when placing the order. If you're still unsure about your order, you can always
-          call our call center: 181 50 50.</p>
+          <p>{{ 'faq_page.faq_accordion12_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(13)" [class.active]="activeAccordion == 13">
-        How can I check the status of my order?
+          {{ 'faq_page.faq_accordion13_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 13">
-        <p>You can track your order by clicking on ‘track my order’ in the order confirmation email or text message.</p>
+          <p>{{ 'faq_page.faq_accordion13_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(14)" [class.active]="activeAccordion == 14">
-        I forgot to add an item to my order?
+          {{ 'faq_page.faq_accordion14_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 14">
-        <p>You can contact us at 181 50 50 and hopefully, depending on the status of your order, we may be able to make the
-          requested change. It may be difficult to make changes for orders that are already on the way to the specific destination.</p>
+          <p>{{ 'faq_page.faq_accordion14_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(15)" [class.active]="activeAccordion == 15">
-        How long does the K-NET/Credit Card refund process take?
+          {{ 'faq_page.faq_accordion15_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 15">
-        <p>The customer refund method might take up to two working days to process on the K-NET payment gateway, and then you
-          have to, kindly, follow up with the bank. We will send an email to that contains a printout of the refund advice
-          printed from K-NET payment gateway as reference in case you need to revise with the bank. To learn more about the
-          K-NET/Credit Card refund, for further details please check our
-          <a  (click)="goToPage('terms')">Terms and Conditions</a>
+          <p>{{ 'faq_page.faq_accordion15_p1' | translate }}  <a  (click)="goToPage('terms')">{{ 'faq_page.faq_accordion15_p1link' | translate }}</a>
         </p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(16)" [class.active]="activeAccordion == 16">
-        Can I have multiple addresses into my account?
+          {{ 'faq_page.faq_accordion16_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 16">
-        <p>Yes. You can add as many addresses as you need to a single account. Go to
-          <a (click)="goToPage('my-account')">My Account</a> and click on the Saved Locations button.</p>
+        <p>{{ 'faq_page.faq_accordion16_p1' | translate }}
+          <a (click)="goToPage('my-account')">{{ 'faq_page.faq_accordion16_p1link' | translate }}</a> {{ 'faq_page.faq_accordion16_p1end' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(17)" [class.active]="activeAccordion == 17">
-        How do I reset my password if I have lost or forgotten it?
+          {{ 'faq_page.faq_accordion17_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 17">
-        <p>If you forget your password, that's OK! Just click on the “Forgot your password?“ link on the
-          <a (click)="goToPage('login')">Sign in</a> page.</p>
+        <p>{{ 'faq_page.faq_accordion17_p1' | translate }}
+           <a (click)="goToPage('login')">{{ 'faq_page.faq_accordion17_p1link' | translate }}</a> {{ 'faq_page.faq_accordion17_p1end' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(18)" [class.active]="activeAccordion == 18">
-        Where can I change my account info?
+          {{ 'faq_page.faq_accordion18_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 18">
-        <p>Once you've signed in to the site with your username and password, go to
-          <a (click)="goToPage('my-account')">My Account</a> from the menu. You can change your account information there.</p>
+        <p>{{ 'faq_page.faq_accordion18_p1' | translate }}
+          <a (click)="goToPage('my-account')">{{ 'faq_page.faq_accordion18_p1link' | translate }}</a> {{ 'faq_page.faq_accordion18_p1end' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(19)" [class.active]="activeAccordion == 19">
-        How can I find a restaurant near me?
+          {{ 'faq_page.faq_accordion19_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 19">
-        <p>The
-          <a (click)="goToPage('home')">Hut Locator</a> will help you find the restaurant nearest you. It will also show which locations offer dine-in,
-          delivery and carryout.</p>
+        <p>{{ 'faq_page.faq_accordion19_p1' | translate }}
+          <a (click)="goToPage('home')">{{ 'faq_page.faq_accordion19_p1link' | translate }}</a> {{ 'faq_page.faq_accordion19_p1end' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(20)" [class.active]="activeAccordion == 20">
-        How can I give feedback to Pizza Hut about my restaurant experience?
+          {{ 'faq_page.faq_accordion20_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 20">
-        <p>Pizza Hut wants to ensure that you have a terrific experience in our restaurants and on our website. If you would
-          like to provide feedback you can do that
-          <a (click)="goToPage('feedback')">here</a>
+        <p>{{ 'faq_page.faq_accordion20_p1' | translate }}
+          <a (click)="goToPage('feedback')">{{ 'faq_page.faq_accordion20_p1link' | translate }}</a>
         </p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(21)" [class.active]="activeAccordion == 21">
-        Which restaurants offer delivery service?
+          {{ 'faq_page.faq_accordion21_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 21">
-        <p>Most Pizza Hut restaurants offer delivery service. To find out if your hometown Pizza Hut restaurant offers delivery,
-          enter your street address into our Store Locator and look for the delivery icon in the search results.</p>
+        <p>{{ 'faq_page.faq_accordion21_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(22)" [class.active]="activeAccordion == 22">
-        How can I find nutritional information on Pizza Hut products?
+          {{ 'faq_page.faq_accordion22_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 22">
-        <p>You can find nutritional information on Pizza Hut products under ‘nutritional values’ which you can find at the bottom
-          of the homepage. You can also click
-          <a (click)="goToPage('nutrition')">here</a>
+        <p>{{ 'faq_page.faq_accordion22_p1' | translate }}
+          <a (click)="goToPage('nutrition')">{{ 'faq_page.faq_accordion22_p1link' | translate }}</a>
         </p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(23)" [class.active]="activeAccordion == 23">
-        I can’t find what I’m looking for, whom do I contact?
+          {{ 'faq_page.faq_accordion23_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 23">
-        <p>If you don't see the answer to your question, please complete the from under
-          <a (click)="goToPage('contact-us')">contact us</a> or you can call us on 181 50 50.</p>
+        <p>{{ 'faq_page.faq_accordion23_p1' | translate }}
+          <a (click)="goToPage('contact-us')">{{ 'faq_page.faq_accordion23_p1link' | translate }}</a> {{ 'faq_page.faq_accordion23_p1end' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(24)" [class.active]="activeAccordion == 24">
-        How do I organize a birthday party at Pizza Hut?
+          {{ 'faq_page.faq_accordion24_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 24">
-        <p>We have several options for birthday parties at Pizza Hut restaurants, click
-          <a (click)="goToPage('home')">here</a> for more information.</p>
+        <p>{{ 'faq_page.faq_accordion24_p1' | translate }}
+          <a (click)="goToPage('home')">{{ 'faq_page.faq_accordion24_p1link' | translate }}</a> {{ 'faq_page.faq_accordion24_p1end' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(25)" [class.active]="activeAccordion == 25">
-        How can I register for offers?
+          {{ 'faq_page.faq_accordion25_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 25">
-        <p>There are several ways you can do this; you can 'Like' our page on Facebook, follow us on Twitter or register online
-          and tick the box to receive offers from us. Remember to keep an eye on our hot deals page, there are always great
-          money savings available!</p>
+        <p>{{ 'faq_page.faq_accordion25_p1' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(26)" [class.active]="activeAccordion == 26">
-        How do I unsubscribe?
+          {{ 'faq_page.faq_accordion26_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 26">
-        <p>Click on our
-          <a (click)="goToPage('contact-us')">Contact Us</a> where you'll be able to unsubscribe from emails and text messages.</p>
+        <p>{{ 'faq_page.faq_accordion26_p1' | translate }}
+          <a (click)="goToPage('contact-us')">{{ 'faq_page.faq_accordion26_p1link' | translate }}</a> {{ 'faq_page.faq_accordion26_p1end' | translate }}</p>
       </div>
     </div>
     <div class="accordion-block">
       <h5 (click)="openAccordion(27)" [class.active]="activeAccordion == 27">
-        How will you use my personal information?
+          {{ 'faq_page.faq_accordion27_head' | translate }}
         <div class="icon icon-arrow-down-2"></div>
       </h5>
       <div class="accordion-content" *ngIf="activeAccordion == 27">
-        <p>Pizza Hut takes security and use of personal information very seriously; for full details of our Privacy Policy please
-          click
-          <a (click)="goToPage('privacy-policy')">here</a>
+        <p>{{ 'faq_page.faq_accordion27_p1' | translate }}
+          <a (click)="goToPage('privacy-policy')">{{ 'faq_page.faq_accordion27_p1link' | translate }}</a>
         </p>
       </div>
     </div>
