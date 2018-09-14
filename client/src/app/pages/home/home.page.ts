@@ -49,6 +49,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   bannerUrl: string;
   changeRequested: boolean = false;
   hasError: { [name:string] : string | boolean } = {};
+  citySelectionHistory: any = {};
 
   deliveryModes = DeliveryModes;
 
@@ -62,7 +63,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
     this.hasError = {
-      selectAreaInput: false
+      selectAreaFirst: false
     };
   }
 
@@ -134,7 +135,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   isCitySelected() {
-    this.hasError.selectAreaInput = !this.selectedCity;
+    this.hasError.selectAreaFirst = !this.selectedCity;
   }
 
   toggleDropDown(name: string, force: boolean = false, forceValue?: boolean) {
@@ -171,6 +172,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   selectCity(city) {
+    this.hasError.selectAreaFirst = false;
     let previousCity = this.selectedCity ? this.selectedCity : '';
     this.selectedCity = city.name;
     this.selectedCityCode = city.code;
@@ -243,12 +245,21 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   }
 
-  changeOrderMode(mode) {
+  changeOrderMode(mode, previousMode) {
+    this.toggleDropDown('area', true, false);
+    this.toggleDropDown('city', true, false);
+    this.citySelectionHistory[previousMode] = {
+      selectedCity: this.selectedCity || '',
+      selectedCityCode: this.selectedCityCode || '',
+      selectedArea: this.selectedArea || '',
+      selectedAreaCode: this.selectedAreaCode || ''
+    };
     this.fulfilmentModeWidgetAction.emit(new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, mode));
-    this.selectedCity = '';
-    this.selectedCityCode = '';
-    this.selectedArea = '';
-    this.selectedAreaCode = '';
+    const selected = this.citySelectionHistory[mode] || {};
+    this.selectedCity = selected.selectedCity || '';
+    this.selectedCityCode = selected.selectedCityCode || '';
+    this.selectedArea = selected.selectedArea || '';
+    this.selectedAreaCode = selected.selectedAreaCode || '';
   }
 
   isStoreSelected() {
@@ -277,5 +288,19 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   getDeliveryMode() {
     return this.globalSharedService.getFulfilmentMode() ? this.globalSharedService.getFulfilmentMode().mode : null;
+  }
+
+  outSideClick() {
+    if (this.dropdownViewStatus.get('area')) {
+      this.toggleDropDown('area', true, false);
+    }
+    if (this.dropdownViewStatus.get('city')) {
+      this.toggleDropDown('city', true, false);
+    }
+  }
+
+  preventPropogation(e) {
+    e.preventDefault();
+    e.stopPropagation();
   }
 }
