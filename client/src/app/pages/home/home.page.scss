@@ -93,9 +93,6 @@
                 }
             }
         }
-        .has-error {
-          border: 1px #ec0a0a solid!important;
-        }
     }
   }
 
@@ -125,15 +122,12 @@
 
 .banner-home {
   display:block;
-  height:200px;
-  line-height:200px;
+  max-height:200px;
   overflow:hidden;
   img {
     position: relative;
-    margin: -50% auto;
     width: 100%;
     height:auto;
-    vertical-align:middle;
   }
 }
 
@@ -225,4 +219,14 @@ ion-row {
 ion-button {
   --border-radius: 5px;
   font-size: 15px;
+}
+
+@media (min-width: 600px) {
+  .banner-home {
+    line-height: 200px;
+    img {
+      margin: -50% auto;
+      vertical-align: middle;
+    }
+  }
 }
