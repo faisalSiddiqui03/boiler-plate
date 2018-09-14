@@ -118,7 +118,10 @@
                                (click)="isCitySelected();toggleDropDown('area');"
                                (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'area')">
                 </ion-searchbar>
-                <ion-list *ngIf="isDropDownShown('area')" text-center class="location-block-list">
+                <div class="has-errors" *ngIf="hasError.selectAreaInput">
+                  {{'home_page.select_city_warning' | translate}}
+                </div>
+                <ion-list *ngIf="!hasError.selectAreaInput && isDropDownShown('area')" text-center class="location-block-list">
                   <ion-item *ngIf="!(widget.model.areas.length && selectedArea)" >
                     <ion-spinner color="success" name="bubbles"></ion-spinner>
                   </ion-item>

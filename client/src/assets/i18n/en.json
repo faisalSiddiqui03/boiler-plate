@@ -6,24 +6,7 @@
 		"description_part_two": "The Carneys created an innovative, high quality, engaging, informal eating experience in a friendly neighborhood restaurant. Pizza Hut became a popular place with the teenage and college crowd. Pizza Hut attracted families that enjoyed a night out eating a meal that they would not be having at home. After the families left, Pizza Hut transformed itself into a hangout for college-age kids. Having a good time was an essential part of Pizza Hut. The idea caught on. A second Pizza Hut opened in December 1958 in downtown Wichita. By 1963, there were forty-two Pizza Hut restaurants.",
 		"our_history": "Our History"
 	},
-	"pizza": {
-		"add_topping_error": "Exceeded maximum topping count",
-		"add_topping_success": "Topping successfuly added",
-		"remove_topping_error": "Minimum topping count reached",
-		"remove_topping_success": "Topping successfuly removed",
-		"slect_size_crust": "Select your size and crust",
-		"change": "Change",
-		"change_cheese_sauce_etc": "Change toppings, sauce or cheese",
-		"your_toppings": "Your Toppings",
-		"extra": "Extra",
-		"add_extra": "Add something extra",
-		"add_to_basket": "Add To My Basket",
-		"added_to_cart": "'Added to cart'"
-	},
-	"product_details": {
-		"add_to_basket": "Add To My Basket",
-		"added_to_cart": "'Added to cart'"
-	},
+	"added_to_cart": "",
 	"cart": {
 		"apply": "apply",
 		"cart_clear": "",
@@ -81,8 +64,8 @@
 		"order_for_later": "You can order for later. Just",
 		"pick_a_time": "pick a time"
 	},
-	"faq_page":{
-		"faq":"Frequently asked questions"
+	"faq_page": {
+		"faq": "Frequently asked questions"
 	},
 	"favorites_page": {
 		"my_favorites": "my Favorites",
@@ -105,8 +88,7 @@
 		"privacy_policy": "Privacy Policy",
 		"signin": "Signin",
 		"terms_and_conditions": "Terms & Conditions",
-		"user_message": "Order a delicious pizza on the go, anywhere, anytime. Pizza Hut is happy to assist you with your home delivery. Every time you order, you get a hot and fresh pizza delivered at your doorstep in less than thirty minutes. *T&C Apply.",
-		"FOLLOW_US": "Follow Us"
+		"user_message": "Order a delicious pizza on the go, anywhere, anytime. Pizza Hut is happy to assist you with your home delivery. Every time you order, you get a hot and fresh pizza delivered at your doorstep in less than thirty minutes. *T&C Apply."
 	},
 	"home": {
 		"page": {
@@ -120,11 +102,11 @@
 		"delivery": "Delivery",
 		"delivery_name": "Delivering from",
 		"find_my_nearest_hut": "Find my nearest Hut",
+		"no_store_available": "No Store Available",
 		"see_deals_menu": "See all deals & menus",
 		"select_area": "Select Area",
-		"select_area_first": "Select Area First",
-		"no_store_available": "No Store Available",
 		"select_block": "Select Block",
+		"select_city_warning": "Select Area First",
 		"start_my_order": "Start my order",
 		"take_away": "Take away",
 		"your_pickup_hut_is": "Your pickup hut is"
@@ -142,8 +124,24 @@
 		"no_orders": "No Orders Found",
 		"order_history": "My Order history"
 	},
-	"privacy_page":{
+	"pizza": {
+		"add_extra": "Add something extra",
+		"add_to_basket": "Add To My Basket",
+		"add_topping_error": "Exceeded maximum topping count",
+		"add_topping_success": "Topping successfuly added",
+		"change": "Change",
+		"change_cheese_sauce_etc": "Change toppings, sauce or cheese",
+		"extra": "Extra",
+		"remove_topping_error": "Minimum topping count reached",
+		"remove_topping_success": "Topping successfuly removed",
+		"slect_size_crust": "Select your size and crust",
+		"your_toppings": "Your Toppings"
+	},
+	"privacy_page": {
 		"privacy_policy": "Privacy Policy"
+	},
+	"product_details": {
+		"add_to_basket": "Add To My Basket"
 	},
 	"reset_password_page": {
 		"email": "Email",
@@ -178,7 +176,7 @@
 		"stores_selection": "Stores Selection",
 		"take_away_now": "Take Away Now"
 	},
-	"terms_page":{
+	"terms_page": {
 		"terms_conditions": "Terms & Conditions"
 	},
 	"user_profile_page": {

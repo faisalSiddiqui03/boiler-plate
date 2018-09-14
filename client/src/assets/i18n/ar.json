@@ -6,23 +6,7 @@
 		"description_part_two": "",
 		"our_history": ""
 	},
-	"pizza": {
-		"add_topping_error": "Exceeded maximum topping count",
-		"add_topping_success": "Topping successfuly added",
-		"remove_topping_error": "Minimum topping count reached",
-		"remove_topping_success": "Topping successfuly removed",
-		"slect_size_crust": "Select your size and crust",
-		"change": "Change",
-		"change_cheese_sauce_etc": "Change toppings, sauce or cheese",
-		"your_toppings": "Your Toppings",
-		"extra": "Extra",
-		"add_extra": "Add something extra",
-		"add_to_basket": "Add To My Basket"
-	},
-	"product_details": {
-		"add_to_basket": "Add To My Basket",
-		"added_to_cart": "'Added to cart'"
-	},
+	"added_to_cart": "",
 	"cart": {
 		"apply": "",
 		"cart_clear": "",
@@ -80,6 +64,9 @@
 		"order_for_later": "",
 		"pick_a_time": ""
 	},
+	"faq_page": {
+		"faq": ""
+	},
 	"favorites_page": {
 		"my_favorites": "",
 		"no_favorites": ""
@@ -115,11 +102,11 @@
 		"delivery": "",
 		"delivery_name": "",
 		"find_my_nearest_hut": "",
+		"no_store_available": "",
 		"see_deals_menu": "",
 		"select_area": "",
-		"select_area_first": "",
-		"no_store_available": "",
 		"select_block": "",
+		"select_city_warning": "",
 		"start_my_order": "",
 		"take_away": "",
 		"your_pickup_hut_is": ""
@@ -136,6 +123,25 @@
 	"order_history_page": {
 		"no_orders": "",
 		"order_history": ""
+	},
+	"pizza": {
+		"add_extra": "Add something extra",
+		"add_to_basket": "Add To My Basket",
+		"add_topping_error": "Exceeded maximum topping count",
+		"add_topping_success": "Topping successfuly added",
+		"change": "Change",
+		"change_cheese_sauce_etc": "Change toppings, sauce or cheese",
+		"extra": "Extra",
+		"remove_topping_error": "Minimum topping count reached",
+		"remove_topping_success": "Topping successfuly removed",
+		"slect_size_crust": "Select your size and crust",
+		"your_toppings": "Your Toppings"
+	},
+	"privacy_page": {
+		"privacy_policy": ""
+	},
+	"product_details": {
+		"add_to_basket": "Add To My Basket"
 	},
 	"reset_password_page": {
 		"email": "",
@@ -169,6 +175,9 @@
 	"store_selection_page": {
 		"stores_selection": "",
 		"take_away_now": ""
+	},
+	"terms_page": {
+		"terms_conditions": ""
 	},
 	"user_profile_page": {
 		"email": "",
