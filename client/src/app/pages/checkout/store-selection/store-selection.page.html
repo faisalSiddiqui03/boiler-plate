@@ -51,7 +51,7 @@
           <h5 no-margin text-uppercase>{{store.name}}</h5>
           <div class="store-content" flex justify-content-between>
             <div class="store-address">{{store.address}}</div>
-            <div class="store-times">11:00 AM - 11:30 AM</div>
+            <div class="store-times">{{getTime(store, 'onTime')}} - {{getTime(store, 'offTime')}}</div>
           </div>
           <div text-right class="take-away-now">
             <ion-button color="success" size="small" class="btn-success" text-uppercase mode="ios" (click)="selectStore(store)">
