@@ -80,7 +80,8 @@ export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidge
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
         this.loaderService.stopLoading();
-        this.alertService.presentToast(this.translate.instant('added_to_cart'), 1000, 'top');
+        this.alertService.presentToast(this.clientProduct.title + ' ' +
+          this.translate.instant('product_details.added_to_cart'), 1000, 'top');
         this.goBack();
         break;
     }

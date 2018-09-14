@@ -6,7 +6,6 @@
 		"description_part_two": "",
 		"our_history": ""
 	},
-	"added_to_cart": "",
 	"cart": {
 		"apply": "",
 		"cart_clear": "",
@@ -71,6 +70,12 @@
 		"my_favorites": "",
 		"no_favorites": ""
 	},
+	"feedback_page": {
+		"feedback": "",
+		"name": "",
+		"name_placeholder": "",
+		"name_required": ""
+	},
 	"footer": {
 		"about_us": "",
 		"contact_us": "",
@@ -120,6 +125,63 @@
 		"order_history": "",
 		"saved_address": ""
 	},
+	"nutrition_page": {
+		"nutition_content_bold1": "",
+		"nutition_content_bold10": "",
+		"nutition_content_bold11": "",
+		"nutition_content_bold12": "",
+		"nutition_content_bold13": "",
+		"nutition_content_bold14": "",
+		"nutition_content_bold15": "",
+		"nutition_content_bold2": "",
+		"nutition_content_bold3": "",
+		"nutition_content_bold4": "",
+		"nutition_content_bold5": "",
+		"nutition_content_bold6": "",
+		"nutition_content_bold7": "",
+		"nutition_content_bold8": "",
+		"nutition_content_bold9": "",
+		"nutition_content_list1": "",
+		"nutition_content_list10": "",
+		"nutition_content_list2": "",
+		"nutition_content_list3": "",
+		"nutition_content_list4": "",
+		"nutition_content_list5": "",
+		"nutition_content_list6": "",
+		"nutition_content_list7": "",
+		"nutition_content_list8": "",
+		"nutition_content_list9": "",
+		"nutition_content_normal1": "",
+		"nutition_content_normal10": "",
+		"nutition_content_normal11": "",
+		"nutition_content_normal12": "",
+		"nutition_content_normal13": "",
+		"nutition_content_normal14": "",
+		"nutition_content_normal15": "",
+		"nutition_content_normal16": "",
+		"nutition_content_normal17": "",
+		"nutition_content_normal18": "",
+		"nutition_content_normal19": "",
+		"nutition_content_normal2": "",
+		"nutition_content_normal20": "",
+		"nutition_content_normal21": "",
+		"nutition_content_normal22": "",
+		"nutition_content_normal23": "",
+		"nutition_content_normal24": "",
+		"nutition_content_normal25": "",
+		"nutition_content_normal26": "",
+		"nutition_content_normal27": "",
+		"nutition_content_normal28": "",
+		"nutition_content_normal3": "",
+		"nutition_content_normal4": "",
+		"nutition_content_normal5": "",
+		"nutition_content_normal6": "",
+		"nutition_content_normal7": "",
+		"nutition_content_normal8": "",
+		"nutition_content_normal9": "",
+		"nutrition": "",
+		"view_nutrition_values": ""
+	},
 	"order_history_page": {
 		"no_orders": "",
 		"order_history": ""
@@ -129,6 +191,7 @@
 		"add_to_basket": "Add To My Basket",
 		"add_topping_error": "Exceeded maximum topping count",
 		"add_topping_success": "Topping successfuly added",
+		"added_to_cart": "",
 		"change": "Change",
 		"change_cheese_sauce_etc": "Change toppings, sauce or cheese",
 		"extra": "Extra",
@@ -141,7 +204,8 @@
 		"privacy_policy": ""
 	},
 	"product_details": {
-		"add_to_basket": "Add To My Basket"
+		"add_to_basket": "Add To My Basket",
+		"added_to_cart": ""
 	},
 	"reset_password_page": {
 		"email": "",
