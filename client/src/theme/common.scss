@@ -226,6 +226,12 @@ body {
     border-radius: 5px;
     background: url('assets/imgs/select-arrow-down.svg') no-repeat right 10px center / 12px;
   }
+  &.searchbar-has-value{
+    .searchbar-input.sc-ion-searchbar-md,
+    .searchbar-input.sc-ion-searchbar-ios {
+      background-image: none;
+    }
+  }
   .searchbar-clear-button.sc-ion-searchbar-md,
   .searchbar-clear-icon.sc-ion-searchbar-ios {
     color: var(--ion-color-dark-tint);
