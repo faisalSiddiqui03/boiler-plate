@@ -10,6 +10,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
 import { DeliverySlotsWidgetModule } from "@capillarytech/pwa-framework";
+import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    SkeletonModule,
     DeliverySlotsWidgetModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
@@ -35,4 +37,5 @@ const routes: Routes = [
   ],
   declarations: [DeliverySlotSelectionPage]
 })
-export class DeliverySlotSelectionModule {}
+export class DeliverySlotSelectionModule {
+}

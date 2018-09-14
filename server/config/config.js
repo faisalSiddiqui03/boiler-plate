@@ -109,7 +109,8 @@ const config = {
   "cdn": {
     "enabled": true,
     "provider": "cloudfare"
-  }
+  },
+  "isAsapEnabled": true
 };
 
 module.exports = config;

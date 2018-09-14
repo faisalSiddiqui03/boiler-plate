@@ -19,6 +19,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../helpers/utils';
 import { DeliverySlotSelectionPage } from '../checkout/delivery-slot-selection/delivery-slot-selection.page';
+import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-home',
@@ -55,7 +56,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private config: ConfigService,
     private router: Router,
     private translate: TranslateService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private loaderService: LoaderService,
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
@@ -82,6 +84,12 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
+        this.loaderService.stopLoading();
+        console.log('unable to find store', data);
+        // this.navigateToDeals();
+        break;
+      case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
+        this.loaderService.stopLoading();
         console.log('unable to find store', data);
         // this.navigateToDeals();
         break;
@@ -92,12 +100,15 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     console.log('name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
+        this.loaderService.stopLoading();
         if (data.length) {
+          console.log('------------0----------', data);
           this.setCurrentStore(data[0]);
           this.navigateToDeals();
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
+        this.loaderService.stopLoading();
         if (data.length) {
           this.setCurrentStore(data[0]);
           this.navigateToDeals();
@@ -204,6 +215,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   findStore() {
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
       [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
+    this.loaderService.startLoading('Fetching Stores');
   }
 
   locateMe(lat, lng) {
