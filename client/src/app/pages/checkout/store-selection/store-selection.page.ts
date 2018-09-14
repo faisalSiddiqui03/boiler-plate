@@ -131,7 +131,7 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
     } else if (time === 'offTime') {
       storeTiming = store.currentDateStoreTime.get(this.deliveryModes.PICKUP).offTime;
     }
-    const min = storeTiming.getMinutes() === 0 ? '00' : '0' + storeTiming.getMinutes();
+    const min = storeTiming.getMinutes() < 10 ? '0' + storeTiming.getMinutes() : storeTiming.getMinutes();
     const hours = storeTiming.getHours() > 10 ? storeTiming.getHours() : '0' + storeTiming.getHours();
     const meridiem = storeTiming.getHours() < 12 ? 'AM' : 'PM';
 
