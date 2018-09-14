@@ -111,8 +111,6 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   }
 
   goToHome() {
-    // this.router.navigate(['/home']);
-    // this.location.back();
     this.router.navigateByUrl('/home');
   }
 }
