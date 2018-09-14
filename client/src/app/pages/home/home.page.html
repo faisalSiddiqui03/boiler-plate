@@ -90,17 +90,16 @@
             <div class="location-bar">
               <div class="form-control">
                 <ion-searchbar
-                  value="abs"
                   class="form-search" [debounce]="1000" [(ngModel)]="selectedCity" #focusInput
                   showCancelButton="false" placeholder="{{'home_page.select_area' | translate}}"
                   (click)="toggleDropDown('city');"
                   (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')">
                 </ion-searchbar>
                 <ion-list *ngIf="isDropDownShown('city')" text-center class="location-block-list">
-                  <ion-item *ngIf="!(widget.model.cities.length && selectedCity)" >
+                  <ion-item *ngIf="!(widget.model?.cities?.length && selectedCity)" >
                     <ion-spinner color="success" name="bubbles"></ion-spinner>
                   </ion-item>
-                  <ion-item *ngIf="widget.model.cities.length && selectedCity" >
+                  <ion-item *ngIf="widget.model.cities?.length && selectedCity" >
                     <div>{{'home_page.no_store_available' | translate}}</div>
                   </ion-item>
                 </ion-list>
@@ -118,14 +117,14 @@
                                (click)="isCitySelected();toggleDropDown('area');"
                                (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'area')">
                 </ion-searchbar>
-                <div class="has-errors" *ngIf="hasError.selectAreaInput">
+                <div class="has-errors" *ngIf="hasError['selectAreaInput']">
                   {{'home_page.select_city_warning' | translate}}
                 </div>
-                <ion-list *ngIf="!hasError.selectAreaInput && isDropDownShown('area')" text-center class="location-block-list">
-                  <ion-item *ngIf="!(widget.model.areas.length && selectedArea)" >
+                <ion-list *ngIf="!hasError['selectAreaInput'] && isDropDownShown('area')" text-center class="location-block-list">
+                  <ion-item *ngIf="!(widget.model?.areas?.length && selectedArea)" >
                     <ion-spinner color="success" name="bubbles"></ion-spinner>
                   </ion-item>
-                  <ion-item *ngIf="widget.model.areas.length && selectedArea" >
+                  <ion-item *ngIf="widget.model.areas?.length && selectedArea" >
                     <div>{{'home_page.no_store_available' | translate}}</div>
                   </ion-item>
                 </ion-list>

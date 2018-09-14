@@ -1,5 +1,42 @@
 <delivery-slots-widget class="full-height" [globalSlots]="true" [deliveryMode]="getFulfilmentMode()?.mode" [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
   <ng-template let-widget="widget">
+    <ng-container *ngIf="!widget.model">
+      <ion-content bg-transparent padding>
+        <div class="container">
+
+          <div class="modal-close">
+            <ion-icon name="close" (click)="closeModal()" color-light></ion-icon>
+          </div>
+          <div class="w-700">
+            <div class="delivery-hut" color-light>
+              <div class="skeleton-warpper">
+                <ion-skeleton-text class="skeleton-text p-skeleton"></ion-skeleton-text>
+              </div>
+            </div>
+            <div class="as-soon-possible" [class.disabled]="!asSoonPossible">
+              <app-skeleton [aspectRatio]="10" [width]="'50%'"></app-skeleton>
+            </div>
+            <div class="order-for-later" color-light>
+              <div class="skeleton-warpper">
+                <ion-skeleton-text class="skeleton-text p-skeleton"></ion-skeleton-text>
+              </div>
+            </div>
+            <div class="available-slots-list">
+              <ion-row *ngFor="let i of [0, 1, 2, 3, 4, 5]">
+                <ion-col  *ngFor="let j of [0, 1, 2, 3]">
+                  <app-skeleton [aspectRatio]="3" [width]="'100%'"></app-skeleton>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+      <ion-footer no-border>
+        <div class="container">
+          <app-skeleton [aspectRatio]="10" [width]="'100%'"></app-skeleton>
+        </div>
+      </ion-footer>
+    </ng-container>
     <ng-container *ngIf="widget.model">
       <ion-content bg-transparent padding>
         <div class="container">
