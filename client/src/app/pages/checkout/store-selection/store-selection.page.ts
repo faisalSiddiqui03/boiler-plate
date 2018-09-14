@@ -44,6 +44,9 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
         this.cityId = params.cityId;
         this.latitude = params.latitude;
         this.longitude = params.longitude;
+        if (!this.cityId && !this.latitude && !this.longitude) {
+          this.goToHome();
+        }
     });
     // if (this.cityId) {
     //   console.log('suno', this.cityId);
@@ -95,7 +98,7 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
       case StoreLocatorWidgetActions.FIND_BY_CITY:
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         if (!data || data.length === 0) {
-          this.router.navigate(['/home']);
+          this.goToHome();
         }
         this.stores = data;
         break;
@@ -105,5 +108,11 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   selectStore(store) {
     this.setCurrentStore(store);
     this.navigateToDeals();
+  }
+
+  goToHome() {
+    // this.router.navigate(['/home']);
+    // this.location.back();
+    this.router.navigateByUrl('/home');
   }
 }
