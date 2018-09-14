@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../base/base-component';
-import { ConfigService, pwaLifeCycle, Action } from '@capillarytech/pwa-framework';
+import { ConfigService, pwaLifeCycle, Action, DeliveryModes } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -23,6 +23,8 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   storeLocatorWidgetAction = new EventEmitter();
   stores: Array<any>;
   titleValue = '';
+  deliveryModes: any;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -34,6 +36,7 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
     private location: Location
   ) {
     super();
+    this.deliveryModes = DeliveryModes;
 
     // this.loaderService.startLoading();
     this.translate.use(Utils.getLanguageCode());
@@ -100,9 +103,16 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
         if (!data || data.length === 0) {
           this.goToHome();
         }
-        this.stores = data;
+        this.stores = this.filterTakeawayStores(data);
         break;
     }
+  }
+
+  filterTakeawayStores(storesList) {
+    const stores = storesList.filter(store =>
+      store.deliveryModes.includes(this.deliveryModes.PICKUP)
+    );
+    return stores;
   }
 
   selectStore(store) {
