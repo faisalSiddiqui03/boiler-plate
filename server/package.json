@@ -11,7 +11,7 @@
     "posttest": "npm run lint && nsp check"
   },
   "dependencies": {
-    "@capillarytech/cap-pwa-seed": "0.3.19",
+    "@capillarytech/cap-pwa-seed": "0.3.20",
     "@capillarytech/cap-commons": "0.0.2",
     "@capillarytech/cap-loopback-api-areas": "0.0.4",
     "@capillarytech/cap-loopback-api-authentication": "0.0.3",
