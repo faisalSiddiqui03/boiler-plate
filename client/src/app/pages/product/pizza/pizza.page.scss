@@ -4,32 +4,41 @@
     height: 210px;
 }
 
-ion-card {
-    box-shadow: none;
-    border-radius: 0;
-    .product-img-block {
-        background: var(--ion-color-medium);
-    }
-    .border-block {
-        border-bottom: 1px solid var(--ion-color-light-shade);
-        margin: 16px;
+.border-block {
+    border-bottom: 1px solid var(--ion-color-light-shade);
+    margin: 16px;
+}
+
+.product-img-block {
+    background: var(--ion-color-medium);
+    ion-icon {
+        color: var(--ion-color-light);
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 1;
+        font-size: 24px;
     }
 }
 
 .popup-title {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(180deg, rgba(var(--ion-color-dark-rgb), .5) 0, rgba(var(--ion-color-dark-rgb), .2) 70%, transparent);
-    ion-label {
+    h4 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(180deg, rgba(var(--ion-color-dark-rgb), .5) 0, rgba(var(--ion-color-dark-rgb), .2) 70%, transparent);
         color: var(--ion-color-light);
         font-size: 18px;
         font-weight: 600;
     }
-    ion-icon {
-        color: var(--ion-color-light);
-        cursor: pointer;
+    .img-text{
+        p{
+            font-size: 13px;
+            color: var(--ion-color-dark-shade);
+            margin: 0;
+        }
     }
 }
 
@@ -240,5 +249,43 @@ ion-footer {
             width: 100%;
             max-width: 460px;
         }
+    }
+}
+
+@media (min-width: 992px) {
+    .popup-wrap {
+        .popup-inner {
+            height: 600px;
+            max-width: 700px;
+        }
+    }
+    .product-img-block{
+        position: fixed;
+        width: 250px;
+        height: 600px;
+        overflow: hidden;
+        .product-main-image{
+            width: auto;
+            height: 650px;
+            max-width: inherit;
+            margin-left: -200px;
+        }
+        ion-icon{
+            color: var(--ion-color-dark-shade);
+        }
+    }
+    .popup-title{
+        position: relative;
+        margin-left: 250px;
+        h4{
+            position: static;
+            padding-bottom: 0;
+            background: transparent;
+            color: var(--ion-color-dark);
+            text-align: left !important;
+        }
+    }
+    .pizza-sizes-wrap{
+        margin-left: 250px;
     }
 }

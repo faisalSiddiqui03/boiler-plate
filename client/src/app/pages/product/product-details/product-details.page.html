@@ -41,21 +41,18 @@
 
         <ng-container *ngIf="loaded">
           <ion-content no-padding>
-            <ion-card no-padding no-margin>
-              <ion-card-header no-padding class="product-img-block">
-                <ion-item text-center class="popup-title" no-margin>
-                  <ion-icon (click)="goBack()" name="close-circle" slot="start"></ion-icon>
-                  <ion-label>{{widget.model.title}}</ion-label>
-                </ion-item>
-                <img alt="{{widget?.model?.title}}" class="product-main-image" height="170" width="340"
-                     src="{{getProductImageUrl()}}"
-                     img-preloader="{{widget?.model?.smallImage}}" 
-                     defaultImage="assets/imgs/default/default.png"/>
-              </ion-card-header>
-              <ion-card-content *ngIf="widget?.model?.shortDescription">
-                <p>{{widget?.model?.longDescription}}</p>
-              </ion-card-content>
-            </ion-card>
+            
+            <div class="product-img-block">
+                <ion-icon name="close-circle" (click)="goBack()" slot="start"></ion-icon>
+                <img alt="{{widget?.model?.title}}" class="product-main-image" height="170" width="340" img-preloader="{{getProductImageUrl()}}"
+                  defaultImage="assets/imgs/default/default.png" />
+              </div>
+              <div class="popup-title">
+                <h4 text-center padding no-margin>{{widget?.model?.title}}</h4>
+                <div class="img-text" padding>
+                  <p>{{widget?.model?.longDescription}}</p>
+                </div>
+              </div>
             
             <div class="drinks-choose-block" margin>
               <div *ngIf="!showVariants">
