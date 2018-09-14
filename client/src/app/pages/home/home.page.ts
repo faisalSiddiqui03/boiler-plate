@@ -130,6 +130,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
     if (name === 'area' && !this.selectedCityCode) {
       return;
+    } else if (name === 'area' && this.selectedCityCode) {
+      this.hasError.selectAreaInput = false;
     }
 
     const nameExists = this.dropdownViewStatus.has(name);
