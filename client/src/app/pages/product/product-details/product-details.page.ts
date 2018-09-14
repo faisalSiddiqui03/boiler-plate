@@ -58,7 +58,7 @@ export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidge
     this.productName = this.route.snapshot.params.productName;
   }
 
-  widgetLoadingStarted(name, data){
+  widgetLoadingStarted(name, data) {
     console.log('Widget loading started' + name, data);
   }
 
@@ -76,7 +76,7 @@ export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidge
   }
 
   widgetActionSuccess(name: string, data: any) {
-    switch(name) {
+    switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
         this.loaderService.stopLoading();
@@ -91,14 +91,14 @@ export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidge
     console.log('Widget action failed' + name, data);
   }
 
-  setClient(){
+  setClient() {
     this.noOfProperties = 0;
     this.noOfSelectedProperties = 0;
     this.clientProduct.selectedPropertyValueIdMap.forEach((valueId, propId) => {
       this.noOfProperties = this.noOfProperties + 1;
       this.clientProduct.selectedPropertyValueIdMap.set(propId, 0);
     });
-    this.showAddToCart = false;
+    this.showAddToCart = !this.clientProduct.isParentProduct;
     this.serverProduct.variantProperties.map((prop) => {
       prop.showProperty = true;
     });
@@ -109,34 +109,34 @@ export class ProductDetailsPage extends BaseComponent implements OnInit, OnWidge
   }
 
   setSelectedPropertyvalue(propVal, prop) {
-    if(this.clientProduct.selectedPropertyValueIdMap.get(propVal.propertyId) === 0){
+    if (this.clientProduct.selectedPropertyValueIdMap.get(propVal.propertyId) === 0) {
       this.noOfSelectedProperties = this.noOfSelectedProperties + 1;
     }
-    if(this.noOfSelectedProperties === this.noOfProperties) this.showAddToCart = true;
+    this.showAddToCart = this.noOfSelectedProperties === this.noOfProperties;
     prop.showProperty = false;
     this.clientProduct.setSelectedPropertyValueId(propVal.propertyId, propVal.id);
   }
 
-  getSelectedPropValueName(property){
+  getSelectedPropValueName(property) {
     let selectedValue = '';
     let propValueId = this.clientProduct.selectedPropertyValueIdMap.get(property.id);
     property.values.map((propVal) => {
-      if(propVal.id === propValueId) selectedValue = propVal.name;
+      if (propVal.id === propValueId) selectedValue = propVal.name;
     });
     return selectedValue;
   }
 
   getProductImageUrl() {
-    if(!this.serverProduct 
-      || !this.serverProduct.multipleImages 
-      || !this.serverProduct.multipleImages.length){
+    if (!this.serverProduct
+      || !this.serverProduct.multipleImages
+      || !this.serverProduct.multipleImages.length) {
       return;
     }
-    const imageUrl = this.getUrl(this.serverProduct.multipleImages[1].largeImage);
+    const imageUrl = this.getUrl(this.serverProduct.multipleImages[1] ? this.serverProduct.multipleImages[1].largeImage : this.serverProduct.multipleImages[0].largeImage);
     return imageUrl;
   }
 
-  getUrl(url: string){
+  getUrl(url: string) {
     return `https://${url}`;
   }
 

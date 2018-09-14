@@ -5,7 +5,8 @@ import {
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   pageView,
-  pwaLifeCycle
+  pwaLifeCycle,
+  Action
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
@@ -46,14 +47,15 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       .subscribe((data) => {
         this.categoryId = data.id;
         this.showcaseFilter.categoryIds = [data.id];
-        this.showcaseFilter = Object.assign({}, this.showcaseFilter)
+        // this.showcaseFilter = Object.assign({}, this.showcaseFilter);
         this.categoryName = data.category;
+        this.productShowcaseWidgetAction.emit(new Action('refresh', true))
       });
   }
 
   getProductImageUrl(product) {
     if (product && product.multipleImages && product.multipleImages.length) {
-      return `http://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
+      return `https://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
     }
   }
   openProductDetails(product) {
