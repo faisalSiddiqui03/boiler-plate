@@ -18,72 +18,6 @@
   }
 }
 
-@media (max-width: 991px) {
-  .tabs-nav-head {
-    position: fixed;
-    bottom: 60px;
-    --min-height: 44px;
-  }
-  ion-content {
-    --offset-bottom: -45px !important;
-  }
-}
-
-@media (min-width: 992px) {
-  .top-header-container {
-    position: fixed;
-    width: calc(100% - 380px);
-    z-index: 0;
-  }
-
-  .common-heading-dotted {
-    background-color: transparent;
-    margin: 10px;
-  }
-  .sidebar-cart {
-    width: 350px;
-    flex-direction: column;
-    display: inline-flex;
-    //position: fixed;
-    height: 100vh;
-  }
-
-  .fixed-sidebar {
-    position: fixed;
-    width: 350px;
-    height: 100%;
-    background: white;
-  }
-
-  .product-content {
-    width: 100%;
-    margin-right: 20px;
-  }
-  .product-main-container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .tabs-nav-head {
-    position: fixed;
-    margin-top: 56px;
-    --min-height: 44px;
-    width: calc(100% - 380px);
-    z-index: 0;
-  }
-
-  .showcase-container {
-    margin-top: 120px;
-  }
-  ion-tabs {
-    --ion-color-base: var(--ion-color-light) !important;
-    --ion-color-base-rgb: var(--ion-color-light-rgb) !important;
-    --ion-color-contrast: var(--ion-color-dark) !important;
-    --ion-color-contrast-rgb: var(--ion-color-dark-rgb) !important;
-    --ion-color-shade: var(--ion-color-dark-shade) !important;
-    --ion-color-tint: var(--ion-color-dark-tint) !important;
-  }
-}
 
 .product-title {
   min-height: 50px;
@@ -319,6 +253,137 @@ ion-card-content {
 
 .tabs-nav-head {
   --ion-toolbar-background-color: transparent;
+  --padding-start: 0;
+  --padding-end: 0;
 }
 
 
+.showcase-tabs{
+  white-space: nowrap;
+  overflow: auto;
+  background: var(--ion-color-light);
+  padding-left: 20px;
+  ul{
+    display: table;
+    width: 100%;
+    li{
+      display: inline-block;
+      font-size: 18px;
+      line-height: 30px;
+      padding: 10px;
+      width: 86px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-family: 'Conv_UnitedSansCond-Bold';
+      color: var(--ion-color-secondary-shade);
+      border-right: 1px solid var(--ion-color-medium-tint);
+      &.selected{
+        background-color: var(--ion-color-danger-shade);
+        background-image: url('assets/imgs/Deals-Highlight-Element.svg');
+        background-size: cover;
+        color: var(--ion-color-light);
+      }
+      &:hover{
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 991px) {
+  .tabs-nav-head {
+    position: fixed;
+    bottom: 53px;
+    --min-height: 44px;
+  }
+  ion-content {
+    --offset-bottom: -45px !important;
+  }
+  .showcase-tabs{
+    background: rgba(var(--ion-color-cart-stripe-rgb), 0.96);
+    padding-left: 0;
+    ul{
+      li{
+        display: table-cell;
+        font-size: 14px;
+        line-height: 21px;
+        border-top: 3px solid transparent;
+        padding: 10px;
+        min-width: 100px;
+        width: auto;
+        color: var(--ion-color-light);
+        border-right: 0;
+        font-family: 'Open Sans';
+        font-weight: 600;
+        text-transform: capitalize;
+        letter-spacing: 0;
+        &+li{
+          border-left: 1px solid var(--ion-color-light-shade);
+        }
+        &.selected{
+          border-top-color: var(--ion-color-danger);
+          background: transparent;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .top-header-container {
+    position: fixed;
+    width: calc(100% - 380px);
+    z-index: 1;
+  }
+
+  .common-heading-dotted {
+    background-color: transparent;
+    margin: 10px;
+  }
+  .sidebar-cart {
+    width: 350px;
+    flex-direction: column;
+    display: inline-flex;
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+  }
+
+  .fixed-sidebar {
+    position: fixed;
+    width: 350px;
+    height: 100%;
+    background: white;
+  }
+
+  .product-content {
+    width: 100%;
+    margin-right: 20px;
+  }
+  .product-main-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tabs-nav-head {
+    position: fixed;
+    margin-top: 54px;
+    --min-height: 44px;
+    width: calc(100% - 380px);
+    z-index: 1;
+  }
+
+  .showcase-container {
+    margin-top: 140px;
+  }
+  ion-tabs {
+    --ion-color-base: var(--ion-color-light) !important;
+    --ion-color-base-rgb: var(--ion-color-light-rgb) !important;
+    --ion-color-contrast: var(--ion-color-dark) !important;
+    --ion-color-contrast-rgb: var(--ion-color-dark-rgb) !important;
+    --ion-color-shade: var(--ion-color-dark-shade) !important;
+    --ion-color-tint: var(--ion-color-dark-tint) !important;
+  }
+}
