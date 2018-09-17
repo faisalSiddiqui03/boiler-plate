@@ -1,29 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule, MouseEvent } from '@agm/core';
 import { TranslateService } from '@ngx-translate/core';
+import { BaseComponent } from '../../../base/base-component';
 
 @Component({
   selector: 'app-location',
   templateUrl: './location.page.html',
   styleUrls: ['./location.page.scss'],
 })
-export class LocationPage implements OnInit {
+export class LocationPage extends BaseComponent  implements OnInit {
 
   // google maps zoom level
   private zoom = 8;
 
-  private marker = {
-      lat: 17.4367635,                        //default location
-      lng: 78.3671521,
-      label: ' ',
-      draggable: true
-  };
+  private marker: Marker;
 
   constructor(
     private translate: TranslateService
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit() {
+    this.marker = {
+      lat: this.getCurrentStore().locationDetails.latitude,
+      lng: this.getCurrentStore().locationDetails.longitude,
+      label: ' ',
+      draggable: true
+    };
   }
 
   markerDragEnd(m: Marker, $event: MouseEvent) {
