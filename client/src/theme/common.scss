@@ -114,7 +114,9 @@ body {
       top: 0.1em;
     }
   }
-  ion-input {
+  ion-input,
+  ion-textarea,
+  ion-select {
     font-size: 15px;
     border: 2px solid rgba(var(--ion-color-secondary-rgb), 0.5);
     border-radius: 4px;
@@ -176,7 +178,8 @@ body {
   }
   &.error {
     .form-input {
-      ion-input {
+      ion-input,
+      ion-textarea {
         border-color: var(--ion-color-danger);
       }
       .icons {

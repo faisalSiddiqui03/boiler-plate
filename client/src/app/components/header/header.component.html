@@ -10,7 +10,7 @@
         <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
         <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">ASAP</span>
       </div>
-      <div (click)="goToPage(getUserModel()?.type === 'GUEST' ? 'login' : 'my-account')">
+      <div *ngIf="showUserIcon" (click)="goToPage(getUserModel()?.type === 'GUEST' ? 'login' : 'my-account')">
         <div class="profile-icon">
           <div class="icon icon-user-circle"></div>
         </div>

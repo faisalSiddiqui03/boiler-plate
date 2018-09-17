@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UserProfilePage } from './user-profile.page';
+import { OrderDetailsPage } from './order-details.page';
+import { HeaderModule } from '../../../../components/header/header.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../../translation.loader';
-import { HeaderModule } from '../../../../components/header/header.module';
-import { UserProfileWidgetModule } from '@capillarytech/pwa-framework';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: UserProfilePage
+    component: OrderDetailsPage
   }
 ];
 
@@ -24,10 +23,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    UserProfileWidgetModule,
     HeaderModule,
     SubHeaderModule,
     TranslateModule.forRoot({
@@ -38,6 +35,6 @@ const routes: Routes = [
       }
     })
   ],
-  declarations: [UserProfilePage]
+  declarations: [OrderDetailsPage]
 })
-export class UserProfilePageModule { }
+export class OrderDetailsPageModule {}

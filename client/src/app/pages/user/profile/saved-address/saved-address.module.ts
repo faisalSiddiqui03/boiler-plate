@@ -11,6 +11,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../../translation.loader';
 import { UserAddressWidgetModule } from '@capillarytech/pwa-framework';
+import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     HeaderModule,
+    SubHeaderModule,
     UserAddressWidgetModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
