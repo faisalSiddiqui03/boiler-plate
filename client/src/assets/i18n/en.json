@@ -191,6 +191,10 @@
 		"unable_to_get_stores": "Unable to get stores",
 		"your_pickup_hut_is": "Your pickup hut is"
 	},
+	"location_page": {
+		"confirm_and_proceed": "Confirm and Proceed",
+		"drag_the_pin_to_exact_location": "Drag the pin to exact location"
+	},
 	"my_account_page": {
 		"change_password": "Change Password",
 		"logout": "Logout",
