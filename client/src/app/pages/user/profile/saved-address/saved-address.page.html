@@ -1,13 +1,8 @@
 <ion-header>
-  <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
+    <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
-  <ion-toolbar class="page-header">
-    <ion-buttons slot="start">
-      <div class="icon icon-arrow-prev-2" (click)="goToPage('my-account')"></div>
-    </ion-buttons>
-    <ion-title text-center text-uppercase>{{'saved_address_page.saved_address' | translate}}</ion-title>
-  </ion-toolbar>
+  <app-sub-header [title]="titleValue"></app-sub-header>
   <div class="saved-addresses w-700">
     <!-- <user-address-widget [componentId]="getComponentId()" >
       <ng-template let-widget="widget">
@@ -35,5 +30,5 @@
   </div>
 </ion-content>
 <ion-footer no-border>
-  <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success">{{'saved_address_page.add_new_address' | translate}}</ion-button>
+  <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success" (click)="goToPage('add-address')">{{'saved_address_page.add_new_address' | translate}}</ion-button>
 </ion-footer>

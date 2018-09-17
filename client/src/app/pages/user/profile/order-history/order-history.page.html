@@ -1,12 +1,77 @@
 <ion-header>
-    <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
-  </ion-header>
-  <ion-content>
-    <ion-toolbar class="page-header">
-      <ion-buttons slot="start">
-        <div class="icon icon-arrow-prev-2" (click)="goToPage('my-account')"></div>
-      </ion-buttons>
-      <ion-title text-center text-uppercase>{{'order_history_page.order_history' | translate}}</ion-title>
-    </ion-toolbar>
-    <div class="no-orders" flex align-items-center justify-content-center>{{'order_history_page.no_orders' | translate}}</div>
-  </ion-content>  
+  <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
+</ion-header>
+<ion-content>
+  <app-sub-header [title]="titleValue"></app-sub-header>
+  <div class="orders-content w-700">
+    <ion-list no-margin>
+      <ion-item no-padding>
+        <ion-label no-margin>
+          <h2>Order # 3207380
+              <span class="order-date"><i>(</i>17-09-18 | 12:24 PM<i>)</i></span>
+          </h2>
+          <div class="order-description" flex-center>
+            <div>
+              <p>Potato Wedges (1)</p>
+              <p>Potato Wedges (1)</p>
+            </div>
+            <span class="icon icon-arrow-next-2"></span>
+          </div>
+          <ion-spinner class="spinner" name="bubbles" color="success"></ion-spinner>
+          <div class="view-order-details">
+            <ion-grid no-padding>
+              <ion-row>
+                <ion-col no-padding size-xs="10">Potato Wedges</ion-col>
+                <ion-col no-padding size-xs="2">1</ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col no-padding size-xs="10">Potato Wedges</ion-col>
+                  <ion-col no-padding size-xs="2">1</ion-col>
+                </ion-row>
+            </ion-grid>
+            <div class="order-detail-link">View Order Details</div>
+          </div>
+          <div class="order-price" flex-center>
+            <span>KD 3.750</span>
+            <span class="icon icon-arrow-next-2"></span>
+          </div>
+        </ion-label>
+      </ion-item>
+      <ion-item no-padding>
+          <ion-label no-margin>
+            <h2>Order # 3207380
+              <span class="order-date"><i>(</i>17-09-18 | 12:24 PM<i>)</i></span>
+            </h2>
+            <div class="order-description" flex-center>
+              <div>
+                <p>Potato Wedges (1)</p>
+              </div>
+              <span class="icon icon-arrow-next-2"></span>
+            </div>
+            <div class="order-price" flex-center>
+              <span>KD 3.750</span>
+              <span class="icon icon-arrow-next-2"></span>
+            </div>
+          </ion-label>
+        </ion-item>
+    </ion-list>
+  </div>
+  <orders-widget [componentId]="getComponentId()" [from]=0 [limit]=6 [executor]="orderWidgetExecutor" [action]="orderWidgetAction"
+    (lifecycle)="handleWidgetLifecycle($event)">
+    <ng-template let-widget="widget">
+      <ng-container *ngIf="widget.model">
+        <div class="no-orders" flex align-items-center justify-content-center>{{'order_history_page.no_orders' | translate}}</div>
+        <div>
+          <h2>{{widget.model.length}}</h2>
+          <div *ngFor="let order of widget.model">
+            <hr/>
+            <p>{{order.amountPayable}}</p>
+            <p>{{order.id}}</p>
+            <p>{{order.status}}</p>
+            <button (click)="getOrderDetails(order)">Get Details</button>
+          </div>
+        </div>
+      </ng-container>
+    </ng-template>
+  </orders-widget>
+</ion-content>
