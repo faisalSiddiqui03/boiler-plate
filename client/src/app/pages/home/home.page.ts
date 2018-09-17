@@ -48,12 +48,12 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   selectedStore;
   dropdownViewStatus: Map<string, boolean> = new Map();
   bannerUrl: string;
-  changeRequested: boolean = false;
-  hasError: { [name:string] : string | boolean } = {};
+  changeRequested = false;
+  hasError: { [name: string]: string | boolean } = {};
   citySelectionHistory: any = {};
 
   deliveryModes = DeliveryModes;
-  asSoonPossible: boolean = false;
+  asSoonPossible = false;
   fetchDeliverySlots = false;
 
   constructor(
@@ -114,7 +114,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
         if (data.length) {
-          console.log('------------0----------', data);
           this.setCurrentStore(data[0]);
           this.fetchDeliverySlots = true;
         }
