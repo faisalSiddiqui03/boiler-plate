@@ -260,10 +260,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   navigateToDeals() {
     if (!this.asSoonPossible || Utils.isEmpty(this.getDeliverySlot())) {
       this.presentSlotModal();
-    } else {
-      this.router.navigateByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
     }
-
+    this.router.navigateByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
   }
 
   changeOrderMode(mode, previousMode) {

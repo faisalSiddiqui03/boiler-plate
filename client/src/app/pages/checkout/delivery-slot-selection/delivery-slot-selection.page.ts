@@ -23,18 +23,23 @@ import { ModalController } from '@ionic/angular';
 
 export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle  {
 
-  asSoonPossible: boolean = false;
-  slotSelected: boolean = false;
-  slotContent: string = "";
+  asSoonPossible = false;
+  slotSelected = false;
+  slotContent = '';
   activeTimeSlot: number;
   timeSlotObj;
 
-  constructor(private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, public modalController: ModalController) {
+  constructor(
+    private loaderService: LoaderService,
+    private alertService: AlertService,
+    private translate: TranslateService,
+    public modalController: ModalController
+  ) {
     super();
 
     // this.loaderService.startLoading();
     this.slotSelected = true;
-    this.slotContent = this.asSoonPossible ? "ASAP" : "";
+    this.slotContent = this.asSoonPossible ? 'ASAP' : '';
     this.activeTimeSlot = 0;
     this.translate.use(Utils.getLanguageCode());
   }
@@ -45,14 +50,14 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
   toggleCheckbox() {
     this.asSoonPossible = !this.asSoonPossible;
     this.slotSelected = this.asSoonPossible;
-    this.slotContent = this.asSoonPossible ? "ASAP" : "";
+    this.slotContent = this.asSoonPossible ? 'ASAP' : '';
     this.activeTimeSlot = this.asSoonPossible ? 0 : null;
   }
 
   selectTime(timeslot, index) {
-    this.asSoonPossible = !(timeslot.id != -1);
+    this.asSoonPossible = !(timeslot.id !== -1);
     this.slotSelected = true;
-    this.slotContent = timeslot.time;
+    this.slotContent = Utils.getTimeHHMM(timeslot.time);
     this.activeTimeSlot = index;
     this.timeSlotObj = timeslot;
   }
@@ -65,10 +70,21 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
     console.log('loaded ' + name, data);
     switch (name) {
       case 'DELIVERYSLOTS':
-        this.asSoonPossible = data[0].id === -1;
-        this.slotContent = this.asSoonPossible ? "ASAP" : data[0].time;
-        this.timeSlotObj = data[0];
+        if (!Utils.isEmpty(this.getDeliverySlot())) {
+          this.asSoonPossible = this.getDeliverySlot().id === -1;
+          this.slotContent = this.asSoonPossible ? 'ASAP' : Utils.getTimeHHMM(this.getDeliverySlot().time);
+          this.timeSlotObj = this.getDeliverySlot();
+          this.activeTimeSlot = this.findIndexOfSlot(this.getDeliverySlot().id, data);
+        } else {
+          this.asSoonPossible = data[0].id === -1;
+          this.slotContent = this.asSoonPossible ? 'ASAP' : Utils.getTimeHHMM(data[0].time);
+          this.timeSlotObj = data[0];
+        }
     }
+  }
+
+  findIndexOfSlot(selectedSlotId, data) {
+    return data.findIndex(slot => slot.id === selectedSlotId);
   }
 
   widgetLoadingFailed(name, data) {
@@ -80,7 +96,7 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
   }
 
   selectTimeSlot() {
-    console.log('slot is: ', this.timeSlotObj)
+    console.log('slot is: ', this.timeSlotObj);
     this.setDeliverySlot(this.timeSlotObj);
     this.closeModal();
   }
