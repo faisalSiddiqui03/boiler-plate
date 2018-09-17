@@ -1,4 +1,5 @@
-import { IValidator, Product, ValidatorAction } from '@capillarytech/pwa-framework';
+import { IValidator, Product, ValidatorAction, BundleItem } from '@capillarytech/pwa-framework';
+import { ToppingCounter } from './pizzahut.count.helper';
 
 
 export class IncrementValidator implements IValidator {
@@ -14,24 +15,26 @@ export class IncrementValidator implements IValidator {
         return ValidatorAction.ADD;
     }
 
-    validate(clientProduct: Product): boolean{
+    validate(clientProduct: Product, item: BundleItem): boolean{
         let validToAddItem = false;
-        clientProduct.setSelectedItemsCount();
+
+        const counter = new ToppingCounter();
+        counter.setSelectedItemsCount(clientProduct);
+        
         let limit = this.itemAdditionLimit;
         let allowNextAddition = false;
         if(this.basedOnDefault){
-            limit = clientProduct.defaultItemCount + this.itemAdditionLimit;
+            limit = counter.defaultItemCount + this.itemAdditionLimit;
         }
-        if(clientProduct.selectedItemCount < limit){
+        if(counter.selectedItemCount < limit){
             validToAddItem = true;
         }
 
         allowNextAddition = validToAddItem;
-        if(!(clientProduct.selectedItemCount + 1 < limit)){
+        if(!(counter.selectedItemCount + 1 < limit)){
             allowNextAddition = false;
         }
         clientProduct.allowAddition(allowNextAddition);
-        clientProduct.resetSelectedItemsCount();
         return validToAddItem;
     }
 }

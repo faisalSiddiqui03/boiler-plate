@@ -14,7 +14,9 @@
             <div class="popup-title">
               <h4 text-center padding no-margin>{{widget?.model?.title}}</h4>
               <div class="img-text" padding>
-                <p>{{widget?.model?.longDescription}}</p>
+                <p>{{defaultToppings?.join(', ')}}</p>
+                <p><span class="success" *ngIf="addedToppings.length">Added: </span>{{addedToppings?.join(', ')}}</p>
+                <p><span class="danger" *ngIf="removedToppings.length">Removed: </span>{{removedToppings?.join(', ')}}</p>
               </div>
             </div>
 
@@ -51,17 +53,17 @@
                 <a class="change" (click)="toggleToppingsView()" text-capitalize>{{'pizza.change' | translate}}</a>
               </div>
               <div class="drinks-choose-block" margin>
-                <div class="block-header" flex-center text-capitalize>
+                <div class="block-header" flex-center text-capitalize (click)="showToppings = !showToppings">
                   {{'pizza.change_cheese_sauce_etc' | translate}}
-                  <ion-icon class="arrow" ios="ios-arrow-down" md="ios-arrow-down" name="arrow-down"></ion-icon>
+                  <ion-icon class="arrow" [class.expand]="showToppings" ios="ios-arrow-down" md="ios-arrow-down" name="arrow-down"></ion-icon>
                 </div>
 
                 <!-- Pizza sauce -->
-                <ng-container *ngFor="let group of widget?.model?.bundleGroups">
+                <ng-container *ngIf="showToppings" (click)="showToppings = !showToppings">
                   <ul>
-                    <li flex-center text-capitalize *ngFor="let item of group?.items">
+                    <li flex-center text-capitalize *ngFor="let item of toppings">
                       <ng-container *ngIf="(isItemSelected(item.id) || item.isDefault) && getItemType(item) === 'Sauce'">
-                        <span class="block-text">{{item.title}}</span>
+                        <span class="block-text">{{item?.title}}</span>
                         <span class="block-icon">
                           <ion-icon color="dark" name="checkmark" *ngIf="isItemSelected(item?.id)" (click)="removeItem(item)"></ion-icon>
                           <ion-icon color="success" name="add" *ngIf="!isItemSelected(item?.id)" (click)="addItem(item)"></ion-icon>
@@ -69,16 +71,14 @@
                       </ng-container>
                     </li>
                   </ul>
-                </ng-container>
-
-                <!-- Default toppings -->
-                <div class="block-header" text-capitalize flex-center>{{'pizza.your_toppings' | translate}}
-                  <strong class="extra">{{'pizza.extra' | translate}}</strong>
-                </div>
-                <ng-container *ngFor="let group of widget?.model?.bundleGroups">
+  
+                  <!-- Default toppings -->
+                  <div class="block-header" text-capitalize flex-center>{{'pizza.your_toppings' | translate}}
+                    <strong class="extra">{{'pizza.extra' | translate}}</strong>
+                  </div>
                   <ul>
-                    <li flex-center text-capitalize *ngFor="let item of group?.items">
-                      <ng-container *ngIf="(isItemSelected(item.id) || item?.isDefault) && getItemType(item) === 'Topping'">
+                    <li flex-center text-capitalize *ngFor="let item of toppings">
+                      <ng-container *ngIf="isItemSelected(item?.id) && getItemType(item) === 'Topping'">
                         <figure class="toppings-img">
                           <img src="{{getUrl(item?.image)}}" alt="item?.title">
                         </figure>
@@ -95,14 +95,23 @@
                         </span>
                       </ng-container>
                     </li>
+                    <li flex-center text-capitalize *ngFor="let item of toppings" [ngClass]="{'disable': !clientProduct?.allowAdd}">
+                      <ng-container *ngIf="!isItemSelected(item.id) && item?.isDefault && getItemType(item) === 'Topping'">
+                        <figure class="toppings-img">
+                          <img src="{{getUrl(item?.image)}}" alt="item?.title">
+                        </figure>
+                        <span class="block-text">{{item.title}}</span>
+                        <span class="block-icon">
+                          <ion-icon color="success" *ngIf="!isItemSelected(item.id)" (click)="addItem(item)" name="add"></ion-icon>
+                        </span>
+                      </ng-container>
+                    </li>
                   </ul>
-                </ng-container>
-
-                <!-- Extra toppings -->
-                <div class="block-header" text-capitalize flex-center>{{'pizza.add_extra' | translate}}</div>
-                <ng-container *ngFor="let group of widget?.model?.bundleGroups">
+  
+                  <!-- Extra toppings -->
+                  <div class="block-header" text-capitalize flex-center>{{'pizza.add_extra' | translate}}</div>
                   <ul>
-                    <li flex-center text-capitalize *ngFor="let item of group?.items" [ngClass]="{'disable': !clientProduct?.allowAdd}">
+                    <li flex-center text-capitalize *ngFor="let item of toppings" [ngClass]="{'disable': !clientProduct?.allowAdd}">
                       <ng-container *ngIf="!(isItemSelected(item?.id)) && !item?.isDefault && getItemType(item) === 'Topping'">
                         <figure class="toppings-img">
                           <img src="{{getUrl(item?.image)}}" alt="item?.title">

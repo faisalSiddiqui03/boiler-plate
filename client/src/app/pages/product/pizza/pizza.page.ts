@@ -14,6 +14,7 @@ import {
 import {   
   IncrementValidator,
   DecrementValidator,
+  RemovalValidator,
 } from '../../../../validators/index';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BaseComponent } from '../../../base/base-component';
@@ -43,6 +44,10 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   currencyCode: string;
   categoryId: string;
   productName: string;
+  toppings;
+  defaultToppings: Array<string>;
+  addedToppings: Array<string>;
+  removedToppings: Array<string>;
 
   constructor(
     private router: Router,
@@ -71,10 +76,10 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   widgetLoadingSuccess(name, data) {
     if (name == WidgetNames.PRODUCT_DISPLAY) {
-      this.loaded = true;
       this.serverProduct = data;
       this.clientProduct = this.serverProduct.client;
-      this.setValidators();
+      this.setToppings();
+      this.loaded = true;
     }
   }
 
@@ -103,27 +108,6 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     console.log('Widget action failed' + name, data);
   }
 
-  setValidators() {
-    try{
-      let items = [];
-      this.serverProduct.bundleGroups.map((group) => { group.items.map((item) => { items.push(item)}); });
-      items.map((item) => {
-        this.clientProduct.bundleItems.forEach((clientItem, number) => {
-          if(item.id === clientItem.id){
-            if(this.getItemType(item) === 'Topping'){
-              const decremnetValidator = new DecrementValidator(true, 3, item.isDefault);
-              const incrementValidator = new IncrementValidator(true, 3);
-              clientItem.validators.push(decremnetValidator);
-              clientItem.validators.push(incrementValidator);
-            }
-          }
-        });
-      });
-    } catch(err) {
-      console.error('Error setting validators');
-    }
-  }
-
   isPropertyValueSelected(propertyId: number, propertyvalueId: number) {
     return this.clientProduct.selectedPropertyValueIdMap.get(propertyId) === propertyvalueId;
   }
@@ -146,6 +130,7 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       return;
     }
     this.alertService.presentToast(this.translate.instant('pizza.add_topping_success'), 1000, 'top');
+    this.setToppingStatus();
     this.getPrice();
   }
 
@@ -163,6 +148,7 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       return;
     }
     this.alertService.presentToast(this.translate.instant('pizza.remove_topping_success'), 1000, 'top');
+    this.setToppingStatus();
     this.getPrice();
   }
 
@@ -247,6 +233,63 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       }
     });
     return sizeAndCrust.reverse().join(' ');
+  }
+
+  setToppings() {
+    this.toppings = [];
+    this.serverProduct.bundleGroups.map((group) => { group.items.map((item) => { this.toppings.push(item) }); });
+    this.toppings = this.toppings.sort((a, b) => {
+      if (a.title < b.title) return -1;
+      else if (a.title > b.title) return 1;
+      return 0;
+    });
+    this.setToppingCountValidators();
+    this.setToppingStatus();
+  };
+
+  setToppingCountValidators() {
+    try{
+      this.toppings.map((item) => {
+        this.clientProduct.bundleItems.forEach((clientItem, number) => {
+          if(item.id === clientItem.id && this.getItemType(item) === 'Topping'){
+            const removalValidator = new RemovalValidator(true, 3, item.isDefault);
+            const decremnetValidator = new DecrementValidator(true, 3, item.isDefault);
+            const incrementValidator = new IncrementValidator(true, 3);
+            clientItem.validators.push(removalValidator);
+            clientItem.validators.push(decremnetValidator);
+            clientItem.validators.push(incrementValidator);
+          }
+        });
+      });
+    } catch(err) {
+      console.error('Error setting validators');
+    }
+  }
+
+  setToppingStatus(){
+    this.defaultToppings = [];
+    this.addedToppings = [];
+    this.removedToppings = [];
+    this.toppings.map((item) => {
+      this.clientProduct.bundleItems.forEach((clientItem, number) => {
+        if(item.id === clientItem.id){
+          if(item.isDefault && clientItem.isSelected && clientItem.count === 1) 
+            this.defaultToppings.push(item.title);
+
+          if(item.isDefault && clientItem.isSelected && clientItem.count === 2) 
+            this.addedToppings.push(item.title + '(' + this.translate.instant('pizza.double') + ')');
+
+          if(!item.isDefault && clientItem.isSelected && clientItem.count === 1) 
+            this.addedToppings.push(item.title);
+
+          if(!item.isDefault && clientItem.isSelected && clientItem.count === 2)
+            this.addedToppings.push(item.title + '(' + this.translate.instant('pizza.double') + ')');
+
+          if(item.isDefault && !clientItem.isSelected) 
+            this.removedToppings.push(item.title);
+        }
+      });
+    });
   }
 
   goBack() {

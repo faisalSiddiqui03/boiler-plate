@@ -1,3 +1,4 @@
-export { IncrementValidator } from './increment.validator';
-export { DecrementValidator } from './decrement.validator';
+export { IncrementValidator } from './pizzahut.increment.validator';
+export { DecrementValidator } from './pizzahut.decrement.validator';
+export { RemovalValidator } from './pizzahut.removal.validator';
 export { IValidator } from '@capillarytech/pwa-framework';

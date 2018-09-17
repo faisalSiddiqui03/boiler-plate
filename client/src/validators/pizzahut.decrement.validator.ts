@@ -1,4 +1,5 @@
-import { IValidator, Product, ValidatorAction } from '@capillarytech/pwa-framework';
+import { IValidator, Product, ValidatorAction, BundleItem } from '@capillarytech/pwa-framework';
+import { ToppingCounter } from './pizzahut.count.helper';
 
 export class DecrementValidator implements IValidator {
     basedOnDefault: boolean;
@@ -12,33 +13,35 @@ export class DecrementValidator implements IValidator {
     }
 
     allowedAction(): ValidatorAction{
-        return ValidatorAction.REMOVE;
+        return ValidatorAction.DECREMENT;
     }
     
-    validate(clientProduct: Product): boolean{
+    validate(clientProduct: Product, item: BundleItem): boolean{
         if(!this.isDefault) {
             return true;
         }
         let validToRemoveItem = false;
-        let allowNextRemoval = false;
-        clientProduct.setSelectedItemsCount();
+        let allowNextDecrease = false;
+        
+        const counter = new ToppingCounter();
+        counter.setSelectedItemsCount(clientProduct);
+
         let limit = this.itemRemovalLimit;
-        let selectedCount = clientProduct.selectedItemCount;
+        let selectedCount = counter.selectedItemCount;
         if(this.basedOnDefault){
-            limit = clientProduct.defaultItemCount - this.itemRemovalLimit;
-            selectedCount = clientProduct.defaultSelectedItemCount;
+            limit = counter.defaultItemCount - this.itemRemovalLimit;
+            selectedCount = counter.defaultSelectedItemCount;
         }
         if(selectedCount > limit){
             validToRemoveItem = true;
             clientProduct.allowAddition(true);
         }
 
-        allowNextRemoval = validToRemoveItem;
+        allowNextDecrease = validToRemoveItem;
         if(!(selectedCount - 1 > limit)){
-            allowNextRemoval = false;
+            allowNextDecrease = false;
         }
-        clientProduct.allowRemoval(allowNextRemoval);
-        clientProduct.resetSelectedItemsCount();
+        clientProduct.allowRemoval(allowNextDecrease);
         return validToRemoveItem;
     }
 }
