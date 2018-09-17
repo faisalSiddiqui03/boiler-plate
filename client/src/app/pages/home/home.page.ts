@@ -62,6 +62,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private translate: TranslateService,
     public modalController: ModalController,
     private loaderService: LoaderService,
+    private alertService: AlertService
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
@@ -77,6 +78,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ionViewDidEnter() {
     this.selectedStore = this.getCurrentStore();
     this.changeRequested = false;
+  }
+
+  ionViewWillLeave() {
+    this.fetchDeliverySlots = false;
   }
 
   widgetLoadingSuccess(name, data) {
@@ -109,19 +114,26 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     }
   }
 
-  widgetActionSuccess(name: string, data: any) {
+  async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
         if (data.length) {
           this.setCurrentStore(data[0]);
           this.fetchDeliverySlots = true;
+        } else {
+          this.loaderService.stopLoading();
+          const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+          this.alertService.presentToast(store_alert, 3000, 'bottom');
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         if (data.length) {
           this.setCurrentStore(data[0]);
           this.fetchDeliverySlots = true;
+        } else {
+          const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+          this.alertService.presentToast(store_alert, 3000, 'bottom');
         }
         break;
     }
