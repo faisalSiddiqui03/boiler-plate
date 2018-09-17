@@ -14,7 +14,8 @@ import {
   LocationWidgetActions,
   FulfilmentModeWidgetActions,
   StoreLocatorWidgetActions,
-  DeliveryModes
+  DeliveryModes,
+  DeliverySlotsWidget
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../helpers/utils';
@@ -52,6 +53,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   citySelectionHistory: any = {};
 
   deliveryModes = DeliveryModes;
+  asSoonPossible: boolean = false;
+  fetchDeliverySlots = false;
 
   constructor(
     private config: ConfigService,
@@ -78,6 +81,15 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   widgetLoadingSuccess(name, data) {
     console.log('name = ', name, ' data = ', data);
+    switch (name) {
+      case 'DELIVERYSLOTS':
+        this.loaderService.stopLoading();
+        this.asSoonPossible = data[0].id === -1;
+        if (this.asSoonPossible) {
+          this.setDeliverySlot(data[0]);
+        }
+        this.navigateToDeals();
+    }
   }
 
   widgetActionFailed(name: string, data: any) {
@@ -101,18 +113,16 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     console.log('name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
-        this.loaderService.stopLoading();
         if (data.length) {
           console.log('------------0----------', data);
           this.setCurrentStore(data[0]);
-          this.navigateToDeals();
+          this.fetchDeliverySlots = true;
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        this.loaderService.stopLoading();
         if (data.length) {
           this.setCurrentStore(data[0]);
-          this.navigateToDeals();
+          this.fetchDeliverySlots = true;
         }
         break;
     }
@@ -237,8 +247,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   navigateToDeals() {
-    if (Utils.isEmpty(this.getDeliverySlot())) {
-      this.presentSlotModal()
+    if (!this.asSoonPossible || Utils.isEmpty(this.getDeliverySlot())) {
+      this.presentSlotModal();
     } else {
       this.router.navigateByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
     }
