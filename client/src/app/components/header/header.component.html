@@ -30,8 +30,8 @@
       <div class="delivery-mode">
         <div class="icon" [ngClass]="{'icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
         <span text-capitalize>Mode:</span>
-        <small *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY" text-capitalize>Delivery</small>
-        <small *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>Take away</small>
+        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY" text-capitalize>Delivery</small>
+        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>Take away</small>
       </div>
       <div class="delivery-location" (click)="goToPage('home')">
         <span text-capitalize>Location:</span>

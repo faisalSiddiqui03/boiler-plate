@@ -11,6 +11,8 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
 import { Utils } from '../../../helpers/utils';
+import { ModalController } from '@ionic/angular';
+import { DeliverySlotSelectionPage } from '../../checkout/delivery-slot-selection/delivery-slot-selection.page';
 
 @Component({
   selector: 'app-category-listing',
@@ -26,6 +28,8 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   productShowcaseWidgetAction = new EventEmitter();
   productShowcaseWidgetExecutor = new EventEmitter();
   currencyCode: string;
+  fetchDeliverySlots = false;
+  asSoonPossible = false;
   showcaseFilter = {
     from: 0,
     limit: 100,
@@ -35,7 +39,8 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
-    private config: ConfigService
+    private config: ConfigService,
+    public modalController: ModalController
   ) {
     super();
     this.translate.use(Utils.getLanguageCode());
@@ -51,6 +56,23 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
         this.categoryName = data.category;
         this.productShowcaseWidgetAction.emit(new Action('refresh', true))
       });
+  }
+
+  ionViewWillEnter() {
+    if (Utils.isEmpty(this.getDeliverySlot())) {
+      this.fetchDeliverySlots = true;
+    }
+  }
+
+  async presentSlotModal() {
+    const modal = await this.modalController.create({
+      component: DeliverySlotSelectionPage
+    });
+    return await modal.present();
+  }
+
+  ionViewWillLeave() {
+    this.fetchDeliverySlots = false;
   }
 
   getProductImageUrl(product) {
@@ -79,6 +101,16 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
+    console.log('name = ', name, ' data = ', data);
+    switch (name) {
+      case 'DELIVERYSLOTS':
+        this.asSoonPossible = data[0].id === -1;
+        if (this.asSoonPossible) {
+          this.setDeliverySlot(data[0]);
+        } else {
+          this.presentSlotModal();
+        }
+    }
   }
 
   goToCart() {
