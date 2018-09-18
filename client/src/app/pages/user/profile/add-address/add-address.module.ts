@@ -11,8 +11,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../../translation.loader';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
-import { AgmCoreModule } from '@agm/core';
-import { appConfig } from '../../../../../../config/config';
+import { LocationMapModule } from '../../../../components/location-map/location-map.module';
 
 
 const routes: Routes = [
@@ -28,11 +27,9 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: appConfig.googleMapsApiKey
-    }),
     HeaderModule,
-    SubHeaderModule,
+    SubHeaderModule, 
+    LocationMapModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {
@@ -44,4 +41,4 @@ const routes: Routes = [
   ],
   declarations: [AddAddressPage]
 })
-export class AddAddressPageModule {}
+export class AddAddressPageModule { }

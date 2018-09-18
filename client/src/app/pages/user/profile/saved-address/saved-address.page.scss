@@ -1,45 +1,77 @@
-.no-address{
-    font-size: 14px;
-    padding: 10px 20px;
-    border-bottom: 1px solid var(--ion-color-medium-tint);
-}
-ion-footer{
-    padding: 10px;
-}
-.saved-addresses{
-    padding: 0 10px 50px;
-    ion-list{
-        border-bottom: 1px solid var(--ion-color-medium-shade);
-        ion-label{
-            margin-right: 0;
-        }
-        h6{
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            ion-icon{
-                float: right;
-                font-size: 20px;
-                color: var(--ion-color-medium-shade);
-                cursor: pointer;
-                margin-top: 3px;
-            }
-        }
-        .address-details {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--ion-color-medium-contrast);
-            .edit{
-                text-decoration: underline;
-                cursor: pointer;
-            }
-        }
-    }
+.no-address {
+  font-size: 14px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--ion-color-medium-tint);
 }
 
-@media (min-width: 992px){
-    .btn-success{
-        max-width: 700px;
-        margin: auto;
-    }   
+ion-footer {
+  padding: 10px;
+}
+
+.saved-addresses {
+  padding: 0 10px 20px;
+  ion-list {
+    ion-item {
+      border-bottom: 1px solid var(--ion-color-medium-shade);
+    }
+    ion-label {
+      margin-right: 0;
+    }
+    h6 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      ion-icon {
+        float: right;
+        font-size: 20px;
+        color: var(--ion-color-medium-shade);
+        cursor: pointer;
+        margin-top: 3px;
+      }
+    }
+    .address-details {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ion-color-medium-contrast);
+      .edit {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.delete-address-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(var(--ion-color-dark-rgb), .8);
+  z-index: 11;
+  .delete-address-wrap {
+    padding: 20px 10px;
+    background: var(--ion-color-light);
+    max-width: 280px;
+    margin: auto;
+    p {
+      font-size: 14px;
+      line-height: 17px;
+      margin: 0 0 20px;
+      color: rgba(var(--ion-color-dark-rgb), .5);
+    }
+    .buttons-group {
+      ion-button {
+        margin: 0 5px;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .btn-success {
+    max-width: 700px;
+    margin: auto;
+  }
 }
