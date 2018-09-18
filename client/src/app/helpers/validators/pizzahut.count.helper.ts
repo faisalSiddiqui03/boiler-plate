@@ -1,4 +1,5 @@
 import { IValidator, Product, ValidatorAction, BundleItem} from '@capillarytech/pwa-framework';
+import { AttributeName, AttributeValue } from './attribute-name-value';
 
 export class ToppingCounter {
     defaultItemCount: number;
@@ -17,8 +18,8 @@ export class ToppingCounter {
 
         items.map((item) => {
           if (item.isDefault
-            && BundleItem.getAttributeValueByName(item, 'type') !== 'Sauce'
-            && BundleItem.getAttributeValueByName(item, 'Ischeese') !== 'True') {
+            && BundleItem.getAttributeValueByName(item, AttributeName.TYPE) !== AttributeValue.SAUCE
+            && BundleItem.getAttributeValueByName(item, AttributeName.IS_CHEESE) !== AttributeValue.TRUE) {
 
             this.defaultItemCount = this.defaultItemCount + 1;
             clientProduct.bundleItems.forEach((clientItem: BundleItem, key: number) => {
@@ -33,8 +34,8 @@ export class ToppingCounter {
             clientProduct.bundleItems.forEach((clientItem: BundleItem, key: number) => {
             if (item.id === clientItem.id 
                 && clientItem.isSelected 
-                && BundleItem.getAttributeValueByName(item, 'type') !== 'Sauce'
-                && BundleItem.getAttributeValueByName(item, 'Ischeese') !== 'True') 
+                && BundleItem.getAttributeValueByName(item, AttributeName.TYPE) !== AttributeValue.SAUCE
+                && BundleItem.getAttributeValueByName(item, AttributeName.IS_CHEESE) !== AttributeValue.TRUE) 
                   this.selectedItemCount = this.selectedItemCount + clientItem.count;
           });
         });

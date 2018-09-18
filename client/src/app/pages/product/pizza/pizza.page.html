@@ -62,7 +62,7 @@
                 <ng-container *ngIf="showToppings" (click)="showToppings = !showToppings">
                   <ul>
                     <li flex-center text-capitalize *ngFor="let item of toppings">
-                      <ng-container *ngIf="(isItemSelected(item.id) || item.isDefault) && getItemType(item) === 'Sauce'">
+                      <ng-container *ngIf="(isItemSelected(item.id) || item.isDefault) && getItemType(item) === sauce">
                         <span class="block-text">{{item?.title}}</span>
                         <span class="block-icon">
                           <ion-icon color="dark" name="checkmark" *ngIf="isItemSelected(item?.id)" (click)="removeItem(item)"></ion-icon>
@@ -78,7 +78,7 @@
                   </div>
                   <ul>
                     <li flex-center text-capitalize *ngFor="let item of toppings">
-                      <ng-container *ngIf="isItemSelected(item?.id) && getItemType(item) === 'Topping'">
+                      <ng-container *ngIf="isItemSelected(item?.id) && getItemType(item) === topping">
                         <figure class="toppings-img">
                           <img src="{{getUrl(item?.image)}}" alt="item?.title">
                         </figure>
@@ -96,7 +96,7 @@
                       </ng-container>
                     </li>
                     <li flex-center text-capitalize *ngFor="let item of toppings" [ngClass]="{'disable': !clientProduct?.allowAdd}">
-                      <ng-container *ngIf="!isItemSelected(item.id) && item?.isDefault && getItemType(item) === 'Topping'">
+                      <ng-container *ngIf="!isItemSelected(item.id) && item?.isDefault && getItemType(item) === topping">
                         <figure class="toppings-img">
                           <img src="{{getUrl(item?.image)}}" alt="item?.title">
                         </figure>
@@ -112,7 +112,7 @@
                   <div class="block-header" text-capitalize flex-center>{{'pizza.add_extra' | translate}}</div>
                   <ul>
                     <li flex-center text-capitalize *ngFor="let item of toppings" [ngClass]="{'disable': !clientProduct?.allowAdd}">
-                      <ng-container *ngIf="!(isItemSelected(item?.id)) && !item?.isDefault && getItemType(item) === 'Topping'">
+                      <ng-container *ngIf="!(isItemSelected(item?.id)) && !item?.isDefault && getItemType(item) === topping">
                         <figure class="toppings-img">
                           <img src="{{getUrl(item?.image)}}" alt="item?.title">
                         </figure>

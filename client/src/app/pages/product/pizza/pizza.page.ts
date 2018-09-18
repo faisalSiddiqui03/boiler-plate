@@ -14,7 +14,9 @@ import {
 import {   
   IncrementValidator,
   DecrementValidator,
-} from '../../../../validators/index';
+  AttributeName,
+  AttributeValue,
+} from '../../../helpers/validators/index';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BaseComponent } from '../../../base/base-component';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
@@ -49,6 +51,8 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   removedToppings: Array<string>;
   maxToppingLimit: number;
   minToppingLimit: number;
+  sauce = AttributeValue.SAUCE;
+  topping = AttributeValue.TOPPING;
 
   constructor(
     private router: Router,
@@ -161,7 +165,7 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   getItemType(item){
-    return BundleItem.getAttributeValueByName(item, 'type');
+    return BundleItem.getAttributeValueByName(item, AttributeName.TYPE);
   }
 
   getItemprice(serverItem){
@@ -254,7 +258,7 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     try{
       this.toppings.map((item) => {
         this.clientProduct.bundleItems.forEach((clientItem, number) => {
-          if(item.id === clientItem.id && this.getItemType(item) === 'Topping'){
+          if(item.id === clientItem.id && this.getItemType(item) === AttributeValue.TOPPING){
             const decremnetValidator = new DecrementValidator(this.minToppingLimit);
             const incrementValidator = new IncrementValidator(this.maxToppingLimit);
             clientItem.validators.push(decremnetValidator);

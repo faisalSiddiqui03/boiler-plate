@@ -1,5 +1,6 @@
 import { IValidator, Product, ValidatorAction, BundleItem } from '@capillarytech/pwa-framework';
 import { ToppingCounter } from './pizzahut.count.helper';
+import { AttributeName, AttributeValue } from './attribute-name-value';
 
 export class DecrementValidator implements IValidator {
     itemRemovalLimit: number;
@@ -13,7 +14,7 @@ export class DecrementValidator implements IValidator {
     }
     
     validate(clientProduct: Product, item: BundleItem, action: ValidatorAction): boolean{
-        if(BundleItem.getAttributeValueByName(item.baseItem, "Ischeese") === 'True') {
+        if(BundleItem.getAttributeValueByName(item.baseItem, AttributeName.IS_CHEESE) === AttributeValue.TRUE) {
             return true;
         }
         let validToRemoveItem = false;
