@@ -107,10 +107,11 @@
     font-weight: 700;
   }
   .total-bill-block {
-    padding: 0px 40px 14px 16px;
+    margin: 0px 40px 14px 16px;
     color: var(--ion-color-dark);
     font-size: 14px;
     font-weight: 700;
+    min-height: 32px;
   }
   .promotion-button {
     padding: 20px;
