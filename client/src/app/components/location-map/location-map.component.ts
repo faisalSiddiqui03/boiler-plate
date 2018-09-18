@@ -46,6 +46,10 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
     console.log('select location and proceed');
   }
 
+  openSearch() {
+    console.log('open search clicked');
+  }
+
 }
 
 // Interface for type safety.
