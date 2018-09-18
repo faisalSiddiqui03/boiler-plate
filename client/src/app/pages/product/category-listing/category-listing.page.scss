@@ -5,6 +5,13 @@
 .product-card {
   background-color: white;
   margin-bottom: 10px;
+  ion-card-header{
+    background-image: url("assets/imgs/product-back.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: lighten;
+  }
 }
 
 .non-deal-card {
@@ -14,7 +21,7 @@
     display: block;
     width: auto;
     margin: 0 auto;
-    height: 120px;
+    height: auto;
   }
 }
 

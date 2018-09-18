@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import {
   ConfigService,
   OnWidgetActionsLifecyle,
@@ -30,37 +31,45 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   currencyCode: string;
   fetchDeliverySlots = false;
   asSoonPossible = false;
-  showcaseFilter = {
-    from: 0,
-    limit: 100,
-    categoryIds: [this.categoryId],
-  };
+  // showcaseFilter = {
+  //   from: 0,
+  //   limit: 100,
+  //   categoryIds: [this.categoryId],
+  // };
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
     private config: ConfigService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private location: Location
   ) {
     super();
     this.translate.use(Utils.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
+    console.log(this.location)
   }
 
   ngOnInit() {
     this.route.queryParams
       .subscribe((data) => {
         this.categoryId = data.id;
-        this.showcaseFilter.categoryIds = [data.id];
-        // this.showcaseFilter = Object.assign({}, this.showcaseFilter);
         this.categoryName = data.category;
-        this.productShowcaseWidgetAction.emit(new Action('refresh', true))
       });
   }
 
   ionViewWillEnter() {
     if (Utils.isEmpty(this.getDeliverySlot())) {
       this.fetchDeliverySlots = true;
+    }
+  }
+
+  getShowcaseFilter(categoryId){
+
+    return {
+      from: 0,
+      limit: 100,
+      categoryIds: [categoryId]
     }
   }
 
