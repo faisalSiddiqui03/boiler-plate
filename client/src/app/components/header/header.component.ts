@@ -4,6 +4,7 @@ import { OnWidgetActionsLifecyle, OnWidgetLifecyle, DeliveryModes } from '@capil
 import { BaseComponent } from '../../base/base-component';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-selection/delivery-slot-selection.page';
+import { LocationPage } from '../../pages/checkout/location/location.page';
 
 @Component({
   selector: 'app-header',
@@ -58,6 +59,13 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
+  }
+
+  async openLocationModal() {
+    const modal = await this.modalController.create({
+      component: LocationPage,
+    });
+    return await modal.present();
   }
 
 }

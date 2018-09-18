@@ -38,6 +38,12 @@
             font-size: 13px;
             color: var(--ion-color-dark-shade);
             margin: 0;
+            .success{
+                color: var(--ion-color-success);
+            }
+            .danger{
+                color: var(--ion-color-danger);
+            }
         }
     }
 }
@@ -52,6 +58,10 @@
     cursor: pointer;
     .arrow {
         font-size: 20px;
+        transition: all 0.3s ease-in-out;
+        &.expand{
+            transform: rotate(180deg);
+        }
     }
     .extra {
         font-size: 11px;

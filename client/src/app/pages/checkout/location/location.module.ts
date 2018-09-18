@@ -6,8 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { LocationPage } from './location.page';
-import { AgmCoreModule } from '@agm/core';
-import { appConfig } from '../../../../../config/config';
+import { LocationMapModule } from '../../../components/location-map/location-map.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
@@ -24,9 +23,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    AgmCoreModule.forRoot({
-      apiKey: appConfig.googleMapsApiKey
-    }),
+    LocationMapModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {

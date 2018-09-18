@@ -14,7 +14,9 @@ import {
 import {   
   IncrementValidator,
   DecrementValidator,
-} from '../../../../validators/index';
+  AttributeName,
+  AttributeValue,
+} from '../../../helpers/validators/index';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BaseComponent } from '../../../base/base-component';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
@@ -43,6 +45,14 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   currencyCode: string;
   categoryId: string;
   productName: string;
+  toppings;
+  defaultToppings: Array<string>;
+  addedToppings: Array<string>;
+  removedToppings: Array<string>;
+  maxToppingLimit: number;
+  minToppingLimit: number;
+  sauce = AttributeValue.SAUCE;
+  topping = AttributeValue.TOPPING;
 
   constructor(
     private router: Router,
@@ -62,7 +72,9 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     this.productId = this.route.snapshot.params.productId;
     this.productName = this.route.snapshot.params.productName;
 
-    this.sizePropertyId = parseInt(this.config.getConfig()['sizePropertyId']);
+    this.sizePropertyId = this.config.getConfig()['sizePropertyId'];
+    this.maxToppingLimit = this.config.getConfig()['maxToppingLimit'];
+    this.minToppingLimit = this.config.getConfig()['minToppingLimit'];
   }
 
   widgetLoadingStarted(name, data){
@@ -71,10 +83,10 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   widgetLoadingSuccess(name, data) {
     if (name == WidgetNames.PRODUCT_DISPLAY) {
-      this.loaded = true;
       this.serverProduct = data;
       this.clientProduct = this.serverProduct.client;
-      this.setValidators();
+      this.setToppings();
+      this.loaded = true;
     }
   }
 
@@ -103,27 +115,6 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     console.log('Widget action failed' + name, data);
   }
 
-  setValidators() {
-    try{
-      let items = [];
-      this.serverProduct.bundleGroups.map((group) => { group.items.map((item) => { items.push(item)}); });
-      items.map((item) => {
-        this.clientProduct.bundleItems.forEach((clientItem, number) => {
-          if(item.id === clientItem.id){
-            if(this.getItemType(item) === 'Topping'){
-              const decremnetValidator = new DecrementValidator(true, 3, item.isDefault);
-              const incrementValidator = new IncrementValidator(true, 3);
-              clientItem.validators.push(decremnetValidator);
-              clientItem.validators.push(incrementValidator);
-            }
-          }
-        });
-      });
-    } catch(err) {
-      console.error('Error setting validators');
-    }
-  }
-
   isPropertyValueSelected(propertyId: number, propertyvalueId: number) {
     return this.clientProduct.selectedPropertyValueIdMap.get(propertyId) === propertyvalueId;
   }
@@ -146,6 +137,7 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       return;
     }
     this.alertService.presentToast(this.translate.instant('pizza.add_topping_success'), 1000, 'top');
+    this.setToppingStatus();
     this.getPrice();
   }
 
@@ -163,6 +155,7 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       return;
     }
     this.alertService.presentToast(this.translate.instant('pizza.remove_topping_success'), 1000, 'top');
+    this.setToppingStatus();
     this.getPrice();
   }
 
@@ -172,7 +165,7 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   getItemType(item){
-    return BundleItem.getAttributeValueByName(item, 'type');
+    return BundleItem.getAttributeValueByName(item, AttributeName.TYPE);
   }
 
   getItemprice(serverItem){
@@ -247,6 +240,61 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       }
     });
     return sizeAndCrust.reverse().join(' ');
+  }
+
+  setToppings() {
+    this.toppings = [];
+    this.serverProduct.bundleGroups.map((group) => { group.items.map((item) => { this.toppings.push(item) }); });
+    this.toppings = this.toppings.sort((a, b) => {
+      if (a.title < b.title) return -1;
+      else if (a.title > b.title) return 1;
+      return 0;
+    });
+    this.setToppingCountValidators();
+    this.setToppingStatus();
+  };
+
+  setToppingCountValidators() {
+    try{
+      this.toppings.map((item) => {
+        this.clientProduct.bundleItems.forEach((clientItem, number) => {
+          if(item.id === clientItem.id && this.getItemType(item) === AttributeValue.TOPPING){
+            const decremnetValidator = new DecrementValidator(this.minToppingLimit);
+            const incrementValidator = new IncrementValidator(this.maxToppingLimit);
+            clientItem.validators.push(decremnetValidator);
+            clientItem.validators.push(incrementValidator);
+          }
+        });
+      });
+    } catch(err) {
+      console.error('Error setting validators');
+    }
+  }
+
+  setToppingStatus(){
+    this.defaultToppings = [];
+    this.addedToppings = [];
+    this.removedToppings = [];
+    this.toppings.map((item) => {
+      this.clientProduct.bundleItems.forEach((clientItem, number) => {
+        if(item.id === clientItem.id){
+          if(item.isDefault && clientItem.isSelected && clientItem.count === 1) 
+            this.defaultToppings.push(item.title);
+
+          if(item.isDefault && clientItem.isSelected && clientItem.count === 2) 
+            this.addedToppings.push(item.title + '(' + this.translate.instant('pizza.double') + ')');
+
+          if(!item.isDefault && clientItem.isSelected && clientItem.count === 1) 
+            this.addedToppings.push(item.title);
+
+          if(!item.isDefault && clientItem.isSelected && clientItem.count === 2)
+            this.addedToppings.push(item.title + '(' + this.translate.instant('pizza.double') + ')');
+
+          if(item.isDefault && !clientItem.isSelected) 
+            this.removedToppings.push(item.title);
+        }
+      });
+    });
   }
 
   goBack() {

@@ -6,6 +6,20 @@
 		"description_part_two": "",
 		"our_history": ""
 	},
+	"add_address_page": {
+		"add_address": "",
+		"address_details": "",
+		"address_details_placeholder": "",
+		"address_details_required": "",
+		"address_type": "",
+		"enter_your_location": "",
+		"home": "",
+		"landmark": "",
+		"landmark_placeholder": "",
+		"locate_me": "",
+		"other": "",
+		"work": ""
+	},
 	"cart": {
 		"apply": "",
 		"cart_clear": "",
@@ -193,7 +207,9 @@
 	},
 	"location_page": {
 		"confirm_and_proceed": "",
-		"drag_the_pin_to_exact_location": ""
+		"drag_the_pin_to_exact_location": "",
+		"enter_your_location": "",
+		"locate_me": ""
 	},
 	"my_account_page": {
 		"change_password": "",
@@ -261,6 +277,9 @@
 		"nutrition": "",
 		"view_nutrition_values": ""
 	},
+	"order_details_page": {
+		"order_details": ""
+	},
 	"order_history_page": {
 		"no_orders": "",
 		"order_history": ""
@@ -277,7 +296,8 @@
 		"remove_topping_error": "Minimum topping count reached",
 		"remove_topping_success": "Topping successfuly removed",
 		"slect_size_crust": "Select your size and crust",
-		"your_toppings": "Your Toppings"
+		"your_toppings": "Your Toppings",
+		"double": "Double"
 	},
 	"privacy_page": {
 		"privacy_accordion10_p1": "",
