@@ -28,6 +28,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   @Input() showTime = false;
   @Input() showCart = false;
   @Input() headerClass = '';
+  @Input() showUserIcon = true;
 
   ngOnInit() {
   }

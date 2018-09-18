@@ -1,0 +1,28 @@
+agm-map {
+  height: 300px;
+}
+
+
+* {
+  font-family: Lato;
+}
+
+a {
+  color: darkblue;
+}
+
+.drag-pin {
+  color: #70a401;
+  font-family: Open Sans,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.geo-location-address p{
+  font-family: Open Sans,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 15px;
+}    

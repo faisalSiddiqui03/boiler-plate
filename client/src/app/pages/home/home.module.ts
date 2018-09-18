@@ -17,7 +17,8 @@ import { HttpClient } from '@angular/common/http';
 import {
   LocationWidgetModule,
   FulfilmentModeModule,
-  StoreLocatorWidgetModule
+  StoreLocatorWidgetModule,
+  DeliverySlotsWidgetModule
 } from '@capillarytech/pwa-framework';
 import { BannerWidgetModule, EventTrackModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
 
@@ -45,6 +46,7 @@ const routes: Routes = [
     FulfilmentModeModule,
     LoaderServiceModule,
     StoreLocatorWidgetModule,
+    DeliverySlotsWidgetModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

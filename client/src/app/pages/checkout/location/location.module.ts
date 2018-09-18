@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UserProfilePage } from './user-profile.page';
+import { LocationPage } from './location.page';
+import { AgmCoreModule } from '@agm/core';
+import { appConfig } from '../../../../../config/config';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from '../../../../translation.loader';
-import { HeaderModule } from '../../../../components/header/header.module';
-import { UserProfileWidgetModule } from '@capillarytech/pwa-framework';
-import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: UserProfilePage
+    component: LocationPage
   }
 ];
 
@@ -24,12 +23,11 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
+    AgmCoreModule.forRoot({
+      apiKey: appConfig.googleMapsApiKey
+    }),
     RouterModule.forChild(routes),
-    UserProfileWidgetModule,
-    HeaderModule,
-    SubHeaderModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -38,6 +36,6 @@ const routes: Routes = [
       }
     })
   ],
-  declarations: [UserProfilePage]
+  declarations: [LocationPage]
 })
-export class UserProfilePageModule { }
+export class LocationPageModule {}

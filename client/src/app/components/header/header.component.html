@@ -10,7 +10,7 @@
         <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
         <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">ASAP</span>
       </div>
-      <div (click)="goToPage(getUserModel()?.type === 'GUEST' ? 'login' : 'my-account')">
+      <div *ngIf="showUserIcon" (click)="goToPage(getUserModel()?.type === 'GUEST' ? 'login' : 'my-account')">
         <div class="profile-icon">
           <div class="icon icon-user-circle"></div>
         </div>
@@ -30,8 +30,8 @@
       <div class="delivery-mode">
         <div class="icon" [ngClass]="{'icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
         <span text-capitalize>Mode:</span>
-        <small *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY" text-capitalize>Delivery</small>
-        <small *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>Take away</small>
+        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY" text-capitalize>Delivery</small>
+        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>Take away</small>
       </div>
       <div class="delivery-location" (click)="goToPage('home')">
         <span text-capitalize>Location:</span>

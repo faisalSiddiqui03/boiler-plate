@@ -14,7 +14,8 @@ import {
   LocationWidgetActions,
   FulfilmentModeWidgetActions,
   StoreLocatorWidgetActions,
-  DeliveryModes
+  DeliveryModes,
+  DeliverySlotsWidget
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../helpers/utils';
@@ -47,11 +48,13 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   selectedStore;
   dropdownViewStatus: Map<string, boolean> = new Map();
   bannerUrl: string;
-  changeRequested: boolean = false;
-  hasError: { [name:string] : string | boolean } = {};
+  changeRequested = false;
+  hasError: { [name: string]: string | boolean } = {};
   citySelectionHistory: any = {};
 
   deliveryModes = DeliveryModes;
+  asSoonPossible = false;
+  fetchDeliverySlots = false;
 
   constructor(
     private config: ConfigService,
@@ -59,6 +62,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private translate: TranslateService,
     public modalController: ModalController,
     private loaderService: LoaderService,
+    private alertService: AlertService
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
@@ -76,8 +80,21 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.changeRequested = false;
   }
 
+  ionViewWillLeave() {
+    this.fetchDeliverySlots = false;
+  }
+
   widgetLoadingSuccess(name, data) {
     console.log('name = ', name, ' data = ', data);
+    switch (name) {
+      case 'DELIVERYSLOTS':
+        this.loaderService.stopLoading();
+        this.asSoonPossible = data[0].id === -1;
+        if (this.asSoonPossible) {
+          this.setDeliverySlot(data[0]);
+        }
+        this.navigateToDeals();
+    }
   }
 
   widgetActionFailed(name: string, data: any) {
@@ -97,22 +114,26 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     }
   }
 
-  widgetActionSuccess(name: string, data: any) {
+  async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
-        this.loaderService.stopLoading();
         if (data.length) {
-          console.log('------------0----------', data);
           this.setCurrentStore(data[0]);
-          this.navigateToDeals();
+          this.fetchDeliverySlots = true;
+        } else {
+          this.loaderService.stopLoading();
+          const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+          this.alertService.presentToast(store_alert, 3000, 'bottom');
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        this.loaderService.stopLoading();
         if (data.length) {
           this.setCurrentStore(data[0]);
-          this.navigateToDeals();
+          this.fetchDeliverySlots = true;
+        } else {
+          const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+          this.alertService.presentToast(store_alert, 3000, 'bottom');
         }
         break;
     }
@@ -237,12 +258,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   navigateToDeals() {
-    if (Utils.isEmpty(this.getDeliverySlot())) {
-      this.presentSlotModal()
-    } else {
-      this.router.navigateByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
+    if (!this.asSoonPossible || Utils.isEmpty(this.getDeliverySlot())) {
+      this.presentSlotModal();
     }
-
+    this.router.navigateByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
   }
 
   changeOrderMode(mode, previousMode) {

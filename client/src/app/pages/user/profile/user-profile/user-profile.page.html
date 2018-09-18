@@ -1,52 +1,50 @@
 <ion-header>
-  <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
+  <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
-  <ion-toolbar class="page-header">
-    <ion-buttons slot="start">
-      <div class="icon icon-arrow-prev-2" (click)="goToPage('my-account')"></div>
-    </ion-buttons>
-    <ion-title text-center text-uppercase>{{'user_profile_page.my_profile' | translate}}</ion-title>
-  </ion-toolbar>
+  <app-sub-header [title]="titleValue"></app-sub-header>
   <div class="main-content w-700">
-    <user-profile-widget [executor]="null" [action]="updateProfileActionEmitter">
+    <user-profile-widget [componentId]="getComponentId()" [executor]="null" [action]="updateProfileActionEmitter">
       <ng-template let-widget="widget">
         <form class="form-section w-400" padding [formGroup]="profileForm">
-          <div class="form-group" [class.error]="profileForm.get('fname').touched && !profileForm.get('fname').valid">
-            <ion-label for="fname" text-capitalize>{{ 'user_profile_page.fname' | translate }}
+          <div class="form-group" [class.error]="profileForm.get('firstName').touched && !profileForm.get('firstName').valid">
+            <ion-label for="firstName" text-capitalize>{{ 'user_profile_page.fname' | translate }}
               <sup>*</sup>
             </ion-label>
             <div class="form-input">
-              <ion-input id="fname" placeholder="{{ 'user_profile_page.fname_placeholder' | translate }}" inputmode="text" formControlName="fname" value="{{widget.model?.firstName}}"></ion-input>
+              <ion-input id="firstName" placeholder="{{ 'user_profile_page.fname_placeholder' | translate }}" inputmode="text" formControlName="firstName"
+                value="{{profileForm.get('firstName').value}}"></ion-input>
               <div class="icons">
                 <ion-icon name="alert"></ion-icon>
               </div>
-            </div>
-            <div *ngIf="profileForm.get('fname').touched">
-              <div class="error-msg" *ngIf="profileForm.get('fname').errors?.required">{{ 'user_profile_page.fname_required' | translate }}</div>
+            </div> 
+            <div *ngIf="profileForm.get('firstName').touched">
+              <div class="error-msg" *ngIf="profileForm.get('firstName').errors?.required">{{ 'user_profile_page.fname_required' | translate }}</div>
             </div>
           </div>
           <div class="form-group">
-            <ion-label for="lname" text-capitalize>{{ 'user_profile_page.lname' | translate }}</ion-label>
+            <ion-label for="lastName" text-capitalize>{{ 'user_profile_page.lname' | translate }}</ion-label>
             <div class="form-input">
-              <ion-input id="lname" placeholder="{{ 'user_profile_page.lname_placeholder' | translate }}" inputmode="text" formControlName="lname" value="{{widget.model?.lastName}}"></ion-input>
+              <ion-input id="lastName" placeholder="{{ 'user_profile_page.lname_placeholder' | translate }}" inputmode="text" formControlName="lastName"
+                value="{{profileForm.get('lastName').value}}"></ion-input>
             </div>
           </div>
-          <div class="form-group" [class.error]="profileForm.get('mobile').touched && !profileForm.get('mobile').valid">
+          <div class="form-group" [class.error]="profileForm.get('mobileNo').touched && !profileForm.get('mobileNo').valid">
             <ion-label for="mobile" text-capitalize>{{ 'user_profile_page.mobile' | translate }}
               <sup>*</sup>
             </ion-label>
             <div class="form-input mobile-input">
               <span>965</span>
-              <ion-input id="mobile" placeholder="{{ 'user_profile_page.mobile_placeholder' | translate }}" inputmode="text" formControlName="mobile" value="{{widget.model?.mobileNo}}"></ion-input>
+              <ion-input id="mobile" placeholder="{{ 'user_profile_page.mobile_placeholder' | translate }}" inputmode="text" formControlName="mobileNo"
+                value="{{profileForm.get('mobileNo').value}}"></ion-input>
               <div class="icons">
                 <ion-icon name="alert"></ion-icon>
               </div>
             </div>
-            <div *ngIf="profileForm.get('mobile').touched">
-              <div class="error-msg" *ngIf="profileForm.get('mobile').errors?.required">{{ 'user_profile_page.mobile_required' | translate }}</div>
-              <div class="error-msg" *ngIf="profileForm.get('mobile').errors?.minlength">{{ 'user_profile_page.mobile_digits' | translate }}</div>
-              <div class="error-msg" *ngIf="profileForm.get('mobile').errors?.maxlength">{{ 'user_profile_page.mobile_digits' | translate }}</div>
+            <div *ngIf="profileForm.get('mobileNo').touched">
+              <div class="error-msg" *ngIf="profileForm.get('mobileNo').errors?.required">{{ 'user_profile_page.mobile_required' | translate }}</div>
+              <div class="error-msg" *ngIf="profileForm.get('mobileNo').errors?.minlength">{{ 'user_profile_page.mobile_digits' | translate }}</div>
+              <div class="error-msg" *ngIf="profileForm.get('mobileNo').errors?.maxlength">{{ 'user_profile_page.mobile_digits' | translate }}</div>
             </div>
           </div>
           <div class="form-group">
@@ -54,11 +52,12 @@
               <sup>*</sup>
             </ion-label>
             <div class="form-input">
-              <ion-input id="email" disabled placeholder="{{ 'user_profile_page.email_placeholder' | translate }}" inputmode="email" formControlName="email" value="{{widget.model?.alternateEmail}}"></ion-input>
+              <ion-input id="email" disabled placeholder="{{ 'user_profile_page.email_placeholder' | translate }}" inputmode="email" formControlName="alternateEmail"
+                value="{{profileForm.get('alternateEmail').value}}"></ion-input>
             </div>
           </div>
           <div class="buttons-group">
-            <ion-button color="medium" class="btn-signin" text-capitalize expand="block" mode="ios" (click)="updateProfile()" [disabled]="!profileForm.valid">{{ 'user_profile_page.save_profile' | translate }}</ion-button>
+            <ion-button color="success" class="btn-success" text-capitalize expand="block" mode="ios" (click)="updateProfile()" [class.disabled]="!profileForm.valid">{{ 'user_profile_page.save_profile' | translate }}</ion-button>
           </div>
         </form>
       </ng-template>
