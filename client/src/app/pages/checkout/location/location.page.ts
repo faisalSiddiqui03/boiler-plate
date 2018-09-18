@@ -7,6 +7,7 @@ import { BaseComponent } from '../../../base/base-component';
   templateUrl: './location.page.html',
   styleUrls: ['./location.page.scss'],
 })
+
 export class LocationPage extends BaseComponent implements OnInit {
 
   constructor(
@@ -21,6 +22,5 @@ export class LocationPage extends BaseComponent implements OnInit {
   dismiss() {
     console.log('on dismiss');
   }
-
 }
 

@@ -116,4 +116,9 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   goToCart() {
     this.router.navigateByUrl('/cart');
   }
+
+  switchCategories(category, categoryId) {
+    this.router.navigate( [], { queryParams: { category: category, id: categoryId }});
+    // this.router.navigateByUrl('/products?category={{item.name}}&id={{item.categoryId}}')
+  }
 }

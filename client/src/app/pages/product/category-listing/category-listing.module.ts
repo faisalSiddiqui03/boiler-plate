@@ -14,15 +14,23 @@ import { HeaderModule } from '../../../components/header/header.module';
 import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
 import { CategoryRouterModule } from './category.router.module';
 
+const routes: Routes = [
+  {
+    path: '',
+    component: CategoryListingPage
+  }
+];
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    CategoryRouterModule,
+    // CategoryRouterModule,
     HeaderModule,
     SkeletonModule,
     ImagePreloadModule,
     NavigationWidgetModule,
+    RouterModule.forChild(routes),
     CartComponentModule,
     ProductShowcaseWidgetModule,
     TranslateModule.forRoot({
