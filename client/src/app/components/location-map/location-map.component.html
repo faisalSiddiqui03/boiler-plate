@@ -3,7 +3,7 @@
     <ion-label (click)="openSearch()" class="margin-left-1 margin-right-0">
         <ion-icon name="search"></ion-icon>
     </ion-label>
-    <ion-input (click)="openSearch()" type="text" placeholder="{{ 'location_page.enter_your_location' | translate }}" [disabled]="true"></ion-input>
+    <ion-input (click)="openSearch()" type="text" placeholder="{{ 'location_page.enter_your_location' | translate }}"></ion-input>
     <button item-right class="location-button" (tap)="locateMe()">
         <ion-icon name="location" color="fill-white" style="color:#fff"></ion-icon>
         <span style="color:#fff">{{ 'location_page.locate_me' | translate }}</span>
