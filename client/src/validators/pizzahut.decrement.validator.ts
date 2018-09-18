@@ -2,46 +2,38 @@ import { IValidator, Product, ValidatorAction, BundleItem } from '@capillarytech
 import { ToppingCounter } from './pizzahut.count.helper';
 
 export class DecrementValidator implements IValidator {
-    basedOnDefault: boolean;
     itemRemovalLimit: number;
-    isDefault: boolean;
 
-    constructor(basedOnDefault: boolean, itemAdditionLimit: number, isDefault: boolean){
-        this.basedOnDefault = basedOnDefault;
-        this.itemRemovalLimit = itemAdditionLimit;
-        this.isDefault = isDefault;
+    constructor(itemRemovalLimit: number){
+        this.itemRemovalLimit = itemRemovalLimit;
     }
 
-    allowedAction(): ValidatorAction{
-        return ValidatorAction.DECREMENT;
+    allowedAction(): Array<ValidatorAction>{
+        return [ValidatorAction.DECREMENT, ValidatorAction.REMOVE];
     }
     
-    validate(clientProduct: Product, item: BundleItem): boolean{
-        if(!this.isDefault) {
+    validate(clientProduct: Product, item: BundleItem, action: ValidatorAction): boolean{
+        if(BundleItem.getAttributeValueByName(item.baseItem, "Ischeese") === 'True') {
             return true;
         }
         let validToRemoveItem = false;
-        let allowNextDecrease = false;
         
         const counter = new ToppingCounter();
         counter.setSelectedItemsCount(clientProduct);
 
-        let limit = this.itemRemovalLimit;
         let selectedCount = counter.selectedItemCount;
-        if(this.basedOnDefault){
-            limit = counter.defaultItemCount - this.itemRemovalLimit;
-            selectedCount = counter.defaultSelectedItemCount;
+        const limit = counter.defaultItemCount - this.itemRemovalLimit;
+
+        if(action === ValidatorAction.REMOVE){
+            selectedCount = selectedCount - item.count;
         }
-        if(selectedCount > limit){
+        else if(action === ValidatorAction.DECREMENT){
+            selectedCount = selectedCount - 1;
+        }
+        if(selectedCount >= limit){
             validToRemoveItem = true;
             clientProduct.allowAddition(true);
         }
-
-        allowNextDecrease = validToRemoveItem;
-        if(!(selectedCount - 1 > limit)){
-            allowNextDecrease = false;
-        }
-        clientProduct.allowRemoval(allowNextDecrease);
         return validToRemoveItem;
     }
 }

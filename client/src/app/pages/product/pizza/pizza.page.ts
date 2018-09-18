@@ -14,7 +14,6 @@ import {
 import {   
   IncrementValidator,
   DecrementValidator,
-  RemovalValidator,
 } from '../../../../validators/index';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BaseComponent } from '../../../base/base-component';
@@ -48,6 +47,8 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   defaultToppings: Array<string>;
   addedToppings: Array<string>;
   removedToppings: Array<string>;
+  maxToppingLimit: number;
+  minToppingLimit: number;
 
   constructor(
     private router: Router,
@@ -67,7 +68,9 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     this.productId = this.route.snapshot.params.productId;
     this.productName = this.route.snapshot.params.productName;
 
-    this.sizePropertyId = parseInt(this.config.getConfig()['sizePropertyId']);
+    this.sizePropertyId = this.config.getConfig()['sizePropertyId'];
+    this.maxToppingLimit = this.config.getConfig()['maxToppingLimit'];
+    this.minToppingLimit = this.config.getConfig()['minToppingLimit'];
   }
 
   widgetLoadingStarted(name, data){
@@ -252,10 +255,8 @@ export class PizzaPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       this.toppings.map((item) => {
         this.clientProduct.bundleItems.forEach((clientItem, number) => {
           if(item.id === clientItem.id && this.getItemType(item) === 'Topping'){
-            const removalValidator = new RemovalValidator(true, 3, item.isDefault);
-            const decremnetValidator = new DecrementValidator(true, 3, item.isDefault);
-            const incrementValidator = new IncrementValidator(true, 3);
-            clientItem.validators.push(removalValidator);
+            const decremnetValidator = new DecrementValidator(this.minToppingLimit);
+            const incrementValidator = new IncrementValidator(this.maxToppingLimit);
             clientItem.validators.push(decremnetValidator);
             clientItem.validators.push(incrementValidator);
           }

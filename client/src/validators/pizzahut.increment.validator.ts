@@ -3,29 +3,24 @@ import { ToppingCounter } from './pizzahut.count.helper';
 
 
 export class IncrementValidator implements IValidator {
-    basedOnDefault: boolean;
     itemAdditionLimit: number;
 
-    constructor(basedOnDefault: boolean, itemAdditionLimit: number){
-        this.basedOnDefault = basedOnDefault;
+    constructor(itemAdditionLimit: number){
         this.itemAdditionLimit = itemAdditionLimit;
     }
 
-    allowedAction(): ValidatorAction{
-        return ValidatorAction.ADD;
+    allowedAction(): Array<ValidatorAction>{
+        return [ValidatorAction.ADD];
     }
 
-    validate(clientProduct: Product, item: BundleItem): boolean{
+    validate(clientProduct: Product, item: BundleItem, action: ValidatorAction): boolean{
         let validToAddItem = false;
 
         const counter = new ToppingCounter();
         counter.setSelectedItemsCount(clientProduct);
         
-        let limit = this.itemAdditionLimit;
         let allowNextAddition = false;
-        if(this.basedOnDefault){
-            limit = counter.defaultItemCount + this.itemAdditionLimit;
-        }
+        const limit = counter.defaultItemCount + this.itemAdditionLimit;
         if(counter.selectedItemCount < limit){
             validToAddItem = true;
         }

@@ -23,6 +23,9 @@ export const config = {
       "port": "33627",
       "db": "kt99-loopback"
     },
+    "sizePropertyId": 1940,
+    "maxToppingLimit": 3,
+    "minToppingLimit": 3,
     "baseUrl": "/api/",
     "server": {
       "mw-static": {
