@@ -17,6 +17,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
+  titleValue: string = '';
+
   constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
 
@@ -26,6 +28,9 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   ngOnInit() {
+    this.translate.get('saved_address_page.saved_address').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   goToPage(pageName) {

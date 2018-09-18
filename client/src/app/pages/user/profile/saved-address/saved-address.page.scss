@@ -36,3 +36,10 @@ ion-footer{
         }
     }
 }
+
+@media (min-width: 992px){
+    .btn-success{
+        max-width: 700px;
+        margin: auto;
+    }   
+}

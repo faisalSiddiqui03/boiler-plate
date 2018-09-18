@@ -18,7 +18,12 @@
                              [action]="null" (lifecycle)="null">
             <ng-template let-widget="widget">
               <div *ngIf="widget.model">
-                <ion-tabs [scrollable]="true" [color]="'dark'" [tabbarHighlight]="true" [useRouter]="true">
+                  <div class="showcase-tabs">
+                      <ul no-margin no-padding>
+                        <li *ngFor="let item of widget.model.items; let i = index;" text-center [class.selected]="item.categoryId === categoryId">{{item.name}}</li>
+                      </ul>
+                    </div>
+                <ion-tabs style="display: none" [scrollable]="true" [color]="'dark'" [tabbarHighlight]="true" [useRouter]="true">
                   <ion-tab *ngFor="let item of widget.model.items; let i = index;" label="{{item.name}}"
                            href="/products/listing/({{i}}:{{i}})?category={{item.name}}&id={{item.categoryId}}">
                     <ion-router-outlet stack name="{{i}}"></ion-router-outlet>

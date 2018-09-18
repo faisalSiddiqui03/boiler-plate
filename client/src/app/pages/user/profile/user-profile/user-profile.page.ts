@@ -27,6 +27,7 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
   profileForm: FormGroup;
   widgetModel: any;
   loaded: boolean;
+  titleValue = '';
 
   constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private formBuilder: FormBuilder) {
     super();
@@ -36,33 +37,45 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
     this.translate.use(Utils.getLanguageCode());
 
     this.profileForm = this.formBuilder.group({
-      fname: ['', Validators.compose([Validators.required])],
-      lname: [''],
-      mobile: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],
-      email: ['', Validators.compose([Validators.required, Validators.email])],
+      firstName: ['', Validators.compose([Validators.required])],
+      lastName: [''],
+      mobileNo: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],
+      alternateEmail: ['',],
     })
   }
 
-  ngOnInit() {
-  }
 
-  goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+  ngOnInit() {
+    this.translate.get('user_profile_page.my_profile').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   updateProfile() {
     this.widgetModel.firstName = this.profileForm.value.firstName;
+    this.widgetModel.lastName = this.profileForm.value.lastName;
+    this.widgetModel.mobileNo = this.profileForm.value.mobileNo;
     this.updateProfileActionEmitter.emit(new Action(UserProfileWidgetActions.ACTION_UPDATE_USER));
   }
 
   widgetActionSuccess(name, data) {
     console.log('action success ' + name, data);
+    this.alertService.presentToast("Profile Updated Successfully", 2000, top);
+    this.router.navigateByUrl('my-account');
   }
 
   widgetLoadingSuccess(name, data) {
-    this.widgetModel = data;
-    this.loaded = true;
-    console.log('loaded ' + name, data);
+    switch (name) {
+      case 'USER_PROFILE':
+        this.widgetModel = data;
+        this.loaded = true;
+        console.log('loaded ' + name, data);
+        this.profileForm.get('firstName').setValue(data.firstName);
+        this.profileForm.get('lastName').setValue(data.lastName);
+        this.profileForm.get('mobileNo').setValue(data.mobileNo);
+        this.profileForm.get('alternateEmail').setValue(data.alternateEmail);
+        break;
+    }
   }
 
   widgetLoadingFailed(name, data) {
