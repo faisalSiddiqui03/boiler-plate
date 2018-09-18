@@ -12,27 +12,31 @@
         </ion-toolbar>
       </ion-show-when>
       <ion-toolbar class="tabs-nav-head">
-        <div class="container">
+
           <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1
                              [executor]="null"
                              [action]="null" (lifecycle)="null">
             <ng-template let-widget="widget">
               <div *ngIf="widget.model">
-                  <div class="showcase-tabs">
-                      <ul no-margin no-padding>
-                        <li *ngFor="let item of widget.model.items; let i = index;" text-center [class.selected]="item.categoryId === categoryId">{{item.name}}</li>
-                      </ul>
-                    </div>
-                <ion-tabs style="display: none" [scrollable]="true" [color]="'dark'" [tabbarHighlight]="true" [useRouter]="true">
-                  <ion-tab *ngFor="let item of widget.model.items; let i = index;" label="{{item.name}}"
-                           href="/products/listing/({{i}}:{{i}})?category={{item.name}}&id={{item.categoryId}}">
-                    <ion-router-outlet stack name="{{i}}"></ion-router-outlet>
-                  </ion-tab>
-                </ion-tabs>
+                <div class="showcase-tabs">
+                  <div class="container">
+                  <ul no-margin no-padding>
+                    <li *ngFor="let item of widget.model.items; let i = index;" text-center
+                        [class.selected]="item.categoryId === categoryId" (click)="switchCategories(item.name, item.categoryId)">{{item.name}}
+                    </li>
+                  </ul>
+                  </div>
+                </div>
+                <!--<ion-tabs style="display: none" [scrollable]="true" [color]="'dark'" [tabbarHighlight]="true"-->
+                          <!--[useRouter]="true">-->
+                  <!--<ion-tab *ngFor="let item of widget.model.items; let i = index;" label="{{item.name}}"-->
+                           <!--href="/products/listing/({{i}}:{{i}})?category={{item.name}}&id={{item.categoryId}}">-->
+                    <!--<ion-router-outlet stack name="{{i}}"></ion-router-outlet>-->
+                  <!--</ion-tab>-->
+                <!--</ion-tabs>-->
               </div>
             </ng-template>
           </navigation-widget>
-        </div>
       </ion-toolbar>
 
       <div class="container showcase-container">
@@ -326,26 +330,26 @@
             </div>
             <div *ngIf="widget.model != undefined && widget.model.length">
               <delivery-slots-widget *ngIf="fetchDeliverySlots"
-                [globalSlots]="true"
-                [deliveryMode]="getFulfilmentMode()?.mode"
-                [storeId]="getCurrentStore()?.id"
-                [componentId]="getComponentId()">
+                                     [globalSlots]="true"
+                                     [deliveryMode]="getFulfilmentMode()?.mode"
+                                     [storeId]="getCurrentStore()?.id"
+                                     [componentId]="getComponentId()">
               </delivery-slots-widget>
               <ion-hide-when size="lg">
-              <div class="ribbon">
-                <div class="ribbon__side--left">
-                  <span></span>
+                <div class="ribbon">
+                  <div class="ribbon__side--left">
+                    <span></span>
+                  </div>
+                  <div class="ribbon__side--title" text-uppercase>
+                    <span class="cond caps">{{categoryName}}</span>
+                  </div>
+                  <div class="ribbon__side--right">
+                    <span></span>
+                  </div>
+                  <div class="ribbon__shadow">
+                    <span></span>
+                  </div>
                 </div>
-                <div class="ribbon__side--title" text-uppercase>
-                  <span class="cond caps">{{categoryName}}</span>
-                </div>
-                <div class="ribbon__side--right">
-                  <span></span>
-                </div>
-                <div class="ribbon__shadow">
-                  <span></span>
-                </div>
-              </div>
               </ion-hide-when>
               <ion-show-when size="lg">
                 <div class="common-heading-dotted" text-center>
