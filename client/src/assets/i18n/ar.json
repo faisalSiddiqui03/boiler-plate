@@ -277,7 +277,8 @@
 		"remove_topping_error": "Minimum topping count reached",
 		"remove_topping_success": "Topping successfuly removed",
 		"slect_size_crust": "Select your size and crust",
-		"your_toppings": "Your Toppings"
+		"your_toppings": "Your Toppings",
+		"double": "Double"
 	},
 	"privacy_page": {
 		"privacy_accordion10_p1": "",
