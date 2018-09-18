@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AgmCoreModule, MouseEvent } from '@agm/core';
+import { ModalController } from '@ionic/angular';
+import { SeacrhLocationPage } from '../seacrh-location/seacrh-location.page';
 
 @Component({
   selector: 'app-add-address',
@@ -22,7 +25,7 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
   titleValue: string = '';
   addAddressForm: FormGroup;
 
-  constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private formBuilder: FormBuilder) {
+  constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private formBuilder: FormBuilder, private modalController: ModalController) {
     super();
 
     // this.loaderService.startLoading();
