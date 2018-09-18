@@ -11,6 +11,9 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../../translation.loader';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
+import { AgmCoreModule } from '@agm/core';
+import { appConfig } from '../../../../../../config/config';
+
 
 const routes: Routes = [
   {
@@ -25,6 +28,9 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: appConfig.googleMapsApiKey
+    }),
     HeaderModule,
     SubHeaderModule,
     RouterModule.forChild(routes),

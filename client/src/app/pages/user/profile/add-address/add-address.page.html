@@ -7,10 +7,19 @@
     <div class="location-wrap">
       <div class="location-form">
         <form flex-center>
-          <ion-input readonly placeholder="{{ 'add_address_page.enter_your_location' | translate }}"></ion-input>
-          <ion-button color="success" text-Capitalize mode="ios" class="btn-success">
-           <ion-icon name="pin"></ion-icon> {{'add_address_page.locate_me' | translate}}</ion-button>
+          <ion-input readonly placeholder="{{ 'add_address_page.enter_your_location' | translate }}" (click)="openLocationModal()"></ion-input>
+          <ion-button color="success" (click)="locateMe()" text-Capitalize mode="ios" class="btn-success">
+            <ion-icon name="pin"></ion-icon> {{'add_address_page.locate_me' | translate}}</ion-button>
         </form>
+        <p class="drag-pin">{{'add_address_page.drag_the_pin' | translate}}</p>
+        <agm-map [latitude]="marker?.lat" [longitude]="marker?.lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="true">
+          <agm-marker [latitude]="marker?.lat" [longitude]="marker?.lng" [label]="marker?.label" [markerDraggable]="marker?.draggable"
+            [iconUrl]="agmMarkerSrc" (dragEnd)="markerDragEnd(marker, $event)">
+          </agm-marker>
+        </agm-map>
+      </div>
+      <div class="geo-location-address">
+        <p> Kuwait City, Kuwait </p>
       </div>
       <form class="form-section" [formGroup]="addAddressForm">
         <div class="form-group" [class.error]="addAddressForm.get('addressDetails').touched && !addAddressForm.get('addressDetails').valid">
