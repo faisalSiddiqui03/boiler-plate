@@ -1,0 +1,46 @@
+agm-map {
+  height: 300px;
+}
+
+
+* {
+  font-family: Lato;
+}
+
+a {
+  color: darkblue;
+}
+
+.drag-pin {
+  color: #70a401;
+  font-family: Open Sans,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.location-button{
+  border-radius: 5px;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  background-color: #70a401;
+  font-size: 15px;
+  letter-spacing: .5px;
+  border-style: solid;
+  border-left: 0px;
+  margin: 4px !important;
+  height: 45px;
+}
+
+.margin-left-1{
+  margin-left: 1rem;
+}
+
+.margin-right-0{
+  margin-right: 0px;
+  font-size: 14px;
+  font-weight: 400;    
+}
+
+.location-bar{margin:5px 10px; box-shadow: none !important; border-radius: 5px; border: 1px #f1f1f1 solid;}
