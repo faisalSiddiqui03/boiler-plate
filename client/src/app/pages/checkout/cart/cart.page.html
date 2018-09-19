@@ -10,8 +10,8 @@
               <div class="common-heading-dotted" text-center>
                 <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
               </div>
-              <ion-list no-margin>
-                <ion-item no-padding>
+              <div class="cart-list">
+                <div class="cart-item" no-padding>
                   <ion-label no-margin>
                     <div>
                       <div class="skeleton-warpper">
@@ -26,8 +26,8 @@
                     </div>
                   </ion-label>
                   <div class="tooltip">{{ 'cart.update_cart_message' | translate}}</div>
-                </ion-item>
-                <ion-item no-padding>
+                </div>
+                <div class="cart-item" no-padding>
                   <ion-label no-margin>
                     <div>
                       <div class="skeleton-warpper">
@@ -41,8 +41,8 @@
                       </div>
                     </div>
                   </ion-label>
-                </ion-item>
-              </ion-list>
+                </div>
+              </div>
               <div flex-center class="total-bill-block">
                 <div class="total-bill">
                   <div class="skeleton-warpper">
@@ -100,24 +100,11 @@
               <div class="common-heading-dotted" text-center>
                 <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
               </div>
-              <ion-list no-margin>
-                <ion-item no-padding *ngFor="let item of widget?.model?.items; let i = index">
-                  <ion-label no-margin>
+              <div class="cart-list">
+                <div class="cart-item" *ngFor="let item of widget?.model?.items; let i = index">
+                  
                     <div flex-center>
                       <div class="product-title">{{item?.description}}
-                        <ng-container *ngIf="item.getType() === product || item.getType() === bundle">
-                          <span>{{item?.getVariant()}}</span>
-                        </ng-container>
-                        <ng-container *ngIf="item.getType() === bundle">
-                          <ng-container *ngFor="let bundleItem of item?.bundleItems">
-                            <span *ngIf="bundleItem?.webPrice > 0 && !bundleItem?.isPrimaryProduct">
-                                {{ 'cart.add' | translate}} {{bundleItem?.description}} {{bundleItem?.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}
-                            </span>
-                          </ng-container>
-                        </ng-container>
-                        <ng-container *ngIf="item.getType() === deal">
-
-                        </ng-container>
                       </div>
 
                       <div class="add-remove">
@@ -128,10 +115,24 @@
                       <div class="product-price">{{(item?.getPrice() * item.quantity) | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
                       <ion-icon class="remove-icon" name="close-circle" (click)="removeCartItem(item?.client)"></ion-icon>
                     </div>
-                  </ion-label>
+                  <div class="toppings">
+                      <ng-container *ngIf="item.getType() === product || item.getType() === bundle">
+                          <div>{{item?.getVariant()}}</div>
+                        </ng-container>
+                        <ng-container *ngIf="item.getType() === bundle">
+                          <ng-container *ngFor="let bundleItem of item?.bundleItems">
+                            <div flex-center *ngIf="bundleItem?.webPrice > 0 && !bundleItem?.isPrimaryProduct">
+                                {{ 'cart.add' | translate}} {{bundleItem?.description}} <span>+ {{bundleItem?.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="item.getType() === deal">
+
+                        </ng-container>
+                  </div>
                   <div *ngIf="i === 0" class="tooltip">{{ 'cart.update_cart_message' | translate}}</div>
-                </ion-item>
-              </ion-list>
+                </div>
+              </div>
               <div flex-center class="delivery-bill-block">
                 <ng-container *ngIf="widget?.model?.getShippingCost()">
                   <div class="total-bill">{{ 'cart.delivery_fee' | translate}} </div>

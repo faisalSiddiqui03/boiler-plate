@@ -34,18 +34,24 @@
   .common-heading-dotted {
     margin-bottom: 10px;
   }
-  ion-list {
-    ion-item {
+  .cart-list {
+    .cart-item {
       position: relative;
       font-size: 13px;
-      ion-label {
         padding: 40px 16px 16px 16px;
-        white-space: normal;
         .product-title {
           font-size: 14px;
           color: var(--ion-color-dark-shade);
           flex: 1;
           padding-right: 15px;
+        }
+        .toppings{
+          font-size: 13px;
+          color: var(--ion-color-secondary);
+          margin-top: 5px;
+          span{
+            padding-right: 30px;
+          }
         }
         .add-remove {
           align-items: center;
@@ -74,8 +80,7 @@
           padding-right: 16px;
           text-align: right;
         }
-      }
-      & + ion-item {
+      &+.cart-item {
         border-top: 1px solid var(--ion-color-light-shade);
       }
     }
