@@ -8,26 +8,26 @@
     <ion-buttons slot="start">
       <div class="icon icon-arrow-prev-2" (click)="goToPage('login')"></div>
     </ion-buttons>
-    <ion-title text-center text-uppercase>Sign up</ion-title>
+    <ion-title text-center text-uppercase>{{'sign_up_page.sign_up' | translate}}</ion-title>
   </ion-toolbar>
   <div class="main-content">
     <form class="form-section" padding [formGroup]="signUpForm">
       <div class="form-group" [class.error]="signUpForm.get('fname').touched && !signUpForm.get('fname').valid">
-        <ion-label for="fname" text-capitalize>First Name
+        <ion-label for="fname" text-capitalize>{{'sign_up_page.fname' | translate}}
           <sup>*</sup>
         </ion-label>
         <div class="form-input">
-          <ion-input id="fname" placeholder="So we know what to call you" inputmode="text" formControlName="fname"></ion-input>
+          <ion-input id="fname" placeholder="{{'sign_up_page.fname_placeholder' | translate}}" inputmode="text" formControlName="fname"></ion-input>
           <div class="icons">
             <ion-icon name="alert"></ion-icon>
           </div>
         </div>
-        <div class="error-msg">First Name Please</div>
+        <div class="error-msg">{{'sign_up_page.fname_error' | translate}}</div>
       </div>
       <div class="form-group">
-        <ion-label for="lname" text-capitalize>Last Name</ion-label>
+        <ion-label for="lname" text-capitalize>{{'sign_up_page.lname' | translate}}</ion-label>
         <div class="form-input">
-          <ion-input id="lname" placeholder="So we know what to call you" inputmode="text" formControlName="lname"></ion-input>
+          <ion-input id="lname" placeholder="{{'sign_up_page.lname_placeholder' | translate}}" inputmode="text" formControlName="lname"></ion-input>
         </div>
       </div>
       <div class="form-group" [class.error]="signUpForm.get('mobile').touched && !signUpForm.get('mobile').valid">
