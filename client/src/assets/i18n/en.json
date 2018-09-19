@@ -61,7 +61,27 @@
 		"submit": "submit"
 	},
 	"checkout_page":{
-		"secure_checkout": "Secure Checkout"
+		"secure_checkout": "Secure Checkout",
+		"name": "Name",
+		"name_placeholder": "First name is fine",
+		"name_required": "First name please",
+		"mobile": "Mobile",
+		"mobile_placeholder": "To send your confirmation",
+		"mobile_required": "Your number please",
+		"mobile_digits": "Mobile should consist of 8 digits",
+		"mobile_valid": "Mobile numbers should start with 2,5,6 or 9",
+		"email": "Email",
+		"email_placeholder": "So we can contact you",
+		"email_required": "Please provide your email",
+		"email_valid": "Please provide the correct email address",
+		"building":"Building Number/Villa Number",
+		"building_placeholder":"Building Number/Villa Number",
+		"building_required":"We would need your address to deliver your pizza",
+		"street":"Way Number/Street Name",
+		"street_placeholder":"Enter Way Number Or Street Name",
+		"street_required":"We would need your address to deliver your pizza",
+		"comment": "Order Comment",
+		"comment_placeholder": "Order Comment"
 	},
 	"contact_page": {
 		"address_1": "Al-Homaizi Foodstuff Co.",

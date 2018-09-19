@@ -1,9 +1,145 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>checkout</ion-title>
-  </ion-toolbar>
+  <app-header></app-header>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content no-padding>
+  <app-sub-header [title]="titleValue"></app-sub-header>
+  <div class="checkout-page">
+    <div class="order-info border">
+      <ion-item class="delivery-area">
+        <span class="icon icon-location-pin"></span>
+        <ion-label> Ordering for delivery to
+          <strong text-uppercase>MAGHATHEIR MALL FARWANIYA</strong>
+        </ion-label>
+      </ion-item>
+      <ion-item class="checkout-time">
+        <span class="icon icon-time"></span>
+        <ion-label> Order for
+          <span class="slot-time">Today, 08:45 AM</span>
+        </ion-label>
+        <a class="change" text-capitalize>Change</a>
+      </ion-item>
+    </div>
+    <div class="checkout-form">
+      <form class="form-section" [formGroup]="checkoutForm">
+        <div class="personal-info border">
+          <div class="checkout-head" text-center>
+            <h2 no-margin>Who are we delivering to? </h2>
+          </div>
+          <div class="form-group" [class.error]="checkoutForm.get('name').touched && !checkoutForm.get('name').valid">
+            <ion-label class="login-label" for="name" text-capitalize>{{ 'checkout_page.name' | translate }}*
+            </ion-label>
+            <div class="form-input">
+              <ion-input id="name" placeholder="{{ 'checkout_page.name_placeholder' | translate }}" inputmode="text" formControlName="name"></ion-input>
+              <div class="icons">
+                <ion-icon name="alert"></ion-icon>
+              </div>
+            </div>
+            <div *ngIf="checkoutForm.get('name').touched">
+              <div class="error-msg" *ngIf="checkoutForm.get('name').errors?.required">{{ 'checkout_page.name_required' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group" [class.error]="(checkoutForm.get('mobile').touched && !checkoutForm.get('mobile').valid) || (checkoutForm.get('mobile').touched && validateMobile(checkoutForm))">
+            <ion-label class="login-label" for="mobile" text-capitalize>{{ 'checkout_page.mobile' | translate }}*
+            </ion-label>
+            <div class="form-input">
+              <ion-input id="mobile" placeholder="{{ 'checkout_page.mobile_placeholder' | translate }}" inputmode="text" formControlName="mobile"></ion-input>
+              <div class="icons">
+                <ion-icon name="alert"></ion-icon>
+              </div>
+            </div>
+            <div *ngIf="checkoutForm.get('mobile').touched">
+              <div class="error-msg" *ngIf="checkoutForm.get('mobile').errors?.required">{{ 'checkout_page.mobile_required' | translate }}
+              </div>
+              <div class="error-msg" *ngIf="!checkoutForm.get('mobile').errors?.required && validateMobile(checkoutForm)">{{ 'checkout_page.mobile_valid' | translate }}
+              </div>
+              <div class="error-msg" *ngIf="(!validateMobile(checkoutForm) && checkoutForm.get('mobile').errors?.minlength) || (!validateMobile(checkoutForm) && checkoutForm.get('mobile').errors?.maxlength)">{{ 'checkout_page.mobile_digits' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group" [class.error]="checkoutForm.get('email').touched && !checkoutForm.get('email').valid">
+            <ion-label class="login-label" for="email" text-capitalize>{{ 'checkout_page.email' | translate }}
+            </ion-label>
+            <div class="form-input">
+              <ion-input id="email" placeholder="{{ 'checkout_page.email_placeholder' | translate }}" inputmode="email" formControlName="email"></ion-input>
+              <div class="icons">
+                <ion-icon name="alert"></ion-icon>
+              </div>
+            </div>
+            <div *ngIf="checkoutForm.get('email').touched">
+              <div class="error-msg" *ngIf="checkoutForm.get('email').errors?.required">{{ 'checkout_page.email_required' | translate }}
+              </div>
+              <div class="error-msg" *ngIf="checkoutForm.get('email').errors?.email">{{ 'checkout_page.email_valid' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="checkout-head" text-center>
+            <h2 no-margin>Where should we deliver it to?</h2>
+          </div>
+          <div class="form-group" [class.error]="checkoutForm.get('building').touched && !checkoutForm.get('building').valid">
+            <ion-label class="login-label" for="building" text-capitalize>{{ 'checkout_page.building' | translate }}*
+            </ion-label>
+            <div class="form-input">
+              <ion-input id="building" placeholder="{{ 'checkout_page.building_placeholder' | translate }}" inputmode="text" formControlName="building"></ion-input>
+              <div class="icons">
+                <ion-icon name="alert"></ion-icon>
+              </div>
+            </div>
+            <div *ngIf="checkoutForm.get('building').touched">
+              <div class="error-msg" *ngIf="checkoutForm.get('building').errors?.required">{{ 'checkout_page.building_required' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group" [class.error]="checkoutForm.get('street').touched && !checkoutForm.get('street').valid">
+            <ion-label class="login-label" for="street" text-capitalize>{{ 'checkout_page.street' | translate }}*
+            </ion-label>
+            <div class="form-input">
+              <ion-input id="street" placeholder="{{ 'checkout_page.street_placeholder' | translate }}" inputmode="text" formControlName="street"></ion-input>
+              <div class="icons">
+                <ion-icon name="alert"></ion-icon>
+              </div>
+            </div>
+            <div *ngIf="checkoutForm.get('street').touched">
+              <div class="error-msg" *ngIf="checkoutForm.get('street').errors?.required">{{ 'checkout_page.street_required' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <ion-label class="login-label" for="comment" text-capitalize>{{ 'checkout_page.comment' | translate }}
+            </ion-label>
+            <div class="form-input">
+              <ion-input id="comment" placeholder="{{ 'checkout_page.comment_placeholder' | translate }}" inputmode="text" formControlName="comment"></ion-input>
+            </div>
+          </div>
+        </div>
+        <div class="payment-info border">
+          <div class="checkout-head" text-center>
+            <h2 no-margin>How would you like to pay?</h2>
+          </div>
+          <ion-list>
+            <ion-radio-group>
+              <ion-item>
+                <ion-radio color="success" slot="start" value="cash" checked></ion-radio>
+                <ion-label>With Cash</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-radio color="success" slot="start" value="card"></ion-radio>
+                <ion-label>Debit Card/Credit Card</ion-label>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </div>
+        <div class="payment-info border" text-center>
+          <ion-item class="terms-check">
+            <ion-checkbox checked color="medium" slot="start"></ion-checkbox>
+            <ion-label>Please send latest discounts and offers from Pizza Hut Delivery</ion-label>
+          </ion-item>
+          <ion-button color="success" text-capitalize expand="block" mode="ios" class="btn-success">Place your Order &nbsp;
+            <span>{{ globalSharedService.getCart()?.total | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+          </ion-button>
+        </div>
+      </form>
+    </div>
+  </div>
 </ion-content>
