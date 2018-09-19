@@ -79,7 +79,7 @@
         </div>
         <div class="error-msg">Please confirm your password</div>
       </div>
-      <ion-button color="medium" class="btn-signin" text-capitalize expand="block" mode="ios" (click)="signUp()" [disabled]="!signUpForm.valid">Submit</ion-button>
+      <ion-button [color]="signUpForm.valid ? 'success' : 'medium'" class="btn-signin" text-capitalize expand="block" mode="ios" (click)="signUp()" [disabled]="!signUpForm.valid">Submit</ion-button>
     </form>
   </div>
 </ion-content>
