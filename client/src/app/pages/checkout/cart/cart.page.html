@@ -105,17 +105,17 @@
                   <ion-label no-margin>
                     <div flex-center>
                       <div class="product-title">{{item?.description}}
-                        <ng-container *ngIf="item.getType() === 'P' || item.getType() === 'B'">
+                        <ng-container *ngIf="item.getType() === product || item.getType() === bundle">
                           <span>{{item?.getVariant()}}</span>
                         </ng-container>
-                        <ng-container *ngIf="item.getType() === 'B'">
+                        <ng-container *ngIf="item.getType() === bundle">
                           <ng-container *ngFor="let bundleItem of item?.bundleItems">
                             <span *ngIf="bundleItem?.webPrice > 0 && !bundleItem?.isPrimaryProduct">
-                              Add {{bundleItem?.description}} {{bundleItem?.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}
+                                {{ 'cart.add' | translate}} {{bundleItem?.description}} {{bundleItem?.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}
                             </span>
                           </ng-container>
                         </ng-container>
-                        <ng-container *ngIf="item.getType() === 'D'">
+                        <ng-container *ngIf="item.getType() === deal">
 
                         </ng-container>
                       </div>
@@ -133,15 +133,15 @@
                 </ion-item>
               </ion-list>
               <div flex-center class="delivery-bill-block">
-                <ng-container *ngIf="widget?.model?.shippingCost">
+                <ng-container *ngIf="widget?.model?.getShippingCost()">
                   <div class="total-bill">{{ 'cart.delivery_fee' | translate}} </div>
-                  <div class="total-price">{{ widget?.model?.shippingCost | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3' }}</div>
+                  <div class="total-price">{{ widget?.model?.getShippingCost() | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3' }}</div>
                 </ng-container>
               </div>
               <div flex-center class="total-bill-block">
                 <div class="total-bill">{{ 'cart.your_total' | translate}} </div>
                 <span *ngIf="!updatingPrice">
-                    <div class="total-price">{{ widget?.model?.productCost | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
+                    <div class="total-price">{{ widget?.model?.getProductCost() | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
                 </span>
                 <span *ngIf="updatingPrice">
                   <ion-spinner name="crescent" color="dark"></ion-spinner>
@@ -159,7 +159,7 @@
             <span *ngIf="updatingPrice">
               <ion-spinner name="crescent" color="dark"></ion-spinner>
             </span>
-            <span *ngIf="!updatingPrice">{{ widget?.model?.total | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+            <span *ngIf="!updatingPrice">{{ widget?.model?.getTotal() | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
           </ion-button>
         </ion-footer>
       </div>

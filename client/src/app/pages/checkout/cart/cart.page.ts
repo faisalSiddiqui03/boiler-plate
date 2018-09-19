@@ -15,6 +15,7 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router } from '@angular/router';
 import { Utils } from '../../../helpers/utils';
 import { Location } from '@angular/common';
+import { ProductType } from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-cart-page',
@@ -34,6 +35,10 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   currencyCode: string;
   couponCode: string;
   updatingPrice: boolean;
+  bundle = ProductType.Bundle;
+  product = ProductType.Product;
+  deal = ProductType.Deal;
+
 
   constructor(
     private translateService: TranslateService,
@@ -50,6 +55,11 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   ngOnInit() {
+    
+  }
+
+  ionViewWillEnter() {
+    this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
   }
 
   applyCoupon() {
