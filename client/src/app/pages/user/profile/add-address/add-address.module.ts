@@ -11,6 +11,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../../translation.loader';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
+import { LocationMapModule } from '../../../../components/location-map/location-map.module';
+
 
 const routes: Routes = [
   {
@@ -26,7 +28,8 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     HeaderModule,
-    SubHeaderModule,
+    SubHeaderModule, 
+    LocationMapModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {
@@ -38,4 +41,4 @@ const routes: Routes = [
   ],
   declarations: [AddAddressPage]
 })
-export class AddAddressPageModule {}
+export class AddAddressPageModule { }

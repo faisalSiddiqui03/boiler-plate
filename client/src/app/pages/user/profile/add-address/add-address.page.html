@@ -5,13 +5,7 @@
   <app-sub-header [title]="titleValue"></app-sub-header>
   <div class="add-addresses w-700">
     <div class="location-wrap">
-      <div class="location-form">
-        <form flex-center>
-          <ion-input readonly placeholder="{{ 'add_address_page.enter_your_location' | translate }}"></ion-input>
-          <ion-button color="success" text-Capitalize mode="ios" class="btn-success">
-           <ion-icon name="pin"></ion-icon> {{'add_address_page.locate_me' | translate}}</ion-button>
-        </form>
-      </div>
+      <app-location-map [addressPageClass]="true"></app-location-map>
       <form class="form-section" [formGroup]="addAddressForm">
         <div class="form-group" [class.error]="addAddressForm.get('addressDetails').touched && !addAddressForm.get('addressDetails').valid">
           <ion-label class="login-label" for="addressDetails" text-capitalize>{{ 'add_address_page.address_details' | translate }}

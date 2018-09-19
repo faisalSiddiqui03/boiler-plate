@@ -17,6 +17,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
+  titleValue = '';
+
   constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
 
@@ -26,6 +28,9 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   ngOnInit() {
+    this.translate.get('favorites_page.my_favorites').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   goToPage(pageName) {

@@ -370,7 +370,10 @@
 	"saved_address_page": {
 		"add_new_address": "Add new Address",
 		"no_saved_address": "You do not have any saved addresses.",
-		"saved_address": "My saved address"
+		"saved_address": "My saved address",
+		"sure_remove_address": "Are you sure you want to remove this address?",
+		"dismiss": "Dismiss",
+		"confirm": "Confirm"
 	},
 	"sign_in_page": {
 		"dont_have_account": "Don't have an account",

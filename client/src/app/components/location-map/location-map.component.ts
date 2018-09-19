@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BaseComponent } from '../../base/base-component';
 import { TranslateService } from '@ngx-translate/core';
 import { AgmCoreModule, MouseEvent } from '@agm/core';
 import { Utils } from '../../helpers/utils';
+import { ModalController } from '@ionic/angular';
+import { SeacrhLocationPage } from '../../pages/user/profile/seacrh-location/seacrh-location.page';
 
 @Component({
   selector: 'app-location-map',
@@ -16,20 +18,26 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
   marker: Marker;
   agmMarkerSrc = 'assets/imgs/location-pin.png';
 
+  @Input() addressPageClass = false;
+
   constructor(
-    private translate: TranslateService
+    private translate: TranslateService,
+    private modalController: ModalController
   ) {
     super();
     this.translate.use(Utils.getLanguageCode());
   }
 
   ngOnInit() {
-    this.marker = {
-      lat: Number(this.getCurrentStore().locationDetail.latitude),
-      lng: Number(this.getCurrentStore().locationDetail.longitude),
-      label: ' ',
-      draggable: true
-    };
+    setTimeout(() => {
+      this.marker = {
+        lat: this.getCurrentStore().locationDetail.latitude,
+        lng: this.getCurrentStore().locationDetail.longitude,
+        label: ' ',
+        draggable: true
+      };
+      console.log(this.getCurrentStore());
+    }, 1000);
   }
 
   markerDragEnd(m: Marker, $event: MouseEvent) {
@@ -46,8 +54,21 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
     console.log('select location and proceed');
   }
 
-  openSearch() {
-    console.log('open search clicked');
+
+  locateMe() {
+    if (navigator) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        this.marker.lng = +pos.coords.longitude;
+        this.marker.lat = +pos.coords.latitude;
+      });
+    }
+  }
+
+  async openLocationModal(){
+    const modal = await this.modalController.create({
+      component: SeacrhLocationPage
+    });
+    return await modal.present();
   }
 
 }

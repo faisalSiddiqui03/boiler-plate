@@ -1,19 +1,32 @@
-ion-footer{
+ion-footer {
   padding: 10px;
 }
-.location-wrap{
+
+.location-wrap {
   margin: 40px auto 10px;
-  .location-form{
-    border-radius: 5px;
-    border: 1px solid var(--ion-color-light-tint);
-    padding: 5px;
+  .form-section{
+    margin-top: 30px;
+  }
+  .form-group {
+    .login-label{
+      font-size: 15px;
+    }
   }
 }
 
-@media (min-width: 992px){
-  .btn-success{
-      max-width: 700px;
-      margin: auto;
-  }   
+@media (min-width: 992px) {
+  .btn-success {
+    max-width: 700px;
+    margin: auto;
+  }
 }
 
+@media (max-width:991px){
+  .location-wrap{
+    .form-section{
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 0 10px;
+    }
+  }
+}
