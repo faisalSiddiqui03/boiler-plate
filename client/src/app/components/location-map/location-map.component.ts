@@ -31,8 +31,8 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.marker = {
-        lat: this.getCurrentStore().locationDetail.latitude,
-        lng: this.getCurrentStore().locationDetail.longitude,
+        lat: parseFloat(this.getCurrentStore().locationDetail.latitude),
+        lng: parseFloat(this.getCurrentStore().locationDetail.longitude),
         label: ' ',
         draggable: true
       };

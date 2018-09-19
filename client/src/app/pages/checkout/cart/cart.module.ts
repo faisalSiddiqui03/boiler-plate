@@ -25,6 +25,7 @@ const routes: Routes = [
     CartWidgetModule,
     VoucherWidgetModule,
     ImagePreloadModule,
+    DebounceClickDirective,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
