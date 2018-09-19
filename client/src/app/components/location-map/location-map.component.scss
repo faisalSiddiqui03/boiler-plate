@@ -1,46 +1,45 @@
-agm-map {
-  height: 300px;
-}
-
-
-* {
-  font-family: Lato;
-}
-
-a {
-  color: darkblue;
-}
-
-.drag-pin {
-  color: #70a401;
-  font-family: Open Sans,sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  text-align: center;
-  margin: 10px 0;
-}
-
-.location-button{
+.location-form {
   border-radius: 5px;
-  padding-top: 1.2rem;
-  padding-bottom: 1.2rem;
-  background-color: #70a401;
-  font-size: 15px;
-  letter-spacing: .5px;
-  border-style: solid;
-  border-left: 0px;
-  margin: 4px !important;
-  height: 45px;
+  border: 1px solid var(--ion-color-light-tint);
+  padding: 5px;
+  form {
+    border: 1px solid var(--ion-color-light-shade);
+    border-radius: 5px;
+    padding: 0 3px 0 10px;
+    ion-input {
+      font-size: 13px;
+      opacity: 0.4;
+    }
+  }
+  agm-map {
+    height: 300px;
+  }
+  .drag-pin {
+    color: var(--ion-color-success);
+    font-size: 14px;
+    text-align: center;
+    margin: 10px 0;
+  }
+}
+.add-address-map{
+  display: flex;
+  flex-direction: column;
+  .geo-location-address{
+    order: 1;
+  }
 }
 
-.margin-left-1{
-  margin-left: 1rem;
+.geo-location-address {
+  p {
+    font-size: 14px;
+    text-align: center;
+    margin: 15px 0;
+  }
 }
 
-.margin-right-0{
-  margin-right: 0px;
-  font-size: 14px;
-  font-weight: 400;    
+@media (max-width:991px) {
+  .location-form {
+    border: 0;
+    padding: 0 10px;
+  }
 }
-
-.location-bar{margin:5px 10px; box-shadow: none !important; border-radius: 5px; border: 1px #f1f1f1 solid;}

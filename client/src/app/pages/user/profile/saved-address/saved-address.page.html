@@ -1,34 +1,44 @@
 <ion-header>
-    <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
+  <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
   <app-sub-header [title]="titleValue"></app-sub-header>
   <div class="saved-addresses w-700">
-    <!-- <user-address-widget [componentId]="getComponentId()" >
+    <user-address-widget [componentId]="getComponentId()" >
       <ng-template let-widget="widget">
         <ng-container *ngIf="widget.model">
-          <p>{{widget.model | json}}</p>
+          <!-- <p>{{widget.model | json}}</p> -->
+          <div *ngIf="!widget.model.length" class="no-address">{{'saved_address_page.no_saved_address' | translate}}</div>
+          <ion-list no-margin *ngIf="widget.model.length">
+            <ion-item no-padding *ngFor="let address of widget.model">
+              <ion-label>
+                <h6>{{address.addressType}}
+                  <ion-icon (click)="deleteAddress()" class="close" name="close-circle"></ion-icon>
+                </h6>
+                <div class="address-details">
+                  <p text-capitalize>{{getFlatAddress(address.landmark, 0)}}</p>
+                  <p text-capitalize>{{getFlatAddress(address.landmark, 1)}}</p>
+                  <p text-capitalize>{{address.detail}}</p>
+                  <p text-right class="edit">Edit</p>
+                </div>
+              </ion-label>
+            </ion-item>
+          </ion-list>
         </ng-container>
       </ng-template>
-    </user-address-widget> -->
-    <div class="no-address" style="display: none;">{{'saved_address_page.no_saved_address' | translate}}</div>
-    <ion-list no-margin>
-      <ion-item no-padding>
-        <ion-label>
-          <h6>Home
-            <ion-icon class="close" name="close-circle"></ion-icon>
-          </h6>
-          <div class="address-details">
-            <p text-capitalize>way, building, flat</p>
-            <p text-capitalize>, Batangas City</p>
-            <p>landmark</p>
-            <p text-right class="edit">Edit</p>
-          </div>
-        </ion-label>
-      </ion-item>
-    </ion-list>
+    </user-address-widget>
   </div>
 </ion-content>
 <ion-footer no-border>
   <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success" (click)="goToPage('add-address')">{{'saved_address_page.add_new_address' | translate}}</ion-button>
 </ion-footer>
+
+<div class="delete-address-modal full-height" *ngIf="toggleDeleteModal">
+  <div class="delete-address-wrap">
+    <p text-center>{{'saved_address_page.sure_remove_address' | translate}}</p>
+    <div class="buttons-group" flex-center>
+      <ion-button color="dark" (click)="dismissAddressModal()" text-uppercase expand="block" mode="ios" class="btn-dismiss">{{'saved_address_page.dismiss' | translate}}</ion-button>
+      <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success">{{'saved_address_page.confirm' | translate}}</ion-button>
+    </div>
+  </div>
+</div>

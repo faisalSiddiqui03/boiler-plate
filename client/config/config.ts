@@ -117,7 +117,10 @@ export const config = {
       "enabled": true,
       "provider": "cloudfare"
     },
-    "googleClientId" : "1040149251979-d892097h8nf8mnuitkv2acdf91vt9dq0.apps.googleusercontent.com"
+    "googleClientId" : "1040149251979-d892097h8nf8mnuitkv2acdf91vt9dq0.apps.googleusercontent.com",
+    "address": {
+      "storeSep": " , Map Location: "
+    }
   };
 
 

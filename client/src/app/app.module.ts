@@ -34,6 +34,7 @@ import { appConfig } from '../../config/config';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-selection/delivery-slot-selection.module';
 import { LocationPageModule } from './pages/checkout/location/location.module';
+import { SeacrhLocationPageModule } from './pages/user/profile/seacrh-location/seacrh-location.module';
 
 export function getAppConfig(): Object {
   return appConfig || {};
@@ -59,6 +60,7 @@ export function getAppConfig(): Object {
     LogoutWidgetModule,
     DeliverySlotSelectionModule,
     LocationPageModule,
+    SeacrhLocationPageModule,
     EventTrackModule.forRoot([EventTrackModule.Tracker.GTM]),
     LanguageServiceModule.forRoot([
       { name: 'English', code: 'en', isDefault: false, alignment: 'ltr' },
