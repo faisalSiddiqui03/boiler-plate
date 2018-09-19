@@ -6,9 +6,7 @@ import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AgmCoreModule, MouseEvent } from '@agm/core';
 import { ModalController } from '@ionic/angular';
-import { SeacrhLocationPage } from '../seacrh-location/seacrh-location.page';
 
 @Component({
   selector: 'app-add-address',
@@ -67,15 +65,3 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
   }
 
 }
-
-
-
-
-// Interface for type safety.
-interface Marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable: boolean;
-}
-

@@ -59,6 +59,9 @@
 		"re_enter_password_required": "Please confirm your password",
 		"submit": "submit"
 	},
+	"checkout_page":{
+		"secure_checkout": "Secure Checkout"
+	},
 	"contact_page": {
 		"address_1": "Al-Homaizi Foodstuff Co.",
 		"address_2": "Al Soor Street, Al Homaizi bldg",
