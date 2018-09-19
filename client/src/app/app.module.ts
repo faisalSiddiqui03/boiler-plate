@@ -64,7 +64,7 @@ export function getAppConfig(): Object {
     EventTrackModule.forRoot([EventTrackModule.Tracker.GTM]),
     LanguageServiceModule.forRoot([
       { name: 'English', code: 'en', isDefault: false, alignment: 'ltr' },
-      { name: 'Hindi', code: 'hi', isDefault: true, alignment: 'ltr' }]),
+      { name: 'Arabic', code: 'ar', isDefault: true, alignment: 'rtl' }]),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
