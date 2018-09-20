@@ -13,6 +13,7 @@ import { AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
+import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
     ProductDetailsWidgetModule,
     ImagePreloadModule,
     AlertServiceModule,
+    SkeletonModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {

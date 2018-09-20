@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-seacrh-location',
-  templateUrl: './seacrh-location.page.html',
-  styleUrls: ['./seacrh-location.page.scss'],
+  selector: 'app-search-location',
+  templateUrl: './search-location.page.html',
+  styleUrls: ['./search-location.page.scss'],
 })
-export class SeacrhLocationPage implements OnInit {
+export class SearchLocationPage implements OnInit {
 
   constructor(private modalController:ModalController) { }
 

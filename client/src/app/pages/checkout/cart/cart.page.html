@@ -1,6 +1,6 @@
 <cart-widget class="full-height" [componentId]="getComponentId()" [action]="cartWidgetAction">
   <ng-template let-widget="widget">
-    <ng-container *ngIf="!globalSharedService.getCart() || !globalSharedService.getCart()?.items">
+    <ng-container *ngIf="!loaded">
       <div class="full-height">
         <ion-content>
           <!-- <p>{{widget.model | json }}</p> -->
@@ -10,8 +10,8 @@
               <div class="common-heading-dotted" text-center>
                 <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
               </div>
-              <ion-list no-margin>
-                <ion-item no-padding>
+              <div class="cart-list">
+                <div class="cart-item" no-padding>
                   <ion-label no-margin>
                     <div>
                       <div class="skeleton-warpper">
@@ -26,8 +26,8 @@
                     </div>
                   </ion-label>
                   <div class="tooltip">{{ 'cart.update_cart_message' | translate}}</div>
-                </ion-item>
-                <ion-item no-padding>
+                </div>
+                <div class="cart-item" no-padding>
                   <ion-label no-margin>
                     <div>
                       <div class="skeleton-warpper">
@@ -41,8 +41,8 @@
                       </div>
                     </div>
                   </ion-label>
-                </ion-item>
-              </ion-list>
+                </div>
+              </div>
               <div flex-center class="total-bill-block">
                 <div class="total-bill">
                   <div class="skeleton-warpper">
@@ -64,7 +64,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="globalSharedService.getCart() && globalSharedService.getCart()?.items && globalSharedService.getCart()?.items.length == 0">
+    <ng-container *ngIf="widget?.model && widget?.model?.items && !widget?.model?.items.length">
       <div class="full-height">
         <ion-content>
           <!-- <p>{{widget.model | json }}</p> -->
@@ -91,7 +91,7 @@
 
 
     <ng-container *ngIf="widget.model">
-      <div class="full-height" *ngIf="globalSharedService.getCart().items && globalSharedService.getCart()?.items.length">
+      <div class="full-height" *ngIf="widget?.model?.items && widget?.model?.items.length">
         <ion-content>
           <!-- <p>{{widget.model | json }}</p> -->
           <div class="basket-container">
@@ -100,30 +100,53 @@
               <div class="common-heading-dotted" text-center>
                 <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
               </div>
-              <ion-list no-margin>
-                <ion-item no-padding *ngFor="let item of globalSharedService.getCart()?.items; let i = index">
-                  <ion-label no-margin>
+              <div class="cart-list">
+                <div class="cart-item" *ngFor="let item of widget?.model?.items; let i = index">
+                  
                     <div flex-center>
-                      <div class="product-title">{{item.description}}</div>
-                      <div class="add-remove">
-                        <ion-icon name="remove-circle" (click)="updateCartItemQuantity(item, -1)"></ion-icon>
-                        <span>{{item.quantity}}</span>
-                        <ion-icon name="add-circle" (click)="updateCartItemQuantity(item, 1)"></ion-icon>
+                      <div class="product-title">{{item?.description}}
                       </div>
-                      <div class="product-price">{{item.mrp | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
-                      <ion-icon class="remove-icon" name="close-circle" (click)="removeCartItem(item)"></ion-icon>
+
+                      <div class="add-remove">
+                        <ion-icon name="remove-circle" appDebounceClick [debounceTime]="'300'" (debounceClick)="updateCart($event, item?.client, false)"></ion-icon>
+                        <span>{{item.quantity}}</span>
+                        <ion-icon name="add-circle" appDebounceClick [debounceTime]="'300'" (debounceClick)="updateCart($event, item?.client, true)"></ion-icon>
+                      </div>
+                      <div class="product-price">{{(item?.getPrice() * item.quantity) | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
+                      <ion-icon class="remove-icon" name="close-circle" (click)="removeCartItem(item?.client)"></ion-icon>
                     </div>
-                  </ion-label>
+                  <div class="toppings">
+                      <ng-container *ngIf="item.getType() === product || item.getType() === bundle">
+                          <div>{{item?.getVariant()}}</div>
+                        </ng-container>
+                        <ng-container *ngIf="item.getType() === bundle">
+                          <ng-container *ngFor="let bundleItem of item?.bundleItems">
+                            <div flex-center *ngIf="bundleItem?.webPrice > 0 && !bundleItem?.isPrimaryProduct">
+                                {{ 'cart.add' | translate}} {{bundleItem?.description}} <span>+ {{bundleItem?.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                            </div>
+                          </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="item.getType() === deal">
+
+                        </ng-container>
+                  </div>
                   <div *ngIf="i === 0" class="tooltip">{{ 'cart.update_cart_message' | translate}}</div>
-                </ion-item>
-              </ion-list>
+                </div>
+              </div>
               <div flex-center class="delivery-bill-block">
-                <div class="total-bill">{{ 'cart.delivery_fee' | translate}} </div>
-                <div class="total-price">{{globalSharedService.getCart()?.shippingCost | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
+                <ng-container *ngIf="widget?.model?.getShippingCost()">
+                  <div class="total-bill">{{ 'cart.delivery_fee' | translate}} </div>
+                  <div class="total-price">{{ widget?.model?.getShippingCost() | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3' }}</div>
+                </ng-container>
               </div>
               <div flex-center class="total-bill-block">
                 <div class="total-bill">{{ 'cart.your_total' | translate}} </div>
-                <div class="total-price">{{globalSharedService.getCart()?.productCost | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
+                <span *ngIf="!updatingPrice">
+                    <div class="total-price">{{ widget?.model?.getProductCost() | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
+                </span>
+                <span *ngIf="updatingPrice">
+                  <ion-spinner name="crescent" color="dark"></ion-spinner>
+                </span>
               </div>
               <div class="promotion-button">
                 <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher" (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}
@@ -133,8 +156,11 @@
           </div>
         </ion-content>
         <ion-footer>
-          <ion-button color="success" text-capitalize expand="block" mode="ios" class="btn-success">{{ 'cart.continue' | translate}} &nbsp;
-            <span>{{ globalSharedService.getCart()?.total | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+          <ion-button color="success" text-capitalize expand="block" [class.disabled]="updatingPrice" mode="ios" class="btn-success">{{ 'cart.continue' | translate}} &nbsp;
+            <span *ngIf="updatingPrice">
+              <ion-spinner name="crescent" color="dark"></ion-spinner>
+            </span>
+            <span *ngIf="!updatingPrice">{{ widget?.model?.getTotal() | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
           </ion-button>
         </ion-footer>
       </div>

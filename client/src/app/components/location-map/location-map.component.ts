@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AgmCoreModule, MouseEvent } from '@agm/core';
 import { Utils } from '../../helpers/utils';
 import { ModalController } from '@ionic/angular';
-import { SeacrhLocationPage } from '../../pages/user/profile/seacrh-location/seacrh-location.page';
+import { SearchLocationPage } from '../../pages/user/profile/search-location/search-location.page';
 
 @Component({
   selector: 'app-location-map',
@@ -31,8 +31,8 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.marker = {
-        lat: this.getCurrentStore().locationDetail.latitude,
-        lng: this.getCurrentStore().locationDetail.longitude,
+        lat: parseFloat(this.getCurrentStore().locationDetail.latitude),
+        lng: parseFloat(this.getCurrentStore().locationDetail.longitude),
         label: ' ',
         draggable: true
       };
@@ -66,7 +66,7 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
 
   async openLocationModal(){
     const modal = await this.modalController.create({
-      component: SeacrhLocationPage
+      component: SearchLocationPage
     });
     return await modal.present();
   }
