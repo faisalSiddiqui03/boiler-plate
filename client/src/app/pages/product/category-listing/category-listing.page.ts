@@ -7,7 +7,8 @@ import {
   OnWidgetLifecyle,
   pageView,
   pwaLifeCycle,
-  Action
+  Action,
+  ProductShowcaseWidgetActions,
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
@@ -95,6 +96,14 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       return;
     }
     this.router.navigateByUrl('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
+  }
+
+  updateFavorites(isFavorite, product){
+    if(!isFavorite){
+      this.productShowcaseWidgetAction.emit(new Action(ProductShowcaseWidgetActions.ACTION_MARK_AS_FAVORITE, product));
+      return;
+    }
+    this.productShowcaseWidgetAction.emit(new Action(ProductShowcaseWidgetActions.ACTION_UNMARK_AS_FAVORITE, product));
   }
 
   widgetActionFailed(name: string, data: any): any {
