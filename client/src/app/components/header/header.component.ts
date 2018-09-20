@@ -1,15 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { OnWidgetActionsLifecyle, OnWidgetLifecyle, DeliveryModes } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../base/base-component';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-selection/delivery-slot-selection.page';
 import { LocationPage } from '../../pages/checkout/location/location.page';
+import { TranslateService } from '@ngx-translate/core';
+import { Utils } from '../../helpers/utils';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
@@ -17,10 +20,12 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
 
   constructor(
     private router: Router,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private translate: TranslateService
   ) {
     super();
     this.deliveryModes = DeliveryModes;
+    this.translate.use(Utils.getLanguageCode());
   }
 
   /** Inputs to show only required tags in header */

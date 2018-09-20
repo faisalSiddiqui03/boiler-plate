@@ -3,7 +3,7 @@
     <app-header [showHalalTag]="true" [showLanguage]="true"></app-header>
   </ion-header>
 </ion-hide-when>
-<ion-content (click)="outSideClick()">
+<ion-content (click)="outSideClick()" class="home-page">
   <div class="banner-home container">
     <banner-widget
       [componentId]="getComponentId()"
@@ -191,8 +191,9 @@
         [action]="locationsWidgetActionGeometry"
         [instanceId]="1">
         <ng-template let-widget="widget">
-          <div class="find-hut" (click)="locateMe(widget.model.geometry.latitude, widget.model.geometry.longitude)">
+          <div class="find-hut" flex-center (click)="locateMe(widget.model.geometry.latitude, widget.model.geometry.longitude)">
             <span> {{'home_page.find_my_nearest_hut' | translate}}</span>
+            <strong>{{'home_page.language' | translate}}</strong>
           </div>
         </ng-template>
       </location-widget>
@@ -230,7 +231,7 @@
     <ion-row margin-bottom justify-content-center padding>
       <ion-col size-xs='12'>
         <ion-button color="success" (click)="navigateToDeals()" text-capitalize expand="block" mode="ios">
-          {{'home.page.view_all_deals' | translate}}
+          {{'home_page.view_all_deals' | translate}}
         </ion-button>
       </ion-col>
     </ion-row>

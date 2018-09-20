@@ -4,7 +4,7 @@
   <ng-template let-widget="widget">
     <div *ngIf="widget.model == undefined" padding>
       <div class="common-heading" text-center text-uppercase margin-bottom>
-        <h2 no-margin> OUR MOST POPULAR DEALS </h2>
+        <h2 no-margin> {{'banner_widget.most_popular_deals' | translate }} </h2>
       </div>
       <ion-row margin-bottom justify-content-center>
         <ion-col size-lg='6' size-xs='12'>
@@ -14,7 +14,7 @@
     </div>
     <div *ngIf="widget.model != undefined && widget.model.length > 0" padding>
       <div class="common-heading" text-center text-uppercase margin-bottom>
-        <h2 no-margin> OUR MOST POPULAR DEALS </h2>
+        <h2 no-margin> {{'banner_widget.most_popular_deals' | translate }} </h2>
       </div>
       <ion-row margin-bottom justify-content-center>
         <ion-col size-lg='6' size-xs='12' *ngFor="let banner of widget.model" (click)="onBannerClicked(banner)">

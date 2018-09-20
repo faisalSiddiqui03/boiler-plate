@@ -2,6 +2,8 @@ import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { pwaLifeCycle, LifeCycle, WidgetNames, ConfigService } from "@capillarytech/pwa-framework";
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../base/base-component';
+import { TranslateService } from '@ngx-translate/core';
+import { Utils } from '../../helpers/utils';
 
 @Component({
   selector: 'app-banner',
@@ -29,9 +31,10 @@ export class BannerComponent extends BaseComponent implements OnInit {
 
   bannerUrl: string;
 
-  constructor(private router: Router, private config: ConfigService) {
+  constructor(private router: Router, private config: ConfigService, private translate: TranslateService) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
+    this.translate.use(Utils.getLanguageCode());
   }
 
   ngOnInit() {

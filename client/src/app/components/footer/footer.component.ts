@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../base/base-component';
@@ -8,7 +8,8 @@ import { pwaLifeCycle } from "@cap-core/lifecycle";
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 @pwaLifeCycle()
 export class FooterComponent extends BaseComponent implements OnInit {

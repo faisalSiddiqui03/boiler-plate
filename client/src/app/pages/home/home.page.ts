@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import {
   LifeCycle,
   Action,
@@ -26,6 +26,7 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()

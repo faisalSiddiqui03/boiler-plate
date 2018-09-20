@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import {
@@ -21,6 +21,7 @@ import { Utils } from '../../../../helpers/utils';
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()
@@ -38,6 +39,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   googleSignInActionEmitter = new EventEmitter();
   googleClientId: string = '';
+  titleValue:string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,6 +67,9 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   ngOnInit() {
+    this.translate.get('sign_in_page.sign_in').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   changeTextPassword() {
