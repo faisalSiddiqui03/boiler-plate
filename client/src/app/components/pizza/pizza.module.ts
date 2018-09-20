@@ -1,22 +1,24 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PizzaPage } from './pizza.page';
+import { PizzaComponent } from './pizza.component';
+
+import { ProductDetailsWidgetModule, ImagePreloadModule } from "@capillarytech/pwa-framework";
 
 import { AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../translation.loader';
+import { HttpLoaderFactory } from '../../translation.loader';
 import { HttpClient } from '@angular/common/http';
-import { PizzaComponentModule } from '../../../components/pizza/pizza.module';
+import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: PizzaPage
+    component: PizzaComponent
   }
 ];
 
@@ -25,8 +27,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ProductDetailsWidgetModule,
+    ImagePreloadModule,
     AlertServiceModule,
-    PizzaComponentModule,
+    SkeletonModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {
@@ -36,6 +40,8 @@ const routes: Routes = [
       }
     })
   ],
-  declarations: [PizzaPage]
+  declarations: [PizzaComponent],
+  exports: [PizzaComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class PizzaPageModule {}
+export class PizzaComponentModule {}
