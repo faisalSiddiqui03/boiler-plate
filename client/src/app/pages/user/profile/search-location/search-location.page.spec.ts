@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SeacrhLocationPage } from './seacrh-location.page';
+import { SearchLocationPage } from './search-location.page';
 
-describe('SeacrhLocationPage', () => {
-  let component: SeacrhLocationPage;
-  let fixture: ComponentFixture<SeacrhLocationPage>;
+describe('SearchLocationPage', () => {
+  let component: SearchLocationPage;
+  let fixture: ComponentFixture<SearchLocationPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeacrhLocationPage ],
+      declarations: [ SearchLocationPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SeacrhLocationPage);
+    fixture = TestBed.createComponent(SearchLocationPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

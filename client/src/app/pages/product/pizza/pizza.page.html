@@ -4,6 +4,34 @@
       [sizePropertyId]="sizePropertyId" [componentId]="getComponentId()">
 
       <ng-template let-widget="widget">
+        <ng-container *ngIf="!loaded">
+          <ion-content>
+            <ion-card no-padding no-margin>
+              <ion-card-header no-padding class="product-img-block">
+                <ion-item text-center class="popup-title" no-margin>
+                  <ion-icon (click)="goBack()" name="close-circle" slot="start"></ion-icon>
+                  <ion-label>
+                    <div class="skeleton-warpper">
+                      <ion-skeleton-text class="skeleton-text p-skeleton"></ion-skeleton-text>
+                    </div>
+                  </ion-label>
+                </ion-item>
+                <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
+              </ion-card-header>
+              <ion-card-content>
+                <div class="skeleton-warpper">
+                  <ion-skeleton-text class="skeleton-text p-skeleton"></ion-skeleton-text>
+                  <ion-skeleton-text class="skeleton-text p-skeleton"></ion-skeleton-text>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-content>
+          <ion-footer>
+            <ion-button disabled color="success" text-uppercase expand="block" mode="ios" class="btn-success">{{'product_details.add_to_basket' | translate}}
+            </ion-button>
+          </ion-footer>
+        </ng-container>
+
         <ng-container *ngIf="loaded">
           <ion-content no-padding>
             <div class="product-img-block">
@@ -15,8 +43,10 @@
               <h4 text-center padding no-margin>{{widget?.model?.title}}</h4>
               <div class="img-text" padding>
                 <p>{{defaultToppings?.join(', ')}}</p>
-                <p><span class="success" *ngIf="addedToppings.length">Added: </span>{{addedToppings?.join(', ')}}</p>
-                <p><span class="danger" *ngIf="removedToppings.length">Removed: </span>{{removedToppings?.join(', ')}}</p>
+                <p>
+                  <span class="success" *ngIf="addedToppings.length">Added: </span>{{addedToppings?.join(', ')}}</p>
+                <p>
+                  <span class="danger" *ngIf="removedToppings.length">Removed: </span>{{removedToppings?.join(', ')}}</p>
               </div>
             </div>
 
@@ -71,7 +101,7 @@
                       </ng-container>
                     </li>
                   </ul>
-  
+
                   <!-- Default toppings -->
                   <div class="block-header" text-capitalize flex-center>{{'pizza.your_toppings' | translate}}
                     <strong class="extra">{{'pizza.extra' | translate}}</strong>
@@ -107,7 +137,7 @@
                       </ng-container>
                     </li>
                   </ul>
-  
+
                   <!-- Extra toppings -->
                   <div class="block-header" text-capitalize flex-center>{{'pizza.add_extra' | translate}}</div>
                   <ul>

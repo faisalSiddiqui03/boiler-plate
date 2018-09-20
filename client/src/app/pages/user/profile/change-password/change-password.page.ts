@@ -68,7 +68,7 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
 
   widgetActionSuccess(name, data) {
     if (data.isSuccessful) {
-      console.log('Changes password successfully!');
+      console.log(this.translate.instant('change_password_page.change_password_success'));
     } else {
       console.log(data.message);
     }
@@ -82,5 +82,11 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
+    switch (name) {
+        case 'USERID_SIGNUP':
+          this.loaderService.stopLoading();
+          this.widgetmodel = data;
+          break;
+      }
   }
 }

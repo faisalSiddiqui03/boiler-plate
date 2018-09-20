@@ -42,7 +42,8 @@
 		"updating_quantity": "",
 		"voucher_description": "Our top deals are always available online on our Deals page.",
 		"your_cart": "Your Cart",
-		"your_total": "Your Total"
+		"your_total": "Your Total",
+		"add": "Added"
 	},
 	"category_listing": {
 		"price_tag": "From"
@@ -57,7 +58,8 @@
 		"re_enter_password_notmatch": "Password do not match",
 		"re_enter_password_placeholder": "Please confirm your password",
 		"re_enter_password_required": "Please confirm your password",
-		"submit": "submit"
+        "submit": "submit",
+        "change_password_success": "'Changed password successfully!'"
 	},
 	"checkout_page":{
 		"secure_checkout": "Secure Checkout",
@@ -413,7 +415,31 @@
 		"remember_me": "Remember me",
 		"sign_in": "Sign In",
 		"signin_google": "Sign in with Google"
-	},
+    },
+    "sign_up_page": {
+        "sign_up": "Sign up",
+        "fname": "First Name",
+        "fname_placeholder": "So we know what to call you",
+        "fname_error": "First Name Please",
+        "lname": "First Name",
+        "lname_placeholder": "So we know what to call you",
+        "mobile": "Mobile",
+        "mobile_placehlder": "So we can contact you for pizza updates",
+        "mobile_error_length": "Mobile should consist of 8 digits",
+        "mobile_error_required": "Your number please",
+        "mobile_error_pattern": "Mobile numbers should start with 2,5,6 or 9",
+        "email": "Email",
+        "email_placeholder": "So we can contact you for pizza updates",
+        "email_error": "Please provide your email",
+        "password": "Password",
+        "password_placeholder": "It will be our little secret",
+        "password_error_required": "It will be our little secret",
+        "password_error_length": "Password minimum length is 6 characters",
+        "confirm_password": "Confirm Password",
+        "confirm_password_placeholder": "Please confirm your password",
+        "confirm_password_error_match": "Password do not match",
+        "submit": "SIGN UP"
+    },
 	"store_selection_page": {
 		"stores_selection": "Stores Selection",
 		"take_away_now": "Take Away Now"

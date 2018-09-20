@@ -42,7 +42,8 @@
 		"updating_quantity": "",
 		"voucher_description": "",
 		"your_cart": "",
-		"your_total": ""
+		"your_total": "",
+		"add": ""
 	},
 	"category_listing": {
 		"price_tag": ""

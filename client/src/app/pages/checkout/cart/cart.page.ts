@@ -15,6 +15,7 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router } from '@angular/router';
 import { Utils } from '../../../helpers/utils';
 import { Location } from '@angular/common';
+import { ProductType } from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-cart-page',
@@ -33,6 +34,11 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   isWrongVoucher = false;
   currencyCode: string;
   couponCode: string;
+  updatingPrice: boolean;
+  bundle = ProductType.Bundle;
+  product = ProductType.Product;
+  deal = ProductType.Deal;
+
 
   constructor(
     private translateService: TranslateService,
@@ -44,12 +50,16 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ) {
     super();
     this.translateService.use(Utils.getLanguageCode());
-    // this.loaderService.startLoading();
     this.loaded = false;
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   ngOnInit() {
+    
+  }
+
+  ionViewWillEnter() {
+    this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
   }
 
   applyCoupon() {
@@ -69,6 +79,16 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     }
   }
 
+  updateCart(event, item, isAddition) {
+    let clicks = event.clickNumber
+
+    if (!isAddition)
+      clicks = -clicks
+
+    this.updateCartItemQuantity(item, clicks)
+  }
+
+
   async updateCartItemQuantity(item, newQuantity) {
 
     item.quantity = item.quantity + newQuantity;
@@ -78,7 +98,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     }
 
     let cartUpdate = await this.translateService.instant('cart.updating_quantity');
-    this.loaderService.startLoading(cartUpdate);
+    this.updatingPrice = true;
     let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
   }
@@ -86,7 +106,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   async removeCartItem(item) {
     item.quantity = 0;
     let cartRemove = await this.translateService.instant('cart.remove_item');
-    this.loaderService.startLoading(cartRemove);
+    this.updatingPrice = true;
     let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
   }
@@ -114,6 +134,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   async widgetActionSuccess(name: string, data: any) {
     console.log('name action success: ' + name + ' data: ' + data);
     this.loaderService.stopLoading();
+    this.updatingPrice = false;
     switch (name) {
       case CartWidgetActions.ACTION_REMOVE_COUPON:
         if (data) {
