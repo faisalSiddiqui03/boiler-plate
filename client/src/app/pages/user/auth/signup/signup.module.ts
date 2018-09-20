@@ -8,7 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../../../../components/header/header.module';
 import { HttpLoaderFactory } from '../../../../translation.loader';
-
+import { UseridSignupWidgetModule, EventTrackModule } from '@capillarytech/pwa-framework';
 import { SignupPage } from './signup.page';
 
 const routes: Routes = [
@@ -25,6 +25,7 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     HeaderModule,
+    UseridSignupWidgetModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {
