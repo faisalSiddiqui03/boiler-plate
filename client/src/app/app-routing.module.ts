@@ -31,7 +31,8 @@ const routes: Routes = [
   { path: 'pizza/:productName/:productId', loadChildren: './pages/product/pizza/pizza.module#PizzaPageModule' },
   { path: 'location', loadChildren: './pages/checkout/location/location.module#LocationPageModule' },
   { path: 'order-details', loadChildren: './pages/user/profile/order-details/order-details.module#OrderDetailsPageModule' },
-  { path: 'search-location', loadChildren: './pages/user/profile/search-location/search-location.module#SearchLocationPageModule' },
+  { path: 'seacrh-location', loadChildren: './pages/user/profile/seacrh-location/seacrh-location.module#SeacrhLocationPageModule' },
+  { path: 'checkout', loadChildren: './pages/checkout/checkout/checkout.module#CheckoutPageModule' },
 ];
 
 @NgModule({

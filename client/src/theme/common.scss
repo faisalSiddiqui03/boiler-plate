@@ -46,6 +46,14 @@ body {
     border-bottom-style: dotted;
   }
 }
+.checkout-head{
+  @extend .common-heading;
+  h2 {
+    font-size: 16px;
+    font-family: 'Open Sans';
+    font-weight: 400;
+  }
+}
 
 .page-header {
   --ion-toolbar-background-color: transparent;
