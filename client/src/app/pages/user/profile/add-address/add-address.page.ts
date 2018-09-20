@@ -7,6 +7,7 @@ import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { SearchLocationPage } from '../search-location/search-location.page';
 
 @Component({
   selector: 'app-add-address',

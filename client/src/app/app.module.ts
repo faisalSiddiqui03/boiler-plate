@@ -2,7 +2,6 @@ import { NgModule, APP_INITIALIZER, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
 import { TranslateCompiler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -29,12 +28,13 @@ import {
   FulfilmentModeModule,
   SEOModule
 } from '@capillarytech/pwa-framework';
+import { AuthGuard } from './auth.guard';
 import { HttpLoaderFactory } from './translation.loader';
 import { appConfig } from '../../config/config';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-selection/delivery-slot-selection.module';
 import { LocationPageModule } from './pages/checkout/location/location.module';
-import { SeacrhLocationPageModule } from './pages/user/profile/seacrh-location/seacrh-location.module';
+import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 
 export function getAppConfig(): Object {
   return appConfig || {};
@@ -60,7 +60,7 @@ export function getAppConfig(): Object {
     LogoutWidgetModule,
     DeliverySlotSelectionModule,
     LocationPageModule,
-    SeacrhLocationPageModule,
+    SearchLocationPageModule,
     EventTrackModule.forRoot([EventTrackModule.Tracker.GTM]),
     LanguageServiceModule.forRoot([
       { name: 'English', code: 'en', isDefault: false, alignment: 'ltr' },
@@ -87,6 +87,7 @@ export function getAppConfig(): Object {
     SplashScreen,
     LifecycleHandler,
     Geolocation,
+    AuthGuard,
     HttpClientModule,
     {
       provide: RouteReuseStrategy,

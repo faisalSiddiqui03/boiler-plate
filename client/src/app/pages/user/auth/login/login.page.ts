@@ -140,7 +140,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       case UserIdPwdSigninWidgetActions.ACTION_SIGN_IN:
         this.handleUseridPasswordSigninResponse(data);
         break;
-      case 'GOOGLE_SIGN_IN':
+      case 'GPLUS_SIGN_IN':
         this.handleGoogleSignInResponse({
           isSuccessful: false,
           message: 'Something went wrong please try again.'
