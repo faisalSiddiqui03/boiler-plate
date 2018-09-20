@@ -104,3 +104,19 @@
   height: 12px;
   width: 50px;
 }
+
+// RTL Support Styles
+html {
+  &[dir="rtl"] {
+    .footer-content {
+			ion-title{
+				text-align: right;
+			}
+			.social-links {
+				ion-title{
+					text-align: center;
+				}
+			}
+		}
+  }
+}

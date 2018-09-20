@@ -20,6 +20,9 @@
 		"other": "Other",
 		"work": "Work"
 	},
+	"banner_widget":{
+		"most_popular_deals": "OUR MOST POPULAR DEALS"
+	},
 	"cart": {
 		"apply": "apply",
 		"cart_clear": "",
@@ -207,10 +210,15 @@
 		"terms_and_conditions": "Terms & Conditions",
 		"user_message": "Order a delicious pizza on the go, anywhere, anytime. Pizza Hut is happy to assist you with your home delivery. Every time you order, you get a hot and fresh pizza delivered at your doorstep in less than thirty minutes. *T&C Apply."
 	},
-	"home": {
-		"page": {
-			"view_all_deals": "View All Deals"
-		}
+	"header":{
+		"language": "العربية",
+		"register": "register",
+		"sign_in": "sign in",
+		"delivery": "Delivery",
+		"take_away": "Take away",
+		"asap": "ASAP",
+		"mode": "Mode",
+		"location": "Location"
 	},
 	"home_page": {
 		"block_": "Block ",
@@ -227,7 +235,9 @@
 		"start_my_order": "Start my order",
 		"take_away": "Take away",
 		"unable_to_get_stores": "Unable to get stores",
-		"your_pickup_hut_is": "Your pickup hut is"
+		"your_pickup_hut_is": "Your pickup hut is",
+		"language": "العربية",
+		"view_all_deals": "View All Deals"
 	},
 	"location_page": {
 		"confirm_and_proceed": "Confirm and Proceed",

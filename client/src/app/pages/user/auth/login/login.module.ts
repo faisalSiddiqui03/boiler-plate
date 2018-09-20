@@ -12,6 +12,7 @@ import { UseridPasswordSigninWidgetModule, EventTrackModule, GoogleSigninWidgetM
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
+import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 import { AlertServiceModule, AlertService, LoaderServiceModule, LoaderService } from '@capillarytech/pwa-ui-helpers';
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     HeaderModule,
+    SubHeaderModule,
     RouterModule.forChild(routes),
     EventTrackModule,
     GoogleSigninWidgetModule,
