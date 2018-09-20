@@ -8,78 +8,92 @@
     <ion-buttons slot="start">
       <div class="icon icon-arrow-prev-2" (click)="goToPage('login')"></div>
     </ion-buttons>
-    <ion-title text-center text-uppercase>Sign up</ion-title>
+    <ion-title text-center text-uppercase>{{'sign_up_page.sign_up' | translate}}</ion-title>
   </ion-toolbar>
-  <div class="main-content">
-    <form class="form-section" padding [formGroup]="signUpForm">
-      <div class="form-group" [class.error]="signUpForm.get('fname').touched && !signUpForm.get('fname').valid">
-        <ion-label for="fname" text-capitalize>First Name
-          <sup>*</sup>
-        </ion-label>
-        <div class="form-input">
-          <ion-input id="fname" placeholder="So we know what to call you" inputmode="text" formControlName="fname"></ion-input>
-          <div class="icons">
-            <ion-icon name="alert"></ion-icon>
-          </div>
-        </div>
-        <div class="error-msg">First Name Please</div>
-      </div>
-      <div class="form-group">
-        <ion-label for="lname" text-capitalize>Last Name</ion-label>
-        <div class="form-input">
-          <ion-input id="lname" placeholder="So we know what to call you" inputmode="text" formControlName="lname"></ion-input>
-        </div>
-      </div>
-      <div class="form-group" [class.error]="signUpForm.get('mobile').touched && !signUpForm.get('mobile').valid">
-        <ion-label for="mobile" text-capitalize>Mobile
-          <sup>*</sup>
-        </ion-label>
-        <div class="form-input mobile-input">
-          <span>965</span>
-          <ion-input id="mobile" placeholder="So we can contact you for pizza updates" inputmode="text" formControlName="mobile"></ion-input>
-          <div class="icons">
-            <ion-icon name="alert"></ion-icon>
-          </div>
-        </div>
-        <div class="error-msg">Your Number Please</div>
-      </div>
-      <div class="form-group" [class.error]="signUpForm.get('email').touched && !signUpForm.get('email').valid">
-        <ion-label for="email" text-capitalize>Email
-          <sup>*</sup>
-        </ion-label>
-        <div class="form-input">
-          <ion-input id="email" placeholder="So we can contact you for pizza updates" inputmode="email" formControlName="email"></ion-input>
-          <div class="icons">
-            <ion-icon name="alert"></ion-icon>
-          </div>
-        </div>
-        <div class="error-msg">Please provide your Email</div>
-      </div>
-      <div class="form-group" [class.error]="signUpForm.get('password').touched && !signUpForm.get('password').valid">
-        <ion-label for="password" text-capitalize>Password
-          <sup>*</sup>
-        </ion-label>
-        <div class="form-input">
-          <ion-input id="password" placeholder="It will be our little secret" inputmode="password" formControlName="password"></ion-input>
-          <div class="icons">
-            <ion-icon name="alert"></ion-icon>
-          </div>
-        </div>
-        <div class="error-msg">It will be our little secret</div>
-      </div>
-      <div class="form-group" [class.error]="signUpForm.get('confirmPassword').touched && !signUpForm.get('confirmPassword').valid">
-        <ion-label for="confirmPassword" text-capitalize>Confirm Password
-          <sup>*</sup>
-        </ion-label>
-        <div class="form-input">
-          <ion-input id="confirmPassword" placeholder="Please confirm your password" inputmode="password" formControlName="password"></ion-input>
-          <div class="icons">
-            <ion-icon name="alert"></ion-icon>
-          </div>
-        </div>
-        <div class="error-msg">Please confirm your password</div>
-      </div>
-      <ion-button color="medium" class="btn-signin" text-capitalize expand="block" mode="ios" (click)="signUp()" [disabled]="!signUpForm.valid">Submit</ion-button>
-    </form>
-  </div>
+  <userid-signup-widget [componentId]="getComponentId()" class="w-400" pfWidgetImpressionTrack [action]="useridSignUpAction"
+                                   (lifecycle)="handleWidgetLifecycle($event)">
+      <ng-template let-widget="widget">
+        <ng-container *ngIf="widget.model">
+            <div class="main-content">
+                <form class="form-section" padding [formGroup]="signUpForm">
+                <div class="form-group" [class.error]="signUpForm.get('fname').touched && !signUpForm.get('fname').valid">
+                    <ion-label for="fname" text-capitalize>{{'sign_up_page.fname' | translate}}
+                    <sup>*</sup>
+                    </ion-label>
+                    <div class="form-input">
+                    <ion-input id="fname" placeholder="{{'sign_up_page.fname_placeholder' | translate}}" inputmode="text" formControlName="fname"></ion-input>
+                    <div class="icons">
+                        <ion-icon name="alert"></ion-icon>
+                    </div>
+                    </div>
+                    <div *ngIf="signUpForm.get('fname').touched && !signUpForm.get('fname').valid" class="error-msg">{{'sign_up_page.fname_error' | translate}}</div>
+                </div>
+                <div class="form-group">
+                    <ion-label for="lname" text-capitalize>{{'sign_up_page.lname' | translate}}</ion-label>
+                    <div class="form-input">
+                    <ion-input id="lname" placeholder="{{'sign_up_page.lname_placeholder' | translate}}" inputmode="text" formControlName="lname"></ion-input>
+                    </div>
+                </div>
+                <div class="form-group" [class.error]="signUpForm.get('mobile').touched && !signUpForm.get('mobile').valid">
+                    <ion-label for="mobile" text-capitalize>{{'sign_up_page.mobile' | translate}}
+                    <sup>*</sup>
+                    </ion-label>
+                    <div class="form-input mobile-input">
+                    <span>965</span>
+                    <ion-input id="mobile" placeholder="{{'sign_up_page.mobile_placehlder' | translate}}" inputmode="text" formControlName="mobile"></ion-input>
+                    <div class="icons">
+                        <ion-icon name="alert"></ion-icon>
+                    </div>
+                    </div>
+                    <div *ngIf="(signUpForm.get('mobile')?.errors?.minlength || signUpForm.get('mobile')?.errors?.maxlength) && !signUpForm.get('mobile')?.errors?.pattern" class="error-msg">{{'sign_up_page.mobile_error_length' | translate}}</div>
+                    <div *ngIf="signUpForm.get('mobile')?.errors?.required" class="error-msg">{{'sign_up_page.mobile_error_required' | translate}}</div>
+                    <div *ngIf="signUpForm.get('mobile')?.errors?.pattern" class="error-msg">{{'sign_up_page.mobile_error_pattern' | translate}}</div>
+                </div>
+                <div class="form-group" [class.error]="signUpForm.get('email').touched && !signUpForm.get('email').valid">
+                    <ion-label for="email" text-capitalize>{{'sign_up_page.email' | translate}}
+                    <sup>*</sup>
+                    </ion-label>
+                    <div class="form-input">
+                    <ion-input id="email" placeholder="{{'sign_up_page.email_placeholder' | translate}}" inputmode="email" formControlName="email"></ion-input>
+                    <div class="icons">
+                        <ion-icon name="alert"></ion-icon>
+                    </div>
+                    </div>
+                    <div *ngIf="signUpForm.get('email').touched && !signUpForm.get('email').valid" class="error-msg">{{'sign_up_page.email_error' | translate}}</div>
+                </div>
+                <div class="form-group" [class.error]="signUpForm.get('password').touched && !signUpForm.get('password').valid">
+                    <ion-label for="password" text-capitalize>{{'sign_up_page.password' | translate}}
+                    <sup>*</sup>
+                    </ion-label>
+                    <div class="form-input">
+                        <ion-input [type]="isPasswordFiled ? 'password' : 'text'"
+                        [inputmode]="isPasswordFiled ? 'password' : 'text'" no-border
+                        placeholder="{{ 'sign_in_page.password_placeholder' | translate }}"
+                        formControlName="password" id="password"></ion-input>
+                    <div class="icons">
+                        <ion-icon (click)="changeTextPassword($event)" [name]="eye"
+                            margin-end-half></ion-icon>
+                        <ion-icon name="alert"></ion-icon>
+                    </div>
+                    </div>
+                    <div *ngIf="signUpForm.get('password').touched && !signUpForm.get('password').valid" class="error-msg">{{'sign_up_page.password_error' | translate}}</div>
+                </div>
+                <div class="form-group" [class.error]="signUpForm.get('confirmPassword').touched && !signUpForm.get('confirmPassword').valid">
+                    <ion-label for="confirmPassword" text-capitalize>{{'sign_up_page.confirm_password' | translate}}
+                    <sup>*</sup>
+                    </ion-label>
+                    <div class="form-input">
+                    <ion-input id="confirmPassword" placeholder="{{'sign_up_page.confirm_password_placeholder' | translate}}" inputmode="password" formControlName="confirmPassword"></ion-input>
+                    <div class="icons">
+                        <ion-icon name="alert"></ion-icon>
+                    </div>
+                    </div>
+                    <div *ngIf="signUpForm.get('confirmPassword').touched && !signUpForm.get('confirmPassword').valid" class="error-msg">{{'sign_up_page.confirm_password_error_match' | translate}}</div>
+                </div>
+                <ion-button [color]="signUpForm.valid ? 'success' : 'medium'" class="btn-signin" text-capitalize expand="block" mode="ios" (click)="signUp()" [disabled]="!signUpForm.valid ">{{'sign_up_page.submit' | translate}}</ion-button>
+                </form>
+            </div>
+        </ng-container>
+      </ng-template>
+    </userid-signup-widget>
 </ion-content>
