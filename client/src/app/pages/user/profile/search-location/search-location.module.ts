@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SeacrhLocationPage } from './seacrh-location.page';
+import { SearchLocationPage } from './search-location.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: SeacrhLocationPage
+    component: SearchLocationPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SeacrhLocationPage]
+  declarations: [SearchLocationPage]
 })
-export class SeacrhLocationPageModule {}
+export class SearchLocationPageModule {}

@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AgmCoreModule, MouseEvent } from '@agm/core';
 import { ModalController } from '@ionic/angular';
-import { SeacrhLocationPage } from '../seacrh-location/seacrh-location.page';
+import { SearchLocationPage } from '../search-location/search-location.page';
 
 @Component({
   selector: 'app-add-address',
