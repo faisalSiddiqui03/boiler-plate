@@ -65,7 +65,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     }
   }
 
-  getShowcaseFilter(categoryId){
+  getShowcaseFilter(categoryId) {
 
     return {
       from: 0,
@@ -90,16 +90,17 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       return `https://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
     }
   }
+
   openProductDetails(product) {
-    if(product.productType === 'B'){
+    if (product.productType === 'B') {
       this.router.navigateByUrl('/pizza/' + product.title + '/' + product.id);
       return;
     }
     this.router.navigateByUrl('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
   }
 
-  updateFavorites(isFavorite, product){
-    if(!isFavorite){
+  updateFavorites(isFavorite, product) {
+    if (!isFavorite) {
       this.productShowcaseWidgetAction.emit(new Action(ProductShowcaseWidgetActions.ACTION_MARK_AS_FAVORITE, product));
       return;
     }
@@ -136,7 +137,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   switchCategories(category, categoryId) {
-    this.router.navigate( [], { queryParams: { category: category, id: categoryId }});
+    this.router.navigate([], { queryParams: { category: category, id: categoryId } });
     // this.router.navigateByUrl('/products?category={{item.name}}&id={{item.categoryId}}')
   }
 }
