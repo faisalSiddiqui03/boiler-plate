@@ -4,11 +4,11 @@
       <div class="center-align logo_bg edge-shadow brd-radius">
         <img src="assets/imgs/pizzahut-logo.svg" alt="Pizza Hut" class="header-img" (click)="goToPage('home')">
       </div>
-      <div *ngIf="showLanguage" class="lang-selection">العربية</div>
+      <div *ngIf="showLanguage" class="lang-selection">{{ 'header.language' | translate }}</div>
       <div *ngIf="showTime" text-uppercase class="delivery-time" (click)="presentSlotModal()">
         <ion-icon name="time" ios="md-time" md="md-time"></ion-icon>
         <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
-        <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">ASAP</span>
+        <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">{{ 'header.asap' | translate }}</span>
       </div>
       <div *ngIf="showUserIcon" (click)="goToPage(getUserModel()?.type === 'GUEST' ? 'login' : 'my-account')">
         <div class="profile-icon">
@@ -29,24 +29,24 @@
     <div class="header-right" text-right>
       <div class="delivery-mode">
         <div class="icon" [ngClass]="{'icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
-        <span text-capitalize>Mode:</span>
-        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY" text-capitalize>Delivery</small>
-        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>Take away</small>
+        <span text-capitalize>{{ 'header.mode' | translate }}:</span>
+        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY" text-capitalize>{{ 'header.delivery' | translate }}</small>
+        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>{{ 'header.take_away' | translate }}</small>
       </div>
       <div class="delivery-location" (click)="openLocationModal()">
-        <span text-capitalize>Location:</span>
+        <span text-capitalize>{{ 'header.location' | translate }}:</span>
         <small text-uppercase>{{getCurrentStore()?.address}}</small>
         <div class="icon icon-arrow-down-2"></div>
       </div>
       <div text-uppercase class="delivery-time-large" (click)="presentSlotModal()">
         <ion-icon name="time" ios="md-time" md="md-time"></ion-icon>
         <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
-        <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">ASAP</span>
+        <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">{{ 'header.asap' | translate }}</span>
       </div>
       <div class="signin-register">
         <div class="icon icon-user-circle" (click)="goToPage('login')"></div>
-        <span text-uppercase (click)="goToPage('login')">sign in /</span>
-        <span text-uppercase (click)="goToPage('signup')">register</span>
+        <span text-uppercase (click)="goToPage('login')">{{ 'header.sign_in' | translate }} /</span>
+        <span text-uppercase (click)="goToPage('signup')">{{ 'header.register' | translate }}</span>
       </div>
     </div>
   </div>

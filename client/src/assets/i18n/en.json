@@ -20,6 +20,9 @@
 		"other": "Other",
 		"work": "Work"
 	},
+	"banner_widget":{
+		"most_popular_deals": "OUR MOST POPULAR DEALS"
+	},
 	"cart": {
 		"apply": "apply",
 		"cart_clear": "",
@@ -60,6 +63,52 @@
 		"re_enter_password_required": "Please confirm your password",
         "submit": "submit",
         "change_password_success": "'Changed password successfully!'"
+	},
+	"checkout_page":{
+		"secure_checkout": "Secure Checkout",
+		"name": "Name",
+		"name_placeholder": "First name is fine",
+		"name_required": "First name please",
+		"mobile": "Mobile",
+		"mobile_placeholder": "To send your confirmation",
+		"mobile_required": "Your number please",
+		"mobile_digits": "Mobile should consist of 8 digits",
+		"mobile_valid": "Mobile numbers should start with 2,5,6 or 9",
+		"email": "Email",
+		"email_placeholder": "So we can contact you",
+		"email_required": "Please provide your email",
+		"email_valid": "Please provide the correct email address",
+		"building":"Building Number/Villa Number",
+		"building_placeholder":"Building Number/Villa Number",
+		"building_required":"We would need your address to deliver your pizza",
+		"street":"Way Number/Street Name",
+		"street_placeholder":"Enter Way Number Or Street Name",
+		"street_required":"We would need your address to deliver your pizza",
+		"comment": "Order Comment",
+		"comment_placeholder": "Order Comment"
+	},
+	"checkout_page":{
+		"secure_checkout": "Secure Checkout",
+		"name": "Name",
+		"name_placeholder": "First name is fine",
+		"name_required": "First name please",
+		"mobile": "Mobile",
+		"mobile_placeholder": "To send your confirmation",
+		"mobile_required": "Your number please",
+		"mobile_digits": "Mobile should consist of 8 digits",
+		"mobile_valid": "Mobile numbers should start with 2,5,6 or 9",
+		"email": "Email",
+		"email_placeholder": "So we can contact you",
+		"email_required": "Please provide your email",
+		"email_valid": "Please provide the correct email address",
+		"building":"Building Number/Villa Number",
+		"building_placeholder":"Building Number/Villa Number",
+		"building_required":"We would need your address to deliver your pizza",
+		"street":"Way Number/Street Name",
+		"street_placeholder":"Enter Way Number Or Street Name",
+		"street_required":"We would need your address to deliver your pizza",
+		"comment": "Order Comment",
+		"comment_placeholder": "Order Comment"
 	},
 	"contact_page": {
 		"address_1": "Al-Homaizi Foodstuff Co.",
@@ -185,10 +234,15 @@
 		"terms_and_conditions": "Terms & Conditions",
 		"user_message": "Order a delicious pizza on the go, anywhere, anytime. Pizza Hut is happy to assist you with your home delivery. Every time you order, you get a hot and fresh pizza delivered at your doorstep in less than thirty minutes. *T&C Apply."
 	},
-	"home": {
-		"page": {
-			"view_all_deals": "View All Deals"
-		}
+	"header":{
+		"language": "العربية",
+		"register": "register",
+		"sign_in": "sign in",
+		"delivery": "Delivery",
+		"take_away": "Take away",
+		"asap": "ASAP",
+		"mode": "Mode",
+		"location": "Location"
 	},
 	"home_page": {
 		"block_": "Block ",
@@ -205,7 +259,9 @@
 		"start_my_order": "Start my order",
 		"take_away": "Take away",
 		"unable_to_get_stores": "Unable to get stores",
-		"your_pickup_hut_is": "Your pickup hut is"
+		"your_pickup_hut_is": "Your pickup hut is",
+		"language": "العربية",
+		"view_all_deals": "View All Deals"
 	},
 	"location_page": {
 		"confirm_and_proceed": "Confirm and Proceed",

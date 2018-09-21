@@ -20,6 +20,9 @@
 		"other": "",
 		"work": ""
 	},
+	"banner_widget":{
+		"most_popular_deals": "عروضنا الأكثر رواجاً."
+	},
 	"cart": {
 		"apply": "",
 		"cart_clear": "",
@@ -166,45 +169,52 @@
 		"name_required": ""
 	},
 	"footer": {
-		"about_us": "",
-		"contact_us": "",
-		"copyright": "",
-		"create_your_account": "",
-		"customer_service": "",
-		"faqs": "",
-		"feedback": "",
-		"follow_us": "",
-		"hurry_up": "",
-		"menu": "",
-		"my_account": "",
-		"nutrition": "",
-		"policies": "",
-		"privacy_policy": "",
-		"signin": "",
-		"terms_and_conditions": "",
-		"user_message": ""
+		"about_us": "من نحن",
+		"contact_us": "اتصل بنا",
+		"copyright": "جميع الحقوق محفوظة لبيتزا هت الكويت 2018",
+		"create_your_account": "أنشأ حسابا جديدا",
+		"customer_service": "خدمات العملاء",
+		"faqs": "اسئلة متكررة",
+		"feedback": "آراؤكم تهمنا",
+		"follow_us": "تابعنا",
+		"hurry_up": "أسرع واطلب ما تريد الآن",
+		"menu": "قائمة الطعام",
+		"my_account": "حسابي",
+		"nutrition": "التغذية",
+		"policies": "السياسة العامة",
+		"privacy_policy": "سياسة الخصوصية",
+		"signin": "تسجيل دخول",
+		"terms_and_conditions": "الشروط & الأحكام",
+		"user_message": "اطلب بيتزا شهية، من أي مكان وفي أي وقت. نحن في بيتزا هت سعداء في توصيل طلبك للمنزل. كل مرة تقوم بها بالطلب ستحصل على بيتزا طازجة وساخنة تصلك إلى باب منزلك في أقل من ثلاثين دقيقة"
 	},
-	"home": {
-		"page": {
-			"view_all_deals": ""
-		}
+	"header":{
+		"language": "English",
+		"register": "تسجيل",
+		"sign_in": "تسجيل دخول",
+		"delivery": "توصيل",
+		"take_away": "يبعد",
+		"asap": "ASAP",
+		"mode": "الوضع",
+		"location": "موقعك"
 	},
 	"home_page": {
-		"block_": "",
-		"change": "",
-		"collection": "",
-		"delivery": "",
-		"delivery_name": "",
-		"find_my_nearest_hut": "",
-		"no_store_available": "",
-		"see_deals_menu": "",
-		"select_area": "",
-		"select_block": "",
-		"select_city_warning": "",
-		"start_my_order": "",
-		"take_away": "",
-		"unable_to_get_stores": "",
-		"your_pickup_hut_is": ""
+		"block_": "منع",
+		"change": "تغير العنوان",
+		"collection": "الاستلام من فرع",
+		"delivery": "توصيل",
+		"delivery_name": "التوصيل من فرع",
+		"find_my_nearest_hut": " إيجاد الفرع الأقر",
+		"no_store_available": "لا يوجد متجر متاح",
+		"see_deals_menu": "إضغط لبدء طلبك و لرؤية أخر العروض",
+		"select_area": "اختر المنطقة",
+		"select_block": "اختر القطعة",
+		"select_city_warning": "اختر المنطقة أولا",
+		"start_my_order": "ابدأ الطلب",
+		"take_away": "طلب خارجي",
+		"unable_to_get_stores": "غير قادر على الحصول على المتاجر",
+		"your_pickup_hut_is": "مكان إستلام الطلب",
+		"language": "English",
+		"view_all_deals": "عرض جميع الصفقات"
 	},
 	"location_page": {
 		"confirm_and_proceed": "",
@@ -374,20 +384,20 @@
 		"saved_address": ""
 	},
 	"sign_in_page": {
-		"dont_have_account": "",
-		"email": "",
-		"email_placeholder": "",
-		"email_required": "",
-		"email_valid": "",
-		"forgot_password": "",
-		"password": "",
-		"password_minlength": "",
-		"password_placeholder": "",
-		"password_required": "",
-		"register": "",
-		"remember_me": "",
-		"sign_in": "",
-		"signin_google": ""
+		"dont_have_account": "هل لديك حساب؟",
+		"email": "البريد الإلكتروني",
+		"email_placeholder": "أدخل بريدك الإلكتروني",
+		"email_required": "يجب إدخال البريد الإلكتروني",
+		"email_valid": "يرجى إدخال عنوان بريدك الالكتروني الصحيح",
+		"forgot_password": "نسيت كلمة المرور",
+		"password": "كلمة المرور",
+		"password_minlength": "الحد الأدنى لكلمة المرور هو ستة رموز",
+		"password_placeholder": "أدخل كلمة المرور",
+		"password_required": "نحتاج كلمة مرورك. كن مطمئناً سرك في بئرنا العميق",
+		"register": "تسجيل جديد",
+		"remember_me": "تذكرنى",
+		"sign_in": "تسجيل دخول",
+		"signin_google": "تسجيل دخول قوقل"
 	},
 	"store_selection_page": {
 		"stores_selection": "",
