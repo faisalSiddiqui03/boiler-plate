@@ -367,7 +367,9 @@
 		"email_required": "Please provide your email",
 		"email_valid": "Please provide the correct email address",
 		"reset_password": "Reset Password",
-		"submit": "Submit"
+        "submit": "Submit",
+        "link_sent": "Successfully sent link",
+        "error": "Something went wrong please try again."
 	},
 	"saved_address_page": {
 		"add_new_address": "Add new Address",
