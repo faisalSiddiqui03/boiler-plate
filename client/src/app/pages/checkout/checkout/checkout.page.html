@@ -136,7 +136,7 @@
             <ion-label>Please send latest discounts and offers from Pizza Hut Delivery</ion-label>
           </ion-item>
           <ion-button color="success" text-capitalize expand="block" mode="ios" class="btn-success">Place your Order &nbsp;
-            <span>{{ globalSharedService.getCart()?.total | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+            <span>{{ getCart()?.total | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
           </ion-button>
         </div>
       </form>

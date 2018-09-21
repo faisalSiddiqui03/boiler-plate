@@ -1,28 +1,30 @@
-import { 
-    Component, 
-    OnInit, 
-    EventEmitter } from '@angular/core';
-import { 
-    Validators, 
-    FormBuilder, 
-    FormGroup, 
-    AbstractControl } from '@angular/forms';
-import { 
-    pwaLifeCycle, 
-    pageView, 
-    OnWidgetActionsLifecyle, 
-    OnWidgetLifecyle,
-    Action,
-    UserIdSignUpWidgetActions } from '@capillarytech/pwa-framework';
+import {
+  Component,
+  OnInit,
+  EventEmitter
+} from '@angular/core';
+import {
+  Validators,
+  FormBuilder,
+  FormGroup,
+  AbstractControl
+} from '@angular/forms';
+import {
+  pwaLifeCycle,
+  pageView,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  Action,
+  UserIdSignUpWidgetActions
+} from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../../base/base-component';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../../helpers/utils';
-import { 
-    AlertService, 
-    LoaderService 
+import {
+  AlertService,
+  LoaderService
 } from '@capillarytech/pwa-ui-helpers';
-
 
 
 @Component({
@@ -36,17 +38,17 @@ import {
 
 export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
-  signUpForm:FormGroup;
+  signUpForm: FormGroup;
   useridSignUpAction = new EventEmitter();
   useridSignUpActionEmitter = new EventEmitter();
   widgetModels: { [name: string]: any };
 
   constructor(
-      private formBuilder: FormBuilder, 
-      private router: Router, 
-      private translate: TranslateService,
-      private loaderService: LoaderService,
-      private alertService: AlertService
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private translate: TranslateService,
+    private loaderService: LoaderService,
+    private alertService: AlertService
   ) {
     super();
     this.translate.use(Utils.getLanguageCode());
@@ -61,12 +63,12 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     });
 
     this.signUpForm.validator = this.matchingPasswords
-   }
+  }
 
   ngOnInit() {
   }
 
-  signUp(){
+  signUp() {
     console.log(this.signUpForm.value);
     this.widgetModels.USERID_SIGNUP.firstName = this.signUpForm.value.fname;
     this.widgetModels.USERID_SIGNUP.lastName = this.signUpForm.value.lname;
@@ -79,11 +81,11 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
 
   handleSignUpResponse(data) {
     if (data.message === "Successful") {
-        this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful') , 500, top);
-        this.router.navigateByUrl('home');
-      } else {
-        this.alertService.presentToast(data.message, 500, top);
-      }
+      this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful'), 500, top);
+      this.router.navigateByUrl('home');
+    } else {
+      this.alertService.presentToast(data.message, 500, top);
+    }
   }
 
   goToPage(pageName) {
@@ -114,43 +116,43 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
 
   widgetLoadingSuccess(name: string, data: any): any {
     switch (name) {
-        case 'USERID_SIGNUP':
-          this.loaderService.stopLoading();
-          this.widgetModels[name] = data;
-          break;
-      }
+      case 'USERID_SIGNUP':
+        this.loaderService.stopLoading();
+        this.widgetModels[name] = data;
+        break;
+    }
   }
 
   private mapValidators(validators) {
     const formValidators = [];
-  
-    if(validators) {
-      for(const validation of Object.keys(validators)) {
-          if(validators[validation] === true){
-            formValidators.push(Validators[validation]);
-          }else{
-            formValidators.push(Validators[validation](validators[validation]));
-          }          
-      }
-    }
-  
-    return formValidators;
-  }
 
-    matchingPasswords(AC: AbstractControl) {
-      if(AC.get('password') && AC.get('confirmPassword')) {
-        let password = AC.get('password').value; // to get value in input tag
-        let confirmPassword = AC.get('confirmPassword').value; // to get value in input tag
-        if (password != confirmPassword) {
-            AC.get('confirmPassword').setErrors({ matchingPasswords: true })
+    if (validators) {
+      for (const validation of Object.keys(validators)) {
+        if (validators[validation] === true) {
+          formValidators.push(Validators[validation]);
         } else {
-            return null
+          formValidators.push(Validators[validation](validators[validation]));
         }
       }
     }
 
-    changeTextPassword(event) {
-        console.log(event);
+    return formValidators;
+  }
+
+  matchingPasswords(AC: AbstractControl) {
+    if (AC.get('password') && AC.get('confirmPassword')) {
+      let password = AC.get('password').value; // to get value in input tag
+      let confirmPassword = AC.get('confirmPassword').value; // to get value in input tag
+      if (password != confirmPassword) {
+        AC.get('confirmPassword').setErrors({ matchingPasswords: true })
+      } else {
+        return null
+      }
     }
+  }
+
+  changeTextPassword(event) {
+    console.log(event);
+  }
 
 }
