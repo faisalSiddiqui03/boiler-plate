@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
 import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle } from '@capillarytech/pwa-framework';
 import { Utils } from '../../../../helpers/utils';
@@ -10,12 +10,15 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-my-account',
   templateUrl: './my-account.page.html',
   styleUrls: ['./my-account.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()
 @pageView()
 
 export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+
+  titleValue:string = '';
 
   constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
@@ -26,6 +29,9 @@ export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   ngOnInit() {
+    this.translate.get('my_account_page.my_account').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   goToPage(pageName) {

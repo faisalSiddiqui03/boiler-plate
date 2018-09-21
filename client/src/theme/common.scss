@@ -408,32 +408,57 @@ html {
       .searchbar-input.sc-ion-searchbar-md,
       .searchbar-input.sc-ion-searchbar-ios {
         padding: 6px 15px 6px 55px !important;
-        background-position: 10px center; 
+        background-position: 10px center;
       }
-      .searchbar-clear-button.sc-ion-searchbar-md, 
-      .searchbar-clear-icon.sc-ion-searchbar-ios{
+      .searchbar-clear-button.sc-ion-searchbar-md,
+      .searchbar-clear-icon.sc-ion-searchbar-ios {
         left: 13px;
         right: auto;
       }
     }
     .form-group {
       .form-input {
-        .icons{
+        .icons {
           left: 10px;
           right: auto;
-          ion-icon{
-            &+ion-icon{
+          ion-icon {
+            &+ion-icon {
               margin-right: 10px;
             }
+          }
+        }
+        &.mobile-input {
+          ion-input {
+            --padding-start: 10px;
+            --padding-end: 68px;
+          }
+          span {
+            right: 2px;
+            left: auto;
           }
         }
       }
     }
     .page-header {
-      .icon{
+      .icon {
         left: auto;
         right: 5px;
         transform: rotate(180deg);
+      }
+    }
+    [text-right] {
+      text-align: left !important;
+    }
+    [text-left] {
+      text-align: right !important;
+    }
+    .accordion-block{
+      h5{
+        padding: 15px 20px 20px 60px;
+        .icon{
+          left: 20px;
+          right: auto;
+        }
       }
     }
   }
