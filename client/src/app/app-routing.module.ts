@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'product/:categoryName/:productName/:productId', loadChildren: './pages/product/product-details/product-details.module#ProductDetailsPageModule'},
   { path: 'login', loadChildren: './pages/user/auth/login/login.module#LoginPageModule' },
   { path: 'signup', loadChildren: './pages/user/auth/signup/signup.module#SignupPageModule' },
-  { path: 'password-reset', loadChildren: './pages/user/auth/password-reset/password-reset.module#PasswordResetPageModule', canActivate: [AuthGuard]  },
+  { path: 'password-reset', loadChildren: './pages/user/auth/password-reset/password-reset.module#PasswordResetPageModule' },
   { path: 'product-details', loadChildren: './pages/product/product-details/product-details.module#ProductDetailsPageModule' },
   { path: 'cart', loadChildren: './pages/checkout/cart/cart.module#CartPageModule' },
   { path: 'user-profile', loadChildren: './pages/user/profile/user-profile/user-profile.module#UserProfilePageModule', canActivate: [AuthGuard]  },
