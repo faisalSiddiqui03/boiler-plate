@@ -22,8 +22,8 @@ export class FeedbackPage implements OnInit {
     this.feedBackForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      mobile: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],
-      orderNumber: ['', Validators.compose([Validators.required])],
+      mobile: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('^[2,5,6,9][0-9]*$')])],
+      orderNumber: ['', Validators.compose([Validators.required, Validators.pattern('^\\d+$')])],
       orderType: ['', Validators.compose([Validators.required])],
       message: ['', Validators.compose([Validators.required])],
     });
@@ -39,6 +39,10 @@ export class FeedbackPage implements OnInit {
 
   goToPage(pageName) {
     this.router.navigateByUrl(pageName);
+  }
+
+  sendFeedback(){
+    console.log(this.feedBackForm.value);
   }
 
 }

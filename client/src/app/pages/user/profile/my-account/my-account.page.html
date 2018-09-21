@@ -2,12 +2,7 @@
   <app-header [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
-  <ion-toolbar class="page-header">
-    <ion-buttons slot="start">
-      <div class="icon icon-arrow-prev-2" (click)="goToPage('home')"></div>
-    </ion-buttons>
-    <ion-title text-center text-uppercase>{{'my_account_page.my_account' | translate}}</ion-title>
-  </ion-toolbar>
+  <app-sub-header [title]="titleValue"></app-sub-header>
   <div class="my-account-wrap w-700">
     <ion-list no-margin>
       <ion-item (click)="goToPage('user-profile')" no-padding text-capitalize>{{'my_account_page.my_profile' | translate}}

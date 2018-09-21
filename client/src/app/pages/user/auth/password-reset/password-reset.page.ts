@@ -25,6 +25,7 @@ import { Utils } from '../../../../helpers/utils';
 export class PasswordResetPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   resetPasswordForm: FormGroup;
   resetPasswordActionEmitter = new EventEmitter();
+  titleValue:string = '';
 
   constructor(private formBuilder: FormBuilder, private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
@@ -37,6 +38,9 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
   }
 
   ngOnInit() {
+    this.translate.get('reset_password_page.reset_password').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   handleResetPasswordActions(data) {
