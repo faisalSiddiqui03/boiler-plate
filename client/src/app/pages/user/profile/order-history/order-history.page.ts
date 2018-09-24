@@ -1,6 +1,14 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
-import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle, LifeCycle } from '@capillarytech/pwa-framework';
+import {
+  pwaLifeCycle,
+  pageView,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  LifeCycle,
+  OrderWidget,
+  // OrderWidgetActions
+} from '@capillarytech/pwa-framework';
 import { Utils } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -59,7 +67,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   widgetLoadingSuccess(name, data) {
-    console.log("widget loading success");
+    console.log("widget loading success", data);
     this.loaded = true;
   }
 
