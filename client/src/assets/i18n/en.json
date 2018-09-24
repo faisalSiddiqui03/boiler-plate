@@ -12,18 +12,17 @@
 		"address_details_placeholder": "Enter House / Flat / Office / Building Details",
 		"address_details_required": "House / Flat / Office / Building Details",
 		"address_type": "Address type",
-		"enter_your_location": "Enter your location",
 		"home": "Home",
 		"landmark": "Landmark",
 		"landmark_placeholder": "optional",
-		"locate_me": "Locate Me",
 		"other": "Other",
 		"work": "Work"
 	},
-	"banner_widget":{
+	"banner_widget": {
 		"most_popular_deals": "OUR MOST POPULAR DEALS"
 	},
 	"cart": {
+		"add": "Added",
 		"apply": "apply",
 		"cart_clear": "",
 		"close": "Close",
@@ -45,14 +44,14 @@
 		"updating_quantity": "",
 		"voucher_description": "Our top deals are always available online on our Deals page.",
 		"your_cart": "Your Cart",
-		"your_total": "Your Total",
-		"add": "Added"
+		"your_total": "Your Total"
 	},
 	"category_listing": {
 		"price_tag": "From"
 	},
 	"change_password_page": {
 		"change_password": "Change Password",
+		"change_password_success": "'Changed password successfully!'",
 		"enter_password": "Enter new password",
 		"enter_password_length": "Password minimum length is 6 characters",
 		"enter_password_placeholder": "Enter your Password",
@@ -61,54 +60,30 @@
 		"re_enter_password_notmatch": "Password do not match",
 		"re_enter_password_placeholder": "Please confirm your password",
 		"re_enter_password_required": "Please confirm your password",
-        "submit": "submit",
-        "change_password_success": "'Changed password successfully!'"
+		"submit": "submit"
 	},
-	"checkout_page":{
-		"secure_checkout": "Secure Checkout",
-		"name": "Name",
-		"name_placeholder": "First name is fine",
-		"name_required": "First name please",
-		"mobile": "Mobile",
-		"mobile_placeholder": "To send your confirmation",
-		"mobile_required": "Your number please",
-		"mobile_digits": "Mobile should consist of 8 digits",
-		"mobile_valid": "Mobile numbers should start with 2,5,6 or 9",
+	"checkout_page": {
+		"building": "Building Number/Villa Number",
+		"building_placeholder": "Building Number/Villa Number",
+		"building_required": "We would need your address to deliver your pizza",
+		"comment": "Order Comment",
+		"comment_placeholder": "Order Comment",
 		"email": "Email",
 		"email_placeholder": "So we can contact you",
 		"email_required": "Please provide your email",
 		"email_valid": "Please provide the correct email address",
-		"building":"Building Number/Villa Number",
-		"building_placeholder":"Building Number/Villa Number",
-		"building_required":"We would need your address to deliver your pizza",
-		"street":"Way Number/Street Name",
-		"street_placeholder":"Enter Way Number Or Street Name",
-		"street_required":"We would need your address to deliver your pizza",
-		"comment": "Order Comment",
-		"comment_placeholder": "Order Comment"
-	},
-	"checkout_page":{
-		"secure_checkout": "Secure Checkout",
+		"mobile": "Mobile",
+		"mobile_digits": "Mobile should consist of 8 digits",
+		"mobile_placeholder": "To send your confirmation",
+		"mobile_required": "Your number please",
+		"mobile_valid": "Mobile numbers should start with 2,5,6 or 9",
 		"name": "Name",
 		"name_placeholder": "First name is fine",
 		"name_required": "First name please",
-		"mobile": "Mobile",
-		"mobile_placeholder": "To send your confirmation",
-		"mobile_required": "Your number please",
-		"mobile_digits": "Mobile should consist of 8 digits",
-		"mobile_valid": "Mobile numbers should start with 2,5,6 or 9",
-		"email": "Email",
-		"email_placeholder": "So we can contact you",
-		"email_required": "Please provide your email",
-		"email_valid": "Please provide the correct email address",
-		"building":"Building Number/Villa Number",
-		"building_placeholder":"Building Number/Villa Number",
-		"building_required":"We would need your address to deliver your pizza",
-		"street":"Way Number/Street Name",
-		"street_placeholder":"Enter Way Number Or Street Name",
-		"street_required":"We would need your address to deliver your pizza",
-		"comment": "Order Comment",
-		"comment_placeholder": "Order Comment"
+		"secure_checkout": "Secure Checkout",
+		"street": "Way Number/Street Name",
+		"street_placeholder": "Enter Way Number Or Street Name",
+		"street_required": "We would need your address to deliver your pizza"
 	},
 	"contact_page": {
 		"address_1": "Al-Homaizi Foodstuff Co.",
@@ -138,7 +113,6 @@
 		"faq_accordion03_p1": "Yes, you can. As soon as you have clicked ‘place my order’ and see a page that confirms that we have received your order you can place another order.",
 		"faq_accordion04_head": "Can I re-order a previous order?",
 		"faq_accordion04_p1": "Yes you can, as long as you are signed in to your account when you placed the previous order. To see your previous orders go to the ‘Order history’ section under",
-		"faq_accordion04_p1link": "My account",
 		"faq_accordion05_head": "What is a future order?",
 		"faq_accordion05_p1": "If you want your pizza to be delivered on a specific time instead of as soon as possible this is a future order. You can place orders to be delivered later on the same day (at least 1 hour from when you are placing the order) or in the next two days. If you place a future order you will receive a confirmation as soon as you place the order as well as a reminder on the day the delivery is due.",
 		"faq_accordion05_p2": "Choose ‘now’ if you want your order delivered as soon as possible.",
@@ -203,37 +177,38 @@
 		"faq_accordion26_p1link": "Contact Us",
 		"faq_accordion27_head": "How will you use my personal information?",
 		"faq_accordion27_p1": "Pizza Hut takes security and use of personal information very seriously; for full details of our Privacy Policy please click",
-		"faq_accordion27_p1link": "here"
+		"faq_accordion27_p1link": "here",
+		"faq_accordion4_p1link": ""
 	},
 	"favorites_page": {
 		"my_favorites": "my Favorites",
 		"no_favorites": "You have not favourited any product!!!"
 	},
 	"feedback_page": {
-		"feedback": "Feedback",
-		"name": "Your Name",
-		"name_placeholder": "First name is fine",
-		"name_required": "Name is required",
+		"door_delivery": "Door Delivery",
 		"email": "Email",
 		"email_placeholder": "Please Enter your Email",
 		"email_required": "Please provide your email",
 		"email_valid": "Please provide the correct email address",
+		"feedback": "Feedback",
+		"message": "Your Message",
+		"message_placeholder": "Please write you message here",
+		"message_required": "Message is required",
 		"mobile": "Mobile",
 		"mobile_digits": "Mobile should consist of 8 digits",
 		"mobile_placeholder": "So we can contact you for pizza updates",
 		"mobile_required": "Your number please",
 		"mobile_valid": "Mobile numbers should start with 2,5,6 or 9",
+		"name": "Your Name",
+		"name_placeholder": "First name is fine",
+		"name_required": "Name is required",
 		"order_number": "Order Number",
 		"order_number_placeholder": "Your reciept number",
 		"order_number_required": "Order number is required",
 		"order_number_valid": "Please enter correct order number",
 		"order_type": "Order Type",
-		"door_delivery": "Door Delivery",
-		"take_away": "Take Away",
-		"message": "Your Message",
-		"message_placeholder": "Please write you message here",
-		"message_required": "Message is required",
-		"submit": "Submit"
+		"submit": "Submit",
+		"take_away": "Take Away"
 	},
 	"footer": {
 		"about_us": "About us",
@@ -254,15 +229,15 @@
 		"terms_and_conditions": "Terms & Conditions",
 		"user_message": "Order a delicious pizza on the go, anywhere, anytime. Pizza Hut is happy to assist you with your home delivery. Every time you order, you get a hot and fresh pizza delivered at your doorstep in less than thirty minutes. *T&C Apply."
 	},
-	"header":{
+	"header": {
+		"asap": "ASAP",
+		"delivery": "Delivery",
 		"language": "العربية",
+		"location": "Location",
+		"mode": "Mode",
 		"register": "register",
 		"sign_in": "sign in",
-		"delivery": "Delivery",
-		"take_away": "Take away",
-		"asap": "ASAP",
-		"mode": "Mode",
-		"location": "Location"
+		"take_away": "Take away"
 	},
 	"home_page": {
 		"block_": "Block ",
@@ -271,6 +246,7 @@
 		"delivery": "Delivery",
 		"delivery_name": "Delivering from",
 		"find_my_nearest_hut": "Find my nearest Hut",
+		"language": "العربية",
 		"no_store_available": "No Store Available",
 		"see_deals_menu": "See all deals & menus",
 		"select_area": "Select Area",
@@ -279,9 +255,8 @@
 		"start_my_order": "Start my order",
 		"take_away": "Take away",
 		"unable_to_get_stores": "Unable to get stores",
-		"your_pickup_hut_is": "Your pickup hut is",
-		"language": "العربية",
-		"view_all_deals": "View All Deals"
+		"view_all_deals": "View All Deals",
+		"your_pickup_hut_is": "Your pickup hut is"
 	},
 	"location_page": {
 		"confirm_and_proceed": "Confirm and Proceed",
@@ -359,6 +334,7 @@
 		"order_details": "Order Details"
 	},
 	"order_history_page": {
+		"load_more_orders": "Load More Orders",
 		"no_orders": "No Orders Found",
 		"order_history": "My Order history"
 	},
@@ -370,12 +346,12 @@
 		"added_to_cart": "added to cart",
 		"change": "Change",
 		"change_cheese_sauce_etc": "Change toppings, sauce or cheese",
+		"double": "Double",
 		"extra": "Extra",
 		"remove_topping_error": "Minimum topping count reached",
 		"remove_topping_success": "Topping successfuly removed",
 		"slect_size_crust": "Select your size and crust",
-		"your_toppings": "Your Toppings",
-		"double": "Double"
+		"your_toppings": "Your Toppings"
 	},
 	"privacy_page": {
 		"privacy_accordion01_list01": "your full name, title and gender;",
@@ -445,18 +421,18 @@
 		"email_placeholder": "Please Enter your Email",
 		"email_required": "Please provide your email",
 		"email_valid": "Please provide the correct email address",
+		"error": "Something went wrong please try again.",
+		"link_sent": "Successfully sent link",
 		"reset_password": "Reset Password",
-        "submit": "Submit",
-        "link_sent": "Successfully sent link",
-        "error": "Something went wrong please try again."
+		"submit": "Submit"
 	},
 	"saved_address_page": {
 		"add_new_address": "Add new Address",
+		"confirm": "Confirm",
+		"dismiss": "Dismiss",
 		"no_saved_address": "You do not have any saved addresses.",
 		"saved_address": "My saved address",
-		"sure_remove_address": "Are you sure you want to remove this address?",
-		"dismiss": "Dismiss",
-		"confirm": "Confirm"
+		"sure_remove_address": "Are you sure you want to remove this address?"
 	},
 	"sign_in_page": {
 		"dont_have_account": "Don't have an account",
@@ -473,31 +449,30 @@
 		"remember_me": "Remember me",
 		"sign_in": "Sign In",
 		"signin_google": "Sign in with Google"
-    },
-    "sign_up_page": {
-        "sign_up": "Sign up",
-        "fname": "First Name",
-        "fname_placeholder": "So we know what to call you",
-        "fname_error": "First Name Please",
-        "lname": "First Name",
-        "lname_placeholder": "So we know what to call you",
-        "mobile": "Mobile",
-        "mobile_placehlder": "So we can contact you for pizza updates",
-        "mobile_error_length": "Mobile should consist of 8 digits",
-        "mobile_error_required": "Your number please",
-        "mobile_error_pattern": "Mobile numbers should start with 2,5,6 or 9",
-        "email": "Email",
-        "email_placeholder": "So we can contact you for pizza updates",
-        "email_error": "Please provide your email",
-        "password": "Password",
-        "password_placeholder": "It will be our little secret",
-        "password_error_required": "It will be our little secret",
-        "password_error_length": "Password minimum length is 6 characters",
-        "confirm_password": "Confirm Password",
-        "confirm_password_placeholder": "Please confirm your password",
-        "confirm_password_error_match": "Password do not match",
-        "submit": "SIGN UP"
-    },
+	},
+	"sign_up_page": {
+		"confirm_password": "Confirm Password",
+		"confirm_password_error_match": "Password do not match",
+		"confirm_password_placeholder": "Please confirm your password",
+		"email": "Email",
+		"email_error": "Please provide your email",
+		"email_placeholder": "So we can contact you for pizza updates",
+		"fname": "First Name",
+		"fname_error": "First Name Please",
+		"fname_placeholder": "So we know what to call you",
+		"lname": "First Name",
+		"lname_placeholder": "So we know what to call you",
+		"mobile": "Mobile",
+		"mobile_error_length": "Mobile should consist of 8 digits",
+		"mobile_error_pattern": "Mobile numbers should start with 2,5,6 or 9",
+		"mobile_error_required": "Your number please",
+		"mobile_placehlder": "So we can contact you for pizza updates",
+		"password": "Password",
+		"password_error": "",
+		"registration_successful": "",
+		"sign_up": "Sign up",
+		"submit": "SIGN UP"
+	},
 	"store_selection_page": {
 		"stores_selection": "Stores Selection",
 		"take_away_now": "Take Away Now"
