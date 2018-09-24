@@ -430,8 +430,10 @@
 		"add_new_address": "Add new Address",
 		"confirm": "Confirm",
 		"dismiss": "Dismiss",
+		"error_deleting_address": "Unable to delete the address",
 		"no_saved_address": "You do not have any saved addresses.",
 		"saved_address": "My saved address",
+		"successfully_deleted_address": "Successfully deleted the address",
 		"sure_remove_address": "Are you sure you want to remove this address?"
 	},
 	"sign_in_page": {

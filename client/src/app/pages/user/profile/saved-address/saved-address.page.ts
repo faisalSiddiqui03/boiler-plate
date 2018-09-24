@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
-import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle, UserAddressWidgetActions, ConfigService } from '@capillarytech/pwa-framework';
+import {
+  Action,
+  pwaLifeCycle,
+  pageView,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  UserAddressWidgetActions,
+  ConfigService
+} from '@capillarytech/pwa-framework';
 import { Utils } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -19,6 +27,8 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
 
   titleValue: string = '';
   toggleDeleteModal: boolean = false;
+  addressToBeDeleted: '';
+  userAddressWidgetActions = new EventEmitter();
 
   constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private config: ConfigService) {
     super();
@@ -45,24 +55,43 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
     return addresses[index] ? addresses[index] : address.split(',')[index];
   }
 
-  deleteAddress() {
+  deleteAddress(address) {
+    this.addressToBeDeleted = address.id;
     this.toggleDeleteModal = !this.toggleDeleteModal;
   }
-  
+
   goToPage(pageName) {
     this.router.navigateByUrl(pageName);
   }
 
-  dismissAddressModal() {
+  dismissAddressModal(isTrue) {
+    if (isTrue && this.addressToBeDeleted) {
+      const action = new Action(UserAddressWidgetActions.DELETE, [this.addressToBeDeleted]);
+      this.userAddressWidgetActions.emit(action);
+    }
     this.toggleDeleteModal = !this.toggleDeleteModal;
   }
 
-  widgetActionFailed(name: string, data: any): any {
+  async widgetActionFailed(name: string, data: any) {
     console.log(name, 'Action Failed');
+    switch (name) {
+      case UserAddressWidgetActions.DELETE:
+        const coupon_error = await this.translate.instant('saved_address_page.error_deleting_address');
+        this.alertService.presentToast(coupon_error, 3000, 'bottom');
+        console.log('failed to delete the address');
+      break;
+    }
   }
 
-  widgetActionSuccess(name: string, data: any): any {
+  async widgetActionSuccess(name: string, data: any) {
     console.log(name, 'Action Success');
+    switch (name) {
+      case UserAddressWidgetActions.DELETE:
+        const coupon_error = await this.translate.instant('saved_address_page.successfully_deleted_address');
+        this.alertService.presentToast(coupon_error, 3000, 'bottom');
+        console.log('successfully deleted the address');
+      break;
+    }
   }
 
   widgetLoadingFailed(name: string, data: any): any {
