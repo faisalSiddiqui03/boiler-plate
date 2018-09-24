@@ -12,11 +12,9 @@
 		"address_details_placeholder": "",
 		"address_details_required": "",
 		"address_type": "",
-		"enter_your_location": "",
 		"home": "",
 		"landmark": "",
 		"landmark_placeholder": "",
-		"locate_me": "",
 		"other": "",
 		"work": ""
 	},
@@ -24,6 +22,7 @@
 		"most_popular_deals": "عروضنا الأكثر رواجاً."
 	},
 	"cart": {
+		"add": "",
 		"apply": "",
 		"cart_clear": "",
 		"close": "",
@@ -45,14 +44,14 @@
 		"updating_quantity": "",
 		"voucher_description": "",
 		"your_cart": "",
-		"your_total": "",
-		"add": ""
+		"your_total": ""
 	},
 	"category_listing": {
 		"price_tag": ""
 	},
 	"change_password_page": {
 		"change_password": "تغير رقم السري",
+		"change_password_success": "",
 		"enter_password": "إدخال كلمة السر",
 		"enter_password_length": "الحد الأدنى لكلمة المرور هو ستة رموز",
 		"enter_password_placeholder": "أدخل كلمة المرور",
@@ -62,6 +61,29 @@
 		"re_enter_password_placeholder": "يرجى تأكيد كلمة المرور",
 		"re_enter_password_required": "كلمة السر لا تتطابق",
 		"submit": "تأكيد الطلب"
+	},
+	"checkout_page": {
+		"building": "",
+		"building_placeholder": "",
+		"building_required": "",
+		"comment": "",
+		"comment_placeholder": "",
+		"email": "",
+		"email_placeholder": "",
+		"email_required": "",
+		"email_valid": "",
+		"mobile": "",
+		"mobile_digits": "",
+		"mobile_placeholder": "",
+		"mobile_required": "",
+		"mobile_valid": "",
+		"name": "",
+		"name_placeholder": "",
+		"name_required": "",
+		"secure_checkout": "",
+		"street": "",
+		"street_placeholder": "",
+		"street_required": ""
 	},
 	"contact_page": {
 		"address_1": "شركة الحميضي الغذائية",
@@ -91,7 +113,6 @@
 		"faq_accordion03_p1": "نعم، يمكنك ذلك. بمجرد أن تضغط على “تنفيذ طلبي“ وتظهر الصفحة التي تؤكد أننا تلقينا طلبك، يمكنك وضع طلب آخر.",
 		"faq_accordion04_head": "هل يمكنني أن أجري تغييرات في طلبي السابق؟",
 		"faq_accordion04_p1": "نعم يمكنك ذلك، طالما أنّك قمت بتسجيل الدخول إلى حسابك عندما وضعت طلبك السابق. يمكنك العودة إلى طلبك السابق من “طلباتي“ تحت بند",
-		"faq_accordion04_p1link": "حسابي",
 		"faq_accordion05_head": "ماذا عن إعداد طلب لوقت لاحق؟",
 		"faq_accordion05_p1": "إذا كنت تريد استلام البيتزا التي طلبتها في وقت محدد لاحقاً بدلاً من توصيلها في أقرب وقت ممكن، يمكنك وضع ذلك خلال تنفيذ طلب التوصيل في نفس اليوم (قبل ساعة على الأقل من تنفيذ الطلب) أو في الأيام المقبلة. إن قمت بوضع طلب من هذا النوع سوف تتلقى تأكيداً بمجرد تنفيذ الطلب إضافة إلى تذكير بالموعد المقرّر للتسليم.",
 		"faq_accordion05_p2": "اختر “الآن“ إن كنت ترغب باستلام طلبك في أقرب وقت ممكن.",
@@ -156,37 +177,38 @@
 		"faq_accordion26_p1link": "د الإلكتروني أو",
 		"faq_accordion27_head": "كيف سيتم استخدام معلوماتي الشخصية؟",
 		"faq_accordion27_p1": "بيتزا هت تقوم بكل الإجراءات اللازمة للحفاظ على أمن استخدام المعلومات الشخصية. للحصول على تفاصيل سياسات الخصوصية يرجى الضغط .",
-		"faq_accordion27_p1link": "هنا"
+		"faq_accordion27_p1link": "هنا",
+		"faq_accordion4_p1link": ""
 	},
 	"favorites_page": {
 		"my_favorites": "",
 		"no_favorites": ""
 	},
 	"feedback_page": {
-		"feedback": "آراؤكم تهمنا",
-		"name": "اسمك",
-		"name_placeholder": "الاسم الأول صحيح",
-		"name_required": "يجب ذكر الاسم",
+		"door_delivery": "التوصيل إلى الباب",
 		"email": "البريد الإلكتروني",
 		"email_placeholder": "أدخل بريدك الإلكتروني",
 		"email_required": "يجب إدخال البريد الإلكتروني",
 		"email_valid": "يرجى إدخال عنوان بريدك الالكتروني الصحيح",
+		"feedback": "آراؤكم تهمنا",
+		"message": "رسالتك",
+		"message_placeholder": "يرجى كتابة رسالتك هنا",
+		"message_required": "يجب كتابة الرسالة هنا",
 		"mobile": "رقم الجوال",
 		"mobile_digits": "رقم الهاتف فقط ثمانية أرقام",
 		"mobile_placeholder": "بحيث نتمكن من الاتصال معك عن آخر تحديثات البيتزا",
 		"mobile_required": "أدخل رقمك لو سمحت",
 		"mobile_valid": "يجب أن يبدأ رقم الموبايل بالأرقام 2 أو 5 أو 6 أو 9 رقم الهاتف فقط ثمانية أرقام ",
+		"name": "اسمك",
+		"name_placeholder": "الاسم الأول صحيح",
+		"name_required": "يجب ذكر الاسم",
 		"order_number": "رقم الطلب",
 		"order_number_placeholder": "رقم إيصالك",
 		"order_number_required": "يجب ذكر رقم الطلب",
 		"order_number_valid": "يرجى إدخال رقم الطلب الصحيح",
 		"order_type": "نوع الطلب",
-		"door_delivery": "التوصيل إلى الباب",
-		"take_away": "الاستلام من المحل",
-		"message": "رسالتك",
-		"message_placeholder": "يرجى كتابة رسالتك هنا",
-		"message_required": "يجب كتابة الرسالة هنا",
-		"submit": "تأكيد الطلب"
+		"submit": "تأكيد الطلب",
+		"take_away": "الاستلام من المحل"
 	},
 	"footer": {
 		"about_us": "من نحن",
@@ -208,14 +230,14 @@
 		"user_message": "اطلب بيتزا شهية، من أي مكان وفي أي وقت. نحن في بيتزا هت سعداء في توصيل طلبك للمنزل. كل مرة تقوم بها بالطلب ستحصل على بيتزا طازجة وساخنة تصلك إلى باب منزلك في أقل من ثلاثين دقيقة"
 	},
 	"header": {
+		"asap": "ASAP",
+		"delivery": "توصيل",
 		"language": "English",
+		"location": "موقعك",
+		"mode": "الوضع",
 		"register": "تسجيل",
 		"sign_in": "تسجيل دخول",
-		"delivery": "توصيل",
-		"take_away": "يبعد",
-		"asap": "ASAP",
-		"mode": "الوضع",
-		"location": "موقعك"
+		"take_away": "يبعد"
 	},
 	"home_page": {
 		"block_": "منع",
@@ -224,6 +246,7 @@
 		"delivery": "توصيل",
 		"delivery_name": "التوصيل من فرع",
 		"find_my_nearest_hut": " إيجاد الفرع الأقر",
+		"language": "English",
 		"no_store_available": "لا يوجد متجر متاح",
 		"see_deals_menu": "إضغط لبدء طلبك و لرؤية أخر العروض",
 		"select_area": "اختر المنطقة",
@@ -232,9 +255,8 @@
 		"start_my_order": "ابدأ الطلب",
 		"take_away": "طلب خارجي",
 		"unable_to_get_stores": "غير قادر على الحصول على المتاجر",
-		"your_pickup_hut_is": "مكان إستلام الطلب",
-		"language": "English",
-		"view_all_deals": "عرض جميع الصفقات"
+		"view_all_deals": "عرض جميع الصفقات",
+		"your_pickup_hut_is": "مكان إستلام الطلب"
 	},
 	"location_page": {
 		"confirm_and_proceed": "",
@@ -312,6 +334,7 @@
 		"order_details": ""
 	},
 	"order_history_page": {
+		"load_more_orders": "",
 		"no_orders": "لم يتم العثور على أية طلبات",
 		"order_history": "تاريخ طلباتي"
 	},
@@ -323,12 +346,12 @@
 		"added_to_cart": "",
 		"change": "Change",
 		"change_cheese_sauce_etc": "Change toppings, sauce or cheese",
+		"double": "Double",
 		"extra": "Extra",
 		"remove_topping_error": "Minimum topping count reached",
 		"remove_topping_success": "Topping successfuly removed",
 		"slect_size_crust": "Select your size and crust",
-		"your_toppings": "Your Toppings",
-		"double": "Double"
+		"your_toppings": "Your Toppings"
 	},
 	"privacy_page": {
 		"privacy_accordion01_list01": "الاسم بالكامل واللقب والنوع؛",
@@ -398,13 +421,18 @@
 		"email_placeholder": "أدخل بريدك الإلكتروني",
 		"email_required": "يجب إدخال البريد الإلكتروني",
 		"email_valid": "يرجى إدخال عنوان بريدك الالكتروني الصحيح",
+		"error": "",
+		"link_sent": "",
 		"reset_password": "إعادة ضبط كلمة المرور",
 		"submit": "تأكيد الطلب"
 	},
 	"saved_address_page": {
 		"add_new_address": "",
+		"confirm": "",
+		"dismiss": "",
 		"no_saved_address": "",
-		"saved_address": ""
+		"saved_address": "",
+		"sure_remove_address": ""
 	},
 	"sign_in_page": {
 		"dont_have_account": "هل لديك حساب؟",
@@ -421,6 +449,29 @@
 		"remember_me": "تذكرنى",
 		"sign_in": "تسجيل دخول",
 		"signin_google": "تسجيل دخول قوقل"
+	},
+	"sign_up_page": {
+		"confirm_password": "",
+		"confirm_password_error_match": "",
+		"confirm_password_placeholder": "",
+		"email": "",
+		"email_error": "",
+		"email_placeholder": "",
+		"fname": "",
+		"fname_error": "",
+		"fname_placeholder": "",
+		"lname": "",
+		"lname_placeholder": "",
+		"mobile": "",
+		"mobile_error_length": "",
+		"mobile_error_pattern": "",
+		"mobile_error_required": "",
+		"mobile_placehlder": "",
+		"password": "",
+		"password_error": "",
+		"registration_successful": "",
+		"sign_up": "",
+		"submit": ""
 	},
 	"store_selection_page": {
 		"stores_selection": "",
