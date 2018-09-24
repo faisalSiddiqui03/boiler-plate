@@ -45,36 +45,23 @@
         <div *ngIf="widget.model.length == 0" class="no-orders" flex align-items-center justify-content-center>{{'order_history_page.no_orders' | translate}}</div>
         <div class="orders-content w-700">
           <ion-list no-margin>
-            <ion-item no-padding *ngFor="let order of widget.model">
-              <!-- <h2>{{order  | json }}</h2>           -->
+            <ion-item no-padding *ngFor="let order of widget.model; let i = index">
               <ion-label no-margin>
                 <h2>Order # {{order.id}}
                     <span class="order-date"><i>(</i>{{order.orderDate.demanded}}<i>)</i></span>
                 </h2>
-                <!-- <div class="order-description" flex-center>
-                  <div>
-                    <p>Potato Wedges (1)</p>
-                    <p>Potato Wedges (1)</p>
-                  </div>
-                  <span class="icon icon-arrow-next-2"></span>
-                </div> -->
-                <!-- <ion-spinner class="spinner" name="bubbles" color="success"></ion-spinner> -->
-                <!-- <div class="view-order-details">
+                <div class="view-order-details" *ngIf="isShowProducts(i)">
                   <ion-grid no-padding>
-                    <ion-row>
-                      <ion-col no-padding size-xs="10">Potato Wedges</ion-col>
-                      <ion-col no-padding size-xs="2">1</ion-col>
+                    <ion-row *ngFor="let orderLineItem of order.getLineItemsOfMainProduct()">
+                      <ion-col no-padding size-xs="10">{{orderLineItem.product.title}}</ion-col>
+                      <ion-col no-padding size-xs="2">{{orderLineItem.qty}}</ion-col>
                     </ion-row>
-                    <ion-row>
-                        <ion-col no-padding size-xs="10">Potato Wedges</ion-col>
-                        <ion-col no-padding size-xs="2">1</ion-col>
-                      </ion-row>
                   </ion-grid>
                   <div class="order-detail-link">View Order Details</div>
-                </div> -->
+                </div>
                 <div class="order-price" flex-center>
                   <span>KD {{order.priceDetails.payableAmount}}</span>
-                  <span class="icon icon-arrow-next-2"></span>
+                  <span class="icon icon-arrow-next-2" (click)="toggleShowingProducts(i)"></span>
                 </div>
               </ion-label>
             </ion-item>

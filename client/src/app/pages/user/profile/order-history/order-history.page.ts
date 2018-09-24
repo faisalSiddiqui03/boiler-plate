@@ -30,6 +30,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   orderWidgetExecutor = new EventEmitter();
   loaded: boolean = false;
   userId: string = "52a3e909-7702-4b49-945d-0e095ddd28bd";
+  showingProductsForIndexs = [];
 
   constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
@@ -83,6 +84,23 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
     } else {
       console.log(x);
     }
+  }
+
+  // helper functions for the accordian
+  toggleShowingProducts(index) {
+    const position = this.showingProductsForIndexs.findIndex(x => x === index);
+    if (position === -1) {
+      this.showingProductsForIndexs.push(index);
+    } else {
+      this.showingProductsForIndexs.splice(position, 1);
+    }
+  }
+
+  isShowProducts(index) {
+    if (this.showingProductsForIndexs.includes(index)) {
+      return true;
+    }
+    return false;
   }
 
 }
