@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
@@ -16,6 +16,7 @@ import { ModalController } from '@ionic/angular';
   selector: 'app-delivery-slot-selection',
   templateUrl: './delivery-slot-selection.page.html',
   styleUrls: ['./delivery-slot-selection.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()
@@ -28,6 +29,7 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
   slotContent = '';
   activeTimeSlot: number;
   timeSlotObj;
+  asapText:'';
 
   constructor(
     private loaderService: LoaderService,
@@ -39,18 +41,21 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
 
     // this.loaderService.startLoading();
     this.slotSelected = true;
-    this.slotContent = this.asSoonPossible ? 'ASAP' : '';
+    this.slotContent = this.asSoonPossible ? this.asapText : '';
     this.activeTimeSlot = 0;
     this.translate.use(Utils.getLanguageCode());
   }
 
   ngOnInit() {
+    this.translate.get('delivery_slot_selection_page.asap').subscribe(value => {
+      this.asapText = value;
+    });
   }
 
   toggleCheckbox() {
     this.asSoonPossible = !this.asSoonPossible;
     this.slotSelected = this.asSoonPossible;
-    this.slotContent = this.asSoonPossible ? 'ASAP' : '';
+    this.slotContent = this.asSoonPossible ? this.asapText : '';
     this.activeTimeSlot = this.asSoonPossible ? 0 : null;
   }
 
@@ -72,12 +77,12 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
       case 'DELIVERYSLOTS':
         if (!Utils.isEmpty(this.getDeliverySlot())) {
           this.asSoonPossible = this.getDeliverySlot().id === -1;
-          this.slotContent = this.asSoonPossible ? 'ASAP' : Utils.getTimeHHMM(this.getDeliverySlot().time);
+          this.slotContent = this.asSoonPossible ? this.asapText : Utils.getTimeHHMM(this.getDeliverySlot().time);
           this.timeSlotObj = this.getDeliverySlot();
           this.activeTimeSlot = this.findIndexOfSlot(this.getDeliverySlot().id, data);
         } else {
           this.asSoonPossible = data[0].id === -1;
-          this.slotContent = this.asSoonPossible ? 'ASAP' : Utils.getTimeHHMM(data[0].time);
+          this.slotContent = this.asSoonPossible ? this.asapText : Utils.getTimeHHMM(data[0].time);
           this.timeSlotObj = data[0];
         }
     }

@@ -1,4 +1,4 @@
-<delivery-slots-widget class="full-height" [globalSlots]="true" [deliveryMode]="getFulfilmentMode()?.mode" [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
+<delivery-slots-widget class="full-height delivery-slots-page" [globalSlots]="true" [deliveryMode]="getFulfilmentMode()?.mode" [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
   <ng-template let-widget="widget">
     <ng-container *ngIf="!widget.model">
       <ion-content bg-transparent padding>
@@ -62,7 +62,7 @@
                           color="warning"
                           class="btn-light" expand="block" text-uppercase mode="ios" (click)="selectTime(slot, i)">
                 <span *ngIf="slot.id != -1">{{slot.time | date:'hh:mm a'}}</span>
-                <span *ngIf="slot.id == -1">ASAP</span>
+                <span *ngIf="slot.id == -1">{{asapText}}</span>
               </ion-button>
             </div>
           </div>
