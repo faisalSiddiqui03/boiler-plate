@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: 'order-details', loadChildren: './pages/user/profile/order-details/order-details.module#OrderDetailsPageModule' },
   { path: 'search-location', loadChildren: './pages/user/profile/search-location/search-location.module#SearchLocationPageModule' },
   { path: 'checkout', loadChildren: './pages/checkout/checkout/checkout.module#CheckoutPageModule' },
+  { path: 'deal/:productName/:productId', loadChildren: './pages/product/deal/deal.module#DealPageModule' },
 ];
 
 @NgModule({

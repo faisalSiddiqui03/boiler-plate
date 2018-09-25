@@ -66,7 +66,7 @@
                             <h5 text-capitalize>{{propValueCrust?.name}}</h5>
                             <p>{{propValueCrust?.description}}</p>
                           </div>
-                          <div class="pizza-price">{{getSizeCrustCombinationPrice(propValueCrust?.id, propValueSize?.id) | currency: 'KD ': true: '1.3-3'}}</div>
+                          <div class="pizza-price">{{getSizeCrustCombinationPrice(propValueCrust?.id, propValueSize?.id) | currency: (currencyCode + ' '): true: '1.3-3'}}</div>
                         </ng-container>
                       </li>
                     </ul>
@@ -114,7 +114,7 @@
                           </figure>
                           <span class="block-text">{{item.title}}</span>
                           <span class="block-price" *ngIf="isExtraItem(item) || (!item?.isDefault && isItemSelected(item?.id))">
-                            {{getItemprice(item) | currency: 'KD ': true: '1.3-3'}}
+                            {{getItemprice(item) | currency: (currencyCode + ' '): true: '1.3-3'}}
                           </span>
                           <ion-checkbox color="success" *ngIf="isExtraItem(item) && isItemSelected(item?.id)" [checked]="true" (click)="removeItem(item, true)"></ion-checkbox>
                           <ion-checkbox color="success" *ngIf="!isExtraItem(item) && isItemSelected(item?.id)" [checked]="false" [disabled]="!clientProduct?.allowAdd"
@@ -147,7 +147,7 @@
                             <img src="{{getUrl(item?.image)}}" alt="item?.title">
                           </figure>
                           <span class="block-text">{{item?.title}}</span>
-                          <span class="block-price">{{getItemprice(item) | currency: 'KD ': true: '1.3-3'}}</span>
+                          <span class="block-price">{{getItemprice(item) | currency: (currencyCode + ' '): true: '1.3-3'}}</span>
                           <span class="block-icon">
                             <ion-icon color="success" name="add" (click)="addItem(item)"></ion-icon>
                           </span>
@@ -167,7 +167,7 @@
                 <span *ngIf="updatingPrice">
                   <ion-spinner name="crescent" color="dark"></ion-spinner>
                 </span>
-                <span *ngIf="!updatingPrice">{{widget?.model?.client?.price | currency: 'KD ': true: '1.3-3'}}</span>
+                <span *ngIf="!updatingPrice">{{widget?.model?.client?.price | currency: (currencyCode + ' '): true: '1.3-3'}}</span>
               </ion-button>
             </ion-footer>
           </ng-container>
