@@ -9,7 +9,7 @@
     "build:prod": "bro build"
   },
   "dependencies": {
-    "@capillarytech/pwa-cli": "0.2.10",
+    "@capillarytech/pwa-cli": "0.2.11",
     "path": "^0.12.7"
   },
   "description": "Build Script for PWA",

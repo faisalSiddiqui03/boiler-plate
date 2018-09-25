@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { FavoritesWidgetModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
 
 import { IonicModule } from '@ionic/angular';
+import { SkeletonModule } from '../../../../helpers/skeleton/skeleton.module';
 
 import { FavoritesPage } from './favorites.page';
 import { HeaderModule } from '../../../../components/header/header.module';
@@ -27,6 +29,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HeaderModule,
     SubHeaderModule,
+    FavoritesWidgetModule,
+    ImagePreloadModule,
+    SkeletonModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

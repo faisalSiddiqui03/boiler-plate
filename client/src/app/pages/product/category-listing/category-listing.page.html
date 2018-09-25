@@ -13,30 +13,31 @@
       </ion-show-when>
       <ion-toolbar class="tabs-nav-head">
 
-          <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1
-                             [executor]="null"
-                             [action]="null" (lifecycle)="null">
-            <ng-template let-widget="widget">
-              <div *ngIf="widget.model">
-                <div class="showcase-tabs">
-                  <div class="container">
+        <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1
+                           [executor]="null"
+                           [action]="null">
+          <ng-template let-widget="widget">
+            <div *ngIf="widget.model">
+              <div class="showcase-tabs">
+                <div class="container">
                   <ul no-margin no-padding>
                     <li *ngFor="let item of widget.model.items; let i = index;" text-center
-                        [class.selected]="item.categoryId === categoryId" (click)="switchCategories(item.name, item.categoryId)">{{item.name}}
+                        [class.selected]="item.categoryId === categoryId"
+                        (click)="switchCategories(item.name, item.categoryId)">{{item.name}}
                     </li>
                   </ul>
-                  </div>
                 </div>
-                <!--<ion-tabs style="display: none" [scrollable]="true" [color]="'dark'" [tabbarHighlight]="true"-->
-                          <!--[useRouter]="true">-->
-                  <!--<ion-tab *ngFor="let item of widget.model.items; let i = index;" label="{{item.name}}"-->
-                           <!--href="/products/listing/({{i}}:{{i}})?category={{item.name}}&id={{item.categoryId}}">-->
-                    <!--<ion-router-outlet stack name="{{i}}"></ion-router-outlet>-->
-                  <!--</ion-tab>-->
-                <!--</ion-tabs>-->
               </div>
-            </ng-template>
-          </navigation-widget>
+              <!--<ion-tabs style="display: none" [scrollable]="true" [color]="'dark'" [tabbarHighlight]="true"-->
+              <!--[useRouter]="true">-->
+              <!--<ion-tab *ngFor="let item of widget.model.items; let i = index;" label="{{item.name}}"-->
+              <!--href="/products/listing/({{i}}:{{i}})?category={{item.name}}&id={{item.categoryId}}">-->
+              <!--<ion-router-outlet stack name="{{i}}"></ion-router-outlet>-->
+              <!--</ion-tab>-->
+              <!--</ion-tabs>-->
+            </div>
+          </ng-template>
+        </navigation-widget>
       </ion-toolbar>
 
       <div class="container showcase-container">
@@ -47,7 +48,8 @@
             <div *ngIf="navwidget.model">
               <ng-container *ngFor="let item of navwidget.model.items;">
                 <div [hidden]="!(item.categoryId === categoryId)">
-                  <product-showcase-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [filters]="getShowcaseFilter(item.categoryId)"
+                  <product-showcase-widget [componentId]="getComponentId()" pfWidgetImpressionTrack
+                                           [filters]="getShowcaseFilter(item.categoryId)"
                                            [executor]="productShowcaseWidgetExecutor"
                                            [action]="productShowcaseWidgetAction">
                     <ng-template let-widget="widget">
@@ -151,7 +153,8 @@
                         <div *ngIf="categoryName.toLocaleLowerCase() !== 'deals'">
                           <ion-grid>
                             <ion-row>
-                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
+                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
+                                       no-padding>
                                 <ion-card class="product-card non-deal-card" no-padding>
                                   <ion-card-header no-padding>
                                     <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
@@ -171,7 +174,8 @@
                                   </ion-card-content>
                                 </ion-card>
                               </ion-col>
-                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
+                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
+                                       no-padding>
                                 <ion-card class="product-card non-deal-card" no-padding>
                                   <ion-card-header no-padding>
                                     <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
@@ -191,7 +195,8 @@
                                   </ion-card-content>
                                 </ion-card>
                               </ion-col>
-                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
+                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
+                                       no-padding>
                                 <ion-card class="product-card non-deal-card" no-padding>
                                   <ion-card-header no-padding>
                                     <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
@@ -211,7 +216,8 @@
                                   </ion-card-content>
                                 </ion-card>
                               </ion-col>
-                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
+                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
+                                       no-padding>
                                 <ion-card class="product-card non-deal-card" no-padding>
                                   <ion-card-header no-padding>
                                     <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
@@ -231,7 +237,8 @@
                                   </ion-card-content>
                                 </ion-card>
                               </ion-col>
-                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
+                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
+                                       no-padding>
                                 <ion-card class="product-card non-deal-card" no-padding>
                                   <ion-card-header no-padding>
                                     <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
@@ -251,7 +258,8 @@
                                   </ion-card-content>
                                 </ion-card>
                               </ion-col>
-                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
+                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
+                                       no-padding>
                                 <ion-card class="product-card non-deal-card" no-padding>
                                   <ion-card-header no-padding>
                                     <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
@@ -271,7 +279,8 @@
                                   </ion-card-content>
                                 </ion-card>
                               </ion-col>
-                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
+                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
+                                       no-padding>
                                 <ion-card class="product-card non-deal-card" no-padding>
                                   <ion-card-header no-padding>
                                     <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
@@ -291,7 +300,8 @@
                                   </ion-card-content>
                                 </ion-card>
                               </ion-col>
-                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
+                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
+                                       no-padding>
                                 <ion-card class="product-card non-deal-card" no-padding>
                                   <ion-card-header no-padding>
                                     <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
@@ -311,7 +321,8 @@
                                   </ion-card-content>
                                 </ion-card>
                               </ion-col>
-                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3" no-padding>
+                              <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
+                                       no-padding>
                                 <ion-card class="product-card non-deal-card" no-padding>
                                   <ion-card-header no-padding>
                                     <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
@@ -366,11 +377,13 @@
                         <div *ngIf="categoryName.toLocaleLowerCase() === 'deals'">
                           <ion-grid>
                             <ion-row>
-                              <ion-col class="product-card-holder" *ngFor="let prod of widget.model" [sizeXl]="4" [sizeMd]="6"
+                              <ion-col class="product-card-holder" *ngFor="let prod of widget.model" [sizeXl]="4"
+                                       [sizeMd]="6"
                                        [sizeSm]="6" [sizeXs]="12">
                                 <ion-card no-margin no-padding no-border class="product-card deal-card">
                                   <ion-card-header>
-                                    <img height="170" (click)="openProductDetails(prod)" src="{{getProductImageUrl(prod)}}"
+                                    <img height="170" (click)="openProductDetails(prod)"
+                                         src="{{getProductImageUrl(prod)}}"
                                          img-preloader="{{getProductImageUrl(prod)}}"
                                          defaultImage="assets/imgs/default/default.png"/>
                                   </ion-card-header>
@@ -386,10 +399,14 @@
                         <div *ngIf="categoryName.toLocaleLowerCase() !== 'deals'">
                           <ion-grid>
                             <ion-row>
-                              <ion-col class="product-card-holder" *ngFor="let prod of widget.model" [sizeSm]="6" [sizeXs]="6"
+                              <ion-col class="product-card-holder" *ngFor="let prod of widget.model" [sizeSm]="6"
+                                       [sizeXs]="6"
                                        [sizeMd]="4" [sizeLg]="3" no-padding>
                                 <ion-card class="product-card non-deal-card" no-padding>
-                                  <div class="icon" [ngClass]="{'icon-favourite-active': prod?.isFavorite,'icon-favourite': !prod?.isFavorite}" (click)="updateFavorites(prod?.isFavorite, prod?.client)"></div>
+                                  <div class="icon"
+                                       style="position: absolute; z-index: 1; margin: 5px;"
+                                       [ngClass]="{'icon-favourite-active': prod?.isFavorite,'icon-favourite': !prod?.isFavorite}"
+                                       (click)="updateFavorites(prod?.isFavorite, prod?.client)"></div>
                                   <ion-card-header no-padding>
                                     <img height="100" src="{{getProductImageUrl(prod)}}"
                                          img-preloader="{{getProductImageUrl(prod)}}"
@@ -397,7 +414,8 @@
                                   </ion-card-header>
 
                                   <ion-card-content padding>
-                                    <ion-card-subtitle class="product-title" color="dark">{{prod.title}}</ion-card-subtitle>
+                                    <ion-card-subtitle class="product-title" color="dark">{{prod.title}}
+                                    </ion-card-subtitle>
                                     <div class="price-segment" text-end>
                                       <p>{{'category_listing.price_tag' | translate }}
                                         <span class="label-price">{{prod.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
