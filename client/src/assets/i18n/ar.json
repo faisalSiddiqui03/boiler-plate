@@ -433,8 +433,10 @@
 		"add_new_address": "",
 		"confirm": "",
 		"dismiss": "",
+		"error_deleting_address": "",
 		"no_saved_address": "",
 		"saved_address": "",
+		"successfully_deleted_address": "",
 		"sure_remove_address": ""
 	},
 	"sign_in_page": {
