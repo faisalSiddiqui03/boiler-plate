@@ -35,11 +35,35 @@
         cursor: pointer;
         text-decoration: underline;
       }
-      .spinner{
+      .spinner {
         display: block;
         margin: 10px auto 0;
       }
     }
+  }
+  .skeleton-text {
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    height: 96px;
+    position: relative;
+  }
+  .h2-skeleton {
+    width: 142px;
+    height: 31px;
+  }
+  .price-skeleton {
+    width: 200px;
+    height: 20px;
+  }
+  .date-skeleton {
+    width: 200px;
+    height: 20px;
   }
 }
 
@@ -87,30 +111,19 @@
   }
 }
 
-.skeleton-text {
-  animation-duration: 5s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-name: placeHolderShimmer;
-  animation-timing-function: linear;
-  background: #f6f7f8;
-  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-  background-size: 800px 104px;
-  height: 96px;
-  position: relative;
-}
-
-.h2-skeleton{
-  width: 142px;
-  height: 31px;
-}
-
-.price-skeleton{
-  width: 200px;
-  height: 20px;
-}
-
-.date-skeleton{
-  width: 200px;
-  height: 20px;
+// RTL Styles
+html{
+  &[dir="rtl"]{
+    .orders-content {
+      ion-list {
+        ion-item {
+          .order-price{
+            .icon{
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
+    }
+  }
 }

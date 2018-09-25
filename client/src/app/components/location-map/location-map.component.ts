@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../base/base-component';
 import { TranslateService } from '@ngx-translate/core';
 import { AgmCoreModule, MouseEvent } from '@agm/core';
@@ -9,7 +9,8 @@ import { SearchLocationPage } from '../../pages/user/profile/search-location/sea
 @Component({
   selector: 'app-location-map',
   templateUrl: './location-map.component.html',
-  styleUrls: ['./location-map.component.scss']
+  styleUrls: ['./location-map.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LocationMapComponent extends BaseComponent implements OnInit {
 

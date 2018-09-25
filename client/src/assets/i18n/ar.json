@@ -7,16 +7,18 @@
 		"our_history": "تاريخنا"
 	},
 	"add_address_page": {
-		"add_address": "",
-		"address_details": "",
-		"address_details_placeholder": "",
-		"address_details_required": "",
-		"address_type": "",
-		"home": "",
-		"landmark": "",
-		"landmark_placeholder": "",
-		"other": "",
-		"work": ""
+		"add_address": "إضافة عنوان جديد",
+		"address_details": "تفاصيل العنوان",
+		"address_details_placeholder": "أدخل تفاصيل المنزل/ الشقة/ المكتب/ المبنى",
+		"address_details_required": " تفاصيل المنزل/ الشقة/ المكتب/ المبنى ",
+		"address_type": "نوع العنوان",
+		"dismiss": "موافق",
+		"home": "المنزل",
+		"landmark": "نقطة إستدلال",
+		"landmark_placeholder": "اختياري",
+		"okay": "نعم",
+		"other": "أخرى",
+		"work": "العمل"
 	},
 	"banner_widget": {
 		"most_popular_deals": "عروضنا الأكثر رواجاً."
@@ -47,7 +49,7 @@
 		"your_total": "مجموعك"
 	},
 	"category_listing": {
-		"price_tag": ""
+		"price_tag": "من عند"
 	},
 	"change_password_page": {
 		"change_password": "تغير رقم السري",
@@ -114,6 +116,7 @@
 		"faq_accordion03_p1": "نعم، يمكنك ذلك. بمجرد أن تضغط على “تنفيذ طلبي“ وتظهر الصفحة التي تؤكد أننا تلقينا طلبك، يمكنك وضع طلب آخر.",
 		"faq_accordion04_head": "هل يمكنني أن أجري تغييرات في طلبي السابق؟",
 		"faq_accordion04_p1": "نعم يمكنك ذلك، طالما أنّك قمت بتسجيل الدخول إلى حسابك عندما وضعت طلبك السابق. يمكنك العودة إلى طلبك السابق من “طلباتي“ تحت بند",
+		"faq_accordion4_p1link": "حسابي",
 		"faq_accordion05_head": "ماذا عن إعداد طلب لوقت لاحق؟",
 		"faq_accordion05_p1": "إذا كنت تريد استلام البيتزا التي طلبتها في وقت محدد لاحقاً بدلاً من توصيلها في أقرب وقت ممكن، يمكنك وضع ذلك خلال تنفيذ طلب التوصيل في نفس اليوم (قبل ساعة على الأقل من تنفيذ الطلب) أو في الأيام المقبلة. إن قمت بوضع طلب من هذا النوع سوف تتلقى تأكيداً بمجرد تنفيذ الطلب إضافة إلى تذكير بالموعد المقرّر للتسليم.",
 		"faq_accordion05_p2": "اختر “الآن“ إن كنت ترغب باستلام طلبك في أقرب وقت ممكن.",
@@ -178,12 +181,11 @@
 		"faq_accordion26_p1link": "د الإلكتروني أو",
 		"faq_accordion27_head": "كيف سيتم استخدام معلوماتي الشخصية؟",
 		"faq_accordion27_p1": "بيتزا هت تقوم بكل الإجراءات اللازمة للحفاظ على أمن استخدام المعلومات الشخصية. للحصول على تفاصيل سياسات الخصوصية يرجى الضغط .",
-		"faq_accordion27_p1link": "هنا",
-		"faq_accordion4_p1link": ""
+		"faq_accordion27_p1link": "هنا"
 	},
 	"favorites_page": {
-		"my_favorites": "",
-		"no_favorites": ""
+		"my_favorites": "تفضيلاتي",
+		"no_favorites": "أنت لم تقدم أي منتج !!!"
 	},
 	"feedback_page": {
 		"door_delivery": "التوصيل إلى الباب",
@@ -231,7 +233,7 @@
 		"user_message": "اطلب بيتزا شهية، من أي مكان وفي أي وقت. نحن في بيتزا هت سعداء في توصيل طلبك للمنزل. كل مرة تقوم بها بالطلب ستحصل على بيتزا طازجة وساخنة تصلك إلى باب منزلك في أقل من ثلاثين دقيقة"
 	},
 	"header": {
-		"asap": "ASAP",
+		"asap": "في أقرب وقت",
 		"delivery": "توصيل",
 		"language": "English",
 		"location": "موقعك",
@@ -260,10 +262,10 @@
 		"your_pickup_hut_is": "مكان إستلام الطلب"
 	},
 	"location_page": {
-		"confirm_and_proceed": "",
-		"drag_the_pin_to_exact_location": "",
-		"enter_your_location": "",
-		"locate_me": ""
+		"confirm_and_proceed": "تأكيد والمتابعة",
+		"drag_the_pin_to_exact_location": "اسحب الدبوس إلى المكان المحدد",
+		"enter_your_location": "أدخل موقعك",
+		"locate_me": "تحديد موقع لي"
 	},
 	"my_account_page": {
 		"change_password": "تغير رقم السري",
@@ -334,27 +336,27 @@
 		"view_nutrition_values": "عرض القيم الغذائية"
 	},
 	"order_details_page": {
-		"order_details": ""
+		"order_details": "تفاصيل الطلب"
 	},
 	"order_history_page": {
-		"load_more_orders": "",
+		"load_more_orders": "تحميل المزيد من الطلبات",
 		"no_orders": "لم يتم العثور على أية طلبات",
 		"order_history": "تاريخ طلباتي"
 	},
 	"pizza": {
-		"add_extra": "Add something extra",
-		"add_to_basket": "Add To My Basket",
-		"add_topping_error": "Exceeded maximum topping count",
-		"add_topping_success": "Topping successfuly added",
-		"added_to_cart": "",
-		"change": "Change",
-		"change_cheese_sauce_etc": "Change toppings, sauce or cheese",
-		"double": "Double",
-		"extra": "Extra",
-		"remove_topping_error": "Minimum topping count reached",
-		"remove_topping_success": "Topping successfuly removed",
-		"slect_size_crust": "Select your size and crust",
-		"your_toppings": "Your Toppings"
+		"add_extra": "أضف شيئًا إضافيًا",
+		"add_to_basket": "أضف إلى سلة بلدي",
+		"add_topping_error": "تجاوز الحد الأقصى لأعلى عدد",
+		"add_topping_success": "أضيفت بنجاح",
+		"added_to_cart": "إضافة إلى السلة",
+		"change": "يتغيرون",
+		"change_cheese_sauce_etc": "تغيير الطبقة ، صلصة أو الجبن",
+		"double": "مزدوج",
+		"extra": "إضافي",
+		"remove_topping_error": "بلغ الحد الأدنى لعدد العدسات",
+		"remove_topping_success": "توبينج إزالتها بنجاح",
+		"slect_size_crust": "حدد حجم وقشرة",
+		"your_toppings": "الطبقة ك"
 	},
 	"privacy_page": {
 		"privacy_accordion01_list01": "الاسم بالكامل واللقب والنوع؛",
@@ -417,27 +419,33 @@
 	},
 	"product_details": {
 		"add_to_basket": "Add To My Basket",
-		"added_to_cart": ""
+		"added_to_cart": "إضافة إلى السلة"
 	},
 	"reset_password_page": {
 		"email": "البريد الإلكتروني",
 		"email_placeholder": "أدخل بريدك الإلكتروني",
 		"email_required": "يجب إدخال البريد الإلكتروني",
 		"email_valid": "يرجى إدخال عنوان بريدك الالكتروني الصحيح",
-		"error": "",
-		"link_sent": "",
+		"error": "حدث خطأ ما. أعد المحاولة من فضلك.",
+		"link_sent": "تم بنجاح إرسال الرابط",
 		"reset_password": "إعادة ضبط كلمة المرور",
 		"submit": "تأكيد الطلب"
 	},
 	"saved_address_page": {
-		"add_new_address": "",
-		"confirm": "",
-		"dismiss": "",
-		"error_deleting_address": "",
-		"no_saved_address": "",
-		"saved_address": "",
-		"successfully_deleted_address": "",
-		"sure_remove_address": ""
+		"add_new_address": " إضافة عنوان جديد",
+		"confirm": "تأكيد الطلب",
+		"dismiss": "تخطى",
+		"edit": "تعديل",
+		"error_deleting_address": "غير قادر على حذف العنوان",
+		"no_saved_address": "ليس لديك أي عناوين محفوظة.",
+		"saved_address": "عنواني المحفوظ",
+		"sure_remove_address": "هل أنت متأكد من رغبتك إزالة هذا العنوان؟"
+	},
+	"search_location_page":{
+		"recent_searches": "أخر عملية بحث",
+		"search_placeholder": "البحث في منطقتك",
+		"use_current_location": " إستخدام الموقع الحالي",
+		"using_gps": " إستخداك الجي بي أس"
 	},
 	"sign_in_page": {
 		"dont_have_account": "هل لديك حساب؟",
@@ -482,8 +490,8 @@
 		"submit": "تسجيل الدخول"	
 	},
 	"store_selection_page": {
-		"stores_selection": "",
-		"take_away_now": ""
+		"stores_selection": "اختيار متاجر",
+		"take_away_now": "خذ بعيدا الآن"
 	},
 	"terms_page": {
 		"terms_accordion01_head1": "معلومات خاصة بالمواقع",

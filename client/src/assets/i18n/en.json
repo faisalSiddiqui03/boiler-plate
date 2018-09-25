@@ -12,9 +12,11 @@
 		"address_details_placeholder": "Enter House / Flat / Office / Building Details",
 		"address_details_required": "House / Flat / Office / Building Details",
 		"address_type": "Address type",
+		"dismiss": "Dismiss",
 		"home": "Home",
 		"landmark": "Landmark",
 		"landmark_placeholder": "optional",
+		"okay": "Okay",
 		"other": "Other",
 		"work": "Work"
 	},
@@ -114,6 +116,7 @@
 		"faq_accordion03_p1": "Yes, you can. As soon as you have clicked ‘place my order’ and see a page that confirms that we have received your order you can place another order.",
 		"faq_accordion04_head": "Can I re-order a previous order?",
 		"faq_accordion04_p1": "Yes you can, as long as you are signed in to your account when you placed the previous order. To see your previous orders go to the ‘Order history’ section under",
+		"faq_accordion4_p1link": "My account",
 		"faq_accordion05_head": "What is a future order?",
 		"faq_accordion05_p1": "If you want your pizza to be delivered on a specific time instead of as soon as possible this is a future order. You can place orders to be delivered later on the same day (at least 1 hour from when you are placing the order) or in the next two days. If you place a future order you will receive a confirmation as soon as you place the order as well as a reminder on the day the delivery is due.",
 		"faq_accordion05_p2": "Choose ‘now’ if you want your order delivered as soon as possible.",
@@ -178,8 +181,7 @@
 		"faq_accordion26_p1link": "Contact Us",
 		"faq_accordion27_head": "How will you use my personal information?",
 		"faq_accordion27_p1": "Pizza Hut takes security and use of personal information very seriously; for full details of our Privacy Policy please click",
-		"faq_accordion27_p1link": "here",
-		"faq_accordion4_p1link": ""
+		"faq_accordion27_p1link": "here"
 	},
 	"favorites_page": {
 		"my_favorites": "my Favorites",
@@ -433,11 +435,18 @@
 		"add_new_address": "Add new Address",
 		"confirm": "Confirm",
 		"dismiss": "Dismiss",
+		"edit": "Edit",
 		"error_deleting_address": "Unable to delete the address",
 		"no_saved_address": "You do not have any saved addresses.",
 		"saved_address": "My saved address",
 		"successfully_deleted_address": "Successfully deleted the address",
 		"sure_remove_address": "Are you sure you want to remove this address?"
+	},
+	"search_location_page":{
+		"recent_searches": "Recent Searches",
+		"search_placeholder": "Search your location",
+		"use_current_location": "Use Current Location ",
+		"using_gps": "Using GPS"
 	},
 	"sign_in_page": {
 		"dont_have_account": "Don't have an account",

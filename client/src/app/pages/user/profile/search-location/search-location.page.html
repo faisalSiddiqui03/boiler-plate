@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <div class="icon icon-arrow-prev-2" (click)="closeSearchModal()"></div>
         </ion-buttons>
-        <ion-searchbar class="location-search" placeholder="Search your location"></ion-searchbar>
+        <ion-searchbar class="location-search" placeholder="{{'search_location_page.search_placeholder' | translate }}"></ion-searchbar>
       </ion-toolbar>
       <ion-icon class="close-icon" (click)="closeSearchModal()" name="close-circle"></ion-icon>
     </ion-header>
@@ -13,8 +13,8 @@
     <ion-content>
       <ion-item class="use-gps">
         <span class="icon icon-gps" item-start></span>
-        <ion-label>Use Current Location
-          <span>Using GPS</span>
+        <ion-label>{{'search_location_page.use_current_location' | translate }}
+          <span>{{'search_location_page.using_gps' | translate }}</span>
         </ion-label>
       </ion-item>
       <ion-list class="search-results" no-margin>
@@ -33,7 +33,7 @@
       </ion-list>
       <ion-item class="search-gps">
         <ion-icon name="search" item-start></ion-icon>
-        <ion-label>Recent Searches</ion-label>
+        <ion-label>{{'search_location_page.recent_searches' | translate }}</ion-label>
       </ion-item>
       <ion-list class="recent-searches">
         <ion-item>
