@@ -3,7 +3,7 @@
 </ion-header>
 <ion-content class="page-bg">
   <app-sub-header [title]="titleValue"></app-sub-header>
-  <favorites-widget [componentId]="getComponentId()">
+  <favorites-widget [componentId]="getComponentId()" [action]="favoritesWidgetAction">
     <ng-template let-widget="widget">
       <div *ngIf="!widget.model">
         <ion-row class="favorites-list">
@@ -33,10 +33,9 @@
                      [sizeXs]="6"
                      [sizeMd]="4" [sizeLg]="3" no-padding>
               <ion-card class="product-card non-deal-card" no-padding>
-                <div class="icon"
+                <div class="icon icon-favourite-active"
                      style="position: absolute; z-index: 1; margin: 5px;"
-                     [ngClass]="{'icon-favourite-active': prod?.isFavorite,'icon-favourite': !prod?.isFavorite}"
-                     (click)="updateFavorites(prod?.isFavorite, prod?.client)">
+                     (click)="updateFavorites(prod.client)">
                 </div>
                 <ion-card-header no-padding>
                   <img class="card-fav-img" height="100" src="{{getProductImageUrl(prod)}}"
