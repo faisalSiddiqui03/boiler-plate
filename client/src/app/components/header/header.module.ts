@@ -6,12 +6,14 @@ import { HeaderComponent } from './header.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
 import { HttpClient } from '@angular/common/http';
+import { LogoutWidgetModule } from '@capillarytech/pwa-framework';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    LogoutWidgetModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

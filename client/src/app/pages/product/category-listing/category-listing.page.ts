@@ -144,4 +144,12 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     this.router.navigate([], { queryParams: { category: category, id: categoryId } });
     // this.router.navigateByUrl('/products?category={{item.name}}&id={{item.categoryId}}')
   }
+
+  isLoggedIn() {
+    if (this.getUserModel() && this.getUserModel().type !== 'GUEST') {
+      return true;
+    }
+    return false;
+  }
+
 }

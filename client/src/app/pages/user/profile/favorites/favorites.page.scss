@@ -33,7 +33,23 @@
                 margin-right: 3px;
             }
         }
+        .skeleton-img{
+          width: 50%;
+          margin-left: 20%;
+          padding-top: 16%;
+          margin-bottom: 10%;
+        }
     }
+}
+
+.product-card{
+  background: #fff;
+}
+
+.card-fav-img{
+  display: block;
+  margin: auto;
+  width: auto;
 }
 
 @media (min-width: 992px){

@@ -4,9 +4,10 @@
 <ion-content>
   <app-sub-header [title]="titleValue"></app-sub-header>
   <div class="main-content w-700">
-    <userid-password-signin-widget [componentId]="getComponentId()" class="w-400" pfWidgetImpressionTrack
-                                   [executor]="useridPasswordSigninExecutor" [action]="useridPasswordSigninAction"
-                                   (lifecycle)="handleWidgetLifecycle($event)">
+    <userid-password-signin-widget
+      [componentId]="getComponentId()" class="w-400" pfWidgetImpressionTrack
+      [executor]="useridPasswordSigninExecutor" [action]="useridPasswordSigninAction"
+    >
       <ng-template let-widget="widget">
         <ng-container *ngIf="widget.model">
           <form class="form-section" padding [formGroup]="userIdSigninForm">
@@ -79,7 +80,8 @@
             <p class="dont-have-account" text-center>{{ 'sign_in_page.dont_have_account' | translate }}?
               <span text-capitalize (click)="goToPage('signup')">{{ 'sign_in_page.register' | translate }}</span>
             </p>
-            <ion-button [color]="userIdSigninForm.valid ? 'success' : 'medium'" class="btn-signin" text-capitalize expand="block" mode="ios" (click)="signIn()"
+            <ion-button [color]="userIdSigninForm.valid ? 'success' : 'medium'" class="btn-signin" text-capitalize
+                        expand="block" mode="ios" (click)="signIn()"
                         [disabled]="!userIdSigninForm.valid">{{ 'sign_in_page.sign_in' | translate }}
             </ion-button>
           </div>
