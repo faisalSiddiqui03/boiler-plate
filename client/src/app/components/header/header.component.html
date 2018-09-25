@@ -43,10 +43,25 @@
         <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
         <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">{{ 'header.asap' | translate }}</span>
       </div>
-      <div class="signin-register">
+      <div class="signin-register" *ngIf="getUserModel()?.userId == 0">
         <div class="icon icon-user-circle" (click)="goToPage('login')"></div>
         <span text-uppercase (click)="goToPage('login')">{{ 'header.sign_in' | translate }} /</span>
         <span text-uppercase (click)="goToPage('signup')">{{ 'header.register' | translate }}</span>
+      </div>
+      <div class="signin-register loggedin-user" (click)="showDropDown()" *ngIf="getUserModel()?.userId != 0">
+        <div class="icon icon-user-circle" (click)="goToPage('login')"></div>
+        <span text-uppercase>Hello {{getUserModel()?.firstName}}</span>
+        <div class="icon-arrow icon-arrow-down-2"></div>
+        <div class="dropdown" [class.open]="enableUserDropdown">
+          <ul>
+            <li (click)="goToPage('my-account')">My Account</li>
+            <li>Logout</li>
+            <li (click)="goToPage('order-history')">My Order History</li>
+            <li (click)="goToPage('saved-address')">My Saved Address</li>
+            <li (click)="goToPage('favorites')">My Favorites</li>
+            <li (click)="goToPage('change-password')">Change Password</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

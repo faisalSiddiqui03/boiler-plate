@@ -36,6 +36,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   @Input() headerClass = '';
   @Input() showUserIcon = true;
 
+  enableUserDropdown:boolean = false;
+
   ngOnInit() {
   }
 
@@ -46,9 +48,12 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   async presentSlotModal() {
     const modal = await this.modalController.create({
       component: DeliverySlotSelectionPage,
-      // componentProps: { value: 123 }
     });
     return await modal.present();
+  }
+
+  showDropDown(){
+    this.enableUserDropdown = !this.enableUserDropdown;
   }
 
   widgetActionFailed(name: string, data: any): any {

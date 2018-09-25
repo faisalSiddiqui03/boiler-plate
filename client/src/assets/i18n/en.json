@@ -97,6 +97,7 @@
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "As soon as Possible",
+		"asap": "ASAP",
 		"delivery": "Delivery",
 		"delivery_hut": "Your local delivery Hut is",
 		"order_for": "Order for",
@@ -457,6 +458,7 @@
 		"email": "Email",
 		"email_error": "Please provide your email",
 		"email_placeholder": "So we can contact you for pizza updates",
+		"email_valid": "Please provide the correct email address",
 		"fname": "First Name",
 		"fname_error": "First Name Please",
 		"fname_placeholder": "So we know what to call you",
@@ -468,7 +470,9 @@
 		"mobile_error_required": "Your number please",
 		"mobile_placehlder": "So we can contact you for pizza updates",
 		"password": "Password",
-		"password_error": "",
+		"password_error_length": "Password minimum length is 6 characters",
+		"password_error_required": "It will be our little secret",
+		"password_placeholder": "It will be our little secret",
 		"registration_successful": "",
 		"sign_up": "Sign up",
 		"submit": "SIGN UP"
