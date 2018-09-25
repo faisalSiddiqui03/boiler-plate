@@ -48,20 +48,20 @@
         <span text-uppercase (click)="goToPage('login')">{{ 'header.sign_in' | translate }} /</span>
         <span text-uppercase (click)="goToPage('signup')">{{ 'header.register' | translate }}</span>
       </div>
-      <div class="signin-register loggedin-user" (click)="showDropDown()" *ngIf="getUserModel()?.userId != 0">
+      <div class="signin-register loggedin-user" *ngIf="getUserModel()?.userId != 0">
         <div class="icon icon-user-circle" (click)="goToPage('login')"></div>
-        <span text-uppercase>Hello {{getUserModel()?.firstName}}</span>
-        <div class="icon-arrow icon-arrow-down-2"></div>
+        <span (click)="showDropDown()" text-uppercase>Hello {{getUserModel()?.firstName}}</span>
+        <div (click)="showDropDown()" class="icon-arrow icon-arrow-down-2"></div>
         <div class="dropdown" [class.open]="enableUserDropdown">
           <ul>
-            <li (click)="goToPage('my-account')">My Account</li>
-            <li (click)="logout()">Logout
+            <li (click)="goToPage('my-account'); showDropDown()">My Account</li>
+            <li (click)="logout(); showDropDown()">Logout
               <logout-widget [componentId]="getComponentId()" [action]="logoutWidgetAction"></logout-widget>
             </li>
-            <li (click)="goToPage('order-history')">My Order History</li>
-            <li (click)="goToPage('saved-address')">My Saved Address</li>
-            <li (click)="goToPage('favorites')">My Favorites</li>
-            <li (click)="goToPage('change-password')">Change Password</li>
+            <li (click)="goToPage('order-history'); showDropDown()">My Order History</li>
+            <li (click)="goToPage('saved-address'); showDropDown()">My Saved Address</li>
+            <li (click)="goToPage('favorites'); showDropDown()">My Favorites</li>
+            <li (click)="goToPage('change-password'); showDropDown()">Change Password</li>
           </ul>
         </div>
       </div>
