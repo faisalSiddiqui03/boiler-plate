@@ -42,7 +42,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     if (product && product.multipleImages && product.multipleImages.length) {
       return `https://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
     } else if (product && product.largeImage) {
-      return `https://${product.largeImage}`;
+      return `https:${product.largeImage}`;
     }
   }
 
