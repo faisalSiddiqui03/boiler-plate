@@ -38,6 +38,12 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     this.router.navigateByUrl(pageName);
   }
 
+  getProductImageUrl(product) {
+    if (product && product.multipleImages && product.multipleImages.length) {
+      return `https://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
+    }
+  }
+
   widgetActionFailed(name: string, data: any): any {
   }
 
@@ -51,6 +57,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
+    console.log('-------', data)
   }
 
 }
