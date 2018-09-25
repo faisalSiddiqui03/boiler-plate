@@ -3,7 +3,7 @@
 </ion-header>
 <ion-content>
   <app-sub-header [title]="titleValue"></app-sub-header>
-  <div class="feedback-content w-700">
+  <div class="main-content feedback-content w-700">
     <form class="form-section" padding [formGroup]="feedBackForm">
       <div class="form-group" [class.error]="feedBackForm.get('name').touched && !feedBackForm.get('name').valid">
         <ion-label for="name" text-capitalize>{{ 'feedback_page.name' | translate }}
@@ -17,6 +17,76 @@
           </div>
         </div>
       </div>
+      <div class="form-group" [class.error]="feedBackForm.get('email').touched && !feedBackForm.get('email').valid">
+        <ion-label for="email" text-capitalize>{{ 'feedback_page.email' | translate }}
+          <sup>*</sup>
+        </ion-label>
+        <div class="form-input">
+          <ion-input id="email" placeholder="{{ 'feedback_page.email_placeholder' | translate }}" inputmode="text" formControlName="email"></ion-input>
+        </div>
+        <div *ngIf="feedBackForm.get('email').touched">
+          <div class="error-msg" *ngIf="feedBackForm.get('email').errors?.required">{{ 'feedback_page.email_required' | translate }}
+          </div>
+          <div class="error-msg" *ngIf="feedBackForm.get('email').errors?.email">{{ 'feedback_page.email_valid' | translate }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group" [class.error]="feedBackForm.get('mobile').touched && !feedBackForm.get('mobile').valid">
+        <ion-label for="mobile" text-capitalize>{{ 'feedback_page.mobile' | translate }}
+          <sup>*</sup>
+        </ion-label>
+        <div class="form-input mobile-input">
+          <span>965</span>
+          <ion-input id="mobile" placeholder="{{ 'feedback_page.mobile_placeholder' | translate }}" inputmode="text" formControlName="mobile"></ion-input>
+        </div>
+        <div *ngIf="feedBackForm.get('mobile').touched">
+          <div class="error-msg" *ngIf="feedBackForm.get('mobile').errors?.required">{{ 'feedback_page.mobile_required' | translate }}
+          </div>
+          <div class="error-msg" *ngIf="feedBackForm.get('mobile').errors?.pattern">{{ 'feedback_page.mobile_valid' | translate }}
+          </div>
+          <div class="error-msg" *ngIf="!feedBackForm.get('mobile').errors?.pattern && (feedBackForm.get('mobile').errors?.minlength ||  feedBackForm.get('mobile').errors?.maxlength)">{{ 'feedback_page.mobile_digits' | translate }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group" [class.error]="feedBackForm.get('orderNumber').touched && !feedBackForm.get('orderNumber').valid">
+        <ion-label for="orderNumber" text-capitalize>{{ 'feedback_page.order_number' | translate }}
+          <sup>*</sup>
+        </ion-label>
+        <div class="form-input">
+          <ion-input id="orderNumber" placeholder="{{ 'feedback_page.order_number_placeholder' | translate }}" inputmode="text" formControlName="orderNumber"></ion-input>
+        </div>
+        <div *ngIf="feedBackForm.get('orderNumber').touched">
+          <div class="error-msg" *ngIf="feedBackForm.get('orderNumber').errors?.required">{{ 'feedback_page.order_number_required' | translate }}
+          </div>
+          <div class="error-msg" *ngIf="feedBackForm.get('orderNumber').errors?.pattern">{{ 'feedback_page.order_number_valid' | translate }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group" [class.error]="feedBackForm.get('orderType').touched && !feedBackForm.get('orderType').valid">
+        <ion-label for="orderType" text-capitalize>{{ 'feedback_page.order_type' | translate }}
+          <sup>*</sup>
+        </ion-label>
+        <div class="form-input">
+          <ion-select id="orderType" formControlName="orderType">
+            <ion-select-option selected value="door_delivery">{{ 'feedback_page.door_delivery' | translate }}</ion-select-option>
+            <ion-select-option value="take_away">{{ 'feedback_page.take_away' | translate }}</ion-select-option>
+          </ion-select>
+        </div>
+      </div>
+      <div class="form-group" [class.error]="feedBackForm.get('message').touched && !feedBackForm.get('message').valid">
+        <ion-label for="message" text-capitalize>{{ 'feedback_page.message' | translate }}
+          <sup>*</sup>
+        </ion-label>
+        <div class="form-input">
+          <ion-textarea id="message" placeholder="{{ 'feedback_page.message_placeholder' | translate }}" formControlName="message"></ion-textarea>
+        </div>
+        <div *ngIf="feedBackForm.get('message').touched">
+          <div class="error-msg" *ngIf="feedBackForm.get('message').errors?.required">{{ 'feedback_page.message_required' | translate }}
+          </div>
+        </div>
+      </div>
+      <ion-button color="success" class="btn-success" text-capitalize expand="block" mode="ios" (click)="sendFeedback()" [disabled]="!feedBackForm.valid">{{ 'feedback_page.submit' | translate }}
+      </ion-button>
     </form>
   </div>
 </ion-content>

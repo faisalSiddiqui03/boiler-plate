@@ -9,6 +9,7 @@
     "build:prod": "bro build"
   },
   "dependencies": {
+    "cls-hooked": "^4.2.2",
     "@capillarytech/pwa-cli": "0.2.11",
     "path": "^0.12.7"
   },

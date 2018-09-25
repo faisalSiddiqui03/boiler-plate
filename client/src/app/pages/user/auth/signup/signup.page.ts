@@ -42,6 +42,7 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
   useridSignUpAction = new EventEmitter();
   useridSignUpActionEmitter = new EventEmitter();
   widgetModels: { [name: string]: any };
+  titleValue:string = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,6 +67,9 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
   }
 
   ngOnInit() {
+    this.translate.get('sign_up_page.sign_up').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   signUp() {

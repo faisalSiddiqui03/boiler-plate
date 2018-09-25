@@ -10,6 +10,7 @@ import { HeaderModule } from '../../../../components/header/header.module';
 import { HttpLoaderFactory } from '../../../../translation.loader';
 import { UseridSignupWidgetModule, EventTrackModule } from '@capillarytech/pwa-framework';
 import { SignupPage } from './signup.page';
+import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     HeaderModule,
+    SubHeaderModule,
     UseridSignupWidgetModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({

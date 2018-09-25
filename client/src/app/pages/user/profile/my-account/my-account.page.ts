@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
-import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle } from '@capillarytech/pwa-framework';
+import {
+  Action,
+  pwaLifeCycle,
+  pageView,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  LogoutWidgetActions,
+  LogoutWidget
+} from '@capillarytech/pwa-framework';
 import { Utils } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -10,12 +18,16 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-my-account',
   templateUrl: './my-account.page.html',
   styleUrls: ['./my-account.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()
 @pageView()
 
 export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+
+  titleValue:string = '';
+  logoutWidgetAction = new EventEmitter();
 
   constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
@@ -26,16 +38,39 @@ export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   ngOnInit() {
+    this.translate.get('my_account_page.my_account').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    if (pageName === 'logout') {
+      const action = new Action(LogoutWidgetActions.ACTION_LOGOUT);
+      this.logoutWidgetAction.emit(action);
+    } else {
+      this.router.navigateByUrl(pageName);
+    }
   }
 
-  widgetActionFailed(name: string, data: any): any {
+  async widgetActionFailed(name: string, data: any) {
+    console.log('name action failed: ' + name + ' data: ' + data);
+    switch (name) {
+      case LogoutWidgetActions.ACTION_LOGOUT:
+        const coupon_remove_success = await this.translate.instant('my_account_page.error_logging_out');
+        this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
+        break;
+    }
   }
 
-  widgetActionSuccess(name: string, data: any): any {
+  async widgetActionSuccess(name: string, data: any) {
+    console.log('name action success: ' + name + ' data: ' + data);
+    switch (name) {
+      case LogoutWidgetActions.ACTION_LOGOUT:
+        const coupon_remove_success = await this.translate.instant('my_account_page.successfully_loged_out');
+        this.router.navigateByUrl('home');
+        this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
+        break;
+    }
   }
 
   widgetLoadingFailed(name: string, data: any): any {

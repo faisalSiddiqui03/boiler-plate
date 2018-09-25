@@ -17,7 +17,7 @@
               <div class="icons">
                 <ion-icon name="alert"></ion-icon>
               </div>
-            </div> 
+            </div>
             <div *ngIf="profileForm.get('firstName').touched">
               <div class="error-msg" *ngIf="profileForm.get('firstName').errors?.required">{{ 'user_profile_page.fname_required' | translate }}</div>
             </div>
@@ -42,9 +42,12 @@
               </div>
             </div>
             <div *ngIf="profileForm.get('mobileNo').touched">
-              <div class="error-msg" *ngIf="profileForm.get('mobileNo').errors?.required">{{ 'user_profile_page.mobile_required' | translate }}</div>
-              <div class="error-msg" *ngIf="profileForm.get('mobileNo').errors?.minlength">{{ 'user_profile_page.mobile_digits' | translate }}</div>
-              <div class="error-msg" *ngIf="profileForm.get('mobileNo').errors?.maxlength">{{ 'user_profile_page.mobile_digits' | translate }}</div>
+              <div class="error-msg" *ngIf="profileForm.get('mobileNo').errors?.required">{{ 'user_profile_page.mobile_required' | translate }}
+              </div>
+              <div class="error-msg" *ngIf="profileForm.get('mobileNo').errors?.pattern">{{ 'user_profile_page.mobile_valid' | translate }}
+              </div>
+              <div class="error-msg" *ngIf="!profileForm.get('mobileNo').errors?.pattern && (profileForm.get('mobileNo').errors?.minlength ||  profileForm.get('mobileNo').errors?.maxlength)">{{ 'user_profile_page.mobile_digits' | translate }}
+              </div>
             </div>
           </div>
           <div class="form-group">

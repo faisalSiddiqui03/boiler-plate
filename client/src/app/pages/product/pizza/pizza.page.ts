@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import {
   LifeCycle,
   Action,
@@ -28,6 +28,7 @@ import { Location } from '@angular/common';
   selector: 'app-pizza',
   templateUrl: './pizza.page.html',
   styleUrls: ['./pizza.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()
