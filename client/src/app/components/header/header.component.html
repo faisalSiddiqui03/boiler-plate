@@ -55,7 +55,7 @@
         <div class="dropdown" [class.open]="enableUserDropdown">
           <ul>
             <li (click)="goToPage('my-account')">My Account</li>
-            <li (click)="logout('')">Logout
+            <li (click)="logout()">Logout
               <logout-widget [componentId]="getComponentId()" [action]="logoutWidgetAction"></logout-widget>
             </li>
             <li (click)="goToPage('order-history')">My Order History</li>
