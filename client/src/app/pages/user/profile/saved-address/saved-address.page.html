@@ -4,8 +4,7 @@
 <ion-content>
   <app-sub-header [title]="titleValue"></app-sub-header>
   <div class="saved-addresses w-700">
-    <user-address-widget [componentId]="getComponentId()" [action]="userAddressWidgetActions"
-    (lifecycle)="handleWidgetLifecycle($event)">
+    <user-address-widget [componentId]="getComponentId()" [action]="userAddressWidgetActions">
       <ng-template let-widget="widget">
         <ng-container *ngIf="widget.model">
           <!-- <p>{{widget.model | json}}</p> -->
