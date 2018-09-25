@@ -375,7 +375,7 @@
                                     <ion-col class="product-card-holder" *ngFor="let prod of widget.model" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
                                       no-padding>
                                       <ion-card class="product-card non-deal-card" no-padding (click)="openProductDetails(prod)">
-                                        <div class="icon" [ngClass]="{'icon-favourite-active': prod?.isFavorite,'icon-favourite': !prod?.isFavorite}" (click)="updateFavorites(prod?.isFavorite, prod?.client)"></div>
+                                        <div *ngIf="isLoggedIn()" class="icon" [ngClass]="{'icon-favourite-active': prod?.isFavorite,'icon-favourite': !prod?.isFavorite}" (click)="updateFavorites(prod?.isFavorite, prod?.client)"></div>
                                         <ion-card-header no-padding>
                                           <img height="100" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
                                           />
