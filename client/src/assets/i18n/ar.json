@@ -25,7 +25,7 @@
 	},
 	"cart": {
 		"add": "وأضاف",
-		"apply": "تطبيق",
+		"apply": "تقديم الطلب",
 		"cart_clear": "",
 		"close": "قريب",
 		"continue": "استمر",
@@ -44,6 +44,7 @@
 		"unable_to_remove_coupon": "لا يمكن إزالة القسيمة",
 		"update_cart_message": "تريد إجراء تغييرات؟ فقط اضغط على أي عنصر.",
 		"updating_quantity": "",
+		"voucher_code": "رمز القسيمة",
 		"voucher_description": "لدينا صفقات الأعلى متاحة دائما على الإنترنت على صفحة صفقاتنا.",
 		"your_cart": "عربتك",
 		"your_total": "مجموعك"

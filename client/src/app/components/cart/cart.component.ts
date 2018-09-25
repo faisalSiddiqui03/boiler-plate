@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   Action,
@@ -17,7 +17,8 @@ import { Utils } from '../../helpers/utils';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()
