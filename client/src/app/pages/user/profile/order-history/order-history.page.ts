@@ -1,6 +1,15 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
-import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle, LifeCycle } from '@capillarytech/pwa-framework';
+import {
+  Action,
+  pwaLifeCycle,
+  pageView,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  LifeCycle,
+  OrderWidget,
+  OrderWidgetActions
+} from '@capillarytech/pwa-framework';
 import { Utils } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -22,6 +31,8 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   orderWidgetExecutor = new EventEmitter();
   loaded: boolean = false;
   userId: string = "52a3e909-7702-4b49-945d-0e095ddd28bd";
+  showingProductsForIndexs = [];
+  isShowMoreButtonVisible = true;
 
   constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
@@ -45,9 +56,27 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
 
 
   widgetActionFailed(name: string, data: any): any {
+    console.log('name action failed: ' + name + ' data: ' + data);
+    switch (name) {
+      case OrderWidgetActions.NEXT:
+        console.log('no Data found, hiding the showmore button');
+        this.isShowMoreButtonVisible = false;
+        break;
+    }
   }
 
   widgetActionSuccess(name: string, data: any): any {
+    console.log('name action success: ' + name + ' data: ' + data);
+    switch (name) {
+      case OrderWidgetActions.NEXT:
+        if (data) {
+          console.log('got latest data');
+        } else {
+          console.log('no Data found, hiding the showmore button');
+          this.isShowMoreButtonVisible = false;
+        }
+        break;
+    }
   }
 
   widgetLoadingFailed(name: string, data: any): any {
@@ -59,7 +88,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   widgetLoadingSuccess(name, data) {
-    console.log("widget loading success");
+    console.log("widget loading success", name, data);
     this.loaded = true;
   }
 
@@ -75,6 +104,28 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
     } else {
       console.log(x);
     }
+  }
+
+  loadNextOrders() {
+    let action = new Action(OrderWidgetActions.NEXT);
+    this.orderWidgetAction.emit(action);
+  }
+
+  // helper functions for the accordian
+  toggleShowingProducts(index) {
+    const position = this.showingProductsForIndexs.findIndex(x => x === index);
+    if (position === -1) {
+      this.showingProductsForIndexs.push(index);
+    } else {
+      this.showingProductsForIndexs.splice(position, 1);
+    }
+  }
+
+  isShowProducts(index) {
+    if (this.showingProductsForIndexs.includes(index)) {
+      return true;
+    }
+    return false;
   }
 
 }

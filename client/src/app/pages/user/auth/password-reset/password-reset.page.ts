@@ -25,6 +25,7 @@ import { Utils } from '../../../../helpers/utils';
 export class PasswordResetPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   resetPasswordForm: FormGroup;
   resetPasswordActionEmitter = new EventEmitter();
+  titleValue:string = '';
 
   constructor(private formBuilder: FormBuilder, private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
@@ -37,6 +38,9 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
   }
 
   ngOnInit() {
+    this.translate.get('reset_password_page.reset_password').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   handleResetPasswordActions(data) {
@@ -52,7 +56,7 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
   handleResetPasswordResponse(data) {
     this.router.navigateByUrl('login');
     if (data.isSuccessful) {
-      this.alertService.presentToast('Successfully sent link', 1000, top);
+      this.alertService.presentToast(this.translate.instant('reset_password_page.link_sent'), 1000, top);
     } else {
       this.alertService.presentToast(data.message, 1000, top);
     }
@@ -71,7 +75,7 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
       case 'SEND_PASSWORD_RESET_LINK':
         this.handleResetPasswordResponse({
           isSuccessful: false,
-          message: 'Something went wrong please try again.'
+          message: this.translate.instant('reset_password_page.error')
         });
         break;
     }

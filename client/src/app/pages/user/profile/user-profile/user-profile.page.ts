@@ -39,7 +39,7 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
     this.profileForm = this.formBuilder.group({
       firstName: ['', Validators.compose([Validators.required])],
       lastName: [''],
-      mobileNo: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],
+      mobileNo: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('^[2,5,6,9][0-9]*$')])],
       alternateEmail: ['',],
     })
   }
