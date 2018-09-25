@@ -97,6 +97,10 @@
 		"email": "Email",
 		"phone_number": "Phone Number"
 	},
+	"deal": {
+		"add_to_basket": "Add To My Basket",
+		"choose_your": "Choose your"
+	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "As soon as Possible",
 		"asap": "ASAP",

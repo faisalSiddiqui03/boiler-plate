@@ -7,10 +7,12 @@ import { IonicModule } from '@ionic/angular';
 
 import { DealPage } from './deal.page';
 
+import { ProductDetailsWidgetModule, ImagePreloadModule } from "@capillarytech/pwa-framework";
+
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
-import { PizzaComponentModule } from '../../../components/pizza/pizza.module';
+import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
 
 const routes: Routes = [
   {
@@ -24,7 +26,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    PizzaComponentModule,
+    ProductDetailsWidgetModule,
+    ImagePreloadModule,
+    SkeletonModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {

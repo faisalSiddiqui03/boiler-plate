@@ -97,6 +97,10 @@
 		"email": "البريد الإلكتروني",
 		"phone_number": "رقم الهاتف"
 	},
+	"deal": {
+		"add_to_basket": "أضف عرضًا إلى السلة",
+		"choose_your": "إختر ما يخصك  بيتزا وسط"
+	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "في أقرب وقت",
 		"asap": "في أقرب وقت",
