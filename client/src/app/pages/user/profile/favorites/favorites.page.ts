@@ -1,6 +1,14 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
-import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle } from '@capillarytech/pwa-framework';
+import {
+  Action,
+  pwaLifeCycle,
+  pageView,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  FavoritesWidgetActions,
+  FavoritesWidget
+} from '@capillarytech/pwa-framework';
 import { Utils } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -19,6 +27,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   titleValue = '';
+  favoritesWidgetAction = new EventEmitter();
 
   constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
@@ -46,10 +55,26 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     }
   }
 
+  updateFavorites(product) {
+    this.favoritesWidgetAction.emit(new Action(FavoritesWidgetActions.ACTION_REMOVE_ITEM, product));
+  }
+
   widgetActionFailed(name: string, data: any): any {
+    console.log('name action failed: ' + name + ' data: ' + data);
+    switch (name) {
+      case FavoritesWidgetActions.ACTION_REMOVE_ITEM:
+        console.log('error removing item');
+        break;
+    }
   }
 
   widgetActionSuccess(name: string, data: any): any {
+    console.log('name action success: ' + name + ' data: ' + data);
+    switch (name) {
+      case FavoritesWidgetActions.ACTION_REMOVE_ITEM:
+          console.log('successfully removed item');
+        break;
+    }
   }
 
   widgetLoadingFailed(name: string, data: any): any {

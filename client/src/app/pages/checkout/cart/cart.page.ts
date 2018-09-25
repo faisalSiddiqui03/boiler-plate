@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   OnWidgetActionsLifecyle,
   pwaLifeCycle,
@@ -21,6 +21,7 @@ import { ProductType } from '@capillarytech/pwa-framework';
   selector: 'app-cart-page',
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()

@@ -174,7 +174,7 @@
       <a (click)="goToDeals()">{{ 'cart.exclusive_offers' | translate}}</a>
     </p>
     <div class="form-section" flex-center>
-      <ion-input placeholder="Voucher code" inputmode="text" [(ngModel)]="couponCode"></ion-input>
+      <ion-input placeholder="{{ 'cart.voucher_code' | translate}}" inputmode="text" [(ngModel)]="couponCode"></ion-input>
       <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success" (click)="applyCoupon()">
         {{ 'cart.apply' | translate}}
       </ion-button>
