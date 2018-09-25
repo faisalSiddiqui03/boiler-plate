@@ -54,7 +54,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
     }
   }
 
-
+  // TODO: uncomment this code after OrderWidgetActions is exported from the framework
   widgetActionFailed(name: string, data: any): any {
     console.log('name action failed: ' + name + ' data: ' + data);
     // switch (name) {
@@ -65,6 +65,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
     // }
   }
 
+  // TODO: uncomment this code after OrderWidgetActions is exported from the framework
   widgetActionSuccess(name: string, data: any): any {
     console.log('name action success: ' + name + ' data: ' + data);
     switch (name) {
