@@ -1,12 +1,20 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { OnWidgetActionsLifecyle, OnWidgetLifecyle, DeliveryModes } from '@capillarytech/pwa-framework';
+import {
+  Action,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  DeliveryModes,
+  LogoutWidgetActions,
+  LogoutWidget
+} from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../base/base-component';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-selection/delivery-slot-selection.page';
 import { LocationPage } from '../../pages/checkout/location/location.page';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../helpers/utils';
+import { AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-header',
@@ -17,11 +25,13 @@ import { Utils } from '../../helpers/utils';
 export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   deliveryModes: any;
+  logoutWidgetAction = new EventEmitter();
 
   constructor(
     private router: Router,
     public modalController: ModalController,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private alertService: AlertService
   ) {
     super();
     this.deliveryModes = DeliveryModes;
@@ -56,10 +66,25 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     this.enableUserDropdown = !this.enableUserDropdown;
   }
 
-  widgetActionFailed(name: string, data: any): any {
+  async widgetActionFailed(name: string, data: any) {
+    console.log('name action failed: ' + name + ' data: ' + data);
+    switch (name) {
+      case LogoutWidgetActions.ACTION_LOGOUT:
+        const coupon_remove_success = await this.translate.instant('my_account_page.error_logging_out');
+        this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
+        break;
+    }
   }
 
-  widgetActionSuccess(name: string, data: any): any {
+  async widgetActionSuccess(name: string, data: any) {
+    console.log('name action success: ' + name + ' data: ' + data);
+    switch (name) {
+      case LogoutWidgetActions.ACTION_LOGOUT:
+        const coupon_remove_success = await this.translate.instant('my_account_page.successfully_loged_out');
+        this.router.navigateByUrl('home');
+        this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
+        break;
+    }
   }
 
   widgetLoadingFailed(name: string, data: any): any {
@@ -76,6 +101,11 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
       component: LocationPage,
     });
     return await modal.present();
+  }
+
+  logout() {
+    const action = new Action(LogoutWidgetActions.ACTION_LOGOUT);
+    this.logoutWidgetAction.emit(action);
   }
 
 }
