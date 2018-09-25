@@ -4,7 +4,8 @@
 <ion-content>
   <app-sub-header [title]="titleValue"></app-sub-header>
   <div class="saved-addresses w-700">
-    <user-address-widget [componentId]="getComponentId()" >
+    <user-address-widget [componentId]="getComponentId()" [action]="userAddressWidgetActions"
+    (lifecycle)="handleWidgetLifecycle($event)">
       <ng-template let-widget="widget">
         <ng-container *ngIf="widget.model">
           <!-- <p>{{widget.model | json}}</p> -->
@@ -13,7 +14,7 @@
             <ion-item no-padding *ngFor="let address of widget.model">
               <ion-label>
                 <h6>{{address.addressType}}
-                  <ion-icon (click)="deleteAddress()" class="close" name="close-circle"></ion-icon>
+                  <ion-icon (click)="deleteAddress(address)" class="close" name="close-circle"></ion-icon>
                 </h6>
                 <div class="address-details">
                   <p text-capitalize>{{getFlatAddress(address.landmark, 0)}}</p>
@@ -37,8 +38,8 @@
   <div class="delete-address-wrap">
     <p text-center>{{'saved_address_page.sure_remove_address' | translate}}</p>
     <div class="buttons-group" flex-center>
-      <ion-button color="dark" (click)="dismissAddressModal()" text-uppercase expand="block" mode="ios" class="btn-dismiss">{{'saved_address_page.dismiss' | translate}}</ion-button>
-      <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success">{{'saved_address_page.confirm' | translate}}</ion-button>
+      <ion-button color="dark" (click)="dismissAddressModal(false)" text-uppercase expand="block" mode="ios" class="btn-dismiss">{{'saved_address_page.dismiss' | translate}}</ion-button>
+      <ion-button color="success" (click)="dismissAddressModal(true)" text-uppercase expand="block" mode="ios" class="btn-success">{{'saved_address_page.confirm' | translate}}</ion-button>
     </div>
   </div>
 </div>

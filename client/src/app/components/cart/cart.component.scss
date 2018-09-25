@@ -1,149 +1,174 @@
-.basket-container {
-  position: relative;
-  padding-top: 25px;
-  //background-color: rgba(var(--ion-color-cart-stripe-rgb), .9);
-  //@media (max-width: 991px) {
+.cart-component {
+  .basket-container {
+    position: relative;
+    padding-top: 25px; //background-color: rgba(var(--ion-color-cart-stripe-rgb), .9);
+    //@media (max-width: 991px) {
     .basket {
       background-color: var(--ion-color-light);
       &::before {
         content: "";
         display: block;
-        height: 12px;
-        //background: url(assets/imgs/cart-bg.jpg);
+        height: 12px; //background: url(assets/imgs/cart-bg.jpg);
         //background-repeat: repeat-x;
         position: absolute;
         top: 18px;
         left: 0;
         right: 0;
       }
+    } //}
+    .basket-close {
+      opacity: 0.7;
+      text-align: right;
+      padding: 5px 10px 10px 10px;
+      font-size: 14px;
+      color: var(--ion-color-dark-shade);
     }
-  //}
-
-  .basket-close {
-    opacity: 0.7;
-    text-align: right;
-    padding: 5px 10px 10px 10px;
-    font-size: 14px;
-    color: var(--ion-color-dark-shade);
-  }
-  .empty-cart {
-    padding: 5px 10px 10px 10px;
-    font-size: 14px;
-    color: var(--ion-color-dark-shade);
-  }
-  .common-heading-dotted {
-    margin-bottom: 10px;
-  }
-  ion-list {
-    ion-item {
-      position: relative;
+    .empty-cart {
+      padding: 5px 20px 10px;
       font-size: 13px;
-      ion-label {
-        padding: 40px 16px 16px 16px;
-        white-space: normal;
-        .product-title {
-          font-size: 14px;
-          color: var(--ion-color-dark-shade);
-          flex: 1;
-          padding-right: 15px;
-        }
-        .add-remove {
-          align-items: center;
-          display: inline-flex;
-          span {
-            min-width: 24px;
-            text-align: center;
-            display: inline-block;
-          }
-        }
-        ion-icon {
-          color: var(--ion-color-medium-shade);
-          font-size: 25px;
-          cursor: pointer;
-          &.remove-icon {
-            position: absolute;
-            font-size: 20px;
-            right: 10px;
-          }
-        }
-        .product-price {
-          font-size: 14px;
-          font-weight: 600;
-          color: var(--ion-color-dark-shade);
-          width: 90px;
-          padding-right: 16px;
-          text-align: right;
-        }
-      }
-      &+ion-item {
-        border-top: 1px solid var(--ion-color-light-shade);
+      color: var(--ion-color-dark-shade);
+      a {
+        color: var(--ion-color-dark-shade);
       }
     }
-    .tooltip {
-      position: absolute;
-      top: 5px;
-      left: 10px;
-      padding: 0 10px;
-      font-size: 12px;
-      color: var(--ion-color-change-link);
-      background-color: var(--ion-color-light-shade);
-      line-height: 24px;
-      &::after {
-        content: '';
+    .common-heading-dotted {
+      margin-bottom: 10px;
+    }
+    ion-list {
+      ion-item {
+        position: relative;
+        font-size: 13px;
+        ion-label {
+          padding: 40px 16px 16px 16px;
+          white-space: normal;
+          .product-title {
+            font-size: 14px;
+            color: var(--ion-color-dark-shade);
+            flex: 1;
+            padding-right: 15px;
+          }
+          .add-remove {
+            align-items: center;
+            display: inline-flex;
+            span {
+              min-width: 24px;
+              text-align: center;
+              display: inline-block;
+            }
+          }
+          ion-icon {
+            color: var(--ion-color-medium-shade);
+            font-size: 25px;
+            cursor: pointer;
+            &.remove-icon {
+              position: absolute;
+              font-size: 20px;
+              right: 10px;
+            }
+          }
+          .product-price {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ion-color-dark-shade);
+            width: 90px;
+            padding-right: 16px;
+            text-align: right;
+          }
+        }
+        &+ion-item {
+          border-top: 1px solid var(--ion-color-light-shade);
+        }
+      }
+      .tooltip {
         position: absolute;
+        top: 5px;
         left: 10px;
-        top: 100%;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        border-top: 10px solid var(--ion-color-light-shade);
+        padding: 0 10px;
+        font-size: 12px;
+        color: var(--ion-color-change-link);
+        background-color: var(--ion-color-light-shade);
+        line-height: 24px;
+        &::after {
+          content: '';
+          position: absolute;
+          left: 10px;
+          top: 100%;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-top: 10px solid var(--ion-color-light-shade);
+        }
+      }
+    }
+    .delivery-bill-block {
+      padding: 14px 40px 14px 16px;
+      border-top: 1px solid var(--ion-color-light-shade);
+      color: var(--ion-color-dark);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .total-bill-block {
+      padding: 0px 40px 14px 16px;
+      color: var(--ion-color-dark);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .promotion-button {
+      padding: 20px;
+      margin-top: 30px;
+      .btn-voucher {
+        --box-shadow: none;
+        --border-radius: 0;
+        --border-width: 1px;
+        --border-style: dashed;
+        --border-color: var(--ion-block-header-color);
+        --ion-color-contrast: var(--ion-color-secondary) !important;
+        font-size: 13px;
       }
     }
   }
-  .delivery-bill-block {
-    padding: 14px 40px 14px 16px;
-    border-top: 1px solid var(--ion-color-light-shade);
-    color: var(--ion-color-dark);
-    font-size: 14px;
-    font-weight: 700;
-  }
-  .total-bill-block {
-    padding: 0px 40px 14px 16px;
-    color: var(--ion-color-dark);
-    font-size: 14px;
-    font-weight: 700;
-  }
-  .promotion-button {
-    padding: 20px;
-    margin-top: 30px;
-    .btn-voucher {
-      --box-shadow: none;
-      --border-radius: 0;
-      --border-width: 1px;
-      --border-style: dashed;
-      --border-color: var(--ion-block-header-color);
-      --ion-color-contrast: var(--ion-color-secondary) !important;
-      font-size: 13px;
+  ion-footer {
+    ion-button {
+      span {
+        position: absolute;
+        right: 30px;
+      }
     }
   }
-}
-
-ion-footer {
-  ion-button {
-    span {
-      position: absolute;
-      right: 30px;
+  .bottom-footer {
+    position: fixed;
+    bottom: 0;
+    display: block;
+    width: 350px;
+    padding: 10px;
+  }
+  @keyframes placeHolderShimmer {
+    0% {
+      background-position: -468px 0
+    }
+    100% {
+      background-position: 468px 0
     }
   }
+  .skeleton-text {
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    position: relative;
+    background: #ffffff;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  }
+  .h2-skeleton {
+    width: 200px;
+  }
+  .p-skeleton {
+    width: 150px;
+  }
+  .underline {
+    text-decoration: underline
+  }
 }
-
-.bottom-footer {
-  position: fixed;
-  bottom: 0;
-  display: block;
-  width: 350px;
-  padding: 10px;
-}
-
 .voucher-modal-wrap {
   position: fixed;
   left: 0;
@@ -192,36 +217,4 @@ ion-footer {
       }
     }
   }
-}
-
-@keyframes placeHolderShimmer{
-  0%{
-    background-position: -468px 0
-  }
-  100%{
-    background-position: 468px 0
-  }
-}
-
-.skeleton-text {
-  animation-duration: 4s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-name: placeHolderShimmer;
-  animation-timing-function: linear;
-  position: relative;
-  background: #ffffff;
-  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-}
-
-.h2-skeleton{
-  width: 200px;
-}
-
-.p-skeleton{
-  width: 150px;
-}
-
-.underline{
-  text-decoration: underline
 }

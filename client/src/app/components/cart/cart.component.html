@@ -1,9 +1,8 @@
-<cart-widget class="full-height" [componentId]="getComponentId()" [action]="cartWidgetAction">
+<cart-widget class="full-height cart-component" [componentId]="getComponentId()" [action]="cartWidgetAction">
   <ng-template let-widget="widget">
     <ng-container *ngIf="!globalSharedService.getCart() || !globalSharedService.getCart()?.items">
       <div class="full-height">
         <div>
-          <!-- <p>{{widget.model | json }}</p> -->
           <div class="basket-container">
             <div class="basket">
               <div class="common-heading-dotted" text-center>
@@ -65,15 +64,15 @@
     <ng-container *ngIf="globalSharedService.getCart() && globalSharedService.getCart()?.items && globalSharedService.getCart()?.items.length == 0">
       <div class="full-height">
         <div>
-          <!-- <p>{{widget.model | json }}</p> -->
           <div class="basket-container">
             <div class="basket">
               <div class="common-heading-dotted" text-center>
                 <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
               </div>
-              <div class="empty-cart">
-                <p>{{ 'cart.empty_cart_message_1' | translate}}</p>
-                <p class="underline" (click)="goToDeals()">{{ 'cart.empty_cart_message_2' | translate}}</p>
+              <div class="empty-cart" text-center>
+                <p>{{ 'cart.empty_cart_message_1' | translate}}
+                  <a class="underline" (click)="goToDeals()">{{ 'cart.empty_cart_message_2' | translate}}</a>
+                </p>
               </div>
               <div class="promotion-button">
                 <ion-button color="light" text-capitalize expand="block" mode="md" class="btn-voucher" (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}</ion-button>
@@ -88,7 +87,6 @@
     <ng-container *ngIf="globalSharedService.getCart()">
       <div class="full-height" *ngIf="globalSharedService.getCart()?.items && globalSharedService.getCart()?.items.length">
         <div>
-          <!-- <p>{{widget.model | json }}</p> -->
           <div class="basket-container">
             <div class="basket">
               <div class="common-heading-dotted" text-center>

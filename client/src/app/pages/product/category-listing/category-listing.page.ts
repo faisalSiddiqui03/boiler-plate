@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import {
@@ -20,6 +20,7 @@ import { DeliverySlotSelectionPage } from '../../checkout/delivery-slot-selectio
   selector: 'app-category-listing',
   templateUrl: './category-listing.page.html',
   styleUrls: ['./category-listing.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()

@@ -1,9 +1,8 @@
-<cart-widget class="full-height" [componentId]="getComponentId()" [action]="cartWidgetAction">
+<cart-widget class="full-height cart-page" [componentId]="getComponentId()" [action]="cartWidgetAction">
   <ng-template let-widget="widget">
     <ng-container *ngIf="!loaded">
       <div class="full-height">
         <ion-content>
-          <!-- <p>{{widget.model | json }}</p> -->
           <div class="basket-container">
             <div class="basket">
               <div class="basket-close" (click)="goBack()">{{ 'cart.close' | translate}}</div>
@@ -67,7 +66,6 @@
     <ng-container *ngIf="widget?.model && widget?.model?.items && !widget?.model?.items.length">
       <div class="full-height">
         <ion-content>
-          <!-- <p>{{widget.model | json }}</p> -->
           <div class="basket-container">
             <div class="basket">
               <div class="basket-close" (click)="goBack()">{{ 'cart.close' | translate}}</div>
