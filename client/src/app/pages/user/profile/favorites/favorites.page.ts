@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
 import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle } from '@capillarytech/pwa-framework';
 import { Utils } from '../../../../helpers/utils';
@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-favorites',
   templateUrl: './favorites.page.html',
   styleUrls: ['./favorites.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()

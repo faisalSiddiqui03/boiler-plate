@@ -4,7 +4,7 @@
   border-bottom: 1px solid var(--ion-color-medium-tint);
 }
 
-ion-footer {
+.saved-addresses-footer {
   padding: 10px;
 }
 
@@ -70,8 +70,25 @@ ion-footer {
 }
 
 @media (min-width: 992px) {
-  .btn-success {
-    max-width: 700px;
-    margin: auto;
+  .saved-addresses-footer {
+    .btn-success {
+      max-width: 700px;
+      margin: auto;
+    }
+  }
+}
+
+// RTL Styles
+html{
+  &[dir="rtl"]{
+    .saved-addresses {
+      ion-list {
+        h6 {
+          ion-icon{
+            float: left;
+          }
+        }
+      }
+    }
   }
 }

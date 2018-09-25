@@ -42,3 +42,18 @@
         margin: auto;
     }
 }
+
+// RTL Styles
+
+html{
+    &[dir="rtl"]{
+        .favorites-list {
+            .favorite-item {
+                .icon{
+                    left: auto;
+                    right: 5px;
+                }
+            }
+        }
+    }
+}

@@ -19,7 +19,7 @@
                   <p text-capitalize>{{getFlatAddress(address.landmark, 0)}}</p>
                   <p text-capitalize>{{getFlatAddress(address.landmark, 1)}}</p>
                   <p text-capitalize>{{address.detail}}</p>
-                  <p text-right class="edit">Edit</p>
+                  <p text-right class="edit">{{'saved_address_page.edit' | translate}}</p>
                 </div>
               </ion-label>
             </ion-item>
@@ -29,7 +29,7 @@
     </user-address-widget>
   </div>
 </ion-content>
-<ion-footer no-border>
+<ion-footer no-border class="saved-addresses-footer">
   <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success" (click)="goToPage('add-address')">{{'saved_address_page.add_new_address' | translate}}</ion-button>
 </ion-footer>
 

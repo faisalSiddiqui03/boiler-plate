@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
 import {
   Action,
@@ -18,6 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-saved-address',
   templateUrl: './saved-address.page.html',
   styleUrls: ['./saved-address.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()
