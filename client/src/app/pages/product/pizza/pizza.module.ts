@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { PizzaPage } from './pizza.page';
 
-import { AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
@@ -25,7 +24,6 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    AlertServiceModule,
     PizzaComponentModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({

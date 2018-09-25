@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PizzaComponent } from './pizza.component';
+import { ProductDetailsComponent } from './product-details.component';
 
 import { ProductDetailsWidgetModule, ImagePreloadModule } from "@capillarytech/pwa-framework";
 
@@ -33,8 +33,8 @@ import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
       }
     })
   ],
-  declarations: [PizzaComponent],
-  exports: [PizzaComponent],
+  declarations: [ProductDetailsComponent],
+  exports: [ProductDetailsComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class PizzaComponentModule {}
+export class ProductDetailsComponentModule {}

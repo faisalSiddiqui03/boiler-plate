@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, ViewEncapsulation } from '@angular/core';
 import {
   LifeCycle,
   Action,
@@ -27,12 +27,13 @@ import { Location } from '@angular/common';
   selector: 'app-pizza-component',
   templateUrl: './pizza.component.html',
   styleUrls: ['./pizza.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 
 @pwaLifeCycle()
 export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
-  @Input() productId: number;
+  @Input() productId;
 
   loaded = false;
   productWidgetExecutor = new EventEmitter();
