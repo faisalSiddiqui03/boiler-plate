@@ -267,12 +267,14 @@
 	},
 	"my_account_page": {
 		"change_password": "Change Password",
+		"error_logging_out": "Error occured while logging out",
 		"logout": "Logout",
 		"my_account": "My Account",
 		"my_favourites": "My Favourites",
 		"my_profile": "My Profile",
 		"order_history": "My Order history",
-		"saved_address": "My saved address"
+		"saved_address": "My saved address",
+		"successfully_loged_out": "Logged out successfully!"
 	},
 	"nutrition_page": {
 		"nutition_content_bold01": "Balanced Meal is on Our Menu Too!",

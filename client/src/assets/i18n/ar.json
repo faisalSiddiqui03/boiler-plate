@@ -267,12 +267,14 @@
 	},
 	"my_account_page": {
 		"change_password": "تغير رقم السري",
+		"error_logging_out": "",
 		"logout": "خروج",
 		"my_account": "حسابي",
 		"my_favourites": "تفضيلاتي",
 		"my_profile": "ملفي الشخصي",
 		"order_history": "تاريخ طلباتي",
-		"saved_address": "عنواني المحفوظ"
+		"saved_address": "عنواني المحفوظ",
+		"successfully_loged_out": ""
 	},
 	"nutrition_page": {
 		"nutition_content_bold01": "الوجبات المتوازنة متوفرة في قائمة الطعام لدينا أيضاً",

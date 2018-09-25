@@ -20,7 +20,8 @@
       <ion-item (click)="goToPage('favorites')" no-padding text-capitalize>{{'my_account_page.my_favourites' | translate}}
         <div class="icon icon-arrow-next-2"></div>
       </ion-item>
-      <ion-item (click)="goToPage('home')" no-padding text-capitalize>{{'my_account_page.logout' | translate}}
+      <ion-item (click)="goToPage('logout')" no-padding text-capitalize>{{'my_account_page.logout' | translate}}
+        <logout-widget [componentId]="getComponentId()" [action]="logoutWidgetAction" (lifecycle)="handleWidgetLifecycle($event)"></logout-widget>
         <div class="icon icon-arrow-next-2"></div>
       </ion-item>
     </ion-list>
