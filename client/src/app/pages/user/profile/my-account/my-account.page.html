@@ -21,7 +21,7 @@
         <div class="icon icon-arrow-next-2"></div>
       </ion-item>
       <ion-item (click)="goToPage('logout')" no-padding text-capitalize>{{'my_account_page.logout' | translate}}
-        <logout-widget [componentId]="getComponentId()" [action]="logoutWidgetAction" (lifecycle)="handleWidgetLifecycle($event)"></logout-widget>
+        <logout-widget [componentId]="getComponentId()" [action]="logoutWidgetAction"></logout-widget>
         <div class="icon icon-arrow-next-2"></div>
       </ion-item>
     </ion-list>

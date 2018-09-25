@@ -8,7 +8,7 @@ import {
   OnWidgetLifecyle,
   LifeCycle,
   OrderWidget,
-  OrderWidgetActions
+  // OrderWidgetActions
 } from '@capillarytech/pwa-framework';
 import { Utils } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
@@ -54,28 +54,29 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
     }
   }
 
-
+  // TODO: uncomment this code after OrderWidgetActions is exported from the framework
   widgetActionFailed(name: string, data: any): any {
     console.log('name action failed: ' + name + ' data: ' + data);
-    switch (name) {
-      case OrderWidgetActions.NEXT:
-        console.log('no Data found, hiding the showmore button');
-        this.isShowMoreButtonVisible = false;
-        break;
-    }
+    // switch (name) {
+    //   case OrderWidgetActions.NEXT:
+    //     console.log('no Data found, hiding the showmore button');
+    //     this.isShowMoreButtonVisible = false;
+    //     break;
+    // }
   }
 
+  // TODO: uncomment this code after OrderWidgetActions is exported from the framework
   widgetActionSuccess(name: string, data: any): any {
     console.log('name action success: ' + name + ' data: ' + data);
     switch (name) {
-      case OrderWidgetActions.NEXT:
-        if (data) {
-          console.log('got latest data');
-        } else {
-          console.log('no Data found, hiding the showmore button');
-          this.isShowMoreButtonVisible = false;
-        }
-        break;
+      // case OrderWidgetActions.NEXT:
+      //   if (data) {
+      //     console.log('got latest data');
+      //   } else {
+      //     console.log('no Data found, hiding the showmore button');
+      //     this.isShowMoreButtonVisible = false;
+      //   }
+      //   break;
     }
   }
 
@@ -107,8 +108,8 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   loadNextOrders() {
-    let action = new Action(OrderWidgetActions.NEXT);
-    this.orderWidgetAction.emit(action);
+    // let action = new Action(OrderWidgetActions.NEXT);
+    // this.orderWidgetAction.emit(action);
   }
 
   // helper functions for the accordian
