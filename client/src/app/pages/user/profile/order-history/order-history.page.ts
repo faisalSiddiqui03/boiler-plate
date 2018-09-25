@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
 import {
   Action,
@@ -19,6 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-order-history',
   templateUrl: './order-history.page.html',
   styleUrls: ['./order-history.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()

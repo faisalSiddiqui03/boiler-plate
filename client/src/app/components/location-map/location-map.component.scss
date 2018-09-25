@@ -21,10 +21,11 @@
     margin: 10px 0;
   }
 }
-.add-address-map{
+
+.add-address-map {
   display: flex;
   flex-direction: column;
-  .geo-location-address{
+  .geo-location-address {
     order: 1;
   }
 }
@@ -41,5 +42,22 @@
   .location-form {
     border: 0;
     padding: 0 10px;
+  }
+}
+
+// RTL Styles
+html {
+  &[dir="rtl"] {
+    .location-form {
+      form {
+        padding: 0 10px 0 3px;
+      }
+    }
+    .alert-radio-icon {
+      right: 26px !important;
+    }
+    .alert-radio-label{
+      padding: 13px 52px 13px 26px !important;
+    }
   }
 }
