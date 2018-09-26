@@ -2,9 +2,9 @@ import envConfig from './.env';
 
 export const config = {
     "merchantId": "2002cbfe-9adf-42ac-9bfd-8e013fee7c18",
-    "developerApiUrl": "http://www9.martjack.com/DeveloperAPI/",
-    "base_dev_url": "http://www9.martjack.com/DeveloperAPI/",
-    "frontendApiUrl": "https://sfapi-yum.martjack.com/V2/",
+    "developerApiUrl": "http://eu.ecom.capillary.in/developerapi/",
+    "base_dev_url": "http://eu.ecom.capillary.in/developerapi/",
+    "frontendApiUrl": "http://eu-fapi.ecom.capillary.in/V2",
     "publicKey": "DQIT6SJJ",
     "secretKey": "NEOV9AGGGLYHERHRBSOTBROD",
     "googleMapsApiKey": "AIzaSyBw9J8qANj6wmVir3wu0vuFJHhwXiZDZk0",
