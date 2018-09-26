@@ -7,11 +7,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { DealPage } from './deal.page';
 
+import { ProductDetailsWidgetModule, ImagePreloadModule } from "@capillarytech/pwa-framework";
+
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
-import { PizzaComponentModule } from '../../../components/pizza/pizza.module';
-
+import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
+import { DealShowcaseComponentModule } from '../../../components/deal-showcase/deal-showcase.module';
+import { DealShowcaseComponent } from '../../../components/deal-showcase/deal-showcase.component';
 const routes: Routes = [
   {
     path: '',
@@ -24,7 +27,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    PizzaComponentModule,
+    ProductDetailsWidgetModule,
+    ImagePreloadModule,
+    SkeletonModule,
+    DealShowcaseComponentModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {
@@ -34,6 +40,7 @@ const routes: Routes = [
       }
     })
   ],
-  declarations: [DealPage]
+  declarations: [DealPage],
+  entryComponents: [DealShowcaseComponent]
 })
 export class DealPageModule {}

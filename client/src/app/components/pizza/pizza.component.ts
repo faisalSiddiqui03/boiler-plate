@@ -22,6 +22,7 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../helpers/utils';
 import { Location } from '@angular/common';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-pizza-component',
@@ -34,6 +35,7 @@ import { Location } from '@angular/common';
 export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   @Input() productId;
+  @Input() productFromDeal;
 
   loaded = false;
   productWidgetExecutor = new EventEmitter();
@@ -61,6 +63,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     private config: ConfigService,
     private location: Location,
     private loaderService: LoaderService,
+    private modalController: ModalController,
   ) {
     super();
     this.translate.use(Utils.getLanguageCode());
@@ -294,6 +297,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   goBack() {
-    this.location.back();
+    if(!this.productFromDeal){
+      this.location.back();
+      return;
+    }
+    this.modalController.dismiss();
   }
 }

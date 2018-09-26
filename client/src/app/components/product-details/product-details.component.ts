@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../base/base-component';
 import { Utils } from '../../helpers/utils';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-product-details-component',
@@ -25,6 +26,7 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 export class ProductDetailsComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   
   @Input() productId: number;
+  @Input() productFromDeal;
   
   loaded = false;
   productWidgetExecutor = new EventEmitter();
@@ -48,6 +50,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     private config: ConfigService,
     private location: Location,
     private loaderService: LoaderService,
+    private modalController: ModalController
   ) {
     super();
     this.translate.use(Utils.getLanguageCode());
@@ -149,6 +152,10 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
 
   goBack() {
     this.setClient();
-    this.location.back();
+    if(!this.productFromDeal){
+      this.location.back();
+      return;
+    }
+    this.modalController.dismiss();
   }
 }

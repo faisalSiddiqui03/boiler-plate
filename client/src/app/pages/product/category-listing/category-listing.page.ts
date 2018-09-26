@@ -9,6 +9,7 @@ import {
   pwaLifeCycle,
   Action,
   ProductShowcaseWidgetActions,
+  ProductType,
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
@@ -93,11 +94,24 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   openProductDetails(product) {
-    if (product.productType === 'B') {
+    if (product.type === ProductType.Bundle) {
       this.router.navigateByUrl('/pizza/' + product.title + '/' + product.id);
       return;
     }
     this.router.navigateByUrl('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
+
+    // Use following, when catlog code is proper from api response
+    // if (product.type === ProductType.Bundle) {
+    //   this.router.navigateByUrl('/pizza/' + product.title + '/' + product.id);
+    // } else if(product.type === ProductType.Deal) {
+    //   this.router.navigateByUrl('/deal/' + product.title + '/' + product.id);
+    // } else {
+    //   this.router.navigateByUrl('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
+    // }
+  }
+
+  openDeal(product){
+    this.router.navigateByUrl('/deal/' + product.title + '/' + product.id);
   }
 
   updateFavorites(isFavorite, product) {
