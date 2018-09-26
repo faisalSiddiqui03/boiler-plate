@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-22706 1489 88 88">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        fill: none;
+      }
+
+      .cls-2, .cls-3, .cls-5 {
+        stroke: #9c9ea0;
+      }
+
+      .cls-2, .cls-4, .cls-5 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke-width: 4px;
+      }
+
+      .cls-4 {
+        stroke: #9c9ea0;
+      }
+
+      .cls-5 {
+        stroke-linecap: round;
+      }
+    </style>
+  </defs>
+  <g id="Icon_Wallet" transform="translate(14 3984)">
+    <rect id="Rectangle_2860" data-name="Rectangle 2860" class="cls-1" width="88" height="88" transform="translate(-22720 -2495)"/>
+    <g id="Icon_Wallet-2" data-name="Icon_Wallet" transform="translate(-23332.367 -5162.249)">
+      <path id="Path_3814" data-name="Path 3814" class="cls-2" d="M45.667,32H31.533A7.8,7.8,0,0,1,23.8,24a7.8,7.8,0,0,1,7.733-8H45.667" transform="translate(650.7 2697.769)"/>
+      <path id="Path_8816" data-name="Path 8816" class="cls-3" d="M1.333,0A1.333,1.333,0,1,1,0,1.333,1.333,1.333,0,0,1,1.333,0Z" transform="translate(681.7 2720.436)"/>
+      <path id="Path_3815" data-name="Path 3815" class="cls-4" d="M2.9,9" transform="translate(615.867 2686.103)"/>
+      <path id="Path_3816" data-name="Path 3816" class="cls-4" d="M3.4,9" transform="translate(616.7 2686.103)"/>
+      <path id="Path_3817" data-name="Path 3817" class="cls-2" d="M79.333,59.667H4.667A2.672,2.672,0,0,1,2,57V11.667A2.672,2.672,0,0,1,4.667,9H79.333A2.672,2.672,0,0,1,82,11.667V57A2.519,2.519,0,0,1,79.333,59.667Z" transform="translate(614.367 2686.103)"/>
+      <path id="Path_3818" data-name="Path 3818" class="cls-5" d="M2.7,20.517l52.533-18.4A3.923,3.923,0,0,1,60.3,5.85V18.917" transform="translate(615.534 2674.319)"/>
+      <line id="Line_851" data-name="Line 851" class="cls-5" x2="5.333" transform="translate(677.7 2701.769)"/>
+      <line id="Line_852" data-name="Line 852" class="cls-5" x2="5.333" transform="translate(661.7 2701.769)"/>
+      <line id="Line_853" data-name="Line 853" class="cls-5" x2="5.333" transform="translate(645.7 2701.769)"/>
+      <line id="Line_854" data-name="Line 854" class="cls-5" x2="5.333" transform="translate(629.7 2701.769)"/>
+      <line id="Line_855" data-name="Line 855" class="cls-5" x2="5.333" transform="translate(677.7 2739.103)"/>
+      <line id="Line_856" data-name="Line 856" class="cls-5" x2="5.333" transform="translate(661.7 2739.103)"/>
+      <line id="Line_857" data-name="Line 857" class="cls-5" x2="5.333" transform="translate(645.7 2739.103)"/>
+      <line id="Line_858" data-name="Line 858" class="cls-5" x2="5.333" transform="translate(629.7 2739.103)"/>
+    </g>
+  </g>
+</svg>
