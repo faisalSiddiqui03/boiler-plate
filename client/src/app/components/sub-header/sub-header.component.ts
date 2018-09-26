@@ -11,6 +11,7 @@ export class SubHeaderComponent implements OnInit {
 
   /**To get heading in the sub-header for each page */
   @Input() title: string;
+  @Input() lockIcon = false;
 
   constructor(
     private location: Location
