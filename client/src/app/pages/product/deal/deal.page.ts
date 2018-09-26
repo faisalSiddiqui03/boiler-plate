@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewEncapsulation, ComponentRef } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BaseComponent } from '../../../base/base-component';
 import { Location } from '@angular/common';
@@ -9,9 +9,13 @@ import {
   ProductDetailsWidgetActions,
   WidgetNames,
   ConfigService,
+  BundleItem,
+  Product,
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../helpers/utils';
+import { ModalController } from '@ionic/angular';
+import { DealShowcaseComponent } from '../../../components/deal-showcase/deal-showcase.component'
 
 @Component({
   selector: 'app-deal',
@@ -27,14 +31,19 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   productName: string;
   loaded = false;
   productWidgetAction = new EventEmitter();
-  serverProduct;
   currencyCode: string;
+  bundleGroupItems: any;
+  clientProduct: Product;
+  isShowBundleGroupItems: boolean;
+  bundleGroupType: string;
+  bundleGroupTitle: string;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private translate: TranslateService,
     private config: ConfigService,
+    private modalController: ModalController,
   ) {
     super();
     this.translate.use(Utils.getLanguageCode());
@@ -52,7 +61,6 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   widgetLoadingSuccess(name, data) {
     if (name == WidgetNames.PRODUCT_DISPLAY) {
-      this.serverProduct = data;
       this.loaded = true;
     }
   }
@@ -69,13 +77,35 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     console.log('Widget action failed' + name, data);
   }
 
-  getProductImageUrl() {
-    if(!this.serverProduct 
-      || !this.serverProduct.multipleImages 
-      || !this.serverProduct.multipleImages.length){
+  async showBundleGroupItems(bundleGroup, clientProduct): Promise<void> {
+    this.bundleGroupItems = bundleGroup.items;
+    this.bundleGroupType = bundleGroup.inputType;
+    this.clientProduct = clientProduct;
+    this.bundleGroupTitle = bundleGroup.title;
+    
+    const modal = await this.modalController.create({
+      component: DealShowcaseComponent,
+      componentProps: {
+        bundleGroupItems: this.bundleGroupItems,
+        bundleGroupType: this.bundleGroupType,
+        clientProduct: this.clientProduct,
+      }
+    });
+
+    modal.onDidDismiss().then((value) => {
+      console.log('dissmissed', value);
+    });
+
+    return await modal.present();
+  }
+
+  getProductImageUrl(product) {
+    if(!product 
+      || !product.multipleImages 
+      || !product.multipleImages.length){
       return;
     }
-    const imageUrl = this.getUrl(this.serverProduct.multipleImages[1].largeImage);
+    const imageUrl = this.getUrl(product.multipleImages[1].largeImage);
     return imageUrl;
   }
 

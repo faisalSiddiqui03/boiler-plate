@@ -1,0 +1,30 @@
+<div class="full-height category-listing-page">
+  <ion-content>
+    <div *ngIf="bundleGroupItems != undefined && bundleGroupItems?.length">
+      <ion-icon name="close-circle" (click)="closeModal()" slot="start"></ion-icon>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="product-card-holder" *ngFor="let prod of bundleGroupItems" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
+            no-padding>
+            <ion-card class="product-card non-deal-card" no-padding (click)="showProduct(prod)">
+              <ion-card-header no-padding>
+                <img height="100" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
+                />
+              </ion-card-header>
+              <ion-card-content padding>
+                <ion-card-subtitle class="product-title" color="dark">{{prod?.title}}</ion-card-subtitle>
+                <div class="price-segment" text-end>
+                  <p>{{'category_listing.price_tag' | translate }}
+                    <span class="label-price">{{prod.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+                  </p>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-content>
+</div>
+
+<app-pizza-component *ngIf="showPizza" [productId]="productId" class="full-height"></app-pizza-component>
