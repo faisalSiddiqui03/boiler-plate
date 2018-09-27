@@ -63,10 +63,10 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
       return this.getUrl(product.image);
     } else {
       let lastItem = product.multipleImages.slice().pop();
-      if(!lastItem.largeImage) {
+      if(!lastItem.image) {
         return this.getUrl(product.image);
       }
-      return this.getUrl(lastItem.largeImage);
+      return this.getUrl(lastItem.image);
     }
   }
 

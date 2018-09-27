@@ -118,13 +118,15 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   getProductImageUrl(product) {
-    if(!product 
-      || !product.multipleImages 
-      || !product.multipleImages.length){
-      return;
+    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+      return this.getUrl(product.image);
+    } else {
+      let lastItem = product.multipleImages.slice().pop();
+      if(!lastItem.image) {
+        return this.getUrl(product.image);
+      }
+      return this.getUrl(lastItem.image);
     }
-    const imageUrl = this.getUrl(product.multipleImages[1].largeImage);
-    return imageUrl;
   }
 
   getUrl(url: string){

@@ -172,14 +172,16 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     return item.price;
   }
 
-  getProductImageUrl() {
-    if(!this.serverProduct 
-      || !this.serverProduct.multipleImages 
-      || !this.serverProduct.multipleImages.length){
-      return;
+  getProductImageUrl(product) {
+    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+      return this.getUrl(product.image);
+    } else {
+      let lastItem = product.multipleImages.slice().pop();
+      if(!lastItem.image) {
+        return this.getUrl(product.image);
+      }
+      return this.getUrl(lastItem.image);
     }
-    const imageUrl = this.getUrl(this.serverProduct.multipleImages[1].largeImage);
-    return imageUrl;
   }
 
   getUrl(url: string){

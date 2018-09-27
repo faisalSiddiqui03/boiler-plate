@@ -94,9 +94,19 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   getProductImageUrl(product) {
-    if (product && product.multipleImages && product.multipleImages.length) {
-      return `https://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
+    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+      return this.getUrl(product.image);
+    } else {
+      let lastItem = product.multipleImages.slice().pop();
+      if(!lastItem.image) {
+        return this.getUrl(product.image);
+      }
+      return this.getUrl(lastItem.image);
     }
+  }
+
+  getUrl(url: string){
+    return `https://${url}`;
   }
 
   openProductDetails(product) {
