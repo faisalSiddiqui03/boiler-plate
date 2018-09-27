@@ -1,75 +1,68 @@
 .no-favorites {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 .favorites-list {
-    .favorite-item {
-        position: relative;
-        background: var(--ion-color-light);
-        .icon{
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            color: var(--ion-color-danger);
-            font-size: 16px;
-        }
-        .fav-img{
-            width: 100%;
-        }
-        .fav-text{
-            padding: 10px;
-        }
-        h5{
-            margin: 0 0 5px;
-            font-size: 15px;
-            line-height: 20px;
-            min-height: 40px;
-        }
-        .price{
-            border-top: 1px solid var(--ion-color-light-shade);
-            font-size: 15px;
-            padding-top: 10px;
-            span{
-                margin-right: 3px;
-            }
-        }
-        .skeleton-img{
-          width: 50%;
-          margin-left: 20%;
-          padding-top: 16%;
-          margin-bottom: 10%;
-        }
-    }
-}
-
-.product-card{
-  background: #fff;
-}
-
-.card-fav-img{
-  display: block;
-  margin: auto;
-  width: auto;
-}
-
-@media (min-width: 992px){
-    .favorites-list{
-        max-width: 1080px;
+  .favorite-item {
+    position: relative;
+    .product-card {
+      background: var(--ion-color-light);
+      .card-fav-img {
         margin: auto;
+        width: auto;
+      }
     }
+    .icon {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      color: var(--ion-color-danger);
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .fav-text {
+      padding: 10px;
+    }
+    h5 {
+      margin: 0 0 5px;
+      font-size: 15px; 
+      line-height: 20px;
+      min-height: 40px;
+    }
+    .price {
+      border-top: 1px solid var(--ion-color-light-shade);
+      font-size: 15px;
+      padding-top: 10px;
+      span {
+        margin-right: 3px;
+      }
+    }
+    .skeleton-img {
+      width: 50%;
+      margin-left: 20%;
+      padding-top: 16%;
+      margin-bottom: 10%;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .favorites-list {
+    max-width: 1080px;
+    margin: auto;
+  }
 }
 
 // RTL Styles
-
-html{
-    &[dir="rtl"]{
-        .favorites-list {
-            .favorite-item {
-                .icon{
-                    left: auto;
-                    right: 5px;
-                }
-            }
+html {
+  &[dir="rtl"] {
+    .favorites-list {
+      .favorite-item {
+        .icon {
+          left: auto;
+          right: 5px;
         }
+      }
     }
+  }
 }

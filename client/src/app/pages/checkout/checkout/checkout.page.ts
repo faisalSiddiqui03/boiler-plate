@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../helpers/utils';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -11,6 +11,7 @@ import { BaseComponent } from '../../../base/base-component';
   selector: 'app-checkout',
   templateUrl: './checkout.page.html',
   styleUrls: ['./checkout.page.scss'], 
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()
@@ -39,12 +40,13 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
 
     this.checkoutForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
-      mobile: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8)])],
+      mobile: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('^[2,5,6,9][0-9]*$')])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       building: ['', Validators.compose([Validators.required])],
       street: ['', Validators.compose([Validators.required])],
       comment: [''],
-    }, { validator: this.validateMobile });
+      paymentMethod:['cash'],
+    });
   }
 
   titleValue = '';
@@ -55,13 +57,12 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     });
   }
 
-  goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+  placeOrder(){
+    console.log(this.checkoutForm.value);
   }
 
-  validateMobile(group: FormGroup) {
-    let mobile = group.controls.mobile.value;
-    return (mobile.slice(0,1) != (2 || 5 || 6 || 9)) ? true : false;
+  goToPage(pageName) {
+    this.router.navigateByUrl(pageName);
   }
 
   widgetActionFailed(name: string, data: any): any {
