@@ -95,7 +95,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       case 'DELIVERYSLOTS':
         this.loaderService.stopLoading();
         this.fetchDeliverySlots = false;
-        this.asSoonPossible = data[0].id === -1;
+        if (data && data.length) {
+          this.asSoonPossible = data[0].id === -1;
+        }
         if (this.asSoonPossible) {
           this.setDeliverySlot(data[0]);
         }
