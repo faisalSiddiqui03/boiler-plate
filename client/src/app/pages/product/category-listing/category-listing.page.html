@@ -33,6 +33,12 @@
           </ion-toolbar>
           <div class="container showcase-container full-height">
             <ion-content>
+              <delivery-slots-widget *ngIf="fetchDeliverySlots"
+                [globalSlots]="true"
+                [deliveryMode]="getFulfilmentMode()?.mode"
+                [storeId]="getCurrentStore()?.id"
+                [componentId]="getComponentId()">
+              </delivery-slots-widget>
               <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
                 [action]="null" (lifecycle)="null">
                 <ng-template let-navwidget="widget">
@@ -327,9 +333,6 @@
                               </div>
                             </div>
                             <div *ngIf="widget.model != undefined && widget.model.length">
-                              <delivery-slots-widget *ngIf="fetchDeliverySlots" [globalSlots]="true" [deliveryMode]="getFulfilmentMode()?.mode" [storeId]="getCurrentStore()?.id"
-                                [componentId]="getComponentId()">
-                              </delivery-slots-widget>
                               <ion-hide-when size="lg">
                                 <div class="ribbon">
                                   <div class="ribbon__side--left">

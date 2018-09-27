@@ -12,6 +12,9 @@
     background-color: white;
     margin-bottom: 10px;
     z-index: 0;
+    .product-title {
+      min-height: 50px;
+    }
     .icon {
       position: absolute;
       top: 5px;
@@ -41,9 +44,6 @@
       margin: 0 auto;
       height: auto;
     }
-  }
-  .product-title {
-    min-height: 50px;
   }
   .product-card-holder {
     padding: 0 5px 10px 5px;

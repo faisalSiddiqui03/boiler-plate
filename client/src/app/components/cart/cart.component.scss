@@ -1,5 +1,7 @@
 .cart-component {
   .basket-container {
+    flex: 1;
+    overflow: auto;
     position: relative;
     padding-top: 25px; //background-color: rgba(var(--ion-color-cart-stripe-rgb), .9);
     //@media (max-width: 991px) {
@@ -34,6 +36,9 @@
     .common-heading-dotted {
       margin-bottom: 10px;
     }
+    .pr-15{
+      padding-right: 15px;
+    }
     ion-list {
       ion-item {
         position: relative;
@@ -45,7 +50,7 @@
             font-size: 14px;
             color: var(--ion-color-dark-shade);
             flex: 1;
-            padding-right: 15px;
+            @extend .pr-15;
           }
           .add-remove {
             align-items: center;
@@ -71,7 +76,7 @@
             font-weight: 600;
             color: var(--ion-color-dark-shade);
             width: 90px;
-            padding-right: 16px;
+            @extend .pr-15;
             text-align: right;
           }
         }
@@ -126,20 +131,18 @@
       }
     }
   }
-  ion-footer {
+  .bottom-footer {
+    // position: fixed;
+    // bottom: 0;
+    // display: block;
+    // width: 350px;
+    padding: 10px;
     ion-button {
       span {
         position: absolute;
-        right: 30px;
+        right: 20px;
       }
     }
-  }
-  .bottom-footer {
-    position: fixed;
-    bottom: 0;
-    display: block;
-    width: 350px;
-    padding: 10px;
   }
   @keyframes placeHolderShimmer {
     0% {
@@ -167,5 +170,54 @@
   }
   .underline {
     text-decoration: underline
+  }
+}
+
+
+// RTL Styles
+html{
+  &[dir="rtl"]{
+    .cart-component {
+      .basket-container {
+        .pr-15{
+          padding: 0 0 0 15px;
+        }
+        ion-list {
+          .tooltip{
+            left: auto;
+            right: 10px;
+            &::after{
+              left: auto;
+              right: 10px;
+            }
+          }
+          ion-label{
+            ion-icon{
+              &.remove-icon{
+                right: auto;
+                left: 10px;
+              }
+            }
+            .product-price{
+              text-align: center;
+            }
+          }
+        }
+        .delivery-bill-block{
+          padding: 14px 16px 14px 40px;
+        }
+        .total-bill-block{
+          padding: 0 16px 14px 40px;
+        }
+      }
+      .bottom-footer{
+        ion-button{
+          span{
+            right: auto;
+            left: 20px;
+          }
+        }
+      }
+    }
   }
 }

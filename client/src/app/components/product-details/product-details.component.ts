@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import {
@@ -20,6 +20,7 @@ import { ModalController } from '@ionic/angular';
   selector: 'app-product-details-component',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 @pwaLifeCycle()
