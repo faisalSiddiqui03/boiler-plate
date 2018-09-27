@@ -10,12 +10,15 @@ import {
   Action,
   ProductShowcaseWidgetActions,
   ProductType,
+  DeliveryModes,
+  DeliverySlotsWidget
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
 import { Utils } from '../../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../checkout/delivery-slot-selection/delivery-slot-selection.page';
+import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-category-listing',
@@ -45,12 +48,14 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     private translate: TranslateService,
     private config: ConfigService,
     public modalController: ModalController,
-    private location: Location
+    private location: Location,
+    private loaderService: LoaderService,
+    private alertService: AlertService
   ) {
     super();
     this.translate.use(Utils.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
-    console.log(this.location)
+    console.log(this.location);
   }
 
   ngOnInit() {
@@ -64,6 +69,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   ionViewWillEnter() {
     if (Utils.isEmpty(this.getDeliverySlot())) {
       this.fetchDeliverySlots = true;
+      this.loaderService.startLoading();
     }
   }
 
@@ -73,7 +79,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       from: 0,
       limit: 100,
       categoryIds: [categoryId]
-    }
+    };
   }
 
   async presentSlotModal() {
@@ -110,7 +116,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     // }
   }
 
-  openDeal(product){
+  openDeal(product) {
     this.router.navigateByUrl('/deal/' + product.title + '/' + product.id);
   }
 
@@ -138,6 +144,8 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     console.log('name = ', name, ' data = ', data);
     switch (name) {
       case 'DELIVERYSLOTS':
+        this.loaderService.stopLoading();
+        this.fetchDeliverySlots = false;
         this.asSoonPossible = data[0].id === -1;
         if (this.asSoonPossible) {
           this.setDeliverySlot(data[0]);
