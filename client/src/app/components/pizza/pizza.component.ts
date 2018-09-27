@@ -191,6 +191,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   } 
 
   addToCart() {
+    if(this.productFromDeal){
+      this.modalController.dismiss(this.clientProduct);
+      return;
+    }
     this.loaderService.startLoading();
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
@@ -206,23 +210,48 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
 
   getSizeCrustCombinationPrice(crustPropertyValueId, sizeProeprtyValueId){
     let variantPrice = 0;
-    this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-      if(key === `${crustPropertyValueId}:${sizeProeprtyValueId}`){
-        variantPrice = variant.webPrice;
-        return;
-      }
-    });
+    if(!this.productFromDeal){
+      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+        if(key === `${crustPropertyValueId}:${sizeProeprtyValueId}`){
+          variantPrice = variant.webPrice;
+          return;
+        }
+      });
+    } else {
+      this.productFromDeal.variantProducts.map((variantFromDeal) => { 
+        this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+          if(variant.id === variantFromDeal.id 
+            && key === `${crustPropertyValueId}:${sizeProeprtyValueId}`
+            && !variantFromDeal.isIncludedInBundleprice){
+
+            variantPrice = variantFromDeal.webPrice;
+            return;
+          }
+        });
+      });
+    }
     return variantPrice;
   }
 
   getSizeCrustCombinationAvailability(crustPropertyValueId, sizeProeprtyValueId){
     let isAvailabel = false;
-    this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-      if(key === `${crustPropertyValueId}:${sizeProeprtyValueId}`){
-        isAvailabel = true;
-        return;
-      }
-    });
+    if(!this.productFromDeal){
+      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+        if(key === `${crustPropertyValueId}:${sizeProeprtyValueId}`){
+          isAvailabel = true;
+          return;
+        }
+      });
+    } else {
+      this.productFromDeal.variantProducts.map((variantFromDeal) => { 
+        this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+          if(variant.id === variantFromDeal.id && key === `${crustPropertyValueId}:${sizeProeprtyValueId}`){
+            isAvailabel = true;
+            return;
+          }
+        });
+      });
+    }
     return isAvailabel;
   }
 

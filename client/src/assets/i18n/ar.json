@@ -100,7 +100,8 @@
 	},
 	"deal": {
 		"add_to_basket": "أضف عرضًا إلى السلة",
-		"choose_your": "إختر ما يخصك  بيتزا وسط"
+		"choose_your": "إختر ما يخصك  بيتزا وسط",
+		"added_to_cart": "إضافة إلى السلة"
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "في أقرب وقت",
@@ -351,6 +352,7 @@
 	"pizza": {
 		"add_extra": "أضف شيئًا إضافيًا",
 		"add_to_basket": "أضف إلى سلة بلدي",
+		"add_to_deal": "اضف إلى الصفقة",
 		"add_topping_error": "تجاوز الحد الأقصى لأعلى عدد",
 		"add_topping_success": "أضيفت بنجاح",
 		"added_to_cart": "إضافة إلى السلة",

@@ -100,7 +100,8 @@
 	},
 	"deal": {
 		"add_to_basket": "Add To My Basket",
-		"choose_your": "Choose your"
+		"choose_your": "Choose your",
+		"added_to_cart": "added to cart"
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "As soon as Possible",
@@ -351,6 +352,7 @@
 	"pizza": {
 		"add_extra": "Add something extra",
 		"add_to_basket": "Add To My Basket",
+		"add_to_deal": "Add to my deal",
 		"add_topping_error": "Exceeded maximum topping count",
 		"add_topping_success": "Topping successfuly added",
 		"added_to_cart": "added to cart",
