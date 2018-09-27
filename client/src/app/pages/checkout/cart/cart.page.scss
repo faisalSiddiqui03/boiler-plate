@@ -35,6 +35,9 @@
     .common-heading-dotted {
       margin-bottom: 10px;
     }
+    .pr-15{
+      padding-right: 15px;
+    }
     .cart-list {
       .cart-item {
         position: relative;
@@ -44,7 +47,7 @@
           font-size: 14px;
           color: var(--ion-color-dark-shade);
           flex: 1;
-          padding-right: 15px;
+          @extend .pr-15;
         }
         .toppings {
           font-size: 13px;
@@ -78,7 +81,7 @@
           font-weight: 600;
           color: var(--ion-color-dark-shade);
           width: 90px;
-          padding-right: 16px;
+          @extend .pr-15;
           text-align: right;
         }
         &+.cart-item {
@@ -113,7 +116,7 @@
       font-weight: 700;
     }
     .total-bill-block {
-      margin: 0px 40px 14px 16px;
+      padding: 0px 40px 14px 16px;
       color: var(--ion-color-dark);
       font-size: 14px;
       font-weight: 700;
@@ -171,3 +174,53 @@
   }
 }
 
+// RTL Styles
+html{
+  &[dir="rtl"]{
+    .cart-page {
+      .basket-container {
+        .pr-15{
+          padding: 0 0 0 15px;
+        }
+        .basket-close{
+          text-align: left;
+        }
+        .cart-list {
+          .tooltip{
+            left: auto;
+            right: 10px;
+            &::after{
+              left: auto;
+              right: 10px;
+            }
+          }
+          .cart-item{
+            ion-icon{
+              &.remove-icon{
+                right: auto;
+                left: 10px;
+              }
+            }
+            .product-price{
+              text-align: center;
+            }
+          }
+        }
+        .delivery-bill-block{
+          padding: 14px 16px 14px 40px;
+        }
+        .total-bill-block{
+          padding: 0 16px 14px 40px;
+        }
+      }
+      ion-footer{
+        ion-button{
+          span{
+            right: auto;
+            left: 30px;
+          }
+        }
+      }
+    }
+  }
+}

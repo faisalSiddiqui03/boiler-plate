@@ -1,11 +1,11 @@
-<div class="full-height popup-wrap">
+<div class="full-height popup-wrap product-details-page">
   <div class="popup-inner full-height">
     <product-display-widget class="full-height" pfWidgetImpressionTrack [executor]="productWidgetExecutor" [action]="productWidgetAction"
       (lifecycle)="null" [productId]="productId" [componentId]="getComponentId()">
 
       <ng-template let-widget="widget">
         <ng-container *ngIf="!loaded">
-          <ion-content>
+          <ion-content class="skeleton-product-details">
             <ion-card no-padding no-margin>
               <ion-card-header no-padding class="product-img-block">
                 <ion-item text-center class="popup-title" no-margin>
@@ -26,55 +26,56 @@
               </ion-card-content>
             </ion-card>
           </ion-content>
-          <ion-footer>
+          <ion-footer class="skeleton-product-details">
             <ion-button disabled color="success" text-uppercase expand="block" mode="ios" class="btn-success">{{'product_details.add_to_basket' | translate}}
             </ion-button>
           </ion-footer>
         </ng-container>
 
         <ng-container *ngIf="loaded">
-          <ion-content no-padding>
+          <div class="product-details-content-block">
 
             <div class="product-img-block">
               <ion-icon name="close-circle" (click)="goBack()" slot="start"></ion-icon>
               <img alt="{{widget?.model?.title}}" class="product-main-image" height="170" width="340" img-preloader="{{getProductImageUrl()}}"
                 defaultImage="assets/imgs/default/default.png" />
             </div>
-            <div class="popup-title">
-              <h4 text-center padding no-margin>{{widget?.model?.title}}</h4>
-              <div class="img-text" padding>
-                <p>{{widget?.model?.longDescription}}</p>
+            <div class="product-details-content-inner">
+              <div class="popup-title">
+                <h4 text-center padding no-margin>{{widget?.model?.title}}</h4>
+                <div class="img-text" padding>
+                  <p>{{widget?.model?.longDescription}}</p>
+                </div>
+              </div>
+
+              <div class="drinks-choose-block" margin>
+                <div *ngIf="!showVariants">
+                  <ul>
+                    <ng-container *ngFor="let varprop of widget?.model?.variantProperties">
+                      <ng-container *ngIf="varprop.showProperty">
+                        <div class="block-header" text-capitalize>{{varprop?.name}}</div>
+                        <li flex-center text-capitalize *ngFor="let propValue of varprop?.values" (click)="setSelectedPropertyvalue(propValue, varprop)">
+                          <span class="block-text">{{propValue?.name}}</span>
+                          <span class="block-icon">
+                            <ion-icon *ngIf="isPropertyValueSelected(varprop?.id, propValue?.id)" color="dark" name="checkmark"></ion-icon>
+                            <ion-icon *ngIf="!isPropertyValueSelected(varprop?.id, propValue?.id)" color="success" name="add"></ion-icon>
+                          </span>
+                        </li>
+                      </ng-container>
+                      <ng-container *ngIf="!varprop.showProperty">
+                        <div class="selected-variant" flex-center (click)="varprop.showProperty = !varprop.showProperty">
+                          <span class="block-text">{{getSelectedPropValueName(varprop)}}</span>
+                          <span class="block-icon">
+                            <ion-icon color="dark" name="checkmark"></ion-icon>
+                          </span>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </ul>
+                </div>
               </div>
             </div>
-
-            <div class="drinks-choose-block" margin>
-              <div *ngIf="!showVariants">
-                <ul>
-                  <ng-container *ngFor="let varprop of widget?.model?.variantProperties">
-                    <ng-container *ngIf="varprop.showProperty">
-                      <div class="block-header" text-capitalize>{{varprop?.name}}</div>
-                      <li flex-center text-capitalize *ngFor="let propValue of varprop?.values" (click)="setSelectedPropertyvalue(propValue, varprop)">
-                        <span class="block-text">{{propValue?.name}}</span>
-                        <span class="block-icon">
-                          <ion-icon *ngIf="isPropertyValueSelected(varprop?.id, propValue?.id)" color="dark" name="checkmark"></ion-icon>
-                          <ion-icon *ngIf="!isPropertyValueSelected(varprop?.id, propValue?.id)" color="success" name="add"></ion-icon>
-                        </span>
-                      </li>
-                    </ng-container>
-                    <ng-container *ngIf="!varprop.showProperty">
-                      <div class="selected-variant" flex-center (click)="varprop.showProperty = !varprop.showProperty">
-                        <span class="block-text">{{getSelectedPropValueName(varprop)}}</span>
-                        <span class="block-icon">
-                          <ion-icon color="dark" name="checkmark"></ion-icon>
-                        </span>
-                      </div>
-                    </ng-container>
-                  </ng-container>
-                </ul>
-              </div>
-            </div>
-
-          </ion-content>
+          </div>
           <ion-footer *ngIf="showAddToCart">
             <!--<div class="quantity-block" flex align-items-center justify-content-between>-->
             <!--<p no-margin>Quantity</p>-->
