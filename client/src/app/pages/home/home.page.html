@@ -4,6 +4,12 @@
   </ion-header>
 </ion-hide-when>
 <ion-content (click)="outSideClick()" class="home-page">
+  <delivery-slots-widget *ngIf="fetchDeliverySlots"
+  [globalSlots]="true"
+  [deliveryMode]="getFulfilmentMode()?.mode"
+  [storeId]="getCurrentStore()?.id"
+  [componentId]="getComponentId()">
+  </delivery-slots-widget>
   <div class="banner-home container">
     <banner-widget
       [componentId]="getComponentId()"
@@ -174,12 +180,6 @@
                 {{'home_page.start_my_order' | translate}}
               </ion-button>
             </div>
-            <delivery-slots-widget *ngIf="fetchDeliverySlots"
-              [globalSlots]="true"
-              [deliveryMode]="getFulfilmentMode()?.mode"
-              [storeId]="getCurrentStore()?.id"
-              [componentId]="getComponentId()">
-            </delivery-slots-widget>
           </div>
         </ng-template>
       </store-locator-widget>

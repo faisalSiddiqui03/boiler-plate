@@ -56,6 +56,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   deliveryModes = DeliveryModes;
   asSoonPossible = false;
   fetchDeliverySlots = false;
+  isNavigationClicked = false;
 
   constructor(
     private config: ConfigService,
@@ -79,6 +80,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ionViewDidEnter() {
     this.selectedStore = this.getCurrentStore();
     this.changeRequested = false;
+    if (this.isStoreSelected()) {
+      this.fetchDeliverySlots = true;
+    }
   }
 
   ionViewWillLeave() {
@@ -90,11 +94,16 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     switch (name) {
       case 'DELIVERYSLOTS':
         this.loaderService.stopLoading();
-        this.asSoonPossible = data[0].id === -1;
+        this.fetchDeliverySlots = false;
+        if (data && data.length) {
+          this.asSoonPossible = data[0].id === -1;
+        }
         if (this.asSoonPossible) {
           this.setDeliverySlot(data[0]);
         }
-        this.navigateToDeals();
+        if (this.isNavigationClicked) {
+          this.navigateToDeals();
+        }
     }
   }
 
@@ -195,7 +204,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   selectCity(city) {
     this.hasError.selectAreaFirst = false;
-    let previousCity = this.selectedCity ? this.selectedCity : '';
+    const previousCity = this.selectedCity ? this.selectedCity : '';
     this.selectedCity = city.name;
     this.selectedCityCode = city.code;
     this.toggleDropDown('city', true, false);
@@ -237,6 +246,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   findStore() {
+    this.isNavigationClicked = true;
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
       [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
     this.loaderService.startLoading('Fetching Stores');
@@ -259,6 +269,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   navigateToDeals() {
+    this.isNavigationClicked = true;
+    if (this.fetchDeliverySlots) {
+      this.loaderService.startLoading();
+      return;
+    }
     if (!this.asSoonPossible || Utils.isEmpty(this.getDeliverySlot())) {
       this.presentSlotModal();
     }
@@ -284,7 +299,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   isStoreSelected() {
-    return this.selectedStore && !this.selectedStore.isDefaultLocation && !this.changeRequested
+    return this.selectedStore && !this.selectedStore.isDefaultLocation && !this.changeRequested;
     // return true;
   }
 
