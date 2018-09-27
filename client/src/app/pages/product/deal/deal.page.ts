@@ -11,11 +11,13 @@ import {
   ConfigService,
   BundleItem,
   Product,
+  Action,
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { DealShowcaseComponent } from '../../../components/deal-showcase/deal-showcase.component'
+import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-deal',
@@ -44,6 +46,8 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private translate: TranslateService,
     private config: ConfigService,
     private modalController: ModalController,
+    private loaderService: LoaderService,
+    private alertService: AlertService,
   ) {
     super();
     this.translate.use(Utils.getLanguageCode());
@@ -70,7 +74,14 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   widgetActionSuccess(name: string, data: any) {
-    
+    switch(name) {
+      case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
+        console.log('Item added to cart : ', data);
+        this.loaderService.stopLoading();
+        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 1000, 'top');
+        this.goBack();
+        break;
+    }
   }
 
   widgetActionFailed(name: string, data: any) {
@@ -99,14 +110,23 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     return await modal.present();
   }
 
+  addToCart() {
+    this.loaderService.startLoading();
+    this.productWidgetAction.emit(
+      new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
+    );
+  }
+
   getProductImageUrl(product) {
-    if(!product 
-      || !product.multipleImages 
-      || !product.multipleImages.length){
-      return;
+    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+      return this.getUrl(product.image);
+    } else {
+      let lastItem = product.multipleImages.slice().pop();
+      if(!lastItem.image) {
+        return this.getUrl(product.image);
+      }
+      return this.getUrl(lastItem.image);
     }
-    const imageUrl = this.getUrl(product.multipleImages[1].largeImage);
-    return imageUrl;
   }
 
   getUrl(url: string){

@@ -179,7 +179,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   widgetLoadingSuccess(name, data) {
-    console.log('name loading success: ' + name + ' data: ' + data);
+    console.log('name loading success: ' + name + ' data: ', data);
     // this.loaderService.stopLoading();
     switch (name) {
       case WidgetNames.CART:

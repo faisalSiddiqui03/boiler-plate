@@ -130,14 +130,16 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     return selectedValue;
   }
 
-  getProductImageUrl() {
-    if (!this.serverProduct
-      || !this.serverProduct.multipleImages
-      || !this.serverProduct.multipleImages.length) {
-      return;
+  getProductImageUrl(product) {
+    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+      return this.getUrl(product.image);
+    } else {
+      let lastItem = product.multipleImages.slice().pop();
+      if(!lastItem.image) {
+        return this.getUrl(product.image);
+      }
+      return this.getUrl(lastItem.image);
     }
-    const imageUrl = this.getUrl(this.serverProduct.multipleImages[1] ? this.serverProduct.multipleImages[1].largeImage : this.serverProduct.multipleImages[0].largeImage);
-    return imageUrl;
   }
 
   getUrl(url: string) {

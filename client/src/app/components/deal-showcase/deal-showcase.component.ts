@@ -59,7 +59,15 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   }
 
   getProductImageUrl(product) {
-    return this.getUrl(product.image);;
+    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+      return this.getUrl(product.image);
+    } else {
+      let lastItem = product.multipleImages.slice().pop();
+      if(!lastItem.image) {
+        return this.getUrl(product.image);
+      }
+      return this.getUrl(lastItem.image);
+    }
   }
 
   getUrl(url: string){
@@ -83,12 +91,34 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
         productId: bundleItem.productId,
         productFromDeal: bundleItem,
       }
-    })
+    });
+
+    modal.onDidDismiss().then((addedItem) => {
+      // WIP
+      if(!addedItem || !addedItem.data){
+        console.error('Invalid configuration for added item!');
+        return;
+      }
+      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+        if(item.groupId === bundleItem.groupId) item.remove();
+      });
+      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+        if(item.id === bundleItem.id){
+          item.add();
+          item.setVariantProductId(addedItem.data.variantProductId);
+          item.setPrimaryProductId(addedItem.data.primaryProductId);
+          if(addedItem.data.type === ProductType.Bundle){
+            item.setBundleItems(addedItem.data.bundleItems);
+          }
+        }
+      });
+      this.closeModal();
+    });
     
     return await modal.present();
   }
 
   closeModal() {
-    this.modalController.dismiss('new data');
+    this.modalController.dismiss();
   }
 }
