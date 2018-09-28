@@ -17,12 +17,16 @@ export class AuthGuard extends BaseComponent implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.getUserModel() && this.getUserModel().type !== 'GUEST') {
-      return true
-    }
-    console.log('access denied');
-    this.router.navigateByUrl('home');
-    return false;
+    state: RouterStateSnapshot
+  ): Observable<boolean> | Promise<boolean> | boolean {
+    this.getUserPromise().then( userModel => {
+        if (userModel && userModel.type !== 'GUEST') {
+            return true;
+        } else {
+          console.log('access denied');
+          this.router.navigateByUrl('home');
+          return false;
+        }
+    });
   }
 }
