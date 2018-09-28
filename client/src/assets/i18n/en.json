@@ -103,7 +103,16 @@
 		"visa_pay_text": "You'll be able to pay securely by Visa, Mastercard or Mestro after you press 'Go to payment'",
 		"where_we_deliver": "Where should we deliver it to?",
 		"who_we_delivering": "Who are we delivering to?",
-		"with_cash": "With Cash"
+        "with_cash": "With Cash",
+        "or": "OR",
+        "change_address": "Change Address:",
+        "add_new_address": "Add New Address",
+        "save_as": "Save As:",
+        "home": "Home",
+        "work": "Work",
+        "other": "Other",
+        "order_successful": "Order Placed Successfully.",
+        "order_failure": "We had an error with placing your order. Please try again"
 	},
 	"contact_page": {
 		"address_1": "Al-Homaizi Foodstuff Co.",
