@@ -180,4 +180,9 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   goToDeals() {
     this.router.navigateByUrl('/product/deals/CU00215646');
   }
+
+  goToPage(pageName) {
+    this.router.navigateByUrl(pageName);
+  }
+
 }

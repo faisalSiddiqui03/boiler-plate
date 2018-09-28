@@ -27,12 +27,16 @@
             <a class="change" (click)="presentSlotModal()" text-capitalize>{{ 'checkout_page.change' | translate }}</a>
           </ion-item>
         </div>
+
+
         <div class="checkout-form">
           <form class="form-section" [formGroup]="checkoutForm">
             <div class="personal-info border">
+              
               <div class="checkout-head" text-center>
                 <h2 no-margin>{{ 'checkout_page.who_we_delivering' | translate }} </h2>
               </div>
+              
               <div class="form-group" [class.error]="checkoutForm.get('name').touched && !checkoutForm.get('name').valid">
                 <ion-label class="login-label" for="name" text-capitalize>{{ 'checkout_page.name' | translate }}*
                 </ion-label>
@@ -47,6 +51,7 @@
                   </div>
                 </div>
               </div>
+              
               <div class="form-group" [class.error]="checkoutForm.get('mobile').touched && !checkoutForm.get('mobile').valid">
                 <ion-label class="login-label" for="mobile" text-capitalize>{{ 'checkout_page.mobile' | translate }}*
                 </ion-label>
@@ -66,6 +71,7 @@
                   </div>
                 </div>
               </div>
+              
               <div class="form-group" [class.error]="checkoutForm.get('email').touched && !checkoutForm.get('email').valid">
                 <ion-label class="login-label" for="email" text-capitalize>{{ 'checkout_page.email' | translate }}*
                 </ion-label>
@@ -82,45 +88,73 @@
                   </div>
                 </div>
               </div>
-              <div class="checkout-head" text-center>
-                <h2 no-margin>{{ 'checkout_page.where_we_deliver' | translate }}</h2>
-              </div>
-              <div class="form-group" [class.error]="checkoutForm.get('building').touched && !checkoutForm.get('building').valid">
-                <ion-label class="login-label" for="building" text-capitalize>{{ 'checkout_page.building' | translate }}*
-                </ion-label>
-                <div class="form-input">
-                  <ion-input id="building" placeholder="{{ 'checkout_page.building_placeholder' | translate }}" inputmode="text" formControlName="building"></ion-input>
-                  <div class="icons">
-                    <ion-icon name="alert"></ion-icon>
+              
+              <div *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY">
+                  <div class="checkout-head" text-center>
+                    <h2 no-margin>{{ 'checkout_page.where_we_deliver' | translate }}</h2>
                   </div>
-                </div>
-                <div *ngIf="checkoutForm.get('building').touched">
-                  <div class="error-msg" *ngIf="checkoutForm.get('building').errors?.required">{{ 'checkout_page.building_required' | translate }}
+                  
+                  <div class="form-group" [class.error]="checkoutForm.get('building').touched && !checkoutForm.get('building').valid">
+                    <ion-label class="login-label" for="building" text-capitalize>{{ 'checkout_page.building' | translate }}*
+                    </ion-label>
+                    <div class="form-input">
+                      <ion-input id="building" placeholder="{{ 'checkout_page.building_placeholder' | translate }}" inputmode="text" formControlName="building"></ion-input>
+                      <div class="icons">
+                        <ion-icon name="alert"></ion-icon>
+                      </div>
+                    </div>
+                    <div *ngIf="checkoutForm.get('building').touched">
+                      <div class="error-msg" *ngIf="checkoutForm.get('building').errors?.required">{{ 'checkout_page.building_required' | translate }}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div class="form-group" [class.error]="checkoutForm.get('street').touched && !checkoutForm.get('street').valid">
-                <ion-label class="login-label" for="street" text-capitalize>{{ 'checkout_page.street' | translate }}*
-                </ion-label>
-                <div class="form-input">
-                  <ion-input id="street" placeholder="{{ 'checkout_page.street_placeholder' | translate }}" inputmode="text" formControlName="street"></ion-input>
-                  <div class="icons">
-                    <ion-icon name="alert"></ion-icon>
+                  
+                  <div class="form-group" [class.error]="checkoutForm.get('street').touched && !checkoutForm.get('street').valid">
+                    <ion-label class="login-label" for="street" text-capitalize>{{ 'checkout_page.street' | translate }}*
+                    </ion-label>
+                    <div class="form-input">
+                      <ion-input id="street" placeholder="{{ 'checkout_page.street_placeholder' | translate }}" inputmode="text" formControlName="street"></ion-input>
+                      <div class="icons">
+                        <ion-icon name="alert"></ion-icon>
+                      </div>
+                    </div>
+                    <div *ngIf="checkoutForm.get('street').touched">
+                      <div class="error-msg" *ngIf="checkoutForm.get('street').errors?.required">{{ 'checkout_page.street_required' | translate }}
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div *ngIf="checkoutForm.get('street').touched">
-                  <div class="error-msg" *ngIf="checkoutForm.get('street').errors?.required">{{ 'checkout_page.street_required' | translate }}
+                  
+                  <div class="form-group">
+                    <ion-label class="login-label" for="comment" text-capitalize>{{ 'checkout_page.comment' | translate }}
+                    </ion-label>
+                    <div class="form-input">
+                      <ion-input id="comment" placeholder="{{ 'checkout_page.comment_placeholder' | translate }}" inputmode="text" formControlName="comment"></ion-input>
+                    </div>
                   </div>
-                </div>
               </div>
-              <div class="form-group">
-                <ion-label class="login-label" for="comment" text-capitalize>{{ 'checkout_page.comment' | translate }}
-                </ion-label>
-                <div class="form-input">
-                  <ion-input id="comment" placeholder="{{ 'checkout_page.comment_placeholder' | translate }}" inputmode="text" formControlName="comment"></ion-input>
-                </div>
+
+              <div *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP">
+                  <div class="checkout-head" text-center>
+                    <h2 no-margin>{{ 'checkout_page.where_should_you_pick_it_from' | translate }}</h2>
+                  </div>
+                  
+                  
+                  
+                  <div class="form-group">
+                    <ion-label class="login-label" for="comment" text-capitalize>{{ 'checkout_page.comment' | translate }}
+                    </ion-label>
+                    <div class="form-input">
+                      <ion-input id="comment" placeholder="{{ 'checkout_page.comment_placeholder' | translate }}" inputmode="text" formControlName="comment"></ion-input>
+                    </div>
+                  </div>
               </div>
+
+              
             </div>
+
+            
+
+
             <user-address-widget *ngIf="getUserModel()?.type !== 'GUEST' && useSavedAddress" [componentId]="getComponentId()" [action]="userAddressWidgetActions">
                 <ng-template let-widget="widget">
                     <ng-container *ngIf="widget.model">
@@ -148,6 +182,7 @@
                     </ng-container>
                     </ng-template>
             </user-address-widget>
+            
             <single-user-address-widget *ngIf="getUserModel()?.type !== 'GUEST' && !useSavedAddress" [componentId]="getComponentId()" [action]="singleUserAddressWidgetActions">
                     <ng-template let-widget="widget">
                         <ng-container *ngIf="widget.model">
@@ -168,30 +203,32 @@
                 </ng-container>
                 </ng-template>
             </single-user-address-widget>
+            
             <div class="payment-info border">
               <div class="checkout-head" text-center>
                 <h2 no-margin>{{ 'checkout_page.how_you_pay' | translate }}</h2>
               </div>
               <payment-options-widget [componentId]="getComponentId()" [action]="paymentOptionsWidgetAction">
-                    <ng-template let-widget="widget">
-                      <ng-container *ngIf="widget.model">
-                        <ion-list>
-                            <ion-radio-group formControlName="paymentMethod">
-                            <ion-item (click)="slectPaymentOption(option)" *ngFor="let option of widget.model">
-                                <ion-radio color="success" slot="start" value="{{option?.paymentOption}}"></ion-radio>
-                                <ion-label *ngIf="option.paymentOption == 'COD'" ><img src="assets/imgs/Icon_cash.svg" alt="">{{ 'checkout_page.with_cash' | translate }}</ion-label>
-                               <ion-label *ngIf="option.paymentOption == 'KNET'" ><img src="assets/imgs/KNET.png" alt="">{{ 'checkout_page.debit_credit_card' | translate }}</ion-label>
-                            </ion-item>
-                            <div class="visa-card" flex-center *ngIf="checkoutForm.controls.paymentMethod.value == 'KNET'">
-                                <img src="assets/imgs/card-icons1.png" alt="cards">
-                                <span>{{ 'checkout_page.visa_pay_text' | translate }}</span>
-                            </div>
-                            </ion-radio-group>
-                        </ion-list>
-                        </ng-container>
-                      </ng-template>
-                </payment-options-widget>
+                  <ng-template let-widget="widget">
+                    <ng-container *ngIf="widget.model">
+                      <ion-list>
+                          <ion-radio-group formControlName="paymentMethod">
+                          <ion-item (click)="slectPaymentOption(option)" *ngFor="let option of widget.model">
+                              <ion-radio color="success" slot="start" value="{{option?.paymentOption}}"></ion-radio>
+                              <ion-label *ngIf="option.paymentOption == 'COD'" ><img src="assets/imgs/Icon_cash.svg" alt="">{{ 'checkout_page.with_cash' | translate }}</ion-label>
+                              <ion-label *ngIf="option.paymentOption == 'KNET'" ><img src="assets/imgs/KNET.png" alt="">{{ 'checkout_page.debit_credit_card' | translate }}</ion-label>
+                          </ion-item>
+                          <div class="visa-card" flex-center *ngIf="checkoutForm.controls.paymentMethod.value == 'KNET'">
+                              <img src="assets/imgs/card-icons1.png" alt="cards">
+                              <span>{{ 'checkout_page.visa_pay_text' | translate }}</span>
+                          </div>
+                          </ion-radio-group>
+                      </ion-list>
+                      </ng-container>
+                    </ng-template>
+              </payment-options-widget>
             </div>
+            
             <dummy-checkout-widget [createTransaction]="false" [componentId]="getComponentId()" [action]="checkoutWidgetAction">
                 <div class="place-order border" text-center>
                 <ion-item class="terms-check">
@@ -208,6 +245,7 @@
                 </ion-button>
                 </div>
             </dummy-checkout-widget>
+            
             <div class="checkout-footer" text-center>
               <p>{{ 'checkout_page.agree_text' | translate }}
                 <br>
@@ -216,6 +254,7 @@
                 <a class="underline">{{ 'checkout_page.privacy_policy' | translate }}</a>
               </p>
             </div>
+
           </form>
         </div>
       </div>

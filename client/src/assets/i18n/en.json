@@ -70,7 +70,7 @@
 		"building": "Building Number/Villa Number",
 		"building_placeholder": "Building Number/Villa Number",
 		"building_required": "We would need your address to deliver your pizza",
-		"change":"Change",
+		"change": "Change",
 		"comment": "Order Comment",
 		"comment_placeholder": "Order Comment",
 		"confirm": "Confirm",
@@ -90,17 +90,18 @@
 		"name": "Name",
 		"name_placeholder": "First name is fine",
 		"name_required": "First name please",
-		"order_for":"Order for",
+		"order_for": "Order for",
 		"ordering_for_delivery_to": "Ordering for delivery to",
 		"pick_a_time": "Pick a time",
 		"place_your_order": "Place your Order",
-		"privacy_policy":"Privacy Policy",
+		"privacy_policy": "Privacy Policy",
 		"secure_checkout": "Secure Checkout",
 		"street": "Way Number/Street Name",
 		"street_placeholder": "Enter Way Number Or Street Name",
 		"street_required": "We would need your address to deliver your pizza",
 		"terms_conditions": "Terms & Conditions",
 		"visa_pay_text": "You'll be able to pay securely by Visa, Mastercard or Mestro after you press 'Go to payment'",
+		"where_should_you_pick_it_from": "Where should your pick it from?",
 		"where_we_deliver": "Where should we deliver it to?",
 		"who_we_delivering": "Who are we delivering to?",
         "with_cash": "With Cash",
@@ -126,8 +127,8 @@
 	},
 	"deal": {
 		"add_to_basket": "Add To My Basket",
-		"choose_your": "Choose your",
-		"added_to_cart": "added to cart"
+		"added_to_cart": "added to cart",
+		"choose_your": "Choose your"
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "As soon as Possible",
@@ -148,7 +149,6 @@
 		"faq_accordion03_p1": "Yes, you can. As soon as you have clicked ‘place my order’ and see a page that confirms that we have received your order you can place another order.",
 		"faq_accordion04_head": "Can I re-order a previous order?",
 		"faq_accordion04_p1": "Yes you can, as long as you are signed in to your account when you placed the previous order. To see your previous orders go to the ‘Order history’ section under",
-		"faq_accordion4_p1link": "My account",
 		"faq_accordion05_head": "What is a future order?",
 		"faq_accordion05_p1": "If you want your pizza to be delivered on a specific time instead of as soon as possible this is a future order. You can place orders to be delivered later on the same day (at least 1 hour from when you are placing the order) or in the next two days. If you place a future order you will receive a confirmation as soon as you place the order as well as a reminder on the day the delivery is due.",
 		"faq_accordion05_p2": "Choose ‘now’ if you want your order delivered as soon as possible.",
@@ -213,7 +213,8 @@
 		"faq_accordion26_p1link": "Contact Us",
 		"faq_accordion27_head": "How will you use my personal information?",
 		"faq_accordion27_p1": "Pizza Hut takes security and use of personal information very seriously; for full details of our Privacy Policy please click",
-		"faq_accordion27_p1link": "here"
+		"faq_accordion27_p1link": "here",
+		"faq_accordion4_p1link": "My account"
 	},
 	"favorites_page": {
 		"my_favorites": "my Favorites",
@@ -475,7 +476,7 @@
 		"successfully_deleted_address": "Successfully deleted the address",
 		"sure_remove_address": "Are you sure you want to remove this address?"
 	},
-	"search_location_page":{
+	"search_location_page": {
 		"recent_searches": "Recent Searches",
 		"search_placeholder": "Search your location",
 		"use_current_location": "Use Current Location ",
@@ -511,14 +512,10 @@
 		"lname": "First Name",
 		"lname_placeholder": "So we know what to call you",
 		"mobile": "Mobile",
-		"mobile_error_length": "Mobile should consist of 8 digits",
-		"mobile_error_pattern": "Mobile numbers should start with 2,5,6 or 9",
-		"mobile_error_required": "Your number please",
 		"mobile_placehlder": "So we can contact you for pizza updates",
 		"password": "Password",
 		"password_error_length": "Password minimum length is 6 characters",
 		"password_error_required": "It will be our little secret",
-		"password_placeholder": "It will be our little secret",
 		"registration_successful": "",
 		"sign_up": "Sign up",
 		"submit": "SIGN UP"
