@@ -2,9 +2,9 @@ import { Component, OnInit, EventEmitter, ViewEncapsulation, ComponentRef } from
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BaseComponent } from '../../../base/base-component';
 import { Location } from '@angular/common';
-import { 
-  OnWidgetActionsLifecyle, 
-  OnWidgetLifecyle, 
+import {
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
   pwaLifeCycle,
   ProductDetailsWidgetActions,
   WidgetNames,
@@ -18,6 +18,7 @@ import { Utils } from '../../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { DealShowcaseComponent } from '../../../components/deal-showcase/deal-showcase.component'
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
+import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
 
 @Component({
   selector: 'app-deal',
@@ -29,6 +30,7 @@ import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 @pwaLifeCycle()
 export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
+  serverProduct;
   productId: number;
   productName: string;
   loaded = false;
@@ -39,6 +41,9 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   isShowBundleGroupItems: boolean;
   bundleGroupType: string;
   bundleGroupTitle: string;
+  noOfRequiredGroups: number;
+  noOfSelectedGroups: number;
+  showAddToCart: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -59,13 +64,20 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.productName = this.route.snapshot.params.productName;
   }
 
-  widgetLoadingStarted(name, data){
+  widgetLoadingStarted(name, data) {
     console.log('Widget loading started' + name, data);
   }
 
   widgetLoadingSuccess(name, data) {
     if (name == WidgetNames.PRODUCT_DISPLAY) {
-      this.loaded = true;
+      try {
+        this.loaded = true;
+        this.serverProduct = data;
+        this.clientProduct = data.client;
+        this.setDealDefaults();
+      } catch (error) {
+        console.error('Something went wrong in setting deal defaults : ', error);
+      }
     }
   }
 
@@ -74,7 +86,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   widgetActionSuccess(name: string, data: any) {
-    switch(name) {
+    switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
         this.loaderService.stopLoading();
@@ -88,26 +100,35 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     console.log('Widget action failed' + name, data);
   }
 
-  async showBundleGroupItems(bundleGroup, clientProduct): Promise<void> {
+  async showBundleGroupItems(bundleGroup): Promise<void> {
     this.bundleGroupItems = bundleGroup.items;
     this.bundleGroupType = bundleGroup.inputType;
-    this.clientProduct = clientProduct;
     this.bundleGroupTitle = bundleGroup.title;
-    
-    const modal = await this.modalController.create({
-      component: DealShowcaseComponent,
-      componentProps: {
-        bundleGroupItems: this.bundleGroupItems,
-        bundleGroupType: this.bundleGroupType,
-        clientProduct: this.clientProduct,
-      }
-    });
 
-    modal.onDidDismiss().then((value) => {
-      console.log('dissmissed', value);
-    });
+    if (bundleGroup.items.length === 1) {
+      this.openProductDetails(bundleGroup.items[0]);
+      return;
+    }
 
-    return await modal.present();
+    this.openDealShowcase();
+  }
+
+  clearBundleGroupItems(bundleGroup) {
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      if (item.groupId === bundleGroup.groupId) item.remove();
+    });
+    this.noOfSelectedGroups = this.noOfSelectedGroups - 1;
+    this.showAddToCart = this.noOfSelectedGroups >= this.noOfRequiredGroups;
+  }
+
+  isBundelGroupSelected(bundelGroup): boolean {
+    let bundleGroupSelected = false;
+    bundelGroup.items.map((item) => {
+      this.clientProduct.bundleItems.forEach((cItem: BundleItem, key: number) => {
+        if (cItem.id === item.id && cItem.isSelected) bundleGroupSelected = true;
+      });
+    });
+    return bundleGroupSelected;
   }
 
   addToCart() {
@@ -118,18 +139,95 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   getProductImageUrl(product) {
-    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
       return this.getUrl(product.image);
     } else {
       let lastItem = product.multipleImages.slice().pop();
-      if(!lastItem.image) {
+      if (!lastItem.image) {
         return this.getUrl(product.image);
       }
       return this.getUrl(lastItem.image);
     }
   }
 
-  getUrl(url: string){
+  setDealDefaults() {
+    this.noOfRequiredGroups = 0;
+    this.noOfSelectedGroups = 0;
+    this.showAddToCart = false;
+    this.serverProduct.bundleGroups.map((group) => {
+      if (group.isRequired) this.noOfRequiredGroups = this.noOfRequiredGroups + 1;
+    });
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      item.remove();
+    });
+  }
+
+  async openProductDetails(bundleItem) {
+
+    const modal = await this.modalController.create({
+      component: ProductDetailsComponent,
+      componentProps: {
+        productId: bundleItem.productId,
+        productFromDeal: bundleItem,
+      }
+    });
+
+    modal.onDidDismiss().then((addedItem) => {
+      if (!addedItem || !addedItem.data) {
+        console.error('Invalid configuration for added item!');
+        return;
+      }
+      try {
+        this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+          if (item.groupId === bundleItem.groupId) item.remove();
+        });
+        this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+          if (item.id === bundleItem.id) {
+            item.add();
+            item.setVariantProductId(addedItem.data.variantProductId);
+          }
+        });
+
+        this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
+        this.showAddToCart = this.noOfSelectedGroups >= this.noOfRequiredGroups;
+      } catch (err) {
+        console.error('Something went wrong in item selection : ', err);
+      }
+      this.modalController.dismiss();
+    });
+
+    return await modal.present();
+  }
+
+  async openDealShowcase() {
+    const modal = await this.modalController.create({
+      component: DealShowcaseComponent,
+      componentProps: {
+        bundleGroupItems: this.bundleGroupItems,
+        bundleGroupType: this.bundleGroupType,
+        bundleGroupTitle: this.bundleGroupTitle,
+        clientProduct: this.clientProduct,
+      }
+    });
+
+    modal.onDidDismiss().then((itemAdded) => {
+      if (!itemAdded || !itemAdded.data) {
+        return;
+      }
+      try {
+        if (itemAdded.data) {
+          this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
+          this.showAddToCart = this.noOfSelectedGroups >= this.noOfRequiredGroups;
+        }
+      } catch (error) {
+        console.error('Something went wrong in item selection : ', error);
+      }
+    });
+
+    return await modal.present();
+  }
+
+  getUrl(url: string) {
     return `https://${url}`;
   }
 

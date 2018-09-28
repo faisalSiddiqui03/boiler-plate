@@ -147,6 +147,10 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   }
 
   addToCart() {
+    if(this.productFromDeal){
+      this.modalController.dismiss(this.clientProduct);
+      return;
+    }
     this.loaderService.startLoading();
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)

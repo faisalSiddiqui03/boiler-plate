@@ -59,18 +59,18 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   }
 
   getProductImageUrl(product) {
-    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
       return this.getUrl(product.image);
     } else {
       let lastItem = product.multipleImages.slice().pop();
-      if(!lastItem.image) {
+      if (!lastItem.image) {
         return this.getUrl(product.image);
       }
       return this.getUrl(lastItem.image);
     }
   }
 
-  getUrl(url: string){
+  getUrl(url: string) {
     return `https://${url}`;
   }
 
@@ -79,7 +79,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
     let modal;
     let component;
     const customizable = BundleItem.getAttributeValueByName(bundleItem, AttributeName.CUSTOMIZABLE);
-    if(customizable === AttributeValue.CUSTOMIZABLE){
+    if (customizable === AttributeValue.CUSTOMIZABLE) {
       component = PizzaComponent;
     } else {
       component = ProductDetailsComponent;
@@ -95,30 +95,34 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
 
     modal.onDidDismiss().then((addedItem) => {
       // WIP
-      if(!addedItem || !addedItem.data){
+      if (!addedItem || !addedItem.data) {
         console.error('Invalid configuration for added item!');
         return;
       }
-      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-        if(item.groupId === bundleItem.groupId) item.remove();
-      });
-      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-        if(item.id === bundleItem.id){
-          item.add();
-          item.setVariantProductId(addedItem.data.variantProductId);
-          item.setPrimaryProductId(addedItem.data.primaryProductId);
-          if(addedItem.data.type === ProductType.Bundle){
-            item.setBundleItems(addedItem.data.bundleItems);
+      try {
+        this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+          if (item.groupId === bundleItem.groupId) item.remove();
+        });
+        this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+          if (item.id === bundleItem.id) {
+            item.add();
+            item.setVariantProductId(addedItem.data.variantProductId);
+            if (addedItem.data.type === ProductType.Bundle) {
+              item.setPrimaryProductId(addedItem.data.primaryProductId);
+              item.setBundleItems(addedItem.data.bundleItems);
+            }
           }
-        }
-      });
-      this.closeModal();
+        });
+      } catch (err) {
+        console.error('Something went wrong in item selection : ', err);
+      }
+      this.modalController.dismiss(true);
     });
-    
+
     return await modal.present();
   }
 
   closeModal() {
-    this.modalController.dismiss();
+    this.modalController.dismiss(false);
   }
 }
