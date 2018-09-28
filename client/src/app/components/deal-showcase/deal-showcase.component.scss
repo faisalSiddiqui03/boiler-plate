@@ -1,0 +1,11 @@
+.deal-showcase-grid{
+  ion-card{
+    box-shadow: none;
+    img{
+      height: auto;
+    }
+    ion-card-content{
+      background: var(--ion-color-light);
+    }
+  }
+} 

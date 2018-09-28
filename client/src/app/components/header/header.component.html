@@ -1,4 +1,4 @@
-<ion-navbar [hideBackButton]="true" [class]="headerClass">
+<ion-navbar [hideBackButton]="true" [class]="headerClass" *ngIf="!dealsHeader">
   <ion-hide-when size="lg">
     <div>
       <div class="center-align logo_bg edge-shadow brd-radius">
@@ -68,3 +68,24 @@
     </div>
   </div>
 </ion-navbar>
+<div class="deals-header" *ngIf="dealsHeader">
+    <div class="container-small" flex-center>
+      <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
+      <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
+        [action]="null" (lifecycle)="null">
+        <ng-template let-widget="widget">
+          <div *ngIf="widget.model">
+            <div class="showcase-tabs">
+              <div class="container">
+                <ul no-margin no-padding>
+                  <li *ngFor="let item of widget.model.items; let i = index;" text-center [class.selected]="item.categoryId === categoryId"
+                    (click)="switchCategories(item.name, item.categoryId)">{{item.name}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </navigation-widget>
+    </div>
+  </div>

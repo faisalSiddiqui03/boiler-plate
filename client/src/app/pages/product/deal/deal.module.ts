@@ -15,6 +15,8 @@ import { HttpClient } from '@angular/common/http';
 import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
 import { DealShowcaseComponentModule } from '../../../components/deal-showcase/deal-showcase.module';
 import { DealShowcaseComponent } from '../../../components/deal-showcase/deal-showcase.component';
+import { HeaderModule } from '../../../components/header/header.module';
+import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +32,8 @@ const routes: Routes = [
     ProductDetailsWidgetModule,
     ImagePreloadModule,
     SkeletonModule,
+    HeaderModule,
+    SubHeaderModule,
     DealShowcaseComponentModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({

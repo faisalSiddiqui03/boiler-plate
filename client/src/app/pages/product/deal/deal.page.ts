@@ -39,9 +39,11 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   isShowBundleGroupItems: boolean;
   bundleGroupType: string;
   bundleGroupTitle: string;
+  titleValue:string = '';
 
   constructor(
     private route: ActivatedRoute,
+    private router:Router,
     private location: Location,
     private translate: TranslateService,
     private config: ConfigService,
@@ -57,6 +59,10 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ngOnInit() {
     this.productId = this.route.snapshot.params.productId;
     this.productName = this.route.snapshot.params.productName;
+
+    this.translate.get('deal.your_deal_details').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   widgetLoadingStarted(name, data){
@@ -100,6 +106,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         bundleGroupItems: this.bundleGroupItems,
         bundleGroupType: this.bundleGroupType,
         clientProduct: this.clientProduct,
+        bundleGroupTitle: this.bundleGroupTitle
       }
     });
 
@@ -136,4 +143,5 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   goBack() {
     this.location.back();
   }
+  
 }

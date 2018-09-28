@@ -1,23 +1,40 @@
-<div class="full-height category-listing-page">
-  <ion-content>
+<div class="full-height">
+  <ion-show-when size="lg">
+    <app-header [dealsHeader]="true"></app-header>
+  </ion-show-when>
+  <ion-hide-when size="lg">
+    <app-sub-header class="deal-heading" [title]="bundleGroupTitle"></app-sub-header>
+  </ion-hide-when>
+  <ion-content class="page-bg">
+    <ion-show-when size="lg">
+      <div class="back-to-deals">
+        <div class="container-small">
+          <a (click)="goBack()">
+            <span class="icon icon-arrow-prev-2"></span>
+            <span>{{'deal.back_to_deals' | translate}}</span>
+          </a>
+        </div>
+      </div>
+    </ion-show-when>
     <div *ngIf="bundleGroupItems != undefined && bundleGroupItems?.length">
-      <ion-icon name="close-circle" (click)="closeModal()" slot="start"></ion-icon>
-      <ion-grid>
-        <ion-row>
-          <ion-col class="product-card-holder" *ngFor="let prod of bundleGroupItems" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
-            no-padding>
-            <ion-card class="product-card non-deal-card" no-padding (click)="showProduct(prod)">
-              <ion-card-header no-padding>
-                <img height="100" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
-                />
-              </ion-card-header>
-              <ion-card-content padding>
-                <ion-card-subtitle class="product-title" color="dark">{{prod?.title}}</ion-card-subtitle>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <div class="container-small">
+        <ion-grid class="deal-showcase-grid">
+          <ion-row>
+            <ion-col class="product-card-holder" *ngFor="let prod of bundleGroupItems" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
+              no-padding>
+              <ion-card class="product-card non-deal-card" no-padding (click)="showProduct(prod)">
+                <ion-card-header no-padding>
+                  <img height="100" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
+                  />
+                </ion-card-header>
+                <ion-card-content padding>
+                  <ion-card-subtitle class="product-title" color="dark">{{prod?.title}}</ion-card-subtitle>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
     </div>
   </ion-content>
 </div>

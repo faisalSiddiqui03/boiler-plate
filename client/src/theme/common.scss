@@ -4,11 +4,6 @@ body {
   background: var(--ion-color-primary-contrast);
 }
 
-//ion-app{
-//    max-width: 1360px;
-//    margin: auto;
-//    background: var(--ion-color-primary-contrast);
-//}
 .container {
   max-width: 1360px;
   margin: auto;
@@ -46,7 +41,8 @@ body {
     border-bottom-style: dotted;
   }
 }
-.checkout-head{
+
+.checkout-head {
   @extend .common-heading;
   h2 {
     font-size: 16px;
@@ -79,7 +75,7 @@ body {
     font-size: 18px;
     font-weight: 500;
     color: var(--ion-color-secondary-shade);
-    span{
+    span {
       display: inline-block;
       font-size: 17px;
       margin: 0 10px;
@@ -88,6 +84,40 @@ body {
   .sc-ion-buttons-md-h {
     pointer-events: all;
   }
+}
+
+.deal-heading {
+  .page-header {
+    background: var(--ion-block-header-color);
+    ion-title {
+      font-weight: 600;
+      font-family: var(--ion-font-family);
+      text-transform: capitalize !important;
+    }
+  }
+}
+.back-to-deals {
+  padding: 16px 0;
+  background: var(--ion-color-light);
+  border-bottom: 1px solid var(--ion-block-header-color);
+  a {
+    padding-left: 15px;
+    font-size: 15px;
+    color: var(--ion-color-dark-shade);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      opacity: 0.7;
+    }
+    .icon {
+      font-size: 10px;
+      margin-right: 5px;
+    }
+  }
+}
+.container-small {
+  max-width: 1080px;
+  margin: auto;
 }
 
 .page-bg {
@@ -400,6 +430,7 @@ ion-item {
     }
   }
 }
+
 .voucher-modal-wrap {
   position: fixed;
   left: 0;
@@ -454,24 +485,23 @@ ion-item {
 }
 
 // RTL Styles
-html{
-  &[dir="rtl"]{
+html {
+  &[dir="rtl"] {
     .voucher-modal-wrap {
       .voucher-modal {
-        .close-icon{
+        .close-icon {
           left: 10px;
           right: auto;
         }
         .form-section {
-          ion-input{
-            margin:  0 0 0 10px;
+          ion-input {
+            margin: 0 0 0 10px;
           }
         }
       }
     }
   }
 }
-
 
 // RTL Support Styles
 html {
@@ -525,12 +555,22 @@ html {
     [text-left] {
       text-align: right !important;
     }
-    .accordion-block{
-      h5{
+    .accordion-block {
+      h5 {
         padding: 15px 20px 20px 60px;
-        .icon{
+        .icon {
           left: 20px;
           right: auto;
+        }
+      }
+    }
+    .back-to-deals {
+      a{
+        padding: 0 15px 0 0;
+        .icon{
+          display: inline-block;
+          transform: rotate(180deg);
+          margin: 0 0 0 5px;
         }
       }
     }

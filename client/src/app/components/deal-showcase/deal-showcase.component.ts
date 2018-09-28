@@ -23,7 +23,7 @@ import { AttributeName, AttributeValue } from '../../helpers/validators';
 @Component({
   selector: 'app-deal-showcase-component',
   templateUrl: './deal-showcase.component.html',
-  styleUrls: ['../../pages/product/category-listing/category-listing.page.scss'],
+  styleUrls: ['../../pages/product/category-listing/category-listing.page.scss', './deal-showcase.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 
@@ -56,6 +56,9 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     console.log('bundleGroupType', this.bundleGroupType);
     console.log('bundleGroupItems', this.bundleGroupItems);
+    this.translate.get('deal.choose_your').subscribe(value=>{
+      this.bundleGroupTitle = value +" "+ this.bundleGroupTitle;
+    })
   }
 
   getProductImageUrl(product) {
@@ -112,13 +115,13 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
           }
         }
       });
-      this.closeModal();
+      this.goBack();
     });
     
     return await modal.present();
   }
 
-  closeModal() {
+  goBack() {
     this.modalController.dismiss();
   }
 }
