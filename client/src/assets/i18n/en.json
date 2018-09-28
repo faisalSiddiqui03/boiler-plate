@@ -118,7 +118,9 @@
 	"deal": {
 		"add_to_basket": "Add To My Basket",
 		"choose_your": "Choose your",
-		"added_to_cart": "added to cart"
+		"added_to_cart": "added to cart",
+		"add": "Add",
+		"added": "Added"
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "As soon as Possible",

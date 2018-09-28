@@ -118,7 +118,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       if (item.groupId === bundleGroup.groupId) item.remove();
     });
     this.noOfSelectedGroups = this.noOfSelectedGroups - 1;
-    this.showAddToCart = this.noOfSelectedGroups >= this.noOfRequiredGroups;
+    this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
   }
 
   isBundelGroupSelected(bundelGroup): boolean {
@@ -155,7 +155,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.noOfSelectedGroups = 0;
     this.showAddToCart = false;
     this.serverProduct.bundleGroups.map((group) => {
-      if (group.isRequired) this.noOfRequiredGroups = this.noOfRequiredGroups + 1;
+      this.noOfRequiredGroups = this.noOfRequiredGroups + 1;
     });
     this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
       item.remove();
@@ -185,11 +185,12 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
           if (item.id === bundleItem.id) {
             item.add();
             item.setVariantProductId(addedItem.data.variantProductId);
+            item.setVarianValueIdMap(addedItem.data.varProductValueIdMap);
           }
         });
 
         this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
-        this.showAddToCart = this.noOfSelectedGroups >= this.noOfRequiredGroups;
+        this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
       } catch (err) {
         console.error('Something went wrong in item selection : ', err);
       }
@@ -217,7 +218,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       try {
         if (itemAdded.data) {
           this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
-          this.showAddToCart = this.noOfSelectedGroups >= this.noOfRequiredGroups;
+          this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
         }
       } catch (error) {
         console.error('Something went wrong in item selection : ', error);
@@ -225,6 +226,46 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     });
 
     return await modal.present();
+  }
+
+  getSelectedVariantValues(bundleGroup) {
+    let selectedVarianValues = [];
+
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      item.varProductValueIdMap.forEach((variant, key) => {
+        if (item.isSelected
+          && item.groupId === bundleGroup.groupId
+          && item.variantProductId === variant.id) {
+
+          selectedVarianValues = variant.propertyValues.map((propval) => { return propval.name; });
+          return;
+        }
+      });
+    });
+    if (!selectedVarianValues.length) return '';
+    return selectedVarianValues.join(',');
+  }
+
+  getSelectedItems(bundleGroup){
+    let selectedItems = [];
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      if (item.groupId !== bundleGroup.groupId) return;
+      if(item.isSelected) selectedItems.push(item.title);
+    });
+    return selectedItems;
+  }
+
+  getSelectedBundleItems(bundleGroup) {
+    let selectedBundleItems = [];
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      if (!item.bundleItems.size) return;
+      item.bundleItems.forEach((pItem: BundleItem, key: number) => {
+        if (item.groupId !== bundleGroup.groupId) return;
+        if (pItem.isSelected && pItem.price && !pItem.baseItem.isDefault) selectedBundleItems.push(pItem.title);
+        if (pItem.baseItem.isDefault && pItem.count === 2) selectedBundleItems.push(pItem.title);
+      })
+    });
+    return selectedBundleItems;
   }
 
   getUrl(url: string) {

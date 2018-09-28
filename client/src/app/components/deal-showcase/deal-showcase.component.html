@@ -13,6 +13,9 @@
               </ion-card-header>
               <ion-card-content padding>
                 <ion-card-subtitle class="product-title" color="dark">{{prod?.title}}</ion-card-subtitle>
+                <ion-button *ngIf="!isCustomizable(prod)" (click)="addProductToDeal(prod)" color="success" text-uppercase expand="block" mode="ios" class="btn-success">
+                  <div>{{'deal.add' | translate}}</div>
+                </ion-button>
               </ion-card-content>
             </ion-card>
           </ion-col>

@@ -16,7 +16,6 @@ import { Utils } from '../../helpers/utils';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PizzaComponent } from '../pizza/pizza.component';
-import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { AttributeName, AttributeValue } from '../../helpers/validators';
 
 
@@ -35,6 +34,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   bundleGroupTitle: string;
   showPizza: boolean;
   clientProduct: Product;
+  showAdd: boolean;
 
   currencyCode: string;
 
@@ -74,19 +74,32 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
     return `https://${url}`;
   }
 
-  async showProduct(bundleItem) {
-    console.log('product', bundleItem);
-    let modal;
-    let component;
-    const customizable = BundleItem.getAttributeValueByName(bundleItem, AttributeName.CUSTOMIZABLE);
+  isCustomizable(item) {
+    const customizable = BundleItem.getAttributeValueByName(item, AttributeName.CUSTOMIZABLE);
     if (customizable === AttributeValue.CUSTOMIZABLE) {
-      component = PizzaComponent;
-    } else {
-      component = ProductDetailsComponent;
+      return true;
     }
+    return false;
+  }
 
+  addProductToDeal(itemToAdd) {
+    if(itemToAdd.variantProductId){
+      console.error('Adding simple product with variant from deal showcase is not implemented!');
+      return;
+    }
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      if(item.id === itemToAdd.id) item.add();
+    });
+    this.modalController.dismiss(true);
+  }
+
+  async showProduct(bundleItem) {
+
+    if(!this.isCustomizable(bundleItem)) return;
+
+    let modal;
     modal = await this.modalController.create({
-      component: component,
+      component: PizzaComponent,
       componentProps: {
         productId: bundleItem.productId,
         productFromDeal: bundleItem,
@@ -107,10 +120,9 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
           if (item.id === bundleItem.id) {
             item.add();
             item.setVariantProductId(addedItem.data.variantProductId);
-            if (addedItem.data.type === ProductType.Bundle) {
-              item.setPrimaryProductId(addedItem.data.primaryProductId);
-              item.setBundleItems(addedItem.data.bundleItems);
-            }
+            item.setPrimaryProductId(addedItem.data.primaryProductId);
+            item.setBundleItems(addedItem.data.bundleItems);
+            item.setVarianValueIdMap(addedItem.data.varProductValueIdMap);
           }
         });
       } catch (err) {

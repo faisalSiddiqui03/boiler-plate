@@ -51,10 +51,19 @@
               <ion-item *ngFor="let group of widget?.model?.bundleGroups; let i = index">
                 <ion-label>
                   <h4>{{i + 1}}. {{group?.title}}</h4>
-                  <p>{{'deal.choose_your' | translate}} {{group?.title}}</p>
+                  <p *ngIf="!isBundelGroupSelected(group)">{{'deal.choose_your' | translate}} {{group?.title}}</p>
+                  <ng-container *ngIf="isBundelGroupSelected(group)">
+                    <ng-container *ngFor="let itemTitle of getSelectedItems(group)">
+                      <p>{{itemTitle}}</p>
+                    </ng-container>
+                    <p>{{getSelectedVariantValues(group)}}</p>
+                    <ng-container *ngFor="let itemTitle of getSelectedBundleItems(group)">
+                      <p>{{'deal.added' | translate}} {{itemTitle}}</p>
+                    </ng-container>
+                  </ng-container>
                 </ion-label>
                 <ion-icon *ngIf="!isBundelGroupSelected(group)" color="success" name="add" slot="end" (click)="showBundleGroupItems(group)"></ion-icon>
-                <ion-icon *ngIf="isBundelGroupSelected(group)"  class="close" name="close-circle" slot="end" (click)="clearBundleGroupItems(group)"></ion-icon>
+                <ion-icon *ngIf="isBundelGroupSelected(group)" class="close" name="close-circle" slot="end" (click)="clearBundleGroupItems(group)"></ion-icon>
               </ion-item>
             </ion-list>
           </ion-content>
