@@ -45,6 +45,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   @Input() showCart = false;
   @Input() headerClass = '';
   @Input() showUserIcon = true;
+  @Input() dealsHeader = false;
 
   enableUserDropdown:boolean = false;
 
@@ -106,6 +107,10 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   logout() {
     const action = new Action(LogoutWidgetActions.ACTION_LOGOUT);
     this.logoutWidgetAction.emit(action);
+  }
+
+  switchCategories(category, categoryId) {
+    this.router.navigateByUrl(`/products?category=${category}&id=${categoryId}`);
   }
 
 }

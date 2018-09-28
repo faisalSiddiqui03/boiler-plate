@@ -117,10 +117,12 @@
 	},
 	"deal": {
 		"add_to_basket": "Add To My Basket",
-		"choose_your": "Choose your",
 		"added_to_cart": "added to cart",
+		"back_to_deals": "Back to Deals",
+		"choose_your": "Choose your",
 		"add": "Add",
-		"added": "Added"
+		"added": "Added",
+		"your_deal_details": "Your Deal Details"
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "As soon as Possible",

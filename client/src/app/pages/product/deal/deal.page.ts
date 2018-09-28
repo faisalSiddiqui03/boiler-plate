@@ -44,9 +44,11 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   noOfRequiredGroups: number;
   noOfSelectedGroups: number;
   showAddToCart: boolean;
+  titleValue:string = '';
 
   constructor(
     private route: ActivatedRoute,
+    private router:Router,
     private location: Location,
     private translate: TranslateService,
     private config: ConfigService,
@@ -62,6 +64,10 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ngOnInit() {
     this.productId = this.route.snapshot.params.productId;
     this.productName = this.route.snapshot.params.productName;
+
+    this.translate.get('deal.your_deal_details').subscribe(value => {
+      this.titleValue = value;
+    });
   }
 
   widgetLoadingStarted(name, data) {
@@ -275,4 +281,5 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   goBack() {
     this.location.back();
   }
+  
 }

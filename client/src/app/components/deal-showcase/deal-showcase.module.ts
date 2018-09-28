@@ -17,6 +17,8 @@ import { AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
 import { HttpClient } from '@angular/common/http';
+import { HeaderModule } from '../header/header.module';
+import { SubHeaderModule } from '../sub-header/sub-header.module';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { HttpClient } from '@angular/common/http';
     ProductDetailsWidgetModule,
     ImagePreloadModule,
     AlertServiceModule,
+    HeaderModule,
+    SubHeaderModule,
     PizzaComponentModule,
     ProductDetailsComponentModule,
     TranslateModule.forRoot({

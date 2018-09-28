@@ -191,6 +191,42 @@
     }
   }
 }
+.deals-header {
+  border-bottom: 1px solid var(--ion-block-header-color);
+  background: var(--ion-color-light);
+  img{
+    max-height: 37px;
+  }
+  navigation-widget{
+    flex: 1;
+    text-align: right;
+  }
+  .showcase-tabs {
+    ul {
+      li {
+        display: inline-block;
+        font-size: 16px;
+        line-height: 34px;
+        padding: 10px;
+        min-width: 10%;
+        cursor: pointer;
+        color: var(--ion-color-dark-shade);
+        text-transform: uppercase;
+        font-family: 'Open Sans Condensed';
+        color: var(--ion-color-secondary-shade);
+        border-right: 1px solid var(--ion-color-medium-tint);
+        transition: all 0.3s ease-in-out;
+        &:first-child{
+          border-left: 1px solid var(--ion-color-medium-tint);
+        }
+        &:hover {
+          color: var(--ion-color-light);
+          background: var(--ion-color-danger);
+        }
+      }
+    }
+  }
+}
 
 @media (min-width: 992px) {
   .desktop-logo {
@@ -353,6 +389,23 @@ html{
       .dropdown{
         left: 10px;
         right: auto;
+      }
+    }
+    .deals-header {
+      navigation-widget{
+        text-align: left;
+      }
+      .showcase-tabs {
+        ul {
+          li {
+            &:first-child{
+              border-left: none;
+            }
+            &:last-child{
+              border-left: 1px solid var(--ion-color-medium-tint);
+            }
+          }
+        }
       }
     }
   }
