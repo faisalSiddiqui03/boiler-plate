@@ -4,30 +4,31 @@ import { Utils } from '../../../helpers/utils';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
-import { 
-    pwaLifeCycle, 
-    LifeCycle, 
-    Action, 
-    pageView, 
-    ConfigService, 
-    OnWidgetActionsLifecyle, 
+import {
+    pwaLifeCycle,
+    LifeCycle,
+    Action,
+    pageView,
+    ConfigService,
+    OnWidgetActionsLifecyle,
     OnWidgetLifecyle,
     DeliverySlotsWidget,
     CheckoutWidgetActions,
     UserAddressWidgetActions,
-    CheckoutDetails, 
-    Payment, 
-    DeliverySlot, 
-    City, 
-    Area, 
-    Country, 
-    State, 
-    LocationDetails, 
+    CheckoutDetails,
+    Payment,
+    DeliverySlot,
+    City,
+    Area,
+    Country,
+    State,
+    LocationDetails,
     Address,
-    ContactDetail, 
-    OrderAttributes, 
-    Checkout, 
-    Transaction
+    ContactDetail,
+    OrderAttributes,
+    Checkout,
+    Transaction,
+    DeliveryModes
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../base/base-component';
 import { element } from 'protractor';
@@ -66,8 +67,9 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
   singleUserAddressWidgetActions = new EventEmitter();
   userAddressWidgetActions = new EventEmitter();
   widgetModels = {};
+  deliveryModes: any;
 
-  constructor( 
+  constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private loaderService: LoaderService,
@@ -77,7 +79,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
   ) {
 
     super();
-    
+    this.deliveryModes = DeliveryModes;
+
     this.translate.use(Utils.getLanguageCode());
 
     this.currencyCode = this.config.getConfig()['currencyCode'];
