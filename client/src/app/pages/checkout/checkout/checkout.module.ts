@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
+import { DeliverySlotsWidgetModule, PaymentOptionsWidgetModule, CheckoutWidgetModule, UserAddressWidgetModule } from "@capillarytech/pwa-framework";
 
 import { CheckoutPage } from './checkout.page';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -24,10 +25,14 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CheckoutWidgetModule,
     IonicModule,
     RouterModule.forChild(routes),
     HeaderModule,
     SubHeaderModule,
+    DeliverySlotsWidgetModule,
+    PaymentOptionsWidgetModule,
+    UserAddressWidgetModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
