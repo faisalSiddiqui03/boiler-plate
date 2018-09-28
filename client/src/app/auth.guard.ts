@@ -19,7 +19,7 @@ export class AuthGuard extends BaseComponent implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    this.getUserPromise().then( userModel => {
+    return this.getUserPromise().then( userModel => {
         if (userModel && userModel.type !== 'GUEST') {
             return true;
         } else {
