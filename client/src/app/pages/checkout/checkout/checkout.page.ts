@@ -243,6 +243,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     attributes.push(attr);
     obj.orderAttributes = attributes;
 
+    obj.deliverySlot = this.getDeliverySlot();
     let action = new Action(CheckoutWidgetActions.ACTION_PLACE_ORDER, obj);
     this.checkoutWidgetAction.emit(action);
   }
@@ -262,7 +263,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
             let action = new Action(UserAddressWidgetActions.SAVE);
             this.singleUserAddressWidgetActions.emit(action);
         }
-        this.goToPage('success', {id: data.orderId});
+        this.goToPage('success/' + data.orderId + '/' + this.checkoutForm.value.email);
     } else {
         this.alertService.presentToast(this.translate.instant('checkout_page.order_failure'), 500, top);
     }

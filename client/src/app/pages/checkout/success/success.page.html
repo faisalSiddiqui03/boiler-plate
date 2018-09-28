@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>success</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+        <orders-details-widget [componentId]="getComponentId()" [orderId]="orderId" [identifier]="email" [action]="orderDetailWidgetAction">
+                <ng-template let-widget="widget">
+                  <div *ngIf="widget.model">
+                
+                    <!-- <h2>{{widget.model.orders.length}}</h2> -->
+                    <div>
+                      <hr/>
+                      <p>amount :- {{widget.model.priceDetails.payableAmount}}</p>
+                      <p>id :- {{widget.model.id}}</p>
+                      <p>status :- {{widget.model.status}}</p>
+                      <div *ngFor="let item of widget.model.lineItems">
+                        <p>{{item|json}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </orders-details-widget>
+</ion-content>
