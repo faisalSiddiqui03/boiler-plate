@@ -90,17 +90,14 @@
           </ion-item>
         </ion-list>
       </ion-content>
-    </ng-container>
 
-    <!-- Add to cart -->
-    <ion-footer *ngIf="showAddToCart">
-      <ion-button color="success" (click)="addToCart(widget?.model?.client)" text-uppercase expand="block" mode="ios" class="btn-success">
-        {{'deal.add_to_basket' | translate}} &nbsp;
-        <span>{{widget?.model?.client?.price | currency: (currencyCode + ' '): true: '1.3-3'}}</span>
-      </ion-button>
-    </ion-footer>
+      <!-- Add to cart -->
+      <ion-footer *ngIf="showAddToCart">
+        <ion-button color="success" (click)="addToCart(widget?.model?.client)" text-uppercase expand="block" mode="ios" class="btn-success">
+          {{'deal.add_to_basket' | translate}} &nbsp;
+          <span>{{widget?.model?.client?.price | currency: (currencyCode + ' '): true: '1.3-3'}}</span>
+        </ion-button>
+      </ion-footer>
     </ng-container>
   </ng-template>
 </product-display-widget>
-</div>
-</div>
