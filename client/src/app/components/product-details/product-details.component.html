@@ -54,13 +54,15 @@
                     <ng-container *ngFor="let varprop of widget?.model?.variantProperties">
                       <ng-container *ngIf="varprop.showProperty">
                         <div class="block-header" text-capitalize>{{varprop?.name}}</div>
-                        <li flex-center text-capitalize *ngFor="let propValue of varprop?.values" (click)="setSelectedPropertyvalue(propValue, varprop)">
-                          <span class="block-text">{{propValue?.name}}</span>
-                          <span class="block-icon">
-                            <ion-icon *ngIf="isPropertyValueSelected(varprop?.id, propValue?.id)" color="dark" name="checkmark"></ion-icon>
-                            <ion-icon *ngIf="!isPropertyValueSelected(varprop?.id, propValue?.id)" color="success" name="add"></ion-icon>
-                          </span>
-                        </li>
+                        <ng-container *ngFor="let propValue of varprop?.values">
+                          <li flex-center text-capitalize *ngIf="isProeprtyAvailable(propValue?.id)" (click)="setSelectedPropertyvalue(propValue, varprop)">
+                            <span class="block-text">{{propValue?.name}}</span>
+                            <span class="block-icon">
+                              <ion-icon *ngIf="isPropertyValueSelected(varprop?.id, propValue?.id)" color="dark" name="checkmark"></ion-icon>
+                              <ion-icon *ngIf="!isPropertyValueSelected(varprop?.id, propValue?.id)" color="success" name="add"></ion-icon>
+                            </span>
+                          </li>
+                        </ng-container>
                       </ng-container>
                       <ng-container *ngIf="!varprop.showProperty">
                         <div class="selected-variant" flex-center (click)="varprop.showProperty = !varprop.showProperty">

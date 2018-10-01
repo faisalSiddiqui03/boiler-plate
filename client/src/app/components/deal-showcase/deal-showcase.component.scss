@@ -1,0 +1,20 @@
+.deal-showcase-grid{
+  ion-card{
+    box-shadow: none;
+    background: var(--ion-color-light);
+    img{
+      height: auto;
+    }
+    ion-card-content{
+      padding: 10px 15px;
+      line-height: 20px;
+      ion-card-subtitle{
+        margin-bottom: 0;
+        min-height: 40px;
+      }
+      ion-button{
+        margin-top: 5px;
+      }
+    }
+  }
+} 

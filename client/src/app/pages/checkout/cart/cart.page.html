@@ -127,11 +127,11 @@
                     </ng-container>
                     <ng-container *ngIf="item.getType() === deal">
                       <ng-container *ngFor="let bundleItem of item?.bundleItems">
-                        <div *ngIf="!bundleItem.isPrimaryProduct && !bundleItem.isDefaultBundleItem && !bundleItem.webPrice">
+                        <div *ngIf="!bundleItem?.isPrimaryProduct && !bundleItem?.isDefaultBundleItem && !bundleItem?.webPrice">
                           {{bundleItem?.description}}
                         </div>
-                        <div *ngIf="bundleItem.isPrimaryProduct">{{bundleItem?.getVariant()}}</div>
-                        <div *ngIf="!bundleItem.isPrimaryProduct && bundleItem.webPrice">
+                        <div *ngIf="bundleItem?.isPrimaryProduct">{{bundleItem?.getVariant()}}</div>
+                        <div *ngIf="!bundleItem?.isPrimaryProduct && bundleItem?.webPrice">
                             {{ 'cart.add' | translate}} {{bundleItem?.description}}
                             <span>+ {{bundleItem?.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
                         </div>

@@ -129,7 +129,11 @@
 	"deal": {
 		"add_to_basket": "أضف عرضًا إلى السلة",
 		"added_to_cart": "إضافة إلى السلة",
-		"choose_your": "إختر ما يخصك  بيتزا وسط"
+		"back_to_deals": "العودة للعروض",
+		"choose_your": "إختر ما يخصك  بيتزا وسط",
+		"add": "",
+		"added": "",
+		"your_deal_details": "معلومات عروضك الخاصة"
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "في أقرب وقت",

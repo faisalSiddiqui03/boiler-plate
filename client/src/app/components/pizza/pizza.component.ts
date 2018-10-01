@@ -204,6 +204,9 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   getPrice() {
+    if(this.productFromDeal){
+      return;
+    }
     this.updatingPrice = true;
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE, this.clientProduct)

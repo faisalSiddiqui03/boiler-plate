@@ -16,14 +16,17 @@ import { Utils } from '../../helpers/utils';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PizzaComponent } from '../pizza/pizza.component';
-import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { AttributeName, AttributeValue } from '../../helpers/validators';
 
+export enum BundleGroupInputType {
+  RADIO = 'Radio button',
+  CHECKBOX = 'Checkbox',
+}
 
 @Component({
   selector: 'app-deal-showcase-component',
   templateUrl: './deal-showcase.component.html',
-  styleUrls: ['../../pages/product/category-listing/category-listing.page.scss'],
+  styleUrls: ['../../pages/product/category-listing/category-listing.page.scss', './deal-showcase.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 
@@ -33,8 +36,15 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   bundleGroupType: string;
   bundleGroupItems: any;
   bundleGroupTitle: string;
+  bundleGroupMinQuantity: number;
+
+  bundleGroup: any;
+  bundleGroupImage: string;
   showPizza: boolean;
   clientProduct: Product;
+  showAdd: boolean;
+  inputType = BundleGroupInputType;
+  disableAddToCart: boolean;
 
   currencyCode: string;
 
@@ -54,39 +64,81 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('bundleGroupType', this.bundleGroupType);
-    console.log('bundleGroupItems', this.bundleGroupItems);
+    console.log('Bundle Group', this.bundleGroup);
+    this.bundleGroupItems = this.bundleGroup.items;
+    this.bundleGroupMinQuantity = this.bundleGroup.minQuantity;
+    this.bundleGroupTitle = this.bundleGroup.title;
+    this.bundleGroupType = this.bundleGroup.inputType;
+    this.translate.get('deal.choose_your').subscribe(value => {
+      this.bundleGroupTitle = value + " " + this.bundleGroupTitle;
+    });
+
+    
+    if (this.bundleGroupType === BundleGroupInputType.CHECKBOX) {
+      this.disableAddToCart = true;
+      let count = 0;
+      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+        if(item.groupId !== this.bundleGroup.groupId) return;
+        item['disableInc'] = false;
+        item['disableDec'] = true;
+        count = count + item.quantity;
+      });
+      if (count === this.bundleGroupMinQuantity) {
+        this.disableAddToCart = false;
+        this.toggleQuantityDisable()
+      }
+    }
   }
 
   getProductImageUrl(product) {
-    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
       return this.getUrl(product.image);
     } else {
       let lastItem = product.multipleImages.slice().pop();
-      if(!lastItem.image) {
+      if (!lastItem.image) {
         return this.getUrl(product.image);
       }
       return this.getUrl(lastItem.image);
     }
   }
 
-  getUrl(url: string){
+  getUrl(url: string) {
     return `https://${url}`;
   }
 
-  async showProduct(bundleItem) {
-    console.log('product', bundleItem);
-    let modal;
-    let component;
-    const customizable = BundleItem.getAttributeValueByName(bundleItem, AttributeName.CUSTOMIZABLE);
-    if(customizable === AttributeValue.CUSTOMIZABLE){
-      component = PizzaComponent;
-    } else {
-      component = ProductDetailsComponent;
+  isCustomizable(item) {
+    const customizable = BundleItem.getAttributeValueByName(item, AttributeName.CUSTOMIZABLE);
+    if (customizable === AttributeValue.CUSTOMIZABLE) {
+      return true;
     }
+    return false;
+  }
 
+  addProductToDeal(itemToAdd) {
+    if(this.bundleGroup.inputType === BundleGroupInputType.CHECKBOX){
+      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+        if (this.bundleGroup.groupId === item.groupId && item.quantity > 0) item.add();
+      });
+      this.modalController.dismiss(true);
+      return;
+    }
+    if (itemToAdd.variantProductId) {
+      console.error('Adding simple product with variant from deal showcase is not implemented!');
+      return;
+    }
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      if (item.id === itemToAdd.id) item.add();
+    });
+    this.modalController.dismiss(true);
+  }
+
+  async showProduct(bundleItem) {
+
+    if (!this.isCustomizable(bundleItem)) return;
+
+    let modal;
     modal = await this.modalController.create({
-      component: component,
+      component: PizzaComponent,
       componentProps: {
         productId: bundleItem.productId,
         productFromDeal: bundleItem,
@@ -95,30 +147,94 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
 
     modal.onDidDismiss().then((addedItem) => {
       // WIP
-      if(!addedItem || !addedItem.data){
+      if (!addedItem || !addedItem.data) {
         console.error('Invalid configuration for added item!');
         return;
       }
-      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-        if(item.groupId === bundleItem.groupId) item.remove();
-      });
-      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-        if(item.id === bundleItem.id){
-          item.add();
-          item.setVariantProductId(addedItem.data.variantProductId);
-          item.setPrimaryProductId(addedItem.data.primaryProductId);
-          if(addedItem.data.type === ProductType.Bundle){
+      try {
+        this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+          if (item.groupId === bundleItem.groupId) item.remove();
+        });
+        this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+          if (item.id === bundleItem.id) {
+            item.add();
+            item.setVariantProductId(addedItem.data.variantProductId);
+            item.setPrimaryProductId(addedItem.data.primaryProductId);
             item.setBundleItems(addedItem.data.bundleItems);
+            item.setVarianValueIdMap(addedItem.data.varProductValueIdMap);
           }
-        }
-      });
-      this.closeModal();
+        });
+      } catch (err) {
+        console.error('Something went wrong in item selection : ', err);
+      }
+      this.modalController.dismiss(true);
     });
-    
+
     return await modal.present();
   }
 
+  getClientBundleItem(serverBundleItem) {
+    let clientBundleItem;
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      if(serverBundleItem.id === item.id) {
+        clientBundleItem = item;
+        return;
+      }
+    });
+    return clientBundleItem;
+  }
+
+  updateQuantity(product: BundleItem, quantity, isAdd) {
+    let count = 0;
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      if(this.bundleGroup.groupId === item.groupId) count = count + item.quantity;
+    });
+    let itemQuantity = product.quantity;
+    if ((count + 1) === this.bundleGroupMinQuantity && isAdd) {
+      itemQuantity = itemQuantity + 1;
+      product.setQuantity(itemQuantity);
+      this.disableAddToCart = false;
+      return;
+    }
+    else if ((count + 1) > this.bundleGroupMinQuantity && isAdd) {
+      this.disableAddToCart = false;
+      return;
+    }
+    else if (count === this.bundleGroupMinQuantity && !isAdd && product.quantity !== 0) {
+      this.disableAddToCart = true;
+    }
+
+    if (isAdd) itemQuantity = itemQuantity + 1; 
+    if (!isAdd && product.quantity >= 1) itemQuantity = itemQuantity - 1;
+    product.setQuantity(itemQuantity);
+  }
+
+  toggleQuantityDisable() {
+    if (this.disableAddToCart) {
+      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => { 
+        item['disableInc'] = false;
+        if (item.quantity > 0) {
+          item['disableDec'] = false;
+        }
+        else {
+          item['disableDec'] = true;
+        }
+      });
+      return;
+    }
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => { 
+      if (item.quantity > 0) {
+        item['disableInc'] = true;
+        item['disableDec'] = false;
+      }
+      else {
+        item['disableInc'] = true;
+        item['disableDec'] = true;
+      }
+    });
+  }
+
   closeModal() {
-    this.modalController.dismiss();
+    this.modalController.dismiss(false);
   }
 }
