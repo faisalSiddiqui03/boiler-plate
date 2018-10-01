@@ -57,7 +57,7 @@
           </div>
         </ion-content>
         <ion-footer>
-          <ion-button color="success" disabled="true" text-capitalize expand="block" mode="ios" class="btn-success">{{ 'cart.continue' | translate}}
+          <ion-button (click)="goToPage('checkout')" color="success" disabled="true" text-capitalize expand="block" mode="ios" class="btn-success">{{ 'cart.continue' | translate}}
           </ion-button>
         </ion-footer>
       </div>
@@ -164,7 +164,7 @@
           </div>
         </ion-content>
         <ion-footer>
-          <ion-button color="success" text-capitalize expand="block" [class.disabled]="updatingPrice" mode="ios" class="btn-success">{{ 'cart.continue' | translate}} &nbsp;
+          <ion-button (click)="goToPage('checkout')" color="success" text-capitalize expand="block" [class.disabled]="updatingPrice" mode="ios" class="btn-success">{{ 'cart.continue' | translate}} &nbsp;
             <span *ngIf="updatingPrice">
               <ion-spinner name="crescent" color="dark"></ion-spinner>
             </span>

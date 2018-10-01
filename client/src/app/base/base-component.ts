@@ -17,6 +17,10 @@ export class BaseComponent {
     return this.globalSharedService.getUserModel();
   }
 
+  getUserPromise() {
+    return this.globalSharedService.getUserModelPromise();
+  }
+
   getCurrentLanguage() {
     return this.globalSharedService.getCurrentLanguage();
   }

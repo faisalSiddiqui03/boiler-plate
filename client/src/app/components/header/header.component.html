@@ -27,18 +27,18 @@
   <div class="container center-align desktop-logo" flex-center>
     <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
     <div class="header-right" text-right>
-      <div class="delivery-mode">
+            <div *ngIf="showMode" class="delivery-mode">
         <div class="icon" [ngClass]="{'icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
         <span text-capitalize>{{ 'header.mode' | translate }}:</span>
         <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY" text-capitalize>{{ 'header.delivery' | translate }}</small>
         <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>{{ 'header.take_away' | translate }}</small>
       </div>
-      <div class="delivery-location" (click)="openLocationModal()">
+      <div *ngIf="showLocation" class="delivery-location" (click)="openLocationModal()">
         <span text-capitalize>{{ 'header.location' | translate }}:</span>
         <small text-uppercase>{{getCurrentStore()?.address}}</small>
         <div class="icon icon-arrow-down-2"></div>
       </div>
-      <div text-uppercase class="delivery-time-large" (click)="presentSlotModal()">
+      <div *ngIf="showTime" text-uppercase class="delivery-time-large" (click)="presentSlotModal()">
         <ion-icon name="time" ios="md-time" md="md-time"></ion-icon>
         <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
         <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">{{ 'header.asap' | translate }}</span>

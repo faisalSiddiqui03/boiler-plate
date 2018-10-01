@@ -34,6 +34,7 @@ const routes: Routes = [
   { path: 'search-location', loadChildren: './pages/user/profile/search-location/search-location.module#SearchLocationPageModule' },
   { path: 'checkout', loadChildren: './pages/checkout/checkout/checkout.module#CheckoutPageModule' },
   { path: 'deal/:productName/:productId', loadChildren: './pages/product/deal/deal.module#DealPageModule' },
+  { path: 'success/:orderId/:email', loadChildren: './pages/checkout/success/success.module#SuccessPageModule' },
 ];
 
 @NgModule({
