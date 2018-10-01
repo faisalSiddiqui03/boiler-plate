@@ -207,4 +207,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.router.navigateByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
   }
 
+  goToPage(pageName) {
+    this.router.navigateByUrl(pageName);
+  }
 }

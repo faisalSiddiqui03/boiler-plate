@@ -64,7 +64,7 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   }
 
   navigateToDeals() {
-    this.router.navigateByUrl('/product/deals/CU00215646');
+    this.router.navigateByUrl('/products?category=desls&id=CU00215646');
   }
 
   widgetLoadingFailed(name: string, data: any): any {

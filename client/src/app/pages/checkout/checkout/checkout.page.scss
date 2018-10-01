@@ -1,4 +1,20 @@
 .checkout-page {
+  .pickup-store {
+    margin-bottom: 95px;
+    padding-left: 14px;    
+  }
+  .field-caption{display: block;}
+  .store-address{
+    span{display: block;color:#333}
+    .store-address{font-weight: 400}
+  }
+  .txt-pickup{
+    padding-left: 14px;
+    font-size: 13px;
+  }
+  .field-caption {
+    font-weight: 600;
+  }
   max-width: 700px;
   margin: 15px auto;
   .border {

@@ -43,6 +43,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   @Input() showLanguage = false;
   @Input() showTime = false;
   @Input() showCart = false;
+  @Input() showMode = true;
+  @Input() showLocation = true;
   @Input() headerClass = '';
   @Input() showUserIcon = true;
 

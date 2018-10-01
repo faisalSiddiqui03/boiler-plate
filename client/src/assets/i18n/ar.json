@@ -66,11 +66,13 @@
 		"submit": "تأكيد الطلب"
 	},
 	"checkout_page": {
+		"add_new_address": "",
 		"agree_text": "من خلال تقديم طلبك، توافق على",
 		"building": "رقم البنايه او رقم المنزل",
 		"building_placeholder": "رقم البنايه او رقم المنزل",
 		"building_required": "نحتاج إلى عنوانك لتوصيل البيتزا",
-		"change":"تغير العنوان",
+		"change": "تغير العنوان",
+		"change_address": "",
 		"comment": "إضافات اخرى",
 		"comment_placeholder": "إضافات اخرى",
 		"confirm": "تأكيد الطلب",
@@ -80,6 +82,7 @@
 		"email_required": " يرجى إدخال بريدك الالكتروني",
 		"email_valid": "يرجى إدخال عنوان بريدك الالكتروني الصحيح",
 		"go_to_payment": "المتابعة للدفع",
+		"home": "",
 		"how_you_pay": "كيف تود أن تدفع؟",
 		"latest_discounts_offers_text": " يرجى إرسال أحدث الخصومات والعروض من بيتزا هت للتوصيل",
 		"mobile": "رقم الجوال",
@@ -90,20 +93,28 @@
 		"name": "اسمك",
 		"name_placeholder": "الاسم الأول صحيح",
 		"name_required": "يجب ذكر الاسم",
+		"or": "",
+		"order_failure": "",
 		"order_for": "الطلب لأجل :",
+		"order_successful": "",
 		"ordering_for_delivery_to": " الطلب للتسليم إلى",
+		"other": "",
 		"pick_a_time": "وقت تسليم الطلب",
+		"pickup_from": "",
 		"place_your_order": "تأكيد الطلب",
-		"privacy_policy":"سياسة الخصوصية",
+		"privacy_policy": "سياسة الخصوصية",
+		"save_as": "",
 		"secure_checkout": "تأكيد الطلب بأمان",
 		"street": " رقم الشارع أو الجادة",
 		"street_placeholder": "أدخل رقم الطريق أو اسم الشارع",
 		"street_required": "نحتاج إلى عنوانك لتوصيل البيتزا",
 		"terms_conditions": "شروطنا & أحكامنا",
 		"visa_pay_text": "سوف تتمكن من الدفع بشكل آمن عبر بطاقة الفيزا أو ماستركارد أو مايسترو بعد الضغط على 'انتقل إلى الدفع'",
+		"where_should_you_pick_it_from": "",
 		"where_we_deliver": "أين يجب علينا توصلها؟",
 		"who_we_delivering": "إلى من نسلم الطلب؟ ",
-		"with_cash": "نقدًا"
+		"with_cash": "نقدًا",
+		"work": ""
 	},
 	"contact_page": {
 		"address_1": "شركة الحميضي الغذائية",
@@ -117,8 +128,8 @@
 	},
 	"deal": {
 		"add_to_basket": "أضف عرضًا إلى السلة",
-		"choose_your": "إختر ما يخصك  بيتزا وسط",
-		"added_to_cart": "إضافة إلى السلة"
+		"added_to_cart": "إضافة إلى السلة",
+		"choose_your": "إختر ما يخصك  بيتزا وسط"
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "في أقرب وقت",
@@ -139,7 +150,6 @@
 		"faq_accordion03_p1": "نعم، يمكنك ذلك. بمجرد أن تضغط على “تنفيذ طلبي“ وتظهر الصفحة التي تؤكد أننا تلقينا طلبك، يمكنك وضع طلب آخر.",
 		"faq_accordion04_head": "هل يمكنني أن أجري تغييرات في طلبي السابق؟",
 		"faq_accordion04_p1": "نعم يمكنك ذلك، طالما أنّك قمت بتسجيل الدخول إلى حسابك عندما وضعت طلبك السابق. يمكنك العودة إلى طلبك السابق من “طلباتي“ تحت بند",
-		"faq_accordion4_p1link": "حسابي",
 		"faq_accordion05_head": "ماذا عن إعداد طلب لوقت لاحق؟",
 		"faq_accordion05_p1": "إذا كنت تريد استلام البيتزا التي طلبتها في وقت محدد لاحقاً بدلاً من توصيلها في أقرب وقت ممكن، يمكنك وضع ذلك خلال تنفيذ طلب التوصيل في نفس اليوم (قبل ساعة على الأقل من تنفيذ الطلب) أو في الأيام المقبلة. إن قمت بوضع طلب من هذا النوع سوف تتلقى تأكيداً بمجرد تنفيذ الطلب إضافة إلى تذكير بالموعد المقرّر للتسليم.",
 		"faq_accordion05_p2": "اختر “الآن“ إن كنت ترغب باستلام طلبك في أقرب وقت ممكن.",
@@ -204,7 +214,8 @@
 		"faq_accordion26_p1link": "د الإلكتروني أو",
 		"faq_accordion27_head": "كيف سيتم استخدام معلوماتي الشخصية؟",
 		"faq_accordion27_p1": "بيتزا هت تقوم بكل الإجراءات اللازمة للحفاظ على أمن استخدام المعلومات الشخصية. للحصول على تفاصيل سياسات الخصوصية يرجى الضغط .",
-		"faq_accordion27_p1link": "هنا"
+		"faq_accordion27_p1link": "هنا",
+		"faq_accordion4_p1link": "حسابي"
 	},
 	"favorites_page": {
 		"my_favorites": "تفضيلاتي",
@@ -463,9 +474,10 @@
 		"error_deleting_address": "غير قادر على حذف العنوان",
 		"no_saved_address": "ليس لديك أي عناوين محفوظة.",
 		"saved_address": "عنواني المحفوظ",
+		"successfully_deleted_address": "",
 		"sure_remove_address": "هل أنت متأكد من رغبتك إزالة هذا العنوان؟"
 	},
-	"search_location_page":{
+	"search_location_page": {
 		"recent_searches": "أخر عملية بحث",
 		"search_placeholder": "البحث في منطقتك",
 		"use_current_location": " إستخدام الموقع الحالي",
@@ -489,8 +501,8 @@
 	},
 	"sign_up_page": {
 		"confirm_password": "تأكيد كلمة المرور",
-		"confirm_password_placeholder": "يرجى تأكيد كلمة المرور",
 		"confirm_password_error_match": "كلمة السر لا تتطابق",
+		"confirm_password_placeholder": "يرجى تأكيد كلمة المرور",
 		"email": "البريد الإلكتروني",
 		"email_error": " يرجى إدخال بريدك الالكتروني",
 		"email_placeholder": "بحيث نتمكن من الاتصال معك عن آخر تحديثات البيتزا",
@@ -501,17 +513,13 @@
 		"lname": "الاسم الاخير",
 		"lname_placeholder": "نود أن نعرف ما الاسم الذي نختاره لك",
 		"mobile": "رقم الجوال",
-		"mobile_error_length": "رقم الهاتف فقط ثمانية أرقام",
-		"mobile_error_pattern": "يجب أن يبدأ رقم الموبايل بالأرقام 2 أو 5 أو 6 أو 9",
-		"mobile_error_required": " أدخل رقمك لو سمحت",
 		"mobile_placehlder": "بحيث نتمكن من الاتصال معك عن آخر تحديثات البيتزا",
 		"password": "كلمة المرور",
 		"password_error_length": "الحد الأدنى لكلمة المرور هو ستة رموز",
 		"password_error_required": "وسيكون سرنا المشترك",
-		"password_placeholder": "وسيكون سرنا المشترك",
 		"registration_successful": "",
 		"sign_up": "التسجيل",
-		"submit": "تسجيل الدخول"	
+		"submit": "تسجيل الدخول"
 	},
 	"store_selection_page": {
 		"stores_selection": "اختيار متاجر",
