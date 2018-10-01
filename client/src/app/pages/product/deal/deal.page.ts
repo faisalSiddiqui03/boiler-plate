@@ -208,7 +208,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     const modal = await this.modalController.create({
       component: DealShowcaseComponent,
       componentProps: {
-        bundleGroup: this.bundleGroup;
+        bundleGroup: this.bundleGroup,
         bundleGroupImage: this.bundleGroupImage,
         clientProduct: this.clientProduct,
       }

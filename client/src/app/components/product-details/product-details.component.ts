@@ -15,6 +15,7 @@ import { BaseComponent } from '../../base/base-component';
 import { Utils } from '../../helpers/utils';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { ModalController } from '@ionic/angular';
+import { VariantProduct } from '../../../../../../pwa-framework/framework/dist/services/product/models/server/variant-product';
 
 @Component({
   selector: 'app-product-details-component',
@@ -25,10 +26,10 @@ import { ModalController } from '@ionic/angular';
 
 @pwaLifeCycle()
 export class ProductDetailsComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
-  
+
   @Input() productId: number;
   @Input() productFromDeal;
-  
+
   loaded = false;
   productWidgetExecutor = new EventEmitter();
   productWidgetAction = new EventEmitter();
@@ -131,11 +132,11 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   }
 
   getProductImageUrl(product) {
-    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
       return this.getUrl(product.image);
     } else {
       let lastItem = product.multipleImages.slice().pop();
-      if(!lastItem.image) {
+      if (!lastItem.image) {
         return this.getUrl(product.image);
       }
       return this.getUrl(lastItem.image);
@@ -146,8 +147,30 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     return `https://${url}`;
   }
 
+  isProeprtyAvailable(propertyValueId) {
+    let isPropertyAvailable = false;
+    if (!this.productFromDeal) {
+      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+        if (key.indexOf(propertyValueId.toString())) {
+          isPropertyAvailable = true;
+          return;
+        }
+      });
+    } else {
+      this.productFromDeal.variantProducts.map((variantFromDeal) => {
+        this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+          if (variant.id === variantFromDeal.id && key.indexOf(propertyValueId.toString()) > -1) {
+            isPropertyAvailable = true;
+            return;
+          }
+        });
+      });
+    }
+    return isPropertyAvailable;
+  }
+
   addToCart() {
-    if(this.productFromDeal){
+    if (this.productFromDeal) {
       this.modalController.dismiss(this.clientProduct);
       return;
     }
@@ -159,7 +182,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
 
   goBack() {
     this.setClient();
-    if(!this.productFromDeal){
+    if (!this.productFromDeal) {
       this.location.back();
       return;
     }
