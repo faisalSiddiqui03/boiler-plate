@@ -87,6 +87,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   ionViewWillLeave() {
     this.fetchDeliverySlots = false;
+    this.isNavigationClicked = false;
   }
 
   widgetLoadingSuccess(name, data) {

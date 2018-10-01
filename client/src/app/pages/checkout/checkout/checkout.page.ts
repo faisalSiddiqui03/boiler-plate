@@ -36,7 +36,7 @@ import { element } from 'protractor';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.page.html',
-  styleUrls: ['./checkout.page.scss'], 
+  styleUrls: ['./checkout.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
 
@@ -47,14 +47,14 @@ import { element } from 'protractor';
 export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   checkoutForm: FormGroup;
-  currencyCode:string;
+  currencyCode: string;
   asSoonPossible = false;
   slotSelected = false;
   slotContent = '';
   activeTimeSlot: number;
   timeSlotObj;
-  asapText:'';
-  showdropdown=true;
+  asapText: '';
+  showdropdown = true;
   objPayment: Payment = new Payment();
   useSavedAddress = true;
   selectedSavedAddress;
@@ -68,6 +68,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
   userAddressWidgetActions = new EventEmitter();
   widgetModels = {};
   deliveryModes: any;
+  isAddNewAddressClicked = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -92,7 +93,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
       building: ['', Validators.compose([Validators.required])],
       street: ['', Validators.compose([Validators.required])],
       comment: [''],
-      paymentMethod:['COD'],
+      paymentMethod: ['COD'],
       addressType: ['Home'],
       saveAddress: [false]
 
@@ -108,6 +109,10 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     });
 
     this.setLoggedInUserDetails();
+  }
+
+  ionViewWillLeave() {
+    this.isAddNewAddressClicked = false;
   }
 
   goToPage(pageName, navParams = {}) {
@@ -169,13 +174,14 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
             this.slotContent = this.asSoonPossible ? this.asapText : Utils.getTimeHHMM(data[0].time);
             this.timeSlotObj = data[0];
           }
+          break;
         case 'PAYMENT_OPTIONS':
-            this.setDefaultPaymentOption(data);
-            break;
+          this.setDefaultPaymentOption(data);
+          break;
         case 'singleUserAddress':
           this.widgetModels['singleUserAddress'] = data;
           break;
-        case 'USER_ADDRESS': 
+        case 'USER_ADDRESS':
           this.getSavedAddresses(data);
           break;
       }
@@ -188,7 +194,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
   selectTimeSlot() {
     console.log('slot is: ', this.timeSlotObj);
     this.setDeliverySlot(this.timeSlotObj);
-    this.showdropdown = false
+    this.showdropdown = false;
     this.closePickTime();
   }
 
@@ -202,11 +208,11 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     this.slotContent = Utils.getTimeHHMM(timeslot.time);
     this.activeTimeSlot = index;
     this.timeSlotObj = timeslot;
-    this.showdropdown = false
+    this.showdropdown = false;
   }
 
   setDefaultPaymentOption(data) {
-    //try to move default payment option to config
+    // try to move default payment option to config
     const defaultPayment = 'COD';
     data.forEach(element => {
         if(element.paymentOption == defaultPayment) this.objPayment = element;
@@ -244,23 +250,23 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     obj.orderAttributes = attributes;
 
     obj.deliverySlot = this.getDeliverySlot();
-    let action = new Action(CheckoutWidgetActions.ACTION_PLACE_ORDER, obj);
+    const action = new Action(CheckoutWidgetActions.ACTION_PLACE_ORDER, obj);
     this.checkoutWidgetAction.emit(action);
   }
 
   handleOrderSuccess(data) {
       this.loaderService.stopLoading();
-    if(data.orderId) {
+    if (data.orderId) {
         this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, top);
-        if(this.checkoutForm.value.saveAddress) {
+        if (this.checkoutForm.value.saveAddress) {
             this.widgetModels['singleUserAddress'].address1 = this.checkoutForm.value.building;
             this.widgetModels['singleUserAddress'].address2 = this.checkoutForm.value.street;
             this.widgetModels['singleUserAddress'].city = this.getCurrentStore().city;
             this.widgetModels['singleUserAddress'].country = this.getCurrentStore().country;
             this.widgetModels['singleUserAddress'].state = this.getCurrentStore().state;
-            this.widgetModels['singleUserAddress'].addressType = this.checkoutForm.value.addressType
-            
-            let action = new Action(UserAddressWidgetActions.SAVE);
+            this.widgetModels['singleUserAddress'].addressType = this.checkoutForm.value.addressType;
+
+            const action = new Action(UserAddressWidgetActions.SAVE);
             this.singleUserAddressWidgetActions.emit(action);
         }
         this.goToPage('success/' + data.orderId + '/' + this.checkoutForm.value.email);
@@ -271,12 +277,12 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
   }
 
   handleSaveAddressSuccess(data) {
-      console.log('Save address response ', data)
+      console.log('Save address response ', data);
   }
 
   setLoggedInUserDetails() {
       const userData = this.getUserModel();
-    if(userData && userData.type !== 'GUEST') {
+    if (userData && userData.type !== 'GUEST') {
         this.checkoutForm.controls['name'].setValue(userData.firstName + ' ' + userData.lastName);
         this.checkoutForm.controls['mobile'].setValue(userData.mobileNo);
         this.checkoutForm.controls['email'].setValue(userData.username);
@@ -285,14 +291,24 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
   }
 
   getSavedAddresses(addresses) {
-    console.log('UK ', addresses)
-    this.savedAddresses = addresses.map(elem => {
-        if(elem.city.code == this.getCurrentStore().city.code) return elem;
-    });
+    console.log('faisal ', addresses);
+    // this.savedAddresses = addresses;
+    this.savedAddresses = addresses.filter(elem =>
+        elem.city.code === this.getCurrentStore().city.code
+    );
     this.useSavedAddress = this.savedAddresses.length > 0;
+    if (this.useSavedAddress) {
+      const index = 0;
+      this.selectedSavedAddress = this.savedAddresses[index];
+
+      this.checkoutForm.controls['building'].setValue(this.savedAddresses[index].address1);
+      this.checkoutForm.controls['street'].setValue(this.savedAddresses[index].address2);
+    }
   }
 
   selectAddress(index) {
+    this.selectedSavedAddress = this.savedAddresses[index];
+
     this.checkoutForm.controls['building'].setValue(this.savedAddresses[index].address1);
     this.checkoutForm.controls['street'].setValue(this.savedAddresses[index].address2);
   }
