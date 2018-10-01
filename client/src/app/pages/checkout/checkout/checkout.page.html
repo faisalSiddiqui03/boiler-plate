@@ -114,7 +114,7 @@
 <!-- store details for pickup end -->
 
 <!-- User address detail form start for guest user --> 
-          <div *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY && (getUserModel()?.type === 'GUEST' || isAddNewAddressClicked)">
+          <div *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY && (getUserModel()?.type === 'GUEST' || isAddNewAddressClicked || !useSavedAddress)">
               <div class="checkout-head" text-center>
                 <h2 no-margin>{{ 'checkout_page.where_we_deliver' | translate }}</h2>
               </div>
@@ -159,7 +159,7 @@
           </div>
 
 <!-- widget to save the new address when user is loggedin -->
-          <single-user-address-widget *ngIf="getUserModel()?.type !== 'GUEST' && isAddNewAddressClicked" [componentId]="getComponentId()" [action]="singleUserAddressWidgetActions">
+          <single-user-address-widget *ngIf="getUserModel()?.type !== 'GUEST' && (isAddNewAddressClicked || !useSavedAddress)" [componentId]="getComponentId()" [action]="singleUserAddressWidgetActions">
               <ng-template let-widget="widget">
                 <ng-container *ngIf="widget.model">
                   <ion-row>
@@ -183,7 +183,7 @@
 <!-- User address detail form end for guest user -->
 
 <!-- User address detail form start for loggedin user -->
-          <div *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY && getUserModel()?.type !== 'GUEST' && !isAddNewAddressClicked">
+          <div *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY && getUserModel()?.type !== 'GUEST' && !isAddNewAddressClicked && useSavedAddress">
             <div class="checkout-head" text-center>
               <h2 no-margin>{{ 'checkout_page.where_we_deliver' | translate }}</h2>
             </div>
@@ -192,7 +192,7 @@
               <ion-label class="login-label" for="building" text-capitalize>{{ 'checkout_page.building' | translate }}*
               </ion-label>
               <div class="form-input">
-                {{selectedSavedAddress.address1}}
+                {{selectedSavedAddress?.address1}}
               </div>
             </div>
             
@@ -200,7 +200,7 @@
               <ion-label class="login-label" for="street" text-capitalize>{{ 'checkout_page.street' | translate }}*
               </ion-label>
               <div class="form-input">
-                {{selectedSavedAddress.address2}}
+                {{selectedSavedAddress?.address2}}
               </div>
             </div>
             
