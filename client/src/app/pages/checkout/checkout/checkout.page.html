@@ -36,57 +36,83 @@
           <div class="checkout-head" text-center>
             <h2 no-margin>{{ 'checkout_page.who_we_delivering' | translate }} </h2>
           </div>
-
-          <div class="form-group" [class.error]="checkoutForm.get('name').touched && !checkoutForm.get('name').valid">
-            <ion-label class="login-label" for="name" text-capitalize>{{ 'checkout_page.name' | translate }}*
-            </ion-label>
-            <div class="form-input">
-              <ion-input id="name" placeholder="{{ 'checkout_page.name_placeholder' | translate }}" inputmode="text" formControlName="name"></ion-input>
-              <div class="icons">
-                <ion-icon name="alert"></ion-icon>
+          <div *ngIf="getUserModel()?.type === 'GUEST'">
+            <div class="form-group" [class.error]="checkoutForm.get('name').touched && !checkoutForm.get('name').valid">
+              <ion-label class="login-label" for="name" text-capitalize>{{ 'checkout_page.name' | translate }}*
+              </ion-label>
+              <div class="form-input">
+                <ion-input id="name" placeholder="{{ 'checkout_page.name_placeholder' | translate }}" inputmode="text" formControlName="name"></ion-input>
+                <div class="icons">
+                  <ion-icon name="alert"></ion-icon>
+                </div>
+              </div>
+              <div *ngIf="checkoutForm.get('name').touched">
+                <div class="error-msg" *ngIf="checkoutForm.get('name').errors?.required">{{ 'checkout_page.name_required' | translate }}
+                </div>
               </div>
             </div>
-            <div *ngIf="checkoutForm.get('name').touched">
-              <div class="error-msg" *ngIf="checkoutForm.get('name').errors?.required">{{ 'checkout_page.name_required' | translate }}
+
+            <div class="form-group" [class.error]="checkoutForm.get('mobile').touched && !checkoutForm.get('mobile').valid">
+              <ion-label class="login-label" for="mobile" text-capitalize>{{ 'checkout_page.mobile' | translate }}*
+              </ion-label>
+              <div class="form-input mobile-input">
+                <span>965</span>
+                <ion-input id="mobile" placeholder="{{ 'checkout_page.mobile_placeholder' | translate }}" inputmode="text" formControlName="mobile"></ion-input>
+                <div class="icons">
+                  <ion-icon name="alert"></ion-icon>
+                </div>
+              </div>
+              <div *ngIf="checkoutForm.get('mobile').touched">
+                <div class="error-msg" *ngIf="checkoutForm.get('mobile').errors?.required">{{ 'checkout_page.mobile_required' | translate }}
+                </div>
+                <div class="error-msg" *ngIf="checkoutForm.get('mobile').errors?.pattern">{{ 'checkout_page.mobile_valid' | translate }}
+                </div>
+                <div class="error-msg" *ngIf="!checkoutForm.get('mobile').errors?.pattern && (checkoutForm.get('mobile').errors?.minlength || checkoutForm.get('mobile').errors?.maxlength)">{{ 'checkout_page.mobile_digits' | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" [class.error]="checkoutForm.get('email').touched && !checkoutForm.get('email').valid">
+              <ion-label class="login-label" for="email" text-capitalize>{{ 'checkout_page.email' | translate }}*
+              </ion-label>
+              <div class="form-input">
+                <ion-input id="email" placeholder="{{ 'checkout_page.email_placeholder' | translate }}" inputmode="email" formControlName="email"></ion-input>
+                <div class="icons">
+                  <ion-icon name="alert"></ion-icon>
+                </div>
+              </div>
+              <div *ngIf="checkoutForm.get('email').touched">
+                <div class="error-msg" *ngIf="checkoutForm.get('email').errors?.required">{{ 'checkout_page.email_required' | translate }}
+                </div>
+                <div class="error-msg" *ngIf="checkoutForm.get('email').errors?.email">{{ 'checkout_page.email_valid' | translate }}
+                </div>
               </div>
             </div>
           </div>
+          <div *ngIf="getUserModel()?.type !== 'GUEST'" class="logged-user-form">
+            <div class="form-group">
+                <ion-label class="login-label" for="name" text-capitalize>{{ 'checkout_page.name' | translate }}
+                </ion-label>
+                <p no-margin>
+                  {{getUserModel()?.firstName}}
+                </p>
+              </div>
+  
+              <div class="form-group">
+                <ion-label class="login-label" for="mobile" text-capitalize>{{ 'checkout_page.mobile' | translate }}*
+                </ion-label>
+                <p no-margin>
+                  {{getUserModel()?.mobileNo}}
+                </p>
+              </div>
 
-          <div class="form-group" [class.error]="checkoutForm.get('mobile').touched && !checkoutForm.get('mobile').valid">
-            <ion-label class="login-label" for="mobile" text-capitalize>{{ 'checkout_page.mobile' | translate }}*
-            </ion-label>
-            <div class="form-input mobile-input">
-              <span>965</span>
-              <ion-input id="mobile" placeholder="{{ 'checkout_page.mobile_placeholder' | translate }}" inputmode="text" formControlName="mobile"></ion-input>
-              <div class="icons">
-                <ion-icon name="alert"></ion-icon>
+              <div class="form-group">
+                <ion-label class="login-label" for="email" text-capitalize>{{ 'checkout_page.email' | translate }}*
+                </ion-label>
+                <p no-margin>
+                  {{getUserModel()?.userName}}
+                </p>
               </div>
-            </div>
-            <div *ngIf="checkoutForm.get('mobile').touched">
-              <div class="error-msg" *ngIf="checkoutForm.get('mobile').errors?.required">{{ 'checkout_page.mobile_required' | translate }}
-              </div>
-              <div class="error-msg" *ngIf="checkoutForm.get('mobile').errors?.pattern">{{ 'checkout_page.mobile_valid' | translate }}
-              </div>
-              <div class="error-msg" *ngIf="!checkoutForm.get('mobile').errors?.pattern && (checkoutForm.get('mobile').errors?.minlength || checkoutForm.get('mobile').errors?.maxlength)">{{ 'checkout_page.mobile_digits' | translate }}
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group" [class.error]="checkoutForm.get('email').touched && !checkoutForm.get('email').valid">
-            <ion-label class="login-label" for="email" text-capitalize>{{ 'checkout_page.email' | translate }}*
-            </ion-label>
-            <div class="form-input">
-              <ion-input id="email" placeholder="{{ 'checkout_page.email_placeholder' | translate }}" inputmode="email" formControlName="email"></ion-input>
-              <div class="icons">
-                <ion-icon name="alert"></ion-icon>
-              </div>
-            </div>
-            <div *ngIf="checkoutForm.get('email').touched">
-              <div class="error-msg" *ngIf="checkoutForm.get('email').errors?.required">{{ 'checkout_page.email_required' | translate }}
-              </div>
-              <div class="error-msg" *ngIf="checkoutForm.get('email').errors?.email">{{ 'checkout_page.email_valid' | translate }}
-              </div>
-            </div>
           </div>
           <!-- User contact detail form end -->
 
