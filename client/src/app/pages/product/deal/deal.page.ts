@@ -36,11 +36,10 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   loaded = false;
   productWidgetAction = new EventEmitter();
   currencyCode: string;
-  bundleGroupItems: any;
+  bundleGroup: any;
   clientProduct: Product;
   isShowBundleGroupItems: boolean;
-  bundleGroupType: string;
-  bundleGroupTitle: string;
+  bundleGroupImage: string;
   noOfRequiredGroups: number;
   noOfSelectedGroups: number;
   showAddToCart: boolean;
@@ -107,9 +106,8 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   async showBundleGroupItems(bundleGroup): Promise<void> {
-    this.bundleGroupItems = bundleGroup.items;
-    this.bundleGroupType = bundleGroup.inputType;
-    this.bundleGroupTitle = bundleGroup.title;
+    this.bundleGroup = bundleGroup;
+    this.bundleGroupImage = this.getProductImageUrl(this.serverProduct);
 
     if (bundleGroup.items.length === 1) {
       this.openProductDetails(bundleGroup.items[0]);
@@ -210,9 +208,8 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     const modal = await this.modalController.create({
       component: DealShowcaseComponent,
       componentProps: {
-        bundleGroupItems: this.bundleGroupItems,
-        bundleGroupType: this.bundleGroupType,
-        bundleGroupTitle: this.bundleGroupTitle,
+        bundleGroup: this.bundleGroup;
+        bundleGroupImage: this.bundleGroupImage,
         clientProduct: this.clientProduct,
       }
     });
