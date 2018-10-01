@@ -102,6 +102,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
           this.setDeliverySlot(data[0]);
         }
         if (this.isNavigationClicked) {
+          this.isNavigationClicked = false;
           this.navigateToDeals();
         }
     }
