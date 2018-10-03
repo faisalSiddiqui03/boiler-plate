@@ -6,6 +6,10 @@ import { OrderDetailsWidgetModule } from "@capillarytech/pwa-framework";
 import { IonicModule } from '@ionic/angular';
 
 import { SuccessPage } from './success.page';
+import { HeaderModule } from '../../../components/header/header.module';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../../../translation.loader';
+import { HttpClient } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -20,7 +24,15 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     OrderDetailsWidgetModule,
-    RouterModule.forChild(routes)
+    HeaderModule,
+    RouterModule.forChild(routes),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   declarations: [SuccessPage]
 })

@@ -1,25 +1,62 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>success</ion-title>
-  </ion-toolbar>
+  <app-header></app-header>
 </ion-header>
 
-<ion-content padding>
-        <orders-details-widget [componentId]="getComponentId()" [orderId]="orderId" [identifier]="email" [action]="orderDetailWidgetAction">
-                <ng-template let-widget="widget">
-                  <div *ngIf="widget.model">
-                
-                    <!-- <h2>{{widget.model.orders.length}}</h2> -->
-                    <div>
-                      <hr/>
-                      <p>amount :- {{widget.model.priceDetails.payableAmount}}</p>
-                      <p>id :- {{widget.model.id}}</p>
-                      <p>status :- {{widget.model.status}}</p>
-                      <div *ngFor="let item of widget.model.lineItems">
-                        <p>{{item|json}}</p>
-                      </div>
-                    </div>
-                  </div>
-                </ng-template>
-              </orders-details-widget>
+<ion-content no-padding>
+  <!-- <orders-details-widget [componentId]="getComponentId()" [orderId]="orderId" [identifier]="email" [action]="orderDetailWidgetAction">
+    <ng-template let-widget="widget">
+      <div *ngIf="widget.model">
+        <div>
+          <hr/>
+          <p>amount :- {{widget.model.priceDetails.payableAmount}}</p>
+          <p>id :- {{widget.model.id}}</p>
+          <p>status :- {{widget.model.status}}</p>
+          <div *ngFor="let item of widget.model.lineItems">
+            <p>{{item|json}}</p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </orders-details-widget> -->
+  <div class="order-success-page">
+    <div class="success-title" text-center padding-top>
+      <h4 text-uppercase no-margin>Thanks for your order,
+        <br> mallikarjun</h4>
+    </div>
+    <div class="preparing-order" padding>
+      <ion-item>
+        <img src="assets/imgs/order_delivery_icon.svg" width="40" height="40" alt="">
+        <ion-label text-wrap>We're preparing your order &amp; it will be with you by 11:30 PM On 03-Oct-2018</ion-label>
+      </ion-item>
+    </div>
+    <div class="order-success-details">
+      <div class="order-success-email" padding text-center>
+        <p no-margin>We have sent your order & tracking details to
+          <br>
+          <a>mallikarjun.kv@capillarytech.com</a>
+        </p>
+      </div>
+      <div class="order-details-table">
+        <table>
+          <tbody>
+            <tr>
+              <td>Order#:</td>
+              <td>3256965</td>
+            </tr>
+            <tr>
+              <td>Delivery Address:</td>
+              <td>asdfgh
+                <br> Street:asdfghjkl</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="guest-user-register">
+      <div class="guest-user-message" text-center>
+        <p no-margin>Liked our experience, click here to register.</p>
+        <ion-button (click)="loadNextOrders()" color="success" text-uppercase mode="ios" class="btn-success">register</ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>
