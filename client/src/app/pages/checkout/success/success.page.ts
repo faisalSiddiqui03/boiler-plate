@@ -1,6 +1,15 @@
 import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../../base/base-component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import {
+  Action,
+  pwaLifeCycle,
+  pageView,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  LifeCycle,
+  OrderDetailsWidget
+} from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-success',
@@ -8,6 +17,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./success.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
+@pwaLifeCycle()
 export class SuccessPage extends BaseComponent implements OnInit {
 
   constructor(
