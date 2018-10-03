@@ -16,22 +16,28 @@
         </div>
       </div>
       <div *ngIf="showHalalTag" class="halal-logo">
-        <img src="assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal" />
+        <img src="assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal"/>
       </div>
       <div *ngIf="showCart" (click)="goToPage('cart')">
         <div class="icon icon-cart cart-logo"></div>
-        <div class="cart-count" *ngIf="getCart()?.items.length" [innerHtml]="getCart()?.items.length | number:'2.0-0'"></div>
+        <div class="cart-count" *ngIf="getCart()?.items.length"
+             [innerHtml]="getCart()?.items.length | number:'2.0-0'"></div>
       </div>
     </div>
   </ion-hide-when>
   <div class="container center-align desktop-logo" flex-center>
     <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
     <div class="header-right" text-right>
-            <div *ngIf="showMode" class="delivery-mode">
-        <div class="icon" [ngClass]="{'icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
+      <div *ngIf="showMode" class="delivery-mode">
+        <div class="icon"
+             [ngClass]="{'icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
         <span text-capitalize>{{ 'header.mode' | translate }}:</span>
-        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY" text-capitalize>{{ 'header.delivery' | translate }}</small>
-        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>{{ 'header.take_away' | translate }}</small>
+        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY"
+               text-capitalize>{{ 'header.delivery' | translate }}
+        </small>
+        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>{{
+          'header.take_away' | translate }}
+        </small>
       </div>
       <div *ngIf="showLocation" class="delivery-location" (click)="openLocationModal()">
         <span text-capitalize>{{ 'header.location' | translate }}:</span>
@@ -69,23 +75,20 @@
   </div>
 </ion-navbar>
 <div class="deals-header" *ngIf="dealsHeader">
-    <div class="container-small" flex-center>
-      <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
-      <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
-        [action]="null" (lifecycle)="null">
-        <ng-template let-widget="widget">
-          <div *ngIf="widget.model">
-            <div class="showcase-tabs">
-              <div class="container">
-                <ul no-margin no-padding>
-                  <li *ngFor="let item of widget.model.items; let i = index;" text-center [class.selected]="item.categoryId === categoryId"
-                    (click)="switchCategories(item.name, item.categoryId)">{{item.name}}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-      </navigation-widget>
+  <div class="container-small" flex-center>
+    <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
+    <div class="showcase-tabs">
+      <div class="container">
+        <navigation-widget [instanceId]="3" [componentId]="getComponentId()" pfWidgetImpressionTrack
+                           [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
+                           [action]="null" (lifecycle)="null"></navigation-widget>
+        <ul no-margin no-padding>
+          <li *ngFor="let item of navigations; let i = index;" text-center
+              [class.selected]="item.categoryId === categoryId"
+              (click)="switchCategories(item.name, item.categoryId)">{{item.name}}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
+</div>

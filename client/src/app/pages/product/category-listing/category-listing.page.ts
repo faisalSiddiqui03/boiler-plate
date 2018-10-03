@@ -38,11 +38,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   fetchDeliverySlots = false;
   asSoonPossible = false;
   navigations = [];
-  // showcaseFilter = {
-  //   from: 0,
-  //   limit: 100,
-  //   categoryIds: [this.categoryId],
-  // };
   subscriber = null;
   constructor(
     private route: ActivatedRoute,

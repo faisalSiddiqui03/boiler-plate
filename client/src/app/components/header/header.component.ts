@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewEncapsulation, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   Action,
   OnWidgetActionsLifecyle,
@@ -26,9 +26,12 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
 
   deliveryModes: any;
   logoutWidgetAction = new EventEmitter();
+  navigations = [];
+  categoryId: string = null;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     public modalController: ModalController,
     private translate: TranslateService,
     private alertService: AlertService
@@ -52,6 +55,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   enableUserDropdown:boolean = false;
 
   ngOnInit() {
+    const data = this.route.snapshot.queryParams;
+    this.categoryId = data.id;
   }
 
   goToPage(pageName) {
@@ -97,6 +102,12 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
+    console.error('name: ', name, 'data: ', data);
+    switch (name) {
+      case 'NAVIGATIONS#3' :
+        this.navigations = data.items;
+        break;
+    }
   }
 
   async openLocationModal() {
