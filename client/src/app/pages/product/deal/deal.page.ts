@@ -19,6 +19,8 @@ import { ModalController } from '@ionic/angular';
 import { DealShowcaseComponent } from '../../../components/deal-showcase/deal-showcase.component'
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
+import { AttributeName, AttributeValue } from '../../../helpers/validators';
+import { TrioComponent } from '../../../components/trio/trio.component';
 
 @Component({
   selector: 'app-deal',
@@ -167,9 +169,18 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   async openProductDetails(bundleItem) {
+    let component;
+    let isTrio = false;
+    if(BundleItem.getAttributeValueByName(bundleItem, AttributeName.CUSTOMIZABLE) === AttributeValue.CUSTOMIZABLE
+    && BundleItem.getAttributeValueByName(bundleItem, AttributeName.TYPE) === AttributeValue.TRIO){
+      component = TrioComponent;
+      isTrio = true;
+    } else {
+      component = ProductDetailsComponent;
+    }
 
     const modal = await this.modalController.create({
-      component: ProductDetailsComponent,
+      component: component,
       componentProps: {
         productId: bundleItem.productId,
         productFromDeal: bundleItem,
@@ -190,6 +201,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
             item.add();
             item.setVariantProductId(addedItem.data.variantProductId);
             item.setVarianValueIdMap(addedItem.data.varProductValueIdMap);
+            if(isTrio) item.setBundleItems(addedItem.data.bundleItems);
           }
         });
 
