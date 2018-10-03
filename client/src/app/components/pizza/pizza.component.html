@@ -55,11 +55,11 @@
               <div class="pizza-sizes-wrap" *ngIf="!showToppingsView">
                 <div class="block-header">{{'pizza.slect_size_crust' | translate}}</div>
                 <ng-container *ngFor="let propValueSize of widget?.model?.variantProperties[1]?.values">
-                  <div class="block-subheader" text-capitalize>{{propValueSize?.name}}</div>
+                  <div class="block-subheader" text-capitalize *ngIf="isSizeAvailabel(propValueSize?.id)">{{propValueSize?.name}}</div>
                   <div class="pizza-list">
                     <ul>
                       <li flex-center *ngFor="let propValueCrust of widget?.model?.variantProperties[0]?.values" (click)="setSelectedPropertyvalue(propValueSize);setSelectedPropertyvalue(propValueCrust);toggleToppingsView();">
-                        <ng-container *ngIf="getSizeCrustCombinationAvailability(propValueCrust.id, propValueSize.id)">
+                        <ng-container *ngIf="getSizeCrustCombinationAvailability(propValueCrust?.id, propValueSize?.id)">
                           <figure class="pizza-img">
                             <img src="{{getUrl(propValueCrust?.swatchImage)}}" alt="propValueCrust?.name">
                           </figure>
