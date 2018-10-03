@@ -75,7 +75,8 @@
     </div>
     <ion-button color="success" [class.disabled]="disableAddToCart" (click)="addProductToDeal()" text-uppercase expand="block"
       mode="ios" class="btn-success">
-      {{'deal.add' | translate}}
+      <span *ngIf="!disableAddToCart">{{'deal.add' | translate}}</span>
+      <span *ngIf="disableAddToCart">{{'deal.choose_any' | translate}} {{bundleGroupMinQuantity}}</span>
     </ion-button>
   </ion-content>
 </div>
