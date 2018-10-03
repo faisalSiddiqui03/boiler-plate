@@ -213,6 +213,16 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     );
   }
 
+  isSizeAvailabel(sizePropertyValueId){
+    let sizeAvailable = false;
+    // variantProperties[0] is used, as variant properties of 0 is always crust properties
+    // this is set from CP only once and never changes
+    this.serverProduct.variantProperties[0].values.map((crustPropertyValue) => {
+      sizeAvailable = this.getSizeCrustCombinationAvailability(crustPropertyValue.id, sizePropertyValueId);
+    });
+    return sizeAvailable;
+  }
+
   getSizeCrustCombinationPrice(crustPropertyValueId, sizeProeprtyValueId){
     let variantPrice = 0;
     if(!this.productFromDeal){
