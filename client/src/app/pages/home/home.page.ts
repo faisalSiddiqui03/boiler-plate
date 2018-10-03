@@ -52,7 +52,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   changeRequested = false;
   hasError: { [name: string]: string | boolean } = {};
   citySelectionHistory: any = {};
-
+  isCleared = false;
   deliveryModes = DeliveryModes;
   asSoonPossible = false;
   fetchDeliverySlots = false;
@@ -205,6 +205,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   selectCity(city) {
+    this.isCleared = false;
     this.hasError.selectAreaFirst = false;
     const previousCity = this.selectedCity ? this.selectedCity : '';
     this.selectedCity = city.name;
@@ -321,7 +322,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   filterEntires(cityList, searchTerm) {
-    return cityList.filter(city => (city.name || '').includes(searchTerm) && city.name);
+    const searchSubString = this.isCleared ? '' : searchTerm;
+    return cityList.filter(city => (city.name || '').includes(searchSubString) && city.name);
   }
 
   getDeliveryMode() {
