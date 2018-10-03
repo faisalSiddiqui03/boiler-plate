@@ -59,7 +59,7 @@
       </div>
       <div class="drinks-list" padding>
         <h4 no-margin padding-horizontal>{{bundleGroupTitle}}</h4>
-        <ion-list no-margin *ngIf="bundleGroupItems != undefined && bundleGroupItems?.length">
+        <ion-list no-margin *ngIf="bundleGroupItems">
           <ion-item *ngFor="let prod of bundleGroupItems">
             <img alt="{{prod?.title}}" height="25" width="25" img-preloader="{{getUrl(prod?.image)}}" defaultImage="assets/imgs/default/default.png"
             />
