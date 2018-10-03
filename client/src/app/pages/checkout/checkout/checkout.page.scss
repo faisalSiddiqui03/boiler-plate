@@ -56,22 +56,26 @@
   .checkout-head {
     margin: 10px 0 20px;
   }
-  .place-order {
-    .terms-check {
-      cursor: pointer;
-      display: inline-flex;
-      ion-checkbox {
-        margin-right: 10px;
-        --size: 21px;
-        --border-color-checked: var(--ion-color-medium-shade);
-        --background-checked: transparent;
-        --ion-color-primary-tint: transparent;
-      }
-      ion-label {
-        color: var(--ion-color-secondary-shade);
-        font-size: 15px;
-        white-space: normal;
-      }
+  .terms-check {
+    cursor: pointer;
+    display: inline-flex;
+    ion-checkbox {
+      margin-right: 10px;
+      --size: 21px;
+      --border-color-checked: var(--ion-color-medium-shade);
+      --background-checked: transparent;
+      --ion-color-primary-tint: transparent;
+    }
+    ion-label {
+      color: var(--ion-color-secondary-shade);
+      font-size: 15px;
+      white-space: normal;
+    }
+  }
+  .save-as-block{
+    .form-group{
+      margin-bottom: 0;
+      min-width: 50%;
     }
   }
   .payment-info {
@@ -130,6 +134,22 @@
       cursor: pointer;
       color: var(--ion-color-dark);
       text-decoration: underline;
+    }
+  }
+  .logged-user-form{
+    .form-group{  
+      padding: 0 20px;
+      margin-bottom: 15px;
+      ion-label{
+        margin: 0;
+        font-weight: 400;
+        color: var(--ion-color-dark-shade);
+      }
+      p{
+        color: var(--ion-color-dark-shade);
+        font-size: 13px;
+        font-weight: 600;
+      }
     }
   }
 }
