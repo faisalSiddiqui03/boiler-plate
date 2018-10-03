@@ -133,7 +133,8 @@
 		"choose_your": "إختر ما يخصك  بيتزا وسط",
 		"add": "",
 		"added": "",
-		"your_deal_details": "معلومات عروضك الخاصة"
+		"your_deal_details": "معلومات عروضك الخاصة",
+		"choose_any": " "
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "في أقرب وقت",
@@ -458,7 +459,8 @@
 	},
 	"product_details": {
 		"add_to_basket": "Add To My Basket",
-		"added_to_cart": "إضافة إلى السلة"
+		"added_to_cart": "إضافة إلى السلة",
+		"add_to_deal": "اضف إلى الصفقة"
 	},
 	"reset_password_page": {
 		"email": "البريد الإلكتروني",

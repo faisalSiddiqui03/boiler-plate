@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Utils } from '../../helpers/utils';
 import { Location } from '@angular/common';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sub-header',
@@ -12,9 +13,11 @@ export class SubHeaderComponent implements OnInit {
   /**To get heading in the sub-header for each page */
   @Input() title: string;
   @Input() lockIcon = false;
+  @Input() isModal = false;
 
   constructor(
-    private location: Location
+    private location: Location,
+    private modalController:ModalController
   ) {}
 
   ngOnInit() {
@@ -23,6 +26,10 @@ export class SubHeaderComponent implements OnInit {
   /** Function to go to previous page */
   goBack() {
     this.location.back();
+  }
+
+  closeModal(){
+    this.modalController.dismiss();
   }
 
 }

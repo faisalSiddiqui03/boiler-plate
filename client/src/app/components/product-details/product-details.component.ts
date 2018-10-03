@@ -15,7 +15,6 @@ import { BaseComponent } from '../../base/base-component';
 import { Utils } from '../../helpers/utils';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { ModalController } from '@ionic/angular';
-import { VariantProduct } from '../../../../../../pwa-framework/framework/dist/services/product/models/server/variant-product';
 
 @Component({
   selector: 'app-product-details-component',
