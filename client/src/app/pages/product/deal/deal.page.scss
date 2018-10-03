@@ -46,6 +46,10 @@
           color: var(--ion-tabs-color);
         }
       }
+      .close {
+        color: var(--ion-color-medium-shade);
+        font-size: 20px;
+      }
     }
   }
   .deal-skeleton{

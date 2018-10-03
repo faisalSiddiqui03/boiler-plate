@@ -107,7 +107,15 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     console.log('Widget action failed' + name, data);
   }
 
-  async showBundleGroupItems(bundleGroup): Promise<void> {
+  showBundleGroupItems(bundleGroup) {
+    let isGroupAlreadySelected = false;
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      if (item.groupId === bundleGroup.groupId && item.isSelected) isGroupAlreadySelected = true;
+    });
+    if(isGroupAlreadySelected){
+      return;
+    }
+
     this.bundleGroup = bundleGroup;
     this.bundleGroupImage = this.getProductImageUrl(this.serverProduct);
 
@@ -125,6 +133,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     });
     this.noOfSelectedGroups = this.noOfSelectedGroups - 1;
     this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
+    return false;
   }
 
   isBundelGroupSelected(bundelGroup): boolean {
@@ -210,7 +219,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       } catch (err) {
         console.error('Something went wrong in item selection : ', err);
       }
-      this.modalController.dismiss();
+      this.modalController.dismiss().catch(() => {});
     });
 
     return await modal.present();

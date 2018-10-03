@@ -133,7 +133,8 @@
 		"choose_your": "Choose your",
 		"add": "Add",
 		"added": "Added",
-		"your_deal_details": "Your Deal Details"
+		"your_deal_details": "Your Deal Details",
+		"choose_any": "Choose any "
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "As soon as Possible",
@@ -458,7 +459,8 @@
 	},
 	"product_details": {
 		"add_to_basket": "Add To My Basket",
-		"added_to_cart": "added to cart"
+		"added_to_cart": "added to cart",
+		"add_to_deal": "Add to my deal"
 	},
 	"reset_password_page": {
 		"email": "Email",
