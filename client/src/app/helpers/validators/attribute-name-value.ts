@@ -9,4 +9,5 @@ export enum AttributeValue {
     TOPPING = "Topping", 
     TRUE = "True",
     CUSTOMIZABLE = '1',
+    TRIO = "Trio",
 }
