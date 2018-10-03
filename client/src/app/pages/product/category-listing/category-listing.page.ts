@@ -29,7 +29,7 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @pwaLifeCycle()
 @pageView()
-export class CategoryListingPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class CategoryListingPage extends BaseComponent implements OnWidgetLifecyle, OnWidgetActionsLifecyle {
   categoryId: string = null;
   categoryName: string;
   productShowcaseWidgetAction = new EventEmitter();
