@@ -17,7 +17,6 @@
       </div>
     </ion-show-when>
     <div class="container-small" *ngIf="bundleGroupItems != undefined && bundleGroupItems?.length">
-      <ion-icon (click)="closeModal()" name="close-circle" slot="start"></ion-icon>
       <ion-grid class="deal-showcase-grid">
         <ion-row>
           <ion-col class="product-card-holder" *ngFor="let prod of bundleGroupItems" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
@@ -42,55 +41,41 @@
   </ion-content>
 </div>
 
-<div *ngIf="bundleGroupType === inputType.CHECKBOX" class="full-height">
+<div *ngIf="bundleGroupType === inputType.CHECKBOX" class="full-height drinks-component">
   <ion-show-when size="lg">
     <app-header [dealsHeader]="true"></app-header>
   </ion-show-when>
-  <ion-hide-when size="lg">
-    <app-sub-header class="deal-heading" [title]="titleValue"></app-sub-header>
-  </ion-hide-when>
   <ion-content no-padding class="page-bg">
-    <ion-show-when size="lg">
-      <div class="back-to-deals">
-        <div class="container-small">
-          <a (click)="goBack()">
-            <span class="icon icon-arrow-prev-2"></span>
-            <span>{{'deal.back_to_deals' | translate}}</span>
-          </a>
-        </div>
-      </div>
-    </ion-show-when>
-    <div class="deal-img-wrap">
-      <ion-icon (click)="closeModal()" name="close-circle" slot="start"></ion-icon>
-      <div class="container-small" flex-center>
-        <div class="deal-img-text">
-          <h4 no-margin text-uppercase>{{bundleGroupTitle}}</h4>
-        </div>
-        <div class="deal-img-block">
+    <div class="deal-content">
+      <div class="drinks-img-wrap">
+        <ion-icon (click)="closeModal()" name="close-circle" slot="start"></ion-icon>
+        <div class="drinks-img-block">
           <img alt="{{bundleGroupTitle}}" height="170" width="340" img-preloader="{{bundleGroupImage}}" defaultImage="assets/imgs/default/default.png"
           />
         </div>
+        <div class="drinks-img-text">
+          <h4 no-margin padding-vertical text-center>{{bundleGroupTitle}}</h4>
+        </div>
+      </div>
+      <div class="drinks-list" padding>
+        <h4 no-margin padding-horizontal>{{bundleGroupTitle}}</h4>
+        <ion-list no-margin *ngIf="bundleGroupItems">
+          <ion-item *ngFor="let prod of bundleGroupItems">
+            <img alt="{{prod?.title}}" height="25" width="25" img-preloader="{{getUrl(prod?.image)}}" defaultImage="assets/imgs/default/default.png"
+            />
+            <ion-label>{{prod?.title}}</ion-label>
+            <div class="add-remove">
+              <ion-icon name="remove" class="remove-icon" [ngClass]="{'disable': getClientBundleItem(prod)?.disableDec}" (click)="updateQuantity(getClientBundleItem(prod),1,false);toggleQuantityDisable()"></ion-icon>
+              <span>{{getClientBundleItem(prod)?.quantity}}</span>
+              <ion-icon name="add" class="add-icon" [ngClass]="{'disable': getClientBundleItem(prod)?.disableInc}" (click)="updateQuantity(getClientBundleItem(prod),1,true);toggleQuantityDisable()"></ion-icon>
+            </div>
+          </ion-item>
+        </ion-list>
       </div>
     </div>
-    <ion-list class="deals-list" bg-transparent *ngIf="bundleGroupItems != undefined && bundleGroupItems?.length">
-      <ion-item *ngFor="let prod of bundleGroupItems">
-        <img alt="{{prod?.title}}" height="25" width="25" img-preloader="{{getUrl(prod?.image)}}" defaultImage="assets/imgs/default/default.png"
-        />
-        <ion-label>{{prod?.title}}</ion-label>
-        <ion-label>
-          &nbsp;
-          <span [ngClass]="{'disable': getClientBundleItem(prod)?.disableDec}" (click)="updateQuantity(getClientBundleItem(prod),1,false);toggleQuantityDisable()">-</span>
-          &nbsp; {{getClientBundleItem(prod)?.quantity}} &nbsp;
-          <span [ngClass]="{'disable': getClientBundleItem(prod)?.disableInc}" (click)="updateQuantity(getClientBundleItem(prod),1,true);toggleQuantityDisable()">+</span>
-          &nbsp;
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-  <ion-footer>
-    <ion-button color="success" [class.disabled]="disableAddToCart" (click)="addProductToDeal()" text-uppercase expand="block" mode="ios" class="btn-success">
-      {{'deal.add' | translate}} &nbsp;
-      <!-- <span>{{widget?.model?.client?.price | currency: (currencyCode + ' '): true: '1.3-3'}}</span> -->
+    <ion-button color="success" [class.disabled]="disableAddToCart" (click)="addProductToDeal()" text-uppercase expand="block"
+      mode="ios" class="btn-success">
+      {{'deal.add' | translate}}
     </ion-button>
-  </ion-footer>
+  </ion-content>
 </div>

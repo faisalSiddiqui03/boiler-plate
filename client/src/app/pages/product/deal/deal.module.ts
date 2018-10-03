@@ -17,6 +17,9 @@ import { DealShowcaseComponentModule } from '../../../components/deal-showcase/d
 import { DealShowcaseComponent } from '../../../components/deal-showcase/deal-showcase.component';
 import { HeaderModule } from '../../../components/header/header.module';
 import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
+import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
+import { TrioComponent } from '../../../components/trio/trio.component';
+import { TrioComponentModule } from '../../../components/trio/trio.module';
 const routes: Routes = [
   {
     path: '',
@@ -35,6 +38,7 @@ const routes: Routes = [
     HeaderModule,
     SubHeaderModule,
     DealShowcaseComponentModule,
+    TrioComponentModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {
@@ -45,6 +49,10 @@ const routes: Routes = [
     })
   ],
   declarations: [DealPage],
-  entryComponents: [DealShowcaseComponent]
+  entryComponents: [
+    DealShowcaseComponent, 
+    ProductDetailsComponent, 
+    TrioComponent,
+  ]
 })
 export class DealPageModule {}
