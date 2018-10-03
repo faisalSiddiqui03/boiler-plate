@@ -30,18 +30,20 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 @pwaLifeCycle()
 @pageView()
 export class CategoryListingPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
-  categoryId: string;
+  categoryId: string = null;
   categoryName: string;
   productShowcaseWidgetAction = new EventEmitter();
   productShowcaseWidgetExecutor = new EventEmitter();
   currencyCode: string;
   fetchDeliverySlots = false;
   asSoonPossible = false;
+  navigations = [];
   // showcaseFilter = {
   //   from: 0,
   //   limit: 100,
   //   categoryIds: [this.categoryId],
   // };
+  subscriber = null;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -58,19 +60,32 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     console.log(this.location);
   }
 
-  ngOnInit() {
-    this.route.queryParams
-      .subscribe((data) => {
-        this.categoryId = data.id;
-        this.categoryName = data.category;
-      });
+  ngOnDestroy(){
+
+    this.subscriber.unsubscribe();
+    this.subscriber = null;
+    console.error('unsubscribed');
   }
 
   ionViewWillEnter() {
+
     if (Utils.isEmpty(this.getDeliverySlot())) {
       this.fetchDeliverySlots = true;
       this.loaderService.startLoading();
     }
+
+    if(this.categoryId !== null){
+      return;
+    }
+
+    let data = this.route.snapshot.queryParams;
+    this.updateCategories(data);
+  }
+
+  updateCategories(data){
+    console.error("vivek", data);
+    this.categoryId = data.id;
+    this.categoryName = data.category;
   }
 
   getShowcaseFilter(categoryId) {
@@ -87,6 +102,10 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       component: DeliverySlotSelectionPage
     });
     return await modal.present();
+  }
+
+  ionNavWillChange(data){
+    console.error(data, "router")
   }
 
   ionViewWillLeave() {
@@ -151,8 +170,12 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
-    console.log('name = ', name, ' data = ', data);
+    console.error('name = ', name, ' data = ', data);
     switch (name) {
+
+      case 'NAVIGATIONS#1' :
+        this.navigations = data.items;
+        break;
       case 'DELIVERYSLOTS':
         this.loaderService.stopLoading();
         this.fetchDeliverySlots = false;
@@ -172,15 +195,22 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   switchCategories(category, categoryId) {
-    this.router.navigate([], { queryParams: { category: category, id: categoryId } });
+    if( categoryId === this.categoryId ) return;
+    this.router.navigate([], { queryParams: { category: category, id: categoryId } }).then(data=>{
+    }).catch(err => {
+    });
+
+    let data = {
+      "category": category,
+      "id": categoryId
+    };
+
+    this.updateCategories(data);
     // this.router.navigateByUrl('/products?category={{item.name}}&id={{item.categoryId}}')
   }
 
   isLoggedIn() {
-    if (this.getUserModel() && this.getUserModel().type !== 'GUEST') {
-      return true;
-    }
-    return false;
+    return this.getUserModel() && this.getUserModel().type !== 'GUEST');
   }
 
 }

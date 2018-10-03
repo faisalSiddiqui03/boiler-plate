@@ -288,18 +288,8 @@
       }
     }
   }
-}
 
-@media (max-width: 991px) {
-  .category-listing-page {
-    .tabs-nav-head {
-      position: fixed;
-      bottom: 59px;
-      --min-height: 44px;
-    }
-    ion-content {
-      --offset-bottom: -45px !important;
-    }
+  @media (max-width: 991px) {
     .showcase-tabs {
       background: rgba(var(--ion-color-cart-stripe-rgb), 0.96);
       padding-left: 0;
@@ -318,7 +308,7 @@
           font-weight: 600;
           text-transform: capitalize;
           letter-spacing: 0;
-          &+li {
+          & + li {
             border-left: 1px solid var(--ion-color-light-shade);
           }
           &.selected {
@@ -328,17 +318,15 @@
         }
       }
     }
+    .product-content {
+      height: 100%;
+    }
+    .product-main-container {
+      height: 100%;
+    }
   }
-  .product-content {
-    height: 100%;
-  }
-  .product-main-container {
-    height: 100%;
-  }
-}
 
-@media (min-width: 992px) {
-  .category-listing-page {
+  @media (min-width: 992px) {
     .top-header-container {
       position: fixed;
       width: calc(100% - 370px);
@@ -389,47 +377,47 @@
       --ion-color-tint: var(--ion-color-dark-tint) !important;
     }
   }
-}
 
-// RTL styles
-html {
-  &[dir="rtl"] {
-    .category-listing-page {
-      .product-card {
-        .icon {
-          left: auto;
-          right: 5px;
+  // RTL styles
+  html {
+    &[dir="rtl"] {
+      .category-listing-page {
+        .product-card {
+          .icon {
+            left: auto;
+            right: 5px;
+          }
         }
       }
     }
   }
-}
 
-@media (min-width: 992px) {
-  html {
-    &[dir="rtl"] {
-      .category-listing-page {
-        .product-content {
-          margin: 0 0 0 20px;
-        }
-        .showcase-tabs {
-          padding: 0 10px 0 0;
+  @media (min-width: 992px) {
+    html {
+      &[dir="rtl"] {
+        .category-listing-page {
+          .product-content {
+            margin: 0 0 0 20px;
+          }
+          .showcase-tabs {
+            padding: 0 10px 0 0;
+          }
         }
       }
     }
   }
-}
 
-@media (max-width: 991px) {
-  html {
-    &[dir="rtl"] {
-      .category-listing-page {
-        .showcase-tabs {
-          ul {
-            li {
-              &+li{
-                border-left-width: 0;
-                border-right: 1px solid var(--ion-color-light-shade);
+  @media (max-width: 991px) {
+    html {
+      &[dir="rtl"] {
+        .category-listing-page {
+          .showcase-tabs {
+            ul {
+              li {
+                & + li {
+                  border-left-width: 0;
+                  border-right: 1px solid var(--ion-color-light-shade);
+                }
               }
             }
           }
