@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../helpers/utils';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -44,7 +44,7 @@ import { element } from 'protractor';
 @pageView()
 
 
-export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   checkoutForm: FormGroup;
   currencyCode: string;
@@ -109,10 +109,16 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     });
 
     this.setLoggedInUserDetails();
-    if(this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+    if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
         this.checkoutForm.controls['building'].setValue('T');
         this.checkoutForm.controls['street'].setValue('T');
     }
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.setLoggedInUserDetails();
+    }, 3000);
   }
 
   ionViewWillLeave() {
@@ -292,7 +298,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
   }
 
   setLoggedInUserDetails() {
-      const userData = this.getUserModel();
+    const userData = this.getUserModel();
     if (userData && userData.type !== 'GUEST') {
         this.checkoutForm.controls['name'].setValue(userData.firstName + ' ' + userData.lastName);
         this.checkoutForm.controls['mobile'].setValue(userData.mobileNo);
