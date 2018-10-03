@@ -127,14 +127,14 @@
 		"phone_number": "رقم الهاتف"
 	},
 	"deal": {
+		"add": "",
 		"add_to_basket": "أضف عرضًا إلى السلة",
+		"added": "",
 		"added_to_cart": "إضافة إلى السلة",
 		"back_to_deals": "العودة للعروض",
+		"choose_any": " ",
 		"choose_your": "إختر ما يخصك  بيتزا وسط",
-		"add": "",
-		"added": "",
-		"your_deal_details": "معلومات عروضك الخاصة",
-		"choose_any": " "
+		"your_deal_details": "معلومات عروضك الخاصة"
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "في أقرب وقت",
@@ -459,8 +459,8 @@
 	},
 	"product_details": {
 		"add_to_basket": "Add To My Basket",
-		"added_to_cart": "إضافة إلى السلة",
-		"add_to_deal": "اضف إلى الصفقة"
+		"add_to_deal": "اضف إلى الصفقة",
+		"added_to_cart": "إضافة إلى السلة"
 	},
 	"reset_password_page": {
 		"email": "البريد الإلكتروني",
@@ -530,6 +530,16 @@
 	"store_selection_page": {
 		"stores_selection": "اختيار متاجر",
 		"take_away_now": "خذ بعيدا الآن"
+	},
+	"success_page": {
+		"delivery_address": "",
+		"it_will_be_with_you_by": "",
+		"liked_our_experience_click_to_register": "",
+		"order": "",
+		"register": "",
+		"sent_tracking_details_to": "",
+		"thanks_for_your_order": "",
+		"we_are_preparing_your_order": ""
 	},
 	"terms_page": {
 		"terms_accordion01_head1": "معلومات خاصة بالمواقع",
