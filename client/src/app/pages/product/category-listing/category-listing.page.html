@@ -11,7 +11,21 @@
           <ion-header class="top-header-container">
             <app-header [showCart]="true" [showTime]="true" [headerClass]="'category-header'"></app-header>
           </ion-header>
+          <ion-toolbar class="tabs-nav-head">
+
+            <div class="showcase-tabs">
+              <div class="container">
+                <ul no-margin no-padding>
+                  <li *ngFor="let item of navigations; let i = index;" text-center
+                      [class.selected]="item.categoryId === categoryId"
+                      (click)="switchCategories(item.name, item.categoryId)">{{item.name}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </ion-toolbar>
         </ion-show-when>
+
         <navigation-widget [instanceId]="1" [componentId]="getComponentId()" pfWidgetImpressionTrack
                            [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
                            [action]="null" (lifecycle)="null"></navigation-widget>
