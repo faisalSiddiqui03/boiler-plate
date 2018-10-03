@@ -1,11 +1,13 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../base/base-component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ViewEncapsulation } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-success',
   templateUrl: './success.page.html',
   styleUrls: ['./success.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SuccessPage extends BaseComponent implements OnInit {
 
