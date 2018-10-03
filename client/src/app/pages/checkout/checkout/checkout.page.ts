@@ -109,7 +109,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     });
 
     this.setLoggedInUserDetails();
-    if(this.getFulfilmentMode().mode == this.deliveryModes.PICKUP) {
+    if(this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
         this.checkoutForm.controls['building'].setValue('T');
         this.checkoutForm.controls['street'].setValue('T');
     }
@@ -230,7 +230,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     obj.paymentDetails = this.objPayment;
 
     const objShipAddress: Address = new Address();
-    if(this.getFulfilmentMode().mode == this.deliveryModes.PICKUP) {
+    if(this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
         objShipAddress.address1 = this.getCurrentStore().address;
     } else {
         objShipAddress.address1 = this.checkoutForm.value.building;
