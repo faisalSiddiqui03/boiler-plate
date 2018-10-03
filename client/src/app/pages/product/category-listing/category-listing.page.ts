@@ -210,7 +210,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   isLoggedIn() {
-    return this.getUserModel() && this.getUserModel().type !== 'GUEST');
+    return this.getUserModel() && this.getUserModel().type !== 'GUEST';
   }
 
 }
