@@ -99,7 +99,8 @@
                   class="form-search" [debounce]="1000" [(ngModel)]="selectedCity" #focusInput
                   showCancelButton="false" placeholder="{{'home_page.select_area' | translate}}"
                   (click)="preventPropogation($event);toggleDropDown('city');"
-                  (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')">
+                  (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')" 
+                  (ionClear)="isCleared = true;">
                 </ion-searchbar>
                 <ion-list *ngIf="isDropDownShown('city')" text-center class="location-block-list">
                   <ion-item *ngIf="!(widget.model?.cities?.length && selectedCity)" >
