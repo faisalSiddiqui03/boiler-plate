@@ -308,10 +308,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     this.useSavedAddress = this.savedAddresses.length > 0;
     if (this.useSavedAddress) {
       const index = 0;
-      this.selectedSavedAddress = this.savedAddresses[index];
-
-      this.checkoutForm.controls['building'].setValue(this.savedAddresses[index].address1);
-      this.checkoutForm.controls['street'].setValue(this.savedAddresses[index].address2);
+      this.selectAddress(index);
     }
   }
 
