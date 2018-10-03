@@ -109,6 +109,10 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     });
 
     this.setLoggedInUserDetails();
+    if(this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+        this.checkoutForm.controls['building'].setValue('T');
+        this.checkoutForm.controls['street'].setValue('T');
+    }
   }
 
   ionViewWillLeave() {
@@ -226,8 +230,12 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     obj.paymentDetails = this.objPayment;
 
     const objShipAddress: Address = new Address();
-    objShipAddress.address1 = this.checkoutForm.value.building;
-    objShipAddress.address2 = this.checkoutForm.value.street;
+    if(this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+        objShipAddress.address1 = this.getCurrentStore().address;
+    } else {
+        objShipAddress.address1 = this.checkoutForm.value.building;
+        objShipAddress.address2 = this.checkoutForm.value.street;
+    }
     // objShipAddress.addressType = 'Home';
     const contactDetail = new ContactDetail();
     contactDetail.firstName = this.checkoutForm.value.name;
@@ -239,6 +247,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     objShipAddress.city = this.getCurrentStore().city;
     objShipAddress.country = this.getCurrentStore().country;
     objShipAddress.state = this.getCurrentStore().state;
+    objShipAddress.pinCode = parseInt(this.getCurrentStore().area.pincode);
     obj.shippingAddress = objShipAddress;
 
     const attributes: OrderAttributes[] = new Array<OrderAttributes>();
@@ -299,10 +308,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
     this.useSavedAddress = this.savedAddresses.length > 0;
     if (this.useSavedAddress) {
       const index = 0;
-      this.selectedSavedAddress = this.savedAddresses[index];
-
-      this.checkoutForm.controls['building'].setValue(this.savedAddresses[index].address1);
-      this.checkoutForm.controls['street'].setValue(this.savedAddresses[index].address2);
+      this.selectAddress(index);
     }
   }
 
