@@ -274,6 +274,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
             this.widgetModels['singleUserAddress'].country = this.getCurrentStore().country;
             this.widgetModels['singleUserAddress'].state = this.getCurrentStore().state;
             this.widgetModels['singleUserAddress'].addressType = this.checkoutForm.value.addressType;
+            this.widgetModels['singleUserAddress'].contactDetail = new ContactDetail();
+            this.widgetModels['singleUserAddress'].locationDetail = this.getCurrentStore().locationDetail;
 
             const action = new Action(UserAddressWidgetActions.SAVE);
             this.singleUserAddressWidgetActions.emit(action);
@@ -317,6 +319,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, OnWidgetLifec
 
     this.checkoutForm.controls['building'].setValue(this.savedAddresses[index].address1);
     this.checkoutForm.controls['street'].setValue(this.savedAddresses[index].address2);
+    this.checkoutForm.controls['addressType'].setValue(this.savedAddresses[index].addressType)
   }
 
   slectPaymentOption(option) {
