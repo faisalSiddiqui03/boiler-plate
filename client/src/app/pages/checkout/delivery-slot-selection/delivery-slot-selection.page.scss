@@ -14,6 +14,9 @@
     font-size: 15px;
     cursor: pointer;
   }
+  ion-content{
+    --background:transparent;
+  }
   [color-light] {
     color: var(--ion-color-light);
   }
