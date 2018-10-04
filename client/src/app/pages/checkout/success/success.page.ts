@@ -2,14 +2,12 @@ import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/cor
 import { BaseComponent } from '../../../base/base-component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {
-  Action,
   pwaLifeCycle,
-  pageView,
-  OnWidgetActionsLifecyle,
-  OnWidgetLifecyle,
-  LifeCycle,
-  OrderDetailsWidget
+  OrderDetailsWidget,
+  WidgetNames,
+  OrderWidget
 } from '@capillarytech/pwa-framework';
+import { Utils } from '../../../helpers/utils';
 
 @Component({
   selector: 'app-success',
@@ -30,11 +28,16 @@ export class SuccessPage extends BaseComponent implements OnInit {
 
   orderId: number;
   email: string;
+  name = 'Guest';
+  addressLine1;
+  addressLine2;
+  time;
+  date;
   orderDetailWidgetAction = new EventEmitter();
 
   ngOnInit() {
     this.orderId = this.route.snapshot.params.orderId;
-    this.email = this.route.snapshot.params.email;
+    // this.email = this.route.snapshot.params.email;
   }
 
   goToPage(pageName) {
@@ -59,6 +62,18 @@ export class SuccessPage extends BaseComponent implements OnInit {
 
   widgetLoadingSuccess(name: string, data: any): any {
     console.log(name, 'Loading Success');
+    switch (name) {
+      case WidgetNames.ORDER_DETAILS:
+        if (data && data.getAddressDetails()) {
+          this.name = data.getAddressDetails().contactDetail.firstName;
+          this.time = data.deliverySlot.endTime;
+          this.addressLine1 = data.getAddressDetails().detail;
+          this.addressLine2 = data.getAddressDetails().landmark;
+          this.email = data.getAddressDetails().contactDetail.emailID;
+          this.orderId = data.id;
+          this.date = Utils.getDate(data.orderDate.locale);
+        }
+    }
   }
 
   loadNextOrders() {
