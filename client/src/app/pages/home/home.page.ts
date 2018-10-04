@@ -118,7 +118,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         console.log('unable to find store', data);
         // this.navigateToDeals();
         break;
-      case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
+      case StoreLocatorWidgetActions.FIND_BY_AREA:
         this.loaderService.stopLoading();
         console.log('unable to find store', data);
         // this.navigateToDeals();
@@ -129,7 +129,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
     switch (name) {
-      case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
+      case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
           this.setCurrentStore(data[0]);
           this.fetchDeliverySlots = true;
@@ -220,7 +220,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       return;
     }
 
-    const getAreasByCityName = new Action(LocationWidgetActions.ACTION_FETCH_AREAS_BY_CITY_CODE, city);
+    const getAreasByCityName = new Action(LocationWidgetActions.FETCH_AREAS_BY_CITY_CODE, [city]);
     this.locationsWidgetAction.emit(getAreasByCityName);
   }
 
@@ -245,13 +245,16 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   // We should get display name from api
   getAreaDisplayName(area) {
-    return this.translate.instant('home_page.block_') + area.pincode;
+    if (area.pincode) {
+      return this.translate.instant('home_page.block_') + area.pincode;
+    }
+    return area.name;
   }
 
   findStore() {
     this.isNavigationClicked = true;
-    this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
-      [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
+    this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
+      [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
     this.loaderService.startLoading('Fetching Stores');
   }
 
