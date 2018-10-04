@@ -1,7 +1,15 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../../base/base-component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { ViewEncapsulation } from '@angular/compiler/src/core';
+import {
+  Action,
+  pwaLifeCycle,
+  pageView,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  LifeCycle,
+  OrderDetailsWidget
+} from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-success',
@@ -9,12 +17,14 @@ import { ViewEncapsulation } from '@angular/compiler/src/core';
   styleUrls: ['./success.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
+@pwaLifeCycle()
 export class SuccessPage extends BaseComponent implements OnInit {
 
   constructor(
       private route: ActivatedRoute,
       private router: Router
-  ) { 
+  ) {
       super();
   }
 
