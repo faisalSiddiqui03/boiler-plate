@@ -76,7 +76,9 @@
 </ion-navbar>
 <div class="deals-header" *ngIf="dealsHeader">
   <div class="container-small" flex-center>
-    <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
+    <div class="deals-logo-holder">
+      <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
+    </div>
     <div class="showcase-tabs">
       <div class="container">
         <navigation-widget [instanceId]="3" [componentId]="getComponentId()" pfWidgetImpressionTrack

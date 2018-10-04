@@ -1,14 +1,26 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../../base/base-component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../helpers/utils';
+import {
+  Action,
+  pwaLifeCycle,
+  pageView,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  LifeCycle,
+  OrderDetailsWidget
+} from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-success',
   templateUrl: './success.page.html',
   styleUrls: ['./success.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
+
+@pwaLifeCycle()
 export class SuccessPage extends BaseComponent implements OnInit {
 
   constructor(
@@ -56,4 +68,7 @@ export class SuccessPage extends BaseComponent implements OnInit {
     console.log(name, 'Loading Success');
   }
 
+  loadNextOrders() {
+
+  }
 }

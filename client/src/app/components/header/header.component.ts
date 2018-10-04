@@ -6,8 +6,8 @@ import {
   OnWidgetLifecyle,
   DeliveryModes,
   LogoutWidgetActions,
-  LogoutWidget,
-  LanguageService
+  LanguageService,
+  LogoutWidget, pwaLifeCycle
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../base/base-component';
 import { ModalController } from '@ionic/angular';
@@ -23,6 +23,8 @@ import { AlertService } from '@capillarytech/pwa-ui-helpers';
   styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
+@pwaLifeCycle()
 export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   deliveryModes: any;
