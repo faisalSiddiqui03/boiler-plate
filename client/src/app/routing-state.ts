@@ -11,14 +11,14 @@ export class RoutingState {
   ) { }
 
   public loadRouting(): void {
-    // this.router.events
-    //   .pipe(filter(event => event instanceof NavigationEnd))
-    //   .subscribe(({ urlAfterRedirects }: NavigationEnd) => {
-    //     this.history = [...this.history, urlAfterRedirects];
-    //   });
-    this.router.events.subscribe(event => {
-      console.log('Check: ',event);
-    })
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(({ urlAfterRedirects }: NavigationEnd) => {
+        this.history = [...this.history, urlAfterRedirects];
+      });
+    // this.router.events.subscribe(event => {
+    //   console.log('Check: ',event);
+    // })
   }
 
   public getHistory(): string[] {
@@ -26,7 +26,6 @@ export class RoutingState {
   }
 
   public getPreviousUrl(): string {
-    console.log('History:', this.history);
     return this.history[this.history.length - 2] || '/index';
   }
 }

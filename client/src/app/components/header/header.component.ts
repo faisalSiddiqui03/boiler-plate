@@ -6,7 +6,8 @@ import {
   OnWidgetLifecyle,
   DeliveryModes,
   LogoutWidgetActions,
-  LogoutWidget
+  LogoutWidget,
+  LanguageService
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../base/base-component';
 import { ModalController } from '@ionic/angular';
@@ -34,7 +35,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     private route: ActivatedRoute,
     public modalController: ModalController,
     private translate: TranslateService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private languageService: LanguageService
   ) {
     super();
     this.deliveryModes = DeliveryModes;
@@ -52,7 +54,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   @Input() showUserIcon = true;
   @Input() dealsHeader = false;
 
-  enableUserDropdown:boolean = false;
+  enableUserDropdown: boolean = false;
 
   ngOnInit() {
     const data = this.route.snapshot.queryParams;
@@ -60,7 +62,30 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    const page = Utils.getLanguageCode() + '/' + pageName;
+    this.router.navigateByUrl(page);
+  }
+
+  async switchLanguage() {
+    const langCode = Utils.getLanguageCode();
+    //console.log('Check this current lang to be changed: ', langCode);
+    switch (langCode) {
+      case 'ar':
+        await this.languageService.updateLanguageByCode('en');
+        this.router.navigateByUrl('en/home', {replaceUrl:true});
+
+        break;
+
+      case 'en':
+        await this.languageService.updateLanguageByCode('ar');
+        this.router.navigateByUrl('ar/home', {replaceUrl:true});
+        break;
+
+      default:
+        // do nothing
+        break;
+    }
+
   }
 
   async presentSlotModal() {
@@ -70,7 +95,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     return await modal.present();
   }
 
-  showDropDown(){
+  showDropDown() {
     this.enableUserDropdown = !this.enableUserDropdown;
   }
 
@@ -104,7 +129,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   widgetLoadingSuccess(name: string, data: any): any {
     console.error('name: ', name, 'data: ', data);
     switch (name) {
-      case 'NAVIGATIONS#3' :
+      case 'NAVIGATIONS#3':
         this.navigations = data.items;
         break;
     }

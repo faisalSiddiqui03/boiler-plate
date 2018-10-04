@@ -5,11 +5,12 @@ import {
   pwaLifeCycle,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
-  ConfigService
+  ConfigService,
+  LanguageService
 } from '@capillarytech/pwa-framework';
 import { ModalController } from '@ionic/angular';
 import { BaseComponent } from '../../base/base-component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {
   LocationWidgetActions,
   FulfilmentModeWidgetActions,
@@ -40,7 +41,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   storeLocatorWidgetAction = new EventEmitter();
 
   /**default order mode is delivery */
-    // orderMode = DeliveryModes.HOME_DELIVERY;
+  // orderMode = DeliveryModes.HOME_DELIVERY;
   dataLoaded: any = {};
   selectedCity = '';
   selectedCityCode;
@@ -61,10 +62,12 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   constructor(
     private config: ConfigService,
     private router: Router,
+    private actRoute: ActivatedRoute,
     private translate: TranslateService,
     public modalController: ModalController,
     private loaderService: LoaderService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private langService:LanguageService
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
@@ -77,6 +80,16 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     console.log('------>', this.getCurrentStore());
   }
 
+  ngOnDestroy(){
+  }
+
+  ionViewWillEnter(){
+    const langCode = this.actRoute.snapshot.params['lang'];
+    Utils.setLanguageCode(langCode);
+    this.translate.use(langCode);
+    this.langService.updateLanguageByCode(langCode);
+  }
+  
   ionViewDidEnter() {
     this.selectedStore = this.getCurrentStore();
     this.changeRequested = false;
@@ -118,7 +131,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         console.log('unable to find store', data);
         // this.navigateToDeals();
         break;
-      case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
+      case StoreLocatorWidgetActions.FIND_BY_AREA:
         this.loaderService.stopLoading();
         console.log('unable to find store', data);
         // this.navigateToDeals();
@@ -129,7 +142,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
     switch (name) {
-      case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
+      case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
           this.setCurrentStore(data[0]);
           this.fetchDeliverySlots = true;
@@ -250,7 +263,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   findStore() {
     this.isNavigationClicked = true;
-    this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
+    this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
       [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
     this.loaderService.startLoading('Fetching Stores');
   }

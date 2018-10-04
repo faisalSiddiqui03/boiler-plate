@@ -55,6 +55,11 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     console.log(this.location);
   }
 
+  ngOnInit() {
+    const langCode = this.route.snapshot.params['lang'];
+    Utils.setLanguageCode(langCode);
+    this.translate.use(langCode);
+  }
   ngOnDestroy(){
 
     this.subscriber.unsubscribe();

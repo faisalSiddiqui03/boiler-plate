@@ -26,7 +26,8 @@ import {
   UserProfileWidgetModule,
   LogoutWidgetModule,
   FulfilmentModeModule,
-  SEOModule
+  SEOModule,
+  LanguageService
 } from '@capillarytech/pwa-framework';
 import { AuthGuard } from './auth.guard';
 import { HttpLoaderFactory } from './translation.loader';
@@ -36,6 +37,7 @@ import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-sele
 import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
+import { Utils } from './helpers/utils';
 
 export function getAppConfig(): Object {
   return appConfig || {};
@@ -103,7 +105,15 @@ export function getAppConfig(): Object {
 
 
 export class AppModule {
-  constructor(injector: Injector) {
+  constructor(injector: Injector, languageService: LanguageService) {
     setAppInjector(injector);
+
+    // languageService.model.subscribe(language => {
+    //   if (!language) {
+    //     return;
+    //   }
+
+    //   Utils.setLanguageCode(language.data.code);
+    // });
   }
 }

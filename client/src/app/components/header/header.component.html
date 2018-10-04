@@ -4,7 +4,7 @@
       <div class="center-align logo_bg edge-shadow brd-radius">
         <img src="assets/imgs/pizzahut-logo.svg" alt="Pizza Hut" class="header-img" (click)="goToPage('home')">
       </div>
-      <div *ngIf="showLanguage" class="lang-selection">{{ 'header.language' | translate }}</div>
+      <div *ngIf="showLanguage" class="lang-selection" (click)="switchLanguage()">{{ 'header.language' | translate }}</div>
       <div *ngIf="showTime" text-uppercase class="delivery-time" (click)="presentSlotModal()">
         <ion-icon name="time" ios="md-time" md="md-time"></ion-icon>
         <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
