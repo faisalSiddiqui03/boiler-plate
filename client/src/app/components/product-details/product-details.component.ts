@@ -28,6 +28,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
 
   @Input() productId: number;
   @Input() productFromDeal;
+  @Input() cartItem = null;
 
   loaded = false;
   productWidgetExecutor = new EventEmitter();
@@ -79,13 +80,19 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   }
 
   widgetActionSuccess(name: string, data: any) {
+    this.loaderService.stopLoading();
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
-        this.loaderService.stopLoading();
         this.alertService.presentToast(this.clientProduct.title + ' ' +
           this.translate.instant('product_details.added_to_cart'), 1000, 'top');
         this.goBack();
+        break;
+      case ProductDetailsWidgetActions.ATION_EDIT_CART:
+        this.alertService.presentToast(this.clientProduct.title + ' ' +
+          this.translate.instant('product_details.added_to_cart'), 1000, 'top');
+        this.modalController.dismiss(true);
+        // this.router.navigateByUrl('/products?category=' + this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);
         break;
     }
   }
@@ -98,11 +105,15 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   setClient() {
     this.noOfProperties = 0;
     this.noOfSelectedProperties = 0;
-    this.clientProduct.selectedPropertyValueIdMap.forEach((valueId, propId) => {
-      this.noOfProperties = this.noOfProperties + 1;
-      this.clientProduct.selectedPropertyValueIdMap.set(propId, 0);
-    });
     this.showAddToCart = !this.clientProduct.isParentProduct;
+    this.clientProduct.selectedPropertyValueIdMap.forEach((valueId, propId) => {
+      if (!this.cartItem) {
+        this.noOfProperties = this.noOfProperties + 1;
+        this.clientProduct.selectedPropertyValueIdMap.set(propId, 0);
+      } else {
+        this.showAddToCart = true;
+      }
+    });
     this.serverProduct.variantProperties.map((prop) => {
       prop.showProperty = true;
     });
@@ -113,10 +124,12 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   }
 
   setSelectedPropertyvalue(propVal, prop) {
-    if (this.clientProduct.selectedPropertyValueIdMap.get(propVal.propertyId) === 0) {
-      this.noOfSelectedProperties = this.noOfSelectedProperties + 1;
+    if (!this.cartItem) {
+      if (this.clientProduct.selectedPropertyValueIdMap.get(propVal.propertyId) === 0) {
+        this.noOfSelectedProperties = this.noOfSelectedProperties + 1;
+      }
+      this.showAddToCart = this.noOfSelectedProperties === this.noOfProperties;
     }
-    this.showAddToCart = this.noOfSelectedProperties === this.noOfProperties;
     prop.showProperty = false;
     this.clientProduct.setSelectedPropertyValueId(propVal.propertyId, propVal.id);
   }
@@ -174,6 +187,12 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       return;
     }
     this.loaderService.startLoading();
+    if(this.cartItem){
+      this.productWidgetAction.emit(
+        new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
+      );
+      return;
+    }
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
     );
@@ -181,10 +200,10 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
 
   goBack() {
     this.setClient();
-    if (!this.productFromDeal) {
-      this.location.back();
+    if (this.productFromDeal || this.cartItem) {
+      this.modalController.dismiss();
       return;
     }
-    this.modalController.dismiss();
+    this.location.back();
   }
 }

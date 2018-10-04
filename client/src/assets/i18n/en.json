@@ -47,7 +47,8 @@
 		"voucher_code": "Voucher code",
 		"voucher_description": "Our top deals are always available online on our Deals page.",
 		"your_cart": "Your Cart",
-		"your_total": "Your Total"
+		"your_total": "Your Total",
+		"not_editable": "Item not editable"
 	},
 	"category_listing": {
 		"price_tag": "From"
