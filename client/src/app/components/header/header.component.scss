@@ -2,13 +2,12 @@
   border-radius: 50%;
 }
 .edge-shadow {
-  -webkit-box-shadow: 0 6px 6px -6px #d5d5d5;
-  box-shadow: 0 6px 6px -6px #d5d5d5;
+  box-shadow: 0 6px 6px -6px var(--ion-color-light-shade);
   background-color: var(--ion-color-light);
 }
 
 .header {
-  box-shadow: 0 0 2px rgba(var(--ion-color-dark-rgb) 0.2);
+  box-shadow: 0 0 2px rgba(var(--ion-color-dark-rgb), 0.2);
   background: var(--ion-color-light);
   &::after{
     content: none;
