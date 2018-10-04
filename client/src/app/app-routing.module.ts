@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'products', loadChildren: './pages/product/category-listing/category-listing.module#CategoryListingPageModule' },
   { path: 'pizza/:productName/:productId', loadChildren: './pages/product/pizza/pizza.module#PizzaPageModule' },
   { path: 'location', loadChildren: './pages/checkout/location/location.module#LocationPageModule' },
-  { path: 'order-details', loadChildren: './pages/user/profile/order-details/order-details.module#OrderDetailsPageModule' },
+  { path: 'order-details/:orderId', loadChildren: './pages/user/profile/order-details/order-details.module#OrderDetailsPageModule' },
   { path: 'search-location', loadChildren: './pages/user/profile/search-location/search-location.module#SearchLocationPageModule' },
   { path: 'checkout', loadChildren: './pages/checkout/checkout/checkout.module#CheckoutPageModule' },
   { path: 'deal/:productName/:productId', loadChildren: './pages/product/deal/deal.module#DealPageModule' },

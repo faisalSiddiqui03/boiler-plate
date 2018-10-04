@@ -57,7 +57,7 @@
                       <ion-col no-padding size-xs="2">{{orderLineItem.qty}}</ion-col>
                     </ion-row>
                   </ion-grid>
-                  <div class="order-detail-link">View Order Details</div>
+                  <div class="order-detail-link" (click)="getOrderDetails(order)">View Order Details</div>
                 </div>
                 <div class="order-price" flex-center>
                   <span>KD {{order.priceDetails.payableAmount}}</span>
