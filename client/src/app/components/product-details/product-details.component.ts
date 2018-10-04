@@ -28,6 +28,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
 
   @Input() productId: number;
   @Input() productFromDeal;
+  @Input() cartItem = null;
 
   loaded = false;
   productWidgetExecutor = new EventEmitter();
@@ -98,11 +99,15 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   setClient() {
     this.noOfProperties = 0;
     this.noOfSelectedProperties = 0;
-    this.clientProduct.selectedPropertyValueIdMap.forEach((valueId, propId) => {
-      this.noOfProperties = this.noOfProperties + 1;
-      this.clientProduct.selectedPropertyValueIdMap.set(propId, 0);
-    });
     this.showAddToCart = !this.clientProduct.isParentProduct;
+    this.clientProduct.selectedPropertyValueIdMap.forEach((valueId, propId) => {
+      if(!this.cartItem){
+        this.noOfProperties = this.noOfProperties + 1;
+        this.clientProduct.selectedPropertyValueIdMap.set(propId, 0);
+      } else {
+        this.showAddToCart = true;
+      }
+    });
     this.serverProduct.variantProperties.map((prop) => {
       prop.showProperty = true;
     });
@@ -113,10 +118,12 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   }
 
   setSelectedPropertyvalue(propVal, prop) {
-    if (this.clientProduct.selectedPropertyValueIdMap.get(propVal.propertyId) === 0) {
-      this.noOfSelectedProperties = this.noOfSelectedProperties + 1;
+    if(!this.cartItem){
+      if (this.clientProduct.selectedPropertyValueIdMap.get(propVal.propertyId) === 0) {
+        this.noOfSelectedProperties = this.noOfSelectedProperties + 1;
+      }
+      this.showAddToCart = this.noOfSelectedProperties === this.noOfProperties;
     }
-    this.showAddToCart = this.noOfSelectedProperties === this.noOfProperties;
     prop.showProperty = false;
     this.clientProduct.setSelectedPropertyValueId(propVal.propertyId, propVal.id);
   }

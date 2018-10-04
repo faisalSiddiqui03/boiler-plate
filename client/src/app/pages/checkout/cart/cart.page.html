@@ -101,7 +101,7 @@
               <div class="cart-list">
                 <div class="cart-item" *ngFor="let item of widget?.model?.items; let i = index">
 
-                  <div flex-center>
+                  <div flex-center (click)="editCartItem(item)">
                     <div class="product-title">{{item?.description}}
                     </div>
 
