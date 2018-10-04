@@ -14,7 +14,7 @@ export class SuccessPage extends BaseComponent implements OnInit {
   constructor(
       private route: ActivatedRoute,
       private router: Router
-  ) { 
+  ) {
       super();
   }
 
@@ -51,4 +51,7 @@ export class SuccessPage extends BaseComponent implements OnInit {
     console.log(name, 'Loading Success');
   }
 
+  loadNextOrders() {
+    
+  }
 }
