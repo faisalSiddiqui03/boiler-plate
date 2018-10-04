@@ -41,7 +41,7 @@
               </table>
             </div>
           </div>
-          <div class="guest-user-register" *ngIf="getUserModel() && getUserModel().type !== 'Guest'">
+          <div class="guest-user-register" *ngIf="getUserModel() && getUserModel().type === 'Guest'">
             <div class="guest-user-message" text-center>
               <p no-margin>{{'success_page.liked_our_experience_click_to_register' | translate}}</p>
               <ion-button (click)="goToPage('signup')" color="success" text-uppercase mode="ios" class="btn-success">{{'success_page.register' | translate}}</ion-button>
