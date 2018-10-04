@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from './base/base-component';
 import { ConfigService, EventService, pwaLifeCycle } from '@capillarytech/pwa-framework';
 import { Utils } from './helpers/utils';
+import { RoutingState } from './routing-state';
 
 @Component({
   selector: 'app-root',
@@ -24,10 +25,11 @@ export class AppComponent extends BaseComponent {
     private translate: TranslateService,
     private eventService: EventService,
     public modalController: ModalController,
-    private config: ConfigService
+    private config: ConfigService,
+    private routingState: RoutingState
   ) {
     super();
-
+    routingState.loadRouting();
     this.sharedService = this.globalSharedService;
     const langCode = 'en';
     this.initializeApp();
@@ -59,7 +61,7 @@ export class AppComponent extends BaseComponent {
   }
 
   setAppDirection(lang: string) {
-    if(lang == 'ar') {
+    if (lang == 'ar') {
       console.log('----------------', this.platform);
       // this.platform.set('rtl', true);
       // this.platform.setDir('ltr', false);

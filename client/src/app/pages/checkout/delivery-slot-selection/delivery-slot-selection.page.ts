@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../helpers/utils';
 import { BaseComponent } from '../../../base/base-component';
 import { ModalController } from '@ionic/angular';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-delivery-slot-selection',
@@ -35,6 +36,7 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
+    private actRoute: ActivatedRoute,
     public modalController: ModalController
   ) {
     super();
@@ -47,6 +49,10 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
   }
 
   ngOnInit() {
+    const langCode = this.actRoute.snapshot.params['lang'];
+    Utils.setLanguageCode(langCode);
+    this.translate.use(langCode);
+
     this.translate.get('delivery_slot_selection_page.asap').subscribe(value => {
       this.asapText = value;
     });

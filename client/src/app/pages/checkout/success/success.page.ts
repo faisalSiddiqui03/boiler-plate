@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../../base/base-component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Utils } from '../../../helpers/utils';
 import {
   Action,
   pwaLifeCycle,
@@ -22,10 +24,11 @@ import {
 export class SuccessPage extends BaseComponent implements OnInit {
 
   constructor(
-      private route: ActivatedRoute,
-      private router: Router
+    private route: ActivatedRoute,
+    private router: Router,
+    private translate: TranslateService
   ) {
-      super();
+    super();
   }
 
   orderId: number;
@@ -33,6 +36,10 @@ export class SuccessPage extends BaseComponent implements OnInit {
   orderDetailWidgetAction = new EventEmitter();
 
   ngOnInit() {
+    const langCode = this.route.snapshot.params['lang'];
+    Utils.setLanguageCode(langCode);
+    this.translate.use(langCode);
+
     this.orderId = this.route.snapshot.params.orderId;
     this.email = this.route.snapshot.params.email;
   }

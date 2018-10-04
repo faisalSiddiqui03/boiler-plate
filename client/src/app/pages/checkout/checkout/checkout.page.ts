@@ -2,33 +2,33 @@ import { Component, OnInit, AfterViewInit, ViewEncapsulation, EventEmitter } fro
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../../helpers/utils';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import {
-    pwaLifeCycle,
-    LifeCycle,
-    Action,
-    pageView,
-    ConfigService,
-    OnWidgetActionsLifecyle,
-    OnWidgetLifecyle,
-    DeliverySlotsWidget,
-    CheckoutWidgetActions,
-    UserAddressWidgetActions,
-    CheckoutDetails,
-    Payment,
-    DeliverySlot,
-    City,
-    Area,
-    Country,
-    State,
-    LocationDetails,
-    Address,
-    ContactDetail,
-    OrderAttributes,
-    Checkout,
-    Transaction,
-    DeliveryModes
+  pwaLifeCycle,
+  LifeCycle,
+  Action,
+  pageView,
+  ConfigService,
+  OnWidgetActionsLifecyle,
+  OnWidgetLifecyle,
+  DeliverySlotsWidget,
+  CheckoutWidgetActions,
+  UserAddressWidgetActions,
+  CheckoutDetails,
+  Payment,
+  DeliverySlot,
+  City,
+  Area,
+  Country,
+  State,
+  LocationDetails,
+  Address,
+  ContactDetail,
+  OrderAttributes,
+  Checkout,
+  Transaction,
+  DeliveryModes
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../base/base-component';
 import { element } from 'protractor';
@@ -77,6 +77,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     private alertService: AlertService,
     private translate: TranslateService,
     private config: ConfigService,
+    private actRoute: ActivatedRoute
   ) {
 
     super();
@@ -104,14 +105,18 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   showSlotsModal = false;
 
   ngOnInit() {
+    const langCode = this.actRoute.snapshot.params['lang'];
+    Utils.setLanguageCode(langCode);
+    this.translate.use(langCode);
+
     this.translate.get('checkout_page.secure_checkout').subscribe(value => {
       this.titleValue = value;
     });
 
     this.setLoggedInUserDetails();
     if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
-        this.checkoutForm.controls['building'].setValue('T');
-        this.checkoutForm.controls['street'].setValue('T');
+      this.checkoutForm.controls['building'].setValue('T');
+      this.checkoutForm.controls['street'].setValue('T');
     }
   }
 
@@ -173,28 +178,28 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   widgetLoadingSuccess(name: string, data: any): any {
     console.log(name, 'Loading Success ', data);
     switch (name) {
-        case 'DELIVERYSLOTS':
-          if (!Utils.isEmpty(this.getDeliverySlot())) {
-            this.asSoonPossible = this.getDeliverySlot().id === -1;
-            this.slotContent = this.asSoonPossible ? this.asapText : Utils.getTimeHHMM(this.getDeliverySlot().time);
-            this.timeSlotObj = this.getDeliverySlot();
-            this.activeTimeSlot = this.findIndexOfSlot(this.getDeliverySlot().id, data);
-          } else {
-            this.asSoonPossible = data[0].id === -1;
-            this.slotContent = this.asSoonPossible ? this.asapText : Utils.getTimeHHMM(data[0].time);
-            this.timeSlotObj = data[0];
-          }
-          break;
-        case 'PAYMENT_OPTIONS':
-          this.setDefaultPaymentOption(data);
-          break;
-        case 'singleUserAddress':
-          this.widgetModels['singleUserAddress'] = data;
-          break;
-        case 'USER_ADDRESS':
-          this.getSavedAddresses(data);
-          break;
-      }
+      case 'DELIVERYSLOTS':
+        if (!Utils.isEmpty(this.getDeliverySlot())) {
+          this.asSoonPossible = this.getDeliverySlot().id === -1;
+          this.slotContent = this.asSoonPossible ? this.asapText : Utils.getTimeHHMM(this.getDeliverySlot().time);
+          this.timeSlotObj = this.getDeliverySlot();
+          this.activeTimeSlot = this.findIndexOfSlot(this.getDeliverySlot().id, data);
+        } else {
+          this.asSoonPossible = data[0].id === -1;
+          this.slotContent = this.asSoonPossible ? this.asapText : Utils.getTimeHHMM(data[0].time);
+          this.timeSlotObj = data[0];
+        }
+        break;
+      case 'PAYMENT_OPTIONS':
+        this.setDefaultPaymentOption(data);
+        break;
+      case 'singleUserAddress':
+        this.widgetModels['singleUserAddress'] = data;
+        break;
+      case 'USER_ADDRESS':
+        this.getSavedAddresses(data);
+        break;
+    }
   }
 
   findIndexOfSlot(selectedSlotId, data) {
@@ -209,7 +214,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   closePickTime() {
-      this.showSlotsModal = false;
+    this.showSlotsModal = false;
   }
 
   selectTime(timeslot, index) {
@@ -225,7 +230,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     // try to move default payment option to config
     const defaultPayment = 'COD';
     data.forEach(element => {
-        if(element.paymentOption == defaultPayment) this.objPayment = element;
+      if (element.paymentOption == defaultPayment) this.objPayment = element;
     });
   }
 
@@ -236,11 +241,11 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     obj.paymentDetails = this.objPayment;
 
     const objShipAddress: Address = new Address();
-    if(this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
-        objShipAddress.address1 = this.getCurrentStore().address;
+    if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+      objShipAddress.address1 = this.getCurrentStore().address;
     } else {
-        objShipAddress.address1 = this.checkoutForm.value.building;
-        objShipAddress.address2 = this.checkoutForm.value.street;
+      objShipAddress.address1 = this.checkoutForm.value.building;
+      objShipAddress.address2 = this.checkoutForm.value.street;
     }
     // objShipAddress.addressType = 'Home';
     const contactDetail = new ContactDetail();
@@ -270,40 +275,40 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   handleOrderSuccess(data) {
-      this.loaderService.stopLoading();
+    this.loaderService.stopLoading();
     if (data.orderId) {
-        this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, top);
-        if (this.checkoutForm.value.saveAddress) {
-            this.widgetModels['singleUserAddress'].address1 = this.checkoutForm.value.building;
-            this.widgetModels['singleUserAddress'].address2 = this.checkoutForm.value.street;
-            this.widgetModels['singleUserAddress'].city = this.getCurrentStore().city;
-            this.widgetModels['singleUserAddress'].country = this.getCurrentStore().country;
-            this.widgetModels['singleUserAddress'].state = this.getCurrentStore().state;
-            this.widgetModels['singleUserAddress'].addressType = this.checkoutForm.value.addressType;
-            this.widgetModels['singleUserAddress'].contactDetail = new ContactDetail();
-            this.widgetModels['singleUserAddress'].locationDetail = this.getCurrentStore().locationDetail;
+      this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, top);
+      if (this.checkoutForm.value.saveAddress) {
+        this.widgetModels['singleUserAddress'].address1 = this.checkoutForm.value.building;
+        this.widgetModels['singleUserAddress'].address2 = this.checkoutForm.value.street;
+        this.widgetModels['singleUserAddress'].city = this.getCurrentStore().city;
+        this.widgetModels['singleUserAddress'].country = this.getCurrentStore().country;
+        this.widgetModels['singleUserAddress'].state = this.getCurrentStore().state;
+        this.widgetModels['singleUserAddress'].addressType = this.checkoutForm.value.addressType;
+        this.widgetModels['singleUserAddress'].contactDetail = new ContactDetail();
+        this.widgetModels['singleUserAddress'].locationDetail = this.getCurrentStore().locationDetail;
 
-            const action = new Action(UserAddressWidgetActions.SAVE);
-            this.singleUserAddressWidgetActions.emit(action);
-        }
-        this.goToPage('success/' + data.orderId + '/' + this.checkoutForm.value.email);
+        const action = new Action(UserAddressWidgetActions.SAVE);
+        this.singleUserAddressWidgetActions.emit(action);
+      }
+      this.goToPage('success/' + data.orderId + '/' + this.checkoutForm.value.email);
     } else {
-        this.alertService.presentToast(this.translate.instant('checkout_page.order_failure'), 500, top);
+      this.alertService.presentToast(this.translate.instant('checkout_page.order_failure'), 500, top);
     }
 
   }
 
   handleSaveAddressSuccess(data) {
-      console.log('Save address response ', data);
+    console.log('Save address response ', data);
   }
 
   setLoggedInUserDetails() {
     const userData = this.getUserModel();
     if (userData && userData.type !== 'GUEST') {
-        this.checkoutForm.controls['name'].setValue(userData.firstName + ' ' + userData.lastName);
-        this.checkoutForm.controls['mobile'].setValue(userData.mobileNo);
-        this.checkoutForm.controls['email'].setValue(userData.username);
-        // this.getSavedAddresses();
+      this.checkoutForm.controls['name'].setValue(userData.firstName + ' ' + userData.lastName);
+      this.checkoutForm.controls['mobile'].setValue(userData.mobileNo);
+      this.checkoutForm.controls['email'].setValue(userData.username);
+      // this.getSavedAddresses();
     }
   }
 
@@ -311,7 +316,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     console.log('faisal ', addresses);
     // this.savedAddresses = addresses;
     this.savedAddresses = addresses.filter(elem =>
-        elem.city.code === this.getCurrentStore().city.code
+      elem.city.code === this.getCurrentStore().city.code
     );
     this.useSavedAddress = this.savedAddresses.length > 0;
     if (this.useSavedAddress) {
@@ -329,7 +334,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   slectPaymentOption(option) {
-      this.objPayment = option;
+    this.objPayment = option;
   }
 
 }
