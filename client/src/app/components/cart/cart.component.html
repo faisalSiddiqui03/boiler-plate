@@ -95,12 +95,12 @@
                   <div flex-center>
                     <div class="product-title">{{item.description}}</div>
                     <div class="add-remove">
-                      <ion-icon name="remove-circle" (click)="updateCartItemQuantity(item, -1)"></ion-icon>
+                      <ion-icon name="remove-circle" (click)="updateCartItemQuantity(item?.client, -1)"></ion-icon>
                       <span>{{item.quantity}}</span>
-                      <ion-icon name="add-circle" (click)="updateCartItemQuantity(item, 1)"></ion-icon>
+                      <ion-icon name="add-circle" (click)="updateCartItemQuantity(item?.client, 1)"></ion-icon>
                     </div>
                     <div class="product-price">{{item.mrp | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
-                    <ion-icon class="remove-icon" name="close-circle" (click)="removeCartItem(item)"></ion-icon>
+                    <ion-icon class="remove-icon" name="close-circle" (click)="removeCartItem(item?.client)"></ion-icon>
                   </div>
                 </ion-label>
                 <div *ngIf="i === 0" class="tooltip">{{ 'cart.update_cart_message' | translate}}</div>

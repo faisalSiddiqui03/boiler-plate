@@ -21,4 +21,15 @@ export class Utils {
     const minString = minutes < 10 ? '0' + minutes : minutes;
     return hourString + ':' + minString + ' ' + meridianString;
   }
+
+  static getDate(date: Date): string {
+    const day = date.getDate();
+    const daySting = day < 10 ? '0' + day : day;
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December']
+    ;
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+    return daySting + ' ' + month + ' ' + year;
+  }
 }
