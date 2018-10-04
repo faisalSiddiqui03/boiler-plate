@@ -57,6 +57,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   asSoonPossible = false;
   fetchDeliverySlots = false;
   isNavigationClicked = false;
+  lat;
+  lng;
 
   constructor(
     private config: ConfigService,
@@ -118,7 +120,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         console.log('unable to find store', data);
         // this.navigateToDeals();
         break;
-      case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
+      case StoreLocatorWidgetActions.FIND_BY_AREA:
         this.loaderService.stopLoading();
         console.log('unable to find store', data);
         // this.navigateToDeals();
@@ -129,7 +131,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
     switch (name) {
-      case StoreLocatorWidgetActions.FIND_BY_CITY_AREA:
+      case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
           this.setCurrentStore(data[0]);
           this.fetchDeliverySlots = true;
@@ -148,6 +150,24 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
           this.alertService.presentToast(store_alert, 3000, 'bottom');
         }
         break;
+        case StoreLocatorWidgetActions.FIND_BY_CITY:
+          this.loaderService.stopLoading();
+          if (data && data.length !== 0) {
+            this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
+          } else {
+            const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+            this.alertService.presentToast(store_alert, 3000, 'bottom');
+          }
+          break;
+        case StoreLocatorWidgetActions.FIND_BY_LOCATION:
+          this.loaderService.stopLoading();
+          if (data && data.length !== 0) {
+            this.router.navigate(['/store-selection'], { queryParams: { 'latitude': this.lat, 'longitude': this.lng } });
+          } else {
+            const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+            this.alertService.presentToast(store_alert, 3000, 'bottom');
+          }
+          break;
     }
   }
 
@@ -216,12 +236,27 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       this.toggleDropDown('area');
     }
     if (this.getFulfilmentMode() && this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
-      this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
+      this.checkIfStoresAreAvailable(this.selectedCityCode);
       return;
     }
 
-    const getAreasByCityName = new Action(LocationWidgetActions.ACTION_FETCH_AREAS_BY_CITY_CODE, city);
+    const getAreasByCityName = new Action(LocationWidgetActions.FETCH_AREAS_BY_CITY_CODE, [city]);
     this.locationsWidgetAction.emit(getAreasByCityName);
+  }
+
+  checkIfStoresAreAvailable(cityId, lat = 0, lng = 0) {
+    this.loaderService.startLoading('Fetching Stores');
+    if (cityId) {
+      const stores = this.storeLocatorWidgetAction.emit(new Action(
+          StoreLocatorWidgetActions.FIND_BY_CITY, [cityId, this.globalSharedService.getFulfilmentMode().mode])
+      );
+
+    } else if (lat && lng) {
+      const stores = this.storeLocatorWidgetAction.emit(new Action(
+          StoreLocatorWidgetActions.FIND_BY_LOCATION, [lat, lng, this.globalSharedService.getFulfilmentMode().mode])
+      );
+    }
+    return;
   }
 
   selectArea(area) {
@@ -245,21 +280,25 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   // We should get display name from api
   getAreaDisplayName(area) {
-    return this.translate.instant('home_page.block_') + area.pincode;
+    if (area.pincode) {
+      return this.translate.instant('home_page.block_') + area.pincode;
+    }
+    return area.name;
   }
 
   findStore() {
     this.isNavigationClicked = true;
-    this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_CITY_AREA,
-      [this.selectedCityCode, this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
+    this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
+      [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
     this.loaderService.startLoading('Fetching Stores');
   }
 
   locateMe(lat, lng) {
     console.log('locate me ', lat, lng);
-
+    this.lat = lat;
+    this.lng = lng;
     if (this.getFulfilmentMode() && this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
-      this.router.navigate(['/store-selection'], { queryParams: { 'latitude': lat, 'longitude': lng } });
+      this.checkIfStoresAreAvailable(null, lat, lng);
       return;
     }
 
