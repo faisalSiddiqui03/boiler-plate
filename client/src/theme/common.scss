@@ -59,9 +59,7 @@ body {
     font-weight: 400;
   }
 }
-.header{
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
+
 .page-header {
   --ion-toolbar-background-color: transparent;
   background: url('assets/imgs/backdrop.jpg');
@@ -98,6 +96,7 @@ body {
     }
   }
 }
+
 .back-to-deals {
   padding: 16px 0;
   background: var(--ion-color-light);
@@ -117,6 +116,7 @@ body {
     }
   }
 }
+
 .container-small {
   max-width: 1080px;
   margin: auto;
@@ -485,6 +485,17 @@ ion-item {
     }
   }
 }
+// Loading animation
+.loading {
+  .loading-wrapper {
+    --ion-background-color-step-50: transparent;
+    background: url('assets/imgs/delivery-bike-icon.gif') no-repeat center / 34px;
+    box-shadow: none;
+    .loading-spinner{
+      display: none;
+    }
+  }
+}
 
 // RTL Styles
 html {
@@ -567,9 +578,9 @@ html {
       }
     }
     .back-to-deals {
-      a{
+      a {
         padding: 0 15px 0 0;
-        .icon{
+        .icon {
           display: inline-block;
           transform: rotate(180deg);
           margin: 0 0 0 5px;
