@@ -26,6 +26,7 @@ export const config = {
     "sizePropertyId": 1940,
     "maxToppingLimit": 3,
     "minToppingLimit": 3,
+    "dealCategoryId": 'CU00215646',
     "baseUrl": "/api/",
     "server": {
       "mw-static": {

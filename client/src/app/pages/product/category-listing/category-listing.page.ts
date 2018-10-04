@@ -39,6 +39,8 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
   asSoonPossible = false;
   navigations = [];
   subscriber = null;
+  dealCategoryId: number;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -52,6 +54,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     super();
     this.translate.use(Utils.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
+    this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
     console.log(this.location);
   }
 

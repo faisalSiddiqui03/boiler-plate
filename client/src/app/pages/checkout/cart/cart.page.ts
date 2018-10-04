@@ -118,6 +118,11 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   async editCartItem(cartItem) {
     switch (cartItem.getType()) {
       case ProductType.Product:
+        if (!cartItem.variantProductId) {
+          const itemNotEditable = await this.translateService.instant('cart.not_editable');
+          this.alertService.presentToast(itemNotEditable, 1000, 'top');
+          return;
+        }
         const modal = await this.modalController.create({
           component: ProductDetailsComponent,
           componentProps: {
@@ -126,6 +131,11 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
           }
         });
         await modal.present();
+
+        modal.onDidDismiss().then((itemEdited) => {
+          if (itemEdited) this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
+        });
+
         break;
       case ProductType.Bundle:
         break;

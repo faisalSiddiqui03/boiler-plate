@@ -45,7 +45,7 @@
                                          [action]="productShowcaseWidgetAction">
                   <ng-template let-widget="widget">
                     <div *ngIf="widget.model == undefined">
-                      <div *ngIf="categoryName.toLocaleLowerCase() === 'deals'">
+                      <div *ngIf="categoryId === dealCategoryId">
                         <ion-grid>
                           <ion-row>
                             <ion-col class="product-card-holder" [sizeXl]="4" [sizeMd]="6" [sizeSm]="6" [sizeXs]="12">
@@ -141,7 +141,7 @@
                           </ion-row>
                         </ion-grid>
                       </div>
-                      <div *ngIf="categoryName.toLocaleLowerCase() !== 'deals'">
+                      <div *ngIf="categoryId !== dealCategoryId">
                         <ion-grid>
                           <ion-row>
                             <ion-col class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
@@ -359,7 +359,7 @@
                           <h2 text-uppercase no-margin>{{categoryName}}</h2>
                         </div>
                       </ion-show-when>
-                      <div *ngIf="categoryName.toLocaleLowerCase() === 'deals'">
+                      <div *ngIf="categoryId === dealCategoryId">
                         <ion-grid>
                           <ion-row>
                             <ion-col class="product-card-holder" *ngFor="let prod of widget.model" [sizeXl]="4"
@@ -380,7 +380,7 @@
                           </ion-row>
                         </ion-grid>
                       </div>
-                      <div *ngIf="categoryName.toLocaleLowerCase() !== 'deals'">
+                      <div *ngIf="categoryId !== dealCategoryId">
                         <ion-grid>
                           <ion-row>
                             <ion-col class="product-card-holder" *ngFor="let prod of widget.model" [sizeSm]="6"
