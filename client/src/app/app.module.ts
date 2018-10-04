@@ -35,6 +35,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-selection/delivery-slot-selection.module';
 import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
+import { RoutingState } from './routing-state';
 
 export function getAppConfig(): Object {
   return appConfig || {};
@@ -95,6 +96,7 @@ export function getAppConfig(): Object {
     },
     AlertService,
     LoaderService,
+    RoutingState
   ],
   bootstrap: [AppComponent]
 })
