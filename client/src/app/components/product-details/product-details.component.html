@@ -1,7 +1,7 @@
 <div class="full-height popup-wrap product-details-page">
   <div class="popup-inner full-height">
     <product-display-widget class="full-height" pfWidgetImpressionTrack [executor]="productWidgetExecutor" [action]="productWidgetAction"
-      (lifecycle)="null" [productId]="productId" [componentId]="getComponentId()">
+      (lifecycle)="null" [productId]="productId" [cartItem]="cartItem" [componentId]="getComponentId()">
 
       <ng-template let-widget="widget">
         <ng-container *ngIf="!loaded">

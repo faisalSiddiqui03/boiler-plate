@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { CartPage } from './cart.page';
 import { AlertServiceModule, AlertService, LoaderServiceModule, LoaderService, DebounceClickDirective } from '@capillarytech/pwa-ui-helpers';
+import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
+import { ProductDetailsComponentModule } from '../../../components/product-details/product-details.module';
 
 const routes: Routes = [
   {
@@ -26,6 +28,7 @@ const routes: Routes = [
     VoucherWidgetModule,
     ImagePreloadModule,
     DebounceClickDirective,
+    ProductDetailsComponentModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -40,6 +43,9 @@ const routes: Routes = [
     AlertService,
     LoaderService,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [
+    ProductDetailsComponent
+  ]
 })
 export class CartPageModule {}

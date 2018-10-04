@@ -16,6 +16,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Utils } from '../../../helpers/utils';
 import { Location } from '@angular/common';
 import { ProductType } from '@capillarytech/pwa-framework';
+import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cart-page',
@@ -31,7 +33,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   cartWidgetAction = new EventEmitter();
   loaded = false;
   vouchersLoaded = false;
-  enableVoucherModal:boolean = false;
+  enableVoucherModal: boolean = false;
   isWrongVoucher = false;
   currencyCode: string;
   couponCode: string;
@@ -48,7 +50,8 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private loaderService: LoaderService,
     private config: ConfigService,
     private location: Location,
-    private actRoute: ActivatedRoute
+    private actRoute: ActivatedRoute,
+    private modalController: ModalController,
   ) {
     super();
     this.translateService.use(Utils.getLanguageCode());
@@ -115,6 +118,35 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.cartWidgetAction.emit(action);
   }
 
+  async editCartItem(cartItem) {
+    switch (cartItem.getType()) {
+      case ProductType.Product:
+        if (!cartItem.variantProductId) {
+          const itemNotEditable = await this.translateService.instant('cart.not_editable');
+          this.alertService.presentToast(itemNotEditable, 1000, 'top');
+          return;
+        }
+        const modal = await this.modalController.create({
+          component: ProductDetailsComponent,
+          componentProps: {
+            productId: cartItem.productId,
+            cartItem: cartItem,
+          }
+        });
+        await modal.present();
+
+        modal.onDidDismiss().then((itemEdited) => {
+          if (itemEdited) this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
+        });
+
+        break;
+      case ProductType.Bundle:
+        break;
+      case ProductType.Deal:
+        break;
+    }
+  }
+
   async clearCart() {
     let cartClear = await this.translateService.instant('cart.cart_clear');
     this.loaderService.startLoading(cartClear);
@@ -165,7 +197,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
         const cartClear = await
-        this.translateService.instant('cart.cart_clear');
+          this.translateService.instant('cart.cart_clear');
         this.alertService.presentToast(cartClear, 3000, 'bottom');
         this.router.navigate(['/home']);
         break;
