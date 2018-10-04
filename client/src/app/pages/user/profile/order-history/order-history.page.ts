@@ -133,7 +133,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   getTimeHHMM(date) {
-    return Utils.getTimeHHMM(date);
+    return this.utilService.getTimeHHMM(date);
   }
 
 }

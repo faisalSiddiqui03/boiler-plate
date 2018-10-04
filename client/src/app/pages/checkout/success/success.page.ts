@@ -9,7 +9,6 @@ import {
   WidgetNames,
   OrderWidget
 } from '@capillarytech/pwa-framework';
-import { Utils } from '../../../helpers/utils';
 
 @Component({
   selector: 'app-success',
@@ -79,7 +78,7 @@ export class SuccessPage extends BaseComponent implements OnInit {
           this.addressLine2 = data.getAddressDetails().landmark;
           this.email = data.getAddressDetails().contactDetail.emailID;
           this.orderId = data.id;
-          this.date = Utils.getDate(data.orderDate.locale);
+          this.date = this.utilService.getDate(data.orderDate.locale);
         }
     }
   }
