@@ -62,6 +62,6 @@ export class SuccessPage extends BaseComponent implements OnInit {
   }
 
   loadNextOrders() {
-    
+
   }
 }
