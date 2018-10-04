@@ -171,7 +171,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     console.error('name = ', name, ' data = ', data);
     switch (name) {
 
-      case 'NAVIGATIONS#1' :
+      case 'NAVIGATIONS' :
         this.navigations = data.items;
         break;
       case 'DELIVERYSLOTS':
@@ -188,6 +188,11 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     }
   }
 
+  assignNav(data){
+    this.navigations = data.items;
+    return "";
+  }  
+  
   goToCart() {
     this.router.navigateByUrl('/cart');
   }

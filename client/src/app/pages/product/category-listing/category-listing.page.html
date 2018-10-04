@@ -26,9 +26,14 @@
           </ion-toolbar>
         </ion-show-when>
 
-        <navigation-widget [instanceId]="1" [componentId]="getComponentId()" pfWidgetImpressionTrack
+        <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack
                            [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
-                           [action]="null" (lifecycle)="null"></navigation-widget>
+                           [action]="null" (lifecycle)="null">
+        
+                           <ng-template let-widget="widget">
+                              <div *ngIf="widget.model">{{assignNav(widget.model)}}</div>
+                           </ng-template>
+        </navigation-widget>
         <div class="container showcase-container full-height">
           <ion-content>
             <delivery-slots-widget *ngIf="fetchDeliverySlots"
