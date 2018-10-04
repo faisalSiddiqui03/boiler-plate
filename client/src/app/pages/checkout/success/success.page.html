@@ -10,12 +10,12 @@
         <div class="order-success-page">
           <div class="success-title" text-center padding-top>
             <h4 text-uppercase no-margin>{{'success_page.thanks_for_your_order' | translate}}
-              <br>mallikarjun</h4>
+              <br>{{name}}</h4>
           </div>
           <div class="preparing-order" padding>
             <ion-item>
               <img src="assets/imgs/order_delivery_icon.svg" width="40" height="40" alt="">
-              <ion-label text-wrap>{{'success_page.we_are_preparing_your_order' | translate}} &amp; {{'success_page.it_will_be_with_you_by' | translate}} 11:30 PM On 03-Oct-2018</ion-label>
+              <ion-label text-wrap>{{'success_page.we_are_preparing_your_order' | translate}} &amp; {{'success_page.it_will_be_with_you_by' | translate}} {{time}} {{'success_page.on' | translate}} {{date}}</ion-label>
             </ion-item>
           </div>
           <div class="order-success-details">
@@ -34,8 +34,8 @@
                   </tr>
                   <tr>
                     <td>{{'success_page.delivery_address' | translate}}</td>
-                    <td>asdfgh
-                      <br> Street:asdfghjkl</td>
+                    <td>{{addressLine1}}
+                      <br> Street:{{addressLine2}}</td>
                   </tr>
                 </tbody>
               </table>

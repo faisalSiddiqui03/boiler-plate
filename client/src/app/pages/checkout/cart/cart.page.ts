@@ -111,9 +111,25 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.cartWidgetAction.emit(action);
   }
 
+  async updateCartItemQuantityNoDebounce(item, newQuantity) {
+
+    item.quantity = item.quantity + newQuantity;
+    if (item.quantity === 0) {
+      this.removeCartItem(item);
+      return;
+    }
+
+    let cartUpdate = await this.translateService.instant('cart.updating_quantity');
+    this.loaderService.startLoading(cartUpdate);
+    this.updatingPrice = true;
+    let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
+    this.cartWidgetAction.emit(action);
+  }
+
   async removeCartItem(item) {
     item.quantity = 0;
     let cartRemove = await this.translateService.instant('cart.remove_item');
+    this.loaderService.startLoading(cartRemove);
     this.updatingPrice = true;
     let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);

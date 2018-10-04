@@ -97,7 +97,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   getOrderDetails(order) {
-    this.router.navigate(['/order-detail/' + order.id]);
+    this.router.navigateByUrl('/order-details/' + order.id);
   }
 
   handleWidgetLifecycle(x: LifeCycle) {
@@ -130,6 +130,10 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
       return true;
     }
     return false;
+  }
+
+  getTimeHHMM(date) {
+    return Utils.getTimeHHMM(date);
   }
 
 }
