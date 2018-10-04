@@ -3,60 +3,53 @@
 </ion-header>
 
 <ion-content no-padding>
-  <!-- <orders-details-widget [componentId]="getComponentId()" [orderId]="orderId" [identifier]="email" [action]="orderDetailWidgetAction">
+  <orders-details-widget [componentId]="getComponentId()" [orderId]="orderId" [identifier]="email" [action]="orderDetailWidgetAction">
     <ng-template let-widget="widget">
-      <div *ngIf="widget.model">
-        <div>
-          <hr/>
-          <p>amount :- {{widget.model.priceDetails.payableAmount}}</p>
-          <p>id :- {{widget.model.id}}</p>
-          <p>status :- {{widget.model.status}}</p>
-          <div *ngFor="let item of widget.model.lineItems">
-            <p>{{item|json}}</p>
+      <!-- <div *ngIf="widget.model === undefined"> -->
+      <div *ngIf="true">
+        <div class="order-success-page">
+          <div class="success-title" text-center padding-top>
+            <h4 text-uppercase no-margin>{{'success_page.thanks_for_your_order' | translate}}
+              <br>mallikarjun</h4>
+          </div>
+          <div class="preparing-order" padding>
+            <ion-item>
+              <img src="assets/imgs/order_delivery_icon.svg" width="40" height="40" alt="">
+              <ion-label text-wrap>{{'success_page.we_are_preparing_your_order' | translate}} &amp; {{'success_page.it_will_be_with_you_by' | translate}} 11:30 PM On 03-Oct-2018</ion-label>
+            </ion-item>
+          </div>
+          <div class="order-success-details">
+            <div class="order-success-email" padding text-center>
+              <p no-margin>{{'success_page.sent_tracking_details_to' | translate}}
+                <br>
+                <a>{{email}}</a>
+              </p>
+            </div>
+            <div class="order-details-table">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>{{'success_page.order' | translate}}</td>
+                    <td>{{orderId}}</td>
+                  </tr>
+                  <tr>
+                    <td>{{'success_page.delivery_address' | translate}}</td>
+                    <td>asdfgh
+                      <br> Street:asdfghjkl</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="guest-user-register" *ngIf="getUserModel() && getUserModel().type === 'Guest'">
+            <div class="guest-user-message" text-center>
+              <p no-margin>{{'success_page.liked_our_experience_click_to_register' | translate}}</p>
+              <ion-button (click)="goToPage('signup')" color="success" text-uppercase mode="ios" class="btn-success">{{'success_page.register' | translate}}</ion-button>
+            </div>
           </div>
         </div>
       </div>
     </ng-template>
-  </orders-details-widget> -->
-  <div class="order-success-page">
-    <div class="success-title" text-center padding-top>
-      <h4 text-uppercase no-margin>Thanks for your order,
-        <br> mallikarjun</h4>
-    </div>
-    <div class="preparing-order" padding>
-      <ion-item>
-        <img src="assets/imgs/order_delivery_icon.svg" width="40" height="40" alt="">
-        <ion-label text-wrap>We're preparing your order &amp; it will be with you by 11:30 PM On 03-Oct-2018</ion-label>
-      </ion-item>
-    </div>
-    <div class="order-success-details">
-      <div class="order-success-email" padding text-center>
-        <p no-margin>We have sent your order & tracking details to
-          <br>
-          <a>mallikarjun.kv@capillarytech.com</a>
-        </p>
-      </div>
-      <div class="order-details-table">
-        <table>
-          <tbody>
-            <tr>
-              <td>Order#:</td>
-              <td>3256965</td>
-            </tr>
-            <tr>
-              <td>Delivery Address:</td>
-              <td>asdfgh
-                <br> Street:asdfghjkl</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="guest-user-register">
-      <div class="guest-user-message" text-center>
-        <p no-margin>Liked our experience, click here to register.</p>
-        <ion-button (click)="loadNextOrders()" color="success" text-uppercase mode="ios" class="btn-success">register</ion-button>
-      </div>
-    </div>
-  </div>
+  </orders-details-widget>
+  
 </ion-content>
