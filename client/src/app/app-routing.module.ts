@@ -85,8 +85,8 @@ const routes: Routes = [
   { path: 'location', redirectTo: defaultLang + '/location' },
   { path: ':lang/location', loadChildren: './pages/checkout/location/location.module#LocationPageModule' },
 
-  { path: 'order-details', redirectTo: defaultLang + '/order-details' },
-  { path: ':lang/order-details', loadChildren: './pages/user/profile/order-details/order-details.module#OrderDetailsPageModule' },
+  { path: 'order-details/:orderId', redirectTo: defaultLang + '/order-details/:orderId' },
+  { path: ':lang/order-details/:orderId', loadChildren: './pages/user/profile/order-details/order-details.module#OrderDetailsPageModule' },
 
   { path: 'search-location', redirectTo: defaultLang + '/search-location' },
   { path: ':lang/search-location', loadChildren: './pages/user/profile/search-location/search-location.module#SearchLocationPageModule' },
