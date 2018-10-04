@@ -106,14 +106,49 @@
                     </div>
 
                     <div class="add-remove">
-                      <!-- <ion-icon name="remove-circle" appDebounceClick [inputDebounceTime]="'300'" (debounceClick)="updateCart($event, item?.client, false)"></ion-icon> -->
-                      <ion-icon name="remove-circle" (click)="updateCartItemQuantityNoDebounce(item?.client, -1);"></ion-icon>
+                      <!--<ion-icon-->
+                              <!--name="remove-circle"-->
+                              <!--[pfRemoveFromCartTrack]="{cart: [item], quantity: 1}"-->
+                              <!--appDebounceClick-->
+                              <!--[inputDebounceTime]="'300'"-->
+                              <!--(debounceClick)="updateCart($event, item?.client, false)">-->
+                      <!--</ion-icon>-->
+                      <ion-icon
+                              name="remove-circle"
+                              [pfRemoveFromCartTrack]="{cart: [item], quantity: 1}"
+                              (click)="updateCartItemQuantityNoDebounce(item?.client, -1);">
+
+                      </ion-icon>
                       <span>{{item.quantity}}</span>
-                      <!-- <ion-icon name="add-circle" appDebounceClick [inputDebounceTime]="'300'" (debounceClick)="updateCart($event, item?.client, true)"></ion-icon> -->
-                      <ion-icon name="add-circle" (click)="updateCartItemQuantityNoDebounce(item?.client, 1);"></ion-icon>
+                      <!--<ion-icon-->
+                              <!--name="add-circle"-->
+                              <!--[pfAddToCartTrack]="{-->
+                                <!--cart: [item],-->
+                                <!--currencyCode:'KD'-->
+                              <!--}"-->
+                              <!--appDebounceClick-->
+                              <!--[inputDebounceTime]="'300'"-->
+                              <!--(debounceClick)="updateCart($event, item?.client, true)">-->
+
+                      <!--</ion-icon>-->
+                      <ion-icon
+                              name="add-circle"
+                              [pfAddToCartTrack]="{
+                                cart: [item],
+                                currencyCode:'KD'
+                              }"
+                              (click)="updateCartItemQuantityNoDebounce(item?.client, 1);">
+
+                      </ion-icon>
                     </div>
                     <div class="product-price">{{(item?.getPrice() * item.quantity) | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
-                    <ion-icon class="remove-icon" name="close-circle" (click)="removeCartItem(item?.client);"></ion-icon>
+                    <ion-icon
+                            class="remove-icon"
+                            name="close-circle"
+                            [pfRemoveFromCartTrack]="{cart: [item]}"
+                            (click)="removeCartItem(item?.client)">
+
+                    </ion-icon>
                   </div>
                   <div class="toppings">
                     <ng-container *ngIf="item.getType() === product">
@@ -158,8 +193,16 @@
           </div>
         </ion-content>
         <ion-footer>
-          <ion-button (click)="goToPage('checkout')" color="success" text-capitalize expand="block" [class.disabled]="updatingPrice"
-            mode="ios" class="btn-success">{{ 'cart.continue' | translate}} &nbsp;
+          <ion-button
+                  (click)="goToPage('checkout')"
+                  [pfCheckoutTrack]="{cart: widget?.model}"
+                  color="success"
+                  text-capitalize
+                  expand="block"
+                  [class.disabled]="updatingPrice"
+                  mode="ios"
+                  class="btn-success">
+            {{ 'cart.continue' | translate}} &nbsp;
             <span *ngIf="updatingPrice">
               <ion-spinner name="crescent" color="dark"></ion-spinner>
             </span>

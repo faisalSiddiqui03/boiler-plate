@@ -375,7 +375,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   filterEntires(cityList, searchTerm) {
     const searchSubString = this.isCleared ? '' : searchTerm.toLowerCase();
-    return cityList.filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
+    return (cityList || []).filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
   }
 
   getDeliveryMode() {

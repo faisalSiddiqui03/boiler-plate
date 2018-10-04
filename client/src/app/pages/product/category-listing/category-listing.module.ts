@@ -6,7 +6,8 @@ import {
   NavigationWidgetModule,
   ProductShowcaseWidgetModule,
   ImagePreloadModule,
-  DeliverySlotsWidgetModule
+  DeliverySlotsWidgetModule,
+  EventTrackModule
 } from '@capillarytech/pwa-framework';
 import { CartComponentModule } from '../../../components/cart/cart.component.module';
 import { HttpLoaderFactory } from '../../../translation.loader';
@@ -35,6 +36,7 @@ const routes: Routes = [
     HeaderModule,
     SkeletonModule,
     ImagePreloadModule,
+    EventTrackModule,
     NavigationWidgetModule,
     RouterModule.forChild(routes),
     CartComponentModule,
