@@ -134,7 +134,7 @@
 .header-right {
   display: none;
 }
-.loggedin-user{ 
+.loggedin-user{
   position: relative;
   .icon-arrow {
     display: inline-block;
@@ -194,20 +194,27 @@
 .deals-header {
   border-bottom: 1px solid var(--ion-block-header-color);
   background: var(--ion-color-light);
-  img{
-    max-height: 37px;
+  .deals-logo-holder {
+    img{
+      max-height: 37px;
+    }
+    width: 200px;
   }
   navigation-widget{
     flex: 1;
     text-align: right;
   }
   .showcase-tabs {
+    width: 100%;
     ul {
+      flex: 1;
+      text-align: right;
       li {
         display: inline-block;
         font-size: 16px;
         line-height: 34px;
         padding: 10px;
+        width: auto;
         min-width: 10%;
         cursor: pointer;
         color: var(--ion-color-dark-shade);

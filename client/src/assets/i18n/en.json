@@ -67,11 +67,13 @@
 		"submit": "submit"
 	},
 	"checkout_page": {
+		"add_new_address": "Add New Address",
 		"agree_text": "By placing your order, you agree to our",
 		"building": "Building Number/Villa Number",
 		"building_placeholder": "Building Number/Villa Number",
 		"building_required": "We would need your address to deliver your pizza",
 		"change": "Change",
+		"change_address": "Change Address:",
 		"comment": "Order Comment",
 		"comment_placeholder": "Order Comment",
 		"confirm": "Confirm",
@@ -81,6 +83,7 @@
 		"email_required": "Please provide your email",
 		"email_valid": "Please provide the correct email address",
 		"go_to_payment": "Go To Payment",
+		"home": "Home",
 		"how_you_pay": "How would you like to pay?",
 		"latest_discounts_offers_text": "Please send latest discounts and offers from Pizza Hut Delivery",
 		"mobile": "Mobile",
@@ -91,12 +94,17 @@
 		"name": "Name",
 		"name_placeholder": "First name is fine",
 		"name_required": "First name please",
+		"or": "OR",
+		"order_failure": "We had an error with placing your order. Please try again",
 		"order_for": "Order for",
+		"order_successful": "Order Placed Successfully.",
 		"ordering_for_delivery_to": "Ordering for delivery to",
+		"other": "Other",
 		"pick_a_time": "Pick a time",
 		"pickup_from": "Pickup from",
 		"place_your_order": "Place your Order",
 		"privacy_policy": "Privacy Policy",
+		"save_as": "Save As:",
 		"secure_checkout": "Secure Checkout",
 		"street": "Way Number/Street Name",
 		"street_placeholder": "Enter Way Number Or Street Name",
@@ -106,16 +114,8 @@
 		"where_should_you_pick_it_from": "Where should your pick it from?",
 		"where_we_deliver": "Where should we deliver it to?",
 		"who_we_delivering": "Who are we delivering to?",
-        "with_cash": "With Cash",
-        "or": "OR",
-        "change_address": "Change Address:",
-        "add_new_address": "Add New Address",
-        "save_as": "Save As:",
-        "home": "Home",
-        "work": "Work",
-        "other": "Other",
-        "order_successful": "Order Placed Successfully.",
-        "order_failure": "We had an error with placing your order. Please try again"
+		"with_cash": "With Cash",
+		"work": "Work"
 	},
 	"contact_page": {
 		"address_1": "Al-Homaizi Foodstuff Co.",
@@ -128,14 +128,14 @@
 		"phone_number": "Phone Number"
 	},
 	"deal": {
+		"add": "Add",
 		"add_to_basket": "Add To My Basket",
+		"added": "Added",
 		"added_to_cart": "added to cart",
 		"back_to_deals": "Back to Deals",
+		"choose_any": "Choose any ",
 		"choose_your": "Choose your",
-		"add": "Add",
-		"added": "Added",
-		"your_deal_details": "Your Deal Details",
-		"choose_any": "Choose any "
+		"your_deal_details": "Your Deal Details"
 	},
 	"delivery_slot_selection_page": {
 		"as_soon_as_possible": "As soon as Possible",
@@ -460,8 +460,8 @@
 	},
 	"product_details": {
 		"add_to_basket": "Add To My Basket",
-		"added_to_cart": "added to cart",
-		"add_to_deal": "Add to my deal"
+		"add_to_deal": "Add to my deal",
+		"added_to_cart": "added to cart"
 	},
 	"reset_password_page": {
 		"email": "Email",
@@ -531,6 +531,16 @@
 	"store_selection_page": {
 		"stores_selection": "Stores Selection",
 		"take_away_now": "Take Away Now"
+	},
+	"success_page": {
+		"delivery_address": "Delivery Address:",
+		"it_will_be_with_you_by": "it will be with you by",
+		"liked_our_experience_click_to_register": "Liked our experience, click here to register.",
+		"order": "Order#:",
+		"register": "Register",
+		"sent_tracking_details_to": "We have sent your order & tracking details to",
+		"thanks_for_your_order": "Thanks for your order,",
+		"we_are_preparing_your_order": "We're preparing your order"
 	},
 	"terms_page": {
 		"terms_accordion01_head1": "Site-specific information",
