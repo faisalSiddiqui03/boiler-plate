@@ -75,6 +75,7 @@
   }
   ion-card-content {
     --ion-padding: 10px 10px 0 10px;
+    min-height: 135px;
   }
   .deal-item-name {
     font-size: 16px;
@@ -256,7 +257,7 @@
     --padding-start: 0;
     --padding-end: 0;
   }
-  .showcase-tabs {
+  .showcase-tabs-one {
     white-space: nowrap;
     overflow: auto;
     background: var(--ion-color-light);
@@ -290,7 +291,7 @@
   }
 
   @media (max-width: 991px) {
-    .showcase-tabs {
+    .showcase-tabs-one {
       background: rgba(var(--ion-color-cart-stripe-rgb), 0.96);
       padding-left: 0;
       ul {
@@ -358,13 +359,6 @@
       display: flex;
       justify-content: space-between;
     }
-    .tabs-nav-head {
-      position: fixed;
-      margin-top: 47px;
-      --min-height: 44px;
-      width: calc(100% - 370px);
-      z-index: 0;
-    }
     .showcase-container {
       padding-top: 140px;
     }
@@ -399,7 +393,7 @@
           .product-content {
             margin: 0 0 0 20px;
           }
-          .showcase-tabs {
+          .showcase-tabs-one {
             padding: 0 10px 0 0;
           }
         }
@@ -411,7 +405,7 @@
     html {
       &[dir="rtl"] {
         .category-listing-page {
-          .showcase-tabs {
+          .showcase-tabs-one {
             ul {
               li {
                 & + li {

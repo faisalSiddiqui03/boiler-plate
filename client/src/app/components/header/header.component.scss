@@ -106,14 +106,15 @@
 .header-right {
   display: none;
 }
-.loggedin-user{
+
+.loggedin-user {
   position: relative;
   .icon-arrow {
     display: inline-block;
     font-size: 12px;
     cursor: pointer;
   }
-  span{
+  span {
     display: inline-block;
     width: 80px;
     vertical-align: middle;
@@ -123,7 +124,7 @@
     text-overflow: ellipsis;
     text-align: left;
   }
-  .dropdown{
+  .dropdown {
     position: absolute;
     top: 45px;
     right: 10px;
@@ -137,42 +138,43 @@
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.3s ease-in-out;
-    &.open{
+    &.open {
       visibility: visible;
       opacity: 1;
       transform: translateY(0);
     }
-    ul{
+    ul {
       padding: 0;
       margin: 0;
       list-style: none;
-      li{
+      li {
         padding: 10px 15px;
         font-size: 13px;
         line-height: 24px;
         cursor: pointer;
         font-family: 'Open Sans';
         transition: all 0.3s ease-in-out;
-        &+li{
+        & + li {
           border-top: 1px solid var(--ion-color-medium-tint);
         }
-        &:hover{
+        &:hover {
           background: var(--ion-color-light-tint);
         }
       }
     }
   }
 }
+
 .deals-header {
   border-bottom: 1px solid var(--ion-block-header-color);
   background: var(--ion-color-light);
   .deals-logo-holder {
-    img{
+    img {
       max-height: 37px;
     }
     width: 200px;
   }
-  navigation-widget{
+  navigation-widget {
     flex: 1;
     text-align: right;
   }
@@ -192,10 +194,9 @@
         color: var(--ion-color-dark-shade);
         text-transform: uppercase;
         font-family: 'Open Sans Condensed';
-        color: var(--ion-color-secondary-shade);
         border-right: 1px solid var(--ion-color-medium-tint);
         transition: all 0.3s ease-in-out;
-        &:first-child{
+        &:first-child {
           border-left: 1px solid var(--ion-color-medium-tint);
         }
         &:hover {
@@ -215,6 +216,47 @@
       margin: 7px auto 2px;
     }
   }
+
+  .tabs-nav-head {
+    //position: fixed;
+    //margin-top: 54px;
+    --min-height: 44px;
+    //width: calc(100% - 370px);
+    //z-index: 10;
+    .showcase-tabs {
+      white-space: nowrap;
+      overflow: auto;
+      background: var(--ion-color-light);
+      padding-left: 20px;
+      ul {
+        display: table;
+        width: 100%;
+        li {
+          display: inline-block;
+          font-size: 18px;
+          line-height: 30px;
+          padding: 10px;
+          width: 86px;
+          cursor: pointer;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          font-family: 'Conv_UnitedSansCond-Bold';
+          color: var(--ion-color-secondary-shade);
+          border-right: 1px solid var(--ion-color-medium-tint);
+          &.selected {
+            background-color: var(--ion-color-danger-shade);
+            background-image: url('assets/imgs/Deals-Highlight-Element.svg');
+            background-size: cover;
+            color: var(--ion-color-light);
+          }
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+
   .category-header {
     .desktop-logo {
       padding: 0 16px;
@@ -235,7 +277,7 @@
         border-left: 1px solid var(--ion-color-medium-tint);
         border-right: 1px solid var(--ion-color-medium-tint);
         cursor: pointer;
-        ion-icon{
+        ion-icon {
           font-size: 20px;
           margin-right: 4px;
           vertical-align: bottom;
@@ -254,7 +296,7 @@
           font-size: 14px;
           margin: 0 4px;
         }
-        small{
+        small {
           font-size: 14px;
           cursor: pointer;
         }
@@ -270,7 +312,7 @@
           font-size: 14px;
           margin: 0 4px;
         }
-        small{
+        small {
           display: inline-block;
           vertical-align: middle;
           text-align: left;
@@ -282,16 +324,16 @@
           text-overflow: ellipsis;
         }
       }
-      .signin-register{
+      .signin-register {
         font-weight: 500;
         font-family: 'Open Sans Condensed';
         font-size: 15px;
-        .icon{
+        .icon {
           display: inline-block;
           font-size: 24px;
           vertical-align: middle;
         }
-        span{
+        span {
           margin-left: 5px;
           cursor: pointer;
         }
@@ -300,87 +342,87 @@
   }
 }
 
-@media (min-width:992px) and (max-width:1199px){
+@media (min-width: 992px) and (max-width: 1199px) {
   .category-header {
-    .desktop-logo{
+    .desktop-logo {
       padding: 0 3px;
     }
     .header-right {
-      .signin-register{
-        span{
+      .signin-register {
+        span {
           display: none;
         }
       }
       .delivery-location {
-        small{
+        small {
           max-width: 100px;
         }
       }
-      .delivery-time-large{
+      .delivery-time-large {
         padding: 4px;
       }
     }
   }
   .loggedin-user {
-    .icon-arrow{
+    .icon-arrow {
       display: none;
     }
   }
 }
 
 // RTL Support Styles
-html{
-  &[dir="rtl"]{
-    .halal-logo{
+html {
+  &[dir="rtl"] {
+    .halal-logo {
       left: 6px;
       right: auto;
     }
-    .lang-selection{
+    .lang-selection {
       right: 43px;
       left: auto;
     }
-    .profile-icon{
+    .profile-icon {
       right: 10px;
       left: auto;
     }
     .delivery-time {
-      ion-icon{
+      ion-icon {
         margin: 0 0 0 3px;
       }
     }
-    .cart-count{
+    .cart-count {
       left: 10px;
       right: auto;
     }
     .category-header {
       .header-right {
         .signin-register {
-          .icon{
+          .icon {
             margin-left: 5px;
           }
         }
       }
     }
     .loggedin-user {
-      span{
+      span {
         text-align: right;
       }
-      .dropdown{
+      .dropdown {
         left: 10px;
         right: auto;
       }
     }
     .deals-header {
-      navigation-widget{
+      navigation-widget {
         text-align: left;
       }
       .showcase-tabs {
         ul {
           li {
-            &:first-child{
+            &:first-child {
               border-left: none;
             }
-            &:last-child{
+            &:last-child {
               border-left: 1px solid var(--ion-color-medium-tint);
             }
           }

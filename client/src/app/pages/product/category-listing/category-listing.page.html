@@ -9,21 +9,8 @@
       <div class="product-content">
         <ion-show-when size="lg">
           <ion-header class="top-header-container">
-            <app-header [showCart]="true" [showTime]="true" [headerClass]="'category-header'"></app-header>
+            <app-header (switchCategory)="switchCategories($event)" [showCart]="true" [showTime]="true" [headerClass]="'category-header'"></app-header>
           </ion-header>
-          <ion-toolbar class="tabs-nav-head">
-
-            <div class="showcase-tabs">
-              <div class="container">
-                <ul no-margin no-padding>
-                  <li *ngFor="let item of navigations; let i = index;" text-center
-                      [class.selected]="item.categoryId === categoryId"
-                      (click)="switchCategories(item.name, item.categoryId)">{{item.name}}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </ion-toolbar>
         </ion-show-when>
 
         <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack
@@ -436,11 +423,11 @@
   </div>
   <ion-hide-when size="lg">
     <ion-footer no-border>
-      <div class="showcase-tabs">
+      <div class="showcase-tabs-one">
         <ul no-margin no-padding>
           <li *ngFor="let item of navigations; let i = index;" text-center class="hello"
               [class.selected]="item.categoryId==categoryId"
-              (click)="switchCategories(item.name, item.categoryId)">{{item.name}}
+              (click)="switchCategories({category: item.name, id: item.categoryId})">{{item.name}}
           </li>
         </ul>
       </div>

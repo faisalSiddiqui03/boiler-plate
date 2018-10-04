@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   Action,
@@ -56,8 +56,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   @Input() headerClass = '';
   @Input() showUserIcon = true;
   @Input() dealsHeader = false;
-
   enableUserDropdown: boolean = false;
+  @Output() switchCategory: EventEmitter<any> = new EventEmitter<any>();
 
   ngOnInit() {
     const data = this.route.snapshot.queryParams;
@@ -132,7 +132,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   widgetLoadingSuccess(name: string, data: any): any {
     console.error('name: ', name, 'data: ', data);
     switch (name) {
-      case 'NAVIGATIONS#3':
+      case 'NAVIGATIONS' :
         this.navigations = data.items;
         break;
     }
@@ -151,6 +151,12 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   switchCategories(category, categoryId) {
+    this.categoryId = categoryId;
+    this.switchCategory.emit({category, id: categoryId});
+    // this.router.navigateByUrl(`/products?category=${category}&id=${categoryId}`);
+  }
+
+  switchCategoryPage(category, categoryId) {
     this.router.navigateByUrl(`/products?category=${category}&id=${categoryId}`);
   }
 

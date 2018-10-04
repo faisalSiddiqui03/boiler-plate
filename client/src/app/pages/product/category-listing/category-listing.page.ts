@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import {
@@ -65,10 +65,9 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     this.translate.use(langCode);
   }
   ngOnDestroy(){
-
-    this.subscriber.unsubscribe();
-    this.subscriber = null;
-    console.error('unsubscribed');
+    // this.subscriber.unsubscribe();
+    // this.subscriber = null;
+    // console.error('unsubscribed');
   }
 
   ionViewWillEnter() {
@@ -78,16 +77,22 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
       this.loaderService.startLoading();
     }
 
-    if(this.categoryId !== null){
+    if (this.categoryId !== null) {
       return;
     }
-
     let data = this.route.snapshot.queryParams;
     this.updateCategories(data);
   }
 
-  updateCategories(data){
-    console.error("vivek", data);
+  ionNavWillChange(data) {
+    console.error(data, "router")
+  }
+
+  ionViewWillLeave() {
+    this.fetchDeliverySlots = false;
+  }
+
+  updateCategories(data) {
     this.categoryId = data.id;
     this.categoryName = data.category;
   }
@@ -108,27 +113,19 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     return await modal.present();
   }
 
-  ionNavWillChange(data){
-    console.error(data, "router")
-  }
-
-  ionViewWillLeave() {
-    this.fetchDeliverySlots = false;
-  }
-
   getProductImageUrl(product) {
-    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
       return this.getUrl(product.image);
     } else {
       let lastItem = product.multipleImages.slice().pop();
-      if(!lastItem.image) {
+      if (!lastItem.image) {
         return this.getUrl(product.image);
       }
       return this.getUrl(lastItem.image);
     }
   }
 
-  getUrl(url: string){
+  getUrl(url: string) {
     return `https://${url}`;
   }
 
@@ -197,22 +194,24 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
   assignNav(data){
     this.navigations = data.items;
     return "";
-  }  
-  
+  }
+
   goToCart() {
     this.router.navigateByUrl('/cart');
   }
 
-  switchCategories(category, categoryId) {
-    if( categoryId === this.categoryId ) return;
-    this.router.navigate([], { queryParams: { category: category, id: categoryId } }).then(data=>{
+  switchCategories(data) {
+    if (data.categoryId === this.categoryId) return;
+    this.router.navigate([], { queryParams: data }).then(data => {
+      console.error('router navigate succe', data);
     }).catch(err => {
+      console.error('router navigate fail', err);
     });
 
-    let data = {
-      "category": category,
-      "id": categoryId
-    };
+    // let data = {
+    //   "category": category,
+    //   "id": categoryId
+    // };
 
     this.updateCategories(data);
     // this.router.navigateByUrl('/products?category={{item.name}}&id={{item.categoryId}}')
@@ -220,6 +219,11 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
 
   isLoggedIn() {
     return this.getUserModel() && this.getUserModel().type !== 'GUEST';
+  }
+
+  hello(a) {
+    this.updateCategories(a);
+    console.error('vivek', a);
   }
 
 }
