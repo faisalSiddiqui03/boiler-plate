@@ -72,8 +72,7 @@
       <location-widget
         [componentId]="getComponentId()"
         [mode]="'geography'"
-        [locator]="'city'"
-        [deliveryMode]="globalSharedService.getFulfilmentMode()?.mode"
+        [locator]="'cities'"
         [action]="locationsWidgetAction">
         <ng-template let-widget="widget">
           <div *ngIf="widget.model == undefined">
@@ -188,7 +187,6 @@
       <location-widget
         [componentId]="getComponentId()"
         [mode]="'geometry'"
-        [deliveryMode]="globalSharedService.getFulfilmentMode()?.mode"
         [action]="locationsWidgetActionGeometry"
         [instanceId]="1">
         <ng-template let-widget="widget">
