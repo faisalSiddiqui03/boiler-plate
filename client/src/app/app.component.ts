@@ -5,7 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from './base/base-component';
 import { ConfigService, EventService, pwaLifeCycle } from '@capillarytech/pwa-framework';
-import { Utils } from './helpers/utils';
+import { UtilService } from './helpers/utils';
 import { RoutingState } from './routing-state';
 
 @Component({
@@ -26,7 +26,8 @@ export class AppComponent extends BaseComponent {
     private eventService: EventService,
     public modalController: ModalController,
     private config: ConfigService,
-    private routingState: RoutingState
+    private routingState: RoutingState,
+    private utilService: UtilService
   ) {
     super();
     routingState.loadRouting();
@@ -54,10 +55,10 @@ export class AppComponent extends BaseComponent {
   }
 
   setLanguage(langCode: string) {
-    Utils.setLanguageCode(langCode);
+    this.utilService.setLanguageCode(langCode);
     this.translate.setDefaultLang(langCode);
     this.translate.use(langCode);
-    this.setAppDirection(langCode);
+    //this.setAppDirection(langCode);
   }
 
   setAppDirection(lang: string) {

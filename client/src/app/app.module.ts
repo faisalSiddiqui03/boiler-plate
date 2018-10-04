@@ -37,7 +37,7 @@ import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-sele
 import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
-import { Utils } from './helpers/utils';
+import { UtilService } from './helpers/utils';
 
 export function getAppConfig(): Object {
   return appConfig || {};
@@ -98,7 +98,8 @@ export function getAppConfig(): Object {
     },
     AlertService,
     LoaderService,
-    RoutingState
+    RoutingState,
+    UtilService
   ],
   bootstrap: [AppComponent]
 })

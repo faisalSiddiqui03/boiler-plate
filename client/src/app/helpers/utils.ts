@@ -1,19 +1,28 @@
-export class Utils {
-  private static _languageCode: string;
+import { LanguageService } from '@capillarytech/pwa-framework';
+import { Injectable } from '@angular/core';
 
-  static setLanguageCode(langCode: string) {
-    Utils._languageCode = langCode;
+@Injectable()
+export class UtilService {
+
+  constructor(private langService: LanguageService) {
   }
 
-  static getLanguageCode(): string {
-    return Utils._languageCode;
+  private _languageCode: string;
+
+  setLanguageCode(langCode: string) {
+    this._languageCode = langCode;
+    this.langService.updateLanguageByCode(langCode);
   }
 
-  static isEmpty(obj): boolean {
+  getLanguageCode(): string {
+    return this._languageCode;
+  }
+
+  isEmpty(obj): boolean {
     return !obj || Object.getOwnPropertyNames(obj).length === 0;
   }
 
-  static getTimeHHMM(date: Date): string {
+  getTimeHHMM(date: Date): string {
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const meridianString = hours < 12 ? 'am' : 'pm';

@@ -9,7 +9,7 @@ import {
   LogoutWidgetActions,
   LogoutWidget
 } from '@capillarytech/pwa-framework';
-import { Utils } from '../../../../helpers/utils';
+import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -26,15 +26,17 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
-  titleValue:string = '';
+  titleValue: string = '';
   logoutWidgetAction = new EventEmitter();
 
-  constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
+  constructor(private router: Router,
+    private utilService: UtilService,
+    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
 
     // this.loaderService.startLoading();
 
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   ngOnInit() {

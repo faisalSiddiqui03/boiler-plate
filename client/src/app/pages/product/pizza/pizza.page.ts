@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BaseComponent } from '../../../base/base-component';
-import { Utils } from '../../../helpers/utils';
+import { UtilService } from '../../../helpers/utils';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -17,13 +17,14 @@ export class PizzaPage extends BaseComponent implements OnInit {
   productName: string;
 
   constructor(private route: ActivatedRoute,
+    private utilService: UtilService,
     private translate: TranslateService) {
     super();
   }
 
   ngOnInit() {
     const langCode = this.route.snapshot.params['lang'];
-    Utils.setLanguageCode(langCode);
+    this.utilService.setLanguageCode(langCode);
     this.translate.use(langCode);
 
     this.productId = this.route.snapshot.params.productId;

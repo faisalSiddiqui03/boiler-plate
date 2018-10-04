@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../base/base-component';
 import { TranslateService } from '@ngx-translate/core';
 import { AgmCoreModule, MouseEvent } from '@agm/core';
-import { Utils } from '../../helpers/utils';
+import { UtilService } from '../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { SearchLocationPage } from '../../pages/user/profile/search-location/search-location.page';
 
@@ -23,10 +23,11 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private utilService: UtilService
   ) {
     super();
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   ngOnInit() {

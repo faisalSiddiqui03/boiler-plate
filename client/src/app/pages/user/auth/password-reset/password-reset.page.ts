@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../../base/base-component';
 import { Router } from '@angular/router';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../../../helpers/utils';
+import { UtilService } from '../../../../helpers/utils';
 
 @Component({
   selector: 'app-password-reset',
@@ -27,10 +27,12 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
   resetPasswordActionEmitter = new EventEmitter();
   titleValue:string = '';
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
+  constructor(private formBuilder: FormBuilder, 
+    private utilService: UtilService,
+    private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
 
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
 
     this.resetPasswordForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])]

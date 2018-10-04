@@ -20,7 +20,7 @@ import {
 import { BaseComponent } from '../../base/base-component';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../helpers/utils';
+import { UtilService } from '../../helpers/utils';
 import { Location } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 
@@ -64,9 +64,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     private location: Location,
     private loaderService: LoaderService,
     private modalController: ModalController,
+    private utilService: UtilService
   ) {
     super();
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 

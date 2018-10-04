@@ -15,7 +15,7 @@ import { BaseComponent } from '../../../../base/base-component';
 import { Router } from '@angular/router';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../../../helpers/utils';
+import { UtilService } from '../../../../helpers/utils';
 
 @Component({
   selector: 'app-login',
@@ -48,6 +48,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     private alertService: AlertService,
     private translate: TranslateService,
     private config: ConfigService,
+    private utilService: UtilService,
     private location: Location
   ) {
     super();
@@ -56,7 +57,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
     // this.loaderService.startLoading();
 
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
 
     this.widgetModels = {};
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
 import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle, LifeCycle } from '@capillarytech/pwa-framework';
-import { Utils } from '../../../../helpers/utils';
+import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,12 +18,14 @@ import { TranslateService } from '@ngx-translate/core';
 export class OrderDetailsPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   titleValue: string = '';
-  constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
+  constructor(private router: Router,
+    private utilService: UtilService,
+    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
 
     // this.loaderService.startLoading();
 
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   ngOnInit() {

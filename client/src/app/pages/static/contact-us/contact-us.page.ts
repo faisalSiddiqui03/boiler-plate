@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../../helpers/utils';
+import { UtilService } from '../../../helpers/utils';
 
 @Component({
   selector: 'app-contact-us',
@@ -10,9 +10,10 @@ import { Utils } from '../../../helpers/utils';
 export class ContactUsPage implements OnInit {
 
   constructor(
-    private translate: TranslateService
+    private translate: TranslateService,
+    private utilService: UtilService
   ) {
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   titleValue = '';

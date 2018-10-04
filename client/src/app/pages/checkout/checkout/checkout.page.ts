@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../../helpers/utils';
+import { UtilService } from '../../../helpers/utils';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -75,6 +75,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     private router: Router,
     private loaderService: LoaderService,
     private alertService: AlertService,
+    private utilService: UtilService,
     private translate: TranslateService,
     private config: ConfigService,
     private actRoute: ActivatedRoute
@@ -83,7 +84,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     super();
     this.deliveryModes = DeliveryModes;
 
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
 
     this.currencyCode = this.config.getConfig()['currencyCode'];
 
@@ -106,7 +107,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
   ngOnInit() {
     const langCode = this.actRoute.snapshot.params['lang'];
-    Utils.setLanguageCode(langCode);
+    console.log('Check kar', langCode);
+    this.utilService.setLanguageCode(langCode);
     this.translate.use(langCode);
 
     this.translate.get('checkout_page.secure_checkout').subscribe(value => {
@@ -179,14 +181,14 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     console.log(name, 'Loading Success ', data);
     switch (name) {
       case 'DELIVERYSLOTS':
-        if (!Utils.isEmpty(this.getDeliverySlot())) {
+        if (!this.utilService.isEmpty(this.getDeliverySlot())) {
           this.asSoonPossible = this.getDeliverySlot().id === -1;
-          this.slotContent = this.asSoonPossible ? this.asapText : Utils.getTimeHHMM(this.getDeliverySlot().time);
+          this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(this.getDeliverySlot().time);
           this.timeSlotObj = this.getDeliverySlot();
           this.activeTimeSlot = this.findIndexOfSlot(this.getDeliverySlot().id, data);
         } else {
           this.asSoonPossible = data[0].id === -1;
-          this.slotContent = this.asSoonPossible ? this.asapText : Utils.getTimeHHMM(data[0].time);
+          this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(data[0].time);
           this.timeSlotObj = data[0];
         }
         break;
@@ -220,7 +222,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   selectTime(timeslot, index) {
     this.asSoonPossible = !(timeslot.id !== -1);
     this.slotSelected = true;
-    this.slotContent = Utils.getTimeHHMM(timeslot.time);
+    this.slotContent = this.utilService.getTimeHHMM(timeslot.time);
     this.activeTimeSlot = index;
     this.timeSlotObj = timeslot;
     this.showdropdown = false;

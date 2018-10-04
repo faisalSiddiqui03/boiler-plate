@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../base/base-component';
-import { Utils } from '../../helpers/utils';
+import { UtilService } from '../../helpers/utils';
 import { pwaLifeCycle } from "@cap-core/lifecycle";
 
 @Component({
@@ -18,10 +18,11 @@ export class FooterComponent extends BaseComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
+    private utilService: UtilService,
     private router: Router
   ) {
     super();
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   ngOnInit() {

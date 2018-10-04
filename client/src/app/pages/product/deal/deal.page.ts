@@ -14,7 +14,7 @@ import {
   Action,
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../../helpers/utils';
+import { UtilService } from '../../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { DealShowcaseComponent } from '../../../components/deal-showcase/deal-showcase.component'
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -56,15 +56,16 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private modalController: ModalController,
     private loaderService: LoaderService,
     private alertService: AlertService,
+    private utilService: UtilService
   ) {
     super();
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   ngOnInit() {
     const langCode = this.route.snapshot.params['lang'];
-    Utils.setLanguageCode(langCode);
+    this.utilService.setLanguageCode(langCode);
     this.translate.use(langCode);
 
     this.productId = this.route.snapshot.params.productId;

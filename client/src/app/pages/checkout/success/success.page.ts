@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/cor
 import { BaseComponent } from '../../../base/base-component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../../helpers/utils';
+import { UtilService } from '../../../helpers/utils';
 import {
   Action,
   pwaLifeCycle,
@@ -26,7 +26,8 @@ export class SuccessPage extends BaseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private utilService: UtilService
   ) {
     super();
   }
@@ -37,7 +38,7 @@ export class SuccessPage extends BaseComponent implements OnInit {
 
   ngOnInit() {
     const langCode = this.route.snapshot.params['lang'];
-    Utils.setLanguageCode(langCode);
+    this.utilService.setLanguageCode(langCode);
     this.translate.use(langCode);
 
     this.orderId = this.route.snapshot.params.orderId;

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Utils } from '../../helpers/utils';
+import { UtilService } from '../../helpers/utils';
 import { Location } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 
@@ -17,8 +17,9 @@ export class SubHeaderComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private modalController:ModalController
-  ) {}
+    private modalController: ModalController,
+    private utilService: UtilService
+  ) { }
 
   ngOnInit() {
   }
@@ -28,7 +29,7 @@ export class SubHeaderComponent implements OnInit {
     this.location.back();
   }
 
-  closeModal(){
+  closeModal() {
     this.modalController.dismiss();
   }
 

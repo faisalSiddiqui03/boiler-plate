@@ -3,7 +3,7 @@ import { pwaLifeCycle, LifeCycle, WidgetNames, ConfigService } from "@capillaryt
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../base/base-component';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../helpers/utils';
+import { UtilService } from '../../helpers/utils';
 
 @Component({
   selector: 'app-banner',
@@ -31,10 +31,14 @@ export class BannerComponent extends BaseComponent implements OnInit {
 
   bannerUrl: string;
 
-  constructor(private router: Router, private config: ConfigService, private translate: TranslateService) {
+  constructor(
+    private router: Router,
+    private config: ConfigService,
+    private utilService: UtilService,
+    private translate: TranslateService) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   ngOnInit() {

@@ -9,7 +9,7 @@ import {
   UserAddressWidgetActions,
   ConfigService
 } from '@capillarytech/pwa-framework';
-import { Utils } from '../../../../helpers/utils';
+import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,12 +31,14 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
   addressToBeDeleted: '';
   userAddressWidgetActions = new EventEmitter();
 
-  constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private config: ConfigService) {
+  constructor(private router: Router,
+    private utilService: UtilService,
+    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private config: ConfigService) {
     super();
 
     // this.loaderService.startLoading();
 
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   ngOnInit() {
@@ -45,9 +47,9 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
     });
   }
 
-  
+
   getFlatAddress(address, index = 0) {
-    
+
     let storeConfig = this.config.getConfig()['address'];
     let sep = storeConfig.storeSep;
 
@@ -80,7 +82,7 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
         const coupon_error = await this.translate.instant('saved_address_page.error_deleting_address');
         this.alertService.presentToast(coupon_error, 3000, 'bottom');
         console.log('failed to delete the address');
-      break;
+        break;
     }
   }
 
@@ -91,7 +93,7 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
         const coupon_error = await this.translate.instant('saved_address_page.successfully_deleted_address');
         this.alertService.presentToast(coupon_error, 3000, 'bottom');
         console.log('successfully deleted the address');
-      break;
+        break;
     }
   }
 

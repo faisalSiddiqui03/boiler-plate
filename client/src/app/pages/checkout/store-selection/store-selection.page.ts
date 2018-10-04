@@ -4,7 +4,7 @@ import { ConfigService, pwaLifeCycle, Action, DeliveryModes } from '@capillaryte
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Utils } from '../../../helpers/utils';
+import { UtilService } from '../../../helpers/utils';
 import { StoreLocatorWidgetActions, OnWidgetLifecyle, OnWidgetActionsLifecyle } from '@capillarytech/pwa-framework';
 import { Location } from '@angular/common';
 
@@ -33,13 +33,14 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
     private alertService: AlertService,
     private translate: TranslateService,
     private config: ConfigService,
-    private location: Location
+    private location: Location,
+    private utilService: UtilService
   ) {
     super();
     this.deliveryModes = DeliveryModes;
 
     // this.loaderService.startLoading();
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   ngOnInit() {

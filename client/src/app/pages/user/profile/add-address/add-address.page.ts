@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
 import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle, UserAddressWidgetActions } from '@capillarytech/pwa-framework';
-import { Utils } from '../../../../helpers/utils';
+import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,12 +24,14 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
   titleValue: string = '';
   addAddressForm: FormGroup;
 
-  constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private formBuilder: FormBuilder, private modalController: ModalController) {
+  constructor(private router: Router,
+    private utilService: UtilService,
+    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private formBuilder: FormBuilder, private modalController: ModalController) {
     super();
 
     // this.loaderService.startLoading();
 
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
 
     this.addAddressForm = this.formBuilder.group({
       addressDetails: ['', Validators.compose([Validators.required])],

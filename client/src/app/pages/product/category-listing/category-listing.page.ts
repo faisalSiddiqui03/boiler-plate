@@ -15,7 +15,7 @@ import {
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
-import { Utils } from '../../../helpers/utils';
+import { UtilService } from '../../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../checkout/delivery-slot-selection/delivery-slot-selection.page';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
@@ -49,10 +49,11 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     public modalController: ModalController,
     private location: Location,
     private loaderService: LoaderService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private utilService: UtilService
   ) {
     super();
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
     this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
     console.log(this.location);
@@ -60,7 +61,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
 
   ngOnInit() {
     const langCode = this.route.snapshot.params['lang'];
-    Utils.setLanguageCode(langCode);
+    this.utilService.setLanguageCode(langCode);
     this.translate.use(langCode);
   }
   ngOnDestroy(){
@@ -72,7 +73,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
 
   ionViewWillEnter() {
 
-    if (Utils.isEmpty(this.getDeliverySlot())) {
+    if (this.utilService.isEmpty(this.getDeliverySlot())) {
       this.fetchDeliverySlots = true;
       this.loaderService.startLoading();
     }

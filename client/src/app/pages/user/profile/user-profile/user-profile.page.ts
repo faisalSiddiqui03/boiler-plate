@@ -7,7 +7,7 @@ import {
   Action,
   OnWidgetActionsLifecyle, OnWidgetLifecyle
 } from '@capillarytech/pwa-framework';
-import { Utils } from '../../../../helpers/utils';
+import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -29,12 +29,17 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
   loaded: boolean;
   titleValue = '';
 
-  constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private formBuilder: FormBuilder) {
+  constructor(private router: Router,
+    private loaderService: LoaderService,
+    private alertService: AlertService,
+    private translate: TranslateService,
+    private utilService: UtilService,
+    private formBuilder: FormBuilder) {
     super();
 
     // this.loaderService.startLoading();
 
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
 
     this.profileForm = this.formBuilder.group({
       firstName: ['', Validators.compose([Validators.required])],

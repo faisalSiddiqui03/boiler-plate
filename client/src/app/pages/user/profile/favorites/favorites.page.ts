@@ -9,7 +9,7 @@ import {
   FavoritesWidgetActions,
   FavoritesWidget
 } from '@capillarytech/pwa-framework';
-import { Utils } from '../../../../helpers/utils';
+import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -29,12 +29,15 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   titleValue = '';
   favoritesWidgetAction = new EventEmitter();
 
-  constructor(private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
+  constructor(private router: Router,
+    private utilService: UtilService,
+    private loaderService: LoaderService,
+    private alertService: AlertService, private translate: TranslateService) {
     super();
 
     // this.loaderService.startLoading();
 
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   ngOnInit() {
@@ -72,7 +75,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     console.log('name action success: ' + name + ' data: ' + data);
     switch (name) {
       case FavoritesWidgetActions.ACTION_REMOVE_ITEM:
-          console.log('successfully removed item');
+        console.log('successfully removed item');
         break;
     }
   }

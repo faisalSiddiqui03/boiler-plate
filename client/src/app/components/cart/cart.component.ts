@@ -12,7 +12,7 @@ import {
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../base/base-component';
-import { Utils } from '../../helpers/utils';
+import { UtilService } from '../../helpers/utils';
 
 @Component({
   selector: 'app-cart',
@@ -37,10 +37,11 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
     private alertService: AlertService,
     private loaderService: LoaderService,
     private config: ConfigService,
-    private location: Location
+    private location: Location,
+    private utilService: UtilService
   ) {
     super();
-    this.translateService.use(Utils.getLanguageCode());
+    this.translateService.use(this.utilService.getLanguageCode());
     this.loaded = false;
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }

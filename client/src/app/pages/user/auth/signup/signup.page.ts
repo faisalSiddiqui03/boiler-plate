@@ -20,7 +20,7 @@ import {
 import { BaseComponent } from '../../../../base/base-component';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../../../helpers/utils';
+import { UtilService } from '../../../../helpers/utils';
 import {
   AlertService,
   LoaderService
@@ -49,10 +49,11 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     private router: Router,
     private translate: TranslateService,
     private loaderService: LoaderService,
+    private utilService: UtilService,
     private alertService: AlertService
   ) {
     super();
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
     this.widgetModels = {};
     this.signUpForm = this.formBuilder.group({
       fname: ['', Validators.compose([Validators.required, Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ \.]*$')])],

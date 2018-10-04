@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../../helpers/utils';
+import { UtilService } from '../../../helpers/utils';
 
 @Component({
   selector: 'app-faq',
@@ -12,9 +12,10 @@ export class FaqPage implements OnInit {
 
   constructor(
     private translate: TranslateService,
+    private utilService: UtilService,
     private router: Router
   ) {
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   titleValue = '';

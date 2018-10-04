@@ -21,7 +21,6 @@ import {
   DeliverySlotsWidgetModule
 } from '@capillarytech/pwa-framework';
 import { BannerWidgetModule, EventTrackModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
-import { Utils } from '../../helpers/utils';
 
 const routes: Routes = [
   {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../../../base/base-component';
-import { Utils } from '../../../helpers/utils';
+import { UtilService } from '../../../helpers/utils';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -16,13 +16,14 @@ export class ProductDetailsPage extends BaseComponent implements OnInit {
   productName: string;
 
   constructor(private route: ActivatedRoute,
+    private utilService: UtilService,
     private translate: TranslateService) {
     super();
   }
 
   ngOnInit() {
     const langCode = this.route.snapshot.params['lang'];
-    Utils.setLanguageCode(langCode);
+    this.utilService.setLanguageCode(langCode);
     this.translate.use(langCode);
 
     this.categoryId = this.route.snapshot.params.categoryId;

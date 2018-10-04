@@ -14,7 +14,7 @@ import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-selection/delivery-slot-selection.page';
 import { LocationPage } from '../../pages/checkout/location/location.page';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../helpers/utils';
+import { UtilService } from '../../helpers/utils';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
@@ -38,11 +38,12 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     public modalController: ModalController,
     private translate: TranslateService,
     private alertService: AlertService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private utilService: UtilService
   ) {
     super();
     this.deliveryModes = DeliveryModes;
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   /** Inputs to show only required tags in header */
@@ -64,23 +65,23 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   goToPage(pageName) {
-    const page = Utils.getLanguageCode() + '/' + pageName;
+    const page = this.utilService.getLanguageCode() + '/' + pageName;
     this.router.navigateByUrl(page);
   }
 
   async switchLanguage() {
-    const langCode = Utils.getLanguageCode();
+    const langCode = this.utilService.getLanguageCode();
     //console.log('Check this current lang to be changed: ', langCode);
     switch (langCode) {
       case 'ar':
         await this.languageService.updateLanguageByCode('en');
-        this.router.navigateByUrl('en/home', {replaceUrl:true});
+        this.router.navigateByUrl('en/home', { replaceUrl: true });
 
         break;
 
       case 'en':
         await this.languageService.updateLanguageByCode('ar');
-        this.router.navigateByUrl('ar/home', {replaceUrl:true});
+        this.router.navigateByUrl('ar/home', { replaceUrl: true });
         break;
 
       default:

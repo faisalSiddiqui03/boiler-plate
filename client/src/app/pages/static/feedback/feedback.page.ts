@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from '../../../helpers/utils';
+import { UtilService } from '../../../helpers/utils';
 
 @Component({
   selector: 'app-feedback',
@@ -15,9 +15,10 @@ export class FeedbackPage implements OnInit {
   constructor(
     private translate: TranslateService,
     private router: Router,
+    private utilService: UtilService,
     private formBuilder: FormBuilder
   ) {
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
 
     this.feedBackForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],

@@ -12,7 +12,7 @@ import {
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../base/base-component';
-import { Utils } from '../../helpers/utils';
+import { UtilService } from '../../helpers/utils';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { ModalController } from '@ionic/angular';
 
@@ -48,13 +48,14 @@ export class TrioComponent extends BaseComponent implements OnInit, OnWidgetLife
     private route: ActivatedRoute,
     private alertService: AlertService,
     private translate: TranslateService,
+    private utilService: UtilService,
     private config: ConfigService,
     private location: Location,
     private loaderService: LoaderService,
     private modalController: ModalController
   ) {
     super();
-    this.translate.use(Utils.getLanguageCode());
+    this.translate.use(this.utilService.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
