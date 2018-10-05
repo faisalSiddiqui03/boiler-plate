@@ -11,6 +11,8 @@ import { CartPage } from './cart.page';
 import { AlertServiceModule, AlertService, LoaderServiceModule, LoaderService, DebounceClickDirective } from '@capillarytech/pwa-ui-helpers';
 import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
 import { ProductDetailsComponentModule } from '../../../components/product-details/product-details.module';
+import { PizzaComponentModule } from '../../../components/pizza/pizza.module';
+import { PizzaComponent } from '../../../components/pizza/pizza.component';
 
 const routes: Routes = [
   {
@@ -29,6 +31,7 @@ const routes: Routes = [
     ImagePreloadModule,
     DebounceClickDirective,
     ProductDetailsComponentModule,
+    PizzaComponentModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -45,7 +48,8 @@ const routes: Routes = [
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    PizzaComponent,
   ]
 })
 export class CartPageModule {}
