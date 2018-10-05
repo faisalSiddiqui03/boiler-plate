@@ -146,11 +146,14 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
-          this.setCurrentStore(data[0]);
-          if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
+          const firstStore = data[0];
+          this.setCurrentStore(firstStore);
+          if (!firstStore.isOnline(this.getDeliveryMode())) {
             this.fetchDeliverySlots = true;
           } else {
             this.setDeliverySlot(this.asapDeliverySlot);
+            this.asSoonPossible = true;
+            this.navigateToDeals();
           }
         } else {
           this.loaderService.stopLoading();
@@ -311,7 +314,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.isNavigationClicked = true;
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
       [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
-    this.loaderService.startLoading('Fetching Stores');
+    this.loaderService.startLoading();
   }
 
   locateMe(lat, lng) {
@@ -339,8 +342,12 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     }
     if (!this.asSoonPossible || this.utilService.isEmpty(this.getDeliverySlot())) {
       this.presentSlotModal().then(data => {
+        this.loaderService.stopLoading();
         this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=deals&id=CU00215646');
       });
+    } else {
+      this.loaderService.stopLoading();
+      this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=deals&id=CU00215646');
     }
   }
 
