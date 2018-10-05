@@ -139,10 +139,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   async openLocationModal() {
-    const modal = await this.modalController.create({
-      component: LocationPage,
-    });
-    return await modal.present();
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
   }
 
   logout() {
