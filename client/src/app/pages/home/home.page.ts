@@ -86,9 +86,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   async ionViewWillEnter() {
-    const langCode = this.actRoute.snapshot.params['lang'];
-    await this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
+    // const langCode = this.actRoute.snapshot.params['lang'];
+    // await this.utilService.setLanguageCode(langCode);
+    this.translate.use(this.getCurrentLanguage().code);
     //this.langService.updateLanguageByCode(langCode);
   }
 
@@ -281,7 +281,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   checkIfStoresAreAvailable(cityId, lat = 0, lng = 0) {
-    this.loaderService.startLoading('Fetching Stores');
+    this.loaderService.startLoading('Fetching Stores', this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (cityId) {
       const stores = this.storeLocatorWidgetAction.emit(new Action(
         StoreLocatorWidgetActions.FIND_BY_CITY, [cityId, this.globalSharedService.getFulfilmentMode().mode])
@@ -326,7 +326,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.isNavigationClicked = true;
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
       [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
-    this.loaderService.startLoading();
+    this.loaderService.startLoading('Fetching Stores', this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
   }
 
   locateMe(lat, lng) {
@@ -349,9 +349,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   navigateToDeals() {
     this.isNavigationClicked = true;
     if (this.fetchDeliverySlots) {
-      this.loaderService.startLoading();
+      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
       return;
     }
+
     const langCode = this.utilService.getLanguageCode();
     if (!this.asSoonPossible || this.utilService.isEmpty(this.getDeliverySlot())) {
       this.presentSlotModal().then(data => {
@@ -409,7 +410,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   filterEntires(cityList, searchTerm) {
     const searchSubString = this.isCleared ? '' : searchTerm.toLowerCase();
-    return cityList.filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
+    return (cityList || []).filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
   }
 
   outSideClick() {

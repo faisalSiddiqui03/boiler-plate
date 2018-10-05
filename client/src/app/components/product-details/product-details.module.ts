@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProductDetailsComponent } from './product-details.component';
 
-import { ProductDetailsWidgetModule, ImagePreloadModule } from "@capillarytech/pwa-framework";
+import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackModule } from "@capillarytech/pwa-framework";
 
 import { AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -24,6 +24,7 @@ import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
     ProductDetailsWidgetModule,
     ImagePreloadModule,
     AlertServiceModule,
+    EventTrackModule,
     SkeletonModule,
     TranslateModule.forRoot({
       loader: {

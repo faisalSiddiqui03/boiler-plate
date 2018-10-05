@@ -70,7 +70,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     if (this.utilService.isEmpty(this.getDeliverySlotPromise())) {
       if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
         this.fetchDeliverySlots = true;
-        this.loaderService.startLoading();
+        this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
       } else {
         this.setDeliverySlot(this.asapDeliverySlot);
       }
