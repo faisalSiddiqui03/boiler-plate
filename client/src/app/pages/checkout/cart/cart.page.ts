@@ -18,6 +18,7 @@ import { Location } from '@angular/common';
 import { ProductType } from '@capillarytech/pwa-framework';
 import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
 import { ModalController } from '@ionic/angular';
+import { PizzaComponent } from '../../../components/pizza/pizza.component';
 
 @Component({
   selector: 'app-cart-page',
@@ -136,32 +137,36 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   async editCartItem(cartItem) {
+    let component;
     switch (cartItem.getType()) {
       case ProductType.Product:
         if (!cartItem.variantProductId) {
           const itemNotEditable = await this.translateService.instant('cart.not_editable');
-          this.alertService.presentToast(itemNotEditable, 1000, 'top');
+          this.alertService.presentToast(itemNotEditable, 1000, 'top'); 
           return;
         }
-        const modal = await this.modalController.create({
-          component: ProductDetailsComponent,
-          componentProps: {
-            productId: cartItem.productId,
-            cartItem: cartItem,
-          }
-        });
-        await modal.present();
-
-        modal.onDidDismiss().then((itemEdited) => {
-          if (itemEdited) this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
-        });
-
+        component = ProductDetailsComponent;
         break;
       case ProductType.Bundle:
+        component = PizzaComponent;
         break;
       case ProductType.Deal:
         break;
     }
+
+    const modal = await this.modalController.create({
+      component: component,
+      componentProps: {
+        productId: cartItem.productId,
+        cartItem: cartItem,
+      }
+    });
+
+    await modal.present();
+
+    modal.onDidDismiss().then((itemEdited) => {
+      if (itemEdited) this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
+    });
   }
 
   async clearCart() {
