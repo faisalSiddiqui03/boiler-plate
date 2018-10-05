@@ -35,7 +35,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     private alertService: AlertService, private translate: TranslateService) {
     super();
 
-    // this.loaderService.startLoading();
+    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
 
     this.translate.use(this.utilService.getLanguageCode());
   }

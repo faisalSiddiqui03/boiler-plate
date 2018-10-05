@@ -56,7 +56,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
     this.googleClientId = this.config.getConfig()['googleClientId'];
 
-    // this.loaderService.startLoading();
+    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
 
     this.translate.use(this.utilService.getLanguageCode());
 
@@ -86,7 +86,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   signIn() {
-    // this.loaderService.startLoading();
+    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.widgetModels.USERID_PWD_SIGNIN.userName = this.userIdSigninForm.value.email;
     this.widgetModels.USERID_PWD_SIGNIN.password = this.userIdSigninForm.value.password;
     this.useridPasswordSigninAction.emit(new Action(UserIdPwdSigninWidgetActions.ACTION_SIGN_IN));
@@ -97,7 +97,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   googleSignIn() {
-    // this.loaderService.startLoading();
+    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.googleSignInActionEmitter.emit(new Action(GoogleSignInWidgetActions.ACTION_GPLUS_SIGN_IN));
   }
 

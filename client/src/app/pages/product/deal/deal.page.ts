@@ -152,7 +152,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   addToCart() {
-    this.loaderService.startLoading();
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
     );
