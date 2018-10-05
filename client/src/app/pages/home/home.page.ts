@@ -366,7 +366,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       component: DeliverySlotSelectionPage,
     });
     await modal.present();
-    return await modal.onWillDismiss();
+    return await modal.onDidDismiss();
   }
 
   filterEmptyCities(cityList) {
