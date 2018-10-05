@@ -93,7 +93,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
         this.alertService.presentToast(this.clientProduct.title + ' ' +
           this.translate.instant('product_details.added_to_cart'), 1000, 'top');
         this.modalController.dismiss(true);
-        // this.router.navigateByUrl('/products?category=' + this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);
+        // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=' + this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);
         break;
     }
   }
