@@ -44,6 +44,21 @@ export function getAppConfig(): Object {
   return appConfig || {};
 }
 
+const languages = [
+  {
+    name: 'English',
+    code: 'en',
+    isDefault: false,
+    alignment: 'ltr'
+  },
+  {
+    name: 'Arabic',
+    code: 'ar',
+    isDefault: true,
+    alignment: 'rtl'
+  }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,9 +81,7 @@ export function getAppConfig(): Object {
     LocationPageModule,
     SearchLocationPageModule,
     EventTrackModule.forRoot([EventTrackModule.Tracker.GTM]),
-    LanguageServiceModule.forRoot([
-      { name: 'English', code: 'en', isDefault: false, alignment: 'ltr' },
-      { name: 'Arabic', code: 'ar', isDefault: true, alignment: 'rtl' }]),
+    LanguageServiceModule.forRoot(languages),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -118,6 +131,13 @@ export class AppModule {
     } else if (locationUrl.startsWith('/en')) {
       languageService.initialize('en');
       this.utilService.setLanguageCode('en');
+    } else {
+      languages.forEach((lang) => {
+        if (lang.isDefault) {
+          languageService.initialize(lang.code);
+          this.utilService.setLanguageCode(lang.code);
+        }
+      })
     }
   }
 }
