@@ -26,7 +26,7 @@ export class BaseComponent {
   }
 
   setCurrentLanguage(language) {
-    return this.globalSharedService.updateLanguage(language)
+    return this.globalSharedService.updateLanguage(language);
   }
 
   setCurrentStore(store) {
@@ -49,12 +49,20 @@ export class BaseComponent {
     return this.globalSharedService.getDeliverySlot();
   }
 
+  async getDeliverySlotPromise() {
+    return await this.globalSharedService.getDeliverySlotPromise();
+  }
+
   setDeliverySlot(slot) {
     return this.globalSharedService.selectDeliverySlot(slot);
   }
 
   getComponentId() {
     return this.componentID;
+  }
+
+  getDeliveryMode() {
+    return this.globalSharedService.getFulfilmentMode() ? this.globalSharedService.getFulfilmentMode().mode : null;
   }
 
 }
