@@ -58,6 +58,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   @Input() dealsHeader = false;
   enableUserDropdown: boolean = false;
   @Output() switchCategory: EventEmitter<any> = new EventEmitter<any>();
+  @Input() isModalActive = false;
 
   ngOnInit() {
     const data = this.route.snapshot.queryParams;
@@ -130,7 +131,6 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
-    console.error('name: ', name, 'data: ', data);
     switch (name) {
       case 'NAVIGATIONS' :
         this.navigations = data.items;
@@ -152,11 +152,12 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
 
   switchCategories(category, categoryId) {
     this.categoryId = categoryId;
-    this.switchCategory.emit({category, id: categoryId});
+    this.switchCategory.emit({ category, id: categoryId });
     // this.router.navigateByUrl(`/products?category=${category}&id=${categoryId}`);
   }
 
   switchCategoryPage(category, categoryId) {
+    if (this.isModalActive) this.modalController.dismiss();
     this.router.navigateByUrl(`/products?category=${category}&id=${categoryId}`);
   }
 

@@ -64,7 +64,8 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     this.utilService.setLanguageCode(langCode);
     this.translate.use(langCode);
   }
-  ngOnDestroy(){
+
+  ngOnDestroy() {
     // this.subscriber.unsubscribe();
     // this.subscriber = null;
     // console.error('unsubscribed');
@@ -82,10 +83,6 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     }
     let data = this.route.snapshot.queryParams;
     this.updateCategories(data);
-  }
-
-  ionNavWillChange(data) {
-    console.error(data, "router")
   }
 
   ionViewWillLeave() {
@@ -165,13 +162,18 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
   }
 
   widgetLoadingFailed(name: string, data: any): any {
+    switch (name) {
+      case 'NAVIGATIONS' :
+        break;
+      case 'DELIVERYSLOTS':
+        this.loaderService.stopLoading();
+    }
   }
 
   widgetLoadingStarted(name: string, data: any): any {
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
-    console.error('name = ', name, ' data = ', data);
     switch (name) {
 
       case 'NAVIGATIONS' :
@@ -191,7 +193,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     }
   }
 
-  assignNav(data){
+  assignNav(data) {
     this.navigations = data.items;
     return "";
   }
@@ -203,18 +205,9 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
   switchCategories(data) {
     if (data.categoryId === this.categoryId) return;
     this.router.navigate([], { queryParams: data }).then(data => {
-      console.error('router navigate succe', data);
     }).catch(err => {
-      console.error('router navigate fail', err);
     });
-
-    // let data = {
-    //   "category": category,
-    //   "id": categoryId
-    // };
-
     this.updateCategories(data);
-    // this.router.navigateByUrl('/products?category={{item.name}}&id={{item.categoryId}}')
   }
 
   isLoggedIn() {
@@ -223,7 +216,6 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
 
   hello(a) {
     this.updateCategories(a);
-    console.error('vivek', a);
   }
 
 }

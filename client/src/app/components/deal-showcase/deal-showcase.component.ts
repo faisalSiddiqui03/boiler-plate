@@ -65,7 +65,6 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Bundle Group', this.bundleGroup);
     this.bundleGroupItems = this.bundleGroup.items;
     this.bundleGroupMinQuantity = this.bundleGroup.minQuantity;
     this.bundleGroupTitle = this.bundleGroup.title;
@@ -74,7 +73,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
       this.bundleGroupTitle = value + " " + this.bundleGroupTitle;
     });
 
-    
+
     if (this.bundleGroupType === BundleGroupInputType.CHECKBOX) {
       this.disableAddToCart = true;
       let count = 0;
@@ -124,7 +123,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
       return;
     }
     if (itemToAdd.variantProductId) {
-      console.error('Adding simple product with variant from deal showcase is not implemented!');
+      console.error('Adding simple product with variant from deal showcase is not supported right now!');
       return;
     }
     this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
@@ -205,14 +204,14 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
       this.disableAddToCart = true;
     }
 
-    if (isAdd) itemQuantity = itemQuantity + 1; 
+    if (isAdd) itemQuantity = itemQuantity + 1;
     if (!isAdd && product.quantity >= 1) itemQuantity = itemQuantity - 1;
     product.setQuantity(itemQuantity);
   }
 
   toggleQuantityDisable() {
     if (this.disableAddToCart) {
-      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => { 
+      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
         item['disableInc'] = false;
         if (item.quantity > 0) {
           item['disableDec'] = false;
@@ -223,7 +222,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
       });
       return;
     }
-    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => { 
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
       if (item.quantity > 0) {
         item['disableInc'] = true;
         item['disableDec'] = false;
