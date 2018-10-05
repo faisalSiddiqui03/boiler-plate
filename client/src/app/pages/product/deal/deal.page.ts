@@ -45,11 +45,11 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   noOfRequiredGroups: number;
   noOfSelectedGroups: number;
   showAddToCart: boolean;
-  titleValue:string = '';
+  titleValue: string = '';
 
   constructor(
     private route: ActivatedRoute,
-    private router:Router,
+    private router: Router,
     private location: Location,
     private translate: TranslateService,
     private config: ConfigService,
@@ -117,7 +117,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
       if (item.groupId === bundleGroup.groupId && item.isSelected) isGroupAlreadySelected = true;
     });
-    if(isGroupAlreadySelected){
+    if (isGroupAlreadySelected) {
       return;
     }
 
@@ -185,8 +185,8 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   async openProductDetails(bundleItem) {
     let component;
     let isTrio = false;
-    if(BundleItem.getAttributeValueByName(bundleItem, AttributeName.CUSTOMIZABLE) === AttributeValue.CUSTOMIZABLE
-    && BundleItem.getAttributeValueByName(bundleItem, AttributeName.TYPE) === AttributeValue.TRIO){
+    if (BundleItem.getAttributeValueByName(bundleItem, AttributeName.CUSTOMIZABLE) === AttributeValue.CUSTOMIZABLE
+      && BundleItem.getAttributeValueByName(bundleItem, AttributeName.TYPE) === AttributeValue.TRIO) {
       component = TrioComponent;
       isTrio = true;
     } else {
@@ -200,7 +200,6 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         productFromDeal: bundleItem,
       }
     });
-
     modal.onDidDismiss().then((addedItem) => {
       if (!addedItem || !addedItem.data) {
         console.error('Invalid configuration for added item!');
@@ -215,7 +214,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
             item.add();
             item.setVariantProductId(addedItem.data.variantProductId);
             item.setVarianValueIdMap(addedItem.data.varProductValueIdMap);
-            if(isTrio) item.setBundleItems(addedItem.data.bundleItems);
+            if (isTrio) item.setBundleItems(addedItem.data.bundleItems);
           }
         });
 
@@ -224,7 +223,8 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       } catch (err) {
         console.error('Something went wrong in item selection : ', err);
       }
-      this.modalController.dismiss().catch(() => {});
+      this.modalController.dismiss().catch(() => {
+      });
     });
 
     return await modal.present();
@@ -266,7 +266,9 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
           && item.groupId === bundleGroup.groupId
           && item.variantProductId === variant.id) {
 
-          selectedVarianValues = variant.propertyValues.map((propval) => { return propval.name; });
+          selectedVarianValues = variant.propertyValues.map((propval) => {
+            return propval.name;
+          });
           return;
         }
       });
@@ -275,11 +277,11 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     return selectedVarianValues.join(',');
   }
 
-  getSelectedItems(bundleGroup){
+  getSelectedItems(bundleGroup) {
     let selectedItems = [];
     this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
       if (item.groupId !== bundleGroup.groupId) return;
-      if(item.isSelected) selectedItems.push(item.title);
+      if (item.isSelected) selectedItems.push(item.title);
     });
     return selectedItems;
   }
@@ -304,5 +306,5 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   goBack() {
     this.location.back();
   }
-  
+
 }
