@@ -74,6 +74,11 @@
       }
     }
   }
+  ion-skeleton-text{
+    width: 250px;
+    height: 16px;
+    background: var(--ion-block-header-color);
+  }
 }
 
 @media (max-width: 991px) {
