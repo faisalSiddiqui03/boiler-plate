@@ -489,11 +489,25 @@ ion-item {
 .loading {
   .loading-wrapper {
     --ion-background-color-step-50: transparent;
-    background: url('assets/imgs/delivery-bike-icon.gif') no-repeat center / 34px;
+    background: url('assets/imgs/collection-icon.gif') no-repeat center / 34px;
     box-shadow: none;
     .loading-spinner{
       display: none;
     }
+  }
+  &.delivery-loader{
+    .loading-wrapper {
+      background-image: url('assets/imgs/delivery-bike-icon.gif');
+    }
+  }
+}
+
+// Toast
+.toast{
+  .toast-wrapper{
+    margin-top: 45px;
+    max-width: 500px;
+    --background: var(--ion-color-secondary);
   }
 }
 

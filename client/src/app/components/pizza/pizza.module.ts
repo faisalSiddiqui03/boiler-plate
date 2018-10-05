@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PizzaComponent } from './pizza.component';
 
-import { ProductDetailsWidgetModule, ImagePreloadModule } from "@capillarytech/pwa-framework";
+import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackModule } from "@capillarytech/pwa-framework";
 
 import { AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -21,6 +21,7 @@ import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
     CommonModule,
     FormsModule,
     IonicModule,
+    EventTrackModule,
     ProductDetailsWidgetModule,
     ImagePreloadModule,
     AlertServiceModule,

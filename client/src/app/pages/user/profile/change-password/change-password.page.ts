@@ -30,7 +30,7 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     private route: ActivatedRoute, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private formBuilder: FormBuilder) {
     super();
 
-    // this.loaderService.startLoading();
+    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
 
     this.translate.use(this.utilService.getLanguageCode());
 

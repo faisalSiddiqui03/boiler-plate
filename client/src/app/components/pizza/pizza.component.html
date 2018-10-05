@@ -1,7 +1,7 @@
 <div class="full-height popup-wrap pizza-component">
   <div class="popup-inner full-height">
     <product-display-widget class="full-height" pfWidgetImpressionTrack [action]="productWidgetAction" [productId]="productId"
-      [sizePropertyId]="sizePropertyId" [componentId]="getComponentId()">
+      [sizePropertyId]="sizePropertyId" [cartItem]="cartItem" [componentId]="getComponentId()">
 
       <ng-template let-widget="widget">
         <ng-container *ngIf="!loaded">
@@ -165,8 +165,18 @@
 
           <!-- Add to cart -->
           <ion-footer *ngIf="showToppingsView">
-            <ion-button (click)="addToCart(widget?.model?.client)" [class.disabled]="updatingPrice" color="success" text-uppercase expand="block"
-              mode="ios" class="btn-success">
+            <ion-button
+                    (click)="addToCart(widget?.model?.client)"
+                    [pfAddToCartTrack]="{
+                      products:[widget?.model],
+                      currencyCode:'KD',
+                      productFromDeal: productFromDeal
+                    }"
+                    [class.disabled]="updatingPrice"
+                    color="success"
+                    text-uppercase expand="block"
+                    mode="ios"
+                    class="btn-success">
               <div *ngIf="!productFromDeal">{{'pizza.add_to_basket' | translate}}</div>
               <div *ngIf="productFromDeal">{{'pizza.add_to_deal' | translate}}</div>
               <span *ngIf="updatingPrice && !productFromDeal">

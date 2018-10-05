@@ -36,7 +36,7 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
     private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private config: ConfigService) {
     super();
 
-    // this.loaderService.startLoading();
+    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
 
     this.translate.use(this.utilService.getLanguageCode());
   }
