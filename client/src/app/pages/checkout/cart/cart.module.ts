@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { CartWidgetModule, VoucherWidgetModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
+import { CartWidgetModule, VoucherWidgetModule, ImagePreloadModule, EventTrackModule } from '@capillarytech/pwa-framework';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
@@ -26,6 +26,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    EventTrackModule,
     CartWidgetModule,
     VoucherWidgetModule,
     ImagePreloadModule,

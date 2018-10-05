@@ -165,8 +165,18 @@
 
           <!-- Add to cart -->
           <ion-footer *ngIf="showToppingsView">
-            <ion-button (click)="addToCart(widget?.model?.client)" [class.disabled]="updatingPrice" color="success" text-uppercase expand="block"
-              mode="ios" class="btn-success">
+            <ion-button
+                    (click)="addToCart(widget?.model?.client)"
+                    [pfAddToCartTrack]="{
+                      products:[widget?.model],
+                      currencyCode:'KD',
+                      productFromDeal: productFromDeal
+                    }"
+                    [class.disabled]="updatingPrice"
+                    color="success"
+                    text-uppercase expand="block"
+                    mode="ios"
+                    class="btn-success">
               <div *ngIf="!productFromDeal">{{'pizza.add_to_basket' | translate}}</div>
               <div *ngIf="productFromDeal">{{'pizza.add_to_deal' | translate}}</div>
               <span *ngIf="updatingPrice && !productFromDeal">

@@ -73,7 +73,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   applyCoupon() {
     if (this.couponCode) {
-      this.loaderService.startLoading();
+      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
       let action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
     } else {
@@ -121,7 +121,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     }
 
     let cartUpdate = await this.translateService.instant('cart.updating_quantity');
-    this.loaderService.startLoading(cartUpdate);
+    this.loaderService.startLoading(cartUpdate, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.updatingPrice = true;
     let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
@@ -130,7 +130,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   async removeCartItem(item) {
     item.quantity = 0;
     let cartRemove = await this.translateService.instant('cart.remove_item');
-    this.loaderService.startLoading(cartRemove);
+    this.loaderService.startLoading(cartRemove, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.updatingPrice = true;
     let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
@@ -171,7 +171,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   async clearCart() {
     let cartClear = await this.translateService.instant('cart.cart_clear');
-    this.loaderService.startLoading(cartClear);
+    this.loaderService.startLoading(cartClear, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     let action = new Action(CartWidgetActions.ACTION_CLEAR_CART);
     this.cartWidgetAction.emit(action);
   }
