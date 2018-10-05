@@ -90,8 +90,8 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ATION_EDIT_CART:
-        this.alertService.presentToast(this.clientProduct.title + ' ' +
-          this.translate.instant('product_details.added_to_cart'), 1000, 'top');
+        // this.alertService.presentToast(this.clientProduct.title + ' ' +
+          // this.translate.instant('product_details.added_to_cart'), 1000, 'top');
         this.modalController.dismiss(true);
         // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=' + this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);
         break;
@@ -187,7 +187,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       this.modalController.dismiss(this.clientProduct);
       return;
     }
-    this.loaderService.startLoading();
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     if(this.cartItem){
       this.productWidgetAction.emit(
         new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)

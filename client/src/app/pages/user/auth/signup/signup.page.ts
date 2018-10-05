@@ -77,16 +77,20 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     console.log(this.signUpForm.value);
     this.widgetModels.USERID_SIGNUP.firstName = this.signUpForm.value.fname;
     this.widgetModels.USERID_SIGNUP.lastName = this.signUpForm.value.lname;
-    this.widgetModels.USERID_SIGNUP.email = this.signUpForm.value.emal;
+    this.widgetModels.USERID_SIGNUP.email = this.signUpForm.value.email;
     this.widgetModels.USERID_SIGNUP.mobile = this.signUpForm.value.mobile;
     this.widgetModels.USERID_SIGNUP.password = this.signUpForm.value.password;
+    this.widgetModels.USERID_SIGNUP.userName = this.signUpForm.value.email;
+    this.widgetModels.USERID_SIGNUP.gender = 'M';
 
     this.useridSignUpAction.emit(new Action(UserIdSignUpWidgetActions.ACTION_SIGN_UP));
   }
 
   handleSignUpResponse(data) {
-    if (data.message === "Successful") {
+    if (data.message === "Succesfull") {
       this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful'), 500, top);
+      this.useridSignUpAction.emit(
+        new Action('SIGNUP_SIGNIN', [this.signUpForm.value.email, this.signUpForm.value.password]))
       this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
     } else {
       this.alertService.presentToast(data.message, 500, top);
@@ -154,10 +158,6 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
         return null
       }
     }
-  }
-
-  changeTextPassword(event) {
-    console.log(event);
   }
 
 }

@@ -11,7 +11,7 @@
     "posttest": "npm run lint && nsp check"
   },
   "dependencies": {
-    "@capillarytech/cap-pwa-seed": "0.3.23",
+    "@capillarytech/cap-pwa-seed": "0.3.24",
     "@capillarytech/cap-commons": "0.0.3",
     "@capillarytech/cap-loopback-api-areas": "1.0.0",
     "@capillarytech/cap-loopback-api-authentication": "0.0.3",
@@ -25,7 +25,7 @@
     "@capillarytech/cap-loopback-api-geolocations": "0.0.3",
     "@capillarytech/cap-loopback-api-locations": "0.0.6",
     "@capillarytech/cap-loopback-api-navigations": "0.0.6",
-    "@capillarytech/cap-loopback-api-orders": "0.2.0",
+    "@capillarytech/cap-loopback-api-orders": "0.2.1",
     "@capillarytech/cap-loopback-api-price": "0.0.2",
     "@capillarytech/cap-loopback-api-products": "0.0.8",
     "@capillarytech/cap-loopback-api-ratings": "0.0.3",

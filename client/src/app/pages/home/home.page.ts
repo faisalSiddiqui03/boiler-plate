@@ -15,8 +15,9 @@ import {
   LocationWidgetActions,
   FulfilmentModeWidgetActions,
   StoreLocatorWidgetActions,
+  CartWidgetActions,
   DeliveryModes,
-  DeliverySlotsWidget
+  DeliverySlot
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
@@ -39,6 +40,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   locationsWidgetAction = new EventEmitter();
   locationsWidgetActionGeometry = new EventEmitter();
   storeLocatorWidgetAction = new EventEmitter();
+  cartWidgetAction = new EventEmitter();
 
   /**default order mode is delivery */
   // orderMode = DeliveryModes.HOME_DELIVERY;
@@ -60,6 +62,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   isNavigationClicked = false;
   lat;
   lng;
+  asapDeliverySlot = DeliverySlot.getAsap();
 
   constructor(
     private config: ConfigService,
@@ -82,13 +85,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ngOnInit() {
   }
 
-  ngOnDestroy() {
-  }
-
   async ionViewWillEnter() {
-    const langCode = this.actRoute.snapshot.params['lang'];
-    await this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
+    // const langCode = this.actRoute.snapshot.params['lang'];
+    // await this.utilService.setLanguageCode(langCode);
+    this.translate.use(this.getCurrentLanguage().code);
     //this.langService.updateLanguageByCode(langCode);
   }
 
@@ -96,7 +96,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.selectedStore = this.getCurrentStore();
     this.changeRequested = false;
     if (this.isStoreSelected()) {
-      this.fetchDeliverySlots = true;
+      if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
+        this.fetchDeliverySlots = true;
+      } else {
+        this.setDeliverySlot(this.asapDeliverySlot);
+      }
     }
   }
 
@@ -136,6 +140,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         this.loaderService.stopLoading();
         console.log('unable to find store', data);
         break;
+      case CartWidgetActions.ACTION_CLEAR_CART:
+        this.alertService.presentToast('failed to remove cart items', 3000, 'bottom');
+        break;
     }
   }
 
@@ -144,8 +151,19 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
-          this.setCurrentStore(data[0]);
-          this.fetchDeliverySlots = true;
+          const firstStore = data[0];
+          // TODO:: add alert-controller to confirm before emptying cart
+          if (this.isStoreSelected() && this.getCurrentStore().id !== firstStore.id) {
+            this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+          }
+          this.setCurrentStore(firstStore);
+          if (!firstStore.isOnline(this.getDeliveryMode())) {
+            this.fetchDeliverySlots = true;
+          } else {
+            this.setDeliverySlot(this.asapDeliverySlot);
+            this.asSoonPossible = true;
+            this.navigateToDeals();
+          }
         } else {
           this.loaderService.stopLoading();
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
@@ -155,7 +173,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         if (data.length) {
           this.setCurrentStore(data[0]);
-          this.fetchDeliverySlots = true;
+          if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
+            this.fetchDeliverySlots = true;
+          } else {
+            this.setDeliverySlot(this.asapDeliverySlot);
+          }
         } else {
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
           this.alertService.presentToast(store_alert, 3000, 'bottom');
@@ -178,6 +200,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
           this.alertService.presentToast(store_alert, 3000, 'bottom');
         }
+        break;
+      case CartWidgetActions.ACTION_CLEAR_CART:
+        this.alertService.presentToast('removed cart items', 3000, 'bottom');
         break;
     }
   }
@@ -256,7 +281,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   checkIfStoresAreAvailable(cityId, lat = 0, lng = 0) {
-    this.loaderService.startLoading('Fetching Stores');
+    this.loaderService.startLoading('Fetching Stores', this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (cityId) {
       const stores = this.storeLocatorWidgetAction.emit(new Action(
         StoreLocatorWidgetActions.FIND_BY_CITY, [cityId, this.globalSharedService.getFulfilmentMode().mode])
@@ -301,7 +326,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.isNavigationClicked = true;
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
       [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
-    this.loaderService.startLoading('Fetching Stores');
+    this.loaderService.startLoading('Fetching Stores', this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
   }
 
   locateMe(lat, lng) {
@@ -324,14 +349,19 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   navigateToDeals() {
     this.isNavigationClicked = true;
     if (this.fetchDeliverySlots) {
-      this.loaderService.startLoading();
+      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
       return;
     }
+
     const langCode = this.utilService.getLanguageCode();
     if (!this.asSoonPossible || this.utilService.isEmpty(this.getDeliverySlot())) {
       this.presentSlotModal().then(data => {
+        this.loaderService.stopLoading();
         this.router.navigateByUrl(langCode + '/products?category=deals&id=CU00215646');
       });
+    } else {
+      this.loaderService.stopLoading();
+      this.router.navigateByUrl(langCode + '/products?category=deals&id=CU00215646');
     }
   }
 
@@ -344,6 +374,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       selectedArea: this.selectedArea || '',
       selectedAreaCode: this.selectedAreaCode || ''
     };
+
+    // TODO:: add alert-controller to confirm before emptying cart
+    if (mode !== previousMode && !this.isCartEmpty()) {
+      this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+    }
     this.fulfilmentModeWidgetAction.emit(new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, mode));
     const selected = this.citySelectionHistory[mode] || {};
     this.selectedCity = selected.selectedCity || '';
@@ -375,11 +410,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   filterEntires(cityList, searchTerm) {
     const searchSubString = this.isCleared ? '' : searchTerm.toLowerCase();
-    return cityList.filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
-  }
-
-  getDeliveryMode() {
-    return this.globalSharedService.getFulfilmentMode() ? this.globalSharedService.getFulfilmentMode().mode : null;
+    return (cityList || []).filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
   }
 
   outSideClick() {
@@ -394,5 +425,12 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   preventPropogation(e) {
     e.preventDefault();
     e.stopPropagation();
+  }
+
+  isCartEmpty() {
+    if (this.getCart().items.length === 0) {
+      return true;
+    }
+    return false;
   }
 }

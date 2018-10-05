@@ -311,12 +311,30 @@
               <ion-checkbox checked color="medium" slot="start"></ion-checkbox>
               <ion-label>{{ 'checkout_page.latest_discounts_offers_text' | translate }}</ion-label>
             </ion-item>
-            <ion-button *ngIf="checkoutForm.controls.paymentMethod.value == 'COD'" color="success" text-capitalize expand="block" mode="ios"
-              class="btn-success" [disabled]="!checkoutForm.valid" (click)="placeOrder()">{{ 'checkout_page.place_your_order' | translate }} &nbsp;
+            <ion-button
+                    *ngIf="checkoutForm.controls.paymentMethod.value == 'COD'"
+                    color="success"
+                    text-capitalize
+                    expand="block"
+                    mode="ios"
+                    class="btn-success"
+                    [disabled]="!checkoutForm.valid"
+                    [pfClickTrack]="{event:'AddPaymentInfo',eventValue:'COD'}"
+                    (click)="placeOrder()">
+              {{ 'checkout_page.place_your_order' | translate }} &nbsp;
               <span>{{ getCart()?.total | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
             </ion-button>
-            <ion-button *ngIf="checkoutForm.controls.paymentMethod.value == 'KNET'" color="success" text-capitalize expand="block" mode="ios"
-              class="btn-success" [disabled]="!checkoutForm.valid" (click)="placeOrder()">{{ 'checkout_page.go_to_payment' | translate }} &nbsp;
+            <ion-button
+                    *ngIf="checkoutForm.controls.paymentMethod.value == 'KNET'"
+                    color="success"
+                    text-capitalize
+                    expand="block"
+                    mode="ios"
+                    class="btn-success"
+                    [disabled]="!checkoutForm.valid"
+                    [pfClickTrack]="{event:'AddPaymentInfo',eventValue:'KNET'}"
+                    (click)="placeOrder()">
+              {{ 'checkout_page.go_to_payment' | translate }} &nbsp;
               <span>{{ getCart()?.total | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
             </ion-button>
           </div>
