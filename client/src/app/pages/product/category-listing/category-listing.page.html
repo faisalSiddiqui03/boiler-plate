@@ -9,17 +9,18 @@
       <div class="product-content">
         <ion-show-when size="lg">
           <ion-header class="top-header-container">
-            <app-header (switchCategory)="switchCategories($event)" [showCart]="true" [showTime]="true" [headerClass]="'category-header'"></app-header>
+            <app-header [selectedCategoryId]="categoryId" (switchCategory)="switchCategories($event)" [showCart]="true" [showTime]="true"
+                        [headerClass]="'category-header'"></app-header>
           </ion-header>
         </ion-show-when>
 
         <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack
                            [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
                            [action]="null" (lifecycle)="null">
-        
-                           <ng-template let-widget="widget">
-                              <div *ngIf="widget.model">{{assignNav(widget.model)}}</div>
-                           </ng-template>
+
+          <ng-template let-widget="widget">
+            <div *ngIf="widget.model">{{assignNav(widget.model)}}</div>
+          </ng-template>
         </navigation-widget>
         <div class="container showcase-container full-height">
           <ion-content>

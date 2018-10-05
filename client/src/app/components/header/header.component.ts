@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, Input, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -12,7 +13,6 @@ import {
 import { BaseComponent } from '../../base/base-component';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-selection/delivery-slot-selection.page';
-import { LocationPage } from '../../pages/checkout/location/location.page';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -38,6 +38,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     public modalController: ModalController,
     private translate: TranslateService,
     private alertService: AlertService,
+    private location: Location,
     private languageService: LanguageService,
     private utilService: UtilService
   ) {
@@ -59,10 +60,13 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   enableUserDropdown: boolean = false;
   @Output() switchCategory: EventEmitter<any> = new EventEmitter<any>();
   @Input() isModalActive = false;
-
+  @Input() selectedCategoryId;
   ngOnInit() {
     const data = this.route.snapshot.queryParams;
-    this.categoryId = data.id;
+    if (!this.selectedCategoryId) {
+      this.categoryId = data.id;
+    }
+
   }
 
   goToPage(pageName) {
@@ -153,7 +157,10 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   switchCategoryPage(category, categoryId) {
-    if (this.isModalActive) this.modalController.dismiss();
+    this.categoryId = categoryId;
+    if (this.isModalActive) {
+      this.modalController.dismiss();
+    }
     this.router.navigateByUrl(this.utilService.getLanguageCode() + `/products?category=${category}&id=${categoryId}`);
   }
 

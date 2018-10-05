@@ -45,7 +45,7 @@
     <ng-container *ngIf="loaded">
       <ion-show-when size="lg">
         <ion-header>
-          <app-header [dealsHeader]="true"></app-header>
+          <app-header [selectedCategoryId]="dealCategoryId" [dealsHeader]="true"></app-header>
         </ion-header>
       </ion-show-when>
       <ion-hide-when size="lg">

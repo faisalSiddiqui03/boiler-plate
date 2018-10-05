@@ -1,7 +1,7 @@
 <div *ngIf="bundleGroupType === inputType.RADIO" class="full-height">
   <ion-show-when size="lg">
     <ion-header>
-      <app-header [dealsHeader]="true" [isModalActive]="true"></app-header>
+      <app-header [selectedCategoryId]="dealsCategoryId" [dealsHeader]="true" [isModalActive]="true"></app-header>
     </ion-header>
   </ion-show-when>
   <ion-hide-when size="lg">
@@ -49,7 +49,7 @@
 <div *ngIf="bundleGroupType === inputType.CHECKBOX" class="full-height drinks-component">
   <ion-show-when size="lg">
     <ion-header>
-      <app-header [dealsHeader]="true" [isModalActive]="true"></app-header>
+      <app-header [selectedCategoryId]="dealsCategoryId" [dealsHeader]="true" [isModalActive]="true"></app-header>
     </ion-header>
   </ion-show-when>
   <ion-content no-padding class="page-bg">
