@@ -428,7 +428,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   isCartEmpty() {
-    if (this.utilService.isEmpty(this.getCart())) {
+    if (this.getCart().items.length === 0) {
       return true;
     }
     return false;
