@@ -242,7 +242,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   async placeOrder() {
-    this.loaderService.startLoading();
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     const obj: CheckoutDetails = new CheckoutDetails();
 
     obj.paymentDetails = this.objPayment;
