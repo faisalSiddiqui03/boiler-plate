@@ -152,12 +152,11 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   switchCategories(category, categoryId) {
     this.categoryId = categoryId;
     this.switchCategory.emit({ category, id: categoryId });
-    // this.router.navigateByUrl(`/products?category=${category}&id=${categoryId}`);
   }
 
   switchCategoryPage(category, categoryId) {
     if (this.isModalActive) this.modalController.dismiss();
-    this.router.navigateByUrl(`/products?category=${category}&id=${categoryId}`);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + `/products?category=${category}&id=${categoryId}`);
   }
 
 }

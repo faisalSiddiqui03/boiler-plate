@@ -94,6 +94,6 @@ export class CategoryNavigationComponent extends BaseComponent implements OnInit
   }
 
   // onSelectChange(selectedValue: any) {
-  //   this.router.navigateByUrl('/category/' + encodeURI(selectedValue.detail.text) + '/' + selectedValue.detail.value);
+  //   this.router.navigateByUrl(this.utilService.getLanguageCode() + '/category/' + encodeURI(selectedValue.detail.text) + '/' + selectedValue.detail.value);
   // }
 }
