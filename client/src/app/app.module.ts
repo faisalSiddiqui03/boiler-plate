@@ -38,6 +38,7 @@ import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
 import { UtilService } from './helpers/utils';
+import { Location } from '@angular/common';
 
 export function getAppConfig(): Object {
   return appConfig || {};
@@ -106,15 +107,17 @@ export function getAppConfig(): Object {
 
 
 export class AppModule {
-  constructor(injector: Injector, languageService: LanguageService) {
+  constructor(injector: Injector,
+    private utilService: UtilService,
+    languageService: LanguageService) {
     setAppInjector(injector);
-
-    // languageService.model.subscribe(language => {
-    //   if (!language) {
-    //     return;
-    //   }
-
-    //   Utils.setLanguageCode(language.data.code);
-    // });
+    const locationUrl = window.location.pathname;
+    if (locationUrl.startsWith('/ar')) {
+      languageService.initialize('ar');
+      this.utilService.setLanguageCode('ar');
+    } else if (locationUrl.startsWith('/en')) {
+      languageService.initialize('en');
+      this.utilService.setLanguageCode('en');
+    }
   }
 }

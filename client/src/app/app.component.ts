@@ -34,7 +34,7 @@ export class AppComponent extends BaseComponent {
     this.sharedService = this.globalSharedService;
     const langCode = 'ar';
     this.initializeApp();
-    this.setLanguage(langCode);
+    //this.setLanguage(langCode);
     console.log("---->>>>>", document.dir);
     this.eventService.GetEvent("HttpError").subscribe(event => {
       this.handleError(event);

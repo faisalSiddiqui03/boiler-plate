@@ -86,9 +86,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   async ionViewWillEnter() {
-    const langCode = this.actRoute.snapshot.params['lang'];
-    await this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
+    // const langCode = this.actRoute.snapshot.params['lang'];
+    // await this.utilService.setLanguageCode(langCode);
+    this.translate.use(this.getCurrentLanguage().code);
     //this.langService.updateLanguageByCode(langCode);
   }
 
@@ -327,10 +327,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       this.loaderService.startLoading();
       return;
     }
-    const langCode = this.utilService.getLanguageCode();
+    
+    //const langCode = this.utilService.getLanguageCode();
     if (!this.asSoonPossible || this.utilService.isEmpty(this.getDeliverySlot())) {
       this.presentSlotModal().then(data => {
-        this.router.navigateByUrl(langCode + '/products?category=deals&id=CU00215646');
+        this.router.navigateByUrl(this.getCurrentLanguage().code + '/products?category=deals&id=CU00215646');
       });
     }
   }
