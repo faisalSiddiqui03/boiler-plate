@@ -65,7 +65,7 @@ export class BannerComponent extends BaseComponent implements OnInit {
     console.log(banner);
     switch (banner.targetType) {
       case 'Category':
-        this.router.navigateByUrl('/category/' + banner.targetId);
+        this.router.navigateByUrl(this.utilService.getLanguageCode() + '/category/' + banner.targetId);
         break;
       case 'URL':
         this.navigateToDeals();
@@ -74,7 +74,7 @@ export class BannerComponent extends BaseComponent implements OnInit {
   }
 
   navigateToDeals() {
-    this.router.navigateByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products/listing/(0:0)?category=deals&id=CU00215646');
   }
 
   getFullBannerUrl(src) {

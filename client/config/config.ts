@@ -14,7 +14,7 @@ export const config = {
 
     },
     "media_agility_url": "https://yum-india.appspot.com/_ah/api/storeApi/v1/getStoresMapping",
-    "banner_base_url": "https://storage.pizzahut.me/yum-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/userimages/pwa/",
+    "banner_base_url": "http://martjackyumstorage.azureedge.net/stage-resources/2002cbfe-9adf-42ac-9bfd-8e013fee7c18/Images/userimages/",
     "media_agility_clientid": "5649391675244544",
     "media_agility_secretid": "V:}Q|IzuZL,k[YG%k\\@F",
     "media_agility_userid": "2746274274",

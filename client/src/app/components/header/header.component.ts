@@ -117,7 +117,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     switch (name) {
       case LogoutWidgetActions.ACTION_LOGOUT:
         const coupon_remove_success = await this.translate.instant('my_account_page.successfully_loged_out');
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
         this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
         break;
     }
@@ -151,7 +151,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   switchCategories(category, categoryId) {
-    this.router.navigateByUrl(`/products?category=${category}&id=${categoryId}`);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=${category}&id=${categoryId}');
   }
 
 }

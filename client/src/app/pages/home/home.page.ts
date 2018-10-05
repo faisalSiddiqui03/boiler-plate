@@ -132,12 +132,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         this.loaderService.stopLoading();
         console.log('unable to find store', data);
-        // this.navigateToDeals();
         break;
       case StoreLocatorWidgetActions.FIND_BY_AREA:
         this.loaderService.stopLoading();
         console.log('unable to find store', data);
-        // this.navigateToDeals();
         break;
     }
   }
@@ -331,10 +329,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       return;
     }
     if (!this.asSoonPossible || this.utilService.isEmpty(this.getDeliverySlot())) {
-      this.presentSlotModal();
+      this.presentSlotModal().then(data => {
+        this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=deals&id=CU00215646');
+      });
     }
-    // this.router.navigateByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=deals&id=CU00215646');
   }
 
   changeOrderMode(mode, previousMode) {
@@ -367,7 +365,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     const modal = await this.modalController.create({
       component: DeliverySlotSelectionPage,
     });
-    return await modal.present();
+    await modal.present();
+    return await modal.onDidDismiss();
   }
 
   filterEmptyCities(cityList) {

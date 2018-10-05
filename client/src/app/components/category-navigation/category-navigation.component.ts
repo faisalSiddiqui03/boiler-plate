@@ -3,6 +3,7 @@ import { Action, LifeCycle, pwaLifeCycle, WidgetNames } from "@capillarytech/pwa
 import { Router } from '@angular/router';
 import { TranslateService } from "@ngx-translate/core";
 import { BaseComponent } from '../../base/base-component';
+import { UtilService } from '../../helpers/utils';
 
 @Component({
   selector: 'app-category-navigation',
@@ -22,14 +23,17 @@ export class CategoryNavigationComponent extends BaseComponent implements OnInit
   navigationWidgetExecutor = new EventEmitter();
 
   showDepartmentsPopup = false;
-  constructor(private router: Router, private translate: TranslateService) {
+  constructor(private router: Router,
+    private translate: TranslateService,
+    private utilService: UtilService) {
     super();
   }
 
   ngOnInit() {
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
-  toggleDepartmentsPopup(){
+  toggleDepartmentsPopup() {
     this.showDepartmentsPopup = !this.showDepartmentsPopup;
   }
 
@@ -66,17 +70,17 @@ export class CategoryNavigationComponent extends BaseComponent implements OnInit
   navigateToCategory(navigationItem) {
     if (navigationItem === '0') {
       this.activeCategoryId = '0';
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
     } else {
       this.activeCategoryId = navigationItem.categoryId;
-      this.router.navigateByUrl('/category/' + encodeURI(navigationItem.name) + '/' + navigationItem.categoryId);
+      this.router.navigateByUrl(this.utilService.getLanguageCode() + '/category/' + encodeURI(navigationItem.name) + '/' + navigationItem.categoryId);
     }
   }
 
   getActiveCategoryName(categories) {
     // console.log('FINDING ACTIVE CATEGORY NAME: ', this.activeCategoryId);
     let categoryName = '';
-    if(this.activeCategoryId === '0') {
+    if (this.activeCategoryId === '0') {
       // console.log('FOUND 1 ACTIVE CATEGORY NAME: ALL DEPS');
       return 'All Departments';
     }
