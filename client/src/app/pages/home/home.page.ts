@@ -86,9 +86,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ngOnDestroy() {
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     const langCode = this.actRoute.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
+    await this.utilService.setLanguageCode(langCode);
     this.translate.use(langCode);
     //this.langService.updateLanguageByCode(langCode);
   }

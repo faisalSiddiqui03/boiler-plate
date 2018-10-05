@@ -66,8 +66,8 @@ export function getAppConfig(): Object {
     SearchLocationPageModule,
     EventTrackModule.forRoot([EventTrackModule.Tracker.GTM]),
     LanguageServiceModule.forRoot([
-      { name: 'English', code: 'en', isDefault: true, alignment: 'ltr' },
-      { name: 'Arabic', code: 'ar', isDefault: false, alignment: 'rtl' }]),
+      { name: 'English', code: 'en', isDefault: false, alignment: 'ltr' },
+      { name: 'Arabic', code: 'ar', isDefault: true, alignment: 'rtl' }]),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
