@@ -80,12 +80,14 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     this.widgetModels.USERID_SIGNUP.email = this.signUpForm.value.email;
     this.widgetModels.USERID_SIGNUP.mobile = this.signUpForm.value.mobile;
     this.widgetModels.USERID_SIGNUP.password = this.signUpForm.value.password;
+    this.widgetModels.USERID_SIGNUP.userName = this.signUpForm.value.email;
+    this.widgetModels.USERID_SIGNUP.gender = 'M';
 
     this.useridSignUpAction.emit(new Action(UserIdSignUpWidgetActions.ACTION_SIGN_UP));
   }
 
   handleSignUpResponse(data) {
-    if (data.message === "Successful") {
+    if (data.message === "Succesfull") {
       this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful'), 500, top);
       this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
     } else {
