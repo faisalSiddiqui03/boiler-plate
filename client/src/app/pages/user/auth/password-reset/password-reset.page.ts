@@ -25,9 +25,9 @@ import { UtilService } from '../../../../helpers/utils';
 export class PasswordResetPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   resetPasswordForm: FormGroup;
   resetPasswordActionEmitter = new EventEmitter();
-  titleValue:string = '';
+  titleValue: string = '';
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: FormBuilder,
     private utilService: UtilService,
     private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
@@ -56,7 +56,7 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
   }
 
   handleResetPasswordResponse(data) {
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/login');
     if (data.isSuccessful) {
       this.alertService.presentToast(this.translate.instant('reset_password_page.link_sent'), 1000, top);
     } else {
@@ -84,7 +84,7 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 
   signIn() {

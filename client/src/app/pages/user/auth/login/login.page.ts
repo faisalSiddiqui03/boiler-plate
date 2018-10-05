@@ -39,7 +39,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   googleSignInActionEmitter = new EventEmitter();
   googleClientId: string = '';
-  titleValue:string = '';
+  titleValue: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -95,19 +95,19 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   handleGoogleSignInResponse(data) {
     this.alertService.presentToast(data.isSuccessful ? 'Successfully signed in' : data.message, 500, top);
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
   }
 
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 
   handleUseridPasswordSigninResponse(data) {
     if (data.message === "Successful") {
       this.isLoginSuccessful = true;
       this.alertService.presentToast('Successfully signed in', 500, top);
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
     } else {
       this.isLoginSuccessful = false;
       this.alertService.presentToast(data.message, 500, top);

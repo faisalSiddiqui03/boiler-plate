@@ -64,7 +64,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     this.utilService.setLanguageCode(langCode);
     this.translate.use(langCode);
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
 
     this.subscriber.unsubscribe();
     this.subscriber = null;
@@ -78,7 +78,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
       this.loaderService.startLoading();
     }
 
-    if(this.categoryId !== null){
+    if (this.categoryId !== null) {
       return;
     }
 
@@ -86,7 +86,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     this.updateCategories(data);
   }
 
-  updateCategories(data){
+  updateCategories(data) {
     console.error("vivek", data);
     this.categoryId = data.id;
     this.categoryName = data.category;
@@ -108,7 +108,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     return await modal.present();
   }
 
-  ionNavWillChange(data){
+  ionNavWillChange(data) {
     console.error(data, "router")
   }
 
@@ -117,27 +117,27 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
   }
 
   getProductImageUrl(product) {
-    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
       return this.getUrl(product.image);
     } else {
       let lastItem = product.multipleImages.slice().pop();
-      if(!lastItem.image) {
+      if (!lastItem.image) {
         return this.getUrl(product.image);
       }
       return this.getUrl(lastItem.image);
     }
   }
 
-  getUrl(url: string){
+  getUrl(url: string) {
     return `https://${url}`;
   }
 
   openProductDetails(product) {
     if (product.type === ProductType.Bundle) {
-      this.router.navigateByUrl('/pizza/' + product.title + '/' + product.id);
+      this.router.navigateByUrl(this.utilService.getLanguageCode() + '/pizza/' + product.title + '/' + product.id);
       return;
     }
-    this.router.navigateByUrl('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/product/' + this.categoryName + '/' + product.title + '/' + product.id);
 
     // Use following, when catlog code is proper from api response
     // if (product.type === ProductType.Bundle) {
@@ -150,7 +150,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
   }
 
   openDeal(product) {
-    this.router.navigateByUrl('/deal/' + product.title + '/' + product.id);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/deal/' + product.title + '/' + product.id);
   }
 
   updateFavorites(isFavorite, product) {
@@ -177,7 +177,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     console.error('name = ', name, ' data = ', data);
     switch (name) {
 
-      case 'NAVIGATIONS' :
+      case 'NAVIGATIONS':
         this.navigations = data.items;
         break;
       case 'DELIVERYSLOTS':
@@ -194,18 +194,18 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     }
   }
 
-  assignNav(data){
+  assignNav(data) {
     this.navigations = data.items;
     return "";
-  }  
-  
+  }
+
   goToCart() {
-    this.router.navigateByUrl('/cart');
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/cart');
   }
 
   switchCategories(category, categoryId) {
-    if( categoryId === this.categoryId ) return;
-    this.router.navigate([], { queryParams: { category: category, id: categoryId } }).then(data=>{
+    if (categoryId === this.categoryId) return;
+    this.router.navigate([], { queryParams: { category: category, id: categoryId } }).then(data => {
     }).catch(err => {
     });
 

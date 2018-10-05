@@ -107,7 +107,6 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
   ngOnInit() {
     const langCode = this.actRoute.snapshot.params['lang'];
-    console.log('Check kar', langCode);
     this.utilService.setLanguageCode(langCode);
     this.translate.use(langCode);
 
@@ -122,6 +121,12 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     }
   }
 
+  ionViewWillEnter() {
+    const langCode = this.actRoute.snapshot.params['lang'];
+    this.utilService.setLanguageCode(langCode);
+    this.translate.use(langCode);
+  }
+
   ngAfterViewInit() {
     setTimeout(() => {
       this.setLoggedInUserDetails();
@@ -133,7 +138,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   goToPage(pageName, navParams = {}) {
-    this.router.navigateByUrl(pageName, navParams);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName, navParams);
   }
 
   presentSlotModal() {

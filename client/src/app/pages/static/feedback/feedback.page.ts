@@ -39,10 +39,10 @@ export class FeedbackPage implements OnInit {
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 
-  sendFeedback(){
+  sendFeedback() {
     console.log(this.feedBackForm.value);
   }
 
