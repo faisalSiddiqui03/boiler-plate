@@ -77,7 +77,7 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     console.log(this.signUpForm.value);
     this.widgetModels.USERID_SIGNUP.firstName = this.signUpForm.value.fname;
     this.widgetModels.USERID_SIGNUP.lastName = this.signUpForm.value.lname;
-    this.widgetModels.USERID_SIGNUP.email = this.signUpForm.value.emal;
+    this.widgetModels.USERID_SIGNUP.email = this.signUpForm.value.email;
     this.widgetModels.USERID_SIGNUP.mobile = this.signUpForm.value.mobile;
     this.widgetModels.USERID_SIGNUP.password = this.signUpForm.value.password;
 
@@ -154,10 +154,6 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
         return null
       }
     }
-  }
-
-  changeTextPassword(event) {
-    console.log(event);
   }
 
 }
