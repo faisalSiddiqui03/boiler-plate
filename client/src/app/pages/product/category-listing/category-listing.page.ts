@@ -129,11 +129,11 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
 
     // Use following, when catlog code is proper from api response
     // if (product.type === ProductType.Bundle) {
-    //   this.router.navigateByUrl('/pizza/' + product.title + '/' + product.id);
+    //   this.router.navigateByUrl(this.utilService.getLanguageCode() + '/pizza/' + product.title + '/' + product.id);
     // } else if(product.type === ProductType.Deal) {
-    //   this.router.navigateByUrl('/deal/' + product.title + '/' + product.id);
+    //   this.router.navigateByUrl(this.utilService.getLanguageCode() + '/deal/' + product.title + '/' + product.id);
     // } else {
-    //   this.router.navigateByUrl('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
+    //   this.router.navigateByUrl(this.utilService.getLanguageCode() + '/product/' + this.categoryName + '/' + product.title + '/' + product.id);
     // }
   }
 

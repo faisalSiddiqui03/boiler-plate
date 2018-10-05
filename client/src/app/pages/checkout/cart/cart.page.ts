@@ -216,7 +216,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         const cartClear = await
           this.translateService.instant('cart.cart_clear');
         this.alertService.presentToast(cartClear, 3000, 'bottom');
-        this.router.navigate(['/home']);
+        this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
         break;
     }
   }
