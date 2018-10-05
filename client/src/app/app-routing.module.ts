@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 
-const defaultLang = 'ar';
+const defaultLang = 'en';
 
 const routes: Routes = [
   { path: '', redirectTo:  defaultLang +'/home', pathMatch: 'full' },
