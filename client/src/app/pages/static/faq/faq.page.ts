@@ -19,7 +19,7 @@ export class FaqPage implements OnInit {
   }
 
   titleValue = '';
-  activeAccordion:number = null;
+  activeAccordion: number = null;
 
   ngOnInit() {
     this.translate.get('faq_page.faq').subscribe(value => {
@@ -27,11 +27,11 @@ export class FaqPage implements OnInit {
     });
   }
 
-  openAccordion(acc){
+  openAccordion(acc) {
     this.activeAccordion = acc;
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 }

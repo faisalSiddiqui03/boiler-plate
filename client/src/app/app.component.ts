@@ -32,7 +32,7 @@ export class AppComponent extends BaseComponent {
     super();
     routingState.loadRouting();
     this.sharedService = this.globalSharedService;
-    const langCode = 'en';
+    const langCode = 'ar';
     this.initializeApp();
     this.setLanguage(langCode);
     console.log("---->>>>>", document.dir);

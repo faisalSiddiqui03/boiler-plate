@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   Action,
@@ -56,8 +56,9 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   @Input() headerClass = '';
   @Input() showUserIcon = true;
   @Input() dealsHeader = false;
-
   enableUserDropdown: boolean = false;
+  @Output() switchCategory: EventEmitter<any> = new EventEmitter<any>();
+  @Input() isModalActive = false;
 
   ngOnInit() {
     const data = this.route.snapshot.queryParams;
@@ -117,7 +118,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     switch (name) {
       case LogoutWidgetActions.ACTION_LOGOUT:
         const coupon_remove_success = await this.translate.instant('my_account_page.successfully_loged_out');
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
         this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
         break;
     }
@@ -130,19 +131,15 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
-    console.error('name: ', name, 'data: ', data);
     switch (name) {
-      case 'NAVIGATIONS#3':
+      case 'NAVIGATIONS' :
         this.navigations = data.items;
         break;
     }
   }
 
   async openLocationModal() {
-    const modal = await this.modalController.create({
-      component: LocationPage,
-    });
-    return await modal.present();
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
   }
 
   logout() {
@@ -151,6 +148,13 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   switchCategories(category, categoryId) {
+    this.categoryId = categoryId;
+    this.switchCategory.emit({ category, id: categoryId });
+    // this.router.navigateByUrl(`/products?category=${category}&id=${categoryId}`);
+  }
+
+  switchCategoryPage(category, categoryId) {
+    if (this.isModalActive) this.modalController.dismiss();
     this.router.navigateByUrl(`/products?category=${category}&id=${categoryId}`);
   }
 

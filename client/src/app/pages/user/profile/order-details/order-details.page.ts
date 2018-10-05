@@ -35,7 +35,7 @@ export class OrderDetailsPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' +pageName);
   }
 
   widgetActionFailed(name: string, data: any): any {

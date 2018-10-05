@@ -42,7 +42,7 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
   useridSignUpAction = new EventEmitter();
   useridSignUpActionEmitter = new EventEmitter();
   widgetModels: { [name: string]: any };
-  titleValue:string = "";
+  titleValue: string = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -87,14 +87,14 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
   handleSignUpResponse(data) {
     if (data.message === "Successful") {
       this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful'), 500, top);
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
     } else {
       this.alertService.presentToast(data.message, 500, top);
     }
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 
   widgetActionFailed(name: string, data: any): any {

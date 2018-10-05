@@ -66,7 +66,7 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
   widgetActionSuccess(name, data) {
     console.log('action success ' + name, data);
     this.alertService.presentToast("Profile Updated Successfully", 2000, top);
-    this.router.navigateByUrl('my-account');
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + 'my-account');
   }
 
   widgetLoadingSuccess(name, data) {

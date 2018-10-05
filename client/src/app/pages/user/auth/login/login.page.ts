@@ -12,7 +12,7 @@ import {
   OnWidgetActionsLifecyle, OnWidgetLifecyle
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../../base/base-component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../../helpers/utils';
@@ -39,12 +39,13 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   googleSignInActionEmitter = new EventEmitter();
   googleClientId: string = '';
-  titleValue:string = '';
+  titleValue: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private loaderService: LoaderService,
+    private actRoute: ActivatedRoute,
     private alertService: AlertService,
     private translate: TranslateService,
     private config: ConfigService,
@@ -65,6 +66,13 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     });
+  }
+
+  ionViewWillEnter() {
+    const langCode = this.actRoute.snapshot.params['lang'];
+    this.utilService.setLanguageCode(langCode);
+    this.translate.use(langCode);
+    //this.langService.updateLanguageByCode(langCode);
   }
 
   ngOnInit() {
@@ -95,19 +103,19 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   handleGoogleSignInResponse(data) {
     this.alertService.presentToast(data.isSuccessful ? 'Successfully signed in' : data.message, 500, top);
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
   }
 
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 
   handleUseridPasswordSigninResponse(data) {
     if (data.message === "Successful") {
       this.isLoginSuccessful = true;
       this.alertService.presentToast('Successfully signed in', 500, top);
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
     } else {
       this.isLoginSuccessful = false;
       this.alertService.presentToast(data.message, 500, top);

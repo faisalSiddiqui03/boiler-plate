@@ -19,7 +19,7 @@ export class PrivacyPolicyPage implements OnInit {
   }
 
   titleValue = '';
-  activeAccordion:number = null;
+  activeAccordion: number = null;
 
   ngOnInit() {
     this.translate.get('privacy_page.privacy_policy').subscribe(value => {
@@ -27,12 +27,12 @@ export class PrivacyPolicyPage implements OnInit {
     });
   }
 
-  openAccordion(acc){
+  openAccordion(acc) {
     this.activeAccordion = acc;
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 
 }

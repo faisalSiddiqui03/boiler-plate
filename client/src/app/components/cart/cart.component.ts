@@ -26,7 +26,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   cartWidgetAction = new EventEmitter();
   loaded = false;
   vouchersLoaded = false;
-  enableVoucherModal:boolean = false;
+  enableVoucherModal: boolean = false;
   isWrongVoucher = false;
   currencyCode: string;
   couponCode: string;
@@ -96,7 +96,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   openProduct(product) {
-    let navigationUrl = 'product/' + encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' + product.productId;
+    let navigationUrl = this.utilService.getLanguageCode() + '/product/' + encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' + product.productId;
     console.log('Nav URL', navigationUrl);
     this.router.navigateByUrl(navigationUrl);
   }
@@ -179,11 +179,11 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   goToDeals() {
-    this.router.navigateByUrl('/product/deals/CU00215646');
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/product/deals/CU00215646');
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 
 }

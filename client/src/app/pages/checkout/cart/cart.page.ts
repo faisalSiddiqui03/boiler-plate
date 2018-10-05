@@ -62,13 +62,13 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   ngOnInit() {
-    const langCode = this.actRoute.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translateService.use(langCode);
   }
 
   ionViewWillEnter() {
     this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
+    const langCode = this.actRoute.snapshot.params['lang'];
+    this.utilService.setLanguageCode(langCode);
+    this.translateService.use(langCode);
   }
 
   applyCoupon() {
@@ -177,7 +177,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   openProduct(product) {
-    let navigationUrl = 'product/' + encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' + product.productId;
+    let navigationUrl = this.utilService.getLanguageCode() + 'product/' + encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' + product.productId;
     console.log('Nav URL', navigationUrl);
     this.router.navigateByUrl(navigationUrl);
   }
@@ -261,10 +261,10 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   goToDeals() {
-    this.router.navigateByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products/listing/(0:0)?category=deals&id=CU00215646');
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(pageName);
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 }

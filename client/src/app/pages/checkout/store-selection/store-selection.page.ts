@@ -45,12 +45,12 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-        this.cityId = params.cityId;
-        this.latitude = params.latitude;
-        this.longitude = params.longitude;
-        if (!this.cityId && !this.latitude && !this.longitude) {
-          this.goToHome();
-        }
+      this.cityId = params.cityId;
+      this.latitude = params.latitude;
+      this.longitude = params.longitude;
+      if (!this.cityId && !this.latitude && !this.longitude) {
+        this.goToHome();
+      }
     });
     // if (this.cityId) {
     //   console.log('suno', this.cityId);
@@ -65,39 +65,39 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   }
 
   navigateToDeals() {
-    this.router.navigateByUrl('/products?category=desls&id=CU00215646');
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=desls&id=CU00215646');
   }
 
   widgetLoadingFailed(name: string, data: any): any {
-    console.log('failed name: ', name, ' data: ', data );
+    console.log('failed name: ', name, ' data: ', data);
   }
 
   widgetLoadingStarted(name: string, data: any): any {
-    console.log('started name: ', name, ' data: ', data );
+    console.log('started name: ', name, ' data: ', data);
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
-    console.log('success name: ', name, ' data: ', data );
+    console.log('success name: ', name, ' data: ', data);
     if (name === 'STORE_SELECTOR' && this.globalSharedService.getFulfilmentMode()) {
       if (this.cityId) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
-            StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.globalSharedService.getFulfilmentMode().mode])
+          StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.globalSharedService.getFulfilmentMode().mode])
         );
 
       } else if (this.latitude && this.longitude) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
-            StoreLocatorWidgetActions.FIND_BY_LOCATION, [this.latitude, this.longitude, this.globalSharedService.getFulfilmentMode().mode])
+          StoreLocatorWidgetActions.FIND_BY_LOCATION, [this.latitude, this.longitude, this.globalSharedService.getFulfilmentMode().mode])
         );
       }
     }
   }
 
   widgetActionFailed(name: string, data: any): any {
-    console.log('failed action name: ', name, ' data: ', data );
+    console.log('failed action name: ', name, ' data: ', data);
   }
 
   widgetActionSuccess(name: string, data: any): any {
-    console.log('success action name: ', name, ' data: ', data );
+    console.log('success action name: ', name, ' data: ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_CITY:
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
@@ -122,7 +122,7 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   }
 
   goToHome() {
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
   }
 
   getTime(store, time) {

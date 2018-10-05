@@ -1,9 +1,11 @@
 <div *ngIf="bundleGroupType === inputType.RADIO" class="full-height">
   <ion-show-when size="lg">
-    <app-header [dealsHeader]="true"></app-header>
+    <ion-header>
+      <app-header [dealsHeader]="true" [isModalActive]="true"></app-header>
+    </ion-header>
   </ion-show-when>
   <ion-hide-when size="lg">
-      <app-sub-header class="deal-heading" [title]="bundleGroupTitle" [isModal]="true"></app-sub-header>
+    <app-sub-header class="deal-heading" [title]="bundleGroupTitle" [isModal]="true"></app-sub-header>
   </ion-hide-when>
   <ion-content class="page-bg">
     <ion-show-when size="lg">
@@ -19,17 +21,20 @@
     <div class="container-small" *ngIf="bundleGroupItems != undefined && bundleGroupItems?.length">
       <ion-grid class="deal-showcase-grid">
         <ion-row>
-          <ion-col class="product-card-holder" *ngFor="let prod of bundleGroupItems" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
-            no-padding>
+          <ion-col class="product-card-holder" *ngFor="let prod of bundleGroupItems" [sizeSm]="6" [sizeXs]="6"
+                   [sizeMd]="4" [sizeLg]="3"
+                   no-padding>
             <ion-card class="product-card non-deal-card" no-padding (click)="showProduct(prod)">
               <ion-card-header no-padding>
-                <img height="100" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
+                <img height="100" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}"
+                     defaultImage="assets/imgs/default/default.png"
                 />
               </ion-card-header>
               <ion-card-content padding>
                 <ion-card-subtitle class="product-title" color="dark">{{prod?.title}}</ion-card-subtitle>
-                <ion-button *ngIf="!isCustomizable(prod)" (click)="addProductToDeal(prod)" color="success" text-uppercase expand="block"
-                  mode="ios" class="btn-success">
+                <ion-button *ngIf="!isCustomizable(prod)" (click)="addProductToDeal(prod)" color="success"
+                            text-uppercase expand="block"
+                            mode="ios" class="btn-success">
                   <div>{{'deal.add' | translate}}</div>
                 </ion-button>
               </ion-card-content>
@@ -43,14 +48,17 @@
 
 <div *ngIf="bundleGroupType === inputType.CHECKBOX" class="full-height drinks-component">
   <ion-show-when size="lg">
-    <app-header [dealsHeader]="true"></app-header>
+    <ion-header>
+      <app-header [dealsHeader]="true" [isModalActive]="true"></app-header>
+    </ion-header>
   </ion-show-when>
   <ion-content no-padding class="page-bg">
     <div class="deal-content">
       <div class="drinks-img-wrap">
         <ion-icon (click)="closeModal()" name="close-circle" slot="start"></ion-icon>
         <div class="drinks-img-block">
-          <img alt="{{bundleGroupTitle}}" height="170" width="340" img-preloader="{{bundleGroupImage}}" defaultImage="assets/imgs/default/default.png"
+          <img alt="{{bundleGroupTitle}}" height="170" width="340" img-preloader="{{bundleGroupImage}}"
+               defaultImage="assets/imgs/default/default.png"
           />
         </div>
         <div class="drinks-img-text">
@@ -61,20 +69,24 @@
         <h4 no-margin padding-horizontal>{{bundleGroupTitle}}</h4>
         <ion-list no-margin *ngIf="bundleGroupItems">
           <ion-item *ngFor="let prod of bundleGroupItems">
-            <img alt="{{prod?.title}}" height="25" width="25" img-preloader="{{getUrl(prod?.image)}}" defaultImage="assets/imgs/default/default.png"
+            <img alt="{{prod?.title}}" height="25" width="25" img-preloader="{{getUrl(prod?.image)}}"
+                 defaultImage="assets/imgs/default/default.png"
             />
             <ion-label>{{prod?.title}}</ion-label>
             <div class="add-remove">
-              <ion-icon name="remove" class="remove-icon" [ngClass]="{'disable': getClientBundleItem(prod)?.disableDec}" (click)="updateQuantity(getClientBundleItem(prod),1,false);toggleQuantityDisable()"></ion-icon>
+              <ion-icon name="remove" class="remove-icon" [ngClass]="{'disable': getClientBundleItem(prod)?.disableDec}"
+                        (click)="updateQuantity(getClientBundleItem(prod),1,false);toggleQuantityDisable()"></ion-icon>
               <span>{{getClientBundleItem(prod)?.quantity}}</span>
-              <ion-icon name="add" class="add-icon" [ngClass]="{'disable': getClientBundleItem(prod)?.disableInc}" (click)="updateQuantity(getClientBundleItem(prod),1,true);toggleQuantityDisable()"></ion-icon>
+              <ion-icon name="add" class="add-icon" [ngClass]="{'disable': getClientBundleItem(prod)?.disableInc}"
+                        (click)="updateQuantity(getClientBundleItem(prod),1,true);toggleQuantityDisable()"></ion-icon>
             </div>
           </ion-item>
         </ion-list>
       </div>
     </div>
-    <ion-button color="success" [class.disabled]="disableAddToCart" (click)="addProductToDeal()" text-uppercase expand="block"
-      mode="ios" class="btn-success">
+    <ion-button color="success" [class.disabled]="disableAddToCart" (click)="addProductToDeal()" text-uppercase
+                expand="block"
+                mode="ios" class="btn-success">
       <span *ngIf="!disableAddToCart">{{'deal.add' | translate}}</span>
       <span *ngIf="disableAddToCart">{{'deal.choose_any' | translate}} {{bundleGroupMinQuantity}}</span>
     </ion-button>
