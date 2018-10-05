@@ -327,9 +327,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       this.loaderService.startLoading();
       return;
     }
+    const langCode = this.utilService.getLanguageCode();
     if (!this.asSoonPossible || this.utilService.isEmpty(this.getDeliverySlot())) {
       this.presentSlotModal().then(data => {
-        this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=deals&id=CU00215646');
+        this.router.navigateByUrl(langCode + '/products?category=deals&id=CU00215646');
       });
     }
   }

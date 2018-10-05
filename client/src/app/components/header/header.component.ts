@@ -57,6 +57,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   @Input() headerClass = '';
   @Input() showUserIcon = true;
   @Input() dealsHeader = false;
+  @Input() dealsHeadershowLocation = false;
+  @Input() dealsHeadershowTime = false;
   enableUserDropdown: boolean = false;
   @Output() switchCategory: EventEmitter<any> = new EventEmitter<any>();
   @Input() isModalActive = false;
