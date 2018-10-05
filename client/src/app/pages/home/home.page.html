@@ -241,3 +241,9 @@
   </div>
   <app-footer></app-footer>
 </ion-content>
+
+<!-- using cart widget to clear cart when changing store or delivery mode -->
+<cart-widget
+  [action]="cartWidgetAction"
+  [componentId]="getComponentId()">
+</cart-widget>
