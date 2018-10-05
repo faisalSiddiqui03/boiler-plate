@@ -78,12 +78,14 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     switch (langCode) {
       case 'ar':
         await this.languageService.updateLanguageByCode('en');
+        this.utilService.setLanguageCode('en');
         this.router.navigateByUrl('en/home', { replaceUrl: true });
 
         break;
 
       case 'en':
         await this.languageService.updateLanguageByCode('ar');
+        this.utilService.setLanguageCode('ar');
         this.router.navigateByUrl('ar/home', { replaceUrl: true });
         break;
 

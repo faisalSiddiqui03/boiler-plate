@@ -15,6 +15,7 @@ import {
   LocationWidgetActions,
   FulfilmentModeWidgetActions,
   StoreLocatorWidgetActions,
+  CartWidgetActions,
   DeliveryModes,
   DeliverySlot
 } from '@capillarytech/pwa-framework';
@@ -39,6 +40,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   locationsWidgetAction = new EventEmitter();
   locationsWidgetActionGeometry = new EventEmitter();
   storeLocatorWidgetAction = new EventEmitter();
+  cartWidgetAction = new EventEmitter();
 
   /**default order mode is delivery */
   // orderMode = DeliveryModes.HOME_DELIVERY;
@@ -138,6 +140,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         this.loaderService.stopLoading();
         console.log('unable to find store', data);
         break;
+      case CartWidgetActions.ACTION_CLEAR_CART:
+        this.alertService.presentToast('failed to remove cart items', 3000, 'bottom');
+        break;
     }
   }
 
@@ -147,6 +152,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
           const firstStore = data[0];
+          // TODO:: add alert-controller to confirm before emptying cart
+          if (this.isStoreSelected() && this.getCurrentStore().id !== firstStore.id) {
+            this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+          }
           this.setCurrentStore(firstStore);
           if (!firstStore.isOnline(this.getDeliveryMode())) {
             this.fetchDeliverySlots = true;
@@ -191,6 +200,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
           this.alertService.presentToast(store_alert, 3000, 'bottom');
         }
+        break;
+      case CartWidgetActions.ACTION_CLEAR_CART:
+        this.alertService.presentToast('removed cart items', 3000, 'bottom');
         break;
     }
   }
@@ -362,6 +374,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       selectedArea: this.selectedArea || '',
       selectedAreaCode: this.selectedAreaCode || ''
     };
+
+    // TODO:: add alert-controller to confirm before emptying cart
+    if (mode !== previousMode && !this.isCartEmpty()) {
+      this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+    }
     this.fulfilmentModeWidgetAction.emit(new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, mode));
     const selected = this.citySelectionHistory[mode] || {};
     this.selectedCity = selected.selectedCity || '';
@@ -408,5 +425,12 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   preventPropogation(e) {
     e.preventDefault();
     e.stopPropagation();
+  }
+
+  isCartEmpty() {
+    if (this.getCart().items.length === 0) {
+      return true;
+    }
+    return false;
   }
 }
