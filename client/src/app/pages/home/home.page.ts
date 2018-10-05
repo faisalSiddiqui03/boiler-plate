@@ -16,7 +16,7 @@ import {
   FulfilmentModeWidgetActions,
   StoreLocatorWidgetActions,
   DeliveryModes,
-  DeliverySlotsWidget
+  DeliverySlot
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
@@ -60,6 +60,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   isNavigationClicked = false;
   lat;
   lng;
+  asapDeliverySlot = DeliverySlot.getAsap();
 
   constructor(
     private config: ConfigService,
@@ -82,9 +83,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ngOnInit() {
   }
 
-  ngOnDestroy() {
-  }
-
   async ionViewWillEnter() {
     const langCode = this.actRoute.snapshot.params['lang'];
     await this.utilService.setLanguageCode(langCode);
@@ -96,7 +94,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.selectedStore = this.getCurrentStore();
     this.changeRequested = false;
     if (this.isStoreSelected()) {
-      this.fetchDeliverySlots = true;
+      if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
+        this.fetchDeliverySlots = true;
+      } else {
+        this.setDeliverySlot(this.asapDeliverySlot);
+      }
     }
   }
 
@@ -145,7 +147,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
           this.setCurrentStore(data[0]);
-          this.fetchDeliverySlots = true;
+          if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
+            this.fetchDeliverySlots = true;
+          } else {
+            this.setDeliverySlot(this.asapDeliverySlot);
+          }
         } else {
           this.loaderService.stopLoading();
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
@@ -155,7 +161,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         if (data.length) {
           this.setCurrentStore(data[0]);
-          this.fetchDeliverySlots = true;
+          if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
+            this.fetchDeliverySlots = true;
+          } else {
+            this.setDeliverySlot(this.asapDeliverySlot);
+          }
         } else {
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
           this.alertService.presentToast(store_alert, 3000, 'bottom');
@@ -375,10 +385,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   filterEntires(cityList, searchTerm) {
     const searchSubString = this.isCleared ? '' : searchTerm.toLowerCase();
     return cityList.filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
-  }
-
-  getDeliveryMode() {
-    return this.globalSharedService.getFulfilmentMode() ? this.globalSharedService.getFulfilmentMode().mode : null;
   }
 
   outSideClick() {
