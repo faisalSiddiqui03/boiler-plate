@@ -356,10 +356,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   goBack() {
-    if (!this.productFromDeal) {
-      this.location.back();
+    if (this.productFromDeal || this.cartItem) {
+      this.modalController.dismiss();
       return;
     }
-    this.modalController.dismiss();
+    this.location.back();
   }
 }
