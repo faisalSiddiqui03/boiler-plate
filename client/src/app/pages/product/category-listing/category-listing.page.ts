@@ -69,7 +69,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
 
     if (this.utilService.isEmpty(this.getDeliverySlot())) {
       this.fetchDeliverySlots = true;
-      this.loaderService.startLoading();
+      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     }
 
     if (this.categoryId !== null) {
