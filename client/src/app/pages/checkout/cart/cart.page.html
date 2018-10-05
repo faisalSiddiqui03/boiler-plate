@@ -106,11 +106,11 @@
                     </div>
 
                     <div class="add-remove">
-                      <!-- <ion-icon name="remove-circle" appDebounceClick [inputDebounceTime]="'300'" (debounceClick)="updateCart($event, item?.client, false)"></ion-icon> -->
-                      <ion-icon name="remove-circle" (click)="updateCartItemQuantityNoDebounce(item?.client, -1);"></ion-icon>
+                      <ion-icon name="remove-circle" appDebounceClick [inputDebounceTime]="'300'" (debounceClick)="updateCart($event, item?.client, false)"></ion-icon>
+                      <!-- <ion-icon name="remove-circle" (click)="updateCartItemQuantityNoDebounce(item?.client, -1);"></ion-icon> -->
                       <span>{{item.quantity}}</span>
-                      <!-- <ion-icon name="add-circle" appDebounceClick [inputDebounceTime]="'300'" (debounceClick)="updateCart($event, item?.client, true)"></ion-icon> -->
-                      <ion-icon name="add-circle" (click)="updateCartItemQuantityNoDebounce(item?.client, 1);"></ion-icon>
+                      <ion-icon name="add-circle" appDebounceClick [inputDebounceTime]="'300'" (debounceClick)="updateCart($event, item?.client, true)"></ion-icon>
+                      <!-- <ion-icon name="add-circle" (click)="updateCartItemQuantityNoDebounce(item?.client, 1);"></ion-icon> -->
                     </div>
                     <div class="product-price">{{(item?.getPrice() * item.quantity) | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
                     <ion-icon class="remove-icon" name="close-circle" (click)="removeCartItem(item?.client);"></ion-icon>
