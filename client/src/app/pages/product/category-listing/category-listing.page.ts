@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import {
@@ -64,12 +64,6 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     this.utilService.setLanguageCode(langCode);
     this.translate.use(langCode);
   }
-  ngOnDestroy() {
-
-    this.subscriber.unsubscribe();
-    this.subscriber = null;
-    console.error('unsubscribed');
-  }
 
   ionViewWillEnter() {
 
@@ -81,13 +75,11 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     if (this.categoryId !== null) {
       return;
     }
-
     let data = this.route.snapshot.queryParams;
     this.updateCategories(data);
   }
 
   updateCategories(data) {
-    console.error("vivek", data);
     this.categoryId = data.id;
     this.categoryName = data.category;
   }
@@ -106,10 +98,6 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
       component: DeliverySlotSelectionPage
     });
     return await modal.present();
-  }
-
-  ionNavWillChange(data) {
-    console.error(data, "router")
   }
 
   ionViewWillLeave() {
@@ -168,13 +156,18 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
   }
 
   widgetLoadingFailed(name: string, data: any): any {
+    switch (name) {
+      case 'NAVIGATIONS' :
+        break;
+      case 'DELIVERYSLOTS':
+        this.loaderService.stopLoading();
+    }
   }
 
   widgetLoadingStarted(name: string, data: any): any {
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
-    console.error('name = ', name, ' data = ', data);
     switch (name) {
 
       case 'NAVIGATIONS':
@@ -203,23 +196,15 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
     this.router.navigateByUrl(this.utilService.getLanguageCode() + '/cart');
   }
 
-  switchCategories(category, categoryId) {
-    if (categoryId === this.categoryId) return;
-    this.router.navigate([], { queryParams: { category: category, id: categoryId } }).then(data => {
+  switchCategories(data) {
+    if (data.categoryId === this.categoryId) return;
+    this.router.navigate([], { queryParams: data }).then(data => {
     }).catch(err => {
     });
-
-    let data = {
-      "category": category,
-      "id": categoryId
-    };
-
     this.updateCategories(data);
-    // this.router.navigateByUrl('/products?category={{item.name}}&id={{item.categoryId}}')
   }
 
   isLoggedIn() {
     return this.getUserModel() && this.getUserModel().type !== 'GUEST';
   }
-
 }

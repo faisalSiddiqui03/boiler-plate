@@ -5,10 +5,10 @@
 </ion-hide-when>
 <ion-content (click)="outSideClick()" class="home-page">
   <delivery-slots-widget *ngIf="fetchDeliverySlots"
-  [globalSlots]="true"
-  [deliveryMode]="getFulfilmentMode()?.mode"
-  [storeId]="getCurrentStore()?.id"
-  [componentId]="getComponentId()">
+                         [globalSlots]="true"
+                         [deliveryMode]="getFulfilmentMode()?.mode"
+                         [storeId]="getCurrentStore()?.id"
+                         [componentId]="getComponentId()">
   </delivery-slots-widget>
   <div class="banner-home container">
     <banner-widget
@@ -98,19 +98,19 @@
                   class="form-search" [debounce]="1000" [(ngModel)]="selectedCity" #focusInput
                   showCancelButton="false" placeholder="{{'home_page.select_area' | translate}}"
                   (click)="preventPropogation($event);toggleDropDown('city');"
-                  (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')" 
+                  (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')"
                   (ionClear)="isCleared = true;">
                 </ion-searchbar>
                 <ion-list *ngIf="isDropDownShown('city')" text-center class="location-block-list">
-                  <ion-item *ngIf="!(widget.model?.cities?.length && selectedCity)" >
+                  <ion-item *ngIf="!(widget.model?.cities?.length && selectedCity)">
                     <ion-spinner color="success" name="bubbles"></ion-spinner>
                   </ion-item>
                 </ion-list>
                 <ion-list *ngIf="isDropDownShown('city')" class="location-block-list">
                   <ion-item *ngIf="!(widget.model.cities?.length && selectedCity)">
-                    <ion-spinner style="margin: auto" color="success" name="bubbles" style="margin: auto" ></ion-spinner>
+                    <ion-spinner style="margin: auto" color="success" name="bubbles" style="margin: auto"></ion-spinner>
                   </ion-item>
-                  <ion-item *ngIf="widget.model.cities?.length && selectedCity" >
+                  <ion-item *ngIf="widget.model.cities?.length && selectedCity">
                     <div>{{'home_page.no_store_available' | translate}}</div>
                   </ion-item>
                 </ion-list>
@@ -123,7 +123,8 @@
               </div>
               <div class="form-control"
                    *ngIf="getDeliveryMode() === deliveryModes?.HOME_DELIVERY">
-                <ion-searchbar [disabled]="!selectedCity || selectedCity === ''" class="form-search" [debounce]="1000" [(ngModel)]="selectedArea" #focusInput
+                <ion-searchbar [disabled]="!selectedCity || selectedCity === ''" class="form-search" [debounce]="1000"
+                               [(ngModel)]="selectedArea" #focusInput
                                showCancelButton="false" placeholder="{{'home_page.select_block' | translate}}"
                                (click)="preventPropogation($event);isCitySelected();toggleDropDown('area');"
                                (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'area')">
@@ -131,15 +132,17 @@
                 <div class="has-errors" *ngIf="hasError['selectAreaFirst']">
                   {{'home_page.select_city_warning' | translate}}
                 </div>
-                <ion-list *ngIf="!hasError['selectAreaFirst'] && isDropDownShown('area')" text-center class="location-block-list">
-                  <ion-item *ngIf="!(widget.model?.areas?.length && selectedArea)" >
+                <ion-list *ngIf="!hasError['selectAreaFirst'] && isDropDownShown('area')" text-center
+                          class="location-block-list">
+                  <ion-item *ngIf="!(widget.model?.areas?.length && selectedArea)">
                     <ion-spinner style="margin: auto" color="success" name="bubbles"></ion-spinner>
                   </ion-item>
-                  <ion-item *ngIf="widget.model.areas?.length && selectedArea" >
+                  <ion-item *ngIf="widget.model.areas?.length && selectedArea">
                     <div>{{'home_page.no_store_available' | translate}}</div>
                   </ion-item>
                 </ion-list>
-                <ion-list *ngIf="isDropDownShown('area') && widget.model.areas?.length" class="location-block-list citydrp">
+                <ion-list *ngIf="isDropDownShown('area') && widget.model.areas?.length"
+                          class="location-block-list citydrp">
                   <ion-item (click)="selectArea(area)" no-padding *ngFor="let area of widget.model.areas">
                     <span>{{ getAreaDisplayName(area) }}</span>
                   </ion-item>
@@ -190,7 +193,8 @@
         [action]="locationsWidgetActionGeometry"
         [instanceId]="1">
         <ng-template let-widget="widget">
-          <div class="find-hut" flex-center (click)="locateMe(widget.model.geometry.latitude, widget.model.geometry.longitude)">
+          <div class="find-hut" flex-center
+               (click)="locateMe(widget.model.geometry.latitude, widget.model.geometry.longitude)">
             <span> {{'home_page.find_my_nearest_hut' | translate}}</span>
             <strong>{{'home_page.language' | translate}}</strong>
           </div>
