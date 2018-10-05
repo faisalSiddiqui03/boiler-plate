@@ -11,7 +11,7 @@ import {
   OnWidgetActionsLifecyle,
   ConfigService,
 } from '@capillarytech/pwa-framework';
-import {   
+import {
   IncrementValidator,
   DecrementValidator,
   AttributeName,
@@ -36,6 +36,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
 
   @Input() productId;
   @Input() productFromDeal;
+  @Input() cartItem;
 
   loaded = false;
   productWidgetExecutor = new EventEmitter();
@@ -77,7 +78,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     this.minToppingLimit = this.config.getConfig()['minToppingLimit'];
   }
 
-  widgetLoadingStarted(name, data){
+  widgetLoadingStarted(name, data) {
     console.log('Widget loading started' + name, data);
   }
 
@@ -95,16 +96,22 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   widgetActionSuccess(name: string, data: any) {
-    switch(name) {
+    this.loaderService.stopLoading();
+    switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
-        this.loaderService.stopLoading();
         this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 1000, 'top');
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE:
         this.updatingPrice = false;
         console.log('Price for current combination : ', data);
+        break;
+      case ProductDetailsWidgetActions.ATION_EDIT_CART:
+        this.alertService.presentToast(this.clientProduct.title + ' ' +
+          this.translate.instant('product_details.added_to_cart'), 1000, 'top');
+        this.modalController.dismiss(true);
+        // this.router.navigateByUrl('/products?category=' + this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);
         break;
     }
   }
@@ -129,10 +136,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     return item.isSelected;
   }
 
-  addItem(serverItem){
+  addItem(serverItem) {
     const item = this.clientProduct.bundleItems.get(serverItem.id);
     const isAdded = item.increment();
-    if(!isAdded){
+    if (!isAdded) {
       this.alertService.presentToast(this.translate.instant('pizza.add_topping_error'), 1000, 'top');
       return;
     }
@@ -144,13 +151,13 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   removeItem(serverItem, isExtra = false) {
     const item = this.clientProduct.bundleItems.get(serverItem.id);
     let isRemoved = true;
-    if(isExtra){
+    if (isExtra) {
       isRemoved = item.decrement();
-    } 
-    if(!isExtra){
+    }
+    if (!isExtra) {
       isRemoved = item.remove();
     }
-    if(!isRemoved){
+    if (!isRemoved) {
       this.alertService.presentToast(this.translate.instant('pizza.remove_topping_error'), 1000, 'top');
       return;
     }
@@ -159,53 +166,59 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     this.getPrice();
   }
 
-  isExtraItem(serverItem){
+  isExtraItem(serverItem) {
     const item = this.clientProduct.bundleItems.get(serverItem.id);
     return item.count === 2;
   }
 
-  getItemType(item){
+  getItemType(item) {
     return BundleItem.getAttributeValueByName(item, AttributeName.TYPE);
   }
 
-  getItemprice(serverItem){
+  getItemprice(serverItem) {
     const item = this.clientProduct.bundleItems.get(serverItem.id);
     return item.price;
   }
 
   getProductImageUrl(product) {
-    if(!product.multipleImages || !(product.multipleImages.length > 0)) {
+    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
       return this.getUrl(product.image);
     } else {
       let lastItem = product.multipleImages.slice().pop();
-      if(!lastItem.image) {
+      if (!lastItem.image) {
         return this.getUrl(product.image);
       }
       return this.getUrl(lastItem.image);
     }
   }
 
-  getUrl(url: string){
+  getUrl(url: string) {
     return `https://${url}`;
   }
 
-  toggleToppingsView(){
+  toggleToppingsView() {
     this.showToppingsView = !this.showToppingsView;
-  } 
+  }
 
   addToCart() {
-    if(this.productFromDeal){
+    if (this.productFromDeal) {
       this.modalController.dismiss(this.clientProduct);
       return;
     }
     this.loaderService.startLoading();
+    if(this.cartItem){
+      this.productWidgetAction.emit(
+        new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
+      );
+      return;
+    }
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
     );
   }
 
   getPrice() {
-    if(this.productFromDeal){
+    if (this.productFromDeal) {
       return;
     }
     this.updatingPrice = true;
@@ -214,7 +227,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     );
   }
 
-  isSizeAvailabel(sizePropertyValueId){
+  isSizeAvailabel(sizePropertyValueId) {
     let sizeAvailable = false;
     // variantProperties[0] is used, as variant properties of 0 is always crust properties
     // this is set from CP only once and never changes
@@ -224,21 +237,21 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     return sizeAvailable;
   }
 
-  getSizeCrustCombinationPrice(crustPropertyValueId, sizeProeprtyValueId){
+  getSizeCrustCombinationPrice(crustPropertyValueId, sizeProeprtyValueId) {
     let variantPrice = 0;
-    if(!this.productFromDeal){
+    if (!this.productFromDeal) {
       this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-        if(key === `${crustPropertyValueId}:${sizeProeprtyValueId}`){
+        if (key === `${crustPropertyValueId}:${sizeProeprtyValueId}`) {
           variantPrice = variant.webPrice;
           return;
         }
       });
     } else {
-      this.productFromDeal.variantProducts.map((variantFromDeal) => { 
+      this.productFromDeal.variantProducts.map((variantFromDeal) => {
         this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-          if(variant.id === variantFromDeal.id 
+          if (variant.id === variantFromDeal.id
             && key === `${crustPropertyValueId}:${sizeProeprtyValueId}`
-            && !variantFromDeal.isIncludedInBundleprice){
+            && !variantFromDeal.isIncludedInBundleprice) {
 
             variantPrice = variantFromDeal.webPrice;
             return;
@@ -249,19 +262,19 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     return variantPrice;
   }
 
-  getSizeCrustCombinationAvailability(crustPropertyValueId, sizeProeprtyValueId){
+  getSizeCrustCombinationAvailability(crustPropertyValueId, sizeProeprtyValueId) {
     let isAvailabel = false;
-    if(!this.productFromDeal){
+    if (!this.productFromDeal) {
       this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-        if(key === `${crustPropertyValueId}:${sizeProeprtyValueId}`){
+        if (key === `${crustPropertyValueId}:${sizeProeprtyValueId}`) {
           isAvailabel = true;
           return;
         }
       });
     } else {
-      this.productFromDeal.variantProducts.map((variantFromDeal) => { 
+      this.productFromDeal.variantProducts.map((variantFromDeal) => {
         this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-          if(variant.id === variantFromDeal.id && key === `${crustPropertyValueId}:${sizeProeprtyValueId}`){
+          if (variant.id === variantFromDeal.id && key === `${crustPropertyValueId}:${sizeProeprtyValueId}`) {
             isAvailabel = true;
             return;
           }
@@ -271,14 +284,14 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     return isAvailabel;
   }
 
-  getSelectedSizeAndCrust(){
+  getSelectedSizeAndCrust() {
     let sizeAndCrust = [];
     const selectedValueIds = [];
     this.clientProduct.selectedPropertyValueIdMap.forEach((valueId, propertyId) => {
       selectedValueIds.push(valueId);
     });
     this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-      if(key === selectedValueIds.join(':')){
+      if (key === selectedValueIds.join(':')) {
         sizeAndCrust = variant.propertyValues.map((propval) => { return propval.name; });
         return;
       }
@@ -296,13 +309,14 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     });
     this.setToppingCountValidators();
     this.setToppingStatus();
+    if (this.cartItem) this.showToppingsView = true;
   };
 
   setToppingCountValidators() {
-    try{
+    try {
       this.toppings.map((item) => {
         this.clientProduct.bundleItems.forEach((clientItem, number) => {
-          if(item.id === clientItem.id && this.getItemType(item) === AttributeValue.TOPPING){
+          if (item.id === clientItem.id && this.getItemType(item) === AttributeValue.TOPPING) {
             const decremnetValidator = new DecrementValidator(this.minToppingLimit);
             const incrementValidator = new IncrementValidator(this.maxToppingLimit);
             clientItem.validators.push(decremnetValidator);
@@ -310,31 +324,31 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
           }
         });
       });
-    } catch(err) {
+    } catch (err) {
       console.error('Error setting validators');
     }
   }
 
-  setToppingStatus(){
+  setToppingStatus() {
     this.defaultToppings = [];
     this.addedToppings = [];
     this.removedToppings = [];
     this.toppings.map((item) => {
       this.clientProduct.bundleItems.forEach((clientItem, number) => {
-        if(item.id === clientItem.id){
-          if(item.isDefault && clientItem.isSelected && clientItem.count === 1) 
+        if (item.id === clientItem.id) {
+          if (item.isDefault && clientItem.isSelected && clientItem.count === 1)
             this.defaultToppings.push(item.title);
 
-          if(item.isDefault && clientItem.isSelected && clientItem.count === 2) 
+          if (item.isDefault && clientItem.isSelected && clientItem.count === 2)
             this.addedToppings.push(item.title + '(' + this.translate.instant('pizza.double') + ')');
 
-          if(!item.isDefault && clientItem.isSelected && clientItem.count === 1) 
+          if (!item.isDefault && clientItem.isSelected && clientItem.count === 1)
             this.addedToppings.push(item.title);
 
-          if(!item.isDefault && clientItem.isSelected && clientItem.count === 2)
+          if (!item.isDefault && clientItem.isSelected && clientItem.count === 2)
             this.addedToppings.push(item.title + '(' + this.translate.instant('pizza.double') + ')');
 
-          if(item.isDefault && !clientItem.isSelected) 
+          if (item.isDefault && !clientItem.isSelected)
             this.removedToppings.push(item.title);
         }
       });
@@ -342,7 +356,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   goBack() {
-    if(!this.productFromDeal){
+    if (!this.productFromDeal) {
       this.location.back();
       return;
     }
