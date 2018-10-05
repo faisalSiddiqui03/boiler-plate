@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import {
@@ -10,8 +10,7 @@ import {
   Action,
   ProductShowcaseWidgetActions,
   ProductType,
-  DeliveryModes,
-  DeliverySlotsWidget
+  DeliverySlot
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
@@ -29,7 +28,7 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @pwaLifeCycle()
 @pageView()
-export class CategoryListingPage extends BaseComponent implements OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class CategoryListingPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   categoryId: string = null;
   categoryName: string;
   productShowcaseWidgetAction = new EventEmitter();
@@ -40,6 +39,7 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
   navigations = [];
   subscriber = null;
   dealCategoryId: number;
+  asapDeliverySlot = DeliverySlot.getAsap();
 
   constructor(
     private route: ActivatedRoute,
@@ -67,9 +67,13 @@ export class CategoryListingPage extends BaseComponent implements OnWidgetLifecy
 
   ionViewWillEnter() {
 
-    if (this.utilService.isEmpty(this.getDeliverySlot())) {
-      this.fetchDeliverySlots = true;
-      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    if (this.utilService.isEmpty(this.getDeliverySlotPromise())) {
+      if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
+        this.fetchDeliverySlots = true;
+        this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+      } else {
+        this.setDeliverySlot(this.asapDeliverySlot);
+      }
     }
 
     if (this.categoryId !== null) {
