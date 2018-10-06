@@ -48,7 +48,7 @@
             <ion-item no-padding *ngFor="let order of widget.model; let i = index">
               <ion-label no-margin>
                 <h2>Order # {{order.id}}
-                    <span class="order-date"><i>(</i>{{order.orderDate.demanded}}<i>)</i></span>
+                    <span class="order-date"><i>(</i>{{order.orderDate.locale}}<i>)</i></span>
                 </h2>
                 <div class="view-order-details" *ngIf="isShowProducts(i)">
                   <ion-grid no-padding>
