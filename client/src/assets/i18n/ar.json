@@ -316,7 +316,7 @@
 		"my_profile": "ملفي الشخصي",
 		"order_history": "تاريخ طلباتي",
 		"saved_address": "عنواني المحفوظ",
-		"successfully_loged_out": ""
+		"successfully_loged_out": "Logged out successfully!"
 	},
 	"nutrition_page": {
 		"nutition_content_bold01": "الوجبات المتوازنة متوفرة في قائمة الطعام لدينا أيضاً",
@@ -502,7 +502,8 @@
 		"password_placeholder": "أدخل كلمة المرور",
 		"password_required": "نحتاج كلمة مرورك. كن مطمئناً سرك في بئرنا العميق",
 		"register": "تسجيل جديد",
-		"remember_me": "تذكرنى",
+    "remember_me": "تذكرنى",
+    "success_sign_in" : "Successfully signed in",
 		"sign_in": "تسجيل دخول",
 		"signin_google": "تسجيل دخول قوقل"
 	},

@@ -114,7 +114,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   handleUseridPasswordSigninResponse(data) {
     if (data.message === "Successful") {
       this.isLoginSuccessful = true;
-      this.alertService.presentToast('Successfully signed in', 500, top);
+      this.alertService.presentToastByTranslationKey('sign_in_page.success_sign_in', 500, top);
       this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
     } else {
       this.isLoginSuccessful = false;

@@ -503,7 +503,8 @@
 		"password_required": "We need your password: We won’t tell anyone. Promise.",
 		"register": "Register",
 		"remember_me": "Remember me",
-		"sign_in": "Sign In",
+    "sign_in": "Sign In",
+    "success_sign_in" : "Successfully signed in",
 		"signin_google": "Sign in with Google"
 	},
 	"sign_up_page": {
