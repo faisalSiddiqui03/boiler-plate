@@ -78,7 +78,7 @@
         <div class="container">
           <ul no-margin no-padding>
             <li *ngFor="let item of navigations;" text-center
-                [class.selected]="item.categoryId === categoryId"
+                [class.selected]="selectedCategoryId ? item.categoryId === selectedCategoryId : item.categoryId === categoryId"
                 (click)="switchCategoryPage(item.name, item.categoryId)">{{item.name}}
             </li>
           </ul>
@@ -92,7 +92,7 @@
 
         <div id="showcase" class="menu-container container" flex>
           <div *ngFor="let item of navigations;" text-center
-               [class.selected]="item.categoryId === categoryId"
+               [class.selected]="selectedCategoryId ? item.categoryId === selectedCategoryId : item.categoryId === categoryId"
                (click)="switchCategories(item.name, item.categoryId)"
                class="single-menu-item"
           >{{item.name}}

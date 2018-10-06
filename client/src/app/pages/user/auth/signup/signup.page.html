@@ -68,10 +68,9 @@
                 <sup>*</sup>
               </ion-label>
               <div class="form-input">
-                <ion-input [type]="isPasswordFiled ? 'password' : 'text'" [inputmode]="isPasswordFiled ? 'password' : 'text'" no-border placeholder="{{ 'sign_in_page.password_placeholder' | translate }}"
+                <ion-input [type]="'password'" [inputmode]="'password'" no-border placeholder="{{ 'sign_in_page.password_placeholder' | translate }}"
                   formControlName="password" id="password"></ion-input>
                 <div class="icons">
-                  <ion-icon (click)="changeTextPassword($event)" [name]="eye" margin-end-half></ion-icon>
                   <ion-icon name="alert"></ion-icon>
                 </div>
               </div>
@@ -85,7 +84,7 @@
                 <sup>*</sup>
               </ion-label>
               <div class="form-input">
-                <ion-input id="confirmPassword" placeholder="{{'sign_up_page.confirm_password_placeholder' | translate}}" inputmode="password"
+                <ion-input id="confirmPassword" placeholder="{{'sign_up_page.confirm_password_placeholder' | translate}}" inputmode="password" type="password"
                   formControlName="confirmPassword"></ion-input>
                 <div class="icons">
                   <ion-icon name="alert"></ion-icon>

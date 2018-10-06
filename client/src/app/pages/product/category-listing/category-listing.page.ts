@@ -56,7 +56,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     this.translate.use(this.utilService.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
     this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
-    console.log(this.location);
   }
 
   ngOnInit() {
@@ -76,11 +75,21 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       }
     }
 
-    if (this.categoryId !== null) {
-      return;
-    }
-    let data = this.route.snapshot.queryParams;
-    this.updateCategories(data);
+    // if (this.categoryId !== null) {
+    //   return;
+    // }
+    // const data = this.route.snapshot.queryParams;
+    const urlData = this.location.path(false);
+    const params = urlData.split('?')[1].split('&');
+    const dataFromParams = {
+      id: '',
+      category: ''
+    };
+    params.forEach((param) => {
+      const paramValues = param.split('=');
+        dataFromParams[paramValues[0]] = paramValues[1]
+    });
+    this.updateCategories(dataFromParams);
   }
 
   updateCategories(data) {

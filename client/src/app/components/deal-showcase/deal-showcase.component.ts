@@ -45,9 +45,8 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   showAdd: boolean;
   inputType = BundleGroupInputType;
   disableAddToCart: boolean;
-
   currencyCode: string;
-
+  dealsCategoryId: string;
   constructor(
     private alertService: AlertService,
     private translate: TranslateService,
@@ -61,7 +60,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
     super();
     this.translate.use(this.utilService.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
-
+    this.dealsCategoryId = this.config.getConfig()['dealCategoryId'];
   }
 
   ngOnInit() {
@@ -108,10 +107,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
 
   isCustomizable(item) {
     const customizable = BundleItem.getAttributeValueByName(item, AttributeName.CUSTOMIZABLE);
-    if (customizable === AttributeValue.CUSTOMIZABLE) {
-      return true;
-    }
-    return false;
+    return customizable === AttributeValue.CUSTOMIZABLE
   }
 
   addProductToDeal(itemToAdd) {

@@ -46,7 +46,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   noOfSelectedGroups: number;
   showAddToCart: boolean;
   titleValue: string = '';
-
+  dealCategoryId: string;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -61,6 +61,7 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     super();
     this.translate.use(this.utilService.getLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
+    this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
   }
 
   ngOnInit() {
