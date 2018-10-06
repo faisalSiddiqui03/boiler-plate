@@ -70,10 +70,10 @@ export class CategoryNavigationComponent extends BaseComponent implements OnInit
   navigateToCategory(navigationItem) {
     if (navigationItem === '0') {
       this.activeCategoryId = '0';
-      this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
+      this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
     } else {
       this.activeCategoryId = navigationItem.categoryId;
-      this.router.navigateByUrl(this.utilService.getLanguageCode() + '/category/' + encodeURI(navigationItem.name) + '/' + navigationItem.categoryId);
+      this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/category/' + encodeURI(navigationItem.name) + '/' + navigationItem.categoryId));
     }
   }
 

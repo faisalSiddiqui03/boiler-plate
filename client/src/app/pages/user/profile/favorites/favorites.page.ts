@@ -47,7 +47,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   getProductImageUrl(product) {

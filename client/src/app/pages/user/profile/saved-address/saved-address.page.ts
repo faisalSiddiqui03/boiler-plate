@@ -64,7 +64,7 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   dismissAddressModal(isTrue) {

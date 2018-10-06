@@ -68,8 +68,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   goToPage(pageName) {
-    const page = this.utilService.getLanguageCode() + '/' + pageName;
-    this.router.navigateByUrl(page);
+    //const page = this.utilService.getLanguageCode() + '/' + pageName;
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   async switchLanguage() {
@@ -122,7 +122,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     switch (name) {
       case LogoutWidgetActions.ACTION_LOGOUT:
         const coupon_remove_success = await this.translate.instant('my_account_page.successfully_loged_out');
-        this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
+        this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
         this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
         break;
     }
@@ -136,14 +136,14 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
 
   widgetLoadingSuccess(name: string, data: any): any {
     switch (name) {
-      case 'NAVIGATIONS' :
+      case 'NAVIGATIONS':
         this.navigations = data.items;
         break;
     }
   }
 
   async openLocationModal() {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
   }
 
   logout() {
@@ -158,7 +158,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
 
   switchCategoryPage(category, categoryId) {
     if (this.isModalActive) this.modalController.dismiss();
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + `/products?category=${category}&id=${categoryId}`);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=${category}&id=${categoryId}'));
   }
 
 }

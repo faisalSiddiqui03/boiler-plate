@@ -70,7 +70,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     if (this.utilService.isEmpty(this.getDeliverySlotPromise())) {
       if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
         this.fetchDeliverySlots = true;
-        this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+        this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
       } else {
         this.setDeliverySlot(this.asapDeliverySlot);
       }
@@ -126,10 +126,10 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   openProductDetails(product) {
     if (product.type === ProductType.Bundle) {
-      this.router.navigateByUrl(this.utilService.getLanguageCode() + '/pizza/' + product.title + '/' + product.id);
+      this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/pizza/' + product.title + '/' + product.id));
       return;
     }
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/product/' + this.categoryName + '/' + product.title + '/' + product.id);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/' + this.categoryName + '/' + product.title + '/' + product.id));
 
     // Use following, when catlog code is proper from api response
     // if (product.type === ProductType.Bundle) {
@@ -142,7 +142,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   openDeal(product) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/deal/' + product.title + '/' + product.id);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/deal/' + product.title + '/' + product.id));
   }
 
   updateFavorites(isFavorite, product) {
@@ -161,7 +161,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   widgetLoadingFailed(name: string, data: any): any {
     switch (name) {
-      case 'NAVIGATIONS' :
+      case 'NAVIGATIONS':
         break;
       case 'DELIVERYSLOTS':
         this.loaderService.stopLoading();
@@ -197,7 +197,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   goToCart() {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/cart');
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/cart'));
   }
 
   switchCategories(data) {

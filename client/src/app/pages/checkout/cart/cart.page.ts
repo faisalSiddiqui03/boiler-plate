@@ -73,7 +73,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   applyCoupon() {
     if (this.couponCode) {
-      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
       let action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
     } else {
@@ -121,7 +121,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     }
 
     let cartUpdate = await this.translateService.instant('cart.updating_quantity');
-    this.loaderService.startLoading(cartUpdate, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    this.loaderService.startLoading(cartUpdate, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updatingPrice = true;
     let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
@@ -130,7 +130,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   async removeCartItem(item) {
     item.quantity = 0;
     let cartRemove = await this.translateService.instant('cart.remove_item');
-    this.loaderService.startLoading(cartRemove, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    this.loaderService.startLoading(cartRemove, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updatingPrice = true;
     let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
@@ -142,7 +142,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       case ProductType.Product:
         if (!cartItem.variantProductId) {
           const itemNotEditable = await this.translateService.instant('cart.not_editable');
-          this.alertService.presentToast(itemNotEditable, 1000, 'top'); 
+          this.alertService.presentToast(itemNotEditable, 1000, 'top');
           return;
         }
         component = ProductDetailsComponent;
@@ -171,13 +171,13 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   async clearCart() {
     let cartClear = await this.translateService.instant('cart.cart_clear');
-    this.loaderService.startLoading(cartClear, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    this.loaderService.startLoading(cartClear, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     let action = new Action(CartWidgetActions.ACTION_CLEAR_CART);
     this.cartWidgetAction.emit(action);
   }
 
   openProduct(product) {
-    let navigationUrl = this.utilService.getLanguageCode() + 'product/' + encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' + product.productId;
+    let navigationUrl = this.getNavigationUrlWithLangSupport('product/' + encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' + product.productId);
     console.log('Nav URL', navigationUrl);
     this.router.navigateByUrl(navigationUrl);
   }
@@ -221,7 +221,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         const cartClear = await
           this.translateService.instant('cart.cart_clear');
         this.alertService.presentToast(cartClear, 3000, 'bottom');
-        this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
+        this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
         break;
     }
   }
@@ -261,10 +261,10 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   goToDeals() {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products/listing/(0:0)?category=deals&id=CU00215646');
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products/listing/(0:0)?category=deals&id=CU00215646'));
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 }

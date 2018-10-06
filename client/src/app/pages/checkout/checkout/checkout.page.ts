@@ -138,7 +138,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   goToPage(pageName, navParams = {}) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName, navParams);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName), navParams);
   }
 
   presentSlotModal() {
@@ -242,7 +242,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   async placeOrder() {
-    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     const obj: CheckoutDetails = new CheckoutDetails();
 
     obj.paymentDetails = this.objPayment;

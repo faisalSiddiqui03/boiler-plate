@@ -29,10 +29,10 @@ export class FooterComponent extends BaseComponent implements OnInit {
   }
 
   navigatePage(page) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + page);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(page));
   }
 
   navigateToCategory(item) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=' + item.name + '&id=' + item.categoryId);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=' + item.name + '&id=' + item.categoryId));
   }
 }

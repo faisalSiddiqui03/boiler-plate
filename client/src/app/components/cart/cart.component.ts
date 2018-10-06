@@ -51,7 +51,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
 
   applyCoupon() {
     if (this.couponCode) {
-      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
       let action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
     } else {
@@ -75,7 +75,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
     }
 
     let cartUpdate = await this.translateService.instant('cart.updating_quantity');
-    this.loaderService.startLoading(cartUpdate, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    this.loaderService.startLoading(cartUpdate, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
   }
@@ -83,20 +83,20 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   async removeCartItem(item) {
     item.quantity = 0;
     let cartRemove = await this.translateService.instant('cart.remove_item');
-    this.loaderService.startLoading(cartRemove, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    this.loaderService.startLoading(cartRemove, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
   }
 
   async clearCart() {
     let cartClear = await this.translateService.instant('cart.cart_clear');
-    this.loaderService.startLoading(cartClear, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    this.loaderService.startLoading(cartClear, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     let action = new Action(CartWidgetActions.ACTION_CLEAR_CART);
     this.cartWidgetAction.emit(action);
   }
 
   openProduct(product) {
-    let navigationUrl = this.utilService.getLanguageCode() + '/product/' + encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' + product.productId;
+    let navigationUrl = this.getNavigationUrlWithLangSupport('/product/' + encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' + product.productId);
     console.log('Nav URL', navigationUrl);
     this.router.navigateByUrl(navigationUrl);
   }
@@ -179,11 +179,11 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   goToDeals() {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/product/deals/CU00215646');
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/deals/CU00215646'));
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/' + pageName));
   }
 
 }

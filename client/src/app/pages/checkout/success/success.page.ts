@@ -48,7 +48,7 @@ export class SuccessPage extends BaseComponent implements OnInit {
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   widgetActionFailed(name: string, data: any): any {

@@ -25,12 +25,16 @@ export class BaseComponent {
     return this.globalSharedService.getCurrentLanguage();
   }
 
+  getCurrentLanguageCode() {
+    return this.globalSharedService.getCurrentLanguage().code;
+  }
+
   setCurrentLanguage(language) {
     return this.globalSharedService.updateLanguage(language);
   }
 
   setCurrentStore(store) {
-      return this.globalSharedService.saveSelectedStore(store);
+    return this.globalSharedService.saveSelectedStore(store);
   }
 
   getFulfilmentMode() {
@@ -65,4 +69,14 @@ export class BaseComponent {
     return this.globalSharedService.getFulfilmentMode() ? this.globalSharedService.getFulfilmentMode().mode : null;
   }
 
+  getNavigationUrlWithLangSupport(url: string): string {
+    let navUrl: string = '';
+    if (url.startsWith('/')) {
+      navUrl = this.getCurrentLanguageCode() + url;
+    } else {
+      navUrl = this.getCurrentLanguageCode() + '/' + url;
+    }
+
+    return navUrl;
+  }
 }

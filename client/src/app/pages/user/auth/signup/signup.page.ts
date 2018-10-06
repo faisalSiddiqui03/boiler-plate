@@ -87,14 +87,14 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
   handleSignUpResponse(data) {
     if (data.message === "Successful") {
       this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful'), 500, top);
-      this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
+      this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
     } else {
       this.alertService.presentToast(data.message, 500, top);
     }
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   widgetActionFailed(name: string, data: any): any {
