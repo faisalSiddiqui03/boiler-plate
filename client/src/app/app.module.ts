@@ -39,7 +39,21 @@ import { SearchLocationPageModule } from './pages/user/profile/search-location/s
 import { RoutingState } from './routing-state';
 import { UtilService } from './helpers/utils';
 import { Location } from '@angular/common';
-import languages from './languages';
+
+export const languages = [
+  {
+    name: 'English',
+    code: 'en',
+    isDefault: false,
+    alignment: 'ltr'
+  },
+  {
+    name: 'Arabic',
+    code: 'ar',
+    isDefault: true,
+    alignment: 'rtl'
+  }
+];
 
 export function getAppConfig(): Object {
   return appConfig || {};
