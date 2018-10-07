@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
-import languages from './languages';
+// import languages from './languages';
 
 
-let defaultLang = '';
-languages.forEach((lang) => {
-  if (lang.isDefault) {
-    defaultLang = lang.code;
-  }
-})
+let defaultLang = 'ar';
+// languages.forEach((lang) => {
+//   if (lang.isDefault) {
+//     defaultLang = lang.code;
+//   }
+// })
 
 const routes: Routes = [
   { path: '', redirectTo: defaultLang + '/home', pathMatch: 'full' },
