@@ -19,6 +19,7 @@ import { ProductType } from '@capillarytech/pwa-framework';
 import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
 import { ModalController } from '@ionic/angular';
 import { PizzaComponent } from '../../../components/pizza/pizza.component';
+import { DealComponent } from '../../../components/deal/deal.component';
 
 @Component({
   selector: 'app-cart-page',
@@ -151,6 +152,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         component = PizzaComponent;
         break;
       case ProductType.Deal:
+        component = DealComponent;
         break;
     }
 

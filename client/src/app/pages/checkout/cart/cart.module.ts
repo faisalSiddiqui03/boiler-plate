@@ -13,6 +13,8 @@ import { ProductDetailsComponent } from '../../../components/product-details/pro
 import { ProductDetailsComponentModule } from '../../../components/product-details/product-details.module';
 import { PizzaComponentModule } from '../../../components/pizza/pizza.module';
 import { PizzaComponent } from '../../../components/pizza/pizza.component';
+import { DealComponentModule } from '../../../components/deal/deal.module';
+import { DealComponent } from '../../../components/deal/deal.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,7 @@ const routes: Routes = [
     DebounceClickDirective,
     ProductDetailsComponentModule,
     PizzaComponentModule,
+    DealComponentModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -51,6 +54,7 @@ const routes: Routes = [
   entryComponents: [
     ProductDetailsComponent,
     PizzaComponent,
+    DealComponent,
   ]
 })
 export class CartPageModule {}
