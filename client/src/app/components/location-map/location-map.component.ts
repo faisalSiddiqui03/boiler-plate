@@ -66,7 +66,7 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
     }
   }
 
-  async openLocationModal(){
+  async openLocationModal() {
     const modal = await this.modalController.create({
       component: SearchLocationPage
     });

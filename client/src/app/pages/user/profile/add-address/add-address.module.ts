@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../../translation.loader';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 import { LocationMapModule } from '../../../../components/location-map/location-map.module';
-
+import { UserAddressWidgetModule } from '@capillarytech/pwa-framework';
 
 const routes: Routes = [
   {
@@ -28,8 +28,9 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     HeaderModule,
-    SubHeaderModule, 
+    SubHeaderModule,
     LocationMapModule,
+    UserAddressWidgetModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {
