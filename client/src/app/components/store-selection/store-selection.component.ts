@@ -228,28 +228,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     return this.dropdownViewStatus.get(name);
   }
 
-  // changeOrderMode(mode, previousMode) {
-  //   this.toggleDropDown('area', true, false);
-  //   this.toggleDropDown('city', true, false);
-  //   this.citySelectionHistory[previousMode] = {
-  //     selectedCity: this.selectedCity || '',
-  //     selectedCityCode: this.selectedCityCode || '',
-  //     selectedArea: this.selectedArea || '',
-  //     selectedAreaCode: this.selectedAreaCode || ''
-  //   };
-  //
-  //   // TODO:: add alert-controller to confirm before emptying cart
-  //   if (mode !== previousMode && !this.isCartEmpty()) {
-  //     this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
-  //   }
-  //   this.fulfilmentModeWidgetAction.emit(new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, mode));
-  //   const selected = this.citySelectionHistory[mode] || {};
-  //   this.selectedCity = selected.selectedCity || '';
-  //   this.selectedCityCode = selected.selectedCityCode || '';
-  //   this.selectedArea = selected.selectedArea || '';
-  //   this.selectedAreaCode = selected.selectedAreaCode || '';
-  // }
-
   isStoreSelected() {
     return this.getCurrentStore() && !this.getCurrentStore().isDefaultLocation && !this.changeRequested;
   }
@@ -372,7 +350,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     this.hasError.selectAreaFirst = !this.selectedCity;
   }
 
-  isCartEmpty() {
+  isCartNotEmpty() {
     return this.getCart() && this.getCart().items.length;
   }
 
@@ -387,7 +365,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   changeOrderMode(mode, previousMode, force: boolean = false) {
     // TODO:: add alert-controller to confirm before emptying cart
-    if (mode !== previousMode && !this.isCartEmpty()) {
+    if (mode !== previousMode && this.isCartNotEmpty()) {
       if (!force) {
         this.clearCartPopup = true;
         return;
