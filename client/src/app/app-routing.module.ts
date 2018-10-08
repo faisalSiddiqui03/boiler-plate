@@ -47,8 +47,8 @@ const routes: Routes = [
   { path: 'saved-address', redirectTo: defaultLang + '/saved-address' },
   { path: ':lang/saved-address', loadChildren: './pages/user/profile/saved-address/saved-address.module#SavedAddressPageModule', canActivate: [AuthGuard] },
 
-  { path: 'add-address', redirectTo: defaultLang + '/add-address' },
-  { path: ':lang/add-address', loadChildren: './pages/user/profile/add-address/add-address.module#AddAddressPageModule', canActivate: [AuthGuard] },
+  { path: 'add-address/:addressId', redirectTo: defaultLang + '/add-address' },
+  { path: ':lang/add-address/:addressId', loadChildren: './pages/user/profile/add-address/add-address.module#AddAddressPageModule', canActivate: [AuthGuard] },
 
   { path: 'favorites', redirectTo: defaultLang + '/favorites' },
   { path: ':lang/favorites', loadChildren: './pages/user/profile/favorites/favorites.module#FavoritesPageModule', canActivate: [AuthGuard] },
