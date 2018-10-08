@@ -8,6 +8,7 @@ import {
   OnWidgetLifecyle,
   LifeCycle,
   OrderWidget,
+  CapRouterService,
   // OrderWidgetActions
 } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
@@ -36,7 +37,8 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
 
   constructor(private router: Router,
     private utilService: UtilService,
-    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
+    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService,
+    private capRouter: CapRouterService) {
     super();
 
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
@@ -96,7 +98,8 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   getOrderDetails(order) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('order-details/' + order.id));
+    this.capRouter.routeByUrlWithLanguage('order-details/' + order.id);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('order-details/' + order.id));
   }
 
   handleWidgetLifecycle(x: LifeCycle) {

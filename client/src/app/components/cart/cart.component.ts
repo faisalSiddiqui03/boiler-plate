@@ -7,7 +7,8 @@ import {
   ConfigService,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
-  pwaLifeCycle, WidgetNames
+  pwaLifeCycle, WidgetNames,
+  CapRouterService,
 } from '@capillarytech/pwa-framework';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -38,7 +39,8 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
     private loaderService: LoaderService,
     private config: ConfigService,
     private location: Location,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.translateService.use(this.getCurrentLanguageCode());
@@ -98,7 +100,8 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   openProduct(product) {
     let navigationUrl = this.getNavigationUrlWithLangSupport('/product/' + encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' + product.productId);
     console.log('Nav URL', navigationUrl);
-    this.router.navigateByUrl(navigationUrl);
+    this.capRouter.routeByUrlWithLanguage(navigationUrl);
+    // this.router.navigateByUrl(navigationUrl);
   }
 
   widgetActionFailed(name: string, data: any): any {
@@ -139,7 +142,8 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
         const cartClear = await
           this.translateService.instant('cart.cart_clear');
         this.alertService.presentToast(cartClear, 3000, 'bottom');
-        this.router.navigate(['/home']);
+        this.capRouter.routeByUrlWithLanguage('/home');
+        // this.router.navigate(['/home']);
         break;
     }
   }
@@ -179,11 +183,13 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   goToDeals() {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/deals/CU00215646'));
+    this.capRouter.routeByUrlWithLanguage('/product/deals/CU00215646');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/deals/CU00215646'));
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/' + pageName));
+    this.capRouter.routeByUrlWithLanguage('/' + pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/' + pageName));
   }
 
 }

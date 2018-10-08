@@ -7,7 +7,8 @@ import {
   WidgetNames,
   Action,
   CartWidgetActions,
-  ConfigService
+  ConfigService,
+  CapRouterService,
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../base/base-component';
 import { TranslateService } from "@ngx-translate/core";
@@ -54,6 +55,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private utilService: UtilService,
     private actRoute: ActivatedRoute,
     private modalController: ModalController,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.translateService.use(this.getCurrentLanguageCode());
@@ -177,7 +179,8 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   openProduct(product) {
     let navigationUrl = this.getNavigationUrlWithLangSupport('product/' + encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' + product.productId);
     console.log('Nav URL', navigationUrl);
-    this.router.navigateByUrl(navigationUrl);
+    this.capRouter.routeByUrlWithLanguage(navigationUrl);
+    // this.router.navigateByUrl(navigationUrl);
   }
 
   widgetActionFailed(name: string, data: any): any {
@@ -219,7 +222,8 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         const cartClear = await
           this.translateService.instant('cart.cart_clear');
         this.alertService.presentToast(cartClear, 3000, 'bottom');
-        this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
+        this.capRouter.routeByUrlWithLanguage('/home');
+        // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
         break;
     }
   }
@@ -259,10 +263,12 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   goToDeals() {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products/listing/(0:0)?category=deals&id=CU00215646'));
+    this.capRouter.routeByUrlWithLanguage('/products/listing/(0:0)?category=deals&id=CU00215646');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products/listing/(0:0)?category=deals&id=CU00215646'));
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 }

@@ -9,7 +9,7 @@ import {
   pageView,
   GoogleSignInWidgetActions,
   ConfigService,
-  OnWidgetActionsLifecyle, OnWidgetLifecyle
+  OnWidgetActionsLifecyle, OnWidgetLifecyle, CapRouterService
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../../base/base-component';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -50,7 +50,8 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     private translate: TranslateService,
     private config: ConfigService,
     private utilService: UtilService,
-    private location: Location
+    private location: Location,
+    private capRouter: CapRouterService,
   ) {
     super();
 
@@ -99,19 +100,22 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   handleGoogleSignInResponse(data) {
     this.alertService.presentToast(data.isSuccessful ? 'Successfully signed in' : data.message, 500, top);
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
+    this.capRouter.routeByUrlWithLanguage('/home');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
   }
 
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   handleUseridPasswordSigninResponse(data) {
     if (data.message === "Successful") {
       this.isLoginSuccessful = true;
       this.alertService.presentToastByTranslationKey('sign_in_page.success_sign_in', 500, top);
-      this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
+      this.capRouter.routeByUrlWithLanguage('/home');
+      // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
     } else {
       this.isLoginSuccessful = false;
       this.alertService.presentToast(data.message, 500, top);

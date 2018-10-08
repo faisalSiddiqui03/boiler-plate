@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilService } from '../../../helpers/utils';
-import { StoreLocatorWidgetActions, OnWidgetLifecyle, OnWidgetActionsLifecyle } from '@capillarytech/pwa-framework';
+import { StoreLocatorWidgetActions, OnWidgetLifecyle, OnWidgetActionsLifecyle, CapRouterService } from '@capillarytech/pwa-framework';
 import { Location } from '@angular/common';
 
 @Component({
@@ -34,7 +34,8 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
     private translate: TranslateService,
     private config: ConfigService,
     private location: Location,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.deliveryModes = DeliveryModes;
@@ -65,7 +66,8 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   }
 
   navigateToDeals() {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=desls&id=CU00215646'));
+    this.capRouter.routeByUrlWithLanguage('/products?category=desls&id=CU00215646');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=desls&id=CU00215646'));
   }
 
   widgetLoadingFailed(name: string, data: any): any {
@@ -122,7 +124,8 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   }
 
   goToHome() {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
+    this.capRouter.routeByUrlWithLanguage('/home');
+    // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/home');
   }
 
   getTime(store, time) {

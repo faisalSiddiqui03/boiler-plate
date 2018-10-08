@@ -7,7 +7,8 @@ import {
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   UserAddressWidgetActions,
-  ConfigService
+  ConfigService,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
@@ -33,7 +34,8 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
 
   constructor(private router: Router,
     private utilService: UtilService,
-    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private config: ConfigService) {
+    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private config: ConfigService,
+    private capRouter: CapRouterService) {
     super();
 
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
@@ -63,7 +65,8 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   dismissAddressModal(isTrue) {

@@ -28,10 +28,12 @@ import {
   OrderAttributes,
   Checkout,
   Transaction,
-  DeliveryModes
+  DeliveryModes,
+  CapRouterService,
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../base/base-component';
 import { element } from 'protractor';
+import { CartPriceDetails } from '@capillarytech/pwa-framework/services/cart/models/cart-price-details';
 
 @Component({
   selector: 'app-checkout',
@@ -78,7 +80,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     private utilService: UtilService,
     private translate: TranslateService,
     private config: ConfigService,
-    private actRoute: ActivatedRoute
+    private actRoute: ActivatedRoute,
+    private capRouter: CapRouterService
   ) {
 
     super();
@@ -134,6 +137,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   goToPage(pageName, navParams = {}) {
+    // this.capRouter.routeByUrlWithLanguage(pageName);
     this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName), navParams);
   }
 
