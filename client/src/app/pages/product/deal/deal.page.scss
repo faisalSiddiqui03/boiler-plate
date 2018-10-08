@@ -1,0 +1,107 @@
+.deal-component {
+  .deal-img-wrap {
+    background: var(--ion-color-light);
+    .container-small {
+      align-items: flex-start;
+    }
+    img {
+      display: block;
+    }
+    .deal-img-text {
+      padding: 30px 0 0px 15px;
+      h4 {
+        font-size: 30px;
+        font-family: Conv_UnitedSansCond-Bold, sans-serif;
+        font-weight: 700;
+        color: var(--ion-color-dark-shade);
+      }
+      p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: var(--ion-color-secondary-shade);
+      }
+    }
+  }
+  ion-content{
+    &.page-bg{
+      --background: transparent;
+    }
+  }
+  .deals-list {
+    max-width: 800px;
+    margin: auto;
+    padding: 10px;
+    ion-item {
+      background: var(--ion-color-light);
+      margin-bottom: 10px;
+      --padding-start: 15px;
+      --padding-top: 10px;
+      --padding-bottom: 20px;
+      box-shadow: 0 0 3px 0 rgba(var(--ion-color-dark-rgb), .25);
+      border-radius: 5px;
+      cursor: pointer;
+      ion-label {
+        h4 {
+          font-size: 14px;
+          margin: 0 0 5px;
+        }
+        p {
+          font-size: 15px;
+          margin: 0;
+          color: var(--ion-tabs-color);
+        }
+      }
+      .close {
+        color: var(--ion-color-medium-shade);
+        font-size: 20px;
+      }
+    }
+  }
+  .deal-skeleton{
+    .container-small{
+      width: 100%;
+    }
+    .deal-img-text{
+      width: 60%;
+    }
+    .deal-img-block{
+      width: 30%;
+    }
+    .deals-list{
+      ion-skeleton-text{
+        display: block;
+      }
+    }
+  }
+}
+
+@media (max-width:991px){
+  .deal-component {
+    .deal-img-wrap {
+      padding: 10px;
+      [flex-center]{
+        flex-direction: column-reverse;
+      }
+      img{
+        width: 100%;
+        height: auto;
+      }
+      .deal-img-text{
+        padding: 20px 0 0;
+        width: 100%;
+        h4{
+          font-size: 20px;
+        }
+      }
+    }
+    .deals-list{
+      max-width: inherit;
+    }
+    .deal-skeleton{
+      .deal-img-text,
+      .deal-img-block{
+        width: 100%;
+      }
+    }
+  }
+}

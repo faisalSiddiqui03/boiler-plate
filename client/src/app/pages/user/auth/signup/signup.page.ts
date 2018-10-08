@@ -15,7 +15,8 @@ import {
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   Action,
-  UserIdSignUpWidgetActions
+  UserIdSignUpWidgetActions,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../../base/base-component';
 import { Router } from '@angular/router';
@@ -50,7 +51,8 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     private translate: TranslateService,
     private loaderService: LoaderService,
     private utilService: UtilService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -91,14 +93,16 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
       this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful'), 500, top);
       this.useridSignUpAction.emit(
         new Action('SIGNUP_SIGNIN', [this.signUpForm.value.email, this.signUpForm.value.password]))
-      this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
+        this.capRouter.routeByUrlWithLanguage('/home');
+      // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
     } else {
       this.alertService.presentToast(data.message, 500, top);
     }
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   widgetActionFailed(name: string, data: any): any {

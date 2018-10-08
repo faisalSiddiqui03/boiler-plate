@@ -7,7 +7,8 @@ import {
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   LogoutWidgetActions,
-  LogoutWidget
+  LogoutWidget,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
@@ -31,7 +32,8 @@ export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLife
 
   constructor(private router: Router,
     private utilService: UtilService,
-    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
+    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService,
+    private capRouter: CapRouterService) {
     super();
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
@@ -48,7 +50,8 @@ export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLife
       const action = new Action(LogoutWidgetActions.ACTION_LOGOUT);
       this.logoutWidgetAction.emit(action);
     } else {
-      this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+      this.capRouter.routeByUrlWithLanguage(pageName);
+      // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
     }
   }
 
@@ -67,7 +70,8 @@ export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLife
     switch (name) {
       case LogoutWidgetActions.ACTION_LOGOUT:
         const coupon_remove_success = await this.translate.instant('my_account_page.successfully_loged_out');
-        this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
+        this.capRouter.routeByUrlWithLanguage('/home');
+        // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
         this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
         break;
     }

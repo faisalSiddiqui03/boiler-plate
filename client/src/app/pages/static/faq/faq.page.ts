@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../helpers/utils';
 import { BaseComponent } from '../../../base/base-component';
+import { CapRouterService } from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-faq',
@@ -14,7 +15,8 @@ export class FaqPage extends BaseComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private utilService: UtilService,
-    private router: Router
+    private router: Router,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -34,6 +36,7 @@ export class FaqPage extends BaseComponent implements OnInit {
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 }

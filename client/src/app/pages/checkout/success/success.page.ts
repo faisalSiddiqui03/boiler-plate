@@ -7,7 +7,8 @@ import {
   pwaLifeCycle,
   OrderDetailsWidget,
   WidgetNames,
-  OrderWidget
+  OrderWidget,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 
 @Component({
@@ -24,7 +25,8 @@ export class SuccessPage extends BaseComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private capRouter: CapRouterService,
   ) {
     super();
   }
@@ -46,7 +48,8 @@ export class SuccessPage extends BaseComponent implements OnInit {
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   widgetActionFailed(name: string, data: any): any {

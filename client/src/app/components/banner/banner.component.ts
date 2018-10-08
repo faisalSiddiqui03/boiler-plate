@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { pwaLifeCycle, LifeCycle, WidgetNames, ConfigService } from "@capillarytech/pwa-framework";
+import { pwaLifeCycle, LifeCycle, WidgetNames, ConfigService, CapRouterService } from "@capillarytech/pwa-framework";
 import { Router } from '@angular/router';
 import { BaseComponent } from '../../base/base-component';
 import { TranslateService } from '@ngx-translate/core';
@@ -35,7 +35,8 @@ export class BannerComponent extends BaseComponent implements OnInit {
     private router: Router,
     private config: ConfigService,
     private utilService: UtilService,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    private capRouter: CapRouterService) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
     this.translate.use(this.getCurrentLanguageCode());
@@ -65,7 +66,8 @@ export class BannerComponent extends BaseComponent implements OnInit {
     console.log(banner);
     switch (banner.targetType) {
       case 'Category':
-        this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=banner&id=' + banner.targetId));
+        this.capRouter.routeByUrlWithLanguage('/products?category=banner&id=' + banner.targetId);
+        // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=banner&id=' + banner.targetId));
         break;
       case 'URL':
         this.navigateToDeals();
@@ -75,7 +77,8 @@ export class BannerComponent extends BaseComponent implements OnInit {
 
   navigateToDeals() {
     // http://localhost:8100/en/products?category=deals&id=CU00215646
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
+    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
   }
 
   getFullBannerUrl(src) {

@@ -22,6 +22,7 @@
 }
 
 .login-with-google {
+  margin-top: 30px;
   padding: 12px;
   border-top: 1px solid var(--ion-color-medium-tint);
   border-bottom: 1px solid var(--ion-color-medium-tint);
@@ -79,7 +80,7 @@
       font-size: 15px;
     }
     .forgot-pwd {
-      font-weight: 700;
+      font-weight: 600;
     }
   }
 }

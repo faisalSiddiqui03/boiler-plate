@@ -7,7 +7,9 @@ import {
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   FavoritesWidgetActions,
-  FavoritesWidget
+  FavoritesWidget,
+  CapRouterService,
+  ConfigService
 } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
@@ -28,15 +30,19 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
 
   titleValue = '';
   favoritesWidgetAction = new EventEmitter();
+  currencyCode: string;
 
   constructor(private router: Router,
     private utilService: UtilService,
     private loaderService: LoaderService,
-    private alertService: AlertService, private translate: TranslateService) {
+    private alertService: AlertService, private translate: TranslateService,
+    private capRouter: CapRouterService,
+    private config: ConfigService,) {
     super();
 
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
+    this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   ngOnInit() {
@@ -46,7 +52,8 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   getProductImageUrl(product) {
