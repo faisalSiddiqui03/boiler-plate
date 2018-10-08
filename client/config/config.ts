@@ -18,11 +18,6 @@ export const config = {
     "media_agility_clientid": "5649391675244544",
     "media_agility_secretid": "V:}Q|IzuZL,k[YG%k\\@F",
     "media_agility_userid": "2746274274",
-    "mongodb": {
-      "host": "kishoret99:k0019625871@ds133627.mlab.com",
-      "port": "33627",
-      "db": "kt99-loopback"
-    },
     "sizePropertyId": 1940,
     "maxToppingLimit": 3,
     "minToppingLimit": 3,

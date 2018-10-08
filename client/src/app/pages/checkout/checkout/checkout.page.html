@@ -23,6 +23,8 @@
         <span class="icon icon-time"></span>
         <ion-label> {{ 'checkout_page.order_for' | translate }}
           <span class="slot-time">{{getDeliverySlot()?.day}}, {{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
+          <span *ngIf="getDeliverySlot()?.id == -1">{{ 'header.asap' | translate }}</span>
+          <span *ngIf="getDeliverySlot()?.id == -2">{{ 'header.noSlot' | translate }}</span>
         </ion-label>
         <a class="change" (click)="presentSlotModal()" text-capitalize>{{ 'checkout_page.change' | translate }}</a>
       </ion-item>
@@ -97,7 +99,7 @@
                   {{getUserModel()?.firstName}}
                 </p>
               </div>
-  
+
               <div class="form-group">
                 <ion-label class="login-label" for="mobile" text-capitalize>{{ 'checkout_page.mobile' | translate }}*
                 </ion-label>

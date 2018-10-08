@@ -15,6 +15,8 @@ import { BaseComponent } from '../../base/base-component';
 import { UtilService } from '../../helpers/utils';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { ModalController } from '@ionic/angular';
+import { SearchLocationPage } from '../../pages/user/profile/search-location/search-location.page';
+import { StoreSelectionComponent } from '../store-selection/store-selection.component';
 
 @Component({
   selector: 'app-product-details-component',
@@ -91,9 +93,10 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
         break;
       case ProductDetailsWidgetActions.ATION_EDIT_CART:
         // this.alertService.presentToast(this.clientProduct.title + ' ' +
-          // this.translate.instant('product_details.added_to_cart'), 1000, 'top');
+        // this.translate.instant('product_details.added_to_cart'), 1000, 'top');
         this.modalController.dismiss(true);
-        // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=' + this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);
+        // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=' +
+        // this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);
         break;
     }
   }
@@ -182,13 +185,24 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     return isPropertyAvailable;
   }
 
-  addToCart() {
+  // async openStoreSelection() {
+  //   const modal = await this.modalController.create({
+  //     component: StoreSelectionModalPage
+  //   });
+  //   return await modal.present();
+  // }
+
+  async addToCart() {
+    // if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
+    //   const modal = await this.openStoreSelection();
+    //   return;
+    // }
     if (this.productFromDeal) {
       this.modalController.dismiss(this.clientProduct);
       return;
     }
-    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
-    if(this.cartItem){
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    if (this.cartItem) {
       this.productWidgetAction.emit(
         new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
       );

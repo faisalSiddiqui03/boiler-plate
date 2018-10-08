@@ -35,7 +35,7 @@
     "@angular/router": "6.1.7",
     "@angular/service-worker": "6.1.7",
     "@capillarytech/pwa-framework": "0.5.41",
-    "@capillarytech/pwa-ui-helpers": "0.1.0",
+    "@capillarytech/pwa-ui-helpers": "0.1.2",
     "@ionic-native/core": "5.0.0-beta.14",
     "@ionic-native/geolocation": "5.0.0-beta.14",
     "@ionic-native/splash-screen": "5.0.0-beta.14",

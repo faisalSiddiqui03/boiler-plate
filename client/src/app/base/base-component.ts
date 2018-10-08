@@ -1,5 +1,6 @@
 import { GlobalSharedService } from '@cap-core/service/global-shared.service';
 import { appInjector } from '@cap-core/app.injector';
+import { DeliverySlot } from '@capillarytech/pwa-framework';
 
 export class BaseComponent {
 
@@ -17,8 +18,8 @@ export class BaseComponent {
     return this.globalSharedService.getUserModel();
   }
 
-  getUserPromise() {
-    return this.globalSharedService.getUserModelPromise();
+  async getUserPromise() {
+    return await this.globalSharedService.getUserModelPromise();
   }
 
   getCurrentLanguage() {
@@ -53,7 +54,7 @@ export class BaseComponent {
     return this.globalSharedService.getDeliverySlot();
   }
 
-  async getDeliverySlotPromise() {
+  async getDeliverySlotPromise(): Promise<DeliverySlot> {
     return await this.globalSharedService.getDeliverySlotPromise();
   }
 
@@ -70,7 +71,7 @@ export class BaseComponent {
   }
 
   getNavigationUrlWithLangSupport(url: string): string {
-    let navUrl: string = '';
+    let navUrl = '';
     if (url.startsWith('/')) {
       navUrl = this.getCurrentLanguageCode() + url;
     } else {
