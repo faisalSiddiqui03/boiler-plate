@@ -31,7 +31,7 @@ import { TrioComponent } from '../../components/trio/trio.component';
 
 @pwaLifeCycle()
 export class DealComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
-  
+
   @Input() productId: number;
   @Input() cartItem;
 
@@ -80,10 +80,10 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   widgetLoadingSuccess(name, data) {
     if (name == WidgetNames.PRODUCT_DISPLAY) {
       try {
-        this.loaded = true;
         this.serverProduct = data;
         this.clientProduct = data.client;
         this.setDealDefaults();
+        this.loaded = true;
       } catch (error) {
         console.error('Something went wrong in setting deal defaults : ', error);
       }
@@ -101,6 +101,11 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
         this.loaderService.stopLoading();
         this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 1000, 'top');
         this.goBack();
+        break;
+      case ProductDetailsWidgetActions.ATION_EDIT_CART:
+        // this.alertService.presentToast(this.clientProduct.title + ' ' +
+        // this.translate.instant('product_details.added_to_cart'), 1000, 'top');
+        this.modalController.dismiss(true);
         break;
     }
   }
@@ -174,7 +179,10 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     this.serverProduct.bundleGroups.map((group) => {
       this.noOfRequiredGroups = this.noOfRequiredGroups + 1;
     });
-    if(this.cartItem) return;
+    if (this.cartItem) {
+      this.showAddToCart = true;
+      return;
+    }
     this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
       item.remove();
     });
@@ -302,6 +310,10 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   goBack() {
+    if (this.cartItem) {
+      this.modalController.dismiss();
+      return;
+    }
     this.location.back();
   }
 
