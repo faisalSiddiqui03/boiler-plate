@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
-import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle, LifeCycle, CapRouterService } from '@capillarytech/pwa-framework';
+import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle, LifeCycle, ConfigService, CapRouterService } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,21 +17,30 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class OrderDetailsPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
-  titleValue: string = '';
+  titleValue = '';
+  orderId;
+  currencyCode;
   constructor(private router: Router,
     private utilService: UtilService,
-    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService,
-    private capRouter: CapRouterService) {
+    private loaderService: LoaderService,
+    private alertService: AlertService,
+    private translate: TranslateService,
+    private actRoute: ActivatedRoute,
+    private config: ConfigService,
+    private capRouter: CapRouterService,
+  ) {
     super();
 
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
+    this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   ngOnInit() {
     this.translate.get('order_details_page.order_details').subscribe(value => {
       this.titleValue = value;
     });
+    this.orderId = this.actRoute.snapshot.params['orderId'];
   }
 
   goToPage(pageName) {

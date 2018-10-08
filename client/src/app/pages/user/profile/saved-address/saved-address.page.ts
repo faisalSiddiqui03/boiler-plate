@@ -64,7 +64,13 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
     this.toggleDeleteModal = !this.toggleDeleteModal;
   }
 
-  goToPage(pageName) {
+  goToPage(pageName, params = null) {
+    if (params) {
+      const route = pageName + '/' + params;
+      this.capRouter.routeByUrlWithLanguage(route);
+      // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(route));
+      return;
+    }
     this.capRouter.routeByUrlWithLanguage(pageName);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }

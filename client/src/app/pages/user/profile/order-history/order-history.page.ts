@@ -138,6 +138,10 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
     return this.utilService.getTimeHHMM(date);
   }
 
+  getDate(date) {
+    return this.utilService.getDate(date);
+  }
+
   ionViewWillLeave() {
     this.isWidgetLoadingDone = false;
   }

@@ -1,19 +1,25 @@
 import { Location } from '@angular/common';
 import { Component, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {
   Action,
   CartWidgetActions,
   ConfigService,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
-  pwaLifeCycle, WidgetNames,
   CapRouterService,
+  pwaLifeCycle,
+  pageView,
+  WidgetNames
 } from '@capillarytech/pwa-framework';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../base/base-component';
 import { UtilService } from '../../helpers/utils';
+import { ProductType } from '@capillarytech/pwa-framework';
+import { ProductDetailsComponent } from '../../components/product-details/product-details.component';
+import { ModalController } from '@ionic/angular';
+import { PizzaComponent } from '../../components/pizza/pizza.component';
 
 @Component({
   selector: 'app-cart',
@@ -23,14 +29,19 @@ import { UtilService } from '../../helpers/utils';
 })
 
 @pwaLifeCycle()
+@pageView()
 export class CartComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   cartWidgetAction = new EventEmitter();
   loaded = false;
   vouchersLoaded = false;
-  enableVoucherModal: boolean = false;
+  enableVoucherModal = false;
   isWrongVoucher = false;
   currencyCode: string;
   couponCode: string;
+  updatingPrice: boolean;
+  bundle = ProductType.Bundle;
+  product = ProductType.Product;
+  deal = ProductType.Deal;
 
   constructor(
     private translateService: TranslateService,
@@ -41,6 +52,8 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
     private location: Location,
     private utilService: UtilService,
     private capRouter: CapRouterService,
+    private actRoute: ActivatedRoute,
+    private modalController: ModalController,
   ) {
     super();
     this.translateService.use(this.getCurrentLanguageCode());
@@ -51,10 +64,15 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   ngOnInit() {
   }
 
+  ionViewWillEnter() {
+    this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
+    this.translateService.use(this.getCurrentLanguageCode());
+  }
+
   applyCoupon() {
     if (this.couponCode) {
       this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
-      let action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
+      const action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
     } else {
       this.isWrongVoucher = true;
@@ -63,10 +81,20 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
 
   removeCoupon(couponCode) {
     if (couponCode) {
-      let action = new Action(CartWidgetActions.ACTION_REMOVE_COUPON, couponCode);
+      const action = new Action(CartWidgetActions.ACTION_REMOVE_COUPON, couponCode);
       this.cartWidgetAction.emit(action);
     }
   }
+
+  updateCart(event, item, isAddition) {
+    let clicks = event.clickNumber;
+
+    if (!isAddition)
+      clicks = -clicks
+
+    this.updateCartItemQuantity(item, clicks)
+  }
+
 
   async updateCartItemQuantity(item, newQuantity) {
 
@@ -76,29 +104,80 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
       return;
     }
 
-    let cartUpdate = await this.translateService.instant('cart.updating_quantity');
+    const cartUpdate = await this.translateService.instant('cart.updating_quantity');
+    this.updatingPrice = true;
+    const action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
+    this.cartWidgetAction.emit(action);
+  }
+
+  async updateCartItemQuantityNoDebounce(item, newQuantity) {
+
+    item.quantity = item.quantity + newQuantity;
+    if (item.quantity === 0) {
+      this.removeCartItem(item);
+      return;
+    }
+
+    const cartUpdate = await this.translateService.instant('cart.updating_quantity');
     this.loaderService.startLoading(cartUpdate, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
-    let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
+    this.updatingPrice = true;
+    const action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
   }
 
   async removeCartItem(item) {
     item.quantity = 0;
-    let cartRemove = await this.translateService.instant('cart.remove_item');
+    const cartRemove = await this.translateService.instant('cart.remove_item');
     this.loaderService.startLoading(cartRemove, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
-    let action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
+    this.updatingPrice = true;
+    const action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
   }
 
+  async editCartItem(cartItem) {
+    let component;
+    switch (cartItem.getType()) {
+      case ProductType.Product:
+        if (!cartItem.variantProductId) {
+          const itemNotEditable = await this.translateService.instant('cart.not_editable');
+          this.alertService.presentToast(itemNotEditable, 1000, 'top');
+          return;
+        }
+        component = ProductDetailsComponent;
+        break;
+      case ProductType.Bundle:
+        component = PizzaComponent;
+        break;
+      case ProductType.Deal:
+        break;
+    }
+
+    const modal = await this.modalController.create({
+      component: component,
+      componentProps: {
+        productId: cartItem.productId,
+        cartItem: cartItem,
+      }
+    });
+
+    await modal.present();
+
+    modal.onDidDismiss().then((itemEdited) => {
+      if (itemEdited) this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
+    });
+  }
+
   async clearCart() {
-    let cartClear = await this.translateService.instant('cart.cart_clear');
+    const cartClear = await this.translateService.instant('cart.cart_clear');
     this.loaderService.startLoading(cartClear, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
-    let action = new Action(CartWidgetActions.ACTION_CLEAR_CART);
+    const action = new Action(CartWidgetActions.ACTION_CLEAR_CART);
     this.cartWidgetAction.emit(action);
   }
 
   openProduct(product) {
-    let navigationUrl = this.getNavigationUrlWithLangSupport('/product/' + encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' + product.productId);
+    const navigationUrl = this.getNavigationUrlWithLangSupport('product/' +
+        encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' +
+        product.productId);
     console.log('Nav URL', navigationUrl);
     this.capRouter.routeByUrlWithLanguage(navigationUrl);
     // this.router.navigateByUrl(navigationUrl);
@@ -114,6 +193,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   async widgetActionSuccess(name: string, data: any) {
     console.log('name action success: ' + name + ' data: ' + data);
     this.loaderService.stopLoading();
+    this.updatingPrice = false;
     switch (name) {
       case CartWidgetActions.ACTION_REMOVE_COUPON:
         if (data) {
@@ -191,5 +271,4 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
     this.capRouter.routeByUrlWithLanguage('/' + pageName);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/' + pageName));
   }
-
 }

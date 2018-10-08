@@ -11,6 +11,8 @@ body {
 
 .common-heading {
   position: relative;
+  display: flex;
+  align-items: center;
   h2 {
     position: relative;
     padding: 0 10px;
@@ -19,14 +21,11 @@ body {
     font-family: 'Open Sans Condensed';
     color: var(--ion-color-secondary-shade);
     font-weight: 700;
-    background: var(--ion-color-light);
   }
-  &::before {
+  &::before,
+  &::after {
     content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
+    flex: 1 1 0;
     border-bottom: 1px solid var(--ion-color-secondary-tint);
   }
 }
@@ -37,17 +36,9 @@ body {
     font-size: 24px;
     font-family: 'Conv_UnitedSansCond-Bold';
   }
-  &::before {
+  &::before,
+  &::after {
     border-bottom-style: dotted;
-  }
-}
-
-.checkout-head {
-  @extend .common-heading;
-  h2 {
-    font-size: 16px;
-    font-family: 'Open Sans';
-    font-weight: 400;
   }
 }
 

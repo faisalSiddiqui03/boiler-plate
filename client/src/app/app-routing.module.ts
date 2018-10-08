@@ -51,7 +51,7 @@ const routes: Routes = [
   { path: ':lang/change-password', loadChildren: './pages/user/profile/change-password/change-password.module#ChangePasswordPageModule', canActivate: [AuthGuard] },
   { path: ':lang/order-history', loadChildren: './pages/user/profile/order-history/order-history.module#OrderHistoryPageModule', canActivate: [AuthGuard] },
   { path: ':lang/saved-address', loadChildren: './pages/user/profile/saved-address/saved-address.module#SavedAddressPageModule', canActivate: [AuthGuard] },
-  { path: ':lang/add-address', loadChildren: './pages/user/profile/add-address/add-address.module#AddAddressPageModule', canActivate: [AuthGuard] },
+  { path: ':lang/add-address/:addressId', loadChildren: './pages/user/profile/add-address/add-address.module#AddAddressPageModule', canActivate: [AuthGuard] },
   { path: ':lang/favorites', loadChildren: './pages/user/profile/favorites/favorites.module#FavoritesPageModule', canActivate: [AuthGuard] },
   { path: ':lang/about-us', loadChildren: './pages/static/about-us/about-us.module#AboutUsPageModule' },
   { path: ':lang/contact-us', loadChildren: './pages/static/contact-us/contact-us.module#ContactUsPageModule' },
