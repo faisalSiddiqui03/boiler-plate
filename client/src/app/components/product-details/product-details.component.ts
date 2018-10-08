@@ -16,6 +16,7 @@ import { UtilService } from '../../helpers/utils';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { ModalController } from '@ionic/angular';
 import { SearchLocationPage } from '../../pages/user/profile/search-location/search-location.page';
+import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 import { StoreSelectionComponent } from '../store-selection/store-selection.component';
 
 @Component({
@@ -185,18 +186,18 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     return isPropertyAvailable;
   }
 
-  // async openStoreSelection() {
-  //   const modal = await this.modalController.create({
-  //     component: StoreSelectionModalPage
-  //   });
-  //   return await modal.present();
-  // }
+  async openStoreSelection() {
+    const modal = await this.modalController.create({
+      component: StoreSelectionModalComponent
+    });
+    return await modal.present();
+  }
 
   async addToCart() {
-    // if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
-    //   const modal = await this.openStoreSelection();
-    //   return;
-    // }
+    if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
+      const modal = await this.openStoreSelection();
+      return;
+    }
     if (this.productFromDeal) {
       this.modalController.dismiss(this.clientProduct);
       return;
