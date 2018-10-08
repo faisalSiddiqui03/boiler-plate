@@ -5,7 +5,7 @@ import {
   pageView,
   Action,
   ForgotPasswordWidgetActions,
-  OnWidgetActionsLifecyle, OnWidgetLifecyle
+  OnWidgetActionsLifecyle, OnWidgetLifecyle, CapRouterService
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../../base/base-component';
 import { Router } from '@angular/router';
@@ -29,7 +29,8 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
 
   constructor(private formBuilder: FormBuilder,
     private utilService: UtilService,
-    private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
+    private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService,
+    private capRouter: CapRouterService,) {
     super();
 
     this.translate.use(this.getCurrentLanguageCode());
@@ -56,7 +57,8 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
   }
 
   handleResetPasswordResponse(data) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/login'));
+    this.capRouter.routeByUrlWithLanguage('/login');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/login'));
     if (data.isSuccessful) {
       this.alertService.presentToast(this.translate.instant('reset_password_page.link_sent'), 1000, top);
     } else {
@@ -84,7 +86,8 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   signIn() {

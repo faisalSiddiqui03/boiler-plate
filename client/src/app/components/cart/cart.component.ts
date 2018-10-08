@@ -7,6 +7,7 @@ import {
   ConfigService,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
+  CapRouterService,
   pwaLifeCycle,
   pageView,
   WidgetNames
@@ -50,6 +51,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
     private config: ConfigService,
     private location: Location,
     private utilService: UtilService,
+    private capRouter: CapRouterService,
     private actRoute: ActivatedRoute,
     private modalController: ModalController,
   ) {
@@ -177,7 +179,8 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
         encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' +
         product.productId);
     console.log('Nav URL', navigationUrl);
-    this.router.navigateByUrl(navigationUrl);
+    this.capRouter.routeByUrlWithLanguage(navigationUrl);
+    // this.router.navigateByUrl(navigationUrl);
   }
 
   widgetActionFailed(name: string, data: any): any {
@@ -219,7 +222,8 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
         const cartClear = await
           this.translateService.instant('cart.cart_clear');
         this.alertService.presentToast(cartClear, 3000, 'bottom');
-        this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
+        this.capRouter.routeByUrlWithLanguage('/home');
+        // this.router.navigate(['/home']);
         break;
     }
   }
@@ -259,10 +263,12 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   goToDeals() {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
+    this.capRouter.routeByUrlWithLanguage('/product/deals/CU00215646');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/deals/CU00215646'));
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+    this.capRouter.routeByUrlWithLanguage('/' + pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/' + pageName));
   }
 }

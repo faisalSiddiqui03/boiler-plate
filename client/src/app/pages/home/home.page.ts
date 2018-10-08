@@ -6,7 +6,8 @@ import {
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   ConfigService,
-  LanguageService
+  LanguageService,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { ModalController } from '@ionic/angular';
 import { BaseComponent } from '../../base/base-component';
@@ -74,7 +75,8 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private loaderService: LoaderService,
     private alertService: AlertService,
     private langService: LanguageService,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private capRouter:CapRouterService,
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
@@ -369,11 +371,13 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     if (!this.asSoonPossible || this.utilService.isEmpty(this.getDeliverySlot())) {
       this.presentSlotModal().then(data => {
         this.loaderService.stopLoading();
-        this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
+        this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+        // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
       });
     } else {
       this.loaderService.stopLoading();
-      this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
+      this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+      // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
     }
   }
 

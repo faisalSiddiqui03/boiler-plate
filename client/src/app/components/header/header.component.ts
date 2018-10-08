@@ -8,7 +8,8 @@ import {
   DeliveryModes,
   LogoutWidgetActions,
   LanguageService,
-  LogoutWidget, pwaLifeCycle
+  LogoutWidget, pwaLifeCycle,
+  CapRouterService,
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../base/base-component';
 import { ModalController } from '@ionic/angular';
@@ -40,7 +41,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     private alertService: AlertService,
     private location: Location,
     private languageService: LanguageService,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.deliveryModes = DeliveryModes;
@@ -73,7 +75,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
 
   goToPage(pageName) {
     //const page = this.utilService.getLanguageCode() + '/' + pageName;
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   async switchLanguage() {
@@ -83,14 +86,16 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
       case 'ar':
         await this.languageService.updateLanguageByCode('en');
         //this.utilService.setLanguageCode('en');
-        this.router.navigateByUrl('en/home', { replaceUrl: true });
+        this.capRouter.routeByUrlWithLanguage('home');
+        // this.router.navigateByUrl('en/home', { replaceUrl: true });
 
         break;
 
       case 'en':
         await this.languageService.updateLanguageByCode('ar');
         //this.utilService.setLanguageCode('ar');
-        this.router.navigateByUrl('ar/home', { replaceUrl: true });
+        this.capRouter.routeByUrlWithLanguage('home');
+        // this.router.navigateByUrl('ar/home', { replaceUrl: true });
         break;
 
       default:
@@ -126,7 +131,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     switch (name) {
       case LogoutWidgetActions.ACTION_LOGOUT:
         const coupon_remove_success = await this.translate.instant('my_account_page.successfully_loged_out');
-        this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
+        this.capRouter.routeByUrlWithLanguage('/home');
+        // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
         this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
         break;
     }
@@ -147,7 +153,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   async openLocationModal() {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
+    this.capRouter.routeByUrlWithLanguage('/home');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
   }
 
   logout() {
@@ -165,7 +172,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     if (this.isModalActive) {
       this.modalController.dismiss();
     }
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=${category}&id=${categoryId}'));
+    this.capRouter.routeByUrlWithLanguage('/products?category=${category}&id=${categoryId}');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=${category}&id=${categoryId}'));
   }
 
 }

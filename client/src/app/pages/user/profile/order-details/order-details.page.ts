@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
-import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle, LifeCycle, ConfigService } from '@capillarytech/pwa-framework';
+import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle, LifeCycle, ConfigService, CapRouterService } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -26,7 +26,8 @@ export class OrderDetailsPage extends BaseComponent implements OnInit, OnWidgetL
     private alertService: AlertService,
     private translate: TranslateService,
     private actRoute: ActivatedRoute,
-    private config: ConfigService
+    private config: ConfigService,
+    private capRouter: CapRouterService,
   ) {
     super();
 
@@ -43,7 +44,8 @@ export class OrderDetailsPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   widgetActionFailed(name: string, data: any): any {

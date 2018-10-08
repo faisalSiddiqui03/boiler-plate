@@ -1,6 +1,14 @@
 import { Component, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
 import {
-  ConfigService
+  OnWidgetActionsLifecyle,
+  pwaLifeCycle,
+  pageView,
+  OnWidgetLifecyle,
+  WidgetNames,
+  Action,
+  CartWidgetActions,
+  ConfigService,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../base/base-component';
 import { TranslateService } from '@ngx-translate/core';
@@ -29,6 +37,7 @@ export class CartPage extends BaseComponent implements OnInit {
     private utilService: UtilService,
     private actRoute: ActivatedRoute,
     private modalController: ModalController,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.translateService.use(this.getCurrentLanguageCode());
@@ -38,10 +47,12 @@ export class CartPage extends BaseComponent implements OnInit {
   }
 
   goToDeals() {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products/listing/(0:0)?category=deals&id=CU00215646'));
+    this.capRouter.routeByUrlWithLanguage('/products/listing/(0:0)?category=deals&id=CU00215646');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products/listing/(0:0)?category=deals&id=CU00215646'));
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 }

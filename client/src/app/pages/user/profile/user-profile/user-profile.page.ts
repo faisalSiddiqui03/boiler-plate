@@ -5,7 +5,7 @@ import {
   pageView,
   UserProfileWidgetActions,
   Action,
-  OnWidgetActionsLifecyle, OnWidgetLifecyle
+  OnWidgetActionsLifecyle, OnWidgetLifecyle, CapRouterService
 } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
@@ -34,7 +34,8 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
     private alertService: AlertService,
     private translate: TranslateService,
     private utilService: UtilService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private capRouter: CapRouterService,) {
     super();
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
@@ -64,7 +65,8 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
   widgetActionSuccess(name, data) {
     console.log('action success ' + name, data);
     this.alertService.presentToast("Profile Updated Successfully", 2000, top);
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('my-account'));
+    this.capRouter.routeByUrlWithLanguage('my-account');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('my-account'));
   }
 
   widgetLoadingSuccess(name, data) {

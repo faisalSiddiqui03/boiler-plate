@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../helpers/utils';
 import { BaseComponent } from '../../../base/base-component';
+import { CapRouterService } from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-feedback',
@@ -17,7 +18,8 @@ export class FeedbackPage extends BaseComponent implements OnInit {
     private translate: TranslateService,
     private router: Router,
     private utilService: UtilService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -41,7 +43,8 @@ export class FeedbackPage extends BaseComponent implements OnInit {
   }
 
   goToPage(pageName) {
-    this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
+    this.capRouter.routeByUrlWithLanguage(pageName);
+    // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 
   sendFeedback() {

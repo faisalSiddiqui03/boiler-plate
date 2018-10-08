@@ -10,7 +10,8 @@ import {
   Action,
   ProductShowcaseWidgetActions,
   ProductType,
-  DeliverySlot
+  DeliverySlot,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
@@ -50,7 +51,8 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     private location: Location,
     private loaderService: LoaderService,
     private alertService: AlertService,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -133,10 +135,12 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   openProductDetails(product) {
     if (product.type === ProductType.Bundle) {
-      this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/pizza/' + product.title + '/' + product.id));
+      this.capRouter.routeByUrlWithLanguage('/pizza/' + product.title + '/' + product.id);
+      // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/pizza/' + product.title + '/' + product.id));
       return;
     }
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/' + this.categoryName + '/' + product.title + '/' + product.id));
+    this.capRouter.routeByUrlWithLanguage('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/' + this.categoryName + '/' + product.title + '/' + product.id));
 
     // Use following, when catlog code is proper from api response
     // if (product.type === ProductType.Bundle) {
@@ -149,7 +153,8 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   openDeal(product) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/deal/' + product.title + '/' + product.id));
+    this.capRouter.routeByUrlWithLanguage('/deal/' + product.title + '/' + product.id);
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/deal/' + product.title + '/' + product.id));
   }
 
   updateFavorites(isFavorite, product) {
@@ -204,7 +209,8 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   goToCart() {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/cart'));
+    this.capRouter.routeByUrlWithLanguage('/cart');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/cart'));
   }
 
   switchCategories(data) {
