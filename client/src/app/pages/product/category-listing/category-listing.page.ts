@@ -14,10 +14,9 @@ import {
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
-import { UtilService } from '../../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../checkout/delivery-slot-selection/delivery-slot-selection.page';
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-category-listing',
@@ -34,10 +33,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   productShowcaseWidgetAction = new EventEmitter();
   productShowcaseWidgetExecutor = new EventEmitter();
   currencyCode: string;
-  fetchDeliverySlots = false;
-  asSoonPossible = false;
   navigations = [];
-  subscriber = null;
   dealCategoryId: number;
   asapDeliverySlot = DeliverySlot.getAsap();
 
@@ -48,9 +44,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     private config: ConfigService,
     public modalController: ModalController,
     private location: Location,
-    private loaderService: LoaderService,
-    private alertService: AlertService,
-    private utilService: UtilService
+    private loaderService: LoaderService
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -62,21 +56,22 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     this.translate.use(this.getCurrentLanguageCode());
   }
 
-  async ionViewWillEnter() {
-    console.error(await this.getDeliverySlotPromise());
-    // this.getDeliverySlotPromise().then((data) => {
-    //    console.error('success', data); 
-    // }).then((e) => {
-    //   console.error('erre', e);
-    // });
-    if (this.utilService.isEmpty(this.getDeliverySlotPromise())) {
-      if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
-        this.fetchDeliverySlots = true;
-        this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
-      } else {
-        this.setDeliverySlot(this.asapDeliverySlot);
+  ionViewWillEnter() {
+    this.getDeliverySlotPromise().then((slot) => {
+
+      if (slot.id === -2) {
+
+        // TODO : generate store promise
+        const store = this.getCurrentStore();
+        if (store === null) {
+            this.presentSlotModal();
+        } else if (!store.isOnline(this.getDeliveryMode())) {
+            this.presentSlotModal();
+        } else {
+            this.setDeliverySlot(this.asapDeliverySlot);
+        }
       }
-    }
+    });
 
     // if (this.categoryId !== null) {
     //   return;
@@ -114,10 +109,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       component: DeliverySlotSelectionPage
     });
     return await modal.present();
-  }
-
-  ionViewWillLeave() {
-    this.fetchDeliverySlots = false;
   }
 
   getProductImageUrl(product) {
@@ -175,8 +166,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     switch (name) {
       case 'NAVIGATIONS':
         break;
-      case 'DELIVERYSLOTS':
-        this.loaderService.stopLoading();
     }
   }
 
@@ -189,17 +178,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       case 'NAVIGATIONS':
         this.navigations = data.items;
         break;
-      case 'DELIVERYSLOTS':
-        this.loaderService.stopLoading();
-        this.fetchDeliverySlots = false;
-        if (data && data.length) {
-          this.asSoonPossible = data[0].id === -1;
-        }
-        if (this.asSoonPossible) {
-          this.setDeliverySlot(data[0]);
-        } else {
-          this.presentSlotModal();
-        }
     }
   }
 
