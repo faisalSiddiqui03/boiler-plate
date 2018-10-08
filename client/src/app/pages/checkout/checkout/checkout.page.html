@@ -25,7 +25,7 @@
       <ion-item class="checkout-time">
         <span class="icon icon-time"></span>
         <ion-label> {{ 'checkout_page.order_for' | translate }}
-          <span class="slot-time">{{getDeliverySlot()?.day}}, {{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
+          <span class="slot-time" *ngIf="getDeliverySlot()?.id > -1">{{getDeliverySlot()?.day}}, {{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
           <span *ngIf="getDeliverySlot()?.id == -1">{{ 'header.asap' | translate }}</span>
           <span *ngIf="getDeliverySlot()?.id == -2">{{ 'header.noSlot' | translate }}</span>
         </ion-label>
