@@ -5,15 +5,41 @@
   <app-sub-header [title]="titleValue"></app-sub-header>
   <orders-details-widget [componentId]="getComponentId()" [orderId]="orderId">
     <ng-template let-widget="widget">
-      <div *ngIf="widget.model">
-    <!-- {{widget.model | json}} -->
+      <div *ngIf="!widget || !widget.model">
         <div class="orders-content w-700">
           <ion-list no-margin>
             <ion-item no-padding>
               <ion-label no-margin>
                 <h2>Order # {{orderId}}</h2>
                 <div class="order-description">
-                  <p *ngFor="let orderLineItem of widget.model.getLineItemsOfMainProduct()">
+                  <p>
+                    <ion-skeleton-text class="p-skeleton"></ion-skeleton-text>
+                  </p>
+                  <p>
+                    <ion-skeleton-text class="p-skeleton"></ion-skeleton-text>
+                  </p>
+                </div>
+                <div class="order-price">
+                  <span>{{ 0 | currency: (currencyCode + ' '): true: '1.3-3'}}</span>
+                </div>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+
+      </div>
+      
+      
+      
+      <div *ngIf="widget && widget.model">
+    <!-- {{widget.model.getLineItemsOfMainProduct() | json}} -->
+        <div class="orders-content w-700">
+          <ion-list no-margin>
+            <ion-item no-padding>
+              <ion-label no-margin>
+                <h2>Order # {{orderId}}</h2>
+                <div class="order-description">
+                  <p *ngFor="let orderLineItem of widget?.model?.getLineItemsOfMainProduct()">
                       {{orderLineItem?.product?.title}} | {{orderLineItem?.qty}}
                   </p>
                 </div>

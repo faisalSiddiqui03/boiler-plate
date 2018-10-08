@@ -1,7 +1,7 @@
 <ion-header>
   <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
-<ion-content>
+<ion-content class="order-history-page">
   <app-sub-header [title]="titleValue"></app-sub-header>
   <orders-widget [componentId]="getComponentId()" [limit]=6 [executor]="orderWidgetExecutor" [action]="orderWidgetAction"
     (lifecycle)="handleWidgetLifecycle($event)">
