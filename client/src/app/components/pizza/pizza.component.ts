@@ -68,14 +68,14 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     private utilService: UtilService
   ) {
     super();
-    this.translate.use(this.getCurrentLanguageCode());
-    this.currencyCode = this.config.getConfig()['currencyCode'];
+    this.translate.use(this.utilService.getLanguageCode());
   }
 
   ngOnInit() {
     this.sizePropertyId = this.config.getConfig()['sizePropertyId'];
     this.maxToppingLimit = this.config.getConfig()['maxToppingLimit'];
     this.minToppingLimit = this.config.getConfig()['minToppingLimit'];
+    this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   widgetLoadingStarted(name, data) {
@@ -310,6 +310,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     this.setToppingCountValidators();
     this.setToppingStatus();
     if (this.cartItem) this.showToppingsView = true;
+    this.getPrice();
   };
 
   setToppingCountValidators() {

@@ -12,14 +12,8 @@ import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackModule } from
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
-import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
-import { DealShowcaseComponentModule } from '../../../components/deal-showcase/deal-showcase.module';
-import { DealShowcaseComponent } from '../../../components/deal-showcase/deal-showcase.component';
-import { HeaderModule } from '../../../components/header/header.module';
-import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
-import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
-import { TrioComponent } from '../../../components/trio/trio.component';
-import { TrioComponentModule } from '../../../components/trio/trio.module';
+import { DealComponentModule } from '../../../components/deal/deal.module';
+
 const routes: Routes = [
   {
     path: '',
@@ -35,11 +29,7 @@ const routes: Routes = [
     EventTrackModule,
     ProductDetailsWidgetModule,
     ImagePreloadModule,
-    SkeletonModule,
-    HeaderModule,
-    SubHeaderModule,
-    DealShowcaseComponentModule,
-    TrioComponentModule,
+    DealComponentModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {
@@ -50,10 +40,5 @@ const routes: Routes = [
     })
   ],
   declarations: [DealPage],
-  entryComponents: [
-    DealShowcaseComponent, 
-    ProductDetailsComponent, 
-    TrioComponent,
-  ]
 })
 export class DealPageModule {}

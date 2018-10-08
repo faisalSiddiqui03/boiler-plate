@@ -13,6 +13,8 @@ import { ProductDetailsComponent } from '../../components/product-details/produc
 import { ProductDetailsComponentModule } from '../../components/product-details/product-details.module';
 import { PizzaComponentModule } from '../../components/pizza/pizza.module';
 import { PizzaComponent } from '../../components/pizza/pizza.component';
+import { DealComponentModule } from '../../components/deal/deal.module';
+import { DealComponent } from '../../components/deal/deal.component';
 
 @NgModule({
   imports: [
@@ -26,6 +28,7 @@ import { PizzaComponent } from '../../components/pizza/pizza.component';
     DebounceClickDirective,
     ProductDetailsComponentModule,
     PizzaComponentModule,
+    DealComponentModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -48,6 +51,7 @@ import { PizzaComponent } from '../../components/pizza/pizza.component';
   entryComponents: [
     ProductDetailsComponent,
     PizzaComponent,
+    DealComponent,
   ]
 })
 
