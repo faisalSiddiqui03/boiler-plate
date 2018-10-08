@@ -18,11 +18,9 @@ import {
   StoreLocatorWidgetActions,
   CartWidgetActions,
   DeliveryModes,
-  DeliverySlot
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
-import { DeliverySlotSelectionPage } from '../checkout/delivery-slot-selection/delivery-slot-selection.page';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
@@ -59,11 +57,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   isCleared = false;
   deliveryModes = DeliveryModes;
   asSoonPossible = false;
-  fetchDeliverySlots = false;
   isNavigationClicked = false;
   lat;
   lng;
-  asapDeliverySlot = DeliverySlot.getAsap();
   clearCartPopup: boolean = false;
 
   constructor(
@@ -76,7 +72,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private alertService: AlertService,
     private langService: LanguageService,
     private utilService: UtilService,
-    private capRouter:CapRouterService,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
@@ -95,37 +91,14 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ionViewDidEnter() {
     this.selectedStore = this.getCurrentStore();
     this.changeRequested = false;
-    if (this.isStoreSelected()) {
-      if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
-        this.fetchDeliverySlots = true;
-      } else {
-        this.setDeliverySlot(this.asapDeliverySlot);
-      }
-    }
   }
 
   ionViewWillLeave() {
-    this.fetchDeliverySlots = false;
     this.isNavigationClicked = false;
   }
 
   widgetLoadingSuccess(name, data) {
     console.log('name = ', name, ' data = ', data);
-    switch (name) {
-      case 'DELIVERYSLOTS':
-        this.loaderService.stopLoading();
-        this.fetchDeliverySlots = false;
-        if (data && data.length) {
-          this.asSoonPossible = data[0].id === -1;
-        }
-        if (this.asSoonPossible) {
-          this.setDeliverySlot(data[0]);
-        }
-        if (this.isNavigationClicked) {
-          this.isNavigationClicked = false;
-          this.navigateToDeals();
-        }
-    }
   }
 
   widgetActionFailed(name: string, data: any) {
@@ -157,13 +130,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
             this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
           }
           this.setCurrentStore(firstStore);
-          if (!firstStore.isOnline(this.getDeliveryMode())) {
-            this.fetchDeliverySlots = true;
-          } else {
-            this.setDeliverySlot(this.asapDeliverySlot);
-            this.asSoonPossible = true;
-            this.navigateToDeals();
-          }
         } else {
           this.loaderService.stopLoading();
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
@@ -173,11 +139,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         if (data.length) {
           this.setCurrentStore(data[0]);
-          if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
-            this.fetchDeliverySlots = true;
-          } else {
-            this.setDeliverySlot(this.asapDeliverySlot);
-          }
         } else {
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
           this.alertService.presentToast(store_alert, 3000, 'bottom');
@@ -362,23 +323,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   navigateToDeals() {
     this.isNavigationClicked = true;
-    if (this.fetchDeliverySlots) {
-      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
-      return;
-    }
+    this.loaderService.stopLoading();
+    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
 
-    // const langCode = this.utilService.getLanguageCode();
-    if (!this.asSoonPossible || this.utilService.isEmpty(this.getDeliverySlot())) {
-      this.presentSlotModal().then(data => {
-        this.loaderService.stopLoading();
-        this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
-        // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
-      });
-    } else {
-      this.loaderService.stopLoading();
-      this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
-      // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
-    }
   }
 
   changeOrderMode(mode, previousMode, force: boolean = false) {
@@ -415,14 +363,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   changeSelectedStore() {
     this.changeRequested = true;
-  }
-
-  async presentSlotModal() {
-    const modal = await this.modalController.create({
-      component: DeliverySlotSelectionPage,
-    });
-    await modal.present();
-    return await modal.onDidDismiss();
   }
 
   filterEmptyCities(cityList) {

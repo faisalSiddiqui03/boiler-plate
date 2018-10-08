@@ -18,7 +18,6 @@ import {
   LocationWidgetModule,
   FulfilmentModeModule,
   StoreLocatorWidgetModule,
-  DeliverySlotsWidgetModule,
   CartWidgetModule
 } from '@capillarytech/pwa-framework';
 import { BannerWidgetModule, EventTrackModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
@@ -47,7 +46,6 @@ const routes: Routes = [
     FulfilmentModeModule,
     LoaderServiceModule,
     StoreLocatorWidgetModule,
-    DeliverySlotsWidgetModule,
     CartWidgetModule,
     TranslateModule.forRoot({
       loader: {
