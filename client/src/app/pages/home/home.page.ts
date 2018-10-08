@@ -14,9 +14,10 @@ import { BaseComponent } from '../../base/base-component';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   DeliveryModes,
-  DeliverySlot
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
+import { UtilService } from '../../helpers/utils';
+import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-home',
@@ -33,8 +34,9 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   bannerUrl: string;
   deliveryModes = DeliveryModes;
   asSoonPossible = false;
-  fetchDeliverySlots = false;
-  asapDeliverySlot = DeliverySlot.getAsap();
+  isNavigationClicked = false;
+  lat;
+  lng;
   clearCartPopup: boolean = false;
 
   constructor(
@@ -43,6 +45,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private actRoute: ActivatedRoute,
     private translate: TranslateService,
     public modalController: ModalController,
+    private loaderService: LoaderService,
+    private alertService: AlertService,
+    private langService: LanguageService,
+    private utilService: UtilService,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
@@ -56,7 +63,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   ionViewWillLeave() {
-    this.fetchDeliverySlots = false;
+    // this.fetchDeliverySlots = false;
     // this.isNavigationClicked = false;
   }
 
@@ -87,7 +94,12 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   navigateToDeals() {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
+    this.isNavigationClicked = true;
+    this.loaderService.stopLoading();
+    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
+
   }
 
   preventPropogation(e) {

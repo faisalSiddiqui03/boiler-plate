@@ -61,7 +61,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     private utilService: UtilService
   ) {
     super();
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {
