@@ -45,13 +45,14 @@
       </ng-container>
 
       <ng-container *ngIf="widget && widget.model != undefined">
+        <!-- {{widget.model | json}} -->
         <div *ngIf="widget.model.length == 0" class="no-orders" flex align-items-center justify-content-center>{{'order_history_page.no_orders' | translate}}</div>
         <div class="orders-content w-700">
           <ion-list no-margin>
             <ion-item no-padding *ngFor="let order of widget.model; let i = index">
               <ion-label no-margin>
                 <h2>Order # {{order.id}}
-                    <span class="order-date"><i>(</i>{{order.orderDate.locale}}<i>)</i></span>
+                    <span class="order-date"><i>(</i>{{getDate(order.orderDate.locale)}}<i>)(</i> | {{getTimeHHMM(order.orderDate.locale)}}<i>)</i></span>
                 </h2>
                 <div class="view-order-details" *ngIf="isShowProducts(i)">
                   <ion-grid no-padding>

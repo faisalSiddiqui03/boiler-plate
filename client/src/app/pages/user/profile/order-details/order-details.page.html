@@ -3,20 +3,29 @@
 </ion-header>
 <ion-content>
   <app-sub-header [title]="titleValue"></app-sub-header>
-  <div class="orders-content w-700">
-    <ion-list no-margin>
-      <ion-item no-padding>
-        <ion-label no-margin>
-          <h2>Order # 3207380</h2>
-          <div class="order-description">
-            <p>Potato Wedges (1)</p>
-            <p>Potato Wedges (1)</p>
-          </div>
-          <div class="order-price">
-            <span>KD 3.750</span>
-          </div>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </div>
+  <orders-details-widget [componentId]="getComponentId()" [orderId]="orderId">
+    <ng-template let-widget="widget">
+      <div *ngIf="widget.model">
+    <!-- {{widget.model | json}} -->
+        <div class="orders-content w-700">
+          <ion-list no-margin>
+            <ion-item no-padding>
+              <ion-label no-margin>
+                <h2>Order # {{orderId}}</h2>
+                <div class="order-description">
+                  <p *ngFor="let orderLineItem of widget.model.getLineItemsOfMainProduct()">
+                      {{orderLineItem?.product?.title}} | {{orderLineItem?.qty}}
+                  </p>
+                </div>
+                <div class="order-price">
+                  <span>{{ widget.model?.priceDetails?.payableAmount | currency: (currencyCode + ' '): true: '1.3-3'}}</span>
+                </div>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+
+      </div>
+    </ng-template>
+  </orders-details-widget>
 </ion-content>

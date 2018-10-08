@@ -96,7 +96,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   getOrderDetails(order) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('order-details/' + order.id));
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/order-details/' + order.id));
   }
 
   handleWidgetLifecycle(x: LifeCycle) {
@@ -133,6 +133,10 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
 
   getTimeHHMM(date) {
     return this.utilService.getTimeHHMM(date);
+  }
+
+  getDate(date) {
+    return this.utilService.getDate(date);
   }
 
   ionViewWillLeave() {
