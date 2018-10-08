@@ -15,7 +15,10 @@
     <div class="order-info border">
       <ion-item class="delivery-area">
         <span class="icon icon-location-pin"></span>
-        <ion-label> {{ 'checkout_page.ordering_for_delivery_to' | translate }}
+        <ion-label *ngIf="getDeliveryMode()==='H'"> {{ 'checkout_page.ordering_for_delivery_to' | translate }}
+          <strong text-uppercase>{{getCurrentStore()?.name}}</strong>
+        </ion-label>
+        <ion-label *ngIf="getDeliveryMode()==='S'"> {{ 'checkout_page.pickup_from' | translate }}
           <strong text-uppercase>{{getCurrentStore()?.name}}</strong>
         </ion-label>
       </ion-item>
@@ -313,7 +316,7 @@
               <ion-checkbox checked color="medium" slot="start"></ion-checkbox>
               <ion-label>{{ 'checkout_page.latest_discounts_offers_text' | translate }}</ion-label>
             </ion-item>
-            <ion-button
+            <ion-button padding
                     *ngIf="checkoutForm.controls.paymentMethod.value == 'COD'"
                     color="success"
                     text-capitalize
@@ -326,7 +329,7 @@
               {{ 'checkout_page.place_your_order' | translate }} &nbsp;
               <span>{{ getCart()?.total | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
             </ion-button>
-            <ion-button
+            <ion-button padding
                     *ngIf="checkoutForm.controls.paymentMethod.value == 'KNET'"
                     color="success"
                     text-capitalize
