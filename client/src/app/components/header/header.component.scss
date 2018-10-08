@@ -183,7 +183,6 @@
   font-family: 'Conv_UnitedSansCond-Bold';
   color: var(--ion-color-secondary-shade);
   border-right: 1px solid var(--ion-color-medium-tint);
-  border-right: 1px solid var(--ion-color-medium-tint);
   transition: all 0.3s ease-in-out;
   &:first-child {
     border-left: 1px solid var(--ion-color-medium-tint);
@@ -468,6 +467,11 @@ html {
               border-left: 1px solid var(--ion-color-medium-tint);
             }
           }
+        }
+      }
+      .single-menu-item{
+        &:first-child{
+          border-left-width: 0;
         }
       }
     }
