@@ -65,7 +65,7 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   goToPage(pageName, params = null) {
-    if (params) {
+    if (params || params === 0) {
       const route = pageName + '/' + params;
       this.capRouter.routeByUrlWithLanguage(route);
       // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(route));
