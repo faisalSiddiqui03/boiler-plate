@@ -105,6 +105,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     console.log('name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_AREA:
+        this.loaderService.stopLoading();
         if (data.length) {
           const firstStore = data[0];
           // TODO:: add alert-controller to confirm before emptying cart
@@ -120,7 +121,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
           this.navigateToDeals();
           // }
         } else {
-          this.loaderService.stopLoading();
+
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
           this.alertService.presentToast(store_alert, 3000, 'bottom');
         }
