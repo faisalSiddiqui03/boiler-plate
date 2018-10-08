@@ -274,6 +274,7 @@
 	},
 	"header": {
 		"asap": "ASAP",
+		"noSlot": "No Slot",
 		"delivery": "Delivery",
 		"language": "العربية",
 		"location": "Location",

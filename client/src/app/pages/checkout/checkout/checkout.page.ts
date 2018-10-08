@@ -120,7 +120,22 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   ionViewWillEnter() {
-    this.translate.use(this.getCurrentLanguageCode());
+    this.getDeliverySlotPromise().then((slot) => {
+
+      if (slot.id === -2) {
+        // TODO : generate store promise
+        const store = this.getCurrentStore();
+        if (store === null) {
+            this.presentSlotModal();
+        } else if (!store.isOnline(this.getDeliveryMode())) {
+            this.presentSlotModal();
+        } else {
+            this.setDeliverySlot(DeliverySlot.getAsap());
+        }
+      }
+    });
+
+    // TODO : get cart and redirect to showcase
   }
 
   ngAfterViewInit() {

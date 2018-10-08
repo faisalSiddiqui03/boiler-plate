@@ -8,8 +8,9 @@
       </div>
       <div *ngIf="showTime" text-uppercase class="delivery-time" (click)="presentSlotModal()">
         <ion-icon name="time" ios="md-time" md="md-time"></ion-icon>
-        <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
-        <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">{{ 'header.asap' | translate }}</span>
+        <span *ngIf="getDeliverySlot()?.id > -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
+        <span *ngIf="getDeliverySlot()?.id == -1">{{ 'header.asap' | translate }}</span>
+        <span *ngIf="getDeliverySlot()?.id == -2">{{ 'header.noSlot' | translate }}</span>
       </div>
       <div *ngIf="showUserIcon" (click)="goToPage(getUserModel()?.type === 'GUEST' ? 'login' : 'my-account')">
         <div class="profile-icon">

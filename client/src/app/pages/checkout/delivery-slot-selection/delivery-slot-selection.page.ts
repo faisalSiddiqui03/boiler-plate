@@ -80,7 +80,7 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
     console.log('loaded ' + name, data);
     switch (name) {
       case 'DELIVERYSLOTS':
-        if (!this.utilService.isEmpty(this.getDeliverySlot())) {
+        if (!this.utilService.isEmpty(this.getDeliverySlot()) && this.getDeliverySlot().id > -2 ) {
           this.asSoonPossible = this.getDeliverySlot().id === -1;
           this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(this.getDeliverySlot().time);
           this.timeSlotObj = this.getDeliverySlot();
@@ -103,6 +103,9 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
 
   closeModal() {
     this.modalController.dismiss();
+    if (this.getDeliverySlot().id === -2) {
+       this.setDeliverySlot(this.timeSlotObj);
+    }
   }
 
   selectTimeSlot() {
