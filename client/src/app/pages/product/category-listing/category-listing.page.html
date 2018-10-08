@@ -393,7 +393,7 @@
                                       (click)="openProductDetails(prod?.client)">
                                 <div *ngIf="isLoggedIn()" class="icon"
                                      [ngClass]="{'icon-favourite-active': prod?.isFavorite,'icon-favourite': !prod?.isFavorite}"
-                                     (click)="updateFavorites(prod?.isFavorite, prod?.client)"></div>
+                                     (click)="updateFavorites(prod?.isFavorite, prod?.client); $event.stopPropagation();"></div>
                                 <ion-card-header no-padding>
                                   <img height="100" src="{{getProductImageUrl(prod)}}"
                                        img-preloader="{{getProductImageUrl(prod)}}"
