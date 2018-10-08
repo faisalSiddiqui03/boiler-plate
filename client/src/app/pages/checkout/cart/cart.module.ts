@@ -2,17 +2,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { CartWidgetModule, VoucherWidgetModule, ImagePreloadModule, EventTrackModule } from '@capillarytech/pwa-framework';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { CartPage } from './cart.page';
-import { AlertServiceModule, AlertService, LoaderServiceModule, LoaderService, DebounceClickDirective } from '@capillarytech/pwa-ui-helpers';
-import { ProductDetailsComponent } from '../../../components/product-details/product-details.component';
-import { ProductDetailsComponentModule } from '../../../components/product-details/product-details.module';
-import { PizzaComponentModule } from '../../../components/pizza/pizza.module';
-import { PizzaComponent } from '../../../components/pizza/pizza.component';
+import { AlertServiceModule, AlertService, LoaderServiceModule, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { CartComponentModule } from '../../../components/cart/cart.component.module';
 
 const routes: Routes = [
   {
@@ -26,13 +22,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    EventTrackModule,
-    CartWidgetModule,
-    VoucherWidgetModule,
-    ImagePreloadModule,
-    DebounceClickDirective,
-    ProductDetailsComponentModule,
-    PizzaComponentModule,
+    CartComponentModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -47,10 +37,6 @@ const routes: Routes = [
     AlertService,
     LoaderService,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [
-    ProductDetailsComponent,
-    PizzaComponent,
-  ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CartPageModule {}
