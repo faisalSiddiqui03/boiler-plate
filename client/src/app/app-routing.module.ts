@@ -71,7 +71,7 @@ const routes: Routes = [
   { path: ':lang/checkout', loadChildren: './pages/checkout/checkout/checkout.module#CheckoutPageModule' },
   { path: ':lang/deal/:productName/:productId', loadChildren: './pages/product/deal/deal.module#DealPageModule' },
   { path: ':lang/success/:orderId/:email', loadChildren: './pages/checkout/success/success.module#SuccessPageModule' },
-  { path: '*', redirectTo: 'en/home' },
+  { path: '**', redirectTo: 'en/home' },
 ];
 
 @NgModule({
