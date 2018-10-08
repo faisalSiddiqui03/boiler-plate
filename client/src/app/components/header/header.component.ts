@@ -8,14 +8,15 @@ import {
   DeliveryModes,
   LogoutWidgetActions,
   LanguageService,
-  LogoutWidget, pwaLifeCycle
+  LogoutWidget, pwaLifeCycle,
+  DeliverySlot
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../base/base-component';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-selection/delivery-slot-selection.page';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
-import { AlertService } from '@capillarytech/pwa-ui-helpers';
+import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-header',
@@ -31,7 +32,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   logoutWidgetAction = new EventEmitter();
   navigations = [];
   categoryId: string = null;
-
+  asapDeliverySlot = DeliverySlot.getAsap();
+  fetchDeliverySlots = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -40,7 +42,8 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     private alertService: AlertService,
     private location: Location,
     private languageService: LanguageService,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private loaderService: LoaderService,
   ) {
     super();
     this.deliveryModes = DeliveryModes;

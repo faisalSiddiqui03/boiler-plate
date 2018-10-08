@@ -53,8 +53,8 @@ export class BaseComponent {
     return this.globalSharedService.getDeliverySlot();
   }
 
-  async getDeliverySlotPromise() {
-    return await this.globalSharedService.getDeliverySlotPromise();
+  getDeliverySlotPromise() {
+    return this.globalSharedService.getDeliverySlotPromise();
   }
 
   setDeliverySlot(slot) {

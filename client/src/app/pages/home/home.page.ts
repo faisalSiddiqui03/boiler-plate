@@ -109,19 +109,19 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   widgetLoadingSuccess(name, data) {
     console.log('name = ', name, ' data = ', data);
     switch (name) {
-      case 'DELIVERYSLOTS':
-        this.loaderService.stopLoading();
-        this.fetchDeliverySlots = false;
-        if (data && data.length) {
-          this.asSoonPossible = data[0].id === -1;
-        }
-        if (this.asSoonPossible) {
-          this.setDeliverySlot(data[0]);
-        }
-        if (this.isNavigationClicked) {
-          this.isNavigationClicked = false;
-          this.navigateToDeals();
-        }
+      // case 'DELIVERYSLOTS':
+      //   this.loaderService.stopLoading();
+      //   this.fetchDeliverySlots = false;
+      //   if (data && data.length) {
+      //     this.asSoonPossible = data[0].id === -1;
+      //   }
+      //   if (this.asSoonPossible) {
+      //     this.setDeliverySlot(data[0]);
+      //   }
+      //   if (this.isNavigationClicked) {
+      //     this.isNavigationClicked = false;
+      //     this.navigateToDeals();
+      //   }
     }
   }
 
@@ -154,13 +154,13 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
             this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
           }
           this.setCurrentStore(firstStore);
-          if (!firstStore.isOnline(this.getDeliveryMode())) {
-            this.fetchDeliverySlots = true;
-          } else {
-            this.setDeliverySlot(this.asapDeliverySlot);
-            this.asSoonPossible = true;
+          // if (!firstStore.isOnline(this.getDeliveryMode())) {
+            // this.fetchDeliverySlots = true;
+          // } else {
+            // this.setDeliverySlot(this.asapDeliverySlot);
+            // this.asSoonPossible = true;
             this.navigateToDeals();
-          }
+          // }
         } else {
           this.loaderService.stopLoading();
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
@@ -170,11 +170,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         if (data.length) {
           this.setCurrentStore(data[0]);
-          if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
-            this.fetchDeliverySlots = true;
-          } else {
-            this.setDeliverySlot(this.asapDeliverySlot);
-          }
+          // if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
+          //   this.fetchDeliverySlots = true;
+          // } else {
+          //   this.setDeliverySlot(this.asapDeliverySlot);
+          // }
         } else {
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
           this.alertService.presentToast(store_alert, 3000, 'bottom');
@@ -210,14 +210,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   widgetLoadingStarted(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
-  }
-
-  /**
-   * @name: could be area, city town based on
-   * requirement of brand
-   */
-  filterEntity(e, type) {
-
   }
 
   isCitySelected() {
@@ -345,21 +337,21 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   navigateToDeals() {
     this.isNavigationClicked = true;
-    if (this.fetchDeliverySlots) {
-      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
-      return;
-    }
-
+    // if (this.fetchDeliverySlots) {
+    //   this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    //   return;
+    // }
+    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
     // const langCode = this.utilService.getLanguageCode();
-    if (!this.asSoonPossible || this.utilService.isEmpty(this.getDeliverySlot())) {
-      this.presentSlotModal().then(data => {
-        this.loaderService.stopLoading();
-        this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
-      });
-    } else {
-      this.loaderService.stopLoading();
-      this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
-    }
+    // if (!this.asSoonPossible || this.utilService.isEmpty(this.getDeliverySlot())) {
+    //   // this.presentSlotModal().then(data => {
+    //     // this.loaderService.stopLoading();
+        
+    //   // });
+    // } else {
+    //   this.loaderService.stopLoading();
+    //   this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
+    // }
   }
 
   changeOrderMode(mode, previousMode) {
@@ -393,13 +385,13 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.changeRequested = true;
   }
 
-  async presentSlotModal() {
-    const modal = await this.modalController.create({
-      component: DeliverySlotSelectionPage,
-    });
-    await modal.present();
-    return await modal.onDidDismiss();
-  }
+  // async presentSlotModal() {
+  //   const modal = await this.modalController.create({
+  //     component: DeliverySlotSelectionPage,
+  //   });
+  //   await modal.present();
+  //   return await modal.onDidDismiss();
+  // }
 
   filterEmptyCities(cityList) {
     return cityList.filter(city => city.name !== '');
