@@ -31,9 +31,7 @@ export class CartPage extends BaseComponent implements OnInit {
     private modalController: ModalController,
   ) {
     super();
-    this.translateService.use(this.getCurrentLanguageCode());
-    this.loaded = false;
-    this.currencyCode = this.config.getConfig()['currencyCode'];
+    this.translateService.use(this.utilService.getLanguageCode());
   }
 
   ngOnInit() {
