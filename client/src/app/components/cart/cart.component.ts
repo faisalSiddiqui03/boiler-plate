@@ -41,7 +41,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
     private utilService: UtilService
   ) {
     super();
-    this.translateService.use(this.utilService.getLanguageCode());
+    this.translateService.use(this.getCurrentLanguageCode());
     this.loaded = false;
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }

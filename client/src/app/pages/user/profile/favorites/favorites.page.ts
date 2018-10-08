@@ -36,8 +36,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     super();
 
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
-
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {

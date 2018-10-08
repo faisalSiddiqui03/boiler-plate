@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BaseComponent } from '../../base/base-component';
 import { UtilService } from '../../helpers/utils';
 import { pwaLifeCycle } from "@cap-core/lifecycle";
+import { CapRouterService } from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-footer',
@@ -19,17 +20,19 @@ export class FooterComponent extends BaseComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private utilService: UtilService,
-    private router: Router
+    private router: Router,
+    private capRouter: CapRouterService,
   ) {
     super();
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {
   }
 
   navigatePage(page) {
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(page));
+    this.capRouter.routeByUrlWithLanguage(page);
+    //this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(page));
   }
 
   navigateToCategory(item) {

@@ -63,6 +63,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   lat;
   lng;
   asapDeliverySlot = DeliverySlot.getAsap();
+  clearCartPopup: boolean = false;
 
   constructor(
     private config: ConfigService,
@@ -86,10 +87,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   async ionViewWillEnter() {
-    // const langCode = this.actRoute.snapshot.params['lang'];
-    // await this.utilService.setLanguageCode(langCode);
-    this.translate.use(this.getCurrentLanguage().code);
-    //this.langService.updateLanguageByCode(langCode);
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ionViewDidEnter() {
@@ -203,6 +201,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
         this.alertService.presentToast('removed cart items', 3000, 'bottom');
+        break;
+      case LocationWidgetActions.FETCH_AREAS_BY_CITY_CODE:
+        if (data && data.length === 1) {
+          this.selectArea(data[0]);
+        }
         break;
     }
   }
@@ -324,8 +327,17 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   findStore() {
     this.isNavigationClicked = true;
-    this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
-      [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
+    if (this.getFulfilmentMode().mode === this.deliveryModes.HOME_DELIVERY) {
+      this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
+        [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
+    } else {
+      this.storeLocatorWidgetAction.emit(
+        new Action(
+          StoreLocatorWidgetActions.FIND_BY_CITY,
+          [this.selectedCityCode, this.getFulfilmentMode().mode]
+        )
+      )
+    }
     this.loaderService.startLoading('Fetching Stores', this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
   }
 
@@ -365,7 +377,16 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     }
   }
 
-  changeOrderMode(mode, previousMode) {
+  changeOrderMode(mode, previousMode, force: boolean = false) {
+    // TODO:: add alert-controller to confirm before emptying cart
+    if (mode !== previousMode && !this.isCartEmpty()) {
+      if (!force) {
+        this.clearCartPopup = true;
+        return;
+      }
+      this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+    }
+
     this.toggleDropDown('area', true, false);
     this.toggleDropDown('city', true, false);
     this.citySelectionHistory[previousMode] = {
@@ -375,10 +396,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       selectedAreaCode: this.selectedAreaCode || ''
     };
 
-    // TODO:: add alert-controller to confirm before emptying cart
-    if (mode !== previousMode && !this.isCartEmpty()) {
-      this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
-    }
     this.fulfilmentModeWidgetAction.emit(new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, mode));
     const selected = this.citySelectionHistory[mode] || {};
     this.selectedCity = selected.selectedCity || '';
@@ -432,5 +449,15 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       return true;
     }
     return false;
+  }
+
+  dismissClearCartPopup() {
+    this.clearCartPopup = false;
+  }
+
+  toggleOrderMode(force: boolean = false) {
+    const presentMode = this.getFulfilmentMode().mode;
+    const toMode = presentMode === this.deliveryModes.HOME_DELIVERY ? this.deliveryModes.PICKUP : this.deliveryModes.HOME_DELIVERY;
+    this.changeOrderMode(toMode, presentMode, force);
   }
 }

@@ -38,7 +38,7 @@ export class BannerComponent extends BaseComponent implements OnInit {
     private translate: TranslateService) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {

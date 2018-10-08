@@ -32,7 +32,7 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
     private router: Router, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService) {
     super();
 
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.resetPasswordForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])]

@@ -299,7 +299,10 @@
 		"take_away": "Take away",
 		"unable_to_get_stores": "Unable to get stores",
 		"view_all_deals": "View All Deals",
-		"your_pickup_hut_is": "Your pickup hut is"
+		"your_pickup_hut_is": "Your pickup hut is",
+		"clear_cart_message": "Are you sure you want to clear cart items?",
+		"dismiss": "DISMISS",
+		"confirm": "CONFIRM"
 	},
 	"location_page": {
 		"confirm_and_proceed": "Confirm and Proceed",

@@ -121,6 +121,9 @@
                   </ion-item>
                 </ion-list>
               </div>
+
+
+
               <div class="form-control"
                    *ngIf="getDeliveryMode() === deliveryModes?.HOME_DELIVERY">
                 <ion-searchbar [disabled]="!selectedCity || selectedCity === ''" class="form-search" [debounce]="1000"
@@ -148,6 +151,10 @@
                   </ion-item>
                 </ion-list>
               </div>
+
+
+
+
             </div>
           </div>
         </ng-template>
@@ -238,6 +245,31 @@
         </ion-button>
       </ion-col>
     </ion-row>
+  </div>
+  <div class="clearcart-modal" *ngIf="clearCartPopup">
+    <div class="clearcart-popup">
+      <p flex-center>{{'home_page.clear_cart_message' | translate}}</p>
+      <div flex-center>
+      <ion-button
+              (click)="dismissClearCartPopup()"
+              color="medium"
+              text-capitalize
+              expand="block"
+              mode="ios"
+              class="btn-dismiss clearcart-dismiss">
+        {{ 'home_page.dismiss' | translate }}
+      </ion-button>
+      <ion-button
+              (click)="dismissClearCartPopup();toggleOrderMode(true)"
+              color="success"
+              text-capitalize
+              expand="block"
+              mode="ios"
+              class="btn-success clearcart-confirm ">
+        {{ 'home_page.confirm' | translate }}
+      </ion-button>
+      </div>
+    </div>
   </div>
   <app-footer></app-footer>
 </ion-content>

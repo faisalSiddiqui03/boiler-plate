@@ -36,10 +36,8 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
     private utilService: UtilService,
     private formBuilder: FormBuilder) {
     super();
-
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
-
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.profileForm = this.formBuilder.group({
       firstName: ['', Validators.compose([Validators.required])],

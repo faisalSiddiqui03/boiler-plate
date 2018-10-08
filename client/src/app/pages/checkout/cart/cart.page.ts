@@ -57,7 +57,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private modalController: ModalController,
   ) {
     super();
-    this.translateService.use(this.utilService.getLanguageCode());
+    this.translateService.use(this.getCurrentLanguageCode());
     this.loaded = false;
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
@@ -67,9 +67,7 @@ export class CartPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   ionViewWillEnter() {
     this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
-    const langCode = this.actRoute.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translateService.use(langCode);
+    this.translateService.use(this.getCurrentLanguageCode());
   }
 
   applyCoupon() {

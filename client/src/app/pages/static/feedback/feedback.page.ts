@@ -3,13 +3,14 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../helpers/utils';
+import { BaseComponent } from '../../../base/base-component';
 
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.page.html',
   styleUrls: ['./feedback.page.scss'],
 })
-export class FeedbackPage implements OnInit {
+export class FeedbackPage extends BaseComponent implements OnInit {
   feedBackForm: FormGroup;
 
   constructor(
@@ -18,7 +19,8 @@ export class FeedbackPage implements OnInit {
     private utilService: UtilService,
     private formBuilder: FormBuilder
   ) {
-    this.translate.use(this.utilService.getLanguageCode());
+    super();
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.feedBackForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],

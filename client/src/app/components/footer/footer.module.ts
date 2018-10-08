@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigationWidgetModule } from '@capillarytech/pwa-framework';
+import { NavigationWidgetModule, CapRouterServiceModule } from '@capillarytech/pwa-framework';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer.component';
@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
     CommonModule,
     FormsModule,
     NavigationWidgetModule,
+    CapRouterServiceModule.forRoot(),
     IonicModule,
     TranslateModule.forRoot({
       loader: {

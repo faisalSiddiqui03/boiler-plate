@@ -84,7 +84,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     super();
     this.deliveryModes = DeliveryModes;
 
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.currencyCode = this.config.getConfig()['currencyCode'];
 
@@ -106,9 +106,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   showSlotsModal = false;
 
   ngOnInit() {
-    const langCode = this.actRoute.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.translate.get('checkout_page.secure_checkout').subscribe(value => {
       this.titleValue = value;
@@ -122,9 +120,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   ionViewWillEnter() {
-    const langCode = this.actRoute.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngAfterViewInit() {

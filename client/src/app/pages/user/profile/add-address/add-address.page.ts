@@ -31,7 +31,7 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
 
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
 
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.addAddressForm = this.formBuilder.group({
       addressDetails: ['', Validators.compose([Validators.required])],

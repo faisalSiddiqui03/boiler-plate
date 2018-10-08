@@ -55,9 +55,9 @@ export class AppComponent extends BaseComponent {
   }
 
   setLanguage(langCode: string) {
-    this.utilService.setLanguageCode(langCode);
-    this.translate.setDefaultLang(langCode);
-    this.translate.use(langCode);
+    // this.utilService.setLanguageCode(langCode);
+    // this.translate.setDefaultLang(langCode);
+    // this.translate.use(langCode);
     //this.setAppDirection(langCode);
   }
 

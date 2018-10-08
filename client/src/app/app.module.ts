@@ -27,7 +27,9 @@ import {
   LogoutWidgetModule,
   FulfilmentModeModule,
   SEOModule,
-  LanguageService
+  LanguageService,
+  CapRouterService,
+  CapRouterServiceModule
 } from '@capillarytech/pwa-framework';
 import { AuthGuard } from './auth.guard';
 import { HttpLoaderFactory } from './translation.loader';
@@ -81,6 +83,7 @@ export function getAppConfig(): Object {
     LocationPageModule,
     SearchLocationPageModule,
     EventTrackModule.forRoot([EventTrackModule.Tracker.GTM]),
+    CapRouterServiceModule,
     LanguageServiceModule.forRoot(languages),
     TranslateModule.forRoot({
       loader: {
@@ -122,22 +125,47 @@ export function getAppConfig(): Object {
 export class AppModule {
   constructor(injector: Injector,
     private utilService: UtilService,
+    private capRouterService: CapRouterService,
     languageService: LanguageService) {
     setAppInjector(injector);
     const locationUrl = window.location.pathname;
+
+    var defaultLang = undefined;
+    var allowedLanguages = [];
+    languages.forEach(async (lang) => {
+      allowedLanguages.push(lang.code);
+      if (lang.isDefault) {
+        defaultLang = lang.code;
+        // await languageService.initialize(lang.code);
+        // this.utilService.setLanguageCode(lang.code);
+        // this.capRouterService.routeByUrlWithLanguage(locationUrl);
+      }
+    })
+
     if (locationUrl.startsWith('/ar')) {
       languageService.initialize('ar');
-      this.utilService.setLanguageCode('ar');
+      //this.utilService.setLanguageCode('ar');
     } else if (locationUrl.startsWith('/en')) {
       languageService.initialize('en');
-      this.utilService.setLanguageCode('en');
+      //this.utilService.setLanguageCode('en');
     } else {
-      languages.forEach((lang) => {
-        if (lang.isDefault) {
-          languageService.initialize(lang.code);
-          this.utilService.setLanguageCode(lang.code);
-        }
-      })
+      // two possiblities: either lang code not provided
+      // or wrong lang code is provided
+     
+      // here check the browser language
+      const browserLang = navigator.language;
+      let mappedLang = languageService.getCodeByBrowserLanguage(browserLang);
+      if (!mappedLang || mappedLang === '') {
+        mappedLang = defaultLang;
+      }
+
+      if (mappedLang === '') {
+        mappedLang = 'en';
+      }
+
+      languageService.initialize(mappedLang);
+      //this.utilService.setLanguageCode(mappedLang);
+      this.capRouterService.routeByUrlWithLanguage(locationUrl);
     }
   }
 }

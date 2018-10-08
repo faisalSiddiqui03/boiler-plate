@@ -28,7 +28,7 @@ export class SearchLocationPage extends BaseComponent implements OnInit, OnWidge
     private config: ConfigService,
     private modalController: ModalController) {
     super();
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {

@@ -22,9 +22,7 @@ export class ProductDetailsPage extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    const langCode = this.route.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.categoryId = this.route.snapshot.params.categoryId;
     this.productId = this.route.snapshot.params.productId;

@@ -57,8 +57,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     this.googleClientId = this.config.getConfig()['googleClientId'];
 
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
-
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.widgetModels = {};
 
@@ -69,10 +68,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   ionViewWillEnter() {
-    const langCode = this.actRoute.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
-    //this.langService.updateLanguageByCode(langCode);
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {

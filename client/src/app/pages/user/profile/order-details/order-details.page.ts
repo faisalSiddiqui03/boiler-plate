@@ -24,8 +24,7 @@ export class OrderDetailsPage extends BaseComponent implements OnInit, OnWidgetL
     super();
 
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
-
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {
