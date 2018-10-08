@@ -64,9 +64,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
 
   ionViewWillEnter() {
     this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
-    const langCode = this.actRoute.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translateService.use(langCode);
+    this.translateService.use(this.getCurrentLanguageCode());
   }
 
   applyCoupon() {
