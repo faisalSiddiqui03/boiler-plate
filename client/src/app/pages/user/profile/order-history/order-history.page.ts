@@ -30,7 +30,6 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   titleValue = '';
   orderWidgetAction = new EventEmitter();
   orderWidgetExecutor = new EventEmitter();
-  userId = '52a3e909-7702-4b49-945d-0e095ddd28bd';
   showingProductsForIndexs = [];
   isShowMoreButtonVisible = true;
   isWidgetLoadingDone = false;
