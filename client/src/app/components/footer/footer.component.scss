@@ -25,6 +25,7 @@
     color: var(--ion-color-light);
   }
   .copyrights p {
+    margin-top: 0;
     font-size: 12px;
     color: var(--ion-color-light);
   }
@@ -85,6 +86,11 @@
 
 @media (min-width: 992px) {
 	.footer-content {
+    background: var(--ion-footer-bg);
+    padding-bottom: 0;
+    .container{
+      max-width: 1080px;
+    }
 		.f-nutition {
 			order: 0;
 		}

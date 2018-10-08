@@ -18,7 +18,13 @@
     }
   }
 }
-
+.deal-showcase-component{
+  ion-content{
+    &.page-bg{
+      --background: transparent;
+    }
+  }
+}
 .drinks-component {
   .drinks-img-wrap {
     position: relative;

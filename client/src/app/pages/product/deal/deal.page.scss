@@ -22,6 +22,11 @@
       }
     }
   }
+  ion-content{
+    &.page-bg{
+      --background: transparent;
+    }
+  }
   .deals-list {
     max-width: 800px;
     margin: auto;
