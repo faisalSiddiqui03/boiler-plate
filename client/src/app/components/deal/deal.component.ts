@@ -137,6 +137,10 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   clearBundleGroupItems(bundleGroup) {
     this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
       if (item.groupId === bundleGroup.groupId) item.remove();
+      item.bundleItems.forEach((subItem: BundleItem, key: number) => {
+        console.log('sub item');
+        if (subItem.groupId === bundleGroup.groupId) subItem.remove();
+      });
     });
     this.noOfSelectedGroups = this.noOfSelectedGroups - 1;
     this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
@@ -181,6 +185,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     });
     if (this.cartItem) {
       this.showAddToCart = true;
+      this.noOfSelectedGroups = this.noOfRequiredGroups;
       return;
     }
     this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
