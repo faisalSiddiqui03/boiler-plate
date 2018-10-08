@@ -18,6 +18,7 @@
 		"landmark_placeholder": "optional",
 		"okay": "Okay",
 		"other": "Other",
+		"update_address": "Update Address",
 		"work": "Work"
 	},
 	"banner_widget": {
@@ -39,6 +40,7 @@
 		"no_voucher_message_1": "Sorry, we don't currently support that voucher code. Don't worry, you can ",
 		"no_voucher_message_2": "Find our best deals on our deals page,",
 		"no_voucher_message_3": " or call your Hut to find out more",
+		"not_editable": "Item not editable",
 		"remove_item": "",
 		"unable_to_apply_coupon": "Unable to apply coupon",
 		"unable_to_remove_coupon": "Coupon could not be removed",
@@ -47,8 +49,7 @@
 		"voucher_code": "Voucher code",
 		"voucher_description": "Our top deals are always available online on our Deals page.",
 		"your_cart": "Your Cart",
-		"your_total": "Your Total",
-		"not_editable": "Item not editable"
+		"your_total": "Your Total"
 	},
 	"category_listing": {
 		"price_tag": "From"
@@ -285,9 +286,12 @@
 	"home_page": {
 		"block_": "Block ",
 		"change": "Change",
+		"clear_cart_message": "Are you sure you want to clear cart items?",
 		"collection": "Pickup from",
+		"confirm": "CONFIRM",
 		"delivery": "Delivery",
 		"delivery_name": "Delivering from",
+		"dismiss": "DISMISS",
 		"find_my_nearest_hut": "Find my nearest Hut",
 		"language": "العربية",
 		"no_store_available": "No Store Available",
@@ -299,10 +303,7 @@
 		"take_away": "Take away",
 		"unable_to_get_stores": "Unable to get stores",
 		"view_all_deals": "View All Deals",
-		"your_pickup_hut_is": "Your pickup hut is",
-		"clear_cart_message": "Are you sure you want to clear cart items?",
-		"dismiss": "DISMISS",
-		"confirm": "CONFIRM"
+		"your_pickup_hut_is": "Your pickup hut is"
 	},
 	"location_page": {
 		"confirm_and_proceed": "Confirm and Proceed",
@@ -506,8 +507,7 @@
 		"password_required": "We need your password: We won’t tell anyone. Promise.",
 		"register": "Register",
 		"remember_me": "Remember me",
-    "sign_in": "Sign In",
-    "success_sign_in" : "Successfully signed in",
+		"sign_in": "Sign In",
 		"signin_google": "Sign in with Google"
 	},
 	"sign_up_page": {

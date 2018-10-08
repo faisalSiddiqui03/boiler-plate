@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
 import {
+  Action,
   pwaLifeCycle,
   pageView,
   OnWidgetActionsLifecyle,
@@ -29,8 +30,9 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
 
   titleValue = '';
   addAddressForm: FormGroup;
-  addressId;
+  addressId: Number;
   singleUserAddressWidgetActions = new EventEmitter();
+  addressModel;
 
   constructor(private router: Router,
     private utilService: UtilService,
@@ -55,7 +57,7 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   ngOnInit() {
-    this.addressId = this.actRoute.snapshot.params['addressId'];
+    this.addressId = parseInt(this.actRoute.snapshot.params['addressId'], 10);
 
     this.translate.get('add_address_page.add_address').subscribe(value => {
       this.titleValue = value;
@@ -65,10 +67,26 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
 
   widgetActionFailed(name: string, data: any): any {
     console.log(name, 'Action Failed');
+    switch (name) {
+      case 'saveAddress':
+        console.log(name, 'error', data);
+        break;
+      case 'updateAddress':
+        console.log(name, 'error', data);
+        break;
+    }
   }
 
   widgetActionSuccess(name: string, data: any): any {
     console.log(name, 'Action Success');
+    switch (name) {
+      case 'saveAddress':
+        console.log(name, data);
+        break;
+      case 'updateAddress':
+        console.log(name, data);
+        break;
+    }
   }
 
   widgetLoadingFailed(name: string, data: any): any {
@@ -88,8 +106,34 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
     console.log(name, 'Loading Success');
     switch (name) {
       case 'singleUserAddress':
+        this.addAddressForm.setValue({
+          addressDetails: data.address1,
+          landMark: data.landmark,
+          addressType: data.addressType.toLowerCase()
+        });
+        this.addressModel = data;
         break;
     }
+  }
+
+  saveAddress(addressForm, type) {
+    this.addressModel.locationDetails = {};
+    this.addressModel.address1 = addressForm.value.addressDetails;
+    this.addressModel.landmark = addressForm.value.landMark;
+    this.addressModel.addressType = addressForm.value.addressType;
+    if (type === 'save') {
+      this.singleUserAddressWidgetActions.emit(
+        new Action(UserAddressWidgetActions.SAVE, this.addressModel)
+      );
+    } else if (type === 'update') {
+      this.singleUserAddressWidgetActions.emit(
+        new Action(UserAddressWidgetActions.UPDATE, this.addressModel)
+      );
+    }
+  }
+
+  updateLatLongDetails(event) {
+
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../base/base-component';
 import { TranslateService } from '@ngx-translate/core';
 import { AgmCoreModule, MouseEvent } from '@agm/core';
@@ -20,6 +20,8 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
   agmMarkerSrc = 'assets/imgs/location-pin.png';
 
   @Input() addressPageClass = false;
+  @Input() locationDetails;
+  @Output() newLocationDetails = new EventEmitter();
 
   constructor(
     private translate: TranslateService,
@@ -32,13 +34,27 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.marker = {
-        lat: parseFloat(this.getCurrentStore().locationDetail.latitude),
-        lng: parseFloat(this.getCurrentStore().locationDetail.longitude),
-        label: ' ',
-        draggable: true
-      };
-      console.log(this.getCurrentStore());
+      if (this.locationDetails && this.locationDetails.latitude && this.locationDetails.longitude) {
+        this.marker = {
+          lat: parseFloat(this.locationDetails.latitude),
+          lng: parseFloat(this.locationDetails.longitude),
+          label: ' ',
+          draggable: true
+        };
+      } else {
+        this.marker = {
+          lat: parseFloat(this.getCurrentStore().locationDetail.latitude),
+          lng: parseFloat(this.getCurrentStore().locationDetail.longitude),
+          label: ' ',
+          draggable: true
+        };
+        const latLong = {
+          latitude: this.marker.lat,
+          longitude: this.marker.lng
+        };
+        this.newLocationDetails.emit(latLong);
+        console.log(this.getCurrentStore());
+      }
     }, 1000);
   }
 
@@ -50,6 +66,11 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
 
   updateLocationAddress() {
     console.log('update location');
+    const latLong = {
+      latitude: this.marker.lat,
+      longitude: this.marker.lng
+    };
+    this.newLocationDetails.emit(latLong);
   }
 
   confirmLocation() {

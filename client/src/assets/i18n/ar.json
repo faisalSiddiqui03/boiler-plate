@@ -18,6 +18,7 @@
 		"landmark_placeholder": "اختياري",
 		"okay": "نعم",
 		"other": "أخرى",
+		"update_address": "",
 		"work": "العمل"
 	},
 	"banner_widget": {
@@ -39,6 +40,7 @@
 		"no_voucher_message_1": "عذرًا ، لا ندعم حاليًا رمز القسيمة هذا. لا تقلق ، يمكنك ذلك",
 		"no_voucher_message_2": "ابحث عن أفضل عروضنا على صفحة صفقاتنا ،",
 		"no_voucher_message_3": "أو اتصل بكوخ لمعرفة المزيد",
+		"not_editable": "",
 		"remove_item": "",
 		"unable_to_apply_coupon": "غير قادر على تطبيق القسيمة",
 		"unable_to_remove_coupon": "لا يمكن إزالة القسيمة",
@@ -47,8 +49,7 @@
 		"voucher_code": "رمز القسيمة",
 		"voucher_description": "لدينا صفقات الأعلى متاحة دائما على الإنترنت على صفحة صفقاتنا.",
 		"your_cart": "عربتك",
-		"your_total": "مجموعك",
-		"not_editable": ""
+		"your_total": "مجموعك"
 	},
 	"category_listing": {
 		"price_tag": "من عند"
@@ -285,9 +286,12 @@
 	"home_page": {
 		"block_": "منع",
 		"change": "تغير العنوان",
+		"clear_cart_message": "Are you sure you want to clear cart items?",
 		"collection": "الاستلام من فرع",
+		"confirm": "CONFIRM",
 		"delivery": "توصيل",
 		"delivery_name": "التوصيل من فرع",
+		"dismiss": "DISMISS",
 		"find_my_nearest_hut": " إيجاد الفرع الأقر",
 		"language": "English",
 		"no_store_available": "لا يوجد متجر متاح",
@@ -299,10 +303,7 @@
 		"take_away": "طلب خارجي",
 		"unable_to_get_stores": "غير قادر على الحصول على المتاجر",
 		"view_all_deals": "عرض جميع الصفقات",
-		"your_pickup_hut_is": "مكان إستلام الطلب",
-		"clear_cart_message": "Are you sure you want to clear cart items?",
-		"dismiss": "DISMISS",
-		"confirm": "CONFIRM"
+		"your_pickup_hut_is": "مكان إستلام الطلب"
 	},
 	"location_page": {
 		"confirm_and_proceed": "تأكيد والمتابعة",
@@ -505,8 +506,7 @@
 		"password_placeholder": "أدخل كلمة المرور",
 		"password_required": "نحتاج كلمة مرورك. كن مطمئناً سرك في بئرنا العميق",
 		"register": "تسجيل جديد",
-    "remember_me": "تذكرنى",
-    "success_sign_in" : "Successfully signed in",
+		"remember_me": "تذكرنى",
 		"sign_in": "تسجيل دخول",
 		"signin_google": "تسجيل دخول قوقل"
 	},
