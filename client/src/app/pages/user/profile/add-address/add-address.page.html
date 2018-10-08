@@ -50,7 +50,7 @@
     </div>
 
     <!-- for editing saved address -->
-    <div class="location-wrap" *ngIf="addressId && addressId !== 0">
+    <div class="location-wrap" *ngIf="addressId && addressId > 0">
       <single-user-address-widget [componentId]="getComponentId()" [useLoggedInUser]="true" [addressId]="addressId" [action]="singleUserAddressWidgetActions">
         <ng-template let-widget="widget">
           <ng-container *ngIf="widget.model">
@@ -97,6 +97,6 @@
   </div>
 </ion-content>
 <ion-footer no-border>
-  <ion-button *ngIf="!addressId" type="submit" color="success" text-uppercase expand="block" mode="ios" class="btn-success">{{'add_address_page.add_address' | translate}}</ion-button>
-  <ion-button *ngIf="addressId" type="submit" color="success" text-uppercase expand="block" mode="ios" class="btn-success">{{'add_address_page.update_address' | translate}}</ion-button>
+  <ion-button *ngIf="!addressId" (click)="saveAddress(addAddressForm, 'save')" color="success" text-uppercase expand="block" mode="ios" class="btn-success">{{'add_address_page.add_address' | translate}}</ion-button>
+  <ion-button *ngIf="addressId" (click)="saveAddress(addAddressForm, 'update')" color="success" text-uppercase expand="block" mode="ios" class="btn-success">{{'add_address_page.update_address' | translate}}</ion-button>
 </ion-footer>

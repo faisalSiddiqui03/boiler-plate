@@ -33,6 +33,10 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
   addressId: Number;
   singleUserAddressWidgetActions = new EventEmitter();
   addressModel;
+  newLatLngDetails = {
+    latitude: 0,
+    longitude: 0
+  };
 
   constructor(private router: Router,
     private utilService: UtilService,
@@ -117,7 +121,7 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   saveAddress(addressForm, type) {
-    this.addressModel.locationDetails = {};
+    this.addressModel.locationDetails = this.newLatLngDetails;
     this.addressModel.address1 = addressForm.value.addressDetails;
     this.addressModel.landmark = addressForm.value.landMark;
     this.addressModel.addressType = addressForm.value.addressType;
@@ -133,7 +137,8 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   updateLatLongDetails(event) {
-
+    this.newLatLngDetails.latitude = event.latitude;
+    this.newLatLngDetails.longitude = event.longitude;
   }
 
 }
