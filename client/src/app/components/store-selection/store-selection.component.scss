@@ -1,0 +1,127 @@
+.delivery-wrap {
+  max-width: 450px;
+  min-width: 320px;
+  padding: 0 15px 15px;
+  margin: -30px auto 0;
+  .delivery-take-away {
+    box-shadow: 0 2px 2px 0 rgba(var(--ion-color-dark-rgb), .14), 0 3px 1px -2px rgba(var(--ion-color-dark-rgb), .2), 0 2px 5px 0 rgba(var(--ion-color-dark-rgb), .12);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    max-width: 400px;
+    margin: auto;
+    ion-segment {
+      min-height: 55px;
+    }
+    ion-segment-button {
+      --padding-start: 5px;
+      --padding-end: 5px;
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+      --border-width: 0;
+      --background: transparent;
+      --border-radius: 0;
+      position: relative;
+      background: var(--ion-color-light-tint);
+      color: var(--ion-tabs-color);
+      font-size: 16px;
+      border-radius: 5px 5px 0 0;
+      font-weight: 700;
+      opacity: 1;
+      height: auto;
+      font-family: 'Open Sans Condensed';
+      align-self: flex-end;
+      transition: all 0.3s ease-in-out;
+      filter: grayscale(100%) contrast(80%);
+      &+ion-segment-button {
+        margin-left: 2px;
+      }
+      &.segment-checked {
+        color: var(--ion-color-danger);
+        background: var(--ion-color-light);
+        filter: none;
+        span {
+          line-height: 35px;
+        }
+      }
+      span {
+        line-height: 25px;
+      }
+      small {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 5px;
+        width: 25px;
+        height: 25px;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        &.delivery-icon {
+          background-image: url('assets/imgs/delivery-bike-icon.gif');
+        }
+        &.takeaway-icon {
+          background-image: url('assets/imgs/collection-icon.gif');
+        }
+      }
+    }
+  }
+  &.segment-checked {
+    --padding-top: 21px;
+    --padding-bottom: 21px;
+    color: var(--ion-color-danger);
+    --background: var(--ion-color-light);
+  }
+}
+
+.find-hut {
+  padding: 15px;
+  font-size: 14px;
+  border-top: 1px solid var(--ion-color-medium-shade);
+  span {
+    color: var(--ion-color-tertiary);
+    display: block;
+    padding-left: 20px;
+    background: url('assets/imgs/icon-geo.svg') no-repeat left / 14px;
+  }
+  strong {
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 600px) {
+  .banner-home {
+    line-height: 200px;
+    img {
+      margin: -50% auto;
+      vertical-align: middle;
+    }
+  }
+}
+
+.banner-home {
+  display: block;
+  max-height: 200px;
+  overflow: hidden;
+  img {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.take-away-block {
+  margin: 30px 10px 0;
+  span {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: var(--ion-color-dark-tint);
+  }
+  .store-name {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  p {
+    margin: 5px 0 10px;
+    font-size: 14px;
+    color: #666;
+  }
+}

@@ -19,9 +19,10 @@ import {
   FulfilmentModeModule,
   StoreLocatorWidgetModule,
   DeliverySlotsWidgetModule,
-  CartWidgetModule
+  CartWidgetModule,
 } from '@capillarytech/pwa-framework';
 import { BannerWidgetModule, EventTrackModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
+import { AppStoreSelectionModule } from '../../components/store-selection/store-selection.module';
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
     BannerWidgetModule,
     EventTrackModule,
     ImagePreloadModule,
+    AppStoreSelectionModule,
     FulfilmentModeModule,
     LoaderServiceModule,
     StoreLocatorWidgetModule,

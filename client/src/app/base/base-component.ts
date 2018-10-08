@@ -1,5 +1,6 @@
 import { GlobalSharedService } from '@cap-core/service/global-shared.service';
 import { appInjector } from '@cap-core/app.injector';
+import { DeliverySlot } from '@capillarytech/pwa-framework';
 
 export class BaseComponent {
 
@@ -53,7 +54,7 @@ export class BaseComponent {
     return this.globalSharedService.getDeliverySlot();
   }
 
-  getDeliverySlotPromise() {
+  async getDeliverySlotPromise(): Promise<DeliverySlot> {
     return this.globalSharedService.getDeliverySlotPromise();
   }
 

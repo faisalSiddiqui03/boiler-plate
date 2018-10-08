@@ -184,6 +184,9 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
 
   addToCart() {
     console.error(this.getCurrentStore())
+    if(this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
+      
+    }
     if (this.productFromDeal) {
       this.modalController.dismiss(this.clientProduct);
       return;

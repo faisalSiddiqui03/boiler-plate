@@ -62,13 +62,13 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     this.translate.use(this.getCurrentLanguageCode());
   }
 
-  async ionViewWillEnter() {
-    console.error(await this.getDeliverySlotPromise());
-    // this.getDeliverySlotPromise().then((data) => {
-    //    console.error('success', data); 
-    // }).then((e) => {
-    //   console.error('erre', e);
-    // });
+  ionViewWillEnter() {
+    // console.error(this.getDeliverySlotPromise());
+    this.getDeliverySlotPromise().then((data) => {
+       console.error('success', data); 
+    }).then((e) => {
+      console.error('erre', e);
+    });
     if (this.utilService.isEmpty(this.getDeliverySlotPromise())) {
       if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
         this.fetchDeliverySlots = true;
