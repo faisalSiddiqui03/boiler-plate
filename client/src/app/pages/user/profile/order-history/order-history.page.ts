@@ -30,10 +30,9 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   titleValue = '';
   orderWidgetAction = new EventEmitter();
   orderWidgetExecutor = new EventEmitter();
-  loaded: boolean = false;
-  userId: string = "52a3e909-7702-4b49-945d-0e095ddd28bd";
   showingProductsForIndexs = [];
   isShowMoreButtonVisible = true;
+  isWidgetLoadingDone = false;
 
   constructor(private router: Router,
     private utilService: UtilService,
@@ -52,8 +51,8 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   handleOrdersResponse(data) {
-    if (data.status == 204) {
-      console.log("There are no previous Orders");
+    if (data.status === 204) {
+      console.log('There are no previous Orders');
     }
   }
 
@@ -85,6 +84,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
 
   widgetLoadingFailed(name: string, data: any): any {
     console.log(name, data);
+    this.isWidgetLoadingDone = true;
     this.handleOrdersResponse(data);
   }
 
@@ -92,8 +92,8 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   widgetLoadingSuccess(name, data) {
-    console.log("widget loading success", name, data);
-    this.loaded = true;
+    console.log('widget loading success', name, data);
+    this.isWidgetLoadingDone = true;
   }
 
   getOrderDetails(order) {
@@ -101,10 +101,10 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   handleWidgetLifecycle(x: LifeCycle) {
-    if (x.type == LifeCycle.WIDGET_LOADING_SUCCESS) {
-      this.loaded = true;
-    } else if (x.type == LifeCycle.PRIMARY_ACTION_SUCCESS) {
-      alert("Action Successful: " + x.data)
+    if (x.type === LifeCycle.WIDGET_LOADING_SUCCESS) {
+      this.isWidgetLoadingDone = true;
+    } else if (x.type === LifeCycle.PRIMARY_ACTION_SUCCESS) {
+      alert('Action Successful: ' + x.data);
     } else {
       console.log(x);
     }
@@ -134,6 +134,10 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
 
   getTimeHHMM(date) {
     return this.utilService.getTimeHHMM(date);
+  }
+
+  ionViewWillLeave() {
+    this.isWidgetLoadingDone = false;
   }
 
 }
