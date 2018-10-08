@@ -78,12 +78,12 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     this.changeRequested = false;
   }
 
-  findStore() {
-    this.isNavigationClicked = true;
-    this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
-      [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
-    this.loaderService.startLoading('Fetching Stores', this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
-  }
+  // findStore() {
+  //   this.isNavigationClicked = true;
+  //   this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
+  //     [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
+  //   this.loaderService.startLoading('Fetching Stores', this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+  // }
 
   getFullBannerUrl(src) {
     return src ? this.bannerUrl + src + '?height=170&width=340&builder=freeimage' : null;
@@ -126,13 +126,20 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        if (data.length) {
-          this.setCurrentStore(data[0]);
-          // if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
-          //   this.fetchDeliverySlots = true;
-          // } else {
-          //   this.setDeliverySlot(this.asapDeliverySlot);
-          // }
+        // if (data.length) {
+        //   this.setCurrentStore(data[0]);
+        //   // if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
+        //   //   this.fetchDeliverySlots = true;
+        //   // } else {
+        //   //   this.setDeliverySlot(this.asapDeliverySlot);
+        //   // }
+        // } else {
+        //   const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+        //   this.alertService.presentToast(store_alert, 3000, 'bottom');
+        // }
+        this.loaderService.stopLoading();
+        if (data && data.length !== 0) {
+          this.router.navigate(['/store-selection'], { queryParams: { 'latitude': this.lat, 'longitude': this.lng } });
         } else {
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
           this.alertService.presentToast(store_alert, 3000, 'bottom');
@@ -147,19 +154,31 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
           this.alertService.presentToast(store_alert, 3000, 'bottom');
         }
         break;
-      case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        this.loaderService.stopLoading();
-        if (data && data.length !== 0) {
-          this.router.navigate(['/store-selection'], { queryParams: { 'latitude': this.lat, 'longitude': this.lng } });
-        } else {
-          const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-          this.alertService.presentToast(store_alert, 3000, 'bottom');
-        }
-        break;
       case CartWidgetActions.ACTION_CLEAR_CART:
         this.alertService.presentToast('removed cart items', 3000, 'bottom');
         break;
+      case LocationWidgetActions.FETCH_AREAS_BY_CITY_CODE:
+        if (data && data.length === 1) {
+          this.selectArea(data[0]);
+        }
+        break;
     }
+  }
+
+  findStore() {
+    this.isNavigationClicked = true;
+    if (this.getFulfilmentMode().mode === this.deliveryModes.HOME_DELIVERY) {
+      this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
+        [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
+    } else {
+      this.storeLocatorWidgetAction.emit(
+        new Action(
+          StoreLocatorWidgetActions.FIND_BY_CITY,
+          [this.selectedCityCode, this.getFulfilmentMode().mode]
+        )
+      )
+    }
+    this.loaderService.startLoading('Fetching Stores', this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
   }
 
   navigateToDeals() {
