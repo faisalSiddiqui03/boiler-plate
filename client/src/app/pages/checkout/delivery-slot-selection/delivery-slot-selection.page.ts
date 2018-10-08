@@ -46,7 +46,7 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
     this.slotSelected = true;
     this.slotContent = this.asSoonPossible ? this.asapText : '';
     this.activeTimeSlot = 0;
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {
