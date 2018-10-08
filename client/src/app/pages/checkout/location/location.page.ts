@@ -21,9 +21,7 @@ export class LocationPage extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    const langCode = this.actRoute.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   dismiss() {

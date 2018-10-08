@@ -58,7 +58,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
     private router: Router,
   ) {
     super();
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
     this.dealsCategoryId = this.config.getConfig()['dealCategoryId'];
   }

@@ -59,15 +59,13 @@ export class DealPage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private utilService: UtilService
   ) {
     super();
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
     this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
   }
 
   ngOnInit() {
-    const langCode = this.route.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.productId = this.route.snapshot.params.productId;
     this.productName = this.route.snapshot.params.productName;

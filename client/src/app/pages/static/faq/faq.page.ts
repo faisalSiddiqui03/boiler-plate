@@ -2,20 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../helpers/utils';
+import { BaseComponent } from '../../../base/base-component';
 
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.page.html',
   styleUrls: ['./faq.page.scss'],
 })
-export class FaqPage implements OnInit {
+export class FaqPage extends BaseComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
     private utilService: UtilService,
     private router: Router
   ) {
-    this.translate.use(this.utilService.getLanguageCode());
+    super();
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   titleValue = '';

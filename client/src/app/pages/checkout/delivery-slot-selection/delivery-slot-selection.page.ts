@@ -50,9 +50,7 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
   }
 
   ngOnInit() {
-    const langCode = this.actRoute.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.translate.get('delivery_slot_selection_page.asap').subscribe(value => {
       this.asapText = value;

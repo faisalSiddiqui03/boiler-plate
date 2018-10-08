@@ -56,7 +56,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     private modalController: ModalController
   ) {
     super();
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 

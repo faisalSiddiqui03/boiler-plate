@@ -68,7 +68,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     private utilService: UtilService
   ) {
     super();
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 

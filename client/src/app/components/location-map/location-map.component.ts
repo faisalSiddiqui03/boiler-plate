@@ -27,7 +27,7 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
     private utilService: UtilService
   ) {
     super();
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {

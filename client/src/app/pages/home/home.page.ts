@@ -86,10 +86,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   async ionViewWillEnter() {
-    // const langCode = this.actRoute.snapshot.params['lang'];
-    // await this.utilService.setLanguageCode(langCode);
-    this.translate.use(this.getCurrentLanguage().code);
-    //this.langService.updateLanguageByCode(langCode);
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ionViewDidEnter() {

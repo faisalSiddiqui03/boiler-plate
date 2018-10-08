@@ -44,7 +44,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   ) {
     super();
     this.deliveryModes = DeliveryModes;
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   /** Inputs to show only required tags in header */
@@ -77,19 +77,19 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   async switchLanguage() {
-    const langCode = this.utilService.getLanguageCode();
+    const langCode = this.getCurrentLanguageCode();
     //console.log('Check this current lang to be changed: ', langCode);
     switch (langCode) {
       case 'ar':
         await this.languageService.updateLanguageByCode('en');
-        this.utilService.setLanguageCode('en');
+        //this.utilService.setLanguageCode('en');
         this.router.navigateByUrl('en/home', { replaceUrl: true });
 
         break;
 
       case 'en':
         await this.languageService.updateLanguageByCode('ar');
-        this.utilService.setLanguageCode('ar');
+        //this.utilService.setLanguageCode('ar');
         this.router.navigateByUrl('ar/home', { replaceUrl: true });
         break;
 

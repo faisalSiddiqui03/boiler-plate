@@ -53,7 +53,7 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     private alertService: AlertService
   ) {
     super();
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
     this.widgetModels = {};
     this.signUpForm = this.formBuilder.group({
       fname: ['', Validators.compose([Validators.required, Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ \.]*$')])],

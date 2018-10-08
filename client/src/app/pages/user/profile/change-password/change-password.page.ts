@@ -32,7 +32,7 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
 
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
 
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.resetPasswordForm = this.formBuilder.group({
       newPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])],

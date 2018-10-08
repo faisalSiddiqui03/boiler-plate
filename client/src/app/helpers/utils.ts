@@ -9,11 +9,11 @@ export class UtilService {
 
   private _languageCode: string;
 
-  async setLanguageCode(langCode: string): Promise<boolean> {
-    this._languageCode = langCode;
-    //await this.langService.updateLanguageByCode(langCode);
-    return true;
-  }
+  // async setLanguageCode(langCode: string): Promise<boolean> {
+  //   this._languageCode = langCode;
+  //   //await this.langService.updateLanguageByCode(langCode);
+  //   return true;
+  // }
 
   getLanguageCode(): string {
     return this._languageCode;

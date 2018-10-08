@@ -55,7 +55,7 @@ export class TrioComponent extends BaseComponent implements OnInit, OnWidgetLife
     private modalController: ModalController
   ) {
     super();
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 

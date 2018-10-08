@@ -53,15 +53,13 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     private utilService: UtilService
   ) {
     super();
-    this.translate.use(this.utilService.getLanguageCode());
+    this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
     this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
   }
 
   ngOnInit() {
-    const langCode = this.route.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
+    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ionViewWillEnter() {

@@ -39,9 +39,7 @@ export class SuccessPage extends BaseComponent implements OnInit {
   orderDetailWidgetAction = new EventEmitter();
 
   ngOnInit() {
-    const langCode = this.route.snapshot.params['lang'];
-    this.utilService.setLanguageCode(langCode);
-    this.translate.use(langCode);
+    this.translate.use(this.getCurrentLanguageCode());
 
     this.orderId = this.route.snapshot.params.orderId;
     // this.email = this.route.snapshot.params.email;
