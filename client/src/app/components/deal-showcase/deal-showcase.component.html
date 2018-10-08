@@ -27,7 +27,7 @@
             <ion-card class="product-card non-deal-card" no-padding (click)="showProduct(prod)">
               <ion-card-header no-padding>
                 <img height="100" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}"
-                     defaultImage="assets/imgs/default/default.png"
+                     defaultImage="assets/imgs/default/default.png" loadingImage="assets/imgs/default/default.png"
                 />
               </ion-card-header>
               <ion-card-content padding>
@@ -58,7 +58,7 @@
         <ion-icon (click)="closeModal()" name="close-circle" slot="start"></ion-icon>
         <div class="drinks-img-block">
           <img alt="{{bundleGroupTitle}}" height="170" width="340" img-preloader="{{bundleGroupImage}}"
-               defaultImage="assets/imgs/default/default.png"
+               defaultImage="assets/imgs/default/default.png" loadingImage="assets/imgs/default/default.png"
           />
         </div>
         <div class="drinks-img-text">
@@ -70,7 +70,7 @@
         <ion-list no-margin *ngIf="bundleGroupItems">
           <ion-item *ngFor="let prod of bundleGroupItems">
             <img alt="{{prod?.title}}" height="25" width="25" img-preloader="{{getUrl(prod?.image)}}"
-                 defaultImage="assets/imgs/default/default.png"
+                 defaultImage="assets/imgs/default/default.png" loadingImage="assets/imgs/default/default.png"
             />
             <ion-label>{{prod?.title}}</ion-label>
             <div class="add-remove">

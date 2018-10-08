@@ -9,7 +9,8 @@
       <div class="product-content">
         <ion-show-when size="lg">
           <ion-header class="top-header-container">
-            <app-header [selectedCategoryId]="categoryId" (switchCategory)="switchCategories($event)" [showCart]="true" [showTime]="true"
+            <app-header [selectedCategoryId]="categoryId" (switchCategory)="switchCategories($event)" [showCart]="true"
+                        [showTime]="true"
                         [headerClass]="'category-header'"></app-header>
           </ion-header>
         </ion-show-when>
@@ -33,11 +34,11 @@
             <ng-container *ngFor="let item of navigations;">
               <div [hidden]="!(item.categoryId === categoryId)">
                 <product-showcase-widget
-                        [componentId]="getComponentId()"
-                        pfWidgetImpressionTrack
-                        [filters]="getShowcaseFilter(item.categoryId)"
-                        [executor]="productShowcaseWidgetExecutor"
-                        [action]="productShowcaseWidgetAction">
+                  [componentId]="getComponentId()"
+                  pfWidgetImpressionTrack
+                  [filters]="getShowcaseFilter(item.categoryId)"
+                  [executor]="productShowcaseWidgetExecutor"
+                  [action]="productShowcaseWidgetAction">
                   <ng-template let-widget="widget">
                     <div *ngIf="widget.model == undefined">
                       <div *ngIf="categoryId === dealCategoryId">
@@ -357,19 +358,23 @@
                       <div *ngIf="categoryId === dealCategoryId">
                         <ion-grid>
                           <ion-row>
-                            <ion-col class="product-card-holder" *ngFor="let prod of widget.model; let idx=index" [sizeXl]="4"
+                            <ion-col class="product-card-holder" *ngFor="let prod of widget.model; let idx=index"
+                                     [sizeXl]="4"
                                      [sizeMd]="6" [sizeSm]="6" [sizeXs]="12">
                               <ion-card
-                                      no-margin
-                                      no-padding
-                                      no-border
-                                      class="product-card deal-card"
-                                      [pfProductClickTrack]="{products:[prod], position:idx}"
-                                      (click)="openDeal(prod?.client)">
+                                no-margin
+                                no-padding
+                                no-border
+                                class="product-card deal-card"
+                                [pfProductClickTrack]="{products:[prod], position:idx}"
+                                (click)="openDeal(prod?.client)">
                                 <ion-card-header>
-                                  <img height="170" src="{{getProductImageUrl(prod)}}"
-                                       img-preloader="{{getProductImageUrl(prod)}}"
-                                       defaultImage="assets/imgs/default/default.png"/>
+                                  <img
+                                    height="170" src="{{getProductImageUrl(prod)}}"
+                                    img-preloader="{{getProductImageUrl(prod)}}"
+                                    defaultImage="assets/imgs/default/default.png"
+                                    loadingImage="assets/imgs/default/default.png"
+                                  />
                                 </ion-card-header>
                                 <ion-card-content>
                                   <p class="deal-item-name">{{prod.title}}</p>
@@ -383,14 +388,15 @@
                       <div *ngIf="categoryId !== dealCategoryId">
                         <ion-grid>
                           <ion-row>
-                            <ion-col class="product-card-holder" *ngFor="let prod of widget.model; let idx=index" [sizeSm]="6"
+                            <ion-col class="product-card-holder" *ngFor="let prod of widget.model; let idx=index"
+                                     [sizeSm]="6"
                                      [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
                                      no-padding>
                               <ion-card
-                                      class="product-card non-deal-card"
-                                      no-padding
-                                      [pfProductClickTrack]="{products:[prod], position:idx}"
-                                      (click)="openProductDetails(prod?.client)">
+                                class="product-card non-deal-card"
+                                no-padding
+                                [pfProductClickTrack]="{products:[prod], position:idx}"
+                                (click)="openProductDetails(prod?.client)">
                                 <div *ngIf="isLoggedIn()" class="icon"
                                      [ngClass]="{'icon-favourite-active': prod?.isFavorite,'icon-favourite': !prod?.isFavorite}"
                                      (click)="updateFavorites(prod?.isFavorite, prod?.client); $event.stopPropagation();"></div>
@@ -398,6 +404,7 @@
                                   <img height="100" src="{{getProductImageUrl(prod)}}"
                                        img-preloader="{{getProductImageUrl(prod)}}"
                                        defaultImage="assets/imgs/default/default.png"
+                                       loadingImage="assets/imgs/default/default.png"
                                   />
                                 </ion-card-header>
 

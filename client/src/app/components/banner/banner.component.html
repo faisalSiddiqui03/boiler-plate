@@ -19,7 +19,7 @@
       <ion-row margin-bottom justify-content-center>
         <ion-col size-lg='6' size-xs='12' *ngFor="let banner of widget.model" (click)="onBannerClicked(banner)">
           <img src="{{getFullBannerUrl(banner.contentUrl)}}" img-preloader="{{getFullBannerUrl(banner.contentUrl)}}"
-               defaultImage="assets/imgs/default/default.png"
+               defaultImage="assets/imgs/default/default.png" loadingImage="assets/imgs/default/default.png"
           />
         </ion-col>
       </ion-row>
