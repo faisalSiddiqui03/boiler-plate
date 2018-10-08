@@ -4,12 +4,12 @@
   </ion-header>
 </ion-hide-when>
 <ion-content (click)="outSideClick()" class="home-page">
-  <delivery-slots-widget *ngIf="fetchDeliverySlots"
+  <!-- <delivery-slots-widget *ngIf="fetchDeliverySlots"
                          [globalSlots]="true"
                          [deliveryMode]="getFulfilmentMode()?.mode"
                          [storeId]="getCurrentStore()?.id"
                          [componentId]="getComponentId()">
-  </delivery-slots-widget>
+  </delivery-slots-widget> -->
   <div class="banner-home container">
     <banner-widget
       [componentId]="getComponentId()"

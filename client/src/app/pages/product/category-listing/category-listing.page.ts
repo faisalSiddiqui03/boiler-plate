@@ -63,7 +63,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   ionViewWillEnter() {
-
     if (this.utilService.isEmpty(this.getDeliverySlotPromise())) {
       if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
         this.fetchDeliverySlots = true;

@@ -92,13 +92,13 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   ionViewDidEnter() {
     this.selectedStore = this.getCurrentStore();
     this.changeRequested = false;
-    if (this.isStoreSelected()) {
-      if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
-        this.fetchDeliverySlots = true;
-      } else {
-        this.setDeliverySlot(this.asapDeliverySlot);
-      }
-    }
+    // if (this.isStoreSelected()) {
+    //   if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
+    //     this.fetchDeliverySlots = true;
+    //   } else {
+    //     this.setDeliverySlot(this.asapDeliverySlot);
+    //   }
+    // }
   }
 
   ionViewWillLeave() {

@@ -17,24 +17,23 @@
         </div>
       </div>
       <div *ngIf="showHalalTag" class="halal-logo">
-        <img src="assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal"/>
+        <img src="assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal" />
       </div>
       <div *ngIf="showCart" (click)="goToPage('cart')">
         <div class="icon icon-cart cart-logo"></div>
-        <div class="cart-count" *ngIf="getCart()?.items.length"
-             [innerHtml]="getCart()?.items.length | number:'2.0-0'"></div>
+        <div class="cart-count" *ngIf="getCart()?.items.length" [innerHtml]="getCart()?.items.length | number:'2.0-0'"></div>
       </div>
     </div>
   </ion-hide-when>
-  <div [ngClass]="{'container': !dealsHeader, 'container-small': dealsHeader}" class="center-align desktop-logo" flex-center>
+  <div [ngClass]="{'container': !dealsHeader, 'container-small': dealsHeader}" class="center-align desktop-logo"
+    flex-center>
     <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
     <div class="header-right" text-right>
       <div *ngIf="!dealsHeader && showMode" class="delivery-mode">
-        <div class="icon"
-             [ngClass]="{'icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
+        <div class="icon" [ngClass]="{'icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
         <span text-capitalize>{{ 'header.mode' | translate }}:</span>
         <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY"
-               text-capitalize>{{ 'header.delivery' | translate }}
+          text-capitalize>{{ 'header.delivery' | translate }}
         </small>
         <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>{{
           'header.take_away' | translate }}
@@ -77,9 +76,8 @@
       <div class="showcase-tabs">
         <div class="container">
           <ul no-margin no-padding>
-            <li *ngFor="let item of navigations;" text-center
-                [class.selected]="selectedCategoryId ? item.categoryId === selectedCategoryId : item.categoryId === categoryId"
-                (click)="switchCategoryPage(item.name, item.categoryId)">{{item.name}}
+            <li *ngFor="let item of navigations;" text-center [class.selected]="selectedCategoryId ? item.categoryId === selectedCategoryId : item.categoryId === categoryId"
+              (click)="switchCategoryPage(item.name, item.categoryId)">{{item.name}}
             </li>
           </ul>
         </div>
@@ -91,11 +89,8 @@
       <div class="tabs-nav-head" *ngIf="headerClass">
 
         <div id="showcase" class="menu-container container" flex>
-          <div *ngFor="let item of navigations;" text-center
-               [class.selected]="selectedCategoryId ? item.categoryId === selectedCategoryId : item.categoryId === categoryId"
-               (click)="switchCategories(item.name, item.categoryId)"
-               class="single-menu-item"
-          >{{item.name}}
+          <div *ngFor="let item of navigations;" text-center [class.selected]="selectedCategoryId ? item.categoryId === selectedCategoryId : item.categoryId === categoryId"
+            (click)="switchCategories(item.name, item.categoryId)" class="single-menu-item">{{item.name}}
           </div>
         </div>
       </div>
@@ -103,6 +98,9 @@
 
   </ion-show-when>
 </ion-navbar>
-<navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack
-                   [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
-                   [action]="null" (lifecycle)="null"></navigation-widget>
+<navigation-widget [componentId]="getComponentId()" pfWidgetImpressioånTrack [refCode]="'pwa-kuwait'" [level]=1
+  [executor]="null" [action]="null" (lifecycle)="null"></navigation-widget>
+
+<!-- <delivery-slots-widget *ngIf="fetchDeliverySlots" [globalSlots]="true" [deliveryMode]="getFulfilmentMode()?.mode"
+  [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
+</delivery-slots-widget> -->
