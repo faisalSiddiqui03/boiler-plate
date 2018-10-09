@@ -53,8 +53,11 @@
 		"voucher_code": "Voucher code",
 		"voucher_description": "Our top deals are always available online on our Deals page.",
 		"your_cart": "Your Cart",
-    "your_total": "Your Total",
-    "you_may_also_like": "You may also like"
+    	"your_total": "Your Total",
+		"you_may_also_like": "You may also like",
+		"confirm_remove": "Are you sure you want to remove the item?",
+		"dismiss": "DISMISS",
+		"confirm": "CONFIRM"
 	},
 	"category_listing": {
 		"price_tag": "From"
