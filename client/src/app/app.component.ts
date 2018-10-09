@@ -4,7 +4,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from './base/base-component';
-import { ConfigService, EventService, pwaLifeCycle } from '@capillarytech/pwa-framework';
+import { ConfigService, EventService, pwaLifeCycle, CapRouterService } from '@capillarytech/pwa-framework';
+import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { UtilService } from './helpers/utils';
 import { RoutingState } from './routing-state';
 
@@ -27,15 +28,16 @@ export class AppComponent extends BaseComponent {
     public modalController: ModalController,
     private config: ConfigService,
     private routingState: RoutingState,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private capAlertService: AlertService,
+    private capRouterService: CapRouterService
   ) {
     super();
     routingState.loadRouting();
     this.sharedService = this.globalSharedService;
-    const langCode = 'ar';
+    // const langCode = 'ar';
     this.initializeApp();
-    //this.setLanguage(langCode);
-    console.log("---->>>>>", document.dir);
+    // console.log("---->>>>>", document.dir);
     this.eventService.GetEvent("HttpError").subscribe(event => {
       this.handleError(event);
     });
@@ -48,45 +50,14 @@ export class AppComponent extends BaseComponent {
     });
   }
 
-  ngOnInit() {
-    //this.isLoggedIn = false;
-    // const userProfile = this.globalSharedService.getUserModel();
-    // setInterval(() => console.log(this.globalSharedService.getUserModel()), 3000);
-  }
-
-  setLanguage(langCode: string) {
-    // this.utilService.setLanguageCode(langCode);
-    // this.translate.setDefaultLang(langCode);
-    // this.translate.use(langCode);
-    //this.setAppDirection(langCode);
-  }
-
-  setAppDirection(lang: string) {
-    if (lang == 'ar') {
-      console.log('----------------', this.platform);
-      // this.platform.set('rtl', true);
-      // this.platform.setDir('ltr', false);
-      // this.menuCtrl.enable(true, 'side-menu-left');
-      // this.menuCtrl.swipeEnable(true, "side-menu-left");
-      // this.menuCtrl.enable(false, 'side-menu-right');
-      // this.menuCtrl.swipeEnable(false, 'side-menu-right');
-      // this.langArabic = true;
-    } else {
-      // this.platform.setDir('ltr', true);
-      // this.platform.setDir('rtl', false);
-      // this.menuCtrl.enable(true, 'side-menu-right');
-      // this.menuCtrl.swipeEnable(true, 'side-menu-right');
-      // this.menuCtrl.enable(false, 'side-menu-left');
-      // this.menuCtrl.swipeEnable(false, "side-menu-left");
-      // this.langArabic = false;
-    }
-  }
-
   private handleError(event) {
     console.log("COMPONENT :- ", event);
     switch (event.code) {
       case 401:
-        console.log("redirect to home");
+        // show popup to user for signed out session
+        // also redirect to sign in page
+        //this.capAlertService.presentToast('Session timed out', null, null);
+        this.capRouterService.routeByUrlWithLanguage('/login');
         break;
     }
   }
