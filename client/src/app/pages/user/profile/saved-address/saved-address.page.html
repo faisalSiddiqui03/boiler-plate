@@ -16,9 +16,9 @@
                   <ion-icon (click)="deleteAddress(address)" class="close" name="close-circle"></ion-icon>
                 </h6>
                 <div class="address-details">
+                  <p text-capitalize>{{address.detail}}</p>
                   <p text-capitalize>{{getFlatAddress(address.landmark, 0)}}</p>
                   <p text-capitalize>{{getFlatAddress(address.landmark, 1)}}</p>
-                  <p text-capitalize>{{address.detail}}</p>
                   <p text-right class="edit" (click)="goToPage('add-address', address.id)">{{'saved_address_page.edit' | translate}}</p>
                 </div>
               </ion-label>
