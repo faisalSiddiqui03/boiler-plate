@@ -265,12 +265,10 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   goToDeals() {
-    this.capRouter.routeByUrlWithLanguage('/product/deals/CU00215646');
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/deals/CU00215646'));
+    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
   goToPage(pageName) {
     this.capRouter.routeByUrlWithLanguage('/' + pageName);
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/' + pageName));
   }
 }
