@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../helpers/utils';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
+import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import {
   pwaLifeCycle,
   LifeCycle,
@@ -81,7 +81,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     private translate: TranslateService,
     private config: ConfigService,
     private actRoute: ActivatedRoute,
-    private capRouter: CapRouterService
+    private capRouter: CapRouterService,
+    private hardwareService: HardwareService
   ) {
 
     super();
@@ -291,9 +292,26 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     attributes.push(attr);
     obj.orderAttributes = attributes;
 
+    let source = this.config.getConfig()['source'];
+    if ( source ) {
+        source.SelectedValue = 'pwa-' + this.getSourceData();
+        source.OrderEntityFieldValues[0].Value = 'pwa-' + this.getSourceData();
+    }
+
     obj.deliverySlot = this.getDeliverySlot();
     const action = new Action(CheckoutWidgetActions.ACTION_PLACE_ORDER, obj);
     this.checkoutWidgetAction.emit(action);
+  }
+
+  /**helper function for channelId based on platform */
+  private getSourceData() {
+    let type = 'PWA,';
+    const os = this.hardwareService.getOSDetails()['name'];
+    if (os === 'Android' || os === 'iOS') {
+        type = 'APP,';
+    }
+    type += os;
+    return type;
   }
 
   handleOrderSuccess(data) {
