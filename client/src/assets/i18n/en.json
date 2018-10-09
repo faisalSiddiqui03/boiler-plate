@@ -6,6 +6,10 @@
     "description_part_two": "The Carneys created an innovative, high quality, engaging, informal eating experience in a friendly neighborhood restaurant. Pizza Hut became a popular place with the teenage and college crowd. Pizza Hut attracted families that enjoyed a night out eating a meal that they would not be having at home. After the families left, Pizza Hut transformed itself into a hangout for college-age kids. Having a good time was an essential part of Pizza Hut. The idea caught on. A second Pizza Hut opened in December 1958 in downtown Wichita. By 1963, there were forty-two Pizza Hut restaurants.",
     "our_history": "Our History"
   },
+  "add-address": {
+		"failed_to_save": "Failed to save address",
+		"failed_to_update": "Failed to update address"
+	},
   "add_address_page": {
     "add_address": "add new Address",
     "address_details": "Address Details",

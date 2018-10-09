@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../base/base-component';
 import { TranslateService } from '@ngx-translate/core';
-import { AgmCoreModule, MouseEvent } from '@agm/core';
+import { AgmCoreModule, MouseEvent, MarkerManager } from '@agm/core';
 import { UtilService } from '../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { SearchLocationPage } from '../../pages/user/profile/search-location/search-location.page';
@@ -34,13 +34,21 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      if (this.locationDetails && this.locationDetails.latitude && this.locationDetails.longitude) {
-        this.marker = {
-          lat: parseFloat(this.locationDetails.latitude),
-          lng: parseFloat(this.locationDetails.longitude),
-          label: ' ',
-          draggable: true
-        };
+      if (this.locationDetails &&
+        (typeof(this.locationDetails) === 'string' ||
+        (this.locationDetails.latitude && this.locationDetails.longitude))) {
+          let latLng;
+          if (typeof(this.locationDetails) === 'string') {
+            latLng = JSON.parse(this.locationDetails);
+          } else {
+            latLng = this.locationDetails;
+          }
+          this.marker = {
+            lat: parseFloat(latLng.latitude),
+            lng: parseFloat(latLng.longitude),
+            label: ' ',
+            draggable: true
+          };
       } else {
         this.marker = {
           lat: parseFloat(this.getCurrentStore().locationDetail.latitude),
