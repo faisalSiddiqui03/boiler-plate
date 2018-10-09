@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BaseComponent } from './base/base-component';
+import { CapRouterService } from '@capillarytech/pwa-framework';
+
 // import { GlobalSharedService } from '@cap-core/service/global-shared.service';
 // import { appInjector } from '@cap-core/app.injector';
 
@@ -11,7 +13,7 @@ import { BaseComponent } from './base/base-component';
 export class AuthGuard extends BaseComponent implements CanActivate {
   // protected globalSharedService: GlobalSharedService;
   //
-  constructor(private router: Router) {
+  constructor(private capRouter: CapRouterService) {
     super()
   }
 
@@ -19,14 +21,14 @@ export class AuthGuard extends BaseComponent implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.getUserPromise().then( userModel => {
-        if (userModel && userModel.type !== 'GUEST') {
-            return true;
-        } else {
-          console.log('access denied');
-          this.router.navigateByUrl('home');
-          return false;
-        }
+    return this.getUserPromise().then(userModel => {
+      if (userModel && userModel.type !== 'GUEST') {
+        return true;
+      } else {
+        console.log('access denied');
+        this.capRouter.routeByUrlWithLanguage('/login');
+        return false;
+      }
     });
   }
 }
