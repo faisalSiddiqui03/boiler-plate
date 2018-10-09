@@ -9,7 +9,8 @@ import {
   PaymentOptionsWidgetModule,
   CheckoutWidgetModule,
   UserAddressWidgetModule,
-  EventTrackModule
+  EventTrackModule,
+  CapRouterServiceModule
 } from "@capillarytech/pwa-framework";
 
 import { CheckoutPage } from './checkout.page';
@@ -40,6 +41,7 @@ const routes: Routes = [
     DeliverySlotsWidgetModule,
     PaymentOptionsWidgetModule,
     UserAddressWidgetModule,
+    CapRouterServiceModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
