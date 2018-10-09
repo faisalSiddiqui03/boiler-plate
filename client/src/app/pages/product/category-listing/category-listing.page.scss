@@ -403,3 +403,14 @@ html {
     }
   }
 }
+
+
+@media (max-width: 991px){
+  .category-listing-page{
+    .showcase-container{
+      ion-grid{
+        padding: 0;
+      }
+    }
+  }
+}

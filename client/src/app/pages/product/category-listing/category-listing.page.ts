@@ -89,6 +89,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       const paramValues = param.split('=');
         dataFromParams[paramValues[0]] = paramValues[1]
     });
+    dataFromParams.category = dataFromParams.category.split('%20').join(' ');
     this.updateCategories(dataFromParams);
   }
 
