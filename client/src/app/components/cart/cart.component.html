@@ -237,7 +237,7 @@
 
 <div class="clearcart-modal" *ngIf="removeItemPopup">
   <div class="clearcart-popup">
-    <p flex-center>Are you sure you want to remove the item?</p>
+    <p flex-center>{{ 'cart.confirm_remove' | translate}}</p>
     <div flex-center>
       <ion-button
         (click)="dismissRemoveItemPopup()"
@@ -246,7 +246,7 @@
         expand="block"
         mode="ios"
         class="btn-dismiss clearcart-dismiss">
-        {{ 'home_page.dismiss' | translate }}
+        {{ 'cart.dismiss' | translate }}
       </ion-button>
       <ion-button
         (click)="dismissRemoveItemPopup();removeCartItem(true)"
@@ -255,7 +255,7 @@
         expand="block"
         mode="ios"
         class="btn-success clearcart-confirm ">
-        {{ 'home_page.confirm' | translate }}
+        {{ 'cart.confirm' | translate }}
       </ion-button>
     </div>
   </div>
