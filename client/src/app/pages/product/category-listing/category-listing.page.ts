@@ -30,7 +30,6 @@ import { LoaderService } from '@capillarytech/pwa-ui-helpers';
 @pageView()
 export class CategoryListingPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   categoryId: string = null;
-  categoryName: string;
   productShowcaseWidgetAction = new EventEmitter();
   productShowcaseWidgetExecutor = new EventEmitter();
   currencyCode: string;
@@ -96,7 +95,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   updateCategories(data) {
     this.categoryId = data.id;
-    this.categoryName = data.category;
   }
 
   getShowcaseFilter(categoryId) {
@@ -134,20 +132,9 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   openProductDetails(product) {
     if (product.type === ProductType.Bundle) {
       this.capRouter.routeByUrlWithLanguage('/pizza/' + product.title + '/' + product.id);
-      // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/pizza/' + product.title + '/' + product.id));
       return;
     }
-    this.capRouter.routeByUrlWithLanguage('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/' + this.categoryName + '/' + product.title + '/' + product.id));
-
-    // Use following, when catlog code is proper from api response
-    // if (product.type === ProductType.Bundle) {
-    //   this.router.navigateByUrl(this.utilService.getLanguageCode() + '/pizza/' + product.title + '/' + product.id);
-    // } else if(product.type === ProductType.Deal) {
-    //   this.router.navigateByUrl(this.utilService.getLanguageCode() + '/deal/' + product.title + '/' + product.id);
-    // } else {
-    //   this.router.navigateByUrl(this.utilService.getLanguageCode() + '/product/' + this.categoryName + '/' + product.title + '/' + product.id);
-    // }
+    this.capRouter.routeByUrlWithLanguage('/product/' + this.categoryNamesById.get(this.categoryId) + '/' + product.title + '/' + product.id);
   }
 
   openDeal(product) {
