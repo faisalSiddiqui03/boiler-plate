@@ -8,7 +8,11 @@
   >
     <ng-template let-widget="widget">
       <div *ngIf="widget.model == undefined">
-        <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
+        <ion-row margin-bottom justify-content-center>
+          <ion-col size-lg='6' size-xs='12'>
+            <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
+          </ion-col>
+        </ion-row>
       </div>
       <div *ngIf="widget.model != undefined && widget.model.length > 0">
         <div>
@@ -187,7 +191,7 @@
         <div class="find-hut" flex-center
              (click)="locateMe(widget.model.geometry.latitude, widget.model.geometry.longitude)">
           <span> {{'home_page.find_my_nearest_hut' | translate}}</span>
-          <strong>{{'home_page.language' | translate}}</strong>
+          <strong *ngIf="!isModal" (click)="switchLanguage()" >{{'home_page.language' | translate}}</strong>
         </div>
       </ng-template>
     </location-widget>

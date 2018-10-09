@@ -14,7 +14,7 @@ import {
   Action,
   LocationWidgetActions,
   CartWidgetActions,
-  FulfilmentModeWidgetActions
+  FulfilmentModeWidgetActions, LanguageService, CapRouterService
 } from '@capillarytech/pwa-framework';
 import { StoreListComponent } from '../store-list/store-list.component';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
@@ -61,6 +61,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     private actRoute: ActivatedRoute,
     private alertService: AlertService,
     private modalController: ModalController,
+    private languageService: LanguageService,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
@@ -166,6 +168,32 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
     }
+  }
+
+  async switchLanguage() {
+    const langCode = this.getCurrentLanguageCode();
+    //console.log('Check this current lang to be changed: ', langCode);
+    switch (langCode) {
+      case 'ar':
+        await this.languageService.updateLanguageByCode('en');
+        //this.utilService.setLanguageCode('en');
+        this.capRouter.routeByUrlWithLanguage('home');
+        // this.router.navigateByUrl('en/home', { replaceUrl: true });
+
+        break;
+
+      case 'en':
+        await this.languageService.updateLanguageByCode('ar');
+        //this.utilService.setLanguageCode('ar');
+        this.capRouter.routeByUrlWithLanguage('home');
+        // this.router.navigateByUrl('ar/home', { replaceUrl: true });
+        break;
+
+      default:
+        // do nothing
+        break;
+    }
+
   }
 
   async openStoreListModal() {
