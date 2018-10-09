@@ -175,6 +175,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
         break;
       case CheckoutWidgetActions.ACTION_GET_SHIPPING_ADDRESS:
         console.log('Shipping address data ', data);
+        this.fillDataFromCache(data);
         break;
       case CheckoutWidgetActions.ACTION_GET_BILLING_ADDRESS:
         console.log('Billing address data ', data);
@@ -191,6 +192,11 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
         this.alertService.presentToast(this.translate.instant('checkout_page.address_saved_successfully'), 500, 'bottom');
         break;
     }
+  }
+
+  // todo: use this data to prefill the form.
+  fillDataFromCache(data) {
+    console.log(data);
   }
 
   widgetLoadingFailed(name: string, data: any): any {
@@ -225,6 +231,12 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
       case 'USER_ADDRESS':
         this.getSavedAddresses(data);
         break;
+      default:
+        this.getUserPromise().then(userModel => {
+          if (userModel.type === 'GUEST') {
+            this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_GET_SHIPPING_ADDRESS));
+          }
+        });
     }
   }
 
@@ -286,6 +298,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     objShipAddress.state = this.getCurrentStore().state;
     objShipAddress.pinCode = parseInt(this.getCurrentStore().area.pincode);
     obj.shippingAddress = objShipAddress;
+
+    this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_SAVE_SHIPPING_ADDRESS, objShipAddress));
 
     const attributes: OrderAttributes[] = new Array<OrderAttributes>();
     const attr: OrderAttributes = new OrderAttributes();
