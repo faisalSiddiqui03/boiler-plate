@@ -66,7 +66,6 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   // }
 
   getProductImageUrl(product) {
-    console.error('hello', product);
     if (!product.multipleImages || !(product.multipleImages.length > 0)) {
       return this.getUrl(product.image);
     } else {
