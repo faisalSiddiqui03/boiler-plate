@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { DealPage } from './deal.page';
 
-import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackModule } from "@capillarytech/pwa-framework";
+import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackServiceModule} from "@capillarytech/pwa-framework";
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
@@ -26,7 +26,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    EventTrackModule,
+    EventTrackServiceModule,
     ProductDetailsWidgetModule,
     ImagePreloadModule,
     DealComponentModule,

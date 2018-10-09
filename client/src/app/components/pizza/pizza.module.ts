@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 import { StoreSelectionModalModule } from '../store-selection-modal/store-selection-modal.module';
 import { PizzaComponent } from './pizza.component';
-import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackModule } from "@capillarytech/pwa-framework";
+import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackServiceModule } from "@capillarytech/pwa-framework";
 import { AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
@@ -17,7 +17,7 @@ import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    EventTrackModule,
+    EventTrackServiceModule,
     ProductDetailsWidgetModule,
     ImagePreloadModule,
     AlertServiceModule,

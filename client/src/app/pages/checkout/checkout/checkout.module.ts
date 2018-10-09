@@ -9,7 +9,8 @@ import {
   PaymentOptionsWidgetModule,
   CheckoutWidgetModule,
   UserAddressWidgetModule,
-  EventTrackModule,
+  EventTrackServiceModule,
+  EventTrackWidgetModule,
   CapRouterServiceModule
 } from "@capillarytech/pwa-framework";
 
@@ -33,7 +34,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     CheckoutWidgetModule,
-    EventTrackModule,
+    EventTrackServiceModule,
+    EventTrackWidgetModule,
     IonicModule,
     RouterModule.forChild(routes),
     HeaderModule,

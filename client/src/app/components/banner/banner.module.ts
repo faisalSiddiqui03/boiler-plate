@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { BannerWidgetModule, EventTrackModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
+import { BannerWidgetModule, EventTrackServiceModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
 import { BannerComponent } from './banner.component';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -15,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
     FormsModule,
     IonicModule,
     BannerWidgetModule,
-    EventTrackModule,
+    EventTrackServiceModule,
     ImagePreloadModule,
     SkeletonModule,
     TranslateModule.forRoot({

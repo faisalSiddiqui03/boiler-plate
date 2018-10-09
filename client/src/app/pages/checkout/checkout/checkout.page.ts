@@ -29,7 +29,7 @@ import {
   Checkout,
   Transaction,
   DeliveryModes,
-  CapRouterService,
+  CapRouterService, EventTrackWidgetActions,
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../base/base-component';
 import { element } from 'protractor';
@@ -64,6 +64,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   savedAddresses = [];
 
   paymentOptionsWidgetAction = new EventEmitter();
+  eventTrackWidgetActions = new EventEmitter();
 
   checkoutWidgetAction = new EventEmitter();
   singleUserAddressWidgetActions = new EventEmitter();
@@ -317,6 +318,15 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   handleOrderSuccess(data) {
     this.loaderService.stopLoading();
     if (data.orderId) {
+      this.eventTrackWidgetActions.emit(
+        new Action(
+          EventTrackWidgetActions.ACTION_PURCHASE,
+          [
+            data.orderId,
+            this.checkoutForm.value.email
+          ]
+        )
+      );
       this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, 'top', 'top');
       if (this.checkoutForm.value.saveAddress) {
         this.widgetModels['singleUserAddress'].detail = this.checkoutForm.value.building;
