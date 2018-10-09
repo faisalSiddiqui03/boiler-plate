@@ -340,7 +340,7 @@
                             <span></span>
                           </div>
                           <div class="ribbon__side--title" text-uppercase>
-                            <span class="cond caps">{{categoryName}}</span>
+                            <span class="cond caps">{{categoryNamesById.get(categoryId)}}</span>
                           </div>
                           <div class="ribbon__side--right">
                             <span></span>
@@ -352,7 +352,7 @@
                       </ion-hide-when>
                       <ion-show-when size="lg">
                         <div class="common-heading-dotted" text-center>
-                          <h2 text-uppercase no-margin>{{categoryName}}</h2>
+                          <h2 text-uppercase no-margin>{{ategoryNamesById.get(categoryId)}}</h2>
                         </div>
                       </ion-show-when>
                       <div *ngIf="categoryId === dealCategoryId">

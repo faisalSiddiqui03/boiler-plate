@@ -37,6 +37,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   navigations = [];
   dealCategoryId: number;
   asapDeliverySlot = DeliverySlot.getAsap();
+  categoryNamesById = new Map();
 
   constructor(
     private route: ActivatedRoute,
@@ -182,6 +183,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
       case 'NAVIGATIONS':
         this.navigations = data.items;
+        this.createCategoryNameMap(data.items);
         break;
     }
   }
@@ -206,5 +208,11 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   isLoggedIn() {
     return this.getUserModel() && this.getUserModel().type !== 'GUEST';
+  }
+
+  createCategoryNameMap(items) {
+    items.forEach((item) => {
+      this.categoryNamesById.set(item.categoryId, item.name);
+    });
   }
 }
