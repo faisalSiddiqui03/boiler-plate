@@ -126,14 +126,20 @@
       padding: 20px;
       margin-top: 30px;
       .btn-voucher {
-        --box-shadow: none;
-        --border-radius: 0;
-        --border-width: 1px;
-        --border-style: dashed;
-        --border-color: var(--ion-block-header-color);
-        --ion-color-contrast: var(--ion-color-secondary) !important;
+        border: 1px dashed var(--ion-block-header-color);
         font-size: 13px;
         position: relative;
+        color: var(--ion-color-contrast);
+        line-height: 36px;
+        display: block;
+        width: 100%;
+        background: var(--ion-color-light);
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease-in-out;
+        &:hover{
+          background: var(--ion-block-header-color);
+        }
       }
     }
   }
