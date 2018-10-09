@@ -8,7 +8,7 @@
     margin: 0 8px 0 0;
     --border-width: 1px;
     --border-color: var(--ion-color-secondary);
-    --background-checked: transparent;
+    --background-checked: transparent !important;
     --ion-color-contrast: var(--ion-color-secondary) !important;
   }
   .forgot-pwd {
