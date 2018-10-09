@@ -11,7 +11,8 @@ import {
   pwaLifeCycle,
   pageView,
   WidgetNames,
-  Product
+  Product,
+  SuggestionsWidgetActions
 } from '@capillarytech/pwa-framework';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,7 +23,6 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 import { ModalController } from '@ionic/angular';
 import { PizzaComponent } from '../pizza/pizza.component';
 import { DealComponent } from '../deal/deal.component';
-import { SuggestionsWidgetActions } from '../../../../../../pwa-framework/framework/dist/widgets/suggestions-widget';
 
 @Component({
   selector: 'app-cart',
