@@ -301,8 +301,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     if (data.orderId) {
       this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, top);
       if (this.checkoutForm.value.saveAddress) {
-        this.widgetModels['singleUserAddress'].address1 = this.checkoutForm.value.building;
-        this.widgetModels['singleUserAddress'].address2 = this.checkoutForm.value.street;
+        this.widgetModels['singleUserAddress'].detail = this.checkoutForm.value.building;
+        this.widgetModels['singleUserAddress'].landmark = this.checkoutForm.value.street;
         this.widgetModels['singleUserAddress'].city = this.getCurrentStore().city;
         this.widgetModels['singleUserAddress'].country = this.getCurrentStore().country;
         this.widgetModels['singleUserAddress'].state = this.getCurrentStore().state;
@@ -310,7 +310,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
         this.widgetModels['singleUserAddress'].contactDetail = new ContactDetail();
         this.widgetModels['singleUserAddress'].locationDetail = this.getCurrentStore().locationDetail;
 
-        const action = new Action(UserAddressWidgetActions.SAVE);
+        const action = new Action(UserAddressWidgetActions.SAVE, this.widgetModels['singleUserAddress']);
         this.singleUserAddressWidgetActions.emit(action);
       }
       this.goToPage('success/' + data.orderId + '/' + this.checkoutForm.value.email);
@@ -352,7 +352,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
     this.checkoutForm.controls['building'].setValue(this.savedAddresses[index].address1);
     this.checkoutForm.controls['street'].setValue(this.savedAddresses[index].address2);
-    this.checkoutForm.controls['addressType'].setValue(this.savedAddresses[index].addressType)
+    this.checkoutForm.controls['addressType'].setValue(this.savedAddresses[index].addressType);
   }
 
   slectPaymentOption(option) {

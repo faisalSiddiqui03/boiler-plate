@@ -6,7 +6,8 @@ import {
   pageView,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
-  UserAddressWidgetActions
+  UserAddressWidgetActions,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -45,7 +46,8 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
     private translate: TranslateService,
     private formBuilder: FormBuilder,
     private modalController: ModalController,
-    private actRoute: ActivatedRoute
+    private actRoute: ActivatedRoute,
+    private capRouter: CapRouterService
   ) {
     super();
 
@@ -69,26 +71,34 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
   }
 
 
-  widgetActionFailed(name: string, data: any): any {
+  async widgetActionFailed(name: string, data: any) {
+    this.loaderService.stopLoading();
     console.log(name, 'Action Failed');
     switch (name) {
       case 'saveAddress':
+        const failedMsg1 = await this.translate.instant('add-address.failed_to_save');
+        this.alertService.presentToast(failedMsg1, 1000, 'top');
         console.log(name, 'error', data);
         break;
       case 'updateAddress':
+        const failedMsg2 = await this.translate.instant('add-address.failed_to_update');
+        this.alertService.presentToast(failedMsg2, 1000, 'top');
         console.log(name, 'error', data);
         break;
     }
   }
 
   widgetActionSuccess(name: string, data: any): any {
+    this.loaderService.stopLoading();
     console.log(name, 'Action Success');
     switch (name) {
       case 'saveAddress':
         console.log(name, data);
+        this.capRouter.routeByUrlWithLanguage('saved-address');
         break;
       case 'updateAddress':
         console.log(name, data);
+        this.capRouter.routeByUrlWithLanguage('saved-address');
         break;
     }
   }
@@ -111,9 +121,9 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
     switch (name) {
       case 'singleUserAddress':
         this.addAddressForm.setValue({
-          addressDetails: data.address1,
-          landMark: data.landmark,
-          addressType: data.addressType.toLowerCase()
+          addressDetails: data.detail || '',
+          landMark: data.landmark || '' ,
+          addressType: data.addressType ? data.addressType.toLowerCase() : ''
         });
         this.addressModel = data;
         break;
@@ -121,15 +131,17 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   saveAddress(addressForm, type) {
-    this.addressModel.locationDetails = this.newLatLngDetails;
-    this.addressModel.address1 = addressForm.value.addressDetails;
+    this.addressModel.locationDetail = this.newLatLngDetails;
+    this.addressModel.detail = addressForm.value.addressDetails;
     this.addressModel.landmark = addressForm.value.landMark;
     this.addressModel.addressType = addressForm.value.addressType;
     if (type === 'save') {
+      this.loaderService.startLoading();
       this.singleUserAddressWidgetActions.emit(
         new Action(UserAddressWidgetActions.SAVE, this.addressModel)
       );
     } else if (type === 'update') {
+      this.loaderService.startLoading();
       this.singleUserAddressWidgetActions.emit(
         new Action(UserAddressWidgetActions.UPDATE, this.addressModel)
       );
