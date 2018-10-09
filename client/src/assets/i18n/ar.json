@@ -53,7 +53,8 @@
 		"voucher_code": "رمز القسيمة",
 		"voucher_description": "لدينا صفقات الأعلى متاحة دائما على الإنترنت على صفحة صفقاتنا.",
 		"your_cart": "عربتك",
-		"your_total": "مجموعك"
+    "your_total": "مجموعك",
+    "you_may_also_like": ""
 	},
 	"category_listing": {
 		"price_tag": "من عند"

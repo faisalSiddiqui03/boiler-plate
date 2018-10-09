@@ -10,7 +10,9 @@ import {
   CapRouterService,
   pwaLifeCycle,
   pageView,
-  WidgetNames
+  WidgetNames,
+  Product,
+  SuggestionsWidgetActions
 } from '@capillarytech/pwa-framework';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -43,6 +45,15 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   bundle = ProductType.Bundle;
   product = ProductType.Product;
   deal = ProductType.Deal;
+  suggestionsLoaded: boolean;
+
+  suggestionWidgetAction = new EventEmitter();
+
+  slideOpts = {
+    slidesPerView: 2,
+    autoplay: false,
+    spaceBetween: 10
+  };
 
   constructor(
     private translateService: TranslateService,
@@ -176,15 +187,6 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
     this.cartWidgetAction.emit(action);
   }
 
-  openProduct(product) {
-    const navigationUrl = this.getNavigationUrlWithLangSupport('product/' +
-        encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' +
-        product.productId);
-    console.log('Nav URL', navigationUrl);
-    this.capRouter.routeByUrlWithLanguage(navigationUrl);
-    // this.router.navigateByUrl(navigationUrl);
-  }
-
   widgetActionFailed(name: string, data: any): any {
     this.loaderService.stopLoading();
     if (name === CartWidgetActions.ACTION_APPLY_COUPON) {
@@ -247,7 +249,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
         this.loaded = true;
         break;
       case WidgetNames.SUGGESTIONS:
-        // this.suggestionsLoaded = true;
+        this.suggestionsLoaded = true;
         break;
       case WidgetNames.COUPONS:
         this.vouchersLoaded = true;
@@ -270,5 +272,52 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
 
   goToPage(pageName) {
     this.capRouter.routeByUrlWithLanguage('/' + pageName);
+  }
+
+  isLoggedIn() {
+    return this.getUserModel() && this.getUserModel().type !== 'GUEST';
+  }
+
+  updateFavorites(isFavorite, product) {
+    if (!isFavorite) {
+      this.suggestionWidgetAction.emit(new Action(SuggestionsWidgetActions.ACTION_MARK_AS_FAVORITE, product));
+      return;
+    }
+    this.suggestionWidgetAction.emit(new Action(SuggestionsWidgetActions.ACTION_UNMARK_AS_FAVORITE, product));
+  }
+
+  async openProductDetails(product: Product) {
+    const modal = await this.modalController.create({
+      component: ProductDetailsComponent,
+      componentProps: {
+        productId: product.id,
+        fromSuggestion: true
+      }
+    });
+
+    await modal.present();
+
+    modal.onDidDismiss().then((itemAdded) => {
+      if (itemAdded) {
+        this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
+        this.suggestionWidgetAction.emit(new Action(SuggestionsWidgetActions.REFRESH));
+      }
+    });
+  }
+
+  getProductImageUrl(product) {
+    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
+      return this.getUrl(product.image);
+    } else {
+      let lastItem = product.multipleImages.slice().pop();
+      if (!lastItem.image) {
+        return this.getUrl(product.image);
+      }
+      return this.getUrl(lastItem.image);
+    }
+  }
+
+  getUrl(url: string) {
+    return `https://${url}`;
   }
 }
