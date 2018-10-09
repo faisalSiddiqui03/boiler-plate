@@ -186,6 +186,10 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
       case CheckoutWidgetActions.ACTION_GET_ORDER_ATTRIBUTES:
         console.log('attributes data ', data);
         break;
+      case 'saveAddress':
+        console.log(name, data);
+        this.alertService.presentToast(this.translate.instant('checkout_page.address_saved_successfully'), 500, 'bottom');
+        break;
     }
   }
 
@@ -313,7 +317,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
         const action = new Action(UserAddressWidgetActions.SAVE, this.widgetModels['singleUserAddress']);
         this.singleUserAddressWidgetActions.emit(action);
       }
-      this.goToPage('success/' + data.orderId + '/' + this.checkoutForm.value.email);
+      this.goToPage('success/' + data.orderId + '/' + btoa(this.checkoutForm.value.email));
     } else {
       this.alertService.presentToast(this.translate.instant('checkout_page.order_failure'), 500, top);
     }

@@ -73,6 +73,7 @@
 	},
 	"checkout_page": {
 		"add_new_address": "Add New Address",
+		"address_saved_successfully": "Address saved successfully",
 		"agree_text": "By placing your order, you agree to our",
 		"building": "Building Number/Villa Number",
 		"building_placeholder": "Building Number/Villa Number",
@@ -542,15 +543,14 @@
 		"take_away_now": "Take Away Now"
 	},
 	"success_page": {
+		"delivery_address": "Delivery Address:",
 		"immediate_delivery": "We're preparing your order & it'll be with you in  45 to 60 Minutes",
 		"immediate_takeaway": "We're preparing your order & You can pick it up in  45 to 60 Minutes",
-		"delivery_address": "Delivery Address:",
-		"pickup_address": "Take-Away Address:",
 		"it_will_be_with_you_by": "You can pick it up by",
-		"pick_it_by": "it will be with you by",
 		"liked_our_experience_click_to_register": "Liked our experience, click here to register.",
 		"on": "On",
 		"order": "Order#:",
+		"pickup_address": "Take-Away Address:",
 		"register": "Register",
 		"sent_tracking_details_to": "We have sent your order & tracking details to",
 		"thanks_for_your_order": "Thanks for your order,",

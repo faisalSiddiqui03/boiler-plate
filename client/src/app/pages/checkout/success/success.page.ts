@@ -37,7 +37,7 @@ export class SuccessPage extends BaseComponent implements OnInit {
     this.translate.use(this.getCurrentLanguageCode());
 
     this.orderId = this.route.snapshot.params.orderId;
-    this.email = this.route.snapshot.params.email;
+    this.email = atob(this.route.snapshot.params.email);
   }
 
   goToPage(pageName) {
