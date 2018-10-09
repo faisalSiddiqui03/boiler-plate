@@ -303,7 +303,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   handleOrderSuccess(data) {
     this.loaderService.stopLoading();
     if (data.orderId) {
-      this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, top);
+      this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, 'top', 'top');
       if (this.checkoutForm.value.saveAddress) {
         this.widgetModels['singleUserAddress'].detail = this.checkoutForm.value.building;
         this.widgetModels['singleUserAddress'].landmark = this.checkoutForm.value.street;
@@ -319,7 +319,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
       }
       this.goToPage('success/' + data.orderId + '/' + btoa(this.checkoutForm.value.email));
     } else {
-      this.alertService.presentToast(this.translate.instant('checkout_page.order_failure'), 500, top);
+      this.alertService.presentToast(this.translate.instant('checkout_page.order_failure'), 500, 'top', 'top');
     }
 
   }

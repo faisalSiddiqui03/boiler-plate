@@ -76,6 +76,7 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
   }
 
   signUp() {
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     console.log(this.signUpForm.value);
     this.widgetModels.USERID_SIGNUP.firstName = this.signUpForm.value.fname;
     this.widgetModels.USERID_SIGNUP.lastName = this.signUpForm.value.lname;
@@ -89,14 +90,15 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
   }
 
   handleSignUpResponse(data) {
+    this.loaderService.stopLoading();
     if (data.message === "Succesfull") {
-      this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful'), 500, top);
+      this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful'), 500, 'top', 'top');
       this.useridSignUpAction.emit(
         new Action('SIGNUP_SIGNIN', [this.signUpForm.value.email, this.signUpForm.value.password]))
         this.capRouter.routeByUrlWithLanguage('/home');
       // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
     } else {
-      this.alertService.presentToast(data.message, 500, top);
+      this.alertService.presentToast(data.message, 500, 'top', 'top');
     }
   }
 

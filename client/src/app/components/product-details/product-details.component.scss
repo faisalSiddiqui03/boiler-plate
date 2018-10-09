@@ -213,7 +213,7 @@
       }
     }
     ion-button {
-      span {
+      .btn-price {
         position: absolute;
         right: 15px;
       }
@@ -317,7 +317,7 @@ html {
       }
       ion-footer {
         ion-button {
-          span {
+          .btn-price {
             left: 15px;
             right: auto;
           }
