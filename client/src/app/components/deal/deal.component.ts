@@ -16,11 +16,12 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
 import { ModalController } from '@ionic/angular';
-import { DealShowcaseComponent } from '../../components/deal-showcase/deal-showcase.component'
+import { DealShowcaseComponent } from '../deal-showcase/deal-showcase.component'
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
-import { ProductDetailsComponent } from '../../components/product-details/product-details.component';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { AttributeName, AttributeValue } from '../../helpers/validators';
-import { TrioComponent } from '../../components/trio/trio.component';
+import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
+import { TrioComponent } from '../trio/trio.component';
 
 @Component({
   selector: 'app-deal-component',
@@ -157,7 +158,22 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     return bundleGroupSelected;
   }
 
-  addToCart() {
+  async openStoreSelection() {
+    const modal = await this.modalController.create({
+      component: StoreSelectionModalComponent
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((storeSelected) => {
+      return storeSelected;
+    });
+  }
+
+  async addToCart() {
+    if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
+      const storeSelected = await this.openStoreSelection();
+      if (!storeSelected) return;
+    }
     this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)

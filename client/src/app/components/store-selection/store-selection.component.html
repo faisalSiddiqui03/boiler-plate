@@ -74,7 +74,7 @@
               </ion-searchbar>
             </div>
             <div class="form-control">
-              <ion-searchbar class="form-search" [debounce]="1000" #focusInput
+              <ion-searchbar class="form-search" [debounce]="300" #focusInput
                              showCancelButton="false"
                              placeholder="{{'home_page.select_block' | translate}}">
               </ion-searchbar>
@@ -85,7 +85,7 @@
           <div class="location-bar">
             <div class="form-control">
               <ion-searchbar
-                class="form-search" [debounce]="1000" [(ngModel)]="selectedCity" #focusInput
+                class="form-search" [debounce]="300" [(ngModel)]="selectedCity" #focusInput
                 showCancelButton="false" placeholder="{{'home_page.select_area' | translate}}"
                 (click)="preventPropogation($event);toggleDropDown('city');"
                 (ionInput)="toggleDropDown('city', true, true);filterEntity($event, 'city')"
@@ -113,11 +113,12 @@
             </div>
             <div class="form-control"
                  *ngIf="getDeliveryMode() === deliveryModes?.HOME_DELIVERY">
-              <ion-searchbar [disabled]="!selectedCity || selectedCity === ''" class="form-search" [debounce]="1000"
-                             [(ngModel)]="selectedArea" #focusInput
-                             showCancelButton="false" placeholder="{{'home_page.select_block' | translate}}"
-                             (click)="preventPropogation($event);isCitySelected();toggleDropDown('area');"
-                             (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'area')">
+              <ion-searchbar
+                [disabled]="!selectedCity || selectedCity === ''" class="form-search" [debounce]="1000"
+                [(ngModel)]="selectedArea" #focusInput
+                showCancelButton="false" placeholder="{{'home_page.select_block' | translate}}"
+                (click)="preventPropogation($event);isCitySelected();toggleDropDown('area');"
+                (ionInput)="toggleDropDown('area', true, true);filterEntity($event, 'area')">
               </ion-searchbar>
               <div class="has-errors" *ngIf="hasError['selectAreaFirst']">
                 {{'home_page.select_city_warning' | translate}}

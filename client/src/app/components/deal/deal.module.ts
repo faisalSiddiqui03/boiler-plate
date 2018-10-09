@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
+import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
+import { StoreSelectionModalModule } from '../store-selection-modal/store-selection-modal.module';
 
 import { DealComponent } from './deal.component';
 
@@ -13,13 +15,13 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
 import { HttpClient } from '@angular/common/http';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
-import { DealShowcaseComponentModule } from '../../components/deal-showcase/deal-showcase.module';
-import { DealShowcaseComponent } from '../../components/deal-showcase/deal-showcase.component';
-import { HeaderModule } from '../../components/header/header.module';
-import { SubHeaderModule } from '../../components/sub-header/sub-header.module';
-import { ProductDetailsComponent } from '../../components/product-details/product-details.component';
-import { TrioComponent } from '../../components/trio/trio.component';
-import { TrioComponentModule } from '../../components/trio/trio.module';
+import { DealShowcaseComponentModule } from '../deal-showcase/deal-showcase.module';
+import { DealShowcaseComponent } from '../deal-showcase/deal-showcase.component';
+import { HeaderModule } from '../header/header.module';
+import { SubHeaderModule } from '../sub-header/sub-header.module';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
+import { TrioComponent } from '../trio/trio.component';
+import { TrioComponentModule } from '../trio/trio.module';
 
 @NgModule({
   imports: [
@@ -34,6 +36,7 @@ import { TrioComponentModule } from '../../components/trio/trio.module';
     SubHeaderModule,
     DealShowcaseComponentModule,
     TrioComponentModule,
+    StoreSelectionModalModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -45,9 +48,10 @@ import { TrioComponentModule } from '../../components/trio/trio.module';
   declarations: [DealComponent],
   exports: [DealComponent],
   entryComponents: [
-    DealShowcaseComponent, 
-    ProductDetailsComponent, 
+    DealShowcaseComponent,
+    ProductDetailsComponent,
     TrioComponent,
+    StoreSelectionModalComponent,
   ]
 })
 export class DealComponentModule {}

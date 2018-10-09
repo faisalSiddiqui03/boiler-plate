@@ -1,7 +1,7 @@
 .category-listing-page {
   background: var(--ion-color-light);
   .content-with-backdrop {
-    background-image: url("assets/imgs/backdrop.jpg");
+    background-image: url("../../../../assets/imgs/backdrop.jpg");
     flex: 1;
   }
   ion-content {
@@ -27,7 +27,7 @@
       }
     }
     ion-card-header {
-      background-image: url("assets/imgs/product-back.jpg");
+      background-image: url("../../../../assets/imgs/product-back.jpg");
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -46,7 +46,7 @@
     }
   }
   ion-row {
-    padding: 0 10px;
+    padding: 0;
   }
   .product-card-holder {
     padding: 0 5px 10px 5px;
@@ -277,7 +277,7 @@
         border-right: 1px solid var(--ion-color-medium-tint);
         &.selected {
           background-color: var(--ion-color-danger-shade);
-          background-image: url('assets/imgs/Deals-Highlight-Element.svg');
+          background-image: url('../../../../assets/imgs/Deals-Highlight-Element.svg');
           background-size: cover;
           color: var(--ion-color-light);
         }

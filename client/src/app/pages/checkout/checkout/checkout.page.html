@@ -29,7 +29,7 @@
           <span *ngIf="getDeliverySlot()?.id == -1">{{ 'header.asap' | translate }}</span>
           <span *ngIf="getDeliverySlot()?.id == -2">{{ 'header.noSlot' | translate }}</span>
         </ion-label>
-        <a class="change" (click)="presentSlotModal()" text-capitalize>{{ 'checkout_page.change' | translate }}</a>
+        <a style="margin-right: 10px;" class="change" (click)="presentSlotModal()" text-capitalize>{{ 'checkout_page.change' | translate }}</a>
       </ion-item>
     </div>
 
