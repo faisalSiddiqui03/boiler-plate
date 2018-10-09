@@ -4,7 +4,7 @@
     ion-button {
       max-width: 700px;
       margin: auto;
-      span {
+      .btn-price {
         padding: 0 3px;
       }
     }
@@ -25,6 +25,9 @@
     cursor: pointer;
     ion-icon {
       font-size: 25px;
+      svg{
+        fill: var(--ion-color-light);
+      }
     }
   }
   .delivery-hut {

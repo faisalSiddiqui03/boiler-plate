@@ -8,7 +8,7 @@
     margin: 0 8px 0 0;
     --border-width: 1px;
     --border-color: var(--ion-color-secondary);
-    --background-checked: transparent;
+    --background-checked: transparent !important;
     --ion-color-contrast: var(--ion-color-secondary) !important;
   }
   .forgot-pwd {
@@ -31,7 +31,7 @@
     background-color: transparent;
     border: 1px solid var(--ion-color-medium-tint);
     border-radius: 4px;
-    background-image: url('assets/imgs/google.png');
+    background-image: url('../../../../../assets/imgs/google.png');
     background-repeat: no-repeat;
     background-position: left 10px center;
     padding: 10px 10px 10px 50px;

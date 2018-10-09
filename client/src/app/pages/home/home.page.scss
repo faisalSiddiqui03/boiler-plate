@@ -55,10 +55,10 @@
         background-repeat: no-repeat;
         background-size: 100%;
         &.delivery-icon {
-          background-image: url('assets/imgs/delivery-bike-icon.gif');
+          background-image: url('../../../assets/imgs/delivery-bike-icon.gif');
         }
         &.takeaway-icon {
-          background-image: url('assets/imgs/collection-icon.gif');
+          background-image: url('../../../assets/imgs/collection-icon.gif');
         }
       }
     }
@@ -100,12 +100,11 @@
 }
 
 .has-errors {
-  background: url(assets/imgs/error.svg);
+  background: url('../../../assets/imgs/error.svg');
   background-size: 18px;
   background-repeat: no-repeat;
   background-color: #fff;
   position: absolute;
-  height: 44px;
   border: 1px solid #ff0000;
   width: 100%;
   top: 0px;
@@ -114,7 +113,6 @@
   padding-left: 10px;
   background-position: right 10px center;
   height: 50px;
-  line-height: 50px;
 }
 
 .loaction-btn {
@@ -140,7 +138,7 @@
     color: var(--ion-color-tertiary);
     display: block;
     padding-left: 20px;
-    background: url('assets/imgs/icon-geo.svg') no-repeat left / 14px;
+    background: url('../../../assets/imgs/icon-geo.svg') no-repeat left / 14px;
   }
   strong {
     font-weight: 600;
@@ -251,7 +249,7 @@ html {
       .delivery-take-away {
         ion-segment-button {
           &+ion-segment-button {
-            margin: 0 2px 0 0;
+            margin: 0 2px 0 0 !important;
           }
         }
       }

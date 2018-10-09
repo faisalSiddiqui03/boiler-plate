@@ -186,6 +186,10 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
       case CheckoutWidgetActions.ACTION_GET_ORDER_ATTRIBUTES:
         console.log('attributes data ', data);
         break;
+      case 'saveAddress':
+        console.log(name, data);
+        this.alertService.presentToast(this.translate.instant('checkout_page.address_saved_successfully'), 500, 'bottom');
+        break;
     }
   }
 
@@ -299,10 +303,10 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   handleOrderSuccess(data) {
     this.loaderService.stopLoading();
     if (data.orderId) {
-      this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, top);
+      this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, 'top', 'top');
       if (this.checkoutForm.value.saveAddress) {
-        this.widgetModels['singleUserAddress'].address1 = this.checkoutForm.value.building;
-        this.widgetModels['singleUserAddress'].address2 = this.checkoutForm.value.street;
+        this.widgetModels['singleUserAddress'].detail = this.checkoutForm.value.building;
+        this.widgetModels['singleUserAddress'].landmark = this.checkoutForm.value.street;
         this.widgetModels['singleUserAddress'].city = this.getCurrentStore().city;
         this.widgetModels['singleUserAddress'].country = this.getCurrentStore().country;
         this.widgetModels['singleUserAddress'].state = this.getCurrentStore().state;
@@ -310,12 +314,12 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
         this.widgetModels['singleUserAddress'].contactDetail = new ContactDetail();
         this.widgetModels['singleUserAddress'].locationDetail = this.getCurrentStore().locationDetail;
 
-        const action = new Action(UserAddressWidgetActions.SAVE);
+        const action = new Action(UserAddressWidgetActions.SAVE, this.widgetModels['singleUserAddress']);
         this.singleUserAddressWidgetActions.emit(action);
       }
-      this.goToPage('success/' + data.orderId + '/' + this.checkoutForm.value.email);
+      this.goToPage('success/' + data.orderId + '/' + btoa(this.checkoutForm.value.email));
     } else {
-      this.alertService.presentToast(this.translate.instant('checkout_page.order_failure'), 500, top);
+      this.alertService.presentToast(this.translate.instant('checkout_page.order_failure'), 500, 'top', 'top');
     }
 
   }
@@ -352,7 +356,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
     this.checkoutForm.controls['building'].setValue(this.savedAddresses[index].address1);
     this.checkoutForm.controls['street'].setValue(this.savedAddresses[index].address2);
-    this.checkoutForm.controls['addressType'].setValue(this.savedAddresses[index].addressType)
+    this.checkoutForm.controls['addressType'].setValue(this.savedAddresses[index].addressType);
   }
 
   slectPaymentOption(option) {

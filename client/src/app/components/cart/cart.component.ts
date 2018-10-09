@@ -10,7 +10,9 @@ import {
   CapRouterService,
   pwaLifeCycle,
   pageView,
-  WidgetNames
+  WidgetNames,
+  Product,
+  SuggestionsWidgetActions
 } from '@capillarytech/pwa-framework';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -43,6 +45,15 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   bundle = ProductType.Bundle;
   product = ProductType.Product;
   deal = ProductType.Deal;
+  suggestionsLoaded: boolean;
+
+  suggestionWidgetAction = new EventEmitter();
+
+  slideOpts = {
+    slidesPerView: 2,
+    autoplay: false,
+    spaceBetween: 10
+  };
 
   constructor(
     private translateService: TranslateService,
@@ -141,7 +152,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
       case ProductType.Product:
         if (!cartItem.variantProductId) {
           const itemNotEditable = await this.translateService.instant('cart.not_editable');
-          this.alertService.presentToast(itemNotEditable, 1000, 'top');
+          this.alertService.presentToast(itemNotEditable, 1000, 'top', 'top');
           return;
         }
         component = ProductDetailsComponent;
@@ -174,15 +185,6 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
     this.loaderService.startLoading(cartClear, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     const action = new Action(CartWidgetActions.ACTION_CLEAR_CART);
     this.cartWidgetAction.emit(action);
-  }
-
-  openProduct(product) {
-    const navigationUrl = this.getNavigationUrlWithLangSupport('product/' +
-        encodeURI(product.description.toLowerCase().replace('/', '-')) + '/' +
-        product.productId);
-    console.log('Nav URL', navigationUrl);
-    this.capRouter.routeByUrlWithLanguage(navigationUrl);
-    // this.router.navigateByUrl(navigationUrl);
   }
 
   widgetActionFailed(name: string, data: any): any {
@@ -247,7 +249,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
         this.loaded = true;
         break;
       case WidgetNames.SUGGESTIONS:
-        // this.suggestionsLoaded = true;
+        this.suggestionsLoaded = true;
         break;
       case WidgetNames.COUPONS:
         this.vouchersLoaded = true;
@@ -265,12 +267,57 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   goToDeals() {
-    this.capRouter.routeByUrlWithLanguage('/product/deals/CU00215646');
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/deals/CU00215646'));
+    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
   goToPage(pageName) {
     this.capRouter.routeByUrlWithLanguage('/' + pageName);
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/' + pageName));
+  }
+
+  isLoggedIn() {
+    return this.getUserModel() && this.getUserModel().type !== 'GUEST';
+  }
+
+  updateFavorites(isFavorite, product) {
+    if (!isFavorite) {
+      this.suggestionWidgetAction.emit(new Action(SuggestionsWidgetActions.ACTION_MARK_AS_FAVORITE, product));
+      return;
+    }
+    this.suggestionWidgetAction.emit(new Action(SuggestionsWidgetActions.ACTION_UNMARK_AS_FAVORITE, product));
+  }
+
+  async openProductDetails(product: Product) {
+    const modal = await this.modalController.create({
+      component: ProductDetailsComponent,
+      componentProps: {
+        productId: product.id,
+        fromSuggestion: true
+      }
+    });
+
+    await modal.present();
+
+    modal.onDidDismiss().then((itemAdded) => {
+      if (itemAdded) {
+        this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
+        this.suggestionWidgetAction.emit(new Action(SuggestionsWidgetActions.REFRESH));
+      }
+    });
+  }
+
+  getProductImageUrl(product) {
+    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
+      return this.getUrl(product.image);
+    } else {
+      let lastItem = product.multipleImages.slice().pop();
+      if (!lastItem.image) {
+        return this.getUrl(product.image);
+      }
+      return this.getUrl(lastItem.image);
+    }
+  }
+
+  getUrl(url: string) {
+    return `https://${url}`;
   }
 }

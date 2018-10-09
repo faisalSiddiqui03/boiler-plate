@@ -6,24 +6,32 @@
   <favorites-widget [componentId]="getComponentId()" [action]="favoritesWidgetAction">
     <ng-template let-widget="widget">
       <div *ngIf="!widget.model">
-        <ion-row class="favorites-list">
-          <ion-col class="favorite-item" size-lg="3" size-md="4" size-xs="6" *ngFor="let i of [0,1,2,3]">
-            <div class="product-card">
-              <div class="icon icon-favourite-active"></div>
-              <div class="skeleton-img">
-                <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
-              </div>
-              <div class="fav-text">
-                <h5>
-                  <ion-skeleton-text width="150px"></ion-skeleton-text>
-                </h5>
-                <div class="price" text-right>
-                  <ion-skeleton-text width="50px"></ion-skeleton-text>
-                </div>
-              </div>
-            </div>
-          </ion-col>
-        </ion-row>
+        <ion-grid>
+          <ion-row>
+            <ion-col *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9]" class="product-card-holder" [sizeSm]="6" [sizeXs]="6"
+                     [sizeMd]="4" [sizeLg]="3"
+                     no-padding>
+              <ion-card class="product-card non-deal-card" no-padding>
+                <ion-card-header no-padding>
+                  <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
+                </ion-card-header>
+
+                <ion-card-content padding>
+                  <ion-card-subtitle color="dark">
+                    <div class="skeleton-warpper">
+                      <ion-skeleton-text class="skeleton-text p-skeleton"></ion-skeleton-text>
+                    </div>
+                  </ion-card-subtitle>
+                  <div class="price-segment" text-end>
+                    <div class="skeleton-warpper">
+                      <ion-skeleton-text class="skeleton-text p-skeleton"></ion-skeleton-text>
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
 
       <div *ngIf="widget.model !== undefined && widget.model.length === 0">
@@ -33,13 +41,18 @@
       <div *ngIf="widget.model !== undefined && widget.model.length !== 0">
         <ion-grid>
           <ion-row class="favorites-list">
-            <ion-col class="product-card-holder favorite-item" *ngFor="let prod of widget.model" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4"
-              [sizeLg]="3" no-padding>
+            <ion-col class="product-card-holder favorite-item" *ngFor="let prod of widget.model" [sizeSm]="6"
+                     [sizeXs]="6" [sizeMd]="4"
+                     [sizeLg]="3" no-padding>
               <ion-card class="product-card non-deal-card" no-padding>
                 <div class="icon icon-favourite-active" (click)="updateFavorites(prod.client)">
                 </div>
                 <ion-card-header no-padding>
-                  <img class="card-fav-img" height="100" src="{{getProductImageUrl(prod)}}" loadingImage="assets/imgs/default/default.png" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
+                  <img
+                    class="card-fav-img" height="100"
+                    loadingImage="assets/imgs/default/default.png"
+                    img-preloader="{{getProductImageUrl(prod)}}"
+                    defaultImage="assets/imgs/default/default.png"
                   />
                 </ion-card-header>
 

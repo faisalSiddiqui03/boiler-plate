@@ -30,13 +30,14 @@ import { LoaderService } from '@capillarytech/pwa-ui-helpers';
 @pageView()
 export class CategoryListingPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   categoryId: string = null;
-  categoryName: string;
-  productShowcaseWidgetAction = new EventEmitter();
   productShowcaseWidgetExecutor = new EventEmitter();
+  productShowcaseActionMap = new Map();
   currencyCode: string;
   navigations = [];
-  dealCategoryId: number;
+  dealCategoryId: string;
   asapDeliverySlot = DeliverySlot.getAsap();
+  categoryNamesById = new Map();
+  favoriteInProgress = new Map();
 
   constructor(
     private route: ActivatedRoute,
@@ -65,7 +66,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
         // TODO : generate store promise
         const store = this.getCurrentStore();
-        if (store === null) {
+        if (!store) {
             this.presentSlotModal();
         } else if (!store.isOnline(this.getDeliveryMode())) {
             this.presentSlotModal();
@@ -89,12 +90,12 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       const paramValues = param.split('=');
         dataFromParams[paramValues[0]] = paramValues[1]
     });
+    dataFromParams.category = dataFromParams.category.split('%20').join(' ');
     this.updateCategories(dataFromParams);
   }
 
   updateCategories(data) {
     this.categoryId = data.id;
-    this.categoryName = data.category;
   }
 
   getShowcaseFilter(categoryId) {
@@ -132,20 +133,9 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   openProductDetails(product) {
     if (product.type === ProductType.Bundle) {
       this.capRouter.routeByUrlWithLanguage('/pizza/' + product.title + '/' + product.id);
-      // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/pizza/' + product.title + '/' + product.id));
       return;
     }
-    this.capRouter.routeByUrlWithLanguage('/product/' + this.categoryName + '/' + product.title + '/' + product.id);
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/' + this.categoryName + '/' + product.title + '/' + product.id));
-
-    // Use following, when catlog code is proper from api response
-    // if (product.type === ProductType.Bundle) {
-    //   this.router.navigateByUrl(this.utilService.getLanguageCode() + '/pizza/' + product.title + '/' + product.id);
-    // } else if(product.type === ProductType.Deal) {
-    //   this.router.navigateByUrl(this.utilService.getLanguageCode() + '/deal/' + product.title + '/' + product.id);
-    // } else {
-    //   this.router.navigateByUrl(this.utilService.getLanguageCode() + '/product/' + this.categoryName + '/' + product.title + '/' + product.id);
-    // }
+    this.capRouter.routeByUrlWithLanguage('/product/' + this.categoryNamesById.get(this.categoryId) + '/' + product.title + '/' + product.id);
   }
 
   openDeal(product) {
@@ -154,17 +144,34 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   updateFavorites(isFavorite, product) {
+    this.favoriteInProgress.set(product.id, true);
     if (!isFavorite) {
-      this.productShowcaseWidgetAction.emit(new Action(ProductShowcaseWidgetActions.ACTION_MARK_AS_FAVORITE, product));
+      this.productShowcaseActionMap.get(this.categoryId).emit(new Action(ProductShowcaseWidgetActions.ACTION_MARK_AS_FAVORITE, product));
       return;
     }
-    this.productShowcaseWidgetAction.emit(new Action(ProductShowcaseWidgetActions.ACTION_UNMARK_AS_FAVORITE, product));
+    this.productShowcaseActionMap.get(this.categoryId).emit(new Action(ProductShowcaseWidgetActions.ACTION_UNMARK_AS_FAVORITE, product));
   }
 
   widgetActionFailed(name: string, data: any): any {
+    switch (name) {
+      case ProductShowcaseWidgetActions.ACTION_MARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
+        break;
+      case ProductShowcaseWidgetActions.ACTION_UNMARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
+        break;
+    }
   }
 
   widgetActionSuccess(name: string, data: any): any {
+    switch (name) {
+      case ProductShowcaseWidgetActions.ACTION_MARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
+        break;
+      case ProductShowcaseWidgetActions.ACTION_UNMARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
+        break;
+    }
   }
 
   widgetLoadingFailed(name: string, data: any): any {
@@ -182,6 +189,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
       case 'NAVIGATIONS':
         this.navigations = data.items;
+        this.createMapsBasedOnCategory(data.items);
         break;
     }
   }
@@ -207,4 +215,12 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   isLoggedIn() {
     return this.getUserModel() && this.getUserModel().type !== 'GUEST';
   }
+
+  createMapsBasedOnCategory(items) {
+    items.forEach((item) => {
+      this.categoryNamesById.set(item.categoryId, item.name);
+      this.productShowcaseActionMap.set(item.categoryId, new EventEmitter());
+    });
+  }
+
 }

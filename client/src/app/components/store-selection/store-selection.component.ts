@@ -76,10 +76,12 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   async ionViewWillEnter() {
     this.translate.use(this.getCurrentLanguageCode());
-    this.selectedStore = this.getCurrentStore();
+    // this.selectedStore = this.getCurrentStore();
   }
 
   ionViewDidEnter() {
+    this.selectedStore = this.getCurrentStore();
+    console.error('selected store', this.getCurrentStore());
     this.changeRequested = false;
   }
 
