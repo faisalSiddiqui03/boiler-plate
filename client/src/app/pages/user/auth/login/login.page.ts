@@ -99,7 +99,6 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   handleGoogleSignInResponse(data) {
-    // this.alertService.presentToast(data.isSuccessful ? 'Successfully signed in' : data.message, 500, 'top');
     this.alertService.presentToastByTranslationKey(data.isSuccessful ? 'sign_in_page.success_sign_in' : data.message, 500, 'top', 'top');
     this.capRouter.routeByUrlWithLanguage('/home');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
@@ -119,7 +118,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
     } else {
       this.isLoginSuccessful = false;
-      this.alertService.presentToast(data.message, 500, 'top');
+      this.alertService.presentToast(data.message, 500, 'top', 'top');
     }
   }
 

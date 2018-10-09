@@ -89,12 +89,12 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
         this.alertService.presentToast(this.clientProduct.title + ' ' +
-          this.translate.instant('product_details.added_to_cart'), 1000, 'top');
+          this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ATION_EDIT_CART:
         // this.alertService.presentToast(this.clientProduct.title + ' ' +
-        // this.translate.instant('product_details.added_to_cart'), 1000, 'top');
+        // this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
         this.modalController.dismiss(true);
         // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=' +
         // this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);

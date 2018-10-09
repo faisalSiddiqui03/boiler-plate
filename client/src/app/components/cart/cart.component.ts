@@ -141,7 +141,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
       case ProductType.Product:
         if (!cartItem.variantProductId) {
           const itemNotEditable = await this.translateService.instant('cart.not_editable');
-          this.alertService.presentToast(itemNotEditable, 1000, 'top');
+          this.alertService.presentToast(itemNotEditable, 1000, 'top', 'top');
           return;
         }
         component = ProductDetailsComponent;
