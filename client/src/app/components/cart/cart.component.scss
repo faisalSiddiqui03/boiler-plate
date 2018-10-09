@@ -252,6 +252,50 @@
   }
 }
 
+.clearcart-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(var(--ion-color-dark-rgb), .8);
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  .clearcart-popup {
+    max-width: 280px;
+    max-height: 135px;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    background: var(--ion-color-light);
+    border-radius: 3px;
+    padding: 10px 10px 20px 10px;
+    p {
+      padding: 10px 0px 20px 0px;
+      margin: 0px;
+      color: rgba(var(--ion-color-dark-rgb), .5);
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+      ion-icon {
+        font-size: 20px;
+        color: var(--ion-color-medium-shade);
+      }
+    }
+    ion-button {
+      width: 100%;
+    }
+    .clearcart-dismiss {
+      --ion-color-contrast: var(--ion-color-light) !important;
+    }
+    .clearcart-confirm {
+      margin-left: 10px;
+    }
+  }
+}
+
 @media (min-width:992px){
   .cart-page {
     .basket-container {

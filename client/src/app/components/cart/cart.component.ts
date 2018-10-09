@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   Action,
@@ -33,7 +33,7 @@ import { DealComponent } from '../deal/deal.component';
 
 @pwaLifeCycle()
 @pageView()
-export class CartComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class CartComponent extends BaseComponent implements AfterViewInit, OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   cartWidgetAction = new EventEmitter();
   loaded = false;
   vouchersLoaded = false;
@@ -46,6 +46,8 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   product = ProductType.Product;
   deal = ProductType.Deal;
   suggestionsLoaded: boolean;
+  removeItemPopup: boolean = false;
+  itemToRemove;
 
   suggestionWidgetAction = new EventEmitter();
 
@@ -76,7 +78,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   ngOnInit() {
   }
 
-  ionViewWillEnter() {
+  ngAfterViewInit() {
     this.cartWidgetAction.emit(new Action(CartWidgetActions.REFRESH));
     this.translateService.use(this.getCurrentLanguageCode());
   }
@@ -112,7 +114,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
 
     item.quantity = item.quantity + newQuantity;
     if (item.quantity < 1) {
-      this.removeCartItem(item);
+      this.confirmRemove(item);
       return;
     }
 
@@ -126,7 +128,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
 
     item.quantity = item.quantity + newQuantity;
     if (item.quantity === 0) {
-      this.removeCartItem(item);
+      this.confirmRemove(item);
       return;
     }
 
@@ -137,12 +139,22 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
     this.cartWidgetAction.emit(action);
   }
 
-  async removeCartItem(item) {
-    item.quantity = 0;
+  confirmRemove(item){
+    this.removeItemPopup = true;
+    this.itemToRemove = item;
+    return;
+  }
+
+  dismissRemoveItemPopup() {
+    this.removeItemPopup = false;
+  }
+
+  async removeCartItem() {
+    this.itemToRemove.quantity = 0;
     const cartRemove = await this.translateService.instant('cart.remove_item');
     this.loaderService.startLoading(cartRemove, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updatingPrice = true;
-    const action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
+    const action = new Action(CartWidgetActions.ACTION_UPDATE_CART, this.itemToRemove);
     this.cartWidgetAction.emit(action);
   }
 
