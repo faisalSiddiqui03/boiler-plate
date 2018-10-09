@@ -8,7 +8,7 @@ import {
   Product,
   ProductDetailsWidgetActions,
   Action,
-  OnWidgetActionsLifecyle, OnWidgetLifecyle
+  OnWidgetActionsLifecyle, OnWidgetLifecyle, CartWidgetActions
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../base/base-component';
@@ -153,10 +153,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       return this.getUrl(product.image);
     } else {
       let lastItem = product.multipleImages.slice().pop();
-      if (!lastItem.image) {
-        return this.getUrl(product.image);
-      }
-      return this.getUrl(lastItem.image);
+      return lastItem.image ? this.getUrl(lastItem.image): this.getUrl(product.image);
     }
   }
 
@@ -190,13 +187,17 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     const modal = await this.modalController.create({
       component: StoreSelectionModalComponent
     });
-    return await modal.present();
+    await modal.present();
+
+    modal.onDidDismiss().then((storeSelected) => {
+      return storeSelected;
+    });
   }
 
   async addToCart() {
     if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
-      const modal = await this.openStoreSelection();
-      return;
+      const storeSelected = await this.openStoreSelection();
+      if (!storeSelected) return;
     }
     if (this.productFromDeal) {
       this.modalController.dismiss(this.clientProduct);

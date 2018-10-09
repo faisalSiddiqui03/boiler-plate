@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
@@ -12,6 +12,7 @@ import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
 import { StoreLocatorWidgetModule } from '@capillarytech/pwa-framework';
 import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
+import { StoreListModule } from '../../../components/store-list/store-list.module';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     HeaderModule,
+    StoreListModule,
     RouterModule.forChild(routes),
     StoreLocatorWidgetModule,
     SubHeaderModule,
@@ -37,6 +39,8 @@ const routes: Routes = [
       }
     })
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [StoreSelectionPage]
 })
-export class StoreSelectionPageModule {}
+export class StoreSelectionPageModule {
+}

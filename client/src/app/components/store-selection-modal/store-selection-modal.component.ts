@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { BaseComponent } from '../../base/base-component';
 
 @Component({
@@ -8,7 +9,9 @@ import { BaseComponent } from '../../base/base-component';
 })
 export class StoreSelectionModalComponent extends BaseComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private modalController: ModalController
+  ) {
     super();
   }
 
@@ -16,6 +19,6 @@ export class StoreSelectionModalComponent extends BaseComponent implements OnIni
   }
 
   goBack() {
-
+    this.modalController.dismiss(false);
   }
 }

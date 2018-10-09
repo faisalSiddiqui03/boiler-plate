@@ -1,21 +1,12 @@
-<div class="full-height popup-wrap pizza-component">
+<div class="full-height popup-wrap modal-component">
   <div class="popup-inner full-height">
-          <div class="pizza-details-content-block">
-            <div class="product-img-block">
-              <!--<ion-icon name="close-circle" (click)="goBack()" slot="start"></ion-icon>-->
-            </div>
-            <div class="pizza-details-content-inner">
-              <div class="popup-title">
-                <h4 text-center padding no-margin></h4>
-              </div>
-
-              <!-- First view, Selection of crust and size -->
-              <div class="pizza-sizes-wrap">
-                <app-store-selection></app-store-selection>
-              </div>
-
-              <!-- Second view, selection of toppings -->
-            </div>
-          </div>
+    <div class="content">
+      <div class="top-block">
+        <ion-icon name="close-circle" (click)="goBack()" slot="start"></ion-icon>
+      </div>
+      <div class="content-inner">
+          <app-store-selection isModal="true"></app-store-selection>
+      </div>
+    </div>
   </div>
 </div>

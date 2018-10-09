@@ -1,6 +1,7 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../base/base-component';
 import {
@@ -15,6 +16,8 @@ import {
   CartWidgetActions,
   FulfilmentModeWidgetActions
 } from '@capillarytech/pwa-framework';
+import { StoreListComponent } from '../store-list/store-list.component';
+import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 
 @Component({
   selector: 'app-store-selection',
@@ -49,6 +52,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   isCleared = false;
   clearCartPopup = false;
 
+  @Input() isModal: false;
   constructor(
     private config: ConfigService,
     private loaderService: LoaderService,
@@ -56,6 +60,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     private router: Router,
     private actRoute: ActivatedRoute,
     private alertService: AlertService,
+    private modalController: ModalController,
   ) {
     super();
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
@@ -69,21 +74,12 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   async ionViewWillEnter() {
     this.translate.use(this.getCurrentLanguageCode());
-    console.error('vivek current store', this.getCurrentStore());
     this.selectedStore = this.getCurrentStore();
   }
 
   ionViewDidEnter() {
-    // this.selectedStore = this.getCurrentStore();
     this.changeRequested = false;
   }
-
-  // findStore() {
-  //   this.isNavigationClicked = true;
-  //   this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
-  //     [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
-  //   this.loaderService.startLoading('Fetching Stores', this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
-  // }
 
   getFullBannerUrl(src) {
     return src ? this.bannerUrl + src + '?height=170&width=340&builder=freeimage' : null;
@@ -101,6 +97,12 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     console.log('Widget loading failed' + name, data);
   }
 
+  // closeDropDowns(e) {
+  //   console.error('closing', e);
+  //   this.toggleDropDown('area', true, false);
+  //   this.toggleDropDown('city', true, false);
+  // }
+
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
     switch (name) {
@@ -113,11 +115,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
             this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
           }
           this.setCurrentStore(firstStore);
-          // if (!firstStore.isOnline(this.getDeliveryMode())) {
-          // this.fetchDeliverySlots = true;
-          // } else {
-          // this.setDeliverySlot(this.asapDeliverySlot);
-          // this.asSoonPossible = true;
           this.navigateToDeals();
           // }
         } else {
@@ -127,32 +124,37 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        // if (data.length) {
-        //   this.setCurrentStore(data[0]);
-        //   // if (!this.getCurrentStore().isOnline(this.getDeliveryMode())) {
-        //   //   this.fetchDeliverySlots = true;
-        //   // } else {
-        //   //   this.setDeliverySlot(this.asapDeliverySlot);
-        //   // }
-        // } else {
-        //   const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-        //   this.alertService.presentToast(store_alert, 3000, 'bottom');
-        // }
         this.loaderService.stopLoading();
-        if (data && data.length !== 0) {
-          this.router.navigate(['/store-selection'], { queryParams: { 'latitude': this.lat, 'longitude': this.lng } });
+        if(!this.isModal) {
+          if (data && data.length) {
+            this.router.navigate(['/store-selection'], { queryParams: { 'latitude': this.lat, 'longitude': this.lng } });
+          } else {
+            const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+            this.alertService.presentToast(store_alert, 3000, 'bottom');
+          }
         } else {
-          const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-          this.alertService.presentToast(store_alert, 3000, 'bottom');
+          // open another modal with store selection
+          const storeSelected = await this.openStoreListModal();
+          if (storeSelected) {
+            this.modalController.dismiss(true);
+          }
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_CITY:
         this.loaderService.stopLoading();
-        if (data && data.length !== 0) {
-          this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
+        if(!this.isModal) {
+          if (data && data.length) {
+            this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
+          } else {
+            const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+            this.alertService.presentToast(store_alert, 3000, 'bottom');
+          }
         } else {
-          const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-          this.alertService.presentToast(store_alert, 3000, 'bottom');
+          // open another modal with store selection
+          const storeSelected = await this.openStoreListModal();
+          if (storeSelected) {
+            this.modalController.dismiss(true);
+          }
         }
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
@@ -164,6 +166,23 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
     }
+  }
+
+  async openStoreListModal() {
+    const modal = await this.modalController.create({
+      component: StoreListComponent,
+      componentProps: {
+        cityId: this.selectedCityCode,
+        latitude: this.lat,
+        longitude: this.lng,
+        isModal: true
+      }
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((storeSelected) => {
+      return storeSelected;
+    });
   }
 
   findStore() {
@@ -183,22 +202,11 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   navigateToDeals() {
+    if (this.isModal) {
+      return this.modalController.dismiss(true);
+    }
     this.isNavigationClicked = true;
-    // if (this.fetchDeliverySlots) {
-    //   this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
-    //   return;
-    // }
     this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
-    // const langCode = this.utilService.getLanguageCode();
-    // if (!this.asSoonPossible || this.utilService.isEmpty(this.getDeliverySlot())) {
-    //   // this.presentSlotModal().then(data => {
-    //     // this.loaderService.stopLoading();
-
-    //   // });
-    // } else {
-    //   this.loaderService.stopLoading();
-    //   this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
-    // }
   }
 
   widgetActionFailed(name: string, data: any) {
@@ -335,7 +343,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   locateMe(lat, lng) {
-    console.log('locate me ', lat, lng);
     this.lat = lat;
     this.lng = lng;
     if (this.getFulfilmentMode() && this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
@@ -353,15 +360,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   isCartNotEmpty() {
     return this.getCart() && this.getCart().items.length;
-  }
-
-  outSideClick() {
-    if (this.dropdownViewStatus.get('area')) {
-      this.toggleDropDown('area', true, false);
-    }
-    if (this.dropdownViewStatus.get('city')) {
-      this.toggleDropDown('city', true, false);
-    }
   }
 
   changeOrderMode(mode, previousMode, force: boolean = false) {

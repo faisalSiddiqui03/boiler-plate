@@ -17,10 +17,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../base/base-component';
 import { UtilService } from '../../helpers/utils';
 import { ProductType } from '@capillarytech/pwa-framework';
-import { ProductDetailsComponent } from '../../components/product-details/product-details.component';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { ModalController } from '@ionic/angular';
-import { PizzaComponent } from '../../components/pizza/pizza.component';
-import { DealComponent } from '../../components/deal/deal.component';
+import { PizzaComponent } from '../pizza/pizza.component';
+import { DealComponent } from '../deal/deal.component';
 
 @Component({
   selector: 'app-cart',
