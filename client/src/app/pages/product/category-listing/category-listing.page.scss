@@ -25,6 +25,9 @@
       &.icon-favourite-active {
         color: var(--ion-color-danger);
       }
+      &.fav-progress {
+        color: orange;
+      }
     }
     ion-card-header {
       background-image: url("../../../../assets/imgs/product-back.jpg");

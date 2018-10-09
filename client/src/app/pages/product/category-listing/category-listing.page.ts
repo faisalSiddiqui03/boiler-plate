@@ -30,13 +30,14 @@ import { LoaderService } from '@capillarytech/pwa-ui-helpers';
 @pageView()
 export class CategoryListingPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   categoryId: string = null;
-  productShowcaseWidgetAction = new EventEmitter();
   productShowcaseWidgetExecutor = new EventEmitter();
+  productShowcaseActionMap = new Map();
   currencyCode: string;
   navigations = [];
-  dealCategoryId: number;
+  dealCategoryId: string;
   asapDeliverySlot = DeliverySlot.getAsap();
   categoryNamesById = new Map();
+  favoriteInProgress = new Map();
 
   constructor(
     private route: ActivatedRoute,
@@ -143,17 +144,34 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   updateFavorites(isFavorite, product) {
+    this.favoriteInProgress.set(product.id, true);
     if (!isFavorite) {
-      this.productShowcaseWidgetAction.emit(new Action(ProductShowcaseWidgetActions.ACTION_MARK_AS_FAVORITE, product));
+      this.productShowcaseActionMap.get(this.categoryId).emit(new Action(ProductShowcaseWidgetActions.ACTION_MARK_AS_FAVORITE, product));
       return;
     }
-    this.productShowcaseWidgetAction.emit(new Action(ProductShowcaseWidgetActions.ACTION_UNMARK_AS_FAVORITE, product));
+    this.productShowcaseActionMap.get(this.categoryId).emit(new Action(ProductShowcaseWidgetActions.ACTION_UNMARK_AS_FAVORITE, product));
   }
 
   widgetActionFailed(name: string, data: any): any {
+    switch (name) {
+      case ProductShowcaseWidgetActions.ACTION_MARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
+        break;
+      case ProductShowcaseWidgetActions.ACTION_UNMARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
+        break;
+    }
   }
 
   widgetActionSuccess(name: string, data: any): any {
+    switch (name) {
+      case ProductShowcaseWidgetActions.ACTION_MARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
+        break;
+      case ProductShowcaseWidgetActions.ACTION_UNMARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
+        break;
+    }
   }
 
   widgetLoadingFailed(name: string, data: any): any {
@@ -171,7 +189,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
       case 'NAVIGATIONS':
         this.navigations = data.items;
-        this.createCategoryNameMap(data.items);
+        this.createMapsBasedOnCategory(data.items);
         break;
     }
   }
@@ -198,9 +216,11 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     return this.getUserModel() && this.getUserModel().type !== 'GUEST';
   }
 
-  createCategoryNameMap(items) {
+  createMapsBasedOnCategory(items) {
     items.forEach((item) => {
       this.categoryNamesById.set(item.categoryId, item.name);
+      this.productShowcaseActionMap.set(item.categoryId, new EventEmitter());
     });
   }
+
 }

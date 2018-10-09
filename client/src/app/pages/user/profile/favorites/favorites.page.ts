@@ -40,7 +40,8 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     private config: ConfigService,) {
     super();
 
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader':
+    // 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
@@ -56,12 +57,29 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
+  // getProductImageUrl(product) {
+  //   if (product && product.multipleImages && product.multipleImages.length) {
+  //     return `https://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
+  //   } else if (product && product.largeImage) {
+  //     return `https:${product.largeImage}`;
+  //   }
+  // }
+
   getProductImageUrl(product) {
-    if (product && product.multipleImages && product.multipleImages.length) {
-      return `https://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
-    } else if (product && product.largeImage) {
-      return `https:${product.largeImage}`;
+    console.error('hello', product);
+    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
+      return this.getUrl(product.image);
+    } else {
+      let lastItem = product.multipleImages.slice().pop();
+      if (!lastItem.image) {
+        return this.getUrl(product.image);
+      }
+      return this.getUrl(lastItem.image);
     }
+  }
+
+  getUrl(url: string) {
+    return `https://${url}`;
   }
 
   updateFavorites(product) {
