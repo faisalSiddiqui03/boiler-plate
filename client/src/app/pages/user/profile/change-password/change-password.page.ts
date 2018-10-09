@@ -58,7 +58,7 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
 
   changePassword() {
     console.log('Password change');
-
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.widgetmodel.userId = this.userId;
     this.widgetmodel.password = this.resetPasswordForm.value.newPassword;
     let action = new Action(ResetPasswordWidgetActions.ACTION_CHANGE_PASSWORD);
@@ -67,9 +67,11 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
   }
 
   widgetActionFailed(name: string, data: any): any {
+    this.loaderService.stopLoading();
   }
 
   widgetActionSuccess(name, data) {
+    this.loaderService.stopLoading();
     if (data.isSuccessful) {
       console.log(this.translate.instant('change_password_page.change_password_success'));
     } else {

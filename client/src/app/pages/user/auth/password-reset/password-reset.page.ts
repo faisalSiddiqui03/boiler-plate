@@ -51,18 +51,20 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
   }
 
   resetPassword() {
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.resetPasswordActionEmitter.emit(new Action(
       ForgotPasswordWidgetActions.ACTION_SEND_PASSWORD_RESET_LINK, this.resetPasswordForm.value.email
     ));
   }
 
   handleResetPasswordResponse(data) {
+    this.loaderService.stopLoading();
     this.capRouter.routeByUrlWithLanguage('/login');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/login'));
     if (data.isSuccessful) {
-      this.alertService.presentToast(this.translate.instant('reset_password_page.link_sent'), 1000, top);
+      this.alertService.presentToast(this.translate.instant('reset_password_page.link_sent'), 1000, 'top', 'top');
     } else {
-      this.alertService.presentToast(data.message, 1000, top);
+      this.alertService.presentToast(data.message, 1000, 'top', 'top');
     }
   }
 
