@@ -3,6 +3,9 @@
 .idea/
 node_modules/
 dist/
+www/
+platforms/
+plugins/
 .DS_Store
 .idea
 ### Node template
