@@ -93,7 +93,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
-    console.log('-------', data)
+    console.log('Favorites data', data)
   }
 
 }
