@@ -1,7 +1,7 @@
 <cart-widget class="full-height cart-page" [componentId]="getComponentId()" [action]="cartWidgetAction">
     <ng-template let-widget="widget">
-      <!-- faisal 1 {{getCart() | json}} -->
-      <ng-container *ngIf="!getCart() || !getCart()?.items">
+      <!-- faisal 1 {{widget?.model | json}} -->
+      <ng-container *ngIf="!widget?.model || !widget?.model?.items">
         <div class="full-height">
           <ion-content>
             <div class="basket-container">
@@ -64,7 +64,7 @@
         </div>
       </ng-container>
   
-      <ng-container *ngIf="getCart() && getCart()?.items && getCart()?.items.length == 0">
+      <ng-container *ngIf="widget?.model && widget?.model?.items && widget?.model?.items.length == 0">
           <div class="full-height">
           <ion-content>
             <div class="basket-container">
@@ -89,8 +89,8 @@
       </ng-container>
   
   
-      <ng-container *ngIf="getCart()">
-        <div class="full-height" *ngIf="getCart()?.items && getCart()?.items.length">
+      <ng-container *ngIf="widget?.model">
+        <div class="full-height" *ngIf="widget?.model?.items && widget?.model?.items.length">
           <ion-content>
             <!-- <p>{{widget.model | json }}</p> -->
             <div class="basket-container">
@@ -100,7 +100,7 @@
                   <h2 text-uppercase no-margin>{{ 'cart.your_cart' | translate}}</h2>
                 </div>
                 <div class="cart-list">
-                  <div class="cart-item" *ngFor="let item of getCart()?.items; let i = index">
+                  <div class="cart-item" *ngFor="let item of widget?.model?.items; let i = index">
   
                     <div flex-center>
                       <div class="product-title" (click)="editCartItem(item)">{{item?.description}}
@@ -110,7 +110,7 @@
                         <ion-icon name="remove-circle" [pfRemoveFromCartTrack]="{cart: [item], quantity: 1}" appDebounceClick [inputDebounceTime]="'300'" (debounceClick)="updateCart($event, item?.client, false)"></ion-icon>
                         <!-- <ion-icon name="remove-circle" (click)="updateCartItemQuantityNoDebounce(item?.client, -1);"></ion-icon> -->
                         <span>{{item.quantity}}</span>
-                        <ion-icon name="add-circle" [pfRemoveFromCartTrack]="{cart: [item], quantity: 1}" appDebounceClick [inputDebounceTime]="'300'" (debounceClick)="updateCart($event, item?.client, true)"></ion-icon>
+                        <ion-icon name="add-circle" [pfAddToCartTrack]="{cart: [item], quantity: 1}" appDebounceClick [inputDebounceTime]="'300'" (debounceClick)="updateCart($event, item?.client, true)"></ion-icon>
                         <!-- <ion-icon name="add-circle" (click)="updateCartItemQuantityNoDebounce(item?.client, 1);"></ion-icon> -->
                       </div>
                       <div class="product-price">{{(item?.getPrice() * item.quantity) | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</div>
@@ -118,7 +118,7 @@
                               class="remove-icon"
                               name="close-circle"
                               [pfRemoveFromCartTrack]="{cart: [item]}"
-                              (click)="removeCartItem(item?.client)">
+                              (click)="confirmRemove(item?.client)">
   
                       </ion-icon>
                     </div>
@@ -174,15 +174,15 @@
                   </suggestions-widget>
 
                 <div flex-center class="delivery-bill-block">
-                  <ng-container *ngIf="getCart()?.getShippingCost()">
+                  <ng-container *ngIf="widget?.model?.getShippingCost()">
                     <div class="total-bill">{{ 'cart.delivery_fee' | translate}} </div>
-                    <div class="total-price">{{getCart()?.getShippingCost() | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
+                    <div class="total-price">{{widget?.model?.getShippingCost() | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
                   </ng-container>
                 </div>
                 <div flex-center class="total-bill-block">
                   <div class="total-bill">{{ 'cart.your_total' | translate}} </div>
                   <span *ngIf="!updatingPrice">
-                    <div class="total-price">{{getCart()?.getProductCost() | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
+                    <div class="total-price">{{widget?.model?.getProductCost() | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}</div>
                   </span>
                   <span *ngIf="updatingPrice">
                     <ion-spinner name="crescent" color="dark"></ion-spinner>
@@ -209,7 +209,7 @@
               <span class="btn-price" *ngIf="updatingPrice">
                 <ion-spinner name="crescent" color="dark"></ion-spinner>
               </span>
-              <span class="btn-price" *ngIf="!updatingPrice">{{ getCart()?.getTotal() | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+              <span class="btn-price" *ngIf="!updatingPrice">{{ widget?.model?.getTotal() | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
             </ion-button>
           </ion-footer>
         </div>
@@ -237,3 +237,29 @@
       </p>
     </div>
   </div>
+
+<div class="clearcart-modal" *ngIf="removeItemPopup">
+  <div class="clearcart-popup">
+    <p flex-center>Are you sure you want to remove the item?</p>
+    <div flex-center>
+      <ion-button
+        (click)="dismissRemoveItemPopup()"
+        color="medium"
+        text-capitalize
+        expand="block"
+        mode="ios"
+        class="btn-dismiss clearcart-dismiss">
+        {{ 'home_page.dismiss' | translate }}
+      </ion-button>
+      <ion-button
+        (click)="dismissRemoveItemPopup();removeCartItem(true)"
+        color="success"
+        text-capitalize
+        expand="block"
+        mode="ios"
+        class="btn-success clearcart-confirm ">
+        {{ 'home_page.confirm' | translate }}
+      </ion-button>
+    </div>
+  </div>
+</div>
