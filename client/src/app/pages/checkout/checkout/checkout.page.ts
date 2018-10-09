@@ -186,6 +186,10 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
       case CheckoutWidgetActions.ACTION_GET_ORDER_ATTRIBUTES:
         console.log('attributes data ', data);
         break;
+      case 'saveAddress':
+        console.log(name, data);
+        this.alertService.presentToast(this.translate.instant('checkout_page.address_saved_successfully'), 500, 'bottom');
+        break;
     }
   }
 

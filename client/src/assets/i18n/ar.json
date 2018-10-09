@@ -73,6 +73,7 @@
 	},
 	"checkout_page": {
 		"add_new_address": "",
+		"address_saved_successfully": "",
 		"agree_text": "من خلال تقديم طلبك، توافق على",
 		"building": "رقم البنايه او رقم المنزل",
 		"building_placeholder": "رقم البنايه او رقم المنزل",
@@ -543,10 +544,13 @@
 	},
 	"success_page": {
 		"delivery_address": "",
+		"immediate_delivery": "",
+		"immediate_takeaway": "",
 		"it_will_be_with_you_by": "",
 		"liked_our_experience_click_to_register": "",
 		"on": "",
 		"order": "",
+		"pickup_address": "",
 		"register": "",
 		"sent_tracking_details_to": "",
 		"thanks_for_your_order": "",
