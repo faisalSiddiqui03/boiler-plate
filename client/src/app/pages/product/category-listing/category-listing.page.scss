@@ -391,6 +391,18 @@ html {
           border-left-width: 0;
         }
       }
+      .showcase-tabs-one {
+        ul {
+          li {
+            &:first-child {
+              border-left: 1px solid var(--ion-color-light-shade);
+            }
+            &:last-child {
+              border-left: none;
+            }
+          }
+        }
+      }
     }
   }
 }
