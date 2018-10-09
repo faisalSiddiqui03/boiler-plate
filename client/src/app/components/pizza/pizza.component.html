@@ -86,7 +86,7 @@
                   <a class="change" (click)="toggleToppingsView()" text-capitalize>{{'pizza.change' | translate}}</a>
                 </div>
                 <div class="drinks-choose-block" margin>
-                  <div class="block-header" flex-center text-capitalize (click)="showToppings = !showToppings">
+                  <div class="block-header" flex-center text-capitalize border-radius (click)="showToppings = !showToppings">
                     {{'pizza.change_cheese_sauce_etc' | translate}}
                     <ion-icon class="arrow" [class.expand]="showToppings" ios="ios-arrow-down" md="ios-arrow-down" name="arrow-down"></ion-icon>
                   </div>
