@@ -23,6 +23,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
 import { Location } from '@angular/common';
 import { ModalController } from '@ionic/angular';
+import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 
 @Component({
   selector: 'app-pizza-component',
@@ -200,7 +201,22 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     this.showToppingsView = !this.showToppingsView;
   }
 
-  addToCart() {
+  async openStoreSelection() {
+    const modal = await this.modalController.create({
+      component: StoreSelectionModalComponent
+    });
+    await modal.present();
+
+    modal.onDidDismiss().then((storeSelected) => {
+      return storeSelected;
+    });
+  }
+
+  async addToCart() {
+    if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
+      const storeSelected = await this.openStoreSelection();
+      if (!storeSelected) return;
+    }
     if (this.productFromDeal) {
       this.modalController.dismiss(this.clientProduct);
       return;
