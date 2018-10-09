@@ -422,6 +422,12 @@ ion-item {
       display: block;
     }
   }
+  .toast{
+    .toast-wrapper{
+      text-align: center;
+      max-width: inherit;
+    }
+  }
 }
 
 .voucher-modal-wrap {
@@ -495,9 +501,10 @@ ion-item {
 
 // Toast
 .toast{
+  &.top{
+    top: 50px;
+  }
   .toast-wrapper{
-    margin-top: 45px;
-    max-width: 500px;
     --background: var(--ion-color-secondary);
   }
 }

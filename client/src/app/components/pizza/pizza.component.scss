@@ -99,15 +99,17 @@
     }
   }
   .drinks-choose-block {
-    border: 1px solid var(--ion-color-light-shade);
+    border: 1px solid var(--ion-pizza-border-color);
     border-radius: 5px;
-    border-bottom: none;
+    border-radius{
+      border-radius: 5px 5px 0 0;
+    }
     .selected-variant {
       cursor: pointer;
       font-size: 14px;
       line-height: 18px;
       padding: 15px 10px 15px 16px;
-      border-bottom: 1px solid var(--ion-color-medium-shade);
+      border-bottom: 1px solid var(--ion-pizza-border-color);
       .block-text {
         flex: 1;
         @extend .mr-10;
@@ -159,6 +161,13 @@
         &.disable {
           pointer-events: none;
           opacity: 0.6;
+        }
+      }
+      &:last-child {
+        li{
+          &:last-of-type:not(:empty){
+            opacity: 0.3;
+          }
         }
       }
     }
