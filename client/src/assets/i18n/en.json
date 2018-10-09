@@ -542,8 +542,12 @@
 		"take_away_now": "Take Away Now"
 	},
 	"success_page": {
+		"immediate_delivery": "We're preparing your order & it'll be with you in  45 to 60 Minutes",
+		"immediate_takeaway": "We're preparing your order & You can pick it up in  45 to 60 Minutes",
 		"delivery_address": "Delivery Address:",
-		"it_will_be_with_you_by": "it will be with you by",
+		"pickup_address": "Take-Away Address:",
+		"it_will_be_with_you_by": "You can pick it up by",
+		"pick_it_by": "it will be with you by",
 		"liked_our_experience_click_to_register": "Liked our experience, click here to register.",
 		"on": "On",
 		"order": "Order#:",
