@@ -2,7 +2,7 @@
   <ion-hide-when size="lg">
     <div>
       <div class="center-align logo_bg edge-shadow brd-radius">
-        <img src="assets/imgs/pizzahut-logo.svg" alt="Pizza Hut" class="header-img" (click)="goToPage('home')">
+        <img src="../../../assets/imgs/pizzahut-logo.svg" alt="Pizza Hut" class="header-img" (click)="goToPage('home')">
       </div>
       <div *ngIf="showLanguage" class="lang-selection" (click)="switchLanguage()">{{ 'header.language' | translate }}
       </div>
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div *ngIf="showHalalTag" class="halal-logo">
-        <img src="assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal" />
+        <img src="../../../assets/imgs/halal.png" class="halal-logo" width="35" height="35" alt="halal" />
       </div>
       <div *ngIf="showCart" (click)="goToPage('cart')">
         <div class="icon icon-cart cart-logo"></div>
@@ -28,7 +28,7 @@
   </ion-hide-when>
   <div [ngClass]="{'container': !dealsHeader, 'container-small': dealsHeader}" class="center-align desktop-logo"
     flex-center>
-    <img src="assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
+    <img src="../../../assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
     <div class="header-right" text-right>
       <div *ngIf="!dealsHeader && showMode" class="delivery-mode">
         <div class="icon" [ngClass]="{'icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>

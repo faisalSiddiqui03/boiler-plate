@@ -9,7 +9,7 @@
         content: "";
         display: block;
         height: 12px;
-        background: url(assets/imgs/cart-bg.jpg);
+        background: url(../../../assets/imgs/cart-bg.jpg);
         background-repeat: repeat-x;
         position: absolute;
         top: 18px;
@@ -177,7 +177,7 @@
 
 @media (min-width:992px){
   .cart-page {
-    .basket-container { 
+    .basket-container {
       background: transparent;
       .basket {
         &::before {

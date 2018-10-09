@@ -65,7 +65,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
         // TODO : generate store promise
         const store = this.getCurrentStore();
-        if (store === null) {
+        if (!store) {
             this.presentSlotModal();
         } else if (!store.isOnline(this.getDeliveryMode())) {
             this.presentSlotModal();
