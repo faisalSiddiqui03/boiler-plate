@@ -25,6 +25,9 @@
       &.icon-favourite-active {
         color: var(--ion-color-danger);
       }
+      &.fav-progress {
+        color: orange;
+      }
     }
     ion-card-header {
       background-image: url("assets/imgs/product-back.jpg");
@@ -399,6 +402,17 @@ html {
         .product-content {
           margin: 0 0 0 20px;
         }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 991px){
+  .category-listing-page{
+    .showcase-container{
+      ion-grid{
+        padding: 0;
       }
     }
   }

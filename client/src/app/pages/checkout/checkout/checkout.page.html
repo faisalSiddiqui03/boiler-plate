@@ -294,12 +294,12 @@
                     <ion-item (click)="slectPaymentOption(option)" *ngFor="let option of widget.model">
                       <ion-radio color="success" slot="start" value="{{option?.paymentOption}}"></ion-radio>
                       <ion-label *ngIf="option.paymentOption == 'COD'">
-                        <img src="assets/imgs/Icon_cash.svg" alt="">{{ 'checkout_page.with_cash' | translate }}</ion-label>
+                        <img src="../../../../assets/imgs/Icon_cash.svg" alt="">{{ 'checkout_page.with_cash' | translate }}</ion-label>
                       <ion-label *ngIf="option.paymentOption == 'KNET'">
-                        <img src="assets/imgs/KNET.png" alt="">{{ 'checkout_page.debit_credit_card' | translate }}</ion-label>
+                        <img src="../../../../assets/imgs/KNET.png" alt="">{{ 'checkout_page.debit_credit_card' | translate }}</ion-label>
                     </ion-item>
                     <div class="visa-card" flex-center *ngIf="checkoutForm.controls.paymentMethod.value == 'KNET'">
-                      <img src="assets/imgs/card-icons1.png" alt="cards">
+                      <img src="../../../../assets/imgs/card-icons1.png" alt="cards">
                       <span>{{ 'checkout_page.visa_pay_text' | translate }}</span>
                     </div>
                   </ion-radio-group>

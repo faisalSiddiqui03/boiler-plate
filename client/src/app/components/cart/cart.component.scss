@@ -9,7 +9,7 @@
         content: "";
         display: block;
         height: 12px;
-        background: url(assets/imgs/cart-bg.jpg);
+        background: url(../../../assets/imgs/cart-bg.jpg);
         background-repeat: repeat-x;
         position: absolute;
         top: 18px;
@@ -211,7 +211,7 @@
   ion-footer {
     padding: 6px 10px;
     ion-button {
-      span {
+      .btn-price {
         position: absolute;
         right: 30px;
       }
@@ -248,7 +248,7 @@
 
 @media (min-width:992px){
   .cart-page {
-    .basket-container { 
+    .basket-container {
       background: transparent;
       .basket {
         &::before {

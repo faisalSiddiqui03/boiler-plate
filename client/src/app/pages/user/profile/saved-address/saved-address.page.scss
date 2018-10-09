@@ -9,6 +9,18 @@
 }
 
 .saved-addresses {
+  .p-skeleton {
+    width: 100px;
+  }
+  .p1-skeleton {
+    width: 200px;
+  }
+  .p2-skeleton {
+    width: 300px;
+  }
+  .h1-skeleton {
+    width: 50px;
+  }
   padding: 0 10px 20px;
   ion-list {
     ion-item {

@@ -1,21 +1,87 @@
 <ion-header>
   <app-header></app-header>
 </ion-header>
-
+<!--3279019-->
+<!--3279027-->
+<!--3278943-->
 <ion-content no-padding>
-  <orders-details-widget [componentId]="getComponentId()" [orderId]="orderId" [identifier]="email" [action]="orderDetailWidgetAction">
+  <orders-details-widget *ngIf="orderId>0"
+                         [componentId]="getComponentId()"
+                         [orderId]="orderId" [identifier]="email" [action]="orderDetailWidgetAction">
     <ng-template let-widget="widget">
-      <!-- <div *ngIf="widget.model === undefined"> -->
-      <div *ngIf="true">
+      <div *ngIf="!widget || !widget.model">
         <div class="order-success-page">
           <div class="success-title" text-center padding-top>
             <h4 text-uppercase no-margin>{{'success_page.thanks_for_your_order' | translate}}
-              <br>{{name}}</h4>
+              <br><ion-skeleton-text class="p-skeleton"></ion-skeleton-text></h4>
           </div>
           <div class="preparing-order" padding>
             <ion-item>
-              <img src="assets/imgs/order_delivery_icon.svg" width="40" height="40" alt="">
+              <img src="../../../../assets/imgs/order_delivery_icon.svg" width="40" height="40" alt="">
               <ion-label text-wrap>{{'success_page.we_are_preparing_your_order' | translate}} &amp; {{'success_page.it_will_be_with_you_by' | translate}} {{time}} {{'success_page.on' | translate}} {{date}}</ion-label>
+            </ion-item>
+          </div>
+          <div class="order-success-details">
+            <div class="order-success-email" padding text-center>
+              <p no-margin>{{'success_page.sent_tracking_details_to' | translate}}
+                <br>
+                <a><ion-skeleton-text class="p-skeleton"></ion-skeleton-text></a>
+              </p>
+            </div>
+            <div class="order-details-table">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>{{'success_page.order' | translate}}</td>
+                    <td>{{orderId}}</td>
+                  </tr>
+                  <tr>
+                    <td>{{'success_page.delivery_address' | translate}}</td>
+                    <td><ion-skeleton-text class="p-skeleton"></ion-skeleton-text>
+                      <br> Street:<ion-skeleton-text class="p-skeleton"></ion-skeleton-text></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="guest-user-register" *ngIf="getUserModel() && getUserModel().type === 'Guest'">
+            <div class="guest-user-message" text-center>
+              <p no-margin>{{'success_page.liked_our_experience_click_to_register' | translate}}</p>
+              <ion-button (click)="goToPage('signup')" color="success" text-uppercase mode="ios" class="btn-success">{{'success_page.register' | translate}}</ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="widget && widget.model">
+        <div class="order-success-page">
+          <div class="success-title" text-center padding-top>
+            <h4 text-uppercase no-margin>{{'success_page.thanks_for_your_order' | translate}}
+              <br>{{widget.model.getAddressDetails().contactDetail.firstName}}
+            </h4>
+          </div>
+          <div class="preparing-order" padding>
+            <ion-item *ngIf="widget.model.deliveryMode === 'H' && widget.model.isImmediateOrder()">
+              <img src="assets/imgs/order_delivery_icon.svg" width="40" height="40" alt="">
+              <ion-label text-wrap>{{'success_page.immediate_delivery' | translate}} </ion-label>
+            </ion-item>
+            <ion-item *ngIf="widget.model.deliveryMode === 'H' && !widget.model.isImmediateOrder()">
+              <img src="assets/imgs/order_delivery_icon.svg" width="40" height="40" alt="">
+              <ion-label text-wrap>{{'success_page.we_are_preparing_your_order' | translate}} &amp;
+                {{'success_page.it_will_be_with_you_by' | translate}} {{widget.model.deliverySlot.endTime}}
+                {{'success_page.on' | translate}} {{getDate(widget.model.orderDate.locale)}}
+              </ion-label>
+            </ion-item>
+
+            <ion-item *ngIf="widget.model.deliveryMode === 'S' && widget.model.isImmediateOrder()">
+              <img src="assets/imgs/order_takeaway.svg" width="40" height="40" alt="">
+              <ion-label text-wrap>{{'success_page.immediate_takeaway' | translate}} </ion-label>
+            </ion-item>
+            <ion-item *ngIf="widget.model.deliveryMode === 'S' && !widget.model.isImmediateOrder()">
+              <img src="assets/imgs/order_takeaway.svg" width="40" height="40" alt="">
+              <ion-label text-wrap>{{'success_page.we_are_preparing_your_order' | translate}} &amp;
+                {{'success_page.it_will_be_with_you_by' | translate}} {{widget.model.deliverySlot.endTime}}
+                {{'success_page.on' | translate}} {{getDate(widget.model.orderDate.locale)}} </ion-label>
             </ion-item>
           </div>
           <div class="order-success-details">
@@ -32,16 +98,22 @@
                     <td>{{'success_page.order' | translate}}</td>
                     <td>{{orderId}}</td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="widget.model.deliveryMode === 'H'">
                     <td>{{'success_page.delivery_address' | translate}}</td>
-                    <td>{{addressLine1}}
-                      <br> Street:{{addressLine2}}</td>
+                    <td>{{widget.model.getAddressDetails().detail}}
+                      <br> Street:{{widget.model.getAddressDetails().landmark}}</td>
                   </tr>
+                  <tr *ngIf="widget.model.deliveryMode === 'S'">
+                    <td>{{'success_page.pickup_address' | translate}}</td>
+                    <td>{{widget.model.getAddressDetails().detail}}
+                      <br> Street:{{widget.model.getAddressDetails().landmark}}</td>
+                  </tr>
+
                 </tbody>
               </table>
             </div>
           </div>
-          <div class="guest-user-register" *ngIf="getUserModel() && getUserModel().type === 'Guest'">
+          <div class="guest-user-register" *ngIf="getUserModel() && getUserModel()?.type.toLowerCase() === 'guest'">
             <div class="guest-user-message" text-center>
               <p no-margin>{{'success_page.liked_our_experience_click_to_register' | translate}}</p>
               <ion-button (click)="goToPage('signup')" color="success" text-uppercase mode="ios" class="btn-success">{{'success_page.register' | translate}}</ion-button>
@@ -51,5 +123,5 @@
       </div>
     </ng-template>
   </orders-details-widget>
-  
+
 </ion-content>

@@ -1,13 +1,11 @@
 import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { BaseComponent } from '../../../base/base-component';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../helpers/utils';
 import {
   pwaLifeCycle,
-  OrderDetailsWidget,
-  WidgetNames,
-  OrderWidget,
   CapRouterService
 } from '@capillarytech/pwa-framework';
 
@@ -26,25 +24,20 @@ export class SuccessPage extends BaseComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private utilService: UtilService,
-    private capRouter: CapRouterService,
+    private capRouter: CapRouterService, private loader: LoaderService
   ) {
     super();
   }
 
   orderId: number;
   email: string;
-  name = 'Guest';
-  addressLine1;
-  addressLine2;
-  time;
-  date;
   orderDetailWidgetAction = new EventEmitter();
 
   ngOnInit() {
     this.translate.use(this.getCurrentLanguageCode());
 
     this.orderId = this.route.snapshot.params.orderId;
-    // this.email = this.route.snapshot.params.email;
+    this.email = atob(this.route.snapshot.params.email);
   }
 
   goToPage(pageName) {
@@ -62,26 +55,21 @@ export class SuccessPage extends BaseComponent implements OnInit {
 
   widgetLoadingFailed(name: string, data: any): any {
     console.log(name, 'Loading Failed');
+    this.loader.stopLoading();
   }
 
   widgetLoadingStarted(name: string, data: any): any {
     console.log(name, 'Loading Started');
+    this.loader.startLoadingByMode('', this.getDeliveryMode());
+  }
+
+  getDate(date) {
+    return this.utilService.getDate(date);
   }
 
   widgetLoadingSuccess(name: string, data: any): any {
     console.log(name, 'Loading Success');
-    switch (name) {
-      case WidgetNames.ORDER_DETAILS:
-        if (data && data.getAddressDetails()) {
-          this.name = data.getAddressDetails().contactDetail.firstName;
-          this.time = data.deliverySlot.endTime;
-          this.addressLine1 = data.getAddressDetails().detail;
-          this.addressLine2 = data.getAddressDetails().landmark;
-          this.email = data.getAddressDetails().contactDetail.emailID;
-          this.orderId = data.id;
-          this.date = this.utilService.getDate(data.orderDate.locale);
-        }
-    }
+    this.loader.stopLoading();
   }
 
   loadNextOrders() {

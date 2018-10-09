@@ -101,7 +101,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 1000, 'top');
+        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 1000, 'top', 'top');
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE:
@@ -110,7 +110,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
         break;
       case ProductDetailsWidgetActions.ATION_EDIT_CART:
         // this.alertService.presentToast(this.clientProduct.title + ' ' +
-          // this.translate.instant('product_details.added_to_cart'), 1000, 'top');
+          // this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
         this.modalController.dismiss(true);
         // this.router.navigateByUrl('/products?category=' + this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);
         break;
@@ -141,10 +141,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     const item = this.clientProduct.bundleItems.get(serverItem.id);
     const isAdded = item.increment();
     if (!isAdded) {
-      this.alertService.presentToast(this.translate.instant('pizza.add_topping_error'), 1000, 'top');
+      this.alertService.presentToast(this.translate.instant('pizza.add_topping_error'), 1000, 'top', 'top');
       return;
     }
-    this.alertService.presentToast(this.translate.instant('pizza.add_topping_success'), 1000, 'top');
+    this.alertService.presentToast(this.translate.instant('pizza.add_topping_success'), 1000, 'top', 'top');
     this.setToppingStatus();
     this.getPrice();
   }
@@ -159,10 +159,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
       isRemoved = item.remove();
     }
     if (!isRemoved) {
-      this.alertService.presentToast(this.translate.instant('pizza.remove_topping_error'), 1000, 'top');
+      this.alertService.presentToast(this.translate.instant('pizza.remove_topping_error'), 1000, 'top', 'top');
       return;
     }
-    this.alertService.presentToast(this.translate.instant('pizza.remove_topping_success'), 1000, 'top');
+    this.alertService.presentToast(this.translate.instant('pizza.remove_topping_success'), 1000, 'top', 'top');
     this.setToppingStatus();
     this.getPrice();
   }

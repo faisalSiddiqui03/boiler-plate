@@ -56,6 +56,7 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   updateProfile() {
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.widgetModel.firstName = this.profileForm.value.firstName;
     this.widgetModel.lastName = this.profileForm.value.lastName;
     this.widgetModel.mobileNo = this.profileForm.value.mobileNo;
@@ -64,7 +65,8 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
 
   widgetActionSuccess(name, data) {
     console.log('action success ' + name, data);
-    this.alertService.presentToast("Profile Updated Successfully", 2000, top);
+    this.loaderService.stopLoading();
+    this.alertService.presentToast("Profile Updated Successfully", 2000, 'top', 'top');
     this.capRouter.routeByUrlWithLanguage('my-account');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('my-account'));
   }

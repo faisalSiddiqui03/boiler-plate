@@ -151,11 +151,11 @@
       <ng-template let-widget="widget">
         <div *ngIf="widget.model != undefined">
           <div
-            *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP && selectedStore && !selectedStore.isDefaultLocation"
+            *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP && getCurrentStore() && !getCurrentStore().isDefaultLocation"
             class="take-away-block">
             <span>{{'home_page.your_pickup_hut_is' | translate}} </span>
-            <div class="store-name">{{selectedStore?.name}}</div>
-            <p>{{selectedStore?.address}}</p>
+            <div class="store-name">{{getCurrentStore()?.name}}</div>
+            <p>{{getCurrentStore()?.address}}</p>
 
           </div>
           <div style="padding: 0 10px; margin-bottom: 10px;">
@@ -169,7 +169,7 @@
                       (
                         globalSharedService.getFulfilmentMode() &&
                         globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP &&
-                        (selectedCity || (selectedStore && !selectedStore.isDefaultLocation))
+                        (selectedCity || (getCurrentStore() && !getCurrentStore().isDefaultLocation))
                       ) || (
                         selectedCity && selectedArea
                       )
@@ -211,8 +211,8 @@
         *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes?.HOME_DELIVERY">
         {{'home_page.delivery_name'|translate}}
       </div>
-      <div class="store-name">{{selectedStore?.name}}</div>
-      <p>{{selectedStore?.address}}</p>
+      <div class="store-name">{{getCurrentStore()?.name}}</div>
+      <p>{{getCurrentStore()?.address}}</p>
       <ion-button color="medium" class="btn-signin" expand="block" mode="ios" (click)="changeSelectedStore()"
                   class="btn-signin">
         {{'home_page.change'|translate}}

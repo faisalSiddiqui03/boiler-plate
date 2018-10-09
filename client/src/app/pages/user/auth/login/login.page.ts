@@ -83,7 +83,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   signIn() {
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.widgetModels.USERID_PWD_SIGNIN.userName = this.userIdSigninForm.value.email;
     this.widgetModels.USERID_PWD_SIGNIN.password = this.userIdSigninForm.value.password;
     this.useridPasswordSigninAction.emit(new Action(UserIdPwdSigninWidgetActions.ACTION_SIGN_IN));
@@ -94,12 +94,12 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   googleSignIn() {
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.googleSignInActionEmitter.emit(new Action(GoogleSignInWidgetActions.ACTION_GPLUS_SIGN_IN));
   }
 
   handleGoogleSignInResponse(data) {
-    this.alertService.presentToast(data.isSuccessful ? 'Successfully signed in' : data.message, 500, top);
+    this.alertService.presentToastByTranslationKey(data.isSuccessful ? 'sign_in_page.success_sign_in' : data.message, 500, 'top', 'top');
     this.capRouter.routeByUrlWithLanguage('/home');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
   }
@@ -113,12 +113,12 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   handleUseridPasswordSigninResponse(data) {
     if (data.message === "Successful") {
       this.isLoginSuccessful = true;
-      this.alertService.presentToastByTranslationKey('sign_in_page.success_sign_in', 500, top);
+      this.alertService.presentToastByTranslationKey('sign_in_page.success_sign_in', 500, 'top', 'top');
       this.capRouter.routeByUrlWithLanguage('/home');
       // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
     } else {
       this.isLoginSuccessful = false;
-      this.alertService.presentToast(data.message, 500, top);
+      this.alertService.presentToast(data.message, 500, 'top', 'top');
     }
   }
 

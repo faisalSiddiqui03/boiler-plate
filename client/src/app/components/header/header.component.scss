@@ -156,7 +156,7 @@
         cursor: pointer;
         font-family: 'Open Sans';
         transition: all 0.3s ease-in-out;
-        & + li {
+        &+li {
           border-top: 1px solid var(--ion-color-medium-tint);
         }
         &:hover {
@@ -182,10 +182,10 @@
   letter-spacing: 0.5px;
   font-family: 'Conv_UnitedSansCond-Bold';
   color: var(--ion-color-secondary-shade);
-  border-right: 1px solid var(--ion-color-medium-tint);
+  border-right: 1px solid var(--ion-block-header-color);
   transition: all 0.3s ease-in-out;
   &:first-child {
-    border-left: 1px solid var(--ion-color-medium-tint);
+    border-left: 1px solid var(--ion-block-header-color);
   }
   &:hover {
     color: var(--ion-color-light);
@@ -212,7 +212,6 @@
     flex: 1;
     text-align: right;
   }
-
   .showcase-tabs {
     width: 100%;
     ul {
@@ -229,10 +228,10 @@
         color: var(--ion-color-dark-shade);
         text-transform: uppercase;
         font-family: 'Open Sans Condensed';
-        border-right: 1px solid var(--ion-color-medium-tint);
+        border-right: 1px solid var(--ion-block-header-color);
         transition: all 0.3s ease-in-out;
         &:first-child {
-          border-left: 1px solid var(--ion-color-medium-tint);
+          border-left: 1px solid var(--ion-block-header-color);
         }
         &:hover {
           color: var(--ion-color-light);
@@ -247,22 +246,21 @@
   .desktop-logo {
     display: flex;
     img {
+      cursor: pointer;
       max-width: 150px;
       margin: 7px auto 2px;
     }
   }
-
   .tabs-nav-head {
     //position: fixed;
     //margin-top: 54px;
     --min-height: 44px;
-    //width: calc(100% - 370px);
+    margin-left: 15px; //width: calc(100% - 370px);
     //z-index: 10;
     .showcase-tabs {
       white-space: nowrap;
       overflow: auto;
-      background: var(--ion-color-light);
-      padding-left: 20px;
+      background: var(--ion-color-light); // padding-left: 20px;
       ul {
         display: table;
         width: 100%;
@@ -277,7 +275,7 @@
           letter-spacing: 0.5px;
           font-family: 'Conv_UnitedSansCond-Bold';
           color: var(--ion-color-secondary-shade);
-          border-right: 1px solid var(--ion-color-medium-tint);
+          border-right: 1px solid var(--ion-block-header-color);
           &.selected {
             background-color: var(--ion-color-danger-shade);
             background-image: url('../../../assets/imgs/Deals-Highlight-Element.svg');
@@ -298,12 +296,21 @@
       }
     }
   }
+  .top-header-container {
+    box-shadow: none;
+  }
   .category-header {
     .desktop-logo {
       padding: 0 16px;
       img {
         margin: 7px 0 6px;
       }
+    }
+    .header {
+      box-shadow: none;
+    }
+    .header:not(.top-header-container) {
+      border-top: 1px solid var(--ion-block-header-color);
     }
     .header-right {
       display: flex;
@@ -464,15 +471,32 @@ html {
               border-left: none;
             }
             &:last-child {
-              border-left: 1px solid var(--ion-color-medium-tint);
+              border-left: 1px solid var(--ion-block-header-color);
             }
           }
         }
       }
-      .single-menu-item{
-        &:first-child{
+      .single-menu-item {
+        &:first-child {
           border-left-width: 0;
         }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  html {
+    &[dir="rtl"] {
+      .desktop-logo {
+        &.container-small {
+          img {
+            margin: 0 15px 0 0;
+          }
+        }
+      }
+      .tabs-nav-head {
+        margin: 0 15px 0 0;
       }
     }
   }

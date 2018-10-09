@@ -1,7 +1,7 @@
 .checkout-page {
   .pickup-store {
     margin-bottom: 95px;
-    padding-left: 14px;    
+    padding-left: 14px;
   }
   .field-caption{display: block;}
   .store-address{
@@ -94,7 +94,7 @@
           &.radio-checked {
             &+ion-label {
               &::before {
-                background-image: url(assets/imgs/btn-radio-selected-1.svg);
+                background-image: url('../../../../assets/imgs/btn-radio-selected-1.svg');
               }
             }
           }
@@ -108,7 +108,7 @@
             vertical-align: middle;
             width: 20px;
             height: 20px;
-            background: url(assets/imgs/btn-radio-disabled-1.svg) no-repeat center / 20px;
+            background: url('../../../../assets/imgs/btn-radio-disabled-1.svg') no-repeat center / 20px;
           }
           img {
             width: 30px;
@@ -140,7 +140,7 @@
     }
   }
   .logged-user-form{
-    .form-group{  
+    .form-group{
       padding: 0 20px;
       margin-bottom: 15px;
       ion-label{

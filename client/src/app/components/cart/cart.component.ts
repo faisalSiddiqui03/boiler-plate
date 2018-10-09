@@ -152,7 +152,7 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
       case ProductType.Product:
         if (!cartItem.variantProductId) {
           const itemNotEditable = await this.translateService.instant('cart.not_editable');
-          this.alertService.presentToast(itemNotEditable, 1000, 'top');
+          this.alertService.presentToast(itemNotEditable, 1000, 'top', 'top');
           return;
         }
         component = ProductDetailsComponent;
@@ -267,13 +267,11 @@ export class CartComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   goToDeals() {
-    this.capRouter.routeByUrlWithLanguage('/product/deals/CU00215646');
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/product/deals/CU00215646'));
+    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
   goToPage(pageName) {
     this.capRouter.routeByUrlWithLanguage('/' + pageName);
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/' + pageName));
   }
 
   isLoggedIn() {

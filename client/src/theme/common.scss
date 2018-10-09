@@ -53,7 +53,7 @@ body {
 
 .page-header {
   --ion-toolbar-background-color: transparent;
-  background: url('assets/imgs/backdrop.jpg');
+  background-image: url('assets/imgs/backdrop.jpg');
   .icon {
     font-size: 21px;
     cursor: pointer;
@@ -114,7 +114,7 @@ body {
 }
 
 .page-bg {
-  background: url('assets/imgs/backdrop.jpg');
+  background-image: url('assets/imgs/backdrop.jpg');
   background-attachment: fixed;
 }
 
@@ -277,7 +277,7 @@ body {
     font-size: 14px;
     border: 1px solid var(--ion-color-medium-shade);
     border-radius: 5px;
-    background: url('assets/imgs/select-arrow-down.svg') no-repeat right 10px center / 12px;
+    background-image: url('assets/imgs/select-arrow-down.svg') no-repeat right 10px center / 12px;
     color: var(--ion-search-color);
     font-weight: 400;
   }
@@ -422,6 +422,12 @@ ion-item {
       display: block;
     }
   }
+  .toast{
+    .toast-wrapper{
+      text-align: center;
+      max-width: inherit;
+    }
+  }
 }
 
 .voucher-modal-wrap {
@@ -495,12 +501,14 @@ ion-item {
 
 // Toast
 .toast{
+  &.top{
+    top: 50px;
+  }
   .toast-wrapper{
-    margin-top: 45px;
-    max-width: 500px;
     --background: var(--ion-color-secondary);
   }
 }
+
 
 // RTL Styles
 html {
