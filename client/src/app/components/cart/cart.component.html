@@ -152,7 +152,7 @@
                                 (click)="updateFavorites(prod?.isFavorite, prod?.client); $event.stopPropagation();"></div>
                               <ion-card-header no-padding>
                                 <img height="100" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
-                                  loadingImage="assets/imgs/default/default.png" />
+                                  loadingImage="assets/imgs/default/default.png" alt="{{prod?.title}}" />
                               </ion-card-header>
     
                               <ion-card-content padding>
