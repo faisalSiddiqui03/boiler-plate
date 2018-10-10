@@ -28,22 +28,6 @@ export const config = {
         "maxAge": "1 day"
       }
     },
-    "source": {
-      "EntityFieldID": 32,
-      "EntityFieldName": "channelid",
-      "Type": "1",
-      "IsPredefined": !0,
-      "IsMandatory": !0,
-      "SelectedValue": "{{SELECTED_VALUE}}",
-      "OrderEntityFieldValues": [
-          {
-              "EntityFieldID": 32,
-              "EntityFieldValueID": 5,
-              "Value": "{{SELECTED_VALUE}}",
-              "IsSelected": !0
-          }
-      ]
-    },
     "enableRedisCaching": false,
     "redis": {
       "host": "nightly-pwa-redis.8xcpns.ng.0001.euc1.cache.amazonaws.com",
