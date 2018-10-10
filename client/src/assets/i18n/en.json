@@ -548,7 +548,9 @@
 		"take_away_now": "Take Away Now"
 	},
 	"success_page": {
+		"confirm": "Confirm",
 		"delivery_address": "Delivery Address:",
+		"go_to_deals": "Go to deals",
 		"immediate_delivery": "We're preparing your order & it'll be with you in  45 to 60 Minutes",
 		"immediate_takeaway": "We're preparing your order & You can pick it up in  45 to 60 Minutes",
 		"it_will_be_with_you_by": "You can pick it up by",
@@ -556,9 +558,11 @@
 		"on": "On",
 		"order": "Order#:",
 		"pickup_address": "Take-Away Address:",
+		"please_enter_emailid": "Please enter email id",
 		"register": "Register",
 		"sent_tracking_details_to": "We have sent your order & tracking details to",
 		"thanks_for_your_order": "Thanks for your order,",
+		"unable_to_fetch_order": "Unable to fetch order details",
 		"we_are_preparing_your_order": "We're preparing your order"
 	},
 	"terms_page": {
