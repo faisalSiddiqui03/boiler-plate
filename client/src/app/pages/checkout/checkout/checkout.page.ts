@@ -318,6 +318,12 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
     obj.orderAttributes = attributes;
 
+    let source = this.config.getConfig()['source'];
+    if ( source ) {
+        source.SelectedValue = 'pwa-' + this.getSourceData();
+        source.OrderEntityFieldValues[0].Value = 'pwa-' + this.getSourceData();
+    }
+
     obj.deliverySlot = this.getDeliverySlot();
     const action = new Action(CheckoutWidgetActions.ACTION_PLACE_ORDER, obj);
     this.checkoutWidgetAction.emit(action);
