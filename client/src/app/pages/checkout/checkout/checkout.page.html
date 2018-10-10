@@ -122,7 +122,7 @@
           <!-- User contact detail form end -->
 
           <!-- store details for pickup start -->
-          <div *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP">
+          <div *ngIf="getDeliveryMode()?.mode === deliveryModes.PICKUP">
             <div class="checkout-head" text-center>
               <h2 no-margin>{{ 'checkout_page.where_should_you_pick_it_from' | translate }}</h2>
             </div>
@@ -145,7 +145,7 @@
           <!-- store details for pickup end -->
 
           <!-- User address detail form start for guest user -->
-          <div [hidden]="!(getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY && (getUserModel()?.type === 'GUEST' || isAddNewAddressClicked || !useSavedAddress))">
+          <div [hidden]="!(getDeliveryMode()?.mode === deliveryModes.HOME_DELIVERY && (getUserModel()?.type === 'GUEST' || isAddNewAddressClicked || !useSavedAddress))">
             <div class="checkout-head" text-center>
               <h2 no-margin>{{ 'checkout_page.where_we_deliver' | translate }}</h2>
             </div>
@@ -214,7 +214,7 @@
           <!-- User address detail form end for guest user -->
 
           <!-- User address detail form start for loggedin user -->
-          <div *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY && getUserModel()?.type !== 'GUEST' && !isAddNewAddressClicked && useSavedAddress"
+          <div *ngIf="getDeliveryMode()?.mode === deliveryModes.HOME_DELIVERY && getUserModel()?.type !== 'GUEST' && !isAddNewAddressClicked && useSavedAddress"
             class="logged-user-form">
             <div class="checkout-head" text-center>
               <h2 no-margin>{{ 'checkout_page.where_we_deliver' | translate }}</h2>
@@ -359,7 +359,7 @@
   </div>
 </ion-content>
 
-<delivery-slots-widget *ngIf="showSlotsModal" class="full-height delivery-slots-page" [globalSlots]="true" [deliveryMode]="getFulfilmentMode()?.mode"
+<delivery-slots-widget *ngIf="showSlotsModal" class="full-height delivery-slots-page" [globalSlots]="true" [deliveryMode]="getDeliveryMode()?.mode"
   [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
   <ng-template let-widget="widget">
     <div class="checkout-modal">

@@ -42,7 +42,7 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
   ) {
     super();
 
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    // this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.slotSelected = true;
     this.slotContent = this.asSoonPossible ? this.asapText : '';
     this.activeTimeSlot = 0;

@@ -96,10 +96,10 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   widgetActionSuccess(name: string, data: any) {
+    this.loaderService.stopLoading();
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
-        this.loaderService.stopLoading();
         this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 1000, 'top', 'top');
         this.goBack();
         break;
@@ -113,6 +113,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
 
   widgetActionFailed(name: string, data: any) {
     console.log('Widget action failed' + name, data);
+    this.loaderService.stopLoading();
   }
 
   showBundleGroupItems(bundleGroup) {
@@ -174,7 +175,13 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
       const storeSelected = await this.openStoreSelection();
       if (!storeSelected) return;
     }
-    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    if(this.cartItem){
+      this.productWidgetAction.emit(
+        new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
+      );
+      return;
+    }
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
     );

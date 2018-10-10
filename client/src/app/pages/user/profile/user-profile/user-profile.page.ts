@@ -37,7 +37,7 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
     private formBuilder: FormBuilder,
     private capRouter: CapRouterService,) {
     super();
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    // this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
 
     this.profileForm = this.formBuilder.group({
@@ -56,7 +56,7 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   updateProfile() {
-    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.widgetModel.firstName = this.profileForm.value.firstName;
     this.widgetModel.lastName = this.profileForm.value.lastName;
     this.widgetModel.mobileNo = this.profileForm.value.mobileNo;

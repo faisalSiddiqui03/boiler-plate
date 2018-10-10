@@ -1,1 +1,5 @@
-<app-store-list [cityId]="cityId" [lat]="latitude" [lng]="longitude" [isModal]="false"></app-store-list>
+<ion-header>
+    <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
+</ion-header>
+<app-sub-header [isModal]="isModal" [title]="titleValue"></app-sub-header>
+<app-store-list class="full-height" [cityId]="cityId" [lat]="latitude" [lng]="longitude" [isModal]="false"></app-store-list>

@@ -42,7 +42,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
     private capRouter: CapRouterService) {
     super();
 
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    // this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
   }
 

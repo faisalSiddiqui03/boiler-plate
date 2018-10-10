@@ -1,4 +1,4 @@
-<delivery-slots-widget class="full-height delivery-slots-page" [globalSlots]="true" [deliveryMode]="getFulfilmentMode()?.mode"
+<delivery-slots-widget class="full-height delivery-slots-page" [globalSlots]="true" [deliveryMode]="getDeliveryMode()?.mode"
   [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
   <ng-template let-widget="widget">
     <ng-container *ngIf="!widget.model">

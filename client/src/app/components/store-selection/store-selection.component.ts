@@ -51,6 +51,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   lng;
   isCleared = false;
   clearCartPopup = false;
+  findingStore = false;
 
   @Input() isModal: false;
   constructor(
@@ -109,6 +110,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
+    this.findingStore = false;
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_AREA:
         this.loaderService.stopLoading();
@@ -131,7 +133,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         this.loaderService.stopLoading();
         if(!this.isModal) {
           if (data && data.length) {
-            this.router.navigate(['/store-selection'], { queryParams: { 'latitude': this.lat, 'longitude': this.lng } });
+            this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
+            // this.router.navigate(['/store-selection'], { queryParams: { 'latitude': this.lat, 'longitude': this.lng } });
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
             this.alertService.presentToast(store_alert, 3000, 'bottom');
@@ -148,7 +151,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         this.loaderService.stopLoading();
         if(!this.isModal) {
           if (data && data.length) {
-            this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
+            this.capRouter.routeByUrlWithLanguage('/store-selection?cityId=' + this.selectedCityCode);
+            // this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
             this.alertService.presentToast(store_alert, 3000, 'bottom');
@@ -217,18 +221,19 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   findStore() {
     this.isNavigationClicked = true;
-    if (this.getFulfilmentMode().mode === this.deliveryModes.HOME_DELIVERY) {
+    this.findingStore = true;
+    if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
       this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
-        [this.selectedAreaCode, this.globalSharedService.getFulfilmentMode().mode]));
+        [this.selectedAreaCode, this.getDeliveryMode()]));
     } else {
       this.storeLocatorWidgetAction.emit(
         new Action(
           StoreLocatorWidgetActions.FIND_BY_CITY,
-          [this.selectedCityCode, this.getFulfilmentMode().mode]
+          [this.selectedCityCode, this.getDeliveryMode()]
         )
       )
     }
-    this.loaderService.startLoading('Fetching Stores', this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    // this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
   }
 
   navigateToDeals() {
@@ -240,7 +245,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   widgetActionFailed(name: string, data: any) {
-
+    this.findingStore = false;
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
@@ -323,7 +328,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
       this.selectedArea = '';
       this.toggleDropDown('area');
     }
-    if (this.getFulfilmentMode() && this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+    if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
       this.checkIfStoresAreAvailable(this.selectedCityCode);
       return;
     }
@@ -333,15 +338,15 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   checkIfStoresAreAvailable(cityId, lat = 0, lng = 0) {
-    this.loaderService.startLoading('Fetching Stores', this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (cityId) {
       const stores = this.storeLocatorWidgetAction.emit(new Action(
-        StoreLocatorWidgetActions.FIND_BY_CITY, [cityId, this.globalSharedService.getFulfilmentMode().mode])
+        StoreLocatorWidgetActions.FIND_BY_CITY, [cityId, this.getDeliveryMode()])
       );
 
     } else if (lat && lng) {
       const stores = this.storeLocatorWidgetAction.emit(new Action(
-        StoreLocatorWidgetActions.FIND_BY_LOCATION, [lat, lng, this.globalSharedService.getFulfilmentMode().mode])
+        StoreLocatorWidgetActions.FIND_BY_LOCATION, [lat, lng, this.getDeliveryMode()])
       );
     }
     return;
@@ -359,6 +364,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   getAreaDisplayName(area) {
     if (area.pincode) {
       return this.translate.instant('home_page.block_') + area.pincode;
+    } else if(area.name && area.name.indexOf('_') !== -1) {
+      return this.translate.instant('home_page.block_') + area.name.split('_')[1];
     }
     return area.name;
   }
@@ -375,13 +382,13 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   locateMe(lat, lng) {
     this.lat = lat;
     this.lng = lng;
-    if (this.getFulfilmentMode() && this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+    if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
       this.checkIfStoresAreAvailable(null, lat, lng);
       return;
     }
 
     this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_LOCATION,
-      [lat, lng, this.globalSharedService.getFulfilmentMode().mode]));
+      [lat, lng, this.getDeliveryMode()]));
   }
 
   isCitySelected() {
@@ -424,7 +431,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   toggleOrderMode(force: boolean = false) {
-    const presentMode = this.getFulfilmentMode().mode;
+    const presentMode = this.getDeliveryMode();
     const toMode = presentMode === this.deliveryModes.HOME_DELIVERY ? this.deliveryModes.PICKUP : this.deliveryModes.HOME_DELIVERY;
     this.changeOrderMode(toMode, presentMode, force);
   }

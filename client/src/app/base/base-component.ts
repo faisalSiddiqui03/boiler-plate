@@ -1,6 +1,6 @@
 import { GlobalSharedService } from '@cap-core/service/global-shared.service';
 import { appInjector } from '@cap-core/app.injector';
-import { DeliverySlot } from '@capillarytech/pwa-framework';
+import { DeliverySlot, DeliveryModes } from '@capillarytech/pwa-framework';
 
 export class BaseComponent {
 
@@ -38,10 +38,6 @@ export class BaseComponent {
     return this.globalSharedService.saveSelectedStore(store);
   }
 
-  getFulfilmentMode() {
-    return this.globalSharedService.getFulfilmentMode();
-  }
-
   getCart() {
     return this.globalSharedService.getCart();
   }
@@ -67,7 +63,7 @@ export class BaseComponent {
   }
 
   getDeliveryMode() {
-    return this.globalSharedService.getFulfilmentMode() ? this.globalSharedService.getFulfilmentMode().mode : null;
+    return (this.globalSharedService.getFulfilmentMode() && this.globalSharedService.getFulfilmentMode().mode) ? this.globalSharedService.getFulfilmentMode().mode : DeliveryModes.HOME_DELIVERY;
   }
 
   getNavigationUrlWithLangSupport(url: string): string {
