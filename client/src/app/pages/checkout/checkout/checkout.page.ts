@@ -198,7 +198,12 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
   // todo: use this data to prefill the form.
   fillDataFromCache(data) {
-    console.log(data);
+    if (!data) return;
+    this.checkoutForm.controls['name'].setValue(data.contactDetail.firstName);
+    this.checkoutForm.controls['mobile'].setValue(data.contactDetail.mobileNumber);
+    this.checkoutForm.controls['email'].setValue(data.contactDetail.emailID);
+    this.checkoutForm.controls['building'].setValue(data.address1);
+    this.checkoutForm.controls['street'].setValue(data.address2);
   }
 
   widgetLoadingFailed(name: string, data: any): any {
