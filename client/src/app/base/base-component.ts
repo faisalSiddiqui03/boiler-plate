@@ -1,6 +1,6 @@
 import { GlobalSharedService } from '@cap-core/service/global-shared.service';
 import { appInjector } from '@cap-core/app.injector';
-import { DeliverySlot } from '@capillarytech/pwa-framework';
+import { DeliverySlot, SeoInfo } from '@capillarytech/pwa-framework';
 
 export class BaseComponent {
 
@@ -12,6 +12,10 @@ export class BaseComponent {
     this.componentID = Math.random().toString(36).substr(2, 9);
     this.globalSharedService = appInjector.get(GlobalSharedService);
     this.isModalOpen = false;
+  }
+
+  addPageTagsViaSeoInfo(seoInfo: SeoInfo) {
+    this.globalSharedService.setSEOPageTagsviaSeoInfo(seoInfo);
   }
 
   getUserModel() {
