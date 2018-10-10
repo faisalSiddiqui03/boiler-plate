@@ -303,19 +303,20 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
     this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_SAVE_SHIPPING_ADDRESS, objShipAddress));
 
+    // adding IsImmediateOrder attribute
     const attributes: OrderAttributes[] = new Array<OrderAttributes>();
     const attr: OrderAttributes = new OrderAttributes();
     attr.name = 'IsImmediateOrder';
     attr.value = 'true';
-
     attributes.push(attr);
-    obj.orderAttributes = attributes;
 
-    let source = this.config.getConfig()['source'];
-    if ( source ) {
-        source.SelectedValue = 'pwa-' + this.getSourceData();
-        source.OrderEntityFieldValues[0].Value = 'pwa-' + this.getSourceData();
-    }
+    // adding channelid attribute
+    const channelAttr: OrderAttributes = new OrderAttributes();
+    channelAttr.name = 'channelid';
+    channelAttr.value = await this.getSourceData();
+    attributes.push(channelAttr);
+
+    obj.orderAttributes = attributes;
 
     obj.deliverySlot = this.getDeliverySlot();
     const action = new Action(CheckoutWidgetActions.ACTION_PLACE_ORDER, obj);
@@ -323,13 +324,13 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   /**helper function for channelId based on platform */
-  private getSourceData() {
+  async getSourceData() {
     let type = 'PWA,';
-    const os = this.hardwareService.getOSDetails()['name'];
-    if (os === 'Android' || os === 'iOS') {
+    const platformDetails = await this.hardwareService.getPlatformDetails();
+    if (platformDetails === 'Android' || platformDetails === 'iOS') {
         type = 'APP,';
     }
-    type += os;
+    type += platformDetails;
     return type;
   }
 
