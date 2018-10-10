@@ -640,6 +640,8 @@
 		"mobile_required": "Your number please",
 		"mobile_valid": "Mobile numbers should start with 2,5,6 or 9",
 		"my_profile": "My Profile",
+		"profile_update_failed": "Profile update failed",
+		"profile_updated_successfully": "Profile updated successfully",
 		"save_profile": "Save Profile"
 	}
 }

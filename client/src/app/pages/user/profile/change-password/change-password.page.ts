@@ -31,6 +31,8 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
   widgetmodel: any;
   userId: string;
   updateInProgress = false;
+  isPasswordFiled = true;
+  isConfirmPasswordFiled = true;
 
   constructor(private router: Router,
     private utilService: UtilService,
@@ -68,9 +70,18 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     return pass === confirmPass ? null : true;
   }
 
+  changeTextPassword(field) {
+    if (field === 'newPassword') {
+      this.isPasswordFiled = !this.isPasswordFiled;
+    } else if (field === 'confirmNewPassword') {
+      this.isConfirmPasswordFiled = !this.isConfirmPasswordFiled;
+    }
+    return;
+  }
+
   changePassword() {
     console.log('Password change');
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updateInProgress = true;
     this.widgetmodel.userId = this.userId;
     this.widgetmodel.password = this.resetPasswordForm.value.newPassword;
@@ -79,15 +90,16 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
   }
 
   widgetActionFailed(name: string, data: any): any {
-    // this.loaderService.stopLoading();
+    this.loaderService.stopLoading();
     this.updateInProgress = false;
   }
 
   widgetActionSuccess(name, data) {
-    // this.loaderService.stopLoading();
+    this.loaderService.stopLoading();
     this.updateInProgress = false;
     if (data.isSuccessful) {
       console.log(this.translate.instant('change_password_page.change_password_success'));
+      this.alertService.presentToast(this.translate.instant('change_password_page.change_password_success'), 1000, 'bottom');
     } else {
       console.log(data.message);
     }
