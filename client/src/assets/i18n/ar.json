@@ -290,7 +290,8 @@
 		"noSlot": "",
 		"register": "تسجيل",
 		"sign_in": "تسجيل دخول",
-		"take_away": "يبعد"
+		"take_away": "يبعد",
+		"sw_update_available": "New update available. Please refresh to experience updated Pizza Hut"
 	},
 	"home_page": {
 		"block_": "منع",

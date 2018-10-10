@@ -290,7 +290,8 @@
 		"noSlot": "No Slot",
 		"register": "register",
 		"sign_in": "sign in",
-		"take_away": "Take away"
+		"take_away": "Take away",
+		"sw_update_available": "New update available. Please refresh to experience updated Pizza Hut"
 	},
 	"home_page": {
 		"block_": "Block ",
