@@ -1,4 +1,7 @@
 {
+	"global": {
+		"showCart": "Show cart"
+	},
 	"about_us_page": {
 		"about_us": "About Us",
 		"description_part_one": "The Pizza Hut story begins in May 1958. Dan and Frank Carney opened their 550-squarefoot pizza restaurant in Wichita, Kansas. Dan and Frank, with friends Richard Beemer and John Bender, made the pizza themselves. Frank rolled the dough with a rolling pin. Richard tossed the dough in the air from the pie tin. Dan filled the unbaked crust with sauce. John flipped the pie from the tin during the baking process. Dan Carney recalled, 'The people were enchanted with the product, watching us tossing the dough over our heads. They were really enjoying themselves….'",

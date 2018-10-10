@@ -100,7 +100,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 1000, 'top', 'top');
+        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 1000, 'top', 'top', true, this.getCurrentLanguageCode());
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ATION_EDIT_CART:
@@ -176,12 +176,6 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
       if (!storeSelected) return;
     }
     this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
-    if(this.cartItem){
-      this.productWidgetAction.emit(
-        new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
-      );
-      return;
-    }
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
     );

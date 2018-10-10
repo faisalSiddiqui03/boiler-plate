@@ -38,6 +38,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   @Input() productId;
   @Input() productFromDeal;
   @Input() cartItem;
+  @Input() fromFavorites;
 
   loaded = false;
   productWidgetExecutor = new EventEmitter();
@@ -101,7 +102,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 1000, 'top', 'top');
+        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 1000, 'top', 'top', true, this.getCurrentLanguageCode());
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE:
@@ -373,7 +374,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   goBack() {
-    if (this.productFromDeal || this.cartItem) {
+    if (this.productFromDeal || this.cartItem || this.fromFavorites) {
       this.modalController.dismiss();
       return;
     }
