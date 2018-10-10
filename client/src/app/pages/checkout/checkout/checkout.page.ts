@@ -274,7 +274,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     console.log(name, 'Loading Success ', data);
     switch (name) {
       case 'DELIVERYSLOTS':
-        if (!this.utilService.isEmpty(this.getDeliverySlot())) {
+        if (!this.utilService.isEmpty(this.getDeliverySlot()) && this.getDeliverySlot().id > -2 ) {
           this.asSoonPossible = this.getDeliverySlot().id === -1;
           this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(this.getDeliverySlot().time);
           this.timeSlotObj = this.getDeliverySlot();
@@ -284,6 +284,17 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
           this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(data[0].time);
           this.timeSlotObj = data[0];
         }
+        //
+        // if (!this.utilService.isEmpty(this.getDeliverySlot())) {
+        //   this.asSoonPossible = this.getDeliverySlot().id === -1;
+        //   this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(this.getDeliverySlot().time);
+        //   this.timeSlotObj = this.getDeliverySlot();
+        //   this.activeTimeSlot = this.findIndexOfSlot(this.getDeliverySlot().id, data);
+        // } else {
+        //   this.asSoonPossible = data[0].id === -1;
+        //   this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(data[0].time);
+        //   this.timeSlotObj = data[0];
+        // }
         break;
       case 'PAYMENT_OPTIONS':
         this.setDefaultPaymentOption(data);
