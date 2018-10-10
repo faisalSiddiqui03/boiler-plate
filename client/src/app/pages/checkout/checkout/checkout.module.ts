@@ -13,7 +13,7 @@ import {
   EventTrackWidgetModule,
   CapRouterServiceModule
 } from "@capillarytech/pwa-framework";
-
+import { HardWareServiceModule } from "@capillarytech/pwa-ui-helpers"
 import { CheckoutPage } from './checkout.page';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../translation.loader';
@@ -44,6 +44,7 @@ const routes: Routes = [
     PaymentOptionsWidgetModule,
     UserAddressWidgetModule,
     CapRouterServiceModule,
+    HardWareServiceModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
