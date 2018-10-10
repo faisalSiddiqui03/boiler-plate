@@ -34,14 +34,14 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
 
   constructor(private router: Router,
     private utilService: UtilService,
-    private route: ActivatedRoute, private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService, private formBuilder: FormBuilder) {
+    private route: ActivatedRoute,
+    private loaderService: LoaderService,
+    private alertService: AlertService,
+    private translate: TranslateService,
+    private formBuilder: FormBuilder) {
     super();
 
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader':
-    // 'pickup-loader');
-
     this.translate.use(this.getCurrentLanguageCode());
-
     this.resetPasswordForm = this.formBuilder.group({
       newPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       confirmNewPassword: ['', Validators.compose([Validators.required])]
@@ -49,30 +49,37 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.userId = this.getUserModel().userId;
-      console.log(this.userId);
-    }, 3000)
-    this.translate.get('change_password_page.change_password').subscribe(value => {
-      this.titleValue = value;
+
+    const translateSub = this.translate.get('change_password_page.change_password').subscribe(value => {
+        this.titleValue = value;
+    });
+
+    this.subscriptions.push(translateSub);
+    this.getUserPromise().then((user) => {
+
+        this.userId = user.userId;
     });
   }
 
+
   checkPasswords(group: FormGroup) {
-    let pass = group.controls.newPassword.value;
-    let confirmPass = group.controls.confirmNewPassword.value;
-    return pass === confirmPass ? null : true
+    const pass = group.controls.newPassword.value;
+    const confirmPass = group.controls.confirmNewPassword.value;
+    return pass === confirmPass ? null : true;
   }
 
   changePassword() {
     console.log('Password change');
+<<<<<<< HEAD
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updateInProgress = true;
+=======
+    this.loaderService.startLoadingByMode(null, this.getFulfilmentMode().mode);
+>>>>>>> change password + unsubscribe changes
     this.widgetmodel.userId = this.userId;
     this.widgetmodel.password = this.resetPasswordForm.value.newPassword;
-    let action = new Action(ResetPasswordWidgetActions.ACTION_CHANGE_PASSWORD);
+    const action = new Action(ResetPasswordWidgetActions.ACTION_CHANGE_PASSWORD);
     this.resetPasswordWidgetActionEmitter.emit(action);
-    // this.router.navigateByUrl('my-account');
   }
 
   widgetActionFailed(name: string, data: any): any {

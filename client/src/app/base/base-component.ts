@@ -1,12 +1,15 @@
+import { OnDestroy } from '@angular/core';
 import { GlobalSharedService } from '@cap-core/service/global-shared.service';
 import { appInjector } from '@cap-core/app.injector';
 import { DeliverySlot } from '@capillarytech/pwa-framework';
+import { Subscription } from 'rxjs/internal/Subscription';
 
-export class BaseComponent {
+export class BaseComponent implements OnDestroy {
 
   isModalOpen: boolean;
   private componentID;
   protected globalSharedService: GlobalSharedService;
+  protected subscriptions: Array<Subscription> = [];
 
   constructor() {
     this.componentID = Math.random().toString(36).substr(2, 9);
@@ -79,5 +82,20 @@ export class BaseComponent {
     }
 
     return navUrl;
+  }
+
+  ngOnDestroy() {
+
+    this.subscriptions.forEach((subscription) => {
+
+      if (subscription) {
+        try {
+
+          subscription.unsubscribe();
+        } catch (e) {
+          console.error('unsubscribe error');
+        }
+      }
+    });
   }
 }

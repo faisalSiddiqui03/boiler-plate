@@ -28,9 +28,9 @@ import { UtilService } from '../../../../helpers/utils';
 @pageView()
 
 export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
-  isPasswordFiled: boolean = true;
+  isPasswordFiled = true;
   userIdSigninForm: FormGroup;
-  isLoginSuccessful: boolean = false;
+  isLoginSuccessful = false;
 
   useridPasswordSigninAction = new EventEmitter();
   useridPasswordSigninActionEmitter = new EventEmitter();
@@ -38,8 +38,8 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   widgetModels: { [name: string]: any };
 
   googleSignInActionEmitter = new EventEmitter();
-  googleClientId: string = '';
-  titleValue: string = '';
+  googleClientId = '';
+  titleValue = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -73,9 +73,10 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   ngOnInit() {
-    this.translate.get('sign_in_page.sign_in').subscribe(value => {
+    const translateSub = this.translate.get('sign_in_page.sign_in').subscribe(value => {
       this.titleValue = value;
     });
+    this.subscriptions.push(translateSub);
   }
 
   changeTextPassword() {
