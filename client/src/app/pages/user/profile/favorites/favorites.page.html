@@ -53,11 +53,12 @@
                     loadingImage="assets/imgs/default/default.png"
                     img-preloader="{{getProductImageUrl(prod)}}"
                     defaultImage="assets/imgs/default/default.png"
+                    alt="{{prod?.title}}"
                   />
                 </ion-card-header>
 
                 <div class="fav-text">
-                  <h5>{{prod.title}}</h5>
+                  <h5>{{prod?.title}}</h5>
                   <p class="price" text-right>{{'category_listing.price_tag' | translate }}
                     <span>{{prod.webPrice | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
                   </p>

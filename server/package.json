@@ -31,7 +31,7 @@
     "@capillarytech/cap-loopback-api-ratings": "0.0.3",
     "@capillarytech/cap-loopback-api-search": "0.0.7",
     "@capillarytech/cap-loopback-api-states": "1.0.0",
-    "@capillarytech/cap-loopback-api-stores": "1.0.1",
+    "@capillarytech/cap-loopback-api-stores": "1.0.2",
     "@capillarytech/cap-loopback-api-wishlist": "0.0.2",
     "@capillarytech/cap-loopback-api-seo": "0.0.2",
     "@capillarytech/cap-loopback-store-helper": "^0.4.0",

@@ -10,8 +10,8 @@
 		"our_history": "تاريخنا"
 	},
 	"add-address": {
-		"failed_to_save": "",
-		"failed_to_update": ""
+		"failed_to_save": "فشلت في انقاذ",
+		"failed_to_update": "اخفاق التحديث"
 	},
 	"add_address_page": {
 		"add_address": "إضافة عنوان جديد",
@@ -25,7 +25,7 @@
 		"landmark_placeholder": "اختياري",
 		"okay": "نعم",
 		"other": "أخرى",
-		"update_address": "",
+		"update_address": "عنوان التحديث",
 		"work": "العمل"
 	},
 	"banner_widget": {
@@ -37,12 +37,12 @@
 		"cart_clear": "",
 		"close": "قريب",
 		"confirm": "",
-		"confirm_remove": "",
+		"confirm_remove": "هل أنت متأكد من أنك تريد إزالة العنصر؟",
 		"continue": "استمر",
 		"coupon_applied_successfully": "تم تطبيق القسيمة بنجاح",
 		"coupon_removed_successfully": "تمت إزالة الكوبون بنجاح",
 		"delivery_fee": "رسوم التوصيل",
-		"dismiss": "",
+		"dismiss": "رفض",
 		"empty_cart_message_1": "سلة الخاص بك تبدو فارغة قليلاً. لما لا",
 		"empty_cart_message_2": "تحقق من بعض صفقاتنا التي لا تقبل المنافسة؟",
 		"exclusive_offers": "عروض حصرية",
@@ -50,7 +50,7 @@
 		"no_voucher_message_1": "عذرًا ، لا ندعم حاليًا رمز القسيمة هذا. لا تقلق ، يمكنك ذلك",
 		"no_voucher_message_2": "ابحث عن أفضل عروضنا على صفحة صفقاتنا ،",
 		"no_voucher_message_3": "أو اتصل بكوخ لمعرفة المزيد",
-		"not_editable": "",
+		"not_editable": "العنصر غير قابل للتحرير",
 		"unable_to_apply_coupon": "غير قادر على تطبيق القسيمة",
 		"unable_to_remove_coupon": "لا يمكن إزالة القسيمة",
 		"update_cart_message": "تريد إجراء تغييرات؟ فقط اضغط على أي عنصر.",
@@ -78,14 +78,14 @@
 		"submit": "تأكيد الطلب"
 	},
 	"checkout_page": {
-		"add_new_address": "",
+		"add_new_address": "إضافة عنوان جديد",
 		"address_saved_successfully": "",
 		"agree_text": "من خلال تقديم طلبك، توافق على",
 		"building": "رقم البنايه او رقم المنزل",
 		"building_placeholder": "رقم البنايه او رقم المنزل",
 		"building_required": "نحتاج إلى عنوانك لتوصيل البيتزا",
 		"change": "تغير العنوان",
-		"change_address": "",
+		"change_address": "تغيير العنوان",
 		"comment": "إضافات اخرى",
 		"comment_placeholder": "إضافات اخرى",
 		"confirm": "تأكيد الطلب",
@@ -551,7 +551,9 @@
 		"take_away_now": "خذ بعيدا الآن"
 	},
 	"success_page": {
+		"confirm": "",
 		"delivery_address": "",
+		"go_to_deals": "",
 		"immediate_delivery": "",
 		"immediate_takeaway": "",
 		"it_will_be_with_you_by": "",
@@ -559,9 +561,11 @@
 		"on": "",
 		"order": "",
 		"pickup_address": "",
+		"please_enter_emailid": "",
 		"register": "",
 		"sent_tracking_details_to": "",
 		"thanks_for_your_order": "",
+		"unable_to_fetch_order": "",
 		"we_are_preparing_your_order": ""
 	},
 	"terms_page": {

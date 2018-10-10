@@ -26,7 +26,11 @@
                    no-padding>
             <ion-card class="product-card non-deal-card" no-padding (click)="showProduct(prod)">
               <ion-card-header no-padding>
-                <img height="100" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}"
+                <img
+                        height="100"
+                        src="{{getProductImageUrl(prod)}}"
+                        img-preloader="{{getProductImageUrl(prod)}}"
+                        alt="{{prod?.title}}"
                      defaultImage="assets/imgs/default/default.png" loadingImage="assets/imgs/default/default.png"
                 />
               </ion-card-header>
