@@ -48,7 +48,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
   suggestionsLoaded: boolean;
   removeItemPopup: boolean = false;
   itemToRemove;
-
+  favoriteInProgress = new Map();
   suggestionWidgetAction = new EventEmitter();
 
   slideOpts = {
@@ -201,8 +201,15 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
 
   widgetActionFailed(name: string, data: any): any {
     this.loaderService.stopLoading();
-    if (name === CartWidgetActions.ACTION_APPLY_COUPON) {
-      this.isWrongVoucher = true;
+    switch (name) {
+      case SuggestionsWidgetActions.ACTION_MARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
+        break;
+      case SuggestionsWidgetActions.ACTION_UNMARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
+        break;
+      case CartWidgetActions.ACTION_APPLY_COUPON:
+        this.isWrongVoucher = true;
     }
   }
 
@@ -240,6 +247,12 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
         this.alertService.presentToast(cartClear, 3000, 'bottom');
         this.capRouter.routeByUrlWithLanguage('/home');
         // this.router.navigate(['/home']);
+        break;
+      case SuggestionsWidgetActions.ACTION_MARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
+        break;
+      case SuggestionsWidgetActions.ACTION_UNMARK_AS_FAVORITE:
+        this.favoriteInProgress.delete(data.product.id);
         break;
     }
   }
@@ -291,6 +304,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
   }
 
   updateFavorites(isFavorite, product) {
+    this.favoriteInProgress.set(product.id, true);
     if (!isFavorite) {
       this.suggestionWidgetAction.emit(new Action(SuggestionsWidgetActions.ACTION_MARK_AS_FAVORITE, product));
       return;

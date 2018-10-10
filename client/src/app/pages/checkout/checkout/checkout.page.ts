@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../helpers/utils';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
+import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import {
   pwaLifeCycle,
   LifeCycle,
@@ -82,7 +82,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     private translate: TranslateService,
     private config: ConfigService,
     private actRoute: ActivatedRoute,
-    private capRouter: CapRouterService
+    private capRouter: CapRouterService,
+    private hardwareService: HardwareService
   ) {
 
     super();
@@ -162,7 +163,33 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   widgetActionFailed(name: string, data: any): any {
-    console.log(name, 'Action Failed');
+    // switch (name) {
+    //   case CheckoutWidgetActions.ACTION_PLACE_ORDER:
+    //     console.log('Model data ', data);
+    //     this.handleOrderSuccess(data);
+    //     break;
+    //   case CheckoutWidgetActions.ACTION_RETRY_ORDER_PAYMENT:
+    //     console.log('Model of this data ', data);
+    //     break;
+    //   case CheckoutWidgetActions.ACTION_GET_SHIPPING_ADDRESS:
+    //     console.log('Shipping address data ', data);
+    //     this.fillDataFromCache(data);
+    //     break;
+    //   case CheckoutWidgetActions.ACTION_GET_BILLING_ADDRESS:
+    //     console.log('Billing address data ', data);
+    //     break;
+    //   case CheckoutWidgetActions.ACTION_GET_PAYMENT_OPTIONS:
+    //     console.log('Payment option data ', data);
+    //     this.setDefaultPaymentOption(data);
+    //     break;
+    //   case CheckoutWidgetActions.ACTION_GET_ORDER_ATTRIBUTES:
+    //     console.log('attributes data ', data);
+    //     break;
+    //   case 'saveAddress':
+    //     console.log(name, data);
+    //     this.alertService.presentToast(this.translate.instant('checkout_page.address_saved_successfully'), 500, 'bottom');
+    //     break;
+    // }
   }
 
   widgetActionSuccess(name: string, data: any) {
@@ -197,11 +224,46 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
   // todo: use this data to prefill the form.
   fillDataFromCache(data) {
-    console.log(data);
+    if (!data) return;
+    this.checkoutForm.controls['name'].setValue(data.contactDetail.firstName);
+    this.checkoutForm.controls['mobile'].setValue(data.contactDetail.mobileNumber);
+    this.checkoutForm.controls['email'].setValue(data.contactDetail.emailID);
+    this.checkoutForm.controls['building'].setValue(data.address1);
+    this.checkoutForm.controls['street'].setValue(data.address2);
   }
 
   widgetLoadingFailed(name: string, data: any): any {
     console.log(name, 'Loading Failed');
+    switch (name) {
+      // case 'DELIVERYSLOTS':
+      //   if (!this.utilService.isEmpty(this.getDeliverySlot())) {
+      //     this.asSoonPossible = this.getDeliverySlot().id === -1;
+      //     this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(this.getDeliverySlot().time);
+      //     this.timeSlotObj = this.getDeliverySlot();
+      //     this.activeTimeSlot = this.findIndexOfSlot(this.getDeliverySlot().id, data);
+      //   } else {
+      //     this.asSoonPossible = data[0].id === -1;
+      //     this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(data[0].time);
+      //     this.timeSlotObj = data[0];
+      //   }
+      //   break;
+      // case 'PAYMENT_OPTIONS':
+      //   this.setDefaultPaymentOption(data);
+      //   break;
+      // case 'singleUserAddress':
+      //   this.widgetModels['singleUserAddress'] = data;
+      //   break;
+      case 'USER_ADDRESS':
+        this.getSavedAddresses([]);
+        break;
+      default:
+        return;
+        // this.getUserPromise().then(userModel => {
+        //   if (userModel.type === 'GUEST') {
+        //     this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_GET_SHIPPING_ADDRESS));
+        //   }
+        // });
+    }
   }
 
   widgetLoadingStarted(name: string, data: any): any {
@@ -212,7 +274,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     console.log(name, 'Loading Success ', data);
     switch (name) {
       case 'DELIVERYSLOTS':
-        if (!this.utilService.isEmpty(this.getDeliverySlot())) {
+        if (!this.utilService.isEmpty(this.getDeliverySlot()) && this.getDeliverySlot().id > -2 ) {
           this.asSoonPossible = this.getDeliverySlot().id === -1;
           this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(this.getDeliverySlot().time);
           this.timeSlotObj = this.getDeliverySlot();
@@ -222,6 +284,17 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
           this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(data[0].time);
           this.timeSlotObj = data[0];
         }
+        //
+        // if (!this.utilService.isEmpty(this.getDeliverySlot())) {
+        //   this.asSoonPossible = this.getDeliverySlot().id === -1;
+        //   this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(this.getDeliverySlot().time);
+        //   this.timeSlotObj = this.getDeliverySlot();
+        //   this.activeTimeSlot = this.findIndexOfSlot(this.getDeliverySlot().id, data);
+        // } else {
+        //   this.asSoonPossible = data[0].id === -1;
+        //   this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(data[0].time);
+        //   this.timeSlotObj = data[0];
+        // }
         break;
       case 'PAYMENT_OPTIONS':
         this.setDefaultPaymentOption(data);
@@ -232,12 +305,15 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
       case 'USER_ADDRESS':
         this.getSavedAddresses(data);
         break;
-      default:
+      case 'CHECKOUT':
         this.getUserPromise().then(userModel => {
           if (userModel.type === 'GUEST') {
             this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_GET_SHIPPING_ADDRESS));
           }
         });
+        break;
+      default:
+        return;
     }
   }
 
@@ -302,17 +378,35 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
     this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_SAVE_SHIPPING_ADDRESS, objShipAddress));
 
+    // adding IsImmediateOrder attribute
     const attributes: OrderAttributes[] = new Array<OrderAttributes>();
     const attr: OrderAttributes = new OrderAttributes();
     attr.name = 'IsImmediateOrder';
     attr.value = 'true';
-
     attributes.push(attr);
+
+    // adding channelid attribute
+    const channelAttr: OrderAttributes = new OrderAttributes();
+    channelAttr.name = 'channelid';
+    channelAttr.value = await this.getSourceData();
+    attributes.push(channelAttr);
+
     obj.orderAttributes = attributes;
 
     obj.deliverySlot = this.getDeliverySlot();
     const action = new Action(CheckoutWidgetActions.ACTION_PLACE_ORDER, obj);
     this.checkoutWidgetAction.emit(action);
+  }
+
+  /**helper function for channelId based on platform */
+  async getSourceData() {
+    let type = 'PWA,';
+    const platformDetails = await this.hardwareService.getPlatformDetails();
+    if (await this.hardwareService.isMobileApp()) {
+        type = 'APP,';
+    }
+    type += platformDetails;
+    return type;
   }
 
   handleOrderSuccess(data) {
@@ -363,7 +457,6 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   getSavedAddresses(addresses) {
-    console.log('faisal ', addresses);
     // this.savedAddresses = addresses;
     this.savedAddresses = addresses.filter(elem =>
       elem.city.code === this.getCurrentStore().city.code

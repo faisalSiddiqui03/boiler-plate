@@ -181,9 +181,9 @@
       margin: 0;
       img {
         display: block;
-        width: auto;
+        width: 200px;
         margin: 0 auto;
-        height: auto;
+        height: 100px;
       }
     }
     .product-card {
@@ -202,6 +202,9 @@
         z-index: 1;
         &.icon-favourite-active {
           color: var(--ion-color-danger);
+        }
+        &.fav-progress {
+          color: orange;
         }
       }
       ion-card-header {

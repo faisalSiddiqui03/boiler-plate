@@ -70,8 +70,8 @@
               </ion-label>
             </ion-item>
           </ion-list>
-          <ion-button *ngIf="widget.model.length >= 6 && isShowMoreButtonVisible && !isNextLoading" (click)="loadNextOrders()" color="success" text-capitalize expand="block" mode="ios" class="btn-success">{{'order_history_page.load_more_orders' | translate}}</ion-button>
-          <ion-button *ngIf="widget.model.length >= 6 && isShowMoreButtonVisible && isNextLoading" color="success" text-capitalize expand="block" mode="ios" class="btn-success">
+          <ion-button *ngIf="widget.model.length >= 6 && isShowMoreButtonVisible && !isNextLoading" (click)="loadNextOrders()" color="success" text-capitalize expand="block" mode="ios" class="btn-success" padding>{{'order_history_page.load_more_orders' | translate}}</ion-button>
+          <ion-button *ngIf="widget.model.length >= 6 && isShowMoreButtonVisible && isNextLoading" color="success" text-capitalize expand="block" mode="ios" class="btn-success" padding>
             <ion-spinner name="crescent" color="dark"></ion-spinner>
           </ion-button>
         </div>

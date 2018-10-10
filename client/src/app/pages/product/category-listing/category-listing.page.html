@@ -9,15 +9,13 @@
       <div class="product-content">
         <ion-show-when size="lg">
           <ion-header class="top-header-container">
-            <app-header [selectedCategoryId]="categoryId" (switchCategory)="switchCategories($event)" [showCart]="true"
-                        [showTime]="true"
-                        [headerClass]="'category-header'"></app-header>
+            <app-header [selectedCategoryId]="categoryId" (switchCategory)="switchCategories($event)" [showCart]="true" [showTime]="true"
+              [headerClass]="'category-header'"></app-header>
           </ion-header>
         </ion-show-when>
 
-        <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack
-                           [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
-                           [action]="null" (lifecycle)="null">
+        <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
+          [action]="null" (lifecycle)="null">
 
           <ng-template let-widget="widget">
             <div *ngIf="widget.model">{{assignNav(widget.model)}}</div>
@@ -33,12 +31,8 @@
             </delivery-slots-widget> -->
             <ng-container *ngFor="let item of navigations; let i = index;">
               <div [hidden]="!(item.categoryId === categoryId)">
-                <product-showcase-widget
-                  [componentId]="getComponentId()"
-                  pfWidgetImpressionTrack
-                  [filters]="getShowcaseFilter(item.categoryId)"
-                  [executor]="productShowcaseWidgetExecutor"
-                  [action]="productShowcaseActionMap.get(item.categoryId)">
+                <product-showcase-widget [componentId]="getComponentId()" [setSEOTags]=false pfWidgetImpressionTrack [filters]="getShowcaseFilter(item.categoryId)"
+                  [executor]="productShowcaseWidgetExecutor" [action]="productShowcaseActionMap.get(item.categoryId)">
                   <ng-template let-widget="widget">
                     <div *ngIf="widget.model == undefined">
                       <div *ngIf="categoryId === dealCategoryId">
@@ -65,8 +59,8 @@
                       <div *ngIf="categoryId !== dealCategoryId">
                         <ion-grid>
                           <ion-row>
-                            <ion-col *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9]" class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
-                                     no-padding>
+                            <ion-col *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9]" class="product-card-holder" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4"
+                              [sizeLg]="3" no-padding>
                               <ion-card class="product-card non-deal-card" no-padding>
                                 <ion-card-header no-padding>
                                   <app-skeleton [aspectRatio]="2" [width]="'100%'"></app-skeleton>
@@ -91,6 +85,7 @@
                       </div>
                     </div>
                     <div *ngIf="widget.model != undefined && widget.model.length">
+                      <seo-info-widget [componentId]="getComponentId()" [pushInfo]=false [refId]='item.categoryId' [type]=seoEntityType></seo-info-widget>
                       <ion-hide-when size="lg">
                         <div class="ribbon">
                           <div class="ribbon__side--left">
@@ -115,23 +110,23 @@
                       <div *ngIf="categoryId === dealCategoryId">
                         <ion-grid>
                           <ion-row>
-                            <ion-col class="product-card-holder" *ngFor="let prod of widget.model; let idx=index"
-                                     [sizeXl]="4"
-                                     [sizeMd]="6" [sizeSm]="6" [sizeXs]="12">
-                              <ion-card
-                                no-margin
-                                no-padding
-                                no-border
-                                class="product-card deal-card"
-                                [pfProductClickTrack]="{products:[prod], position:idx}"
+                            <ion-col class="product-card-holder" *ngFor="let prod of widget.model; let idx=index" [sizeXl]="4" [sizeMd]="6" [sizeSm]="6"
+                              [sizeXs]="12">
+                              <ion-card no-margin no-padding no-border class="product-card deal-card" [pfProductClickTrack]="{products:[prod], position:idx}"
                                 (click)="openDeal(prod?.client)">
                                 <ion-card-header>
+<<<<<<< HEAD
+                                  <img height="170" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
+                                    loadingImage="assets/imgs/default/default.png" />
+=======
                                   <img
                                     height="170" src="{{getProductImageUrl(prod)}}"
                                     img-preloader="{{getProductImageUrl(prod)}}"
                                     defaultImage="assets/imgs/default/default.png"
                                     loadingImage="assets/imgs/default/default.png"
+                                    alt="{{prod?.title}}"
                                   />
+>>>>>>> Add title, alt and metatags for home page
                                 </ion-card-header>
                                 <ion-card-content>
                                   <p class="deal-item-name">{{prod.title}}</p>
@@ -145,23 +140,17 @@
                       <div *ngIf="categoryId !== dealCategoryId">
                         <ion-grid>
                           <ion-row>
-                            <ion-col class="product-card-holder" *ngFor="let prod of widget.model; let idx=index"
-                                     [sizeSm]="6"
-                                     [sizeXs]="6" [sizeMd]="4" [sizeLg]="3"
-                                     no-padding>
-                              <ion-card
-                                class="product-card non-deal-card"
-                                no-padding
-                                [pfProductClickTrack]="{products:[prod], position:idx}"
-                                (click)="openProductDetails(prod?.client)">
-                                <div *ngIf="isLoggedIn()" class="icon"
-                                     [ngClass]="{'icon-favourite-active': prod?.isFavorite,'icon-favourite': !prod?.isFavorite, 'fav-progress': favoriteInProgress.get(prod.id)}"
-                                     (click)="updateFavorites(prod?.isFavorite, prod?.client); $event.stopPropagation();"></div>
+                            <ion-col class="product-card-holder" *ngFor="let prod of widget.model; let idx=index" [sizeSm]="6" [sizeXs]="6" [sizeMd]="4"
+                              [sizeLg]="3" no-padding>
+                              <ion-card class="product-card non-deal-card" no-padding [pfProductClickTrack]="{products:[prod], position:idx}" (click)="openProductDetails(prod?.client)">
+                                <div *ngIf="isLoggedIn()" class="icon" [ngClass]="{'icon-favourite-active': prod?.isFavorite,'icon-favourite': !prod?.isFavorite, 'fav-progress': favoriteInProgress.get(prod.id)}"
+                                  (click)="updateFavorites(prod?.isFavorite, prod?.client); $event.stopPropagation();"></div>
                                 <ion-card-header no-padding>
                                   <img height="100" src="{{getProductImageUrl(prod)}}"
                                        img-preloader="{{getProductImageUrl(prod)}}"
                                        defaultImage="assets/imgs/default/default.png"
                                        loadingImage="assets/imgs/default/default.png"
+                                       alt="{{prod?.title}}"
                                   />
                                 </ion-card-header>
 
@@ -200,9 +189,8 @@
     <ion-footer no-border>
       <div class="showcase-tabs-one">
         <ul no-margin no-padding>
-          <li *ngFor="let item of navigations; let i = index;" text-center class="hello"
-              [class.selected]="item.categoryId==categoryId"
-              (click)="switchCategories({category: item.name, id: item.categoryId})">{{item.name}}
+          <li *ngFor="let item of navigations; let i = index;" text-center class="hello" [class.selected]="item.categoryId==categoryId"
+            (click)="switchCategories({category: item.name, id: item.categoryId})">{{item.name}}
           </li>
         </ul>
       </div>

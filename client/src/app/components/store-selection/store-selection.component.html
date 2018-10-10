@@ -17,6 +17,7 @@
       <div *ngIf="widget.model != undefined && widget.model.length > 0">
         <div>
           <img src="{{getFullBannerUrl(widget.model[0].contentUrl)}}"
+               alt="{{widget.model[0].name || widget.model[0].contentUrl}}"
                img-preloader="{{getFullBannerUrl(widget.model[0].contentUrl)}}"
                defaultImage="assets/imgs/default/default.png"
                loadingImage="assets/imgs/default/default.png"

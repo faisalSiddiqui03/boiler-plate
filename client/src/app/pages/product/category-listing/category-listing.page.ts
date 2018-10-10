@@ -11,7 +11,9 @@ import {
   ProductShowcaseWidgetActions,
   ProductType,
   DeliverySlot,
-  CapRouterService
+  CapRouterService,
+  SeoInfoEntityType,
+  WidgetNames
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
@@ -38,6 +40,8 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   asapDeliverySlot = DeliverySlot.getAsap();
   categoryNamesById = new Map();
   favoriteInProgress = new Map();
+  seoEntityType: SeoInfoEntityType = SeoInfoEntityType.CATEGORY;
+  categorySeoMap = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -67,11 +71,11 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
         // TODO : generate store promise
         const store = this.getCurrentStore();
         if (!store) {
-            this.presentSlotModal();
+          this.presentSlotModal();
         } else if (!store.isOnline(this.getDeliveryMode())) {
-            this.presentSlotModal();
+          this.presentSlotModal();
         } else {
-            this.setDeliverySlot(this.asapDeliverySlot);
+          this.setDeliverySlot(this.asapDeliverySlot);
         }
       }
     });
@@ -88,7 +92,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     };
     params.forEach((param) => {
       const paramValues = param.split('=');
-        dataFromParams[paramValues[0]] = paramValues[1]
+      dataFromParams[paramValues[0]] = paramValues[1]
     });
     dataFromParams.category = dataFromParams.category.split('%20').join(' ');
     this.updateCategories(dataFromParams);
@@ -96,6 +100,11 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   updateCategories(data) {
     this.categoryId = data.id;
+    let seoInfo = this.categorySeoMap[this.categoryId];
+    if (seoInfo) {
+      //this.seoService.addPageTagsViaSeoInfo(seoInfo);
+      this.addPageTagsViaSeoInfo(seoInfo);
+    }
   }
 
   getShowcaseFilter(categoryId) {
@@ -186,7 +195,12 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   widgetLoadingSuccess(name: string, data: any): any {
     switch (name) {
-
+      case WidgetNames.SEO_INFO:
+        console.log('SEO info data', data);
+        if (data) {
+          this.categorySeoMap[data.id] = data.seoInfo;
+        }
+        break;
       case 'NAVIGATIONS':
         this.navigations = data.items;
         this.createMapsBasedOnCategory(data.items);
@@ -206,9 +220,11 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   switchCategories(data) {
     if (data.categoryId === this.categoryId) return;
-    this.router.navigate([], { queryParams: data }).then(data => {
-    }).catch(err => {
-    });
+    this.router.navigate([], { queryParams: data })
+      .then(data => {
+      })
+      .catch(err => {
+      });
     this.updateCategories(data);
   }
 

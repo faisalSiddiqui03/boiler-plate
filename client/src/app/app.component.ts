@@ -4,7 +4,13 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from './base/base-component';
-import { ConfigService, EventService, pwaLifeCycle, CapRouterService } from '@capillarytech/pwa-framework';
+import {
+  ConfigService,
+  EventService,
+  pwaLifeCycle,
+  CapRouterService,
+  ServiceWorkerServiceImpl
+} from '@capillarytech/pwa-framework';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { UtilService } from './helpers/utils';
 import { RoutingState } from './routing-state';
@@ -30,7 +36,8 @@ export class AppComponent extends BaseComponent {
     private routingState: RoutingState,
     private utilService: UtilService,
     private capAlertService: AlertService,
-    private capRouterService: CapRouterService
+    private capRouterService: CapRouterService,
+    private serviceWorkerService: ServiceWorkerServiceImpl
   ) {
     super();
     routingState.loadRouting();
@@ -48,6 +55,22 @@ export class AppComponent extends BaseComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+
+    this.handleSWUpdates();
+  }
+
+  private handleSWUpdates() {
+    this.serviceWorkerService.getMinorUpdate().subscribe(
+      (versionUpdate) => {
+        this.capAlertService.presentToast(
+          this.translate.instant('header.sw_update_available'),
+          1000,
+          'top',
+          'top'
+        );
+      },
+    );
+
   }
 
   private handleError(event) {
