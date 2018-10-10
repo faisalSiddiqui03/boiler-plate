@@ -139,6 +139,10 @@ const config = {
   "attributes": [{
     "id": 18,
     "name": "IsImmediateOrder"
+  },
+  {
+    "id": 32,
+    "name": "channelid"
   }]
 };
 
