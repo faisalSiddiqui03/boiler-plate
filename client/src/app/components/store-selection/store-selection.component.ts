@@ -111,9 +111,9 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
     this.findingStore = false;
+    this.loaderService.stopLoading();
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_AREA:
-        this.loaderService.stopLoading();
         if (data.length) {
           const firstStore = data[0];
           // TODO:: add alert-controller to confirm before emptying cart
@@ -130,7 +130,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        this.loaderService.stopLoading();
         if(!this.isModal) {
           if (data && data.length) {
             this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
@@ -148,7 +147,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_CITY:
-        this.loaderService.stopLoading();
         if(!this.isModal) {
           if (data && data.length) {
             this.capRouter.routeByUrlWithLanguage('/store-selection?cityId=' + this.selectedCityCode);
@@ -246,14 +244,13 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   widgetActionFailed(name: string, data: any) {
     this.findingStore = false;
+    this.loaderService.stopLoading();
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        this.loaderService.stopLoading();
         console.log('unable to find store', data);
         break;
       case StoreLocatorWidgetActions.FIND_BY_AREA:
-        this.loaderService.stopLoading();
         console.log('unable to find store', data);
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
@@ -338,7 +335,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   checkIfStoresAreAvailable(cityId, lat = 0, lng = 0) {
-    this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (cityId) {
       const stores = this.storeLocatorWidgetAction.emit(new Action(
         StoreLocatorWidgetActions.FIND_BY_CITY, [cityId, this.getDeliveryMode()])
@@ -382,6 +378,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   locateMe(lat, lng) {
     this.lat = lat;
     this.lng = lng;
+    this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
       this.checkIfStoresAreAvailable(null, lat, lng);
       return;

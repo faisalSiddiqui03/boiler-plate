@@ -35,6 +35,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   titleValue = '';
   favoritesWidgetAction = new EventEmitter();
   currencyCode: string;
+  favoriteInProgress = new Map();
 
   constructor(private router: Router,
     private utilService: UtilService,
@@ -79,6 +80,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   removeFavorite(product) {
+    this.favoriteInProgress.set(product.id, true);
     this.favoritesWidgetAction.emit(new Action(FavoritesWidgetActions.ACTION_REMOVE_ITEM, product));
   }
 
@@ -109,6 +111,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     switch (name) {
       case FavoritesWidgetActions.ACTION_REMOVE_ITEM:
         console.log('error removing item');
+        this.favoriteInProgress.delete(data.product.id);
         break;
     }
   }
@@ -117,6 +120,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     console.log('name action success: ' + name + ' data: ' + data);
     switch (name) {
       case FavoritesWidgetActions.ACTION_REMOVE_ITEM:
+        this.favoriteInProgress.delete(data.product.id);
         console.log('successfully removed item');
         break;
     }

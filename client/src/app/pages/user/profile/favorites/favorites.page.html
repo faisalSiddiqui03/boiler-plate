@@ -45,7 +45,7 @@
                      [sizeXs]="6" [sizeMd]="4"
                      [sizeLg]="3" no-padding>
               <ion-card class="product-card non-deal-card" no-padding (click)="openProduct(prod?.client)">
-                <div class="icon icon-favourite-active" (click)="removeFavorite(prod?.client); $event.stopPropagation();">
+                <div class="icon icon-favourite-active" [ngClass]="{'fav-progress': favoriteInProgress.get(prod.id)}" (click)="removeFavorite(prod?.client); $event.stopPropagation();">
                 </div>
                 <ion-card-header no-padding>
                   <img

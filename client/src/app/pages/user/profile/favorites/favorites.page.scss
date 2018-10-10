@@ -24,6 +24,9 @@
         z-index: 1;
         position: absolute;
       }
+      &.fav-progress {
+        color: orange;
+      }
     }
     .fav-text {
       padding: 10px;

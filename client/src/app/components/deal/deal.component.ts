@@ -100,7 +100,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 1000, 'top', 'top', true, this.getCurrentLanguageCode());
+        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 2000, 'top', 'top', true, this.getCurrentLanguageCode());
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ATION_EDIT_CART:

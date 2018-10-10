@@ -115,10 +115,6 @@
                               <ion-card no-margin no-padding no-border class="product-card deal-card" [pfProductClickTrack]="{products:[prod], position:idx}"
                                 (click)="openDeal(prod?.client)">
                                 <ion-card-header>
-<<<<<<< HEAD
-                                  <img height="170" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
-                                    loadingImage="assets/imgs/default/default.png" />
-=======
                                   <img
                                     height="170" src="{{getProductImageUrl(prod)}}"
                                     img-preloader="{{getProductImageUrl(prod)}}"
@@ -126,7 +122,6 @@
                                     loadingImage="assets/imgs/default/default.png"
                                     alt="{{prod?.title}}"
                                   />
->>>>>>> Add title, alt and metatags for home page
                                 </ion-card-header>
                                 <ion-card-content>
                                   <p class="deal-item-name">{{prod.title}}</p>
