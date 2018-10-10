@@ -41,9 +41,10 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
   }
 
   ngOnInit() {
-    this.translate.get('reset_password_page.reset_password').subscribe(value => {
+    const translateSub = this.translate.get('reset_password_page.reset_password').subscribe(value => {
       this.titleValue = value;
     });
+    this.subscriptions.push(translateSub);
   }
 
   handleResetPasswordActions(data) {

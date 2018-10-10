@@ -70,9 +70,11 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
   }
 
   ngOnInit() {
-    this.translate.get('sign_up_page.sign_up').subscribe(value => {
+    const translateSub = this.translate.get('sign_up_page.sign_up').subscribe(value => {
       this.titleValue = value;
     });
+
+    this.subscriptions.push(translateSub);
   }
 
   signUp() {

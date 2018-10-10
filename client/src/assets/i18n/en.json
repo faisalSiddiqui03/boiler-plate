@@ -33,10 +33,13 @@
 		"apply": "apply",
 		"cart_clear": "",
 		"close": "Close",
+		"confirm": "CONFIRM",
+		"confirm_remove": "Are you sure you want to remove the item?",
 		"continue": "Continue",
 		"coupon_applied_successfully": "Coupon applied successfully",
 		"coupon_removed_successfully": "Coupon removed successfully",
 		"delivery_fee": "Delivery Fee",
+		"dismiss": "DISMISS",
 		"empty_cart_message_1": "Your basket looks a little empty. Why not ",
 		"empty_cart_message_2": "check out some of our unbeatable deals?",
 		"exclusive_offers": "exclusive offers",
@@ -45,19 +48,15 @@
 		"no_voucher_message_2": "Find our best deals on our deals page,",
 		"no_voucher_message_3": " or call your Hut to find out more",
 		"not_editable": "Item not editable",
-		"remove_item": "",
 		"unable_to_apply_coupon": "Unable to apply coupon",
 		"unable_to_remove_coupon": "Coupon could not be removed",
 		"update_cart_message": "Want to make changes? Just tap any item.",
 		"updating_quantity": "",
 		"voucher_code": "Voucher code",
 		"voucher_description": "Our top deals are always available online on our Deals page.",
-		"your_cart": "Your Cart",
-    	"your_total": "Your Total",
 		"you_may_also_like": "You may also like",
-		"confirm_remove": "Are you sure you want to remove the item?",
-		"dismiss": "DISMISS",
-		"confirm": "CONFIRM"
+		"your_cart": "Your Cart",
+		"your_total": "Your Total"
 	},
 	"category_listing": {
 		"price_tag": "From"
@@ -291,7 +290,8 @@
 		"noSlot": "No Slot",
 		"register": "register",
 		"sign_in": "sign in",
-		"take_away": "Take away"
+		"take_away": "Take away",
+		"sw_update_available": "New update available. Please refresh to experience updated Pizza Hut"
 	},
 	"home_page": {
 		"block_": "Block ",
@@ -323,7 +323,7 @@
 	},
 	"my_account_page": {
 		"change_password": "Change Password",
-		"error_logging_out": "Error occured while logging out",
+		"error_logging_out": "Error occurred while logging out",
 		"logout": "Logout",
 		"my_account": "My Account",
 		"my_favourites": "My Favourites",
@@ -518,7 +518,8 @@
 		"register": "Register",
 		"remember_me": "Remember me",
 		"sign_in": "Sign In",
-		"signin_google": "Sign in with Google"
+		"signin_google": "Sign in with Google",
+		"success_sign_in": "Successfully signed in"
 	},
 	"sign_up_page": {
 		"confirm_password": "Confirm Password",
@@ -639,6 +640,8 @@
 		"mobile_required": "Your number please",
 		"mobile_valid": "Mobile numbers should start with 2,5,6 or 9",
 		"my_profile": "My Profile",
+		"profile_update_failed": "Profile update failed",
+		"profile_updated_successfully": "Profile updated successfully",
 		"save_profile": "Save Profile"
 	}
 }

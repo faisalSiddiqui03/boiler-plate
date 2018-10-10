@@ -30,7 +30,8 @@ import {
   SEOModule,
   LanguageService,
   CapRouterService,
-  CapRouterServiceModule
+  CapRouterServiceModule,
+  ServiceWorkerModule as PWAServiceWorkerModule
 } from '@capillarytech/pwa-framework';
 import { AuthGuard } from './auth.guard';
 import { HttpLoaderFactory } from './translation.loader';
@@ -100,7 +101,8 @@ export function getAppConfig(): Object {
     }),
     LoaderServiceModule,
     AlertServiceModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    PWAServiceWorkerModule.forRoot()
   ],
   providers: [
     StatusBar,
