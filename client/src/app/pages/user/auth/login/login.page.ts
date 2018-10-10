@@ -101,13 +101,11 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   handleGoogleSignInResponse(data) {
     this.alertService.presentToast(data.isSuccessful ? this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top', 'top');
     this.capRouter.routeByUrlWithLanguage('/home');
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
   }
 
 
   goToPage(pageName) {
     this.capRouter.routeByUrlWithLanguage(pageName);
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   handleUseridPasswordSigninResponse(data) {
@@ -115,7 +113,6 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       this.isLoginSuccessful = true;
       this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top', 'top');
       this.capRouter.routeByUrlWithLanguage('/home');
-      // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
     } else {
       this.isLoginSuccessful = false;
       this.alertService.presentToast(data.message, 500, 'top', 'top');
@@ -173,21 +170,6 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
           message: 'Something went wrong please try again.'
         });
         break;
-    }
-  }
-
-  handleWidgetLifecycle(x: LifeCycle) {
-    if (x.type == LifeCycle.WIDGET_LOADING_SUCCESS) {
-      this.loaderService.stopLoading();
-      console.log("Widget Loading Successful: " + x.data);
-
-    } else if (x.type == LifeCycle.PRIMARY_ACTION_SUCCESS) {
-      console.log("Primary Action Successful: " + x.data);
-
-    } else {
-      console.log('It throwed here');
-      console.log(x);
-
     }
   }
 

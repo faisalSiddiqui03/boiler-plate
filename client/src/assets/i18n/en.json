@@ -322,7 +322,7 @@
 	},
 	"my_account_page": {
 		"change_password": "Change Password",
-		"error_logging_out": "Error occured while logging out",
+		"error_logging_out": "Error occurred while logging out",
 		"logout": "Logout",
 		"my_account": "My Account",
 		"my_favourites": "My Favourites",
