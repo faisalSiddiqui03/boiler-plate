@@ -141,10 +141,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     const item = this.clientProduct.bundleItems.get(serverItem.id);
     const isAdded = item.increment();
     if (!isAdded) {
-      this.alertService.presentToast(this.translate.instant('pizza.add_topping_error'), 1000, 'top', 'top');
+      this.alertService.presentToast(this.translate.instant('pizza.add_topping_error'), 1000, 'top');
       return;
     }
-    this.alertService.presentToast(this.translate.instant('pizza.add_topping_success'), 1000, 'top', 'top');
+    this.alertService.presentToast(this.translate.instant('pizza.add_topping_success'), 1000, 'top');
     this.setToppingStatus();
     this.getPrice();
   }

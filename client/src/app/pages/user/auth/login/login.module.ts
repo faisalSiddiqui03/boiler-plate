@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login.page';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { UseridPasswordSigninWidgetModule, EventTrackModule, GoogleSigninWidgetModule } from '@capillarytech/pwa-framework';
+import { UseridPasswordSigninWidgetModule, EventTrackServiceModule, GoogleSigninWidgetModule } from '@capillarytech/pwa-framework';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../../translation.loader';
@@ -30,7 +30,7 @@ const routes: Routes = [
     HeaderModule,
     SubHeaderModule,
     RouterModule.forChild(routes),
-    EventTrackModule,
+    EventTrackServiceModule,
     GoogleSigninWidgetModule,
     UseridPasswordSigninWidgetModule,
     TranslateModule.forRoot({

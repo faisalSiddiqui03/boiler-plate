@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { StoreListComponent } from './store-list.component';
-import { BannerWidgetModule, CartWidgetModule, EventTrackModule, ImagePreloadModule, FulfilmentModeModule, LocationWidgetModule, StoreLocatorWidgetModule } from '@capillarytech/pwa-framework';
+import { BannerWidgetModule, CartWidgetModule, EventTrackServiceModule, ImagePreloadModule, FulfilmentModeModule, LocationWidgetModule, StoreLocatorWidgetModule } from '@capillarytech/pwa-framework';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
@@ -18,7 +18,7 @@ import { HttpClient } from '@angular/common/http';
     FulfilmentModeModule,
     LocationWidgetModule,
     StoreLocatorWidgetModule,
-    EventTrackModule,
+    EventTrackServiceModule,
     FormsModule,
     CartWidgetModule,
     ImagePreloadModule,

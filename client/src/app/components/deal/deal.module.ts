@@ -9,7 +9,7 @@ import { StoreSelectionModalModule } from '../store-selection-modal/store-select
 
 import { DealComponent } from './deal.component';
 
-import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackModule } from "@capillarytech/pwa-framework";
+import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackServiceModule} from "@capillarytech/pwa-framework";
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
@@ -28,7 +28,7 @@ import { TrioComponentModule } from '../trio/trio.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    EventTrackModule,
+    EventTrackServiceModule,
     ProductDetailsWidgetModule,
     ImagePreloadModule,
     SkeletonModule,

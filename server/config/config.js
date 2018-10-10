@@ -135,7 +135,11 @@ const config = {
     "enabled": true,
     "provider": "cloudfare"
   },
-  "isAsapEnabled": true
+  "isAsapEnabled": true,
+  "attributes": [{
+    "id": 18,
+    "name": "IsImmediateOrder"
+  }]
 };
 
 module.exports = config;

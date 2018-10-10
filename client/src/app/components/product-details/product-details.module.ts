@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 import { ProductDetailsComponent } from './product-details.component';
-import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackModule } from "@capillarytech/pwa-framework";
+import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackServiceModule} from "@capillarytech/pwa-framework";
 import { AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
@@ -21,7 +21,7 @@ import { StoreSelectionModalModule } from '../store-selection-modal/store-select
     ImagePreloadModule,
     AlertServiceModule,
     StoreSelectionModalModule,
-    EventTrackModule,
+    EventTrackServiceModule,
     SkeletonModule,
     TranslateModule.forRoot({
       loader: {

@@ -32,6 +32,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   @Input() productId: number;
   @Input() productFromDeal;
   @Input() cartItem = null;
+  @Input() fromSuggestion;
 
   loaded = false;
   productWidgetExecutor = new EventEmitter();
@@ -89,7 +90,11 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
         this.alertService.presentToast(this.clientProduct.title + ' ' +
-          this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
+        this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
+        if(this.fromSuggestion) {
+          this.modalController.dismiss(true);
+          return;
+        }
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ATION_EDIT_CART:
@@ -217,7 +222,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
 
   goBack() {
     this.setClient();
-    if (this.productFromDeal || this.cartItem) {
+    if (this.productFromDeal || this.cartItem || this.fromSuggestion) {
       this.modalController.dismiss();
       return;
     }

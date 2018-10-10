@@ -7,7 +7,7 @@ import { StoreSelectionComponent } from './store-selection.component';
 import {
   BannerWidgetModule,
   CartWidgetModule,
-  EventTrackModule,
+  EventTrackServiceModule,
   ImagePreloadModule,
   FulfilmentModeModule,
   LocationWidgetModule,
@@ -29,7 +29,7 @@ import { StoreListModule } from '../store-list/store-list.module';
     StoreListModule,
     LocationWidgetModule,
     StoreLocatorWidgetModule,
-    EventTrackModule,
+    EventTrackServiceModule,
     FormsModule,
     CartWidgetModule,
     ImagePreloadModule,
