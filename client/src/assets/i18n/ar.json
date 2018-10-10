@@ -547,7 +547,9 @@
 		"take_away_now": "خذ بعيدا الآن"
 	},
 	"success_page": {
+		"confirm": "",
 		"delivery_address": "",
+		"go_to_deals": "",
 		"immediate_delivery": "",
 		"immediate_takeaway": "",
 		"it_will_be_with_you_by": "",
@@ -555,9 +557,11 @@
 		"on": "",
 		"order": "",
 		"pickup_address": "",
+		"please_enter_emailid": "",
 		"register": "",
 		"sent_tracking_details_to": "",
 		"thanks_for_your_order": "",
+		"unable_to_fetch_order": "",
 		"we_are_preparing_your_order": ""
 	},
 	"terms_page": {
