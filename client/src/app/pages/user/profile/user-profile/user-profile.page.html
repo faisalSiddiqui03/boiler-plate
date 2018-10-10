@@ -76,7 +76,7 @@
                         expand="block" mode="ios"
                         (click)="updateProfile()" [class.disabled]="!profileForm.valid || !profileForm.dirty || updateInProgress">{{
               'user_profile_page.save_profile' | translate }}
-              <ion-spinner *ngIf="updateInProgress" color="primary" name="circles"></ion-spinner>
+              <!-- <ion-spinner *ngIf="updateInProgress" color="primary" name="circles"></ion-spinner> -->
             </ion-button>
           </div>
         </form>

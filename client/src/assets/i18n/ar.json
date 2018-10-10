@@ -639,6 +639,8 @@
 		"mobile_required": "أدخل رقمك لو سمحت",
 		"mobile_valid": "يجب أن يبدأ رقم الموبايل بالأرقام 2 أو 5 أو 6 أو 9 رقم الهاتف فقط ثمانية أرقام ",
 		"my_profile": "ملفي الشخصي",
+		"profile_update_failed": "",
+		"profile_updated_successfully": "",
 		"save_profile": "حفظ الملف الشخصي"
 	}
 }
