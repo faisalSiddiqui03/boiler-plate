@@ -55,12 +55,10 @@ export class SuccessPage extends BaseComponent implements OnInit {
 
   widgetLoadingFailed(name: string, data: any): any {
     console.log(name, 'Loading Failed');
-    this.loader.stopLoading();
   }
 
   widgetLoadingStarted(name: string, data: any): any {
     console.log(name, 'Loading Started');
-    this.loader.startLoadingByMode('', this.getDeliveryMode());
   }
 
   getDate(date) {
@@ -69,7 +67,6 @@ export class SuccessPage extends BaseComponent implements OnInit {
 
   widgetLoadingSuccess(name: string, data: any): any {
     console.log(name, 'Loading Success');
-    this.loader.stopLoading();
   }
 
   loadNextOrders() {

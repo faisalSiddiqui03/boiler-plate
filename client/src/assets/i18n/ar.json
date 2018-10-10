@@ -33,10 +33,13 @@
 		"apply": "تقديم الطلب",
 		"cart_clear": "",
 		"close": "قريب",
+		"confirm": "",
+		"confirm_remove": "",
 		"continue": "استمر",
 		"coupon_applied_successfully": "تم تطبيق القسيمة بنجاح",
 		"coupon_removed_successfully": "تمت إزالة الكوبون بنجاح",
 		"delivery_fee": "رسوم التوصيل",
+		"dismiss": "",
 		"empty_cart_message_1": "سلة الخاص بك تبدو فارغة قليلاً. لما لا",
 		"empty_cart_message_2": "تحقق من بعض صفقاتنا التي لا تقبل المنافسة؟",
 		"exclusive_offers": "عروض حصرية",
@@ -45,19 +48,15 @@
 		"no_voucher_message_2": "ابحث عن أفضل عروضنا على صفحة صفقاتنا ،",
 		"no_voucher_message_3": "أو اتصل بكوخ لمعرفة المزيد",
 		"not_editable": "",
-		"remove_item": "",
 		"unable_to_apply_coupon": "غير قادر على تطبيق القسيمة",
 		"unable_to_remove_coupon": "لا يمكن إزالة القسيمة",
 		"update_cart_message": "تريد إجراء تغييرات؟ فقط اضغط على أي عنصر.",
 		"updating_quantity": "",
 		"voucher_code": "رمز القسيمة",
 		"voucher_description": "لدينا صفقات الأعلى متاحة دائما على الإنترنت على صفحة صفقاتنا.",
-		"your_cart": "عربتك",
-    	"your_total": "مجموعك",
 		"you_may_also_like": "",
-		"confirm_remove": "",
-		"dismiss": "",
-		"confirm": ""
+		"your_cart": "عربتك",
+		"your_total": "مجموعك"
 	},
 	"category_listing": {
 		"price_tag": "من عند"
@@ -291,7 +290,8 @@
 		"noSlot": "",
 		"register": "تسجيل",
 		"sign_in": "تسجيل دخول",
-		"take_away": "يبعد"
+		"take_away": "يبعد",
+		"sw_update_available": "New update available. Please refresh to experience updated Pizza Hut"
 	},
 	"home_page": {
 		"block_": "منع",
@@ -518,7 +518,8 @@
 		"register": "تسجيل جديد",
 		"remember_me": "تذكرنى",
 		"sign_in": "تسجيل دخول",
-		"signin_google": "تسجيل دخول قوقل"
+		"signin_google": "تسجيل دخول قوقل",
+		"success_sign_in": ""
 	},
 	"sign_up_page": {
 		"confirm_password": "تأكيد كلمة المرور",
@@ -639,6 +640,8 @@
 		"mobile_required": "أدخل رقمك لو سمحت",
 		"mobile_valid": "يجب أن يبدأ رقم الموبايل بالأرقام 2 أو 5 أو 6 أو 9 رقم الهاتف فقط ثمانية أرقام ",
 		"my_profile": "ملفي الشخصي",
+		"profile_update_failed": "",
+		"profile_updated_successfully": "",
 		"save_profile": "حفظ الملف الشخصي"
 	}
 }

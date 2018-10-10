@@ -28,6 +28,7 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
   widgetModel: any;
   loaded: boolean;
   titleValue = '';
+  updateInProgress = false;
 
   constructor(private router: Router,
     private loaderService: LoaderService,
@@ -57,6 +58,7 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
 
   updateProfile() {
     this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    this.updateInProgress = true;
     this.widgetModel.firstName = this.profileForm.value.firstName;
     this.widgetModel.lastName = this.profileForm.value.lastName;
     this.widgetModel.mobileNo = this.profileForm.value.mobileNo;
@@ -66,7 +68,8 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
   widgetActionSuccess(name, data) {
     console.log('action success ' + name, data);
     this.loaderService.stopLoading();
-    this.alertService.presentToast("Profile Updated Successfully", 2000, 'top', 'top');
+    this.updateInProgress = false;
+    this.alertService.presentToast(this.translate.instant('user_profile_page.profile_updated_successfully'), 2000, 'top', 'top');
     this.capRouter.routeByUrlWithLanguage('my-account');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('my-account'));
   }
@@ -89,11 +92,10 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
     console.log('loading failed' + name, data);
   }
 
-  widgetActionFailure(name, data) {
-    console.log('action failed ' + name, data);
-  }
-
   widgetActionFailed(name: string, data: any): any {
+    this.updateInProgress = false;
+    this.loaderService.stopLoading();
+    this.alertService.presentToast(this.translate.instant('user_profile_page.profile_update_failed'), 2000, 'top', 'top');
   }
 
   widgetLoadingStarted(name: string, data: any): any {

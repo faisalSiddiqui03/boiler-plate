@@ -11,7 +11,7 @@
     "posttest": "npm run lint && nsp check"
   },
   "dependencies": {
-    "@capillarytech/cap-pwa-seed": "0.3.24",
+    "@capillarytech/cap-pwa-seed": "0.3.25",
     "@capillarytech/cap-commons": "0.0.3",
     "@capillarytech/cap-loopback-api-areas": "1.0.0",
     "@capillarytech/cap-loopback-api-authentication": "0.0.3",
@@ -31,7 +31,7 @@
     "@capillarytech/cap-loopback-api-ratings": "0.0.3",
     "@capillarytech/cap-loopback-api-search": "0.0.7",
     "@capillarytech/cap-loopback-api-states": "1.0.0",
-    "@capillarytech/cap-loopback-api-stores": "1.0.0",
+    "@capillarytech/cap-loopback-api-stores": "1.0.1",
     "@capillarytech/cap-loopback-api-wishlist": "0.0.2",
     "@capillarytech/cap-loopback-store-helper": "^0.4.0",
     "@capillarytech/loopback-connector-mongodb": "0.1.2",
