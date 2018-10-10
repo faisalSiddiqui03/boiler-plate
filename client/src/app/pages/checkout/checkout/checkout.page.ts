@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../helpers/utils';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
+import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import {
   pwaLifeCycle,
   LifeCycle,
@@ -82,7 +82,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     private translate: TranslateService,
     private config: ConfigService,
     private actRoute: ActivatedRoute,
-    private capRouter: CapRouterService
+    private capRouter: CapRouterService,
+    private hardwareService: HardwareService
   ) {
 
     super();
@@ -302,17 +303,41 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
     this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_SAVE_SHIPPING_ADDRESS, objShipAddress));
 
+    // adding IsImmediateOrder attribute
     const attributes: OrderAttributes[] = new Array<OrderAttributes>();
     const attr: OrderAttributes = new OrderAttributes();
     attr.name = 'IsImmediateOrder';
     attr.value = 'true';
-
     attributes.push(attr);
+
+    // adding channelid attribute
+    const channelAttr: OrderAttributes = new OrderAttributes();
+    channelAttr.name = 'channelid';
+    channelAttr.value = await this.getSourceData();
+    attributes.push(channelAttr);
+
     obj.orderAttributes = attributes;
+
+    let source = this.config.getConfig()['source'];
+    if ( source ) {
+        source.SelectedValue = 'pwa-' + this.getSourceData();
+        source.OrderEntityFieldValues[0].Value = 'pwa-' + this.getSourceData();
+    }
 
     obj.deliverySlot = this.getDeliverySlot();
     const action = new Action(CheckoutWidgetActions.ACTION_PLACE_ORDER, obj);
     this.checkoutWidgetAction.emit(action);
+  }
+
+  /**helper function for channelId based on platform */
+  async getSourceData() {
+    let type = 'PWA,';
+    const platformDetails = await this.hardwareService.getPlatformDetails();
+    if (platformDetails === 'Android' || platformDetails === 'iOS') {
+        type = 'APP,';
+    }
+    type += platformDetails;
+    return type;
   }
 
   handleOrderSuccess(data) {
