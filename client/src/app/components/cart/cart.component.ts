@@ -151,8 +151,8 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
 
   async removeCartItem() {
     this.itemToRemove.quantity = 0;
-    const cartRemove = await this.translateService.instant('cart.remove_item');
-    this.loaderService.startLoading(cartRemove, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    // const cartRemove = await this.translateService.instant('cart.remove_item');
+    // this.loaderService.startLoading(cartRemove, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updatingPrice = true;
     const action = new Action(CartWidgetActions.ACTION_UPDATE_CART, this.itemToRemove);
     this.cartWidgetAction.emit(action);
