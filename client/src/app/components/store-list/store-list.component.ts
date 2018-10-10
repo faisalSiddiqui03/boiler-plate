@@ -42,7 +42,7 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
     super();
     this.deliveryModes = DeliveryModes;
 
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    // this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
   }
 
@@ -81,15 +81,15 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
 
   widgetLoadingSuccess(name: string, data: any): any {
     console.log('success name: ', name, ' data: ', data);
-    if (name === 'STORE_SELECTOR' && this.globalSharedService.getFulfilmentMode()) {
+    if (name === 'STORE_SELECTOR' && this.getDeliveryMode()) {
       if (this.cityId) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
-          StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.globalSharedService.getFulfilmentMode().mode])
+          StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.getDeliveryMode()])
         );
 
       } else if (this.latitude && this.longitude) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
-          StoreLocatorWidgetActions.FIND_BY_LOCATION, [this.latitude, this.longitude, this.globalSharedService.getFulfilmentMode().mode])
+          StoreLocatorWidgetActions.FIND_BY_LOCATION, [this.latitude, this.longitude, this.getDeliveryMode()])
         );
       }
     }
@@ -138,6 +138,9 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
       storeTiming = store.currentDateStoreTime.get(this.deliveryModes.PICKUP).onTime;
     } else if (time === 'offTime') {
       storeTiming = store.currentDateStoreTime.get(this.deliveryModes.PICKUP).offTime;
+    }
+    if(isNaN(storeTiming)){
+      return '';
     }
     const min = storeTiming.getMinutes() < 10 ? '0' + storeTiming.getMinutes() : storeTiming.getMinutes();
     const hours = storeTiming.getHours() > 10 ? storeTiming.getHours() : '0' + storeTiming.getHours();

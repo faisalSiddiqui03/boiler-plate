@@ -44,8 +44,8 @@
             <ion-col class="product-card-holder favorite-item" *ngFor="let prod of widget.model" [sizeSm]="6"
                      [sizeXs]="6" [sizeMd]="4"
                      [sizeLg]="3" no-padding>
-              <ion-card class="product-card non-deal-card" no-padding>
-                <div class="icon icon-favourite-active" (click)="updateFavorites(prod.client)">
+              <ion-card class="product-card non-deal-card" no-padding (click)="openProduct(prod?.client)">
+                <div class="icon icon-favourite-active" [ngClass]="{'fav-progress': favoriteInProgress.get(prod.id)}" (click)="removeFavorite(prod?.client); $event.stopPropagation();">
                 </div>
                 <ion-card-header no-padding>
                   <img

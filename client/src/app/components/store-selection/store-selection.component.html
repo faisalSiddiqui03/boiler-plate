@@ -152,7 +152,7 @@
       <ng-template let-widget="widget">
         <div *ngIf="widget.model != undefined">
           <div
-            *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP && getCurrentStore() && !getCurrentStore().isDefaultLocation"
+            *ngIf="getDeliveryMode() && getDeliveryMode() === deliveryModes.PICKUP && getCurrentStore() && !getCurrentStore().isDefaultLocation"
             class="take-away-block">
             <span>{{'home_page.your_pickup_hut_is' | translate}} </span>
             <div class="store-name">{{getCurrentStore()?.name}}</div>
@@ -166,10 +166,11 @@
               mode="ios"
               class="btn-success"
               text-capitalize
+              [class.disabled]="findingStore"
               [disabled]="!(
                       (
-                        globalSharedService.getFulfilmentMode() &&
-                        globalSharedService.getFulfilmentMode().mode === deliveryModes.PICKUP &&
+                        getDeliveryMode() &&
+                        getDeliveryMode() === deliveryModes.PICKUP &&
                         (selectedCity || (getCurrentStore() && !getCurrentStore().isDefaultLocation))
                       ) || (
                         selectedCity && selectedArea
@@ -177,6 +178,9 @@
                     )"
               expand="block">
               {{'home_page.start_my_order' | translate}}
+              <span class="find-store-spinner" *ngIf="findingStore">
+                <ion-spinner name="crescent" color="dark"></ion-spinner>
+              </span>
             </ion-button>
           </div>
         </div>
@@ -189,8 +193,8 @@
       [action]="locationsWidgetActionGeometry"
       [instanceId]="1">
       <ng-template let-widget="widget">
-        <div class="find-hut" flex-center
-             (click)="locateMe(widget.model.geometry.latitude, widget.model.geometry.longitude)">
+        <div *ngIf="widget?.model" class="find-hut" flex-center
+             (click)="locateMe(widget.model?.geometry.latitude, widget.model?.geometry?.longitude)">
           <span> {{'home_page.find_my_nearest_hut' | translate}}</span>
           <strong *ngIf="!isModal" (click)="switchLanguage()" >{{'home_page.language' | translate}}</strong>
         </div>
@@ -205,11 +209,11 @@
               card-content-md box-shadow-card collection-details">
 
       <div
-        *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes?.PICKUP">
+        *ngIf="getDeliveryMode() && getDeliveryMode() === deliveryModes?.PICKUP">
         {{'home_page.collection'|translate}}
       </div>
       <div
-        *ngIf="globalSharedService.getFulfilmentMode() && globalSharedService.getFulfilmentMode().mode === deliveryModes?.HOME_DELIVERY">
+        *ngIf="getDeliveryMode() && getDeliveryMode() === deliveryModes?.HOME_DELIVERY">
         {{'home_page.delivery_name'|translate}}
       </div>
       <div class="store-name">{{getCurrentStore()?.name}}</div>

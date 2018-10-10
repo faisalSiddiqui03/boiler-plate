@@ -31,12 +31,12 @@
     <img src="../../../assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
     <div class="header-right" text-right>
       <div *ngIf="!dealsHeader && showMode" class="delivery-mode">
-        <div class="icon" [ngClass]="{'icon-delivery': getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getFulfilmentMode()?.mode === deliveryModes.PICKUP}"></div>
+        <div class="icon" [ngClass]="{'icon-delivery': getDeliveryMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getDeliveryMode()?.mode === deliveryModes.PICKUP}"></div>
         <span text-capitalize>{{ 'header.mode' | translate }}:</span>
-        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY"
+        <small (click)="goToPage('home')" *ngIf="getDeliveryMode()?.mode === deliveryModes.HOME_DELIVERY"
           text-capitalize>{{ 'header.delivery' | translate }}
         </small>
-        <small (click)="goToPage('home')" *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP" text-capitalize>{{
+        <small (click)="goToPage('home')" *ngIf="getDeliveryMode()?.mode === deliveryModes.PICKUP" text-capitalize>{{
           'header.take_away' | translate }}
         </small>
       </div>
@@ -102,6 +102,6 @@
 <navigation-widget [componentId]="getComponentId()" pfWidgetImpressioånTrack [refCode]="'pwa-kuwait'" [level]=1
   [executor]="null" [action]="null" (lifecycle)="null"></navigation-widget>
 
-<!-- <delivery-slots-widget *ngIf="fetchDeliverySlots" [globalSlots]="true" [deliveryMode]="getFulfilmentMode()?.mode"
+<!-- <delivery-slots-widget *ngIf="fetchDeliverySlots" [globalSlots]="true" [deliveryMode]="getDeliveryMode()?.mode"
   [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
 </delivery-slots-widget> -->

@@ -81,7 +81,7 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
 
   changePassword() {
     console.log('Password change');
-    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updateInProgress = true;
     this.widgetmodel.userId = this.userId;
     this.widgetmodel.password = this.resetPasswordForm.value.newPassword;

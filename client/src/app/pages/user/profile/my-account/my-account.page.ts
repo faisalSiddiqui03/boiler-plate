@@ -35,7 +35,7 @@ export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLife
     private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService,
     private capRouter: CapRouterService) {
     super();
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    // this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
   }
 

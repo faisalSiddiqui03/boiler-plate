@@ -1,7 +1,7 @@
 import { OnDestroy } from '@angular/core';
 import { GlobalSharedService } from '@cap-core/service/global-shared.service';
 import { appInjector } from '@cap-core/app.injector';
-import { DeliverySlot, SeoInfo } from '@capillarytech/pwa-framework';
+import { DeliverySlot, DeliveryModes, SeoInfo } from '@capillarytech/pwa-framework';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 export class BaseComponent implements OnDestroy {
@@ -45,10 +45,6 @@ export class BaseComponent implements OnDestroy {
     return this.globalSharedService.saveSelectedStore(store);
   }
 
-  getFulfilmentMode() {
-    return this.globalSharedService.getFulfilmentMode();
-  }
-
   getCart() {
     return this.globalSharedService.getCart();
   }
@@ -74,7 +70,7 @@ export class BaseComponent implements OnDestroy {
   }
 
   getDeliveryMode() {
-    return this.globalSharedService.getFulfilmentMode() ? this.globalSharedService.getFulfilmentMode().mode : null;
+    return (this.globalSharedService.getFulfilmentMode() && this.globalSharedService.getFulfilmentMode().mode) ? this.globalSharedService.getFulfilmentMode().mode : DeliveryModes.HOME_DELIVERY;
   }
 
   getNavigationUrlWithLangSupport(url: string): string {

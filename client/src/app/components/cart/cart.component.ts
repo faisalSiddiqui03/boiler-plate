@@ -85,7 +85,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
 
   applyCoupon() {
     if (this.couponCode) {
-      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+      this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
       const action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
     } else {
@@ -133,7 +133,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
     }
 
     const cartUpdate = await this.translateService.instant('cart.updating_quantity');
-    this.loaderService.startLoading(cartUpdate, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    this.loaderService.startLoading(cartUpdate, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updatingPrice = true;
     const action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
@@ -152,7 +152,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
   async removeCartItem() {
     this.itemToRemove.quantity = 0;
     // const cartRemove = await this.translateService.instant('cart.remove_item');
-    // this.loaderService.startLoading(cartRemove, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    // this.loaderService.startLoading(cartRemove, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updatingPrice = true;
     const action = new Action(CartWidgetActions.ACTION_UPDATE_CART, this.itemToRemove);
     this.cartWidgetAction.emit(action);
@@ -194,7 +194,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
 
   async clearCart() {
     const cartClear = await this.translateService.instant('cart.cart_clear');
-    this.loaderService.startLoading(cartClear, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    this.loaderService.startLoading(cartClear, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     const action = new Action(CartWidgetActions.ACTION_CLEAR_CART);
     this.cartWidgetAction.emit(action);
   }
