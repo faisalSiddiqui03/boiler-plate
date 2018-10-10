@@ -70,12 +70,8 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
 
   changePassword() {
     console.log('Password change');
-<<<<<<< HEAD
     // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updateInProgress = true;
-=======
-    this.loaderService.startLoadingByMode(null, this.getFulfilmentMode().mode);
->>>>>>> change password + unsubscribe changes
     this.widgetmodel.userId = this.userId;
     this.widgetmodel.password = this.resetPasswordForm.value.newPassword;
     const action = new Action(ResetPasswordWidgetActions.ACTION_CHANGE_PASSWORD);
@@ -107,7 +103,7 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
   widgetLoadingSuccess(name: string, data: any): any {
     switch (name) {
       case 'RESET_PASSWORD':
-        this.loaderService.stopLoading();
+        // this.loaderService.stopLoading();
         this.widgetmodel = data;
         break;
     }
