@@ -1,7 +1,7 @@
 import { OnDestroy } from '@angular/core';
 import { GlobalSharedService } from '@cap-core/service/global-shared.service';
 import { appInjector } from '@cap-core/app.injector';
-import { DeliverySlot } from '@capillarytech/pwa-framework';
+import { DeliverySlot, SeoInfo } from '@capillarytech/pwa-framework';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 export class BaseComponent implements OnDestroy {
@@ -15,6 +15,10 @@ export class BaseComponent implements OnDestroy {
     this.componentID = Math.random().toString(36).substr(2, 9);
     this.globalSharedService = appInjector.get(GlobalSharedService);
     this.isModalOpen = false;
+  }
+
+  addPageTagsViaSeoInfo(seoInfo: SeoInfo) {
+    this.globalSharedService.setSEOPageTagsviaSeoInfo(seoInfo);
   }
 
   getUserModel() {

@@ -33,6 +33,7 @@
     "@capillarytech/cap-loopback-api-states": "1.0.0",
     "@capillarytech/cap-loopback-api-stores": "1.0.1",
     "@capillarytech/cap-loopback-api-wishlist": "0.0.2",
+    "@capillarytech/cap-loopback-api-seo": "0.0.2",
     "@capillarytech/cap-loopback-store-helper": "^0.4.0",
     "@capillarytech/loopback-connector-mongodb": "0.1.2",
     "@capillarytech/loopback-connector-rest": "0.5.0",
