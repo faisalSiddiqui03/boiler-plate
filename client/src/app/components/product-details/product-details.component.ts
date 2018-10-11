@@ -91,7 +91,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
         this.alertService.presentToast(this.clientProduct.title + ' ' +
-        this.translate.instant('product_details.added_to_cart'), 2000, 'top', 'top', true, this.getCurrentLanguageCode());
+        this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', true, this.getCurrentLanguageCode());
         if(this.fromSuggestion) {
           this.modalController.dismiss(true);
           return;

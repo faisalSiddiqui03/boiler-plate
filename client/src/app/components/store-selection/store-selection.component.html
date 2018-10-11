@@ -2,7 +2,8 @@
   <banner-widget
     [componentId]="getComponentId()"
     pfWidgetImpressionTrack
-    [type]="'tag'"
+    [type]="'RefCode'"
+    [value]="getBannerRefCodeWithLangCode(bannerRefCode)"
     [executor]="bannerWidgetExecutor"
     [action]="bannerWidgetAction"
   >
@@ -14,11 +15,11 @@
           </ion-col>
         </ion-row>
       </div>
-      <div *ngIf="widget.model != undefined && widget.model.length > 0">
+      <div *ngIf="widget.model != undefined">
         <div>
-          <img src="{{getFullBannerUrl(widget.model[0].contentUrl)}}"
-               alt="{{widget.model[0].name || widget.model[0].contentUrl}}"
-               img-preloader="{{getFullBannerUrl(widget.model[0].contentUrl)}}"
+          <img src="{{getFullBannerUrl(widget?.model)}}"
+               alt="{{widget?.model[0]?.name || widget?.model[0]?.contentUrl}}"
+               img-preloader="{{getFullBannerUrl(widget?.model[0]?.contentUrl)}}"
                defaultImage="assets/imgs/default/default.png"
                loadingImage="assets/imgs/default/default.png"
           />

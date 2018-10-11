@@ -31,7 +31,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
 
   bannerWidgetAction = new EventEmitter();
   bannerWidgetExecutor = new EventEmitter();
-  bannerUrl: string;
+  bannerRefCode: string;
   deliveryModes = DeliveryModes;
   asSoonPossible = false;
   isNavigationClicked = false;
@@ -52,7 +52,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private capRouter: CapRouterService
   ) {
     super();
-    this.bannerUrl = this.config.getConfig()['banner_base_url'];
+    this.bannerRefCode = this.config.getConfig()['footerBannerRefCode'];
   }
 
   ngOnInit() {
@@ -100,13 +100,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     console.log('name = ', name, ' data = ', data);
   }
 
-
-  // We should get display name from api
-
-  getFullBannerUrl(src) {
-    return src ? this.bannerUrl + src + '?height=170&width=340&builder=freeimage' : null;
-  }
-
   navigateToDeals() {
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
     this.isNavigationClicked = true;
@@ -114,6 +107,10 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
 
+  }
+
+  getBannerRefCodeWithLangCode(refCode: string) {
+    return refCode + this.getCurrentLanguage().code;
   }
 
   preventPropogation(e) {
