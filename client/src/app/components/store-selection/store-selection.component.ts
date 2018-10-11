@@ -52,7 +52,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   lng;
   isCleared = false;
   clearCartPopup = false;
-  findingStore = false;
 
   @Input() isModal: false;
   constructor(
@@ -106,10 +105,10 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   //   this.toggleDropDown('city', true, false);
   // }
 
+  // WARNING : Do not add loaderService.stopLoading(); before switch case or at any place except 
+  // existing stop loading.
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
-    this.findingStore = false;
-    this.loaderService.stopLoading();
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
@@ -117,7 +116,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
           // TODO:: add alert-controller to confirm before emptying cart
           if (this.isStoreSelected() && this.getCurrentStore().id !== firstStore.id) {
             this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
-          }
+          }          
           this.setCurrentStore(firstStore);
           this.navigateToDeals();
           // }
@@ -128,7 +127,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        if(!this.isModal) {
+        if (!this.isModal) {
           if (data && data.length) {
             this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
             // this.router.navigate(['/store-selection'], { queryParams: { 'latitude': this.lat, 'longitude': this.lng } });
@@ -145,7 +144,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_CITY:
-        if(!this.isModal) {
+        this.loaderService.stopLoading();
+        if (!this.isModal) {
           if (data && data.length) {
             this.capRouter.routeByUrlWithLanguage('/store-selection?cityId=' + this.selectedCityCode);
             // this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
@@ -219,11 +219,19 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   findStore() {
     this.isNavigationClicked = true;
-    this.findingStore = true;
     if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
+      this.loaderService.startLoadingByMode('', this.getDeliveryMode());
       this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
         [this.selectedAreaCode, this.getDeliveryMode()]));
     } else {
+      this.loaderService.startLoadingByMode('', this.getDeliveryMode());
+
+      if( !this.selectedCityCode ) {
+        
+        this.navigateToDeals();
+        return;
+      }
+
       this.storeLocatorWidgetAction.emit(
         new Action(
           StoreLocatorWidgetActions.FIND_BY_CITY,
@@ -231,7 +239,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         )
       )
     }
-    // this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
   }
 
   navigateToDeals() {
@@ -239,21 +246,23 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
       return this.modalController.dismiss(true);
     }
     this.isNavigationClicked = true;
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
+    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
   widgetActionFailed(name: string, data: any) {
-    this.findingStore = false;
-    this.loaderService.stopLoading();
+    
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
+        this.loaderService.stopLoading();
         console.log('unable to find store', data);
         break;
       case StoreLocatorWidgetActions.FIND_BY_AREA:
+        this.loaderService.stopLoading();
         console.log('unable to find store', data);
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
+        this.loaderService.stopLoading();
         this.alertService.presentToast('failed to remove cart items', 3000, 'bottom');
         break;
     }
@@ -360,7 +369,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   getAreaDisplayName(area) {
     if (area.pincode) {
       return this.translate.instant('home_page.block_') + area.pincode;
-    } else if(area.name && area.name.indexOf('_') !== -1) {
+    } else if (area.name && area.name.indexOf('_') !== -1) {
       return this.translate.instant('home_page.block_') + area.name.split('_')[1];
     }
     return area.name;
@@ -428,9 +437,10 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   getFullBannerUrl(src) {
-    return ( Array.isArray(src) && src.length > 0 ) 
-      ? this.bannerUrl + src[0].contentUrl + '?height=170&width=340&builder=freeimage' 
-      : 'assets/imgs/default/default.png';
+    return (Array.isArray(src) && src.length > 0)
+      ? this.bannerUrl + src[0].contentUrl + '?height=170&width=340&builder=freeimage'
+      : this.getCurrentLanguageCode() === 'en' ? 'https://www.kuwait.pizzahut.me/assets/imgs/PH-60th-Years-FCDS-Deals-Banner-eng.jpg'
+        : 'https://www.kuwait.pizzahut.me/assets/imgs/PH-60th-Years-FCDS-Deals-Banner-ar.jpg'
   }
 
   dismissClearCartPopup() {

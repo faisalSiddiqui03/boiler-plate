@@ -317,8 +317,19 @@
           </div>
           <payment-options-widget [componentId]="getComponentId()" [action]="paymentOptionsWidgetAction">
             <ng-template let-widget="widget">
-              <ng-container *ngIf="widget.model">
-                <ion-list>
+              <ng-container *ngIf="widget?.model">
+                <ion-list *ngIf="widget?.model?.length === 0">
+                  <ion-radio-group formControlName="paymentMethod">
+                    <ion-item>
+                      <ion-radio color="success" slot="start" value="COD"></ion-radio>
+                      <ion-label>
+                        <img src="../../../../assets/imgs/Icon_cash.svg" alt="">{{ 'checkout_page.with_cash' | translate
+                        }}
+                      </ion-label>
+                    </ion-item>
+                  </ion-radio-group>
+                </ion-list>
+                <ion-list *ngIf="widget.model.length > 0">
                   <ion-radio-group formControlName="paymentMethod">
                     <ion-item (click)="slectPaymentOption(option)" *ngFor="let option of widget.model">
                       <ion-radio color="success" slot="start" value="{{option?.paymentOption}}"></ion-radio>
