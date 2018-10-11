@@ -196,14 +196,16 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
-      return storeSelected;
+      if(storeSelected.data){
+        this.addToCart();
+      }
     });
   }
 
   async addToCart() {
     if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
-      const storeSelected = await this.openStoreSelection();
-      if (!storeSelected) return;
+      this.openStoreSelection();
+      return;
     }
     if (this.productFromDeal) {
       this.modalController.dismiss(this.clientProduct);
