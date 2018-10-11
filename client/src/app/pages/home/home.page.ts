@@ -1,13 +1,12 @@
 import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import {
-  LifeCycle,
-  Action,
   pwaLifeCycle,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   ConfigService,
   LanguageService,
-  CapRouterService
+  CapRouterService,
+  BannerWidgetActions
 } from '@capillarytech/pwa-framework';
 import { ModalController } from '@ionic/angular';
 import { BaseComponent } from '../../base/base-component';
@@ -62,17 +61,17 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     this.translate.use(this.getCurrentLanguageCode());
     this.globalSharedService.setPageTitle('Pizza Hut Kuwait | Pizza Delivery Near You | Order Online');
     this.globalSharedService.setSEOPageTags([
-      {name: 'title', content: 'Pizza Hut Kuwait | Pizza Delivery Near You | Order Online'},
-      {name: 'og:title', content: 'Pizza Hut Kuwait | Pizza Delivery Near You | Order Online'},
-      {name: 'description', content: 'Pizza Hut, one of the most popular Pizza destinations in India is now online. Order Pizza online that is both delicious and value for money.'},
-      {name: 'og:description', content: 'Pizza Hut, one of the most popular Pizza destinations in India is now online. Order Pizza online that is both delicious and value for money.'},
-      {name: 'url', content: 'https://m.kuwait.pizzahut.me/home'},
-      {name: 'og:url', content: 'https://m.kuwait.pizzahut.me/home'},
-      {name: 'type', content: 'e-commerce'},
-      {name: 'og:type', content: 'e-commerce'},
-      {name: 'image', content: 'https://phindia-resources.cdn.martjack.io/azure/inc-yum-resources/98d18d82-ba59-4957-9c92-3f89207a34f6/Images/ProductImages/Source/Exotica.jpg?height=1200&width=1200&builder=freeimage'},
-      {name: 'og:image', content: 'https://phindia-resources.cdn.martjack.io/azure/inc-yum-resources/98d18d82-ba59-4957-9c92-3f89207a34f6/Images/ProductImages/Source/Exotica.jpg?height=1200&width=1200&builder=freeimage'},
-      {name: 'keywords', content: 'Pizza Hut Kuwait | Pizza Delivery Near You | Order Online'}
+      { name: 'title', content: 'Pizza Hut Kuwait | Pizza Delivery Near You | Order Online' },
+      { name: 'og:title', content: 'Pizza Hut Kuwait | Pizza Delivery Near You | Order Online' },
+      { name: 'description', content: 'Pizza Hut, one of the most popular Pizza destinations in India is now online. Order Pizza online that is both delicious and value for money.' },
+      { name: 'og:description', content: 'Pizza Hut, one of the most popular Pizza destinations in India is now online. Order Pizza online that is both delicious and value for money.' },
+      { name: 'url', content: 'https://m.kuwait.pizzahut.me/home' },
+      { name: 'og:url', content: 'https://m.kuwait.pizzahut.me/home' },
+      { name: 'type', content: 'e-commerce' },
+      { name: 'og:type', content: 'e-commerce' },
+      { name: 'image', content: 'https://phindia-resources.cdn.martjack.io/azure/inc-yum-resources/98d18d82-ba59-4957-9c92-3f89207a34f6/Images/ProductImages/Source/Exotica.jpg?height=1200&width=1200&builder=freeimage' },
+      { name: 'og:image', content: 'https://phindia-resources.cdn.martjack.io/azure/inc-yum-resources/98d18d82-ba59-4957-9c92-3f89207a34f6/Images/ProductImages/Source/Exotica.jpg?height=1200&width=1200&builder=freeimage' },
+      { name: 'keywords', content: 'Pizza Hut Kuwait | Pizza Delivery Near You | Order Online' }
     ]);
   }
 
@@ -81,23 +80,24 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     // this.isNavigationClicked = false;
   }
 
+  widgetLoadingStarted(name: string, data: any) {
+    console.log('home page widget loading started name = ', name, ' data = ', data);
+  }
+
   widgetLoadingSuccess(name, data) {
-    console.log('name = ', name, ' data = ', data);
-  }
-
-  widgetActionFailed(name: string, data: any) {
-  }
-
-  async widgetActionSuccess(name: string, data: any) {
-    console.log('name = ', name, ' data = ', data);
+    console.log('home page widget loading success name = ', name, ' data = ', data);
   }
 
   widgetLoadingFailed(name: string, data: any) {
-    console.log('name = ', name, ' data = ', data);
+    console.log('home page widget loading failed name = ', name, ' data = ', data);
   }
 
-  widgetLoadingStarted(name: string, data: any) {
-    console.log('name = ', name, ' data = ', data);
+  widgetActionFailed(name: string, data: any) {
+    console.log('home page widget action failed name = ', name, ' data = ', data);
+  }
+
+  async widgetActionSuccess(name: string, data: any) {
+    console.log('home page widget action success name = ', name, ' data = ', data);
   }
 
   navigateToDeals() {

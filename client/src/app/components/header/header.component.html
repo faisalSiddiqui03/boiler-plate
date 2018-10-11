@@ -31,12 +31,12 @@
     <img src="../../../assets/imgs/pizzahut-desktop-logo.svg" alt="Pizza Hut" (click)="goToPage('home')">
     <div class="header-right" text-right>
       <div *ngIf="!dealsHeader && showMode" class="delivery-mode">
-        <div class="icon" [ngClass]="{'icon-delivery': getDeliveryMode()?.mode === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getDeliveryMode()?.mode === deliveryModes.PICKUP}"></div>
+        <div class="icon" [ngClass]="{'icon-delivery': getDeliveryMode() === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getDeliveryMode() === deliveryModes.PICKUP}"></div>
         <span text-capitalize>{{ 'header.mode' | translate }}:</span>
-        <small (click)="goToPage('home')" *ngIf="getDeliveryMode()?.mode === deliveryModes.HOME_DELIVERY"
+        <small (click)="goToPage('home')" *ngIf="getDeliveryMode() === deliveryModes.HOME_DELIVERY"
           text-capitalize>{{ 'header.delivery' | translate }}
         </small>
-        <small (click)="goToPage('home')" *ngIf="getDeliveryMode()?.mode === deliveryModes.PICKUP" text-capitalize>{{
+        <small (click)="goToPage('home')" *ngIf="getDeliveryMode() === deliveryModes.PICKUP" text-capitalize>{{
           'header.take_away' | translate }}
         </small>
       </div>
@@ -47,8 +47,9 @@
       </div>
       <div *ngIf="!dealsHeader && !dealsHeadershowTime" text-uppercase class="delivery-time-large" (click)="presentSlotModal()">
         <ion-icon name="time" ios="md-time" md="md-time"></ion-icon>
-        <span *ngIf="getDeliverySlot()?.deliverySlotId != -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
-        <span *ngIf="getDeliverySlot()?.deliverySlotId == -1">{{ 'header.asap' | translate }}</span>
+        <span *ngIf="getDeliverySlot()?.id > -1">{{getDeliverySlot()?.time | date:'hh:mm a'}}</span>
+        <span *ngIf="getDeliverySlot()?.id == -1">{{ 'header.asap' | translate }}</span>
+        <span *ngIf="getDeliverySlot()?.id == -2">{{ 'header.noSlot' | translate }}</span>
       </div>
       <div class="signin-register" *ngIf="!dealsHeader && getUserModel()?.userId == 0">
         <div class="icon icon-user-circle" (click)="goToPage('login')"></div>
@@ -101,7 +102,4 @@
 </ion-navbar>
 <navigation-widget [componentId]="getComponentId()" pfWidgetImpressioånTrack [refCode]="'pwa-kuwait'" [level]=1
   [executor]="null" [action]="null" (lifecycle)="null"></navigation-widget>
-
-<!-- <delivery-slots-widget *ngIf="fetchDeliverySlots" [globalSlots]="true" [deliveryMode]="getDeliveryMode()?.mode"
-  [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
-</delivery-slots-widget> -->
+  

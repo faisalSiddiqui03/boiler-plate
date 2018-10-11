@@ -160,7 +160,7 @@
                     <h6 text-center>{{ 'cart.you_may_also_like' | translate}}</h6>
                     <ion-slides [options]="slideOpts">
                       <ion-slide class="product-card-holder" *ngFor="let prod of widget?.model; let idx=index">
-                        <ion-card class="product-card non-deal-card" no-padding
+                        <ion-card class="product-card non-deal-card suggestion-card" no-padding
                                   [pfProductClickTrack]="{products:[prod], position:idx}"
                                   (click)="openProductDetails(prod?.client)">
                           <div *ngIf="isLoggedIn()" class="icon"

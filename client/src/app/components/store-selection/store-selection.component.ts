@@ -138,10 +138,10 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
           }
         } else {
           // open another modal with store selection
-          const storeSelected = await this.openStoreListModal();
-          if (storeSelected) {
-            this.modalController.dismiss(true);
-          }
+          await this.openStoreListModal();
+          // if (storeSelected) {
+          //   this.modalController.dismiss(true);
+          // }
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_CITY:
@@ -155,10 +155,10 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
           }
         } else {
           // open another modal with store selection
-          const storeSelected = await this.openStoreListModal();
-          if (storeSelected) {
-            this.modalController.dismiss(true);
-          }
+          await this.openStoreListModal();
+          // if (storeSelected) {
+          //   this.modalController.dismiss(true);
+          // }
         }
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
@@ -211,7 +211,9 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
-      return storeSelected;
+      if(storeSelected.data){
+        this.modalController.dismiss(true);
+      }
     });
   }
 

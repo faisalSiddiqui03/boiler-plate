@@ -1,8 +1,8 @@
-<ion-header *ngIf="isModal">
-  <app-header  [showHalalTag]="false" [showLanguage]="false"></app-header>
+<ion-header>
+  <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
-  <app-sub-header *ngIf="isModal" [isModal]="isModal" [title]="titleValue"></app-sub-header>
+  <app-sub-header [isModal]="isModal" [title]="titleValue"></app-sub-header>
 
   <store-locator-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [action]="storeLocatorWidgetAction">
     <ng-template let-widget="widget">
