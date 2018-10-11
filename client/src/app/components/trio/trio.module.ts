@@ -22,7 +22,7 @@ import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
     ProductDetailsWidgetModule,
     ImagePreloadModule,
     AlertServiceModule,
-    HardWareServiceModule
+    HardWareServiceModule,
     StoreSelectionModalModule,
     SkeletonModule,
     TranslateModule.forRoot({
