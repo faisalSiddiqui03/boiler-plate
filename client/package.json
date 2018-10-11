@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
   "scripts": {
@@ -34,7 +34,7 @@
     "@angular/pwa": "^0.8.1",
     "@angular/router": "6.1.7",
     "@angular/service-worker": "6.1.7",
-    "@capillarytech/pwa-framework": "0.5.59",
+    "@capillarytech/pwa-framework": "0.5.60",
     "@capillarytech/pwa-ui-helpers": "0.1.6",
     "@ionic-native/core": "5.0.0-beta.14",
     "@ionic-native/geolocation": "5.0.0-beta.14",
