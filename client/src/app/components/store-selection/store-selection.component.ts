@@ -116,7 +116,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
           // TODO:: add alert-controller to confirm before emptying cart
           if (this.isStoreSelected() && this.getCurrentStore().id !== firstStore.id) {
             this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
-          }
+          }          
           this.setCurrentStore(firstStore);
           this.navigateToDeals();
           // }
@@ -127,7 +127,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        this.loaderService.stopLoading();
         if (!this.isModal) {
           if (data && data.length) {
             this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
@@ -145,6 +144,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_CITY:
+        this.loaderService.stopLoading();
         if (!this.isModal) {
           if (data && data.length) {
             this.capRouter.routeByUrlWithLanguage('/store-selection?cityId=' + this.selectedCityCode);
@@ -218,12 +218,20 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   findStore() {
-    this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.isNavigationClicked = true;
     if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
+      this.loaderService.startLoadingByMode('', this.getDeliveryMode());
       this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
         [this.selectedAreaCode, this.getDeliveryMode()]));
     } else {
+      this.loaderService.startLoadingByMode('', this.getDeliveryMode());
+
+      if( !this.selectedCityCode ) {
+        
+        this.navigateToDeals();
+        return;
+      }
+
       this.storeLocatorWidgetAction.emit(
         new Action(
           StoreLocatorWidgetActions.FIND_BY_CITY,
@@ -238,20 +246,23 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
       return this.modalController.dismiss(true);
     }
     this.isNavigationClicked = true;
-    this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
+    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
   widgetActionFailed(name: string, data: any) {
-    this.loaderService.stopLoading();
+    
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
+        this.loaderService.stopLoading();
         console.log('unable to find store', data);
         break;
       case StoreLocatorWidgetActions.FIND_BY_AREA:
+        this.loaderService.stopLoading();
         console.log('unable to find store', data);
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
+        this.loaderService.stopLoading();
         this.alertService.presentToast('failed to remove cart items', 3000, 'bottom');
         break;
     }

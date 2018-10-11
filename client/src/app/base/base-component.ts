@@ -42,6 +42,7 @@ export class BaseComponent implements OnDestroy {
   }
 
   setCurrentStore(store) {
+    if(!store) return;
     return this.globalSharedService.saveSelectedStore(store);
   }
 
@@ -79,6 +80,11 @@ export class BaseComponent implements OnDestroy {
 
   getDeliveryMode() {
     return (this.globalSharedService.getFulfilmentMode() && this.globalSharedService.getFulfilmentMode().mode) ? this.globalSharedService.getFulfilmentMode().mode : DeliveryModes.HOME_DELIVERY;
+  }
+
+  async getDeliveryModeAsync() {
+    const mode = await this.globalSharedService.getFulfilmentModePromise();
+    return mode.mode;
   }
 
   getNavigationUrlWithLangSupport(url: string): string {

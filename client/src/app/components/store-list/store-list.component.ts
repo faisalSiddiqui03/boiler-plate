@@ -63,6 +63,10 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
     });
   }
 
+  ionViewDidEnter(){
+    this.loaderService.stopLoading();
+  }
+
   navigateToDeals() {
     if(this.isModal) {
       this.modalController.dismiss(true);
@@ -79,14 +83,14 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
     console.log('started name: ', name, ' data: ', data);
   }
 
-  widgetLoadingSuccess(name: string, data: any): any {
+  async widgetLoadingSuccess(name: string, data: any) {
     console.log('success name: ', name, ' data: ', data);
     if (name === 'STORE_SELECTOR' && this.getDeliveryMode()) {
       if (this.cityId) {
+        await this.getDeliveryModeAsync();
         const stores = this.storeLocatorWidgetAction.emit(new Action(
           StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.getDeliveryMode()])
         );
-
       } else if (this.latitude && this.longitude) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
           StoreLocatorWidgetActions.FIND_BY_LOCATION, [this.latitude, this.longitude, this.getDeliveryMode()])
@@ -120,6 +124,10 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
   }
 
   selectStore(store) {
+    if(store && store.id) {
+      store.city.code = this.cityId;
+    }
+
     this.setCurrentStore(store);
     this.navigateToDeals();
   }
