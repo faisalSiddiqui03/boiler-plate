@@ -23,12 +23,6 @@
         </navigation-widget>
         <div class="container showcase-container full-height">
           <ion-content>
-            <!-- <delivery-slots-widget *ngIf="fetchDeliverySlots"
-                                   [globalSlots]="true"
-                                   [deliveryMode]="getDeliveryMode()?.mode"
-                                   [storeId]="getCurrentStore()?.id"
-                                   [componentId]="getComponentId()">
-            </delivery-slots-widget> -->
             <ng-container *ngFor="let item of navigations; let i = index;">
               <div [hidden]="!(item.categoryId === categoryId)">
                 <product-showcase-widget [componentId]="getComponentId()" [setSEOTags]=false pfWidgetImpressionTrack [filters]="getShowcaseFilter(item.categoryId)"
