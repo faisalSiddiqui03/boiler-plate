@@ -18,22 +18,13 @@ import {
   CheckoutDetails,
   Payment,
   DeliverySlot,
-  City,
-  Area,
-  Country,
-  State,
-  LocationDetails,
   Address,
   ContactDetail,
   OrderAttributes,
-  Checkout,
-  Transaction,
   DeliveryModes,
   CapRouterService, EventTrackWidgetActions,
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../base/base-component';
-import { element } from 'protractor';
-import { CartPriceDetails } from '@capillarytech/pwa-framework/services/cart/models/cart-price-details';
 
 @Component({
   selector: 'app-checkout',
@@ -81,8 +72,6 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     private utilService: UtilService,
     private translate: TranslateService,
     private config: ConfigService,
-    private actRoute: ActivatedRoute,
-    private capRouter: CapRouterService,
     private hardwareService: HardwareService
   ) {
 
