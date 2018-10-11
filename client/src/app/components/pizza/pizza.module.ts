@@ -6,7 +6,7 @@ import { StoreSelectionModalComponent } from '../store-selection-modal/store-sel
 import { StoreSelectionModalModule } from '../store-selection-modal/store-selection-modal.module';
 import { PizzaComponent } from './pizza.component';
 import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackServiceModule } from "@capillarytech/pwa-framework";
-import { AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
+import { AlertServiceModule, HardWareServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
 import { HttpClient } from '@angular/common/http';
@@ -20,6 +20,7 @@ import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
     EventTrackServiceModule,
     ProductDetailsWidgetModule,
     ImagePreloadModule,
+    HardWareServiceModule,
     AlertServiceModule,
     StoreSelectionModalModule,
     SkeletonModule,

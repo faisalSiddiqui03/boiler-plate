@@ -18,7 +18,7 @@ import {
   AttributeValue,
 } from '../../helpers/validators/index';
 import { BaseComponent } from '../../base/base-component';
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
 import { Location } from '@angular/common';
@@ -67,7 +67,8 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     private location: Location,
     private loaderService: LoaderService,
     private modalController: ModalController,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private hardwareService: HardwareService,
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -97,12 +98,13 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     console.log('Widget loading failed' + name, data);
   }
 
-  widgetActionSuccess(name: string, data: any) {
+  async widgetActionSuccess(name: string, data: any) {
     this.loaderService.stopLoading();
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
+        const isMobile = await this.hardwareService.isMobileApp();
         console.log('Item added to cart : ', data);
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 3000, 'top', 'top', true, this.getCurrentLanguageCode());
+        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 3000, 'top', 'top', isMobile, this.getCurrentLanguageCode());
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE:

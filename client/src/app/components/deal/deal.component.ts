@@ -17,7 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { DealShowcaseComponent } from '../deal-showcase/deal-showcase.component'
-import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
+import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { AttributeName, AttributeValue } from '../../helpers/validators';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
@@ -50,6 +50,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   showAddToCart: boolean;
   titleValue: string = '';
   dealCategoryId: string;
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -59,7 +60,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     private modalController: ModalController,
     private loaderService: LoaderService,
     private alertService: AlertService,
-    private utilService: UtilService
+    private hardwareService: HardwareService
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -95,12 +96,13 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     console.log('Widget loading failed' + name, data);
   }
 
-  widgetActionSuccess(name: string, data: any) {
+  async widgetActionSuccess(name: string, data: any) {
     this.loaderService.stopLoading();
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 3000, 'top', 'top', true, this.getCurrentLanguageCode());
+        const isMobile = await this.hardwareService.isMobileApp();
+        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 3000, 'top', 'top', isMobile, this.getCurrentLanguageCode());
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ATION_EDIT_CART:
