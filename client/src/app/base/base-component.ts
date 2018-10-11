@@ -49,8 +49,16 @@ export class BaseComponent implements OnDestroy {
     return this.globalSharedService.getCart();
   }
 
+  async getCartAsync() {
+    return await this.globalSharedService.getCartPromise();
+  }
+
   getCurrentStore() {
     return this.globalSharedService.getCurrentStore();
+  }
+
+  async getCurrentStoreAsync() {
+    return await this.globalSharedService.getCurrentStorePromise();
   }
 
   getDeliverySlot() {

@@ -99,6 +99,27 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     this.scrollMenu(dataFromParams.id);
   }
 
+  ionViewDidEnter() {
+    this.loaderService.stopLoading();
+  }
+
+  async checkSlots() {
+
+    const slot = await this.getDeliverySlotPromise();
+    const store = await this.getCurrentStoreAsync();
+      
+    if (slot.id === -2) {
+      const store = this.getCurrentStore();
+      if (store === null) {
+          this.presentSlotModal();
+      } else if (!store.isOnline(this.getDeliveryMode())) {
+          this.presentSlotModal();
+      } else {
+          this.setDeliverySlot(DeliverySlot.getAsap());
+      }
+    }      
+  }
+
   updateCategories(data) {
     this.categoryId = data.id;
     let seoInfo = this.categorySeoMap[this.categoryId];

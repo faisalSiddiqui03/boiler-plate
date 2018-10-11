@@ -52,7 +52,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   lng;
   isCleared = false;
   clearCartPopup = false;
-  findingStore = false;
 
   @Input() isModal: false;
   constructor(
@@ -106,10 +105,10 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   //   this.toggleDropDown('city', true, false);
   // }
 
+  // WARNING : Do not add loaderService.stopLoading(); before switch case or at any place except 
+  // existing stop loading.
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
-    this.findingStore = false;
-    this.loaderService.stopLoading();
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
@@ -128,7 +127,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        if(!this.isModal) {
+        this.loaderService.stopLoading();
+        if (!this.isModal) {
           if (data && data.length) {
             this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
             // this.router.navigate(['/store-selection'], { queryParams: { 'latitude': this.lat, 'longitude': this.lng } });
@@ -145,7 +145,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_CITY:
-        if(!this.isModal) {
+        if (!this.isModal) {
           if (data && data.length) {
             this.capRouter.routeByUrlWithLanguage('/store-selection?cityId=' + this.selectedCityCode);
             // this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
@@ -218,8 +218,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   findStore() {
+    this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.isNavigationClicked = true;
-    this.findingStore = true;
     if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
       this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
         [this.selectedAreaCode, this.getDeliveryMode()]));
@@ -231,7 +231,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         )
       )
     }
-    // this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
   }
 
   navigateToDeals() {
@@ -243,7 +242,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   widgetActionFailed(name: string, data: any) {
-    this.findingStore = false;
     this.loaderService.stopLoading();
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
@@ -360,7 +358,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   getAreaDisplayName(area) {
     if (area.pincode) {
       return this.translate.instant('home_page.block_') + area.pincode;
-    } else if(area.name && area.name.indexOf('_') !== -1) {
+    } else if (area.name && area.name.indexOf('_') !== -1) {
       return this.translate.instant('home_page.block_') + area.name.split('_')[1];
     }
     return area.name;
@@ -428,9 +426,10 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   getFullBannerUrl(src) {
-    return ( Array.isArray(src) && src.length > 0 ) 
-      ? this.bannerUrl + src[0].contentUrl + '?height=170&width=340&builder=freeimage' 
-      : 'assets/imgs/default/default.png';
+    return (Array.isArray(src) && src.length > 0)
+      ? this.bannerUrl + src[0].contentUrl + '?height=170&width=340&builder=freeimage'
+      : this.getCurrentLanguageCode() === 'en' ? 'https://www.kuwait.pizzahut.me/assets/imgs/PH-60th-Years-FCDS-Deals-Banner-eng.jpg'
+        : 'https://www.kuwait.pizzahut.me/assets/imgs/PH-60th-Years-FCDS-Deals-Banner-ar.jpg'
   }
 
   dismissClearCartPopup() {
