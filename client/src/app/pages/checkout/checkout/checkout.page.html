@@ -409,15 +409,15 @@
 
         <div *ngIf="widget.model" class="pick-time-block">
           <div (click)="showdropdown=!showdropdown" class="pick-time-selected" flex-center>
-            <span *ngIf="timeSlotObj?.id === -1">{{'delivery_slot_selection_page.as_soon_as_possible' | translate}}</span>
+            <span *ngIf="timeSlotObj?.id === -1">{{'delivery_slot_selection_page.asap' | translate}}</span>
             <span *ngIf="!widget.model.length">{{'header.noSlot' | translate}}</span>
             <span *ngIf="timeSlotObj?.id !== -1">{{timeSlotObj?.time | date:'hh:mm a'}}</span>
             <ion-icon name="arrow-down" ios="ios-arrow-down" md="ios-arrow-down"></ion-icon>
           </div>
           <ion-list *ngIf="showdropdown && widget.model.length" no-margin class="pick-time-list">
-            <ion-item *ngFor="let slot of widget.model; let i = index;" (click)="selectTime(slot, i)">
-              <span *ngIf="slot.id === -1">{{'delivery_slot_selection_page.as_soon_as_possible' | translate}}</span>
-              <span *ngIf="slot.id !== -1">{{slot.time | date:'hh:mm a'}}</span>
+            <ion-item class="slot-list" *ngFor="let slot of widget.model; let i = index;" (click)="selectTime(slot, i)">
+              <span [ngClass]="{'slot-selected': timeSlotObj?.id === slot.id}" *ngIf="slot.id === -1">{{'delivery_slot_selection_page.asap' | translate}}</span>
+              <span [ngClass]="{'slot-selected': timeSlotObj?.id === slot.id}" *ngIf="slot.id !== -1">{{slot.time | date:'hh:mm a'}}</span>
             </ion-item>
           </ion-list>
         </div>
