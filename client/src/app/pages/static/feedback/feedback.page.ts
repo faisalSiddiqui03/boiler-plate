@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../../helpers/utils';
-import { BaseComponent } from '../../../base/base-component';
-import { CapRouterService } from '@capillarytech/pwa-framework';
+import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Validators, FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {UtilService} from '../../../helpers/utils';
+import {BaseComponent} from '../../../base/base-component';
+import {CapRouterService, SurveyWidgetActions, Action} from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-feedback',
@@ -13,6 +13,8 @@ import { CapRouterService } from '@capillarytech/pwa-framework';
 })
 export class FeedbackPage extends BaseComponent implements OnInit {
   feedBackForm: FormGroup;
+  feedbackWidgetAction = new EventEmitter();
+  feedbackWidgetExecutor = new EventEmitter();
 
   constructor(
     private translate: TranslateService,
@@ -48,7 +50,14 @@ export class FeedbackPage extends BaseComponent implements OnInit {
   }
 
   sendFeedback() {
-    console.log(this.feedBackForm.value);
+    const map = new Map<String, String>();
+    // console.log(this.feedBackForm.value);
+    Object.keys(this.feedBackForm.value).forEach((key) => {
+      console.log(key);
+      map.set(key, this.feedBackForm.value[key]);
+    });
+    this.feedbackWidgetAction.emit(
+      new Action(SurveyWidgetActions.ACTION_ADD_SURVEY, map)
+    );
   }
-
 }

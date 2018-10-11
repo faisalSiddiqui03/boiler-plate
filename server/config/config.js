@@ -55,11 +55,11 @@ const config = {
           "maxsize": 100000000,
           "json": false
         },
-          "console": {
-              "level": "debug",
-              "colorize": true,
-              "timestamp": true
-          }
+        "console": {
+          "level": "debug",
+          "colorize": true,
+          "timestamp": true
+        }
       },
       "ACCESS": {
         "dailyRotateFile": {
@@ -72,11 +72,11 @@ const config = {
           "maxsize": 100000000,
           "json": false
         },
-          "console": {
-              "level": "debug",
-              "colorize": true,
-              "timestamp": true
-          }
+        "console": {
+          "level": "debug",
+          "colorize": true,
+          "timestamp": true
+        }
       },
       "BACKEND": {
         "dailyRotateFile": {
@@ -89,11 +89,11 @@ const config = {
           "maxsize": 100000000,
           "json": false
         },
-          "console": {
-              "level": "debug",
-              "colorize": true,
-              "timestamp": true
-          }
+        "console": {
+          "level": "debug",
+          "colorize": true,
+          "timestamp": true
+        }
       },
       "ERROR": {
         "dailyRotateFile": {
@@ -106,11 +106,11 @@ const config = {
           "maxsize": 100000000,
           "json": false
         },
-          "console": {
-              "level": "debug",
-              "colorize": true,
-              "timestamp": true
-          }
+        "console": {
+          "level": "debug",
+          "colorize": true,
+          "timestamp": true
+        }
       },
       "FORENSIC": {
         "dailyRotateFile": {
@@ -123,11 +123,11 @@ const config = {
           "maxsize": 100000000,
           "json": false
         },
-          "console": {
-              "level": "debug",
-              "colorize": true,
-              "timestamp": true
-          }
+        "console": {
+          "level": "debug",
+          "colorize": true,
+          "timestamp": true
+        }
       }
     }
   },
@@ -140,10 +140,19 @@ const config = {
     "id": 18,
     "name": "IsImmediateOrder"
   },
-  {
-    "id": 32,
-    "name": "channelid"
-  }]
+    {
+      "id": 32,
+      "name": "channelid"
+    }],
+  "intouchCluster" : "https://api.capillary.co.in",
+  "survey": {
+    "credentials": {
+      "username": "kn.003",
+      "password": "202cb962ac59075b964b07152d234b70"
+    },
+    "to": "shanuj.bansal@capillarytech.com",
+    "subject": "Order Feedback"
+  }
 };
 
 module.exports = config;
