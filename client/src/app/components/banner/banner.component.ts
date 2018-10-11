@@ -40,7 +40,7 @@ export class BannerComponent extends BaseComponent implements OnInit {
     private capRouter: CapRouterService) {
     super();
     this.bannerRefCode = this.config.getConfig()['footerBannerRefCode'];
-    this.bannerUrl = this.config.getConfig()['banner_base_url'];
+    // this.bannerUrl = this.config.getConfig()['banner_base_url'];
     this.translate.use(this.getCurrentLanguageCode());
   }
 
@@ -84,7 +84,7 @@ export class BannerComponent extends BaseComponent implements OnInit {
   }
 
   getFullBannerUrl(src) {
-    return src ? this.bannerUrl + src + '?height=170&width=340&builder=freeimage' : null;
+    return src ? src + '?height=170&width=340&builder=freeimage' : null;
   }
 
   getBannerRefCodeWithLangCode(refCode: string) {
