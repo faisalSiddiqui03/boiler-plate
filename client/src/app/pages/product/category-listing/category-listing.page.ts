@@ -64,26 +64,8 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   ionViewWillEnter() {
-    this.getDeliverySlotPromise().then((slot) => {
+    this.checkSlots();
 
-      if (slot.id === -2) {
-
-        // TODO : generate store promise
-        const store = this.getCurrentStore();
-        if (!store) {
-          this.presentSlotModal();
-        } else if (!store.isOnline(this.getDeliveryMode())) {
-          this.presentSlotModal();
-        } else {
-          this.setDeliverySlot(this.asapDeliverySlot);
-        }
-      }
-    });
-
-    // if (this.categoryId !== null) {
-    //   return;
-    // }
-    // const data = this.route.snapshot.queryParams;
     const urlData = this.location.path(false);
     const params = urlData.split('?')[1].split('&');
     const dataFromParams = {
@@ -96,6 +78,27 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     });
     dataFromParams.category = dataFromParams.category.split('%20').join(' ');
     this.updateCategories(dataFromParams);
+  }
+
+  ionViewDidEnter() {
+    this.loaderService.stopLoading();
+  }
+
+  async checkSlots() {
+
+    const slot = await this.getDeliverySlotPromise();
+    const store = await this.getCurrentStoreAsync();
+      
+    if (slot.id === -2) {
+      const store = this.getCurrentStore();
+      if (store === null) {
+          this.presentSlotModal();
+      } else if (!store.isOnline(this.getDeliveryMode())) {
+          this.presentSlotModal();
+      } else {
+          this.setDeliverySlot(DeliverySlot.getAsap());
+      }
+    }      
   }
 
   updateCategories(data) {

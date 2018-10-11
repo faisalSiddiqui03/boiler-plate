@@ -110,7 +110,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   getBannerRefCodeWithLangCode(refCode: string) {
-    return refCode + this.getCurrentLanguage().code;
+    return refCode + this.getCurrentLanguageCode();
   }
 
   preventPropogation(e) {
