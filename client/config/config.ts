@@ -22,6 +22,8 @@ export const config = {
     "maxToppingLimit": 3,
     "minToppingLimit": 3,
     "dealCategoryId": 'CU00215646',
+    "headerBannerRefCode": "ph-60th-years-",
+    "footerBannerRefCode": "bogo-pwa-",
     "baseUrl": "/api/",
     "server": {
       "mw-static": {

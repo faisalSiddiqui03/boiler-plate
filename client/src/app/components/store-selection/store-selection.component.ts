@@ -27,6 +27,7 @@ import { StoreSelectionModalComponent } from '../store-selection-modal/store-sel
 
 @pwaLifeCycle()
 export class StoreSelectionComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+  bannerRefCode: string;
   bannerUrl: string;
   bannerWidgetAction = new EventEmitter();
   bannerWidgetExecutor = new EventEmitter();
@@ -66,6 +67,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     private capRouter: CapRouterService,
   ) {
     super();
+    this.bannerRefCode = this.config.getConfig()['headerBannerRefCode'];
     this.bannerUrl = this.config.getConfig()['banner_base_url'];
     this.hasError = {
       selectAreaFirst: false
@@ -84,10 +86,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     this.selectedStore = this.getCurrentStore();
     console.error('selected store', this.getCurrentStore());
     this.changeRequested = false;
-  }
-
-  getFullBannerUrl(src) {
-    return src ? this.bannerUrl + src + '?height=170&width=340&builder=freeimage' : null;
   }
 
   widgetLoadingStarted(name, data) {
@@ -421,6 +419,16 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     this.selectedCityCode = selected.selectedCityCode || '';
     this.selectedArea = selected.selectedArea || '';
     this.selectedAreaCode = selected.selectedAreaCode || '';
+  }
+
+  getBannerRefCodeWithLangCode(refCode: string) {
+    return refCode + this.getCurrentLanguage().code;
+  }
+
+  getFullBannerUrl(src) {
+    return ( Array.isArray(src) && src.length > 0 ) 
+      ? this.bannerUrl + src[0].contentUrl + '?height=170&width=340&builder=freeimage' 
+      : 'assets/imgs/default/default.png';
   }
 
   dismissClearCartPopup() {

@@ -70,7 +70,7 @@ export function getAppConfig(): Object {
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({mode: 'md'}),
     ConfigServiceModule.forRoot(getAppConfig),
     GlobalServiceModule.forRoot(),
     IonicStorageModule.forRoot(),

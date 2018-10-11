@@ -102,7 +102,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 2000, 'top', 'top', true, this.getCurrentLanguageCode());
+        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 3000, 'top', 'top', true, this.getCurrentLanguageCode());
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE:

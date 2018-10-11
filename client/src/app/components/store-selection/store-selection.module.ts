@@ -19,6 +19,7 @@ import { HttpLoaderFactory } from '../../translation.loader';
 import { LoaderServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { HttpClient } from '@angular/common/http';
 import { StoreListModule } from '../store-list/store-list.module';
+import { BannerModule } from '../banner/banner.module';
 
 @NgModule({
   imports: [
@@ -33,6 +34,8 @@ import { StoreListModule } from '../store-list/store-list.module';
     FormsModule,
     CartWidgetModule,
     ImagePreloadModule,
+    SkeletonModule,
+    BannerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
