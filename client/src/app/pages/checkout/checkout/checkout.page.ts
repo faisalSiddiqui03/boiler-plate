@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, EventEmitter } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../../helpers/utils';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
+import {Component, OnInit, AfterViewInit, ViewEncapsulation, EventEmitter} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {UtilService} from '../../../helpers/utils';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
+import {Router, ActivatedRoute} from '@angular/router';
+import {LoaderService, AlertService, HardwareService} from '@capillarytech/pwa-ui-helpers';
 import {
   pwaLifeCycle,
   LifeCycle,
@@ -24,7 +24,7 @@ import {
   DeliveryModes,
   CapRouterService, EventTrackWidgetActions,
 } from '@capillarytech/pwa-framework';
-import { BaseComponent } from '../../../base/base-component';
+import {BaseComponent} from '../../../base/base-component';
 
 @Component({
   selector: 'app-checkout',
@@ -72,7 +72,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     private utilService: UtilService,
     private translate: TranslateService,
     private config: ConfigService,
-    private hardwareService: HardwareService
+    private hardwareService: HardwareService,
+    private capRouter: CapRouterService
   ) {
 
     super();
@@ -114,7 +115,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   ionViewWillEnter() {
-    
+
     this.checkSlots();
     this.checkCart();
   }
@@ -123,22 +124,22 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
     const slot = await this.getDeliverySlotPromise();
     const store = await this.getCurrentStoreAsync();
-      
+
     if (slot.id === -2) {
       const store = this.getCurrentStore();
       if (store === null) {
-          this.presentSlotModal();
+        this.presentSlotModal();
       } else if (!store.isOnline(this.getDeliveryMode())) {
-          this.presentSlotModal();
+        this.presentSlotModal();
       } else {
-          this.setDeliverySlot(DeliverySlot.getAsap());
+        this.setDeliverySlot(DeliverySlot.getAsap());
       }
-    }      
+    }
   }
 
   async checkCart() {
     const cart = await this.getCartAsync();
-    if(cart.items.length === 0) this.goToDeals();
+    if (cart.items.length === 0) this.goToDeals();
   }
 
   goToDeals() {
@@ -260,11 +261,11 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
         break;
       default:
         return;
-        // this.getUserPromise().then(userModel => {
-        //   if (userModel.type === 'GUEST') {
-        //     this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_GET_SHIPPING_ADDRESS));
-        //   }
-        // });
+      // this.getUserPromise().then(userModel => {
+      //   if (userModel.type === 'GUEST') {
+      //     this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_GET_SHIPPING_ADDRESS));
+      //   }
+      // });
     }
   }
 
@@ -276,7 +277,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     console.log(name, 'Loading Success ', data);
     switch (name) {
       case 'DELIVERYSLOTS':
-        if (!this.utilService.isEmpty(this.getDeliverySlot()) && this.getDeliverySlot().id > -2 ) {
+        if (!this.utilService.isEmpty(this.getDeliverySlot()) && this.getDeliverySlot().id > -2) {
           this.asSoonPossible = this.getDeliverySlot().id === -1;
           this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(this.getDeliverySlot().time);
           this.timeSlotObj = this.getDeliverySlot();
@@ -325,13 +326,13 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
   selectTimeSlot() {
     console.log('slot is: ', this.timeSlotObj);
-    if(this.timeSlotObj && this.timeSlotObj.id > -2) {
+    if (this.timeSlotObj && this.timeSlotObj.id > -2) {
 
       this.setDeliverySlot(this.timeSlotObj);
     } else {
 
       this.setDeliverySlot(this.getDeliverySlot());
-    }      
+    }
     this.showdropdown = false;
     this.closePickTime();
   }
@@ -411,7 +412,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     let type = 'PWA,';
     const platformDetails = await this.hardwareService.getPlatformDetails();
     if (await this.hardwareService.isMobileApp()) {
-        type = 'APP,';
+      type = 'APP,';
     }
     type += platformDetails;
     return type;
