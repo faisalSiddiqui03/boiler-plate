@@ -88,7 +88,7 @@ export class BannerComponent extends BaseComponent implements OnInit {
   }
 
   getBannerRefCodeWithLangCode(refCode: string) {
-    return refCode + this.getCurrentLanguage().code;
+    return refCode + this.getCurrentLanguageCode();
   }
 
 }

@@ -12,12 +12,9 @@ import {
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../base/base-component';
-import { UtilService } from '../../helpers/utils';
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { ModalController } from '@ionic/angular';
-import { SearchLocationPage } from '../../pages/user/profile/search-location/search-location.page';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
-import { StoreSelectionComponent } from '../store-selection/store-selection.component';
 
 @Component({
   selector: 'app-product-details-component',
@@ -50,11 +47,9 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   addingToCart: boolean;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
     private alertService: AlertService,
     private translate: TranslateService,
-    private utilService: UtilService,
+    private hardwareService: HardwareService,
     private config: ConfigService,
     private location: Location,
     private loaderService: LoaderService,
@@ -85,13 +80,13 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     console.log('Widget loading failed' + name, data);
   }
 
-  widgetActionSuccess(name: string, data: any) {
+  async widgetActionSuccess(name: string, data: any) {
     this.loaderService.stopLoading();
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
-        console.log('Item added to cart : ', data);
+        const isMobile = await this.hardwareService.isMobileApp();
         this.alertService.presentToast(this.clientProduct.title + ' ' +
-        this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', true, this.getCurrentLanguageCode());
+        this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', isMobile, this.getCurrentLanguageCode());
         if(this.fromSuggestion) {
           this.modalController.dismiss(true);
           return;
@@ -196,14 +191,16 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
-      return storeSelected;
+      if(storeSelected.data){
+        this.addToCart();
+      }
     });
   }
 
   async addToCart() {
     if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
-      const storeSelected = await this.openStoreSelection();
-      if (!storeSelected) return;
+      this.openStoreSelection();
+      return;
     }
     if (this.productFromDeal) {
       this.modalController.dismiss(this.clientProduct);

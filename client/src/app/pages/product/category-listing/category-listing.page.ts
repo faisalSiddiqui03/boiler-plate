@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location, DOCUMENT } from '@angular/common';
 import {
   ConfigService,
   OnWidgetActionsLifecyle,
@@ -52,6 +52,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     private location: Location,
     private loaderService: LoaderService,
     private capRouter: CapRouterService,
+    @Inject(DOCUMENT) document
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -64,26 +65,8 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   ionViewWillEnter() {
-    this.getDeliverySlotPromise().then((slot) => {
+    this.checkSlots();
 
-      if (slot.id === -2) {
-
-        // TODO : generate store promise
-        const store = this.getCurrentStore();
-        if (!store) {
-          this.presentSlotModal();
-        } else if (!store.isOnline(this.getDeliveryMode())) {
-          this.presentSlotModal();
-        } else {
-          this.setDeliverySlot(this.asapDeliverySlot);
-        }
-      }
-    });
-
-    // if (this.categoryId !== null) {
-    //   return;
-    // }
-    // const data = this.route.snapshot.queryParams;
     const urlData = this.location.path(false);
     const params = urlData.split('?')[1].split('&');
     const dataFromParams = {
@@ -96,6 +79,49 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     });
     dataFromParams.category = dataFromParams.category.split('%20').join(' ');
     this.updateCategories(dataFromParams);
+    this.scrollMenu(dataFromParams.id);
+  }
+
+  ionViewDidEnter() {
+    this.loaderService.stopLoading();
+  }
+
+  async checkSlots() {
+
+    const slot = await this.getDeliverySlotPromise();
+    const store = await this.getCurrentStoreAsync();
+      
+    if (slot.id === -2) {
+      const store = this.getCurrentStore();
+      if (store === null) {
+          this.presentSlotModal();
+      } else if (!store.isOnline(this.getDeliveryMode())) {
+          this.presentSlotModal();
+      } else {
+          this.setDeliverySlot(DeliverySlot.getAsap());
+      }
+    }      
+  }
+
+  ionViewDidEnter() {
+    this.loaderService.stopLoading();
+  }
+
+  async checkSlots() {
+
+    const slot = await this.getDeliverySlotPromise();
+    const store = await this.getCurrentStoreAsync();
+      
+    if (slot.id === -2) {
+      const store = this.getCurrentStore();
+      if (store === null) {
+          this.presentSlotModal();
+      } else if (!store.isOnline(this.getDeliveryMode())) {
+          this.presentSlotModal();
+      } else {
+          this.setDeliverySlot(DeliverySlot.getAsap());
+      }
+    }      
   }
 
   updateCategories(data) {
@@ -239,4 +265,15 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     });
   }
 
+  scrollMenu(id) {
+    const selectedItem = document.getElementById(id);
+    const bottomDiv = document.getElementById('bottom-div');
+    if (this.getCurrentLanguage() && this.getCurrentLanguage().alignment === 'ltr') {
+      const scrollPosition = selectedItem.offsetLeft;
+      bottomDiv.scrollLeft += scrollPosition;
+    } else {
+      const scrollPosition = selectedItem.offsetLeft;
+      bottomDiv.scrollLeft += scrollPosition;
+    }
+  }
 }

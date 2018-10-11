@@ -11,7 +11,6 @@
     "posttest": "npm run lint && nsp check"
   },
   "dependencies": {
-    "@capillarytech/cap-pwa-seed": "0.3.25",
     "@capillarytech/cap-commons": "0.0.3",
     "@capillarytech/cap-loopback-api-areas": "1.0.0",
     "@capillarytech/cap-loopback-api-authentication": "0.0.3",
@@ -30,14 +29,15 @@
     "@capillarytech/cap-loopback-api-products": "0.0.8",
     "@capillarytech/cap-loopback-api-ratings": "0.0.3",
     "@capillarytech/cap-loopback-api-search": "0.0.7",
+    "@capillarytech/cap-loopback-api-seo": "0.0.2",
     "@capillarytech/cap-loopback-api-states": "1.0.0",
     "@capillarytech/cap-loopback-api-stores": "1.0.2",
     "@capillarytech/cap-loopback-api-wishlist": "0.0.2",
-    "@capillarytech/cap-loopback-api-seo": "0.0.2",
     "@capillarytech/cap-loopback-api-survey" : "0.0.1",
     "@capillarytech/cap-loopback-store-helper": "^0.4.0",
+    "@capillarytech/cap-pwa-seed": "0.3.26",
     "@capillarytech/loopback-connector-mongodb": "0.1.2",
-    "@capillarytech/loopback-connector-rest": "0.5.0",
+    "@capillarytech/loopback-connector-rest": "0.5.1",
     "@capillarytech/mw-redirects": "0.0.3",
     "@capillarytech/pwa-config": "1.0.4",
     "azure-storage": "2.10.1",
@@ -75,7 +75,8 @@
     "utf8": "3.0.0",
     "util": "0.10.3",
     "winston": "2.4.2",
-    "winston-daily-rotate-file": "3.1.4"
+    "winston-daily-rotate-file": "3.1.4",
+    "winston-loggly-bulk": "^2.0.3"
   },
   "devDependencies": {
     "eslint": "5.4.0",

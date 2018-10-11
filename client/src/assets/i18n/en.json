@@ -150,6 +150,8 @@
 		"your_deal_details": "Your Deal Details"
 	},
 	"delivery_slot_selection_page": {
+		"NO_SLOT_TEXT": "No slots are available for the selected store. Please try for other store.",
+		"CLOSE":"Close",
 		"as_soon_as_possible": "As soon as Possible",
 		"asap": "ASAP",
 		"delivery": "Delivery",

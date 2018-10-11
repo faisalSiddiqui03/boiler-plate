@@ -209,14 +209,16 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
-      return storeSelected;
+      if(storeSelected.data){
+        this.addToCart();
+      }
     });
   }
 
   async addToCart() {
     if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
-      const storeSelected = await this.openStoreSelection();
-      if (!storeSelected) return;
+      await this.openStoreSelection();
+      return;
     }
     if (this.productFromDeal) {
       this.modalController.dismiss(this.clientProduct);

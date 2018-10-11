@@ -4,13 +4,14 @@ import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {UtilService} from '../../../helpers/utils';
 import {BaseComponent} from '../../../base/base-component';
-import {CapRouterService, SurveyWidgetActions, Action} from '@capillarytech/pwa-framework';
+import {CapRouterService, SurveyWidgetActions, Action, pwaLifeCycle} from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.page.html',
   styleUrls: ['./feedback.page.scss'],
 })
+@pwaLifeCycle()
 export class FeedbackPage extends BaseComponent implements OnInit {
   feedBackForm: FormGroup;
   feedbackWidgetAction = new EventEmitter();
@@ -42,6 +43,14 @@ export class FeedbackPage extends BaseComponent implements OnInit {
     this.translate.get('feedback_page.feedback').subscribe(value => {
       this.titleValue = value;
     });
+  }
+
+  widgetActionSuccess(name: string, data: any) {
+    switch (name) {
+      case SurveyWidgetActions.ACTION_ADD_SURVEY:
+        console.log(name, data);
+        break;
+    }
   }
 
   goToPage(pageName) {

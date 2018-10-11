@@ -150,6 +150,8 @@
 		"your_deal_details": "معلومات عروضك الخاصة"
 	},
 	"delivery_slot_selection_page": {
+		"NO_SLOT_TEXT": "No slots are available for the selected store. Please try for other store.",
+		"CLOSE":"قريب",		
 		"as_soon_as_possible": "في أقرب وقت",
 		"asap": "في أقرب وقت",
 		"delivery": "توصيل",

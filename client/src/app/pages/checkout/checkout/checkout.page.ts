@@ -18,22 +18,13 @@ import {
   CheckoutDetails,
   Payment,
   DeliverySlot,
-  City,
-  Area,
-  Country,
-  State,
-  LocationDetails,
   Address,
   ContactDetail,
   OrderAttributes,
-  Checkout,
-  Transaction,
   DeliveryModes,
   CapRouterService, EventTrackWidgetActions,
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../base/base-component';
-import { element } from 'protractor';
-import { CartPriceDetails } from '@capillarytech/pwa-framework/services/cart/models/cart-price-details';
 
 @Component({
   selector: 'app-checkout',
@@ -81,8 +72,6 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     private utilService: UtilService,
     private translate: TranslateService,
     private config: ConfigService,
-    private actRoute: ActivatedRoute,
-    private capRouter: CapRouterService,
     private hardwareService: HardwareService
   ) {
 
@@ -125,22 +114,35 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   ionViewWillEnter() {
-    this.getDeliverySlotPromise().then((slot) => {
+    
+    this.checkSlots();
+    this.checkCart();
+  }
 
-      if (slot.id === -2) {
-        // TODO : generate store promise
-        const store = this.getCurrentStore();
-        if (store === null) {
-            this.presentSlotModal();
-        } else if (!store.isOnline(this.getDeliveryMode())) {
-            this.presentSlotModal();
-        } else {
-            this.setDeliverySlot(DeliverySlot.getAsap());
-        }
+  async checkSlots() {
+
+    const slot = await this.getDeliverySlotPromise();
+    const store = await this.getCurrentStoreAsync();
+      
+    if (slot.id === -2) {
+      const store = this.getCurrentStore();
+      if (store === null) {
+          this.presentSlotModal();
+      } else if (!store.isOnline(this.getDeliveryMode())) {
+          this.presentSlotModal();
+      } else {
+          this.setDeliverySlot(DeliverySlot.getAsap());
       }
-    });
+    }      
+  }
 
-    // TODO : get cart and redirect to showcase
+  async checkCart() {
+    const cart = await this.getCartAsync();
+    if(cart.items.length === 0) this.goToDeals();
+  }
+
+  goToDeals() {
+    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
   ngAfterViewInit() {
@@ -323,7 +325,13 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
   selectTimeSlot() {
     console.log('slot is: ', this.timeSlotObj);
-    this.setDeliverySlot(this.timeSlotObj);
+    if(this.timeSlotObj && this.timeSlotObj.id > -2) {
+
+      this.setDeliverySlot(this.timeSlotObj);
+    } else {
+
+      this.setDeliverySlot(this.getDeliverySlot());
+    }      
     this.showdropdown = false;
     this.closePickTime();
   }

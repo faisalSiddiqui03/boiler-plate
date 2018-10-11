@@ -9,6 +9,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
 import { LoaderServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { HttpClient } from '@angular/common/http';
+import { HeaderModule } from '../header/header.module';
+import { SubHeaderModule } from '../sub-header/sub-header.module';
 
 @NgModule({
   imports: [
@@ -18,10 +20,12 @@ import { HttpClient } from '@angular/common/http';
     FulfilmentModeModule,
     LocationWidgetModule,
     StoreLocatorWidgetModule,
+    HeaderModule,
     EventTrackServiceModule,
     FormsModule,
     CartWidgetModule,
     ImagePreloadModule,
+    SubHeaderModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -167,7 +167,6 @@
               mode="ios"
               class="btn-success"
               text-capitalize
-              [class.disabled]="findingStore"
               [disabled]="!(
                       (
                         getDeliveryMode() &&
@@ -179,9 +178,6 @@
                     )"
               expand="block">
               {{'home_page.start_my_order' | translate}}
-              <span class="find-store-spinner" *ngIf="findingStore">
-                <ion-spinner name="crescent" color="dark"></ion-spinner>
-              </span>
             </ion-button>
           </div>
         </div>

@@ -24,12 +24,6 @@
 
         <div class="container showcase-container full-height">
           <ion-content>
-            <!-- <delivery-slots-widget *ngIf="fetchDeliverySlots"
-                                   [globalSlots]="true"
-                                   [deliveryMode]="getDeliveryMode()?.mode"
-                                   [storeId]="getCurrentStore()?.id"
-                                   [componentId]="getComponentId()">
-            </delivery-slots-widget> -->
             <ng-container *ngFor="let item of navigations; let i = index;">
               <div [hidden]="!(item.categoryId === categoryId)">
                 <product-showcase-widget [componentId]="getComponentId()" [setSEOTags]=false pfWidgetImpressionTrack [filters]="getShowcaseFilter(item.categoryId)"
@@ -183,9 +177,9 @@
   </div>
   <ion-hide-when size="lg">
     <ion-footer no-border>
-      <div class="showcase-tabs-one">
-        <ul no-margin no-padding>
-          <li *ngFor="let item of navigations; let i = index;" text-center class="hello" [class.selected]="item.categoryId==categoryId"
+      <div id="bottom-div" class="showcase-tabs-one">
+        <ul id="bottom-list" no-margin no-padding>
+          <li id={{item.categoryId}} *ngFor="let item of navigations; let i = index;" text-center class="hello" [class.selected]="item.categoryId==categoryId"
             (click)="switchCategories({category: item.name, id: item.categoryId})">{{item.name}}
           </li>
         </ul>
