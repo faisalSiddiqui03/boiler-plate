@@ -515,26 +515,31 @@ ion-item {
   }
   .toast-button {
     position: relative;
-    min-width: 150px;
+    min-width: 115px;
     text-align: center;
     visibility: hidden;
-    padding-right: 20px;
-  }
-  .toast-button::before {
+    &::before {
     content: 'show cart';
     position: absolute;
-    right: 0;
-    left: 0;
+    right: 15px;
     cursor: pointer;
     visibility: visible;
-    font-size: 20px;
+    font-size: 15px;
     text-transform: uppercase;
+    border-bottom: 1px solid;
   }
 }
 
 // RTL Styles
 html {
   &[dir="rtl"] {
+    .toast {
+      .toast-button{
+        &::before{
+          content: 'عرض العربة';
+        }
+      }
+    }
     .voucher-modal-wrap {
       .voucher-modal {
         .close-icon {
