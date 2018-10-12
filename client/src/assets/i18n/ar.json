@@ -139,12 +139,12 @@
 		"phone_number": "رقم الهاتف"
 	},
 	"deal": {
-		"add": "",
+		"add": "وأضاف",
 		"add_to_basket": "أضف عرضًا إلى السلة",
-		"added": "",
+		"added": "وأضاف",
 		"added_to_cart": "إضافة إلى السلة",
 		"back_to_deals": "العودة للعروض",
-		"choose_any": " ",
+		"choose_any": "اختيار أي",
 		"choose_your": "إختر ما يخصك  بيتزا وسط",
 		"your_deal_details": "معلومات عروضك الخاصة"
 	},
@@ -477,7 +477,7 @@
 		"privacy_text_qtn10": "كيف يمكنني التواصل مع بيتزا هت؟"
 	},
 	"product_details": {
-		"add_to_basket": "Add To My Basket",
+		"add_to_basket": "أضف إلى سلة بلدي",
 		"add_to_deal": "اضف إلى الصفقة",
 		"added_to_cart": "إضافة إلى السلة"
 	},

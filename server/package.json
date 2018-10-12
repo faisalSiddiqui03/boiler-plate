@@ -18,7 +18,7 @@
     "@capillarytech/cap-loopback-api-cart": "0.0.17",
     "@capillarytech/cap-loopback-api-cities": "1.0.0",
     "@capillarytech/cap-loopback-api-countries": "0.0.5",
-    "@capillarytech/cap-loopback-api-customer": "0.0.15",
+    "@capillarytech/cap-loopback-api-customer": "0.0.16",
     "@capillarytech/cap-loopback-api-customer-address": "0.0.3",
     "@capillarytech/cap-loopback-api-delivery-slots": "0.0.4",
     "@capillarytech/cap-loopback-api-geolocations": "0.0.3",
