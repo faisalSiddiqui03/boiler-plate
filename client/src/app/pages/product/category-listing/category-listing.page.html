@@ -169,7 +169,7 @@
       <ion-show-when size="lg">
         <div class="sidebar-cart">
           <div class="fixed-sidebar">
-            <app-cart></app-cart>
+            <app-cart (switchCategory)="switchCategories($event)"></app-cart>
           </div>
         </div>
       </ion-show-when>

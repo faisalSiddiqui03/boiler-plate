@@ -43,7 +43,7 @@
 		"empty_cart_message_1": "Your basket looks a little empty. Why not ",
 		"empty_cart_message_2": "check out some of our unbeatable deals?",
 		"exclusive_offers": "exclusive offers",
-		"got_a_voucher_code_?": "Got a voucher code?",
+		"got_a_voucher_code": "Got a voucher code?",
 		"item_removed": "Removed cart items",
 		"item_removed_failure": "Failed to remove cart items",
 		"no_voucher_message_1": "Sorry, we don't currently support that voucher code. Don't worry, you can ",

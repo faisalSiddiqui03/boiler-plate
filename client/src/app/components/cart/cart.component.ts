@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, EventEmitter, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewEncapsulation, AfterViewInit, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   Action,
@@ -50,6 +50,8 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
   itemToRemove;
   favoriteInProgress = new Map();
   suggestionWidgetAction = new EventEmitter();
+  @Output() switchCategory: EventEmitter<any> = new EventEmitter<any>();
+  dealCategoryId: string;
 
   slideOpts = {
     slidesPerView: 2,
@@ -73,6 +75,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
     this.translateService.use(this.getCurrentLanguageCode());
     this.loaded = false;
     this.currencyCode = this.config.getConfig()['currencyCode'];
+    this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
   }
 
   ngOnInit() {
@@ -292,7 +295,9 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
   }
 
   goToDeals() {
-    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    this.enableVoucherModal = false;
+    this.switchCategory.emit({ category: 'deals', id: this.dealCategoryId });
+    // this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
   goToPage(pageName) {
