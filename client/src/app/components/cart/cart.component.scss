@@ -17,7 +17,6 @@
         right: 0;
       }
     }
-    
     .basket-close {
       opacity: 0.7;
       text-align: right;
@@ -36,7 +35,7 @@
     .common-heading-dotted {
       margin-bottom: 10px;
     }
-    .pr-15{
+    .pr-15 {
       padding-right: 15px;
     }
     .cart-list {
@@ -109,23 +108,8 @@
         }
       }
     }
-    .delivery-bill-block {
-      padding: 14px 40px 14px 16px;
-      border-top: 1px solid var(--ion-color-light-shade);
-      color: var(--ion-color-dark);
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .total-bill-block {
-      padding: 0px 40px 14px 16px;
-      color: var(--ion-color-dark);
-      font-size: 14px;
-      font-weight: 700;
-      min-height: 32px;
-    }
     .promotion-button {
       padding: 20px;
-      margin-top: 30px;
       .btn-voucher {
         border: 1px dashed var(--ion-block-header-color);
         font-size: 13px;
@@ -138,24 +122,24 @@
         cursor: pointer;
         outline: none;
         transition: all 0.3s ease-in-out;
-        &:hover{
+        &:hover {
           background: var(--ion-block-header-color);
         }
       }
     }
   }
-  .suggestions-wrap{
+  .suggestions-wrap {
     padding: 10px 5px;
     background: var(--ion-block-header-color);
     border-top: 2px solid var(--ion-color-medium-shade);
     border-bottom: 2px solid var(--ion-color-medium-shade);
-    h6{
+    h6 {
       font-size: 14px;
       font-weight: 600;
       color: var(--ion-color-secondary-shade);
       margin: 0 0 10px;
     }
-    .product-card-holder{
+    .product-card-holder {
       ion-card {
         --padding-bottom: 0;
         --padding-start: 0;
@@ -218,6 +202,19 @@
         padding: 0;
       }
     }
+  }
+  .delivery-bill-block {
+    padding: 6px;
+    color: var(--ion-color-dark);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .total-bill-block {
+    padding: 0px 6px;
+    color: var(--ion-color-dark);
+    font-size: 14px;
+    font-weight: 700;
+    min-height: 32px;
   }
   ion-footer {
     padding: 6px 10px;
@@ -301,65 +298,76 @@
   }
 }
 
-@media (min-width:992px){
+@media (min-width:992px) {
   .cart-page {
+    .full{
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+    }
     .basket-container {
       background: transparent;
+      padding-top: 0;
+      @extend .full;
       .basket {
+        @extend .full;
         &::before {
           content: none;
         }
-        .basket-close{
+        .basket-close {
           display: none;
         }
+      }
+      .cart-list {
+        flex: 1;
+        overflow: auto;
       }
     }
   }
 }
 
-
 // RTL Styles
-html{
-  &[dir="rtl"]{
+html {
+  &[dir="rtl"] {
     .cart-page {
       .basket-container {
-        .pr-15{
+        .pr-15 {
           padding: 0 0 0 15px;
         }
-        .basket-close{
+        .basket-close {
           text-align: left;
         }
         .cart-list {
-          .tooltip{
+          .tooltip {
             left: auto;
             right: 10px;
-            &::after{
+            &::after {
               left: auto;
               right: 10px;
             }
           }
-          .cart-item{
-            ion-icon{
-              &.remove-icon{
+          .cart-item {
+            ion-icon {
+              &.remove-icon {
                 right: auto;
                 left: 10px;
               }
             }
-            .product-price{
+            .product-price {
               text-align: center;
             }
           }
         }
-        .delivery-bill-block{
+        .delivery-bill-block {
           padding: 14px 16px 14px 40px;
         }
-        .total-bill-block{
+        .total-bill-block {
           padding: 0 16px 14px 40px;
         }
       }
-      ion-footer{
-        ion-button{
-          span{
+      ion-footer {
+        ion-button {
+          span {
             right: auto;
             left: 30px;
           }

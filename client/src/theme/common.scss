@@ -427,8 +427,8 @@ ion-item {
       display: block;
     }
   }
-  .toast{
-    .toast-wrapper{
+  .toast {
+    .toast-wrapper {
       text-align: center;
       max-width: inherit;
     }
@@ -487,17 +487,18 @@ ion-item {
     }
   }
 }
+
 // Loading animation
 .loading {
   .loading-wrapper {
     --ion-background-color-step-50: transparent;
     background: url('assets/imgs/collection-icon.gif') no-repeat center / 34px;
     box-shadow: none;
-    .loading-spinner{
+    .loading-spinner {
       display: none;
     }
   }
-  &.delivery-loader{
+  &.delivery-loader {
     .loading-wrapper {
       background-image: url('assets/imgs/delivery-bike-icon.gif');
     }
@@ -505,15 +506,31 @@ ion-item {
 }
 
 // Toast
-.toast{
-  &.top{
+.toast {
+  &.top {
     top: 50px;
   }
-  .toast-wrapper{
+  .toast-wrapper {
     --background: var(--ion-color-secondary);
   }
+  .toast-button {
+    position: relative;
+    min-width: 150px;
+    text-align: center;
+    visibility: hidden;
+    padding-right: 20px;
+  }
+  .toast-button::before {
+    content: 'show cart';
+    position: absolute;
+    right: 0;
+    left: 0;
+    cursor: pointer;
+    visibility: visible;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
 }
-
 
 // RTL Styles
 html {
