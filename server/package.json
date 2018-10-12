@@ -37,7 +37,7 @@
     "@capillarytech/cap-loopback-store-helper": "^0.4.0",
     "@capillarytech/cap-pwa-seed": "0.3.26",
     "@capillarytech/loopback-connector-mongodb": "0.1.2",
-    "@capillarytech/loopback-connector-rest": "0.5.1",
+    "@capillarytech/loopback-connector-rest": "0.5.2",
     "@capillarytech/mw-redirects": "0.0.3",
     "@capillarytech/pwa-config": "1.0.4",
     "azure-storage": "2.10.1",
