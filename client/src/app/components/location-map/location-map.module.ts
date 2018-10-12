@@ -15,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
     FormsModule,
     IonicModule,
     AgmCoreModule.forRoot({
-      apiKey: appConfig.googleMapsApiKey
+      apiKey: 'AIzaSyAl29VXAA5U34fAKFaQ9dEaxTJbA-Mxo8A'
     }),
     TranslateModule.forRoot({
       loader: {
