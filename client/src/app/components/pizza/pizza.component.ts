@@ -102,9 +102,9 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     this.loaderService.stopLoading();
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
-        const isMobile = await this.hardwareService.isMobileApp();
+        const isDesktop = await this.hardwareService.isDesktopSite();
         console.log('Item added to cart : ', data);
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 3000, 'top', 'top', isMobile, this.getCurrentLanguageCode());
+        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE:
@@ -211,6 +211,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
+      this.loaderService.stopLoading();
       if(storeSelected.data){
         this.addToCart();
       }

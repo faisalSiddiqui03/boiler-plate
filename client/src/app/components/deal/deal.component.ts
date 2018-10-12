@@ -101,8 +101,8 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
-        const isMobile = await this.hardwareService.isMobileApp();
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 3000, 'top', 'top', isMobile, this.getCurrentLanguageCode());
+        const isDesktop = await this.hardwareService.isDesktopSite();
+        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ATION_EDIT_CART:
@@ -168,6 +168,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
+      this.loaderService.stopLoading();
       return storeSelected;
     });
   }
