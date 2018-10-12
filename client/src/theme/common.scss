@@ -13,6 +13,7 @@ body {
   position: relative;
   display: flex;
   align-items: center;
+
   h2 {
     position: relative;
     padding: 0 10px;
@@ -22,6 +23,7 @@ body {
     color: var(--ion-color-secondary-shade);
     font-weight: 700;
   }
+
   &::before,
   &::after {
     content: '';
@@ -32,10 +34,12 @@ body {
 
 .common-heading-dotted {
   @extend .common-heading;
+
   h2 {
     font-size: 24px;
     font-family: 'Conv_UnitedSansCond-Bold';
   }
+
   &::before,
   &::after {
     border-bottom-style: dotted;
@@ -44,6 +48,7 @@ body {
 
 .checkout-head {
   @extend .common-heading;
+
   h2 {
     font-size: 16px;
     font-family: 'Open Sans';
@@ -54,6 +59,7 @@ body {
 .page-header {
   --ion-toolbar-background-color: transparent;
   background-image: url('assets/imgs/backdrop.jpg');
+
   .icon {
     font-size: 21px;
     cursor: pointer;
@@ -61,17 +67,20 @@ body {
     left: 5px;
     pointer-events: all;
   }
+
   ion-title {
     font-family: 'Open Sans Condensed';
     font-size: 18px;
     font-weight: 500;
     color: var(--ion-color-secondary-shade);
+
     span {
       display: inline-block;
       font-size: 17px;
       margin: 0 10px;
     }
   }
+
   .sc-ion-buttons-md-h {
     pointer-events: all;
   }
@@ -80,6 +89,7 @@ body {
 .deal-heading {
   .page-header {
     background: var(--ion-block-header-color);
+
     ion-title {
       font-weight: 600;
       font-family: var(--ion-font-family);
@@ -92,15 +102,18 @@ body {
   padding: 16px 0;
   background: var(--ion-color-light);
   border-bottom: 1px solid var(--ion-block-header-color);
+
   a {
     padding-left: 15px;
     font-size: 15px;
     color: var(--ion-color-dark-shade);
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+
     &:hover {
       opacity: 0.7;
     }
+
     .icon {
       font-size: 10px;
       margin-right: 5px;
@@ -140,24 +153,29 @@ body {
 
 .form-group {
   padding-bottom: 5px;
+
   ion-label {
     margin: 10px 0 5px;
     font-size: 15px;
     color: var(--ion-color-dark);
+
     &.login-label {
       margin: 5px 0;
       font-weight: 600;
       font-size: 13px;
       color: var(--ion-color-secondary);
+
       sup {
         font-size: 18px;
       }
     }
+
     sup {
       font-size: 24px;
       top: 0.1em;
     }
   }
+
   ion-input,
   ion-textarea,
   ion-select {
@@ -165,19 +183,24 @@ body {
     border: 2px solid rgba(var(--ion-color-secondary-rgb), 0.5);
     border-radius: 4px;
     transition: all 0.3s ease-in-out;
+
     &.has-focus {
       border-color: var(--ion-color-dark);
     }
+
     --padding-top: 13px;
     --padding-bottom: 13px;
     --padding-start:10px;
     --padding-end:10px;
+
     &[disabled] {
       border-color: rgba(var(--ion-color-secondary-rgb), 0.3);
     }
   }
+
   .form-input {
     position: relative;
+
     .icons {
       position: absolute;
       right: 10px;
@@ -185,23 +208,28 @@ body {
       transform: translateY(-50%);
       margin-top: 2px;
       font-size: 20px;
+
       ion-icon[name="alert"] {
         color: var(--ion-color-danger);
         display: none;
       }
+
       ion-icon {
         color: var(--ion-color-secondary-tint);
       }
+
       ion-icon {
         &+ion-icon {
           margin-left: 10px;
         }
       }
     }
+
     &.mobile-input {
       ion-input {
         --padding-start: 68px;
       }
+
       span {
         position: absolute;
         left: 2px;
@@ -215,17 +243,21 @@ body {
       }
     }
   }
+
   .error-msg {
     margin: 5px 8px 0;
     font-size: 12px;
     color: var(--ion-color-danger);
   }
+
   &.error {
     .form-input {
+
       ion-input,
       ion-textarea {
         border-color: var(--ion-color-danger);
       }
+
       .icons {
         ion-icon[name="alert"] {
           display: inline-block;
@@ -253,6 +285,7 @@ body {
 .btn-success {
   --border-radius: 5px;
   font-size: 15px; // margin: 10px;
+
   &.disabled {
     cursor: default;
     pointer-events: none;
@@ -270,6 +303,7 @@ body {
 
 .form-search {
   padding: 0;
+
   .searchbar-input.sc-ion-searchbar-md,
   .searchbar-input.sc-ion-searchbar-ios {
     box-shadow: none;
@@ -281,20 +315,25 @@ body {
     color: var(--ion-search-color);
     font-weight: 400;
   }
+
   &.searchbar-has-value {
+
     .searchbar-input.sc-ion-searchbar-md,
     .searchbar-input.sc-ion-searchbar-ios {
       background-image: none;
     }
   }
+
   .searchbar-clear-button.sc-ion-searchbar-md,
   .searchbar-clear-icon.sc-ion-searchbar-ios {
     color: var(--ion-color-dark-tint);
   }
+
   .searchbar-search-icon.sc-ion-searchbar-md,
   .searchbar-search-icon.sc-ion-searchbar-ios {
     display: none !important;
   }
+
   .searchbar-input-container.sc-ion-searchbar-ios,
   &.sc-ion-searchbar-ios-h,
   .searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios {
@@ -304,6 +343,7 @@ body {
 
 .location-search {
   padding: 0;
+
   .searchbar-input.sc-ion-searchbar-md,
   .searchbar-input.sc-ion-searchbar-ios {
     box-shadow: none;
@@ -311,6 +351,7 @@ body {
     font-size: 14px;
     border: 1px solid var(--ion-color-medium-shade);
   }
+
   .searchbar-input-container.sc-ion-searchbar-ios,
   &.sc-ion-searchbar-ios-h,
   .searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios {
@@ -320,6 +361,7 @@ body {
 
 .location-search {
   padding: 0;
+
   .searchbar-input.sc-ion-searchbar-md,
   .searchbar-input.sc-ion-searchbar-ios {
     box-shadow: none;
@@ -327,6 +369,7 @@ body {
     font-size: 14px;
     border: 1px solid var(--ion-color-medium-shade);
   }
+
   .searchbar-input-container.sc-ion-searchbar-ios,
   &.sc-ion-searchbar-ios-h,
   .searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios {
@@ -355,6 +398,7 @@ ion-item {
 
 .accordion-block {
   border-top: 2px solid var(--ion-color-medium-tint);
+
   h5 {
     margin: 0;
     padding: 15px 60px 20px 20px;
@@ -362,6 +406,7 @@ ion-item {
     font-weight: 600;
     position: relative;
     cursor: pointer;
+
     .icon {
       position: absolute;
       right: 20px;
@@ -369,30 +414,37 @@ ion-item {
       margin-top: -10px;
       transition: all 0.3s ease-in-out;
     }
+
     &.active {
       .icon {
         transform: rotate(180deg);
       }
     }
   }
+
   .accordion-content {
     margin: 0 45px 0px 35px;
+
     p {
       margin: 0 0 20px;
       color: var(--ion-color-secondary-shade);
       font-size: 14px;
       line-height: 22px;
+
       a {
         cursor: pointer;
+
         &:hover {
           opacity: 0.8;
         }
       }
     }
+
     ul {
       margin: 0 0 20px;
       padding: 0;
       list-style-type: square;
+
       li {
         color: var(--ion-color-secondary-shade);
         font-size: 14px;
@@ -418,15 +470,18 @@ ion-item {
     max-width: 700px;
     margin: auto;
   }
+
   .main-content {
     margin: 40px auto;
     border: 1px solid var(--ion-color-medium-tint);
+
     .w-400 {
       max-width: 400px;
       margin: 10px auto;
       display: block;
     }
   }
+
   .toast {
     .toast-wrapper {
       text-align: center;
@@ -445,25 +500,30 @@ ion-item {
   padding: 60px 16px;
   overflow: auto;
   z-index: 99;
+
   .voucher-modal {
     position: relative;
     background: var(--ion-color-light);
     max-width: 320px;
     margin: auto;
+
     h3 {
       margin: 0 0 10px;
       font-family: 'Open Sans Condensed';
       font-size: 20px;
       font-weight: 700;
     }
+
     p {
       font-size: 12px;
       margin: 0 0 20px;
+
       a {
         color: var(--ion-color-dark);
         text-decoration: underline;
       }
     }
+
     .close-icon {
       position: absolute;
       right: 10px;
@@ -471,10 +531,12 @@ ion-item {
       color: var(--ion-color-medium-shade);
       font-size: 22px;
     }
+
     .form-section {
       .btn-success {
         min-width: 30%;
       }
+
       ion-input {
         border: 1px solid rgba(var(--ion-color-secondary-rgb), 0.5);
         border-radius: 5px;
@@ -494,10 +556,12 @@ ion-item {
     --ion-background-color-step-50: transparent;
     background: url('assets/imgs/collection-icon.gif') no-repeat center / 34px;
     box-shadow: none;
+
     .loading-spinner {
       display: none;
     }
   }
+
   &.delivery-loader {
     .loading-wrapper {
       background-image: url('assets/imgs/delivery-bike-icon.gif');
@@ -510,23 +574,27 @@ ion-item {
   &.top {
     top: 50px;
   }
+
   .toast-wrapper {
     --background: var(--ion-color-secondary);
   }
+
   .toast-button {
     position: relative;
     min-width: 115px;
     text-align: center;
     visibility: hidden;
+
     &::before {
-    content: 'show cart';
-    position: absolute;
-    right: 15px;
-    cursor: pointer;
-    visibility: visible;
-    font-size: 15px;
-    text-transform: uppercase;
-    border-bottom: 1px solid;
+      content: 'show cart';
+      position: absolute;
+      right: 15px;
+      cursor: pointer;
+      visibility: visible;
+      font-size: 15px;
+      text-transform: uppercase;
+      border-bottom: 1px solid;
+    }
   }
 }
 
@@ -534,18 +602,20 @@ ion-item {
 html {
   &[dir="rtl"] {
     .toast {
-      .toast-button{
-        &::before{
+      .toast-button {
+        &::before {
           content: 'عرض العربة';
         }
       }
     }
+
     .voucher-modal-wrap {
       .voucher-modal {
         .close-icon {
           left: 10px;
           right: auto;
         }
+
         .form-section {
           ion-input {
             margin: 0 0 0 10px;
@@ -561,33 +631,39 @@ html {
   &[dir="rtl"] {
     .form-search {
       padding: 0;
+
       .searchbar-input.sc-ion-searchbar-md,
       .searchbar-input.sc-ion-searchbar-ios {
         padding: 6px 15px 6px 55px !important;
         background-position: 10px center;
       }
+
       .searchbar-clear-button.sc-ion-searchbar-md,
       .searchbar-clear-icon.sc-ion-searchbar-ios {
         left: 13px;
         right: auto;
       }
     }
+
     .form-group {
       .form-input {
         .icons {
           left: 10px;
           right: auto;
+
           ion-icon {
             &+ion-icon {
               margin-right: 10px;
             }
           }
         }
+
         &.mobile-input {
           ion-input {
             --padding-start: 10px;
             --padding-end: 68px;
           }
+
           span {
             right: 2px;
             left: auto;
@@ -595,6 +671,7 @@ html {
         }
       }
     }
+
     .page-header {
       .icon {
         left: auto;
@@ -602,24 +679,30 @@ html {
         transform: rotate(180deg);
       }
     }
+
     [text-right] {
       text-align: left !important;
     }
+
     [text-left] {
       text-align: right !important;
     }
+
     .accordion-block {
       h5 {
         padding: 15px 20px 20px 60px;
+
         .icon {
           left: 20px;
           right: auto;
         }
       }
     }
+
     .back-to-deals {
       a {
         padding: 0 15px 0 0;
+
         .icon {
           display: inline-block;
           transform: rotate(180deg);
