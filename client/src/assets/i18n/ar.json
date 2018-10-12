@@ -1,7 +1,4 @@
 {
-	"global": {
-		"showCart": "Show Cart"
-	},
 	"about_us_page": {
 		"about_us": "من نحن",
 		"description_part_one": "تبدأ قصة بيتزا هت في مايو 1958. افتتح كل من دان وفرانك كارني مطعم بيتزا على مساحة 550 قدمًا في ويتشيتا بولاية كنساس. صنع كل من دان وفرانك ، مع الأصدقاء ريتشارد بيمر وجون بيندر ، البيتزا بأنفسهم. توالت فرانك العجين مع درفلة. ريتشارد قذف العجين في الهواء من القصدير دائري. دان ملأت القشرة غير المقطوعة بالصلصة. جون انقلب الكعكة من القصدير أثناء عملية الخبز. يتذكر دان كارني أن الناس كانوا يسحرون بالمنتج ، ويراقبوننا وهم يرمون العجينة فوق رؤوسنا. كانوا حقا يتمتعون أنفسهم ... ",
@@ -47,6 +44,8 @@
 		"empty_cart_message_2": "تحقق من بعض صفقاتنا التي لا تقبل المنافسة؟",
 		"exclusive_offers": "عروض حصرية",
 		"got_a_voucher_code_?": "حصلت على رمز القسيمة؟",
+		"item_removed": "",
+		"item_removed_failure": "",
 		"no_voucher_message_1": "عذرًا ، لا ندعم حاليًا رمز القسيمة هذا. لا تقلق ، يمكنك ذلك",
 		"no_voucher_message_2": "ابحث عن أفضل عروضنا على صفحة صفقاتنا ،",
 		"no_voucher_message_3": "أو اتصل بكوخ لمعرفة المزيد",
@@ -150,8 +149,8 @@
 		"your_deal_details": "معلومات عروضك الخاصة"
 	},
 	"delivery_slot_selection_page": {
+		"CLOSE": "قريب",
 		"NO_SLOT_TEXT": "No slots are available for the selected store. Please try for other store.",
-		"CLOSE":"قريب",		
 		"as_soon_as_possible": "في أقرب وقت",
 		"asap": "في أقرب وقت",
 		"delivery": "توصيل",
@@ -295,8 +294,8 @@
 		"noSlot": "",
 		"register": "تسجيل",
 		"sign_in": "تسجيل دخول",
-		"take_away": "يبعد",
-		"sw_update_available": "New update available. Please refresh to experience updated Pizza Hut"
+		"sw_update_available": "New update available. Please refresh to experience updated Pizza Hut",
+		"take_away": "يبعد"
 	},
 	"home_page": {
 		"block_": "منع",

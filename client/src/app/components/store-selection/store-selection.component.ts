@@ -228,7 +228,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
-  widgetActionFailed(name: string, data: any) {
+  async widgetActionFailed(name: string, data: any) {
     this.loaderService.stopLoading();
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
@@ -239,7 +239,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         console.log('unable to find store', data);
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
-        this.alertService.presentToast('failed to remove cart items', 3000, 'bottom');
+        const alert_text = await this.translate.instant('cart.item_removed_failure');
+        this.alertService.presentToast(alert_text, 30000, 'bottom');
         break;
     }
   }

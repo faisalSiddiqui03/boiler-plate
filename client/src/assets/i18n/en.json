@@ -1,7 +1,4 @@
 {
-	"global": {
-		"showCart": "Show cart"
-	},
 	"about_us_page": {
 		"about_us": "About Us",
 		"description_part_one": "The Pizza Hut story begins in May 1958. Dan and Frank Carney opened their 550-squarefoot pizza restaurant in Wichita, Kansas. Dan and Frank, with friends Richard Beemer and John Bender, made the pizza themselves. Frank rolled the dough with a rolling pin. Richard tossed the dough in the air from the pie tin. Dan filled the unbaked crust with sauce. John flipped the pie from the tin during the baking process. Dan Carney recalled, 'The people were enchanted with the product, watching us tossing the dough over our heads. They were really enjoying themselves….'",
@@ -47,6 +44,8 @@
 		"empty_cart_message_2": "check out some of our unbeatable deals?",
 		"exclusive_offers": "exclusive offers",
 		"got_a_voucher_code_?": "Got a voucher code?",
+		"item_removed": "Removed cart items",
+		"item_removed_failure": "Failed to remove cart items",
 		"no_voucher_message_1": "Sorry, we don't currently support that voucher code. Don't worry, you can ",
 		"no_voucher_message_2": "Find our best deals on our deals page,",
 		"no_voucher_message_3": " or call your Hut to find out more",
@@ -59,8 +58,7 @@
 		"voucher_description": "Our top deals are always available online on our Deals page.",
 		"you_may_also_like": "You may also like",
 		"your_cart": "Your Cart",
-		"your_total": "Your Total",
-		"item_removed": "Removed cart items"
+		"your_total": "Your Total"
 	},
 	"category_listing": {
 		"price_tag": "From"
@@ -151,8 +149,8 @@
 		"your_deal_details": "Your Deal Details"
 	},
 	"delivery_slot_selection_page": {
+		"CLOSE": "Close",
 		"NO_SLOT_TEXT": "No slots are available for the selected store. Please try for other store.",
-		"CLOSE":"Close",
 		"as_soon_as_possible": "As soon as Possible",
 		"asap": "ASAP",
 		"delivery": "Delivery",
@@ -296,8 +294,8 @@
 		"noSlot": "No Slot",
 		"register": "register",
 		"sign_in": "sign in",
-		"take_away": "Take away",
-		"sw_update_available": "New update available. Please refresh to experience updated Pizza Hut"
+		"sw_update_available": "New update available. Please refresh to experience updated Pizza Hut",
+		"take_away": "Take away"
 	},
 	"home_page": {
 		"block_": "Block ",
