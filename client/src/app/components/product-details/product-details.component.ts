@@ -84,9 +84,9 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     this.loaderService.stopLoading();
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
-        const isMobile = await this.hardwareService.isMobileApp();
+        const isDesktop = await this.hardwareService.isDesktopSite();
         this.alertService.presentToast(this.clientProduct.title + ' ' +
-        this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', isMobile, this.getCurrentLanguageCode());
+        this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
         if(this.fromSuggestion) {
           this.modalController.dismiss(true);
           return;
