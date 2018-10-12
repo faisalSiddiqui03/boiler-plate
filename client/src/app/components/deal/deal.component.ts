@@ -168,6 +168,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
+      this.loaderService.stopLoading();
       return storeSelected;
     });
   }

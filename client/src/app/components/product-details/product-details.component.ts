@@ -191,6 +191,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
+      this.loaderService.stopLoading();
       if(storeSelected.data){
         this.addToCart();
       }

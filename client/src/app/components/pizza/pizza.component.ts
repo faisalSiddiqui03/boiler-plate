@@ -211,6 +211,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
+      this.loaderService.stopLoading();
       if(storeSelected.data){
         this.addToCart();
       }
