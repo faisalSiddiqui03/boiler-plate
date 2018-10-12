@@ -7,7 +7,7 @@ export const config = {
     "frontendApiUrl": "http://eu-fapi.ecom.capillary.in/V2",
     "publicKey": "DQIT6SJJ",
     "secretKey": "NEOV9AGGGLYHERHRBSOTBROD",
-    "googleMapsApiKey": "AIzaSyBw9J8qANj6wmVir3wu0vuFJHhwXiZDZk0",
+    "googleMapsApiKey": "AIzaSyAl29VXAA5U34fAKFaQ9dEaxTJbA-Mxo8A",
     "countryCode": "KWT",
     "currencyCode": "KD",
     "redirects": {
