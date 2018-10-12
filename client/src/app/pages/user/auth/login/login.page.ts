@@ -13,7 +13,7 @@ import {
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../../base/base-component';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../../helpers/utils';
 
@@ -49,7 +49,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     private alertService: AlertService,
     private translate: TranslateService,
     private config: ConfigService,
-    private utilService: UtilService,
+    private hardwareService: HardwareService,
     private location: Location,
     private capRouter: CapRouterService,
   ) {
@@ -99,8 +99,14 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     this.googleSignInActionEmitter.emit(new Action(GoogleSignInWidgetActions.ACTION_GPLUS_SIGN_IN));
   }
 
-  handleGoogleSignInResponse(data) {
-    this.alertService.presentToast(data.isSuccessful ? this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top', 'top');
+  async handleGoogleSignInResponse(data) {
+    const isDesktop = await this.hardwareService.isDesktopSite();
+    if (isDesktop) {
+      this.alertService.presentToast(data.isSuccessful ? this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top');
+    }else {
+      this.alertService.presentToast(data.isSuccessful ? this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top', 'top');
+    }
+    
     this.capRouter.routeByUrlWithLanguage('/home');
   }
 
@@ -109,14 +115,24 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     this.capRouter.routeByUrlWithLanguage(pageName);
   }
 
-  handleUseridPasswordSigninResponse(data) {
+  async handleUseridPasswordSigninResponse(data) {
+    const isDesktop = await this.hardwareService.isDesktopSite();
     if (data.message === "Successful") {
       this.isLoginSuccessful = true;
-      this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top', 'top');
+      if (isDesktop) {
+        this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top');
+      }else {
+        this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top', 'top');
+      }
       this.capRouter.routeByUrlWithLanguage('/home');
     } else {
       this.isLoginSuccessful = false;
-      this.alertService.presentToast(data.message, 500, 'top', 'top');
+      if (isDesktop) {
+        this.alertService.presentToast(data.message, 500, 'top');
+      }else {
+        this.alertService.presentToast(data.message, 500, 'top', 'top');
+      }
+      
     }
   }
 
