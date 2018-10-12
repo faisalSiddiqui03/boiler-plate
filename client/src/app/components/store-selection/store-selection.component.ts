@@ -99,12 +99,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     console.log('Widget loading failed' + name, data);
   }
 
-  // closeDropDowns(e) {
-  //   console.error('closing', e);
-  //   this.toggleDropDown('area', true, false);
-  //   this.toggleDropDown('city', true, false);
-  // }
-
   // WARNING : Do not add loaderService.stopLoading(); before switch case or at any place except 
   // existing stop loading.
   async widgetActionSuccess(name: string, data: any) {
@@ -127,10 +121,10 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
+      this.loaderService.stopLoading();
         if (!this.isModal) {
           if (data && data.length) {
             this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
-            // this.router.navigate(['/store-selection'], { queryParams: { 'latitude': this.lat, 'longitude': this.lng } });
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
             this.alertService.presentToast(store_alert, 3000, 'bottom');
@@ -138,9 +132,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         } else {
           // open another modal with store selection
           await this.openStoreListModal();
-          // if (storeSelected) {
-          //   this.modalController.dismiss(true);
-          // }
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_CITY:
@@ -148,7 +139,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         if (!this.isModal) {
           if (data && data.length) {
             this.capRouter.routeByUrlWithLanguage('/store-selection?cityId=' + this.selectedCityCode);
-            // this.router.navigate(['/store-selection'], { queryParams: { 'cityId': this.selectedCityCode } });
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
             this.alertService.presentToast(store_alert, 3000, 'bottom');
@@ -156,9 +146,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         } else {
           // open another modal with store selection
           await this.openStoreListModal();
-          // if (storeSelected) {
-          //   this.modalController.dismiss(true);
-          // }
         }
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
@@ -174,28 +161,19 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   async switchLanguage() {
     const langCode = this.getCurrentLanguageCode();
-    //console.log('Check this current lang to be changed: ', langCode);
     switch (langCode) {
       case 'ar':
         await this.languageService.updateLanguageByCode('en');
-        //this.utilService.setLanguageCode('en');
         this.capRouter.routeByUrlWithLanguage('home');
-        // this.router.navigateByUrl('en/home', { replaceUrl: true });
-
         break;
-
       case 'en':
         await this.languageService.updateLanguageByCode('ar');
-        //this.utilService.setLanguageCode('ar');
         this.capRouter.routeByUrlWithLanguage('home');
-        // this.router.navigateByUrl('ar/home', { replaceUrl: true });
         break;
-
       default:
         // do nothing
         break;
     }
-
   }
 
   async openStoreListModal() {
@@ -250,19 +228,16 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   widgetActionFailed(name: string, data: any) {
-    
+    this.loaderService.stopLoading();
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        this.loaderService.stopLoading();
         console.log('unable to find store', data);
         break;
       case StoreLocatorWidgetActions.FIND_BY_AREA:
-        this.loaderService.stopLoading();
         console.log('unable to find store', data);
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
-        this.loaderService.stopLoading();
         this.alertService.presentToast('failed to remove cart items', 3000, 'bottom');
         break;
     }
