@@ -110,6 +110,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     console.log('name action failed: ' + name + ' data: ' + data);
     switch (name) {
       case FavoritesWidgetActions.ACTION_REMOVE_ITEM:
+        console.error('remove failed', data);
         console.log('error removing item');
         this.favoriteInProgress.delete(data.product.id);
         break;
@@ -120,6 +121,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     console.log('name action success: ' + name + ' data: ' + data);
     switch (name) {
       case FavoritesWidgetActions.ACTION_REMOVE_ITEM:
+        console.error('remove success', data);
         this.favoriteInProgress.delete(data.product.id);
         console.log('successfully removed item');
         break;

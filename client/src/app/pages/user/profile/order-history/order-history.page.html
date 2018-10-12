@@ -64,7 +64,7 @@
                   <div class="order-detail-link" (click)="getOrderDetails(order)">View Order Details</div>
                 </div>
                 <div class="order-price" flex-center>
-                  <span>KD {{order.priceDetails.payableAmount}}</span>
+                  <span>{{order.priceDetails.payableAmount | currency: (currencyCode + ' '): true: '1.3-3'}}</span>
                   <span class="icon icon-arrow-next-2" (click)="toggleShowingProducts(i)"></span>
                 </div>
               </ion-label>
