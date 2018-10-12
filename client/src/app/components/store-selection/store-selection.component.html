@@ -190,9 +190,8 @@
       [action]="locationsWidgetActionGeometry"
       [instanceId]="1">
       <ng-template let-widget="widget">
-        <div *ngIf="widget?.model" class="find-hut" flex-center
-             (click)="locateMe(widget.model?.geometry?.latitude, widget.model?.geometry?.longitude)">
-          <span> {{'home_page.find_my_nearest_hut' | translate}}</span>
+        <div *ngIf="widget?.model" class="find-hut" flex-center>
+          <span (click)="locateMe(widget.model?.geometry?.latitude, widget.model?.geometry?.longitude)"> {{'home_page.find_my_nearest_hut' | translate}}</span>
           <strong *ngIf="!isModal" (click)="switchLanguage()" >{{'home_page.language' | translate}}</strong>
         </div>
       </ng-template>

@@ -58,7 +58,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   }
 
   async ionViewWillEnter() {
-    this.loaderService.stopLoading();
     this.translate.use(this.getCurrentLanguageCode());
     this.globalSharedService.setPageTitle('Pizza Hut Kuwait | Pizza Delivery Near You | Order Online');
     this.globalSharedService.setSEOPageTags([
