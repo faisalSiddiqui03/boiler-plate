@@ -59,7 +59,8 @@
 		"voucher_description": "Our top deals are always available online on our Deals page.",
 		"you_may_also_like": "You may also like",
 		"your_cart": "Your Cart",
-		"your_total": "Your Total"
+		"your_total": "Your Total",
+		"item_removed": "Removed cart items"
 	},
 	"category_listing": {
 		"price_tag": "From"

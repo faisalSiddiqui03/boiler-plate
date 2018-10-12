@@ -245,6 +245,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   scrollMenu(id) {
     const selectedItem = document.getElementById(id);
+    if (!selectedItem) return;
     const bottomDiv = document.getElementById('bottom-div');
     if (this.getCurrentLanguage() && this.getCurrentLanguage().alignment === 'ltr') {
       const scrollPosition = selectedItem.offsetLeft;
