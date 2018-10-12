@@ -101,6 +101,8 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
         const coupon_error = await this.translate.instant('saved_address_page.successfully_deleted_address');
         this.alertService.presentToast(coupon_error, 3000, 'bottom');
         console.log('successfully deleted the address');
+        const action = new Action(UserAddressWidgetActions.REFRESH, []);
+        this.userAddressWidgetActions.emit(action);
         break;
     }
   }
