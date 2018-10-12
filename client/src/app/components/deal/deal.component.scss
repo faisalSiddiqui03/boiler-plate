@@ -74,6 +74,17 @@
   }
 }
 
+@media (min-width:992px){
+  .deal-component{
+    ion-footer{
+      ion-button{
+        max-width: 780px;
+        margin: auto;
+      }
+    }
+  }
+}
+
 @media (max-width:991px){
   .deal-component {
     .deal-img-wrap {
