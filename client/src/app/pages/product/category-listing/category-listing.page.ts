@@ -91,8 +91,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     const slot = await this.getDeliverySlotPromise();
     const store = await this.getCurrentStoreAsync();
       
-    if (slot.id === -2) {
-      const store = this.getCurrentStore();
+    if (slot.id === -2 && !store.isDefaultLocation) {
       if (store === null) {
           this.presentSlotModal();
       } else if (!store.isOnline(this.getDeliveryMode())) {
