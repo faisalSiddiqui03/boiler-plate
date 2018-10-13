@@ -285,7 +285,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   setDealPrice() {
     const laterPrice = this.getDealPrice();
     const priceDiff = laterPrice - this.initPrice;
-    this.alertService.presentToast('Added KD ' + priceDiff + ' extra!', 1000, 'top', 'top');
+    if(priceDiff) this.alertService.presentToast('Added KD ' + priceDiff + ' extra!', 1000, 'top', 'top');
   }
 
   async openDealShowcase() {

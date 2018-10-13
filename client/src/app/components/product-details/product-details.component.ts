@@ -86,8 +86,8 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         const isDesktop = await this.hardwareService.isDesktopSite();
         this.alertService.presentToast(this.clientProduct.title + ' ' +
-        this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
-        if(this.fromSuggestion) {
+          this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
+        if (this.fromSuggestion) {
           this.modalController.dismiss(true);
           return;
         }
@@ -112,6 +112,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     this.noOfProperties = 0;
     this.noOfSelectedProperties = 0;
     this.showAddToCart = !this.clientProduct.isParentProduct;
+    if (this.productFromDeal) this.setProductFromDeal();
     this.clientProduct.selectedPropertyValueIdMap.forEach((valueId, propId) => {
       if (!this.cartItem) {
         this.noOfProperties = this.noOfProperties + 1;
@@ -154,7 +155,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       return this.getUrl(product.image);
     } else {
       let lastItem = product.multipleImages.slice().pop();
-      return lastItem.image ? this.getUrl(lastItem.image): this.getUrl(product.image);
+      return lastItem.image ? this.getUrl(lastItem.image) : this.getUrl(product.image);
     }
   }
 
@@ -184,6 +185,27 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     return isPropertyAvailable;
   }
 
+  setProductFromDeal() {
+    this.productFromDeal.variantProducts.map((variantFromDeal) => {
+      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+        if (variant.id === variantFromDeal.id) {
+          variant.isIncludedInBundleprice = variantFromDeal.isIncludedInBundleprice;
+          variant.webPrice = (variant.isIncludedInBundleprice ? 0 : variantFromDeal.webPrice);
+          return;
+        }
+      });
+    });
+  }
+
+  getPrice() {
+    if (this.productFromDeal) {
+      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+        if (variant.id === this.clientProduct.variantProductId) this.clientProduct.setPrice(variant.webPrice);
+      });
+    }
+    return this.clientProduct.price;;
+  }
+
   async openStoreSelection() {
     const modal = await this.modalController.create({
       component: StoreSelectionModalComponent
@@ -192,7 +214,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
 
     modal.onDidDismiss().then((storeSelected) => {
       this.loaderService.stopLoading();
-      if(storeSelected.data){
+      if (storeSelected.data) {
         this.addToCart();
       }
     });
