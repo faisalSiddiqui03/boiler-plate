@@ -113,7 +113,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
         break;
       case ProductDetailsWidgetActions.ATION_EDIT_CART:
         // this.alertService.presentToast(this.clientProduct.title + ' ' +
-          // this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
+        // this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
         this.modalController.dismiss(true);
         // this.router.navigateByUrl('/products?category=' + this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);
         break;
@@ -212,7 +212,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
 
     modal.onDidDismiss().then((storeSelected) => {
       this.loaderService.stopLoading();
-      if(storeSelected.data){
+      if (storeSelected.data) {
         this.addToCart();
       }
     });
@@ -227,8 +227,8 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
       this.modalController.dismiss(this.clientProduct);
       return;
     }
-    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
-    if(this.cartItem){
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    if (this.cartItem) {
       this.productWidgetAction.emit(
         new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
       );
@@ -241,6 +241,14 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
 
   getPrice() {
     if (this.productFromDeal) {
+      let price = 0;
+      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+        if(variant.id === this.clientProduct.variantProductId) price = price + variant.webPrice;
+      });
+      this.clientProduct.bundleItems.forEach((bItem: BundleItem, key: number) => {
+        if(bItem.isSelected && !bItem.isDefault) price = price + bItem.price;
+      });
+      this.clientProduct.setPrice(price);
       return;
     }
     this.updatingPrice = true;
@@ -331,6 +339,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     });
     this.setToppingCountValidators();
     this.setToppingStatus();
+    if (this.productFromDeal) this.setPizzaFromDeal();
     if (this.cartItem) this.showToppingsView = true;
     this.getPrice();
   };
@@ -373,6 +382,18 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
 
           if (item.isDefault && !clientItem.isSelected)
             this.removedToppings.push(item.title);
+        }
+      });
+    });
+  }
+
+  setPizzaFromDeal() {
+    this.productFromDeal.variantProducts.map((variantFromDeal) => {
+      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+        if (variant.id === variantFromDeal.id) {
+          variant.isIncludedInBundleprice = variantFromDeal.isIncludedInBundleprice;
+          variant.webPrice = (variant.isIncludedInBundleprice ? 0 : variantFromDeal.webPrice);
+          return;
         }
       });
     });

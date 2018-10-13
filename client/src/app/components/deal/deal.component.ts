@@ -50,7 +50,8 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   showAddToCart: boolean;
   titleValue: string = '';
   dealCategoryId: string;
-
+  initPrice: number;
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -129,6 +130,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
 
     this.bundleGroup = bundleGroup;
     this.bundleGroupImage = this.getProductImageUrl(this.serverProduct);
+    this.initPrice = this.getDealPrice();
 
     if (bundleGroup.items.length === 1) {
       this.openProductDetails(bundleGroup.items[0]);
@@ -179,6 +181,12 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
       if (!storeSelected) return;
     }
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    if(this.cartItem){
+      this.productWidgetAction.emit(
+        new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
+      );
+      return;
+    }
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
     );
@@ -200,6 +208,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     this.noOfRequiredGroups = 0;
     this.noOfSelectedGroups = 0;
     this.showAddToCart = false;
+    this.initPrice = this.getDealPrice();
     this.serverProduct.bundleGroups.map((group) => {
       this.noOfRequiredGroups = this.noOfRequiredGroups + 1;
     });
@@ -248,7 +257,8 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
             if (isTrio) item.setBundleItems(addedItem.data.bundleItems);
           }
         });
-
+        
+        this.setDealPrice();
         this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
         this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
       } catch (err) {
@@ -259,6 +269,23 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     });
 
     return await modal.present();
+  }
+
+  getDealPrice() {
+    let price = 0;
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      if(item.isSelected && !item.isIncludedInPrice) {
+        price = price + item.price;
+      }
+    });
+    price = this.clientProduct.price + price;
+    return price;
+  }
+
+  setDealPrice() {
+    const laterPrice = this.getDealPrice();
+    const priceDiff = laterPrice - this.initPrice;
+    this.alertService.presentToast('Added KD ' + priceDiff + ' extra!', 1000, 'top', 'top');
   }
 
   async openDealShowcase() {
@@ -279,6 +306,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
         if (itemAdded.data) {
           this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
           this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
+          this.setDealPrice();
         }
       } catch (error) {
         console.error('Something went wrong in item selection : ', error);
