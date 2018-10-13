@@ -79,7 +79,7 @@
 
               <!-- Second view, selection of toppings -->
               <div class="sub-modal-wrap">
-                <div class="sub-modal-head" flex-center>
+                <div class="sub-modal-head" flex-center *ngIf="showToppingsView">
                   <p no-margin>
                     <span>{{getSelectedSizeAndCrust()}}</span>
                   </p>
