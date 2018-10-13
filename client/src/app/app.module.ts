@@ -13,9 +13,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateMessageFormatCompiler } from "ngx-translate-messageformat-compiler";
 import {
-  AlertService,
   AlertServiceModule,
-  LoaderService,
   LoaderServiceModule,
   HardWareServiceModule
 } from '@capillarytech/pwa-ui-helpers';
