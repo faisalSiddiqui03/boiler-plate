@@ -38,6 +38,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   bundleGroupTitle: string;
   bundleGroupMinQuantity: number;
   bundleGroupId: number;
+  toppingsEnabled: Boolean = true;
 
   bundleGroup: any;
   bundleGroupImage: string;
@@ -137,6 +138,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
       componentProps: {
         productId: bundleItem.productId,
         productFromDeal: bundleItem,
+        toppingsEnabled: this.toppingsEnabled,
       }
     });
 

@@ -39,6 +39,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   @Input() productFromDeal;
   @Input() cartItem;
   @Input() fromFavorites;
+  @Input() toppingsEnabled: boolean = true;
 
   loaded = false;
   productWidgetExecutor = new EventEmitter();
@@ -243,10 +244,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     if (this.productFromDeal) {
       let price = 0;
       this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-        if(variant.id === this.clientProduct.variantProductId) price = price + variant.webPrice;
+        if (variant.id === this.clientProduct.variantProductId) price = price + variant.webPrice;
       });
       this.clientProduct.bundleItems.forEach((bItem: BundleItem, key: number) => {
-        if(bItem.isSelected && !bItem.isDefault) price = price + bItem.price;
+        if (bItem.isSelected && !bItem.isDefault) price = price + bItem.price;
       });
       this.clientProduct.setPrice(price);
       return;

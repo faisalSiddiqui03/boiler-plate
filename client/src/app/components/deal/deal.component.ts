@@ -51,7 +51,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   titleValue: string = '';
   dealCategoryId: string;
   initPrice: number;
-  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -181,7 +181,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
       if (!storeSelected) return;
     }
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
-    if(this.cartItem){
+    if (this.cartItem) {
       this.productWidgetAction.emit(
         new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
       );
@@ -257,7 +257,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
             if (isTrio) item.setBundleItems(addedItem.data.bundleItems);
           }
         });
-        
+
         this.setDealPrice();
         this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
         this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
@@ -274,7 +274,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   getDealPrice() {
     let price = 0;
     this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-      if(item.isSelected && !item.isIncludedInPrice) {
+      if (item.isSelected && !item.isIncludedInPrice) {
         price = price + item.price;
       }
     });
@@ -289,12 +289,18 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   async openDealShowcase() {
+    let toppingsEnabled = true;
+    if (Product.getAttributeValueByName(this.serverProduct, AttributeName.IS_TOPPINGS_ENABLED)
+      === AttributeValue.TOPPING_NOT_ENABLED) {
+        toppingsEnabled = false;
+    }
     const modal = await this.modalController.create({
       component: DealShowcaseComponent,
       componentProps: {
         bundleGroup: this.bundleGroup,
         bundleGroupImage: this.bundleGroupImage,
         clientProduct: this.clientProduct,
+        toppingsEnabled: toppingsEnabled,
       }
     });
 
