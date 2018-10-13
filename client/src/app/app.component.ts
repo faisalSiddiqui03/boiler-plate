@@ -9,11 +9,13 @@ import {
   EventService,
   pwaLifeCycle,
   CapRouterService,
-  ServiceWorkerServiceImpl
+  ServiceWorkerServiceImpl,
+  AppUpdateServiceImpl
 } from '@capillarytech/pwa-framework';
-import { AlertService } from '@capillarytech/pwa-ui-helpers';
+import { AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { UtilService } from './helpers/utils';
 import { RoutingState } from './routing-state';
+// import { Market } from '@ionic-native/market';
 
 @Component({
   selector: 'app-root',
@@ -37,7 +39,10 @@ export class AppComponent extends BaseComponent {
     private utilService: UtilService,
     private capAlertService: AlertService,
     private capRouterService: CapRouterService,
-    private serviceWorkerService: ServiceWorkerServiceImpl
+    private serviceWorkerService: ServiceWorkerServiceImpl,
+    private appUpdateService: AppUpdateServiceImpl,
+    private hardwareService: HardwareService,
+    // private market: Market
   ) {
     super();
     routingState.loadRouting();
@@ -51,12 +56,30 @@ export class AppComponent extends BaseComponent {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then( async() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      const mobilePlatform = await this.hardwareService.getPlatformDetails();
+      let versionDetails;
+      if (mobilePlatform.includes('android')) {
+        versionDetails = await this.appUpdateService.getVersionDetails('android');
+        this.handleForceUpdateAlert(versionDetails);
+      } else if (mobilePlatform.includes('ios')) {
+        versionDetails = await this.appUpdateService.getVersionDetails('ios');
+        this.handleForceUpdateAlert(versionDetails);
+      }
     });
 
     this.handleSWUpdates();
+  }
+
+  private handleForceUpdateAlert(versionDetails) {
+    this.capAlertService.presentToast(
+      'update Available and forceUpdate = ' + versionDetails.forceUpdate,
+      1000,
+      'top',
+      'top'
+    );
   }
 
   private handleSWUpdates() {
