@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@capillarytech/cap-commons": "0.0.3",
+    "@capillarytech/cap-loopback-api-app-details": "0.0.3",
     "@capillarytech/cap-loopback-api-areas": "1.0.0",
     "@capillarytech/cap-loopback-api-authentication": "0.0.3",
     "@capillarytech/cap-loopback-api-banners": "0.0.11",

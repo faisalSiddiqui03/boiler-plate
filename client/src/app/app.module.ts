@@ -12,7 +12,13 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateMessageFormatCompiler } from "ngx-translate-messageformat-compiler";
-import { LoaderServiceModule, AlertServiceModule, AlertService, HardWareServiceModule } from '@capillarytech/pwa-ui-helpers';
+import {
+  AlertService,
+  AlertServiceModule,
+  LoaderService,
+  LoaderServiceModule,
+  HardWareServiceModule
+} from '@capillarytech/pwa-ui-helpers';
 import {
   ConfigServiceModule,
   HttpService,
@@ -29,6 +35,8 @@ import {
   FulfilmentModeModule,
   SEOModule,
   LanguageService,
+  AppUpdateServiceModule,
+  AppUpdateServiceImpl,
   CapRouterService,
   ServiceWorkerModule as PWAServiceWorkerModule
 } from '@capillarytech/pwa-framework';
@@ -85,6 +93,8 @@ export function getAppConfig(): Object {
     SearchLocationPageModule,
     EventTrackServiceModule.forRoot([EventTrackServiceModule.Tracker.GTM]),
     EventTrackWidgetModule,
+    CapRouterServiceModule,
+    AppUpdateServiceModule,
     LanguageServiceModule.forRoot(languages),
     TranslateModule.forRoot({
       loader: {
@@ -117,7 +127,8 @@ export function getAppConfig(): Object {
       useClass: IonicRouteStrategy
     },
     RoutingState,
-    UtilService
+    UtilService,
+    AppUpdateServiceImpl
   ],
   bootstrap: [AppComponent]
 })
