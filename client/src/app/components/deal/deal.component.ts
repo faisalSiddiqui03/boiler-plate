@@ -51,6 +51,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   titleValue: string = '';
   dealCategoryId: string;
   initPrice: number;
+  toppingsEnabled: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -285,14 +286,18 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   setDealPrice() {
     const laterPrice = this.getDealPrice();
     const priceDiff = laterPrice - this.initPrice;
-    if(priceDiff) this.alertService.presentToast('Added KD ' + priceDiff + ' extra!', 1000, 'top', 'top');
+    const added = this.translate.instant('deal.added');
+    const extra = this.translate.instant('deal.extra');
+    if(priceDiff && this.toppingsEnabled) {
+      this.alertService.presentToast(added + ' ' + this.currencyCode + ' ' + priceDiff + ' ' + extra + '!', 2000, 'top', 'top');
+    }
   }
 
   async openDealShowcase() {
-    let toppingsEnabled = true;
+    this.toppingsEnabled = true;
     if (Product.getAttributeValueByName(this.serverProduct, AttributeName.IS_TOPPINGS_ENABLED)
       === AttributeValue.TOPPING_NOT_ENABLED) {
-        toppingsEnabled = false;
+        this.toppingsEnabled = false;
     }
     const modal = await this.modalController.create({
       component: DealShowcaseComponent,
@@ -300,7 +305,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
         bundleGroup: this.bundleGroup,
         bundleGroupImage: this.bundleGroupImage,
         clientProduct: this.clientProduct,
-        toppingsEnabled: toppingsEnabled,
+        toppingsEnabled: this.toppingsEnabled,
       }
     });
 
