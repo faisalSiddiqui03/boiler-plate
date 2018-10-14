@@ -290,7 +290,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     const added = this.translate.instant('deal.added');
     const extra = this.translate.instant('deal.extra');
     if(priceDiff && this.toppingsEnabled) {
-      this.alertService.presentToast(added + ' ' + this.currencyCode + ' ' + priceDiff + ' ' + extra + '!', 2000, 'top', 'top');
+      this.alertService.presentToast(added + ' ' + this.currencyCode + ' ' + priceDiff.toFixed(3) + ' ' + extra + '!', 2000, 'top', 'top');
     }
   }
 
