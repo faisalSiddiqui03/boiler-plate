@@ -253,15 +253,16 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
         this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
           if (item.id === bundleItem.id) {
             item.add();
-            item.setVariantProductId(addedItem.data.variantProductId);
             item.setVarianValueIdMap(addedItem.data.varProductValueIdMap);
             if (isTrio) item.setBundleItems(addedItem.data.bundleItems);
+            item.setVariantProductId(addedItem.data.variantProductId);
           }
         });
 
         this.setDealPrice();
         this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
         this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
+        return;
       } catch (err) {
         console.error('Something went wrong in item selection : ', err);
       }
