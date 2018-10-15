@@ -241,13 +241,14 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   getPrice() {
+    // commented this to set price in UI, front api data should be correct for this.
     // if (this.productFromDeal) {
     let price = 0;
     this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
       if (variant.id === this.clientProduct.variantProductId) price = price + variant.webPrice;
     });
     this.clientProduct.bundleItems.forEach((bItem: BundleItem, key: number) => {
-      if (bItem.isSelected && !bItem.isDefault) price = price + bItem.price;
+      if (bItem.isSelected && (!bItem.isDefault || bItem.count === 2)) price = price + bItem.price;
     });
     this.clientProduct.setPrice(price);
     return;
