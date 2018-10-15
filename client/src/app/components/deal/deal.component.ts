@@ -259,7 +259,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
           }
         });
 
-        this.setDealPrice();
+        this.setDealPriceDiff();
         this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
         this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
         return;
@@ -284,7 +284,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     return price;
   }
 
-  setDealPrice() {
+  setDealPriceDiff() {
     const laterPrice = this.getDealPrice();
     const priceDiff = laterPrice - this.initPrice;
     const added = this.translate.instant('deal.added');
@@ -318,7 +318,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
         if (itemAdded.data) {
           this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
           this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
-          this.setDealPrice();
+          this.setDealPriceDiff();
         }
       } catch (error) {
         console.error('Something went wrong in item selection : ', error);

@@ -143,7 +143,7 @@
               </div>
               
               <div class="promotion-button">
-                <button type="button" text-center text-capitalize class="btn-voucher" (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code_?' | translate}}
+                <button type="button" text-center text-capitalize class="btn-voucher" (click)="showVoucherModal()">{{ 'cart.got_a_voucher_code' | translate}}
                 </button>
               </div>
 
@@ -182,9 +182,9 @@
         </ion-content>
         <ion-footer>
           <div flex-center class="delivery-bill-block">
-              <ng-container *ngIf="getCart()?.getShippingCost()">
+              <ng-container *ngIf="(getCart()?.getPromotionDiscount()  + getCart()?.getVoucherDiscount()) > 0">
                 <div class="total-bill">{{ 'cart.discount' | translate}}</div>
-                <div class="total-price" *ngIf="(getCart()?.getPromotionDiscount()  + getCart()?.getVoucherDiscount()) > 0">
+                <div class="total-price">
                   {{(getCart()?.getPromotionDiscount()  + getCart()?.getVoucherDiscount()) | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}
                 </div>
             </ng-container>
