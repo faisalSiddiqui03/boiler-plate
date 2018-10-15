@@ -64,11 +64,11 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
     this.updateProfileActionEmitter.emit(new Action(UserProfileWidgetActions.ACTION_UPDATE_USER));
   }
 
-  widgetActionSuccess(name, data) {
+  async widgetActionSuccess(name, data) {
     console.log('action success ' + name, data);
     this.loaderService.stopLoading();
     this.updateInProgress = false;
-    this.alertService.presentToast(this.translate.instant('user_profile_page.profile_updated_successfully'), 2000, 'top', 'top');
+    await this.alertService.presentToast(this.translate.instant('user_profile_page.profile_updated_successfully'), 2000, 'top', 'top');
     this.capRouter.routeByUrlWithLanguage('my-account');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('my-account'));
   }
@@ -91,10 +91,10 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
     console.log('loading failed' + name, data);
   }
 
-  widgetActionFailed(name: string, data: any): any {
+  async widgetActionFailed(name: string, data: any) {
     this.updateInProgress = false;
     this.loaderService.stopLoading();
-    this.alertService.presentToast(this.translate.instant('user_profile_page.profile_update_failed'), 2000, 'top', 'top');
+    await this.alertService.presentToast(this.translate.instant('user_profile_page.profile_update_failed'), 2000, 'top', 'top');
   }
 
   widgetLoadingStarted(name: string, data: any): any {

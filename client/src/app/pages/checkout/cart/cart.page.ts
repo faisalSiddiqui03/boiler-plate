@@ -46,6 +46,14 @@ export class CartPage extends BaseComponent implements OnInit {
   ngOnInit() {
   }
 
+  ionViewWillEnter() {
+    this.closeCartToast();
+  }
+
+  async closeCartToast() {
+    await this.alertService.closeToast();;
+  }
+
   goToDeals() {
     this.capRouter.routeByUrlWithLanguage('/products/listing/(0:0)?category=deals&id=CU00215646');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products/listing/(0:0)?category=deals&id=CU00215646'));

@@ -117,7 +117,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         } else {
 
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-          this.alertService.presentToast(store_alert, 3000, 'top');
+          await this.alertService.presentToast(store_alert, 3000, 'top');
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
@@ -127,7 +127,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
             this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-            this.alertService.presentToast(store_alert, 3000, 'top');
+            await this.alertService.presentToast(store_alert, 3000, 'top');
           }
         } else {
           // open another modal with store selection
@@ -141,7 +141,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
             this.capRouter.routeByUrlWithLanguage('/store-selection?cityId=' + this.selectedCityCode);
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-            this.alertService.presentToast(store_alert, 3000, 'top');
+            await this.alertService.presentToast(store_alert, 3000, 'top');
           }
         } else {
           // open another modal with store selection
@@ -150,7 +150,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
         const alert_text = await this.translate.instant('cart.item_removed');
-        this.alertService.presentToast(alert_text, 3000, 'bottom');
+        await this.alertService.presentToast(alert_text, 3000, 'bottom');
         break;
       case LocationWidgetActions.FETCH_AREAS_BY_CITY_CODE:
         if (data && data.length === 1) {
@@ -239,7 +239,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
         const alert_text = await this.translate.instant('cart.item_removed_failure');
-        this.alertService.presentToast(alert_text, 30000, 'bottom');
+        await this.alertService.presentToast(alert_text, 30000, 'bottom');
         break;
     }
   }
