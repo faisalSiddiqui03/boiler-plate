@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, EventEmitter, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewEncapsulation, AfterViewInit, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   Action,
@@ -50,6 +50,8 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
   itemToRemove;
   favoriteInProgress = new Map();
   suggestionWidgetAction = new EventEmitter();
+  @Output() switchCategory: EventEmitter<any> = new EventEmitter<any>();
+  dealCategoryId: string;
 
   slideOpts = {
     slidesPerView: 2,
@@ -73,6 +75,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
     this.translateService.use(this.getCurrentLanguageCode());
     this.loaded = false;
     this.currencyCode = this.config.getConfig()['currencyCode'];
+    this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
   }
 
   ngOnInit() {
@@ -83,9 +86,9 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
     this.translateService.use(this.getCurrentLanguageCode());
   }
 
-  applyCoupon() {
+  async applyCoupon() {
     if (this.couponCode) {
-      this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+      await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
       const action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
     } else {
@@ -133,7 +136,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
     }
 
     const cartUpdate = await this.translateService.instant('cart.updating_quantity');
-    this.loaderService.startLoading(cartUpdate, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    await this.loaderService.startLoading(cartUpdate, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updatingPrice = true;
     const action = new Action(CartWidgetActions.ACTION_UPDATE_CART, item);
     this.cartWidgetAction.emit(action);
@@ -152,7 +155,6 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
   async removeCartItem() {
     this.itemToRemove.quantity = 0;
     // const cartRemove = await this.translateService.instant('cart.remove_item');
-    // this.loaderService.startLoading(cartRemove, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updatingPrice = true;
     const action = new Action(CartWidgetActions.ACTION_UPDATE_CART, this.itemToRemove);
     this.cartWidgetAction.emit(action);
@@ -194,7 +196,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
 
   async clearCart() {
     const cartClear = await this.translateService.instant('cart.cart_clear');
-    this.loaderService.startLoading(cartClear, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    await this.loaderService.startLoading(cartClear, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     const action = new Action(CartWidgetActions.ACTION_CLEAR_CART);
     this.cartWidgetAction.emit(action);
   }
@@ -292,7 +294,9 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
   }
 
   goToDeals() {
-    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    this.enableVoucherModal = false;
+    this.switchCategory.emit({ category: 'deals', id: this.dealCategoryId });
+    // this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
   goToPage(pageName) {

@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, EventEmitter } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../../helpers/utils';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
+import {Component, OnInit, AfterViewInit, ViewEncapsulation, EventEmitter} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {UtilService} from '../../../helpers/utils';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
+import {Router, ActivatedRoute} from '@angular/router';
+import {LoaderService, AlertService, HardwareService} from '@capillarytech/pwa-ui-helpers';
 import {
   pwaLifeCycle,
   LifeCycle,
@@ -18,22 +18,13 @@ import {
   CheckoutDetails,
   Payment,
   DeliverySlot,
-  City,
-  Area,
-  Country,
-  State,
-  LocationDetails,
   Address,
   ContactDetail,
   OrderAttributes,
-  Checkout,
-  Transaction,
   DeliveryModes,
   CapRouterService, EventTrackWidgetActions,
 } from '@capillarytech/pwa-framework';
-import { BaseComponent } from '../../../base/base-component';
-import { element } from 'protractor';
-import { CartPriceDetails } from '@capillarytech/pwa-framework/services/cart/models/cart-price-details';
+import {BaseComponent} from '../../../base/base-component';
 
 @Component({
   selector: 'app-checkout',
@@ -81,9 +72,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     private utilService: UtilService,
     private translate: TranslateService,
     private config: ConfigService,
-    private actRoute: ActivatedRoute,
-    private capRouter: CapRouterService,
-    private hardwareService: HardwareService
+    private hardwareService: HardwareService,
+    private capRouter: CapRouterService
   ) {
 
     super();
@@ -118,29 +108,42 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     });
 
     this.setLoggedInUserDetails();
-    if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+    if (this.getDeliveryMode() === this.deliveryModes.PICKUP) {
       this.checkoutForm.controls['building'].setValue('T');
       this.checkoutForm.controls['street'].setValue('T');
     }
   }
 
   ionViewWillEnter() {
-    this.getDeliverySlotPromise().then((slot) => {
 
-      if (slot.id === -2) {
-        // TODO : generate store promise
-        const store = this.getCurrentStore();
-        if (store === null) {
-            this.presentSlotModal();
-        } else if (!store.isOnline(this.getDeliveryMode())) {
-            this.presentSlotModal();
-        } else {
-            this.setDeliverySlot(DeliverySlot.getAsap());
-        }
+    this.checkSlots();
+    this.checkCart();
+  }
+
+  async checkSlots() {
+
+    const slot = await this.getDeliverySlotPromise();
+    const store = await this.getCurrentStoreAsync();
+
+    if (slot.id === -2) {
+      const store = this.getCurrentStore();
+      if (store === null) {
+        this.presentSlotModal();
+      } else if (!store.isOnline(this.getDeliveryMode())) {
+        this.presentSlotModal();
+      } else {
+        this.setDeliverySlot(DeliverySlot.getAsap());
       }
-    });
+    }
+  }
 
-    // TODO : get cart and redirect to showcase
+  async checkCart() {
+    const cart = await this.getCartAsync();
+    if (cart.items.length === 0) this.goToDeals();
+  }
+
+  goToDeals() {
+    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
   ngAfterViewInit() {
@@ -258,11 +261,11 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
         break;
       default:
         return;
-        // this.getUserPromise().then(userModel => {
-        //   if (userModel.type === 'GUEST') {
-        //     this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_GET_SHIPPING_ADDRESS));
-        //   }
-        // });
+      // this.getUserPromise().then(userModel => {
+      //   if (userModel.type === 'GUEST') {
+      //     this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_GET_SHIPPING_ADDRESS));
+      //   }
+      // });
     }
   }
 
@@ -274,7 +277,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     console.log(name, 'Loading Success ', data);
     switch (name) {
       case 'DELIVERYSLOTS':
-        if (!this.utilService.isEmpty(this.getDeliverySlot()) && this.getDeliverySlot().id > -2 ) {
+        if (!this.utilService.isEmpty(this.getDeliverySlot()) && this.getDeliverySlot().id > -2) {
           this.asSoonPossible = this.getDeliverySlot().id === -1;
           this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(this.getDeliverySlot().time);
           this.timeSlotObj = this.getDeliverySlot();
@@ -323,7 +326,13 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
   selectTimeSlot() {
     console.log('slot is: ', this.timeSlotObj);
-    this.setDeliverySlot(this.timeSlotObj);
+    if (this.timeSlotObj && this.timeSlotObj.id > -2) {
+
+      this.setDeliverySlot(this.timeSlotObj);
+    } else {
+
+      this.setDeliverySlot(this.getDeliverySlot());
+    }
     this.showdropdown = false;
     this.closePickTime();
   }
@@ -350,13 +359,13 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   async placeOrder() {
-    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     const obj: CheckoutDetails = new CheckoutDetails();
 
     obj.paymentDetails = this.objPayment;
 
     const objShipAddress: Address = new Address();
-    if (this.getFulfilmentMode().mode === this.deliveryModes.PICKUP) {
+    if (this.getDeliveryMode() === this.deliveryModes.PICKUP) {
       objShipAddress.address1 = this.getCurrentStore().address;
     } else {
       objShipAddress.address1 = this.checkoutForm.value.building;
@@ -403,7 +412,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     let type = 'PWA,';
     const platformDetails = await this.hardwareService.getPlatformDetails();
     if (await this.hardwareService.isMobileApp()) {
-        type = 'APP,';
+      type = 'APP,';
     }
     type += platformDetails;
     return type;

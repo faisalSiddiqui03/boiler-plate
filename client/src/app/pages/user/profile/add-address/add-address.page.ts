@@ -10,7 +10,7 @@ import {
   CapRouterService
 } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -25,7 +25,6 @@ import { SearchLocationPage } from '../search-location/search-location.page';
 
 @pwaLifeCycle()
 @pageView()
-
 export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
 
@@ -35,11 +34,11 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
   singleUserAddressWidgetActions = new EventEmitter();
   addressModel;
   newLatLngDetails = {
-    latitude: 0,
-    longitude: 0
+    latitude: '0',
+    longitude: '0'
   };
 
-  constructor(private router: Router,
+  constructor(
     private utilService: UtilService,
     private loaderService: LoaderService,
     private alertService: AlertService,
@@ -50,8 +49,6 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
     private capRouter: CapRouterService
   ) {
     super();
-
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
 
     this.translate.use(this.getCurrentLanguageCode());
 
@@ -94,11 +91,11 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
     switch (name) {
       case 'saveAddress':
         console.log(name, data);
-        this.capRouter.routeByUrlWithLanguage('saved-address');
+        this.capRouter.goBack();
         break;
       case 'updateAddress':
         console.log(name, data);
-        this.capRouter.routeByUrlWithLanguage('saved-address');
+          this.capRouter.goBack();
         break;
     }
   }
@@ -116,7 +113,7 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
     console.log(name, 'Loading Started');
   }
 
-  widgetLoadingSuccess(name: string, data: any): any {
+  async widgetLoadingSuccess(name: string, data: any) {
     console.log(name, 'Loading Success');
     switch (name) {
       case 'singleUserAddress':
@@ -126,22 +123,28 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
           addressType: data.addressType ? data.addressType.toLowerCase() : ''
         });
         this.addressModel = data;
+        if (data.locationDetail.latitude && data.locationDetail.longitude) {
+          this.newLatLngDetails = data.locationDetail;
+        } else {
+          const store = await this.getCurrentStoreAsync();
+          this.newLatLngDetails = store.locationDetail;
+        }
         break;
     }
   }
 
-  saveAddress(addressForm, type) {
+  async saveAddress(addressForm, type) {
     this.addressModel.locationDetail = this.newLatLngDetails;
     this.addressModel.detail = addressForm.value.addressDetails;
     this.addressModel.landmark = addressForm.value.landMark;
     this.addressModel.addressType = addressForm.value.addressType;
     if (type === 'save') {
-      this.loaderService.startLoading();
+      await this.loaderService.startLoading();
       this.singleUserAddressWidgetActions.emit(
         new Action(UserAddressWidgetActions.SAVE, this.addressModel)
       );
     } else if (type === 'update') {
-      this.loaderService.startLoading();
+      await this.loaderService.startLoading();
       this.singleUserAddressWidgetActions.emit(
         new Action(UserAddressWidgetActions.UPDATE, this.addressModel)
       );
@@ -152,5 +155,4 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
     this.newLatLngDetails.latitude = event.latitude;
     this.newLatLngDetails.longitude = event.longitude;
   }
-
 }

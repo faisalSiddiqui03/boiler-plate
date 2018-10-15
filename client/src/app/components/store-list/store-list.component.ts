@@ -41,8 +41,6 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
   ) {
     super();
     this.deliveryModes = DeliveryModes;
-
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
   }
 
@@ -63,6 +61,10 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
     });
   }
 
+  ionViewDidEnter(){
+    this.loaderService.stopLoading();
+  }
+
   navigateToDeals() {
     if(this.isModal) {
       this.modalController.dismiss(true);
@@ -79,17 +81,17 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
     console.log('started name: ', name, ' data: ', data);
   }
 
-  widgetLoadingSuccess(name: string, data: any): any {
+  async widgetLoadingSuccess(name: string, data: any) {
     console.log('success name: ', name, ' data: ', data);
-    if (name === 'STORE_SELECTOR' && this.globalSharedService.getFulfilmentMode()) {
+    if (name === 'STORE_SELECTOR' && this.getDeliveryMode()) {
       if (this.cityId) {
+        await this.getDeliveryModeAsync();
         const stores = this.storeLocatorWidgetAction.emit(new Action(
-          StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.globalSharedService.getFulfilmentMode().mode])
+          StoreLocatorWidgetActions.FIND_BY_CITY, [this.cityId, this.getDeliveryMode()])
         );
-
       } else if (this.latitude && this.longitude) {
         const stores = this.storeLocatorWidgetAction.emit(new Action(
-          StoreLocatorWidgetActions.FIND_BY_LOCATION, [this.latitude, this.longitude, this.globalSharedService.getFulfilmentMode().mode])
+          StoreLocatorWidgetActions.FIND_BY_LOCATION, [this.latitude, this.longitude, this.getDeliveryMode()])
         );
       }
     }
@@ -120,6 +122,10 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
   }
 
   selectStore(store) {
+    if(store && store.id) {
+      store.city.code = this.cityId;
+    }
+
     this.setCurrentStore(store);
     this.navigateToDeals();
   }
@@ -138,6 +144,9 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
       storeTiming = store.currentDateStoreTime.get(this.deliveryModes.PICKUP).onTime;
     } else if (time === 'offTime') {
       storeTiming = store.currentDateStoreTime.get(this.deliveryModes.PICKUP).offTime;
+    }
+    if(isNaN(storeTiming)){
+      return '';
     }
     const min = storeTiming.getMinutes() < 10 ? '0' + storeTiming.getMinutes() : storeTiming.getMinutes();
     const hours = storeTiming.getHours() > 10 ? storeTiming.getHours() : '0' + storeTiming.getHours();

@@ -1,4 +1,4 @@
-<delivery-slots-widget class="full-height delivery-slots-page" [globalSlots]="true" [deliveryMode]="getFulfilmentMode()?.mode"
+<delivery-slots-widget class="full-height delivery-slots-page" [globalSlots]="true" [deliveryMode]="getDeliveryMode()"
   [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
   <ng-template let-widget="widget">
     <ng-container *ngIf="!widget.model">
@@ -34,7 +34,27 @@
         </div>
       </ion-footer>
     </ng-container>
-    <ng-container *ngIf="widget.model">
+    <ng-container *ngIf="widget.model && widget.model.length < 1 ">
+        <ion-content padding>
+          <div class="container">
+  
+            <div class="modal-close">
+              <ion-icon name="close" (click)="closeModal()" color-light></ion-icon>
+            </div>
+            <div class="w-700" color-light>
+                {{'delivery_slot_selection_page.NO_SLOT_TEXT' | translate}}
+            </div>
+          </div>
+        </ion-content>
+        <ion-footer no-border>
+            <div class="container">
+              <ion-button color="success" [class.disabled]="!slotSelected" text-capitalize expand="block" mode="ios" class="selection-button btn-success"
+                (click)="closeModal()">{{'delivery_slot_selection_page.CLOSE' | translate}}
+              </ion-button>
+            </div>
+          </ion-footer>      
+        </ng-container>    
+    <ng-container *ngIf="widget.model && widget.model.length > 0 ">
       <ion-content bg-transparent padding>
         <div class="container">
 
@@ -69,8 +89,8 @@
         <div class="container">
           <ion-button color="success" [class.disabled]="!slotSelected" text-capitalize expand="block" mode="ios" class="selection-button btn-success"
             (click)="selectTimeSlot()">{{'delivery_slot_selection_page.order_for' | translate}}
-            <span class="btn-price" text-uppercase *ngIf="slotContent && widget.model[0].id != -1">{{slotContent}}</span>
-            <span class="btn-price" text-uppercase *ngIf="slotContent && widget.model[0].id == -1">{{slotContent}}</span>
+            <span class="btn-price" text-uppercase *ngIf="slotContent && widget.model && widget.model[0]?.id != -1">{{slotContent}}</span>
+            <span class="btn-price" text-uppercase *ngIf="slotContent && widget.model && widget.model[0]?.id == -1">{{slotContent}}</span>
             {{'delivery_slot_selection_page.delivery' | translate}}
           </ion-button>
         </div>

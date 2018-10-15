@@ -41,8 +41,6 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
     private utilService: UtilService
   ) {
     super();
-
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.slotSelected = true;
     this.slotContent = this.asSoonPossible ? this.asapText : '';
     this.activeTimeSlot = 0;
@@ -86,6 +84,8 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
           this.timeSlotObj = this.getDeliverySlot();
           this.activeTimeSlot = this.findIndexOfSlot(this.getDeliverySlot().id, data);
         } else {
+          if( !Array.isArray(data) || data.length < 1 ) return;
+
           this.asSoonPossible = data[0].id === -1;
           this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(data[0].time);
           this.timeSlotObj = data[0];
@@ -104,7 +104,14 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
   closeModal() {
     this.modalController.dismiss();
     if (this.getDeliverySlot().id === -2) {
-       this.setDeliverySlot(this.timeSlotObj);
+
+      if(this.timeSlotObj && this.timeSlotObj.id > -2) {
+
+        this.setDeliverySlot(this.timeSlotObj);
+      } else {
+
+        this.setDeliverySlot(this.getDeliverySlot());
+      }
     }
   }
 

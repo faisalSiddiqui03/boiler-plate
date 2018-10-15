@@ -51,8 +51,8 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
     console.log(data);
   }
 
-  resetPassword() {
-    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+  async resetPassword() {
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.resetPasswordActionEmitter.emit(new Action(
       ForgotPasswordWidgetActions.ACTION_SEND_PASSWORD_RESET_LINK, this.resetPasswordForm.value.email
     ));

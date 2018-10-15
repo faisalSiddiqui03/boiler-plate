@@ -135,7 +135,7 @@
           <!-- User contact detail form end -->
 
           <!-- store details for pickup start -->
-          <div *ngIf="getFulfilmentMode()?.mode === deliveryModes.PICKUP">
+          <div *ngIf="getDeliveryMode() === deliveryModes.PICKUP">
             <div class="checkout-head" text-center>
               <h2 no-margin>{{ 'checkout_page.where_should_you_pick_it_from' | translate }}</h2>
             </div>
@@ -159,8 +159,7 @@
           <!-- store details for pickup end -->
 
           <!-- User address detail form start for guest user -->
-          <div
-            [hidden]="!(getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY && (getUserModel()?.type === 'GUEST' || isAddNewAddressClicked || !useSavedAddress))">
+          <div [hidden]="!(getDeliveryMode() === deliveryModes.HOME_DELIVERY && (getUserModel()?.type === 'GUEST' || isAddNewAddressClicked || !useSavedAddress))">
             <div class="checkout-head" text-center>
               <h2 no-margin>{{ 'checkout_page.where_we_deliver' | translate }}</h2>
             </div>
@@ -238,8 +237,7 @@
           <!-- User address detail form end for guest user -->
 
           <!-- User address detail form start for loggedin user -->
-          <div
-            *ngIf="getFulfilmentMode()?.mode === deliveryModes.HOME_DELIVERY && getUserModel()?.type !== 'GUEST' && !isAddNewAddressClicked && useSavedAddress"
+          <div *ngIf="getDeliveryMode() === deliveryModes.HOME_DELIVERY && getUserModel()?.type !== 'GUEST' && !isAddNewAddressClicked && useSavedAddress"
             class="logged-user-form">
             <div class="checkout-head" text-center>
               <h2 no-margin>{{ 'checkout_page.where_we_deliver' | translate }}</h2>
@@ -319,8 +317,19 @@
           </div>
           <payment-options-widget [componentId]="getComponentId()" [action]="paymentOptionsWidgetAction">
             <ng-template let-widget="widget">
-              <ng-container *ngIf="widget.model">
-                <ion-list>
+              <ng-container *ngIf="widget?.model">
+                <ion-list *ngIf="widget?.model?.length === 0">
+                  <ion-radio-group formControlName="paymentMethod">
+                    <ion-item>
+                      <ion-radio color="success" slot="start" value="COD"></ion-radio>
+                      <ion-label>
+                        <img src="../../../../assets/imgs/Icon_cash.svg" alt="">{{ 'checkout_page.with_cash' | translate
+                        }}
+                      </ion-label>
+                    </ion-item>
+                  </ion-radio-group>
+                </ion-list>
+                <ion-list *ngIf="widget.model.length > 0">
                   <ion-radio-group formControlName="paymentMethod">
                     <ion-item (click)="slectPaymentOption(option)" *ngFor="let option of widget.model">
                       <ion-radio color="success" slot="start" value="{{option?.paymentOption}}"></ion-radio>
@@ -397,9 +406,8 @@
   </div>
 </ion-content>
 
-<delivery-slots-widget *ngIf="showSlotsModal" class="full-height delivery-slots-page" [globalSlots]="true"
-                       [deliveryMode]="getFulfilmentMode()?.mode"
-                       [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
+<delivery-slots-widget *ngIf="showSlotsModal" class="full-height delivery-slots-page" [globalSlots]="true" [deliveryMode]="getDeliveryMode()"
+  [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
   <ng-template let-widget="widget">
     <div class="checkout-modal">
       <div class="checkout-popup">
@@ -412,15 +420,15 @@
 
         <div *ngIf="widget.model" class="pick-time-block">
           <div (click)="showdropdown=!showdropdown" class="pick-time-selected" flex-center>
-            <span *ngIf="timeSlotObj?.id === -1">{{'delivery_slot_selection_page.as_soon_as_possible' | translate}}</span>
+            <span *ngIf="timeSlotObj?.id === -1">{{'delivery_slot_selection_page.asap' | translate}}</span>
             <span *ngIf="!widget.model.length">{{'header.noSlot' | translate}}</span>
             <span *ngIf="timeSlotObj?.id !== -1">{{timeSlotObj?.time | date:'hh:mm a'}}</span>
             <ion-icon name="arrow-down" ios="ios-arrow-down" md="ios-arrow-down"></ion-icon>
           </div>
           <ion-list *ngIf="showdropdown && widget.model.length" no-margin class="pick-time-list">
-            <ion-item *ngFor="let slot of widget.model; let i = index;" (click)="selectTime(slot, i)">
-              <span *ngIf="slot.id === -1">{{'delivery_slot_selection_page.as_soon_as_possible' | translate}}</span>
-              <span *ngIf="slot.id !== -1">{{slot.time | date:'hh:mm a'}}</span>
+            <ion-item class="slot-list" *ngFor="let slot of widget.model; let i = index;" (click)="selectTime(slot, i)">
+              <span [ngClass]="{'slot-selected': timeSlotObj?.id === slot.id}" *ngIf="slot.id === -1">{{'delivery_slot_selection_page.asap' | translate}}</span>
+              <span [ngClass]="{'slot-selected': timeSlotObj?.id === slot.id}" *ngIf="slot.id !== -1">{{slot.time | date:'hh:mm a'}}</span>
             </ion-item>
           </ion-list>
         </div>

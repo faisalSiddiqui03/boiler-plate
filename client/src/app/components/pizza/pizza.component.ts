@@ -18,7 +18,7 @@ import {
   AttributeValue,
 } from '../../helpers/validators/index';
 import { BaseComponent } from '../../base/base-component';
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
 import { Location } from '@angular/common';
@@ -38,6 +38,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   @Input() productId;
   @Input() productFromDeal;
   @Input() cartItem;
+  @Input() fromFavorites;
 
   loaded = false;
   productWidgetExecutor = new EventEmitter();
@@ -66,7 +67,8 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     private location: Location,
     private loaderService: LoaderService,
     private modalController: ModalController,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private hardwareService: HardwareService,
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -96,12 +98,13 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     console.log('Widget loading failed' + name, data);
   }
 
-  widgetActionSuccess(name: string, data: any) {
+  async widgetActionSuccess(name: string, data: any) {
     this.loaderService.stopLoading();
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
+        const isDesktop = await this.hardwareService.isDesktopSite();
         console.log('Item added to cart : ', data);
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 1000, 'top', 'top');
+        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE:
@@ -208,20 +211,23 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
-      return storeSelected;
+      this.loaderService.stopLoading();
+      if(storeSelected.data){
+        this.addToCart();
+      }
     });
   }
 
   async addToCart() {
     if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
-      const storeSelected = await this.openStoreSelection();
-      if (!storeSelected) return;
+      await this.openStoreSelection();
+      return;
     }
     if (this.productFromDeal) {
       this.modalController.dismiss(this.clientProduct);
       return;
     }
-    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     if(this.cartItem){
       this.productWidgetAction.emit(
         new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
@@ -373,7 +379,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   goBack() {
-    if (this.productFromDeal || this.cartItem) {
+    if (this.productFromDeal || this.cartItem || this.fromFavorites) {
       this.modalController.dismiss();
       return;
     }

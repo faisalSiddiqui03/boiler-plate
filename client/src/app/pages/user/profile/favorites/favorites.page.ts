@@ -9,12 +9,16 @@ import {
   FavoritesWidgetActions,
   FavoritesWidget,
   CapRouterService,
-  ConfigService
+  ConfigService,
+  ProductType
 } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
+import { ProductDetailsComponent } from '../../../../components/product-details/product-details.component';
+import { PizzaComponent } from '../../../../components/pizza/pizza.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-favorites',
@@ -31,17 +35,16 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   titleValue = '';
   favoritesWidgetAction = new EventEmitter();
   currencyCode: string;
+  favoriteInProgress = new Map();
 
   constructor(private router: Router,
     private utilService: UtilService,
     private loaderService: LoaderService,
     private alertService: AlertService, private translate: TranslateService,
     private capRouter: CapRouterService,
-    private config: ConfigService,) {
+    private config: ConfigService,
+    private modalController: ModalController) {
     super();
-
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader':
-    // 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
@@ -56,14 +59,6 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     this.capRouter.routeByUrlWithLanguage(pageName);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
-
-  // getProductImageUrl(product) {
-  //   if (product && product.multipleImages && product.multipleImages.length) {
-  //     return `https://${product.multipleImages[product.multipleImages.length > 1 ? 1 : 0].largeImage}`;
-  //   } else if (product && product.largeImage) {
-  //     return `https:${product.largeImage}`;
-  //   }
-  // }
 
   getProductImageUrl(product) {
     if (!product.multipleImages || !(product.multipleImages.length > 0)) {
@@ -81,15 +76,40 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     return `https://${url}`;
   }
 
-  updateFavorites(product) {
+  removeFavorite(product) {
+    this.favoriteInProgress.set(product.id, true);
     this.favoritesWidgetAction.emit(new Action(FavoritesWidgetActions.ACTION_REMOVE_ITEM, product));
+  }
+
+  async openProduct(product) {
+    let component;
+    switch (product.type) {
+      case ProductType.Product:
+        component = ProductDetailsComponent
+        break;
+      case ProductType.Bundle:
+        component = PizzaComponent;
+        break;
+    }
+
+    const modal = await this.modalController.create({
+      component: component,
+      componentProps: {
+        productId: product.id,
+        fromFavorites: true,
+      }
+    });
+
+    await modal.present();
   }
 
   widgetActionFailed(name: string, data: any): any {
     console.log('name action failed: ' + name + ' data: ' + data);
     switch (name) {
       case FavoritesWidgetActions.ACTION_REMOVE_ITEM:
+        console.error('remove failed', data);
         console.log('error removing item');
+        this.favoriteInProgress.delete(data.product.id);
         break;
     }
   }
@@ -98,6 +118,8 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     console.log('name action success: ' + name + ' data: ' + data);
     switch (name) {
       case FavoritesWidgetActions.ACTION_REMOVE_ITEM:
+        console.error('remove success', data);
+        this.favoriteInProgress.delete(data.product.id);
         console.log('successfully removed item');
         break;
     }

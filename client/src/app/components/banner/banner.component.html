@@ -1,4 +1,4 @@
-<banner-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [type]="'tag'" [value]="value"
+<banner-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [type]="type" [value]="value"
                [executor]="bundleWidgetExecutor" [action]="bundleWidgetAction"
                (lifecycle)="null">
   <ng-template let-widget="widget">
@@ -18,8 +18,10 @@
       </div>
       <ion-row margin-bottom justify-content-center>
         <ion-col size-lg='6' size-xs='12' *ngFor="let banner of widget.model" (click)="onBannerClicked(banner)">
-          <img src="{{getFullBannerUrl(banner.contentUrl)}}" img-preloader="{{getFullBannerUrl(banner.contentUrl)}}"
-               defaultImage="assets/imgs/default/default.png" loadingImage="assets/imgs/default/default.png"
+          <img src="{{getFullBannerUrl(banner.imagePath)}}"
+               img-preloader="{{getFullBannerUrl(banner.imagePath)}}"
+               defaultImage="assets/imgs/default/default.png"
+               loadingImage="assets/imgs/default/default.png"
                alt="{{banner?.name}}"
           />
         </ion-col>

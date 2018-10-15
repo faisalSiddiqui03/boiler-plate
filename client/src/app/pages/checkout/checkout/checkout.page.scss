@@ -241,3 +241,19 @@
     }
   }
 }
+
+.slot-list {
+  span {
+    margin: 0 auto;
+    padding-inline-end: 30px;
+  }
+}
+.slot-selected {
+  color: var(--ion-color-primary);
+}
+
+.pick-time-selected {
+  span {
+    margin: 0 auto;
+  }
+}

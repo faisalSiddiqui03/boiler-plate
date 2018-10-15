@@ -9,7 +9,8 @@ import {
   LifeCycle,
   OrderWidget,
   CapRouterService,
-  OrderWidgetActions
+  OrderWidgetActions,
+  ConfigService
 } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
@@ -35,15 +36,19 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   isShowMoreButtonVisible = true;
   isWidgetLoadingDone = false;
   isNextLoading = false;
+  currencyCode: string;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private utilService: UtilService,
-    private loaderService: LoaderService, private alertService: AlertService, private translate: TranslateService,
-    private capRouter: CapRouterService) {
+    private loaderService: LoaderService,
+    private config: ConfigService,
+    private translate: TranslateService,
+    private capRouter: CapRouterService
+    ) {
     super();
-
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
+    this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   ngOnInit() {

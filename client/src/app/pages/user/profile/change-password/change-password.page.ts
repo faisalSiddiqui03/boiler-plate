@@ -79,9 +79,9 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     return;
   }
 
-  changePassword() {
+  async changePassword() {
     console.log('Password change');
-    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader' : 'pickup-loader');
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updateInProgress = true;
     this.widgetmodel.userId = this.userId;
     this.widgetmodel.password = this.resetPasswordForm.value.newPassword;
@@ -99,7 +99,7 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     this.updateInProgress = false;
     if (data.isSuccessful) {
       console.log(this.translate.instant('change_password_page.change_password_success'));
-      this.alertService.presentToast(this.translate.instant('change_password_page.change_password_success'), 1000, 'bottom');
+      this.alertService.presentToast(this.translate.instant('change_password_page.change_password_success'), 1000, 'top');
     } else {
       console.log(data.message);
     }

@@ -13,7 +13,7 @@ import {
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '../../../../base/base-component';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../../helpers/utils';
 
@@ -49,15 +49,13 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     private alertService: AlertService,
     private translate: TranslateService,
     private config: ConfigService,
-    private utilService: UtilService,
+    private hardwareService: HardwareService,
     private location: Location,
     private capRouter: CapRouterService,
   ) {
     super();
 
     this.googleClientId = this.config.getConfig()['googleClientId'];
-
-    // this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
 
     this.widgetModels = {};
@@ -83,8 +81,8 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     this.isPasswordFiled = !this.isPasswordFiled;
   }
 
-  signIn() {
-    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+  async signIn() {
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.widgetModels.USERID_PWD_SIGNIN.userName = this.userIdSigninForm.value.email;
     this.widgetModels.USERID_PWD_SIGNIN.password = this.userIdSigninForm.value.password;
     this.useridPasswordSigninAction.emit(new Action(UserIdPwdSigninWidgetActions.ACTION_SIGN_IN));
@@ -94,13 +92,19 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     console.log(data);
   }
 
-  googleSignIn() {
-    this.loaderService.startLoading(null, this.getFulfilmentMode().mode === 'H' ? 'delivery-loader': 'pickup-loader');
+  async googleSignIn() {
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.googleSignInActionEmitter.emit(new Action(GoogleSignInWidgetActions.ACTION_GPLUS_SIGN_IN));
   }
 
-  handleGoogleSignInResponse(data) {
-    this.alertService.presentToast(data.isSuccessful ? this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top', 'top');
+  async handleGoogleSignInResponse(data) {
+    const isDesktop = await this.hardwareService.isDesktopSite();
+    if (isDesktop) {
+      this.alertService.presentToast(data.isSuccessful ? this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top');
+    }else {
+      this.alertService.presentToast(data.isSuccessful ? this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top', 'top');
+    }
+
     this.capRouter.routeByUrlWithLanguage('/home');
   }
 
@@ -109,14 +113,24 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     this.capRouter.routeByUrlWithLanguage(pageName);
   }
 
-  handleUseridPasswordSigninResponse(data) {
+  async handleUseridPasswordSigninResponse(data) {
+    const isDesktop = await this.hardwareService.isDesktopSite();
     if (data.message === "Successful") {
       this.isLoginSuccessful = true;
-      this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top', 'top');
+      if (isDesktop) {
+        this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top');
+      }else {
+        this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top', 'top');
+      }
       this.capRouter.routeByUrlWithLanguage('/home');
     } else {
       this.isLoginSuccessful = false;
-      this.alertService.presentToast(data.message, 500, 'top', 'top');
+      if (isDesktop) {
+        this.alertService.presentToast(data.message, 500, 'top');
+      }else {
+        this.alertService.presentToast(data.message, 500, 'top', 'top');
+      }
+
     }
   }
 

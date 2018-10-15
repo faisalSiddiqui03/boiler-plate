@@ -1,7 +1,7 @@
 import { OnDestroy } from '@angular/core';
 import { GlobalSharedService } from '@cap-core/service/global-shared.service';
 import { appInjector } from '@cap-core/app.injector';
-import { DeliverySlot, SeoInfo } from '@capillarytech/pwa-framework';
+import { DeliverySlot, DeliveryModes, SeoInfo } from '@capillarytech/pwa-framework';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 export class BaseComponent implements OnDestroy {
@@ -42,19 +42,24 @@ export class BaseComponent implements OnDestroy {
   }
 
   setCurrentStore(store) {
+    if(!store) return;
     return this.globalSharedService.saveSelectedStore(store);
-  }
-
-  getFulfilmentMode() {
-    return this.globalSharedService.getFulfilmentMode();
   }
 
   getCart() {
     return this.globalSharedService.getCart();
   }
 
+  async getCartAsync() {
+    return await this.globalSharedService.getCartPromise();
+  }
+
   getCurrentStore() {
     return this.globalSharedService.getCurrentStore();
+  }
+
+  async getCurrentStoreAsync() {
+    return await this.globalSharedService.getCurrentStorePromise();
   }
 
   getDeliverySlot() {
@@ -74,7 +79,12 @@ export class BaseComponent implements OnDestroy {
   }
 
   getDeliveryMode() {
-    return this.globalSharedService.getFulfilmentMode() ? this.globalSharedService.getFulfilmentMode().mode : null;
+    return (this.globalSharedService.getFulfilmentMode() && this.globalSharedService.getFulfilmentMode().mode) ? this.globalSharedService.getFulfilmentMode().mode : DeliveryModes.HOME_DELIVERY;
+  }
+
+  async getDeliveryModeAsync() {
+    const mode = await this.globalSharedService.getFulfilmentModePromise();
+    return mode.mode;
   }
 
   getNavigationUrlWithLangSupport(url: string): string {

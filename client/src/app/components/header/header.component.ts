@@ -78,6 +78,9 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
 
   goToPage(pageName) {
     //const page = this.utilService.getLanguageCode() + '/' + pageName;
+    if (this.isModalActive) {
+      this.modalController.dismiss();
+    }
     this.capRouter.routeByUrlWithLanguage(pageName);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
@@ -175,7 +178,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     if (this.isModalActive) {
       this.modalController.dismiss();
     }
-    this.capRouter.routeByUrlWithLanguage('/products?category=${category}&id=${categoryId}');
+    this.capRouter.routeByUrlWithLanguage(`/products?category=${category}&id=${categoryId}`);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=${category}&id=${categoryId}'));
   }
 

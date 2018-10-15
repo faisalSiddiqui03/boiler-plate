@@ -43,7 +43,9 @@
 		"empty_cart_message_1": "Your basket looks a little empty. Why not ",
 		"empty_cart_message_2": "check out some of our unbeatable deals?",
 		"exclusive_offers": "exclusive offers",
-		"got_a_voucher_code_?": "Got a voucher code?",
+		"got_a_voucher_code": "Got a voucher code?",
+		"item_removed": "Removed cart items",
+		"item_removed_failure": "Failed to remove cart items",
 		"no_voucher_message_1": "Sorry, we don't currently support that voucher code. Don't worry, you can ",
 		"no_voucher_message_2": "Find our best deals on our deals page,",
 		"no_voucher_message_3": " or call your Hut to find out more",
@@ -147,6 +149,8 @@
 		"your_deal_details": "Your Deal Details"
 	},
 	"delivery_slot_selection_page": {
+		"CLOSE": "Close",
+		"NO_SLOT_TEXT": "No slots are available for the selected store. Please try for other store.",
 		"as_soon_as_possible": "As soon as Possible",
 		"asap": "ASAP",
 		"delivery": "Delivery",
@@ -290,8 +294,8 @@
 		"noSlot": "No Slot",
 		"register": "register",
 		"sign_in": "sign in",
-		"take_away": "Take away",
-		"sw_update_available": "New update available. Please refresh to experience updated Pizza Hut"
+		"sw_update_available": "New update available. Please refresh to experience updated Pizza Hut",
+		"take_away": "Take away"
 	},
 	"home_page": {
 		"block_": "Block ",
@@ -548,7 +552,9 @@
 		"take_away_now": "Take Away Now"
 	},
 	"success_page": {
+		"confirm": "Confirm",
 		"delivery_address": "Delivery Address:",
+		"go_to_deals": "Go to deals",
 		"immediate_delivery": "We're preparing your order & it'll be with you in  45 to 60 Minutes",
 		"immediate_takeaway": "We're preparing your order & You can pick it up in  45 to 60 Minutes",
 		"it_will_be_with_you_by": "You can pick it up by",
@@ -556,9 +562,11 @@
 		"on": "On",
 		"order": "Order#:",
 		"pickup_address": "Take-Away Address:",
+		"please_enter_emailid": "Please enter email id",
 		"register": "Register",
 		"sent_tracking_details_to": "We have sent your order & tracking details to",
 		"thanks_for_your_order": "Thanks for your order,",
+		"unable_to_fetch_order": "Unable to fetch order details",
 		"we_are_preparing_your_order": "We're preparing your order"
 	},
 	"terms_page": {

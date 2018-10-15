@@ -21,14 +21,9 @@
             <div *ngIf="widget.model">{{assignNav(widget.model)}}</div>
           </ng-template>
         </navigation-widget>
+
         <div class="container showcase-container full-height">
           <ion-content>
-            <!-- <delivery-slots-widget *ngIf="fetchDeliverySlots"
-                                   [globalSlots]="true"
-                                   [deliveryMode]="getFulfilmentMode()?.mode"
-                                   [storeId]="getCurrentStore()?.id"
-                                   [componentId]="getComponentId()">
-            </delivery-slots-widget> -->
             <ng-container *ngFor="let item of navigations; let i = index;">
               <div [hidden]="!(item.categoryId === categoryId)">
                 <product-showcase-widget [componentId]="getComponentId()" [setSEOTags]=false pfWidgetImpressionTrack [filters]="getShowcaseFilter(item.categoryId)"
@@ -115,10 +110,6 @@
                               <ion-card no-margin no-padding no-border class="product-card deal-card" [pfProductClickTrack]="{products:[prod], position:idx}"
                                 (click)="openDeal(prod?.client)">
                                 <ion-card-header>
-<<<<<<< HEAD
-                                  <img height="170" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
-                                    loadingImage="assets/imgs/default/default.png" />
-=======
                                   <img
                                     height="170" src="{{getProductImageUrl(prod)}}"
                                     img-preloader="{{getProductImageUrl(prod)}}"
@@ -126,7 +117,6 @@
                                     loadingImage="assets/imgs/default/default.png"
                                     alt="{{prod?.title}}"
                                   />
->>>>>>> Add title, alt and metatags for home page
                                 </ion-card-header>
                                 <ion-card-content>
                                   <p class="deal-item-name">{{prod.title}}</p>
@@ -179,7 +169,7 @@
       <ion-show-when size="lg">
         <div class="sidebar-cart">
           <div class="fixed-sidebar">
-            <app-cart></app-cart>
+            <app-cart (switchCategory)="switchCategories($event)"></app-cart>
           </div>
         </div>
       </ion-show-when>
@@ -187,9 +177,9 @@
   </div>
   <ion-hide-when size="lg">
     <ion-footer no-border>
-      <div class="showcase-tabs-one">
-        <ul no-margin no-padding>
-          <li *ngFor="let item of navigations; let i = index;" text-center class="hello" [class.selected]="item.categoryId==categoryId"
+      <div id="bottom-div" class="showcase-tabs-one">
+        <ul id="bottom-list" no-margin no-padding>
+          <li id={{item.categoryId}} *ngFor="let item of navigations; let i = index;" text-center class="hello" [class.selected]="item.categoryId==categoryId"
             (click)="switchCategories({category: item.name, id: item.categoryId})">{{item.name}}
           </li>
         </ul>
