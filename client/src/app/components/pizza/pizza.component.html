@@ -78,14 +78,14 @@
               </div>
 
               <!-- Second view, selection of toppings -->
-              <div class="sub-modal-wrap" *ngIf="showToppingsView">
-                <div class="sub-modal-head" flex-center>
+              <div class="sub-modal-wrap">
+                <div class="sub-modal-head" flex-center *ngIf="showToppingsView">
                   <p no-margin>
                     <span>{{getSelectedSizeAndCrust()}}</span>
                   </p>
                   <a class="change" (click)="toggleToppingsView()" text-capitalize>{{'pizza.change' | translate}}</a>
                 </div>
-                <div class="drinks-choose-block" margin>
+                <div class="drinks-choose-block" margin *ngIf="showToppingsView && toppingsEnabled">
                   <div class="block-header" flex-center text-capitalize border-radius (click)="showToppings = !showToppings">
                     {{'pizza.change_cheese_sauce_etc' | translate}}
                     <ion-icon class="arrow" [class.expand]="showToppings" ios="ios-arrow-down" md="ios-arrow-down" name="arrow-down"></ion-icon>
@@ -179,10 +179,12 @@
                     class="btn-success">
               <div *ngIf="!productFromDeal">{{'pizza.add_to_basket' | translate}}</div>
               <div *ngIf="productFromDeal">{{'pizza.add_to_deal' | translate}}</div>
-              <span class="btn-price" *ngIf="updatingPrice && !productFromDeal">
+              <span class="btn-price" *ngIf="updatingPrice">
                 <ion-spinner name="crescent" color="dark"></ion-spinner>
               </span>
-              <span class="btn-price" *ngIf="!updatingPrice && !productFromDeal">{{widget?.model?.client?.price | currency: (currencyCode + ' '): true: '1.3-3'}}</span>
+              <span class="btn-price" *ngIf="!updatingPrice && widget?.model?.client?.price !== 0">
+                <span *ngIf="productFromDeal">+&nbsp;</span>{{widget?.model?.client?.price | currency: (currencyCode + ' '): true: '1.3-3'}}
+              </span>
             </ion-button>
           </ion-footer>
         </ng-container>

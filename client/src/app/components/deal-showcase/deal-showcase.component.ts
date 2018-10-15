@@ -37,6 +37,8 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   bundleGroupItems: any;
   bundleGroupTitle: string;
   bundleGroupMinQuantity: number;
+  bundleGroupId: number;
+  toppingsEnabled: Boolean = true;
 
   bundleGroup: any;
   bundleGroupImage: string;
@@ -68,6 +70,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
     this.bundleGroupMinQuantity = this.bundleGroup.minQuantity;
     this.bundleGroupTitle = this.bundleGroup.title;
     this.bundleGroupType = this.bundleGroup.inputType;
+    this.bundleGroupId = this.bundleGroup.groupId;
     this.translate.get('deal.choose_your').subscribe(value => {
       this.bundleGroupTitle = value + " " + this.bundleGroupTitle;
     });
@@ -135,6 +138,7 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
       componentProps: {
         productId: bundleItem.productId,
         productFromDeal: bundleItem,
+        toppingsEnabled: this.toppingsEnabled,
       }
     });
 
@@ -146,15 +150,15 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
       }
       try {
         this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-          if (item.groupId === bundleItem.groupId) item.remove();
+          if (item.groupId === this.bundleGroupId) item.remove();
         });
         this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-          if (item.id === bundleItem.id) {
+          if (item.id === bundleItem.id && item.groupId === this.bundleGroupId) {
             item.add();
-            item.setVariantProductId(addedItem.data.variantProductId);
             item.setPrimaryProductId(addedItem.data.primaryProductId);
-            item.setBundleItems(addedItem.data.bundleItems);
             item.setVarianValueIdMap(addedItem.data.varProductValueIdMap);
+            item.setBundleItems(addedItem.data.bundleItems);
+            item.setVariantProductId(addedItem.data.variantProductId);
           }
         });
       } catch (err) {

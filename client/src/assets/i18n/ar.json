@@ -58,7 +58,8 @@
 		"voucher_description": "لدينا صفقات الأعلى متاحة دائما على الإنترنت على صفحة صفقاتنا.",
 		"you_may_also_like": "",
 		"your_cart": "عربتك",
-		"your_total": "مجموعك"
+		"your_total": "مجموعك",
+		"discount": " خص"
 	},
 	"category_listing": {
 		"price_tag": "من عند"
@@ -146,7 +147,8 @@
 		"back_to_deals": "العودة للعروض",
 		"choose_any": "اختيار أي",
 		"choose_your": "إختر ما يخصك  بيتزا وسط",
-		"your_deal_details": "معلومات عروضك الخاصة"
+		"your_deal_details": "معلومات عروضك الخاصة",
+		"extra": "إضافي"
 	},
 	"delivery_slot_selection_page": {
 		"CLOSE": "قريب",

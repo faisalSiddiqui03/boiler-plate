@@ -50,6 +50,8 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   showAddToCart: boolean;
   titleValue: string = '';
   dealCategoryId: string;
+  initPrice: number;
+  toppingsEnabled: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -129,6 +131,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
 
     this.bundleGroup = bundleGroup;
     this.bundleGroupImage = this.getProductImageUrl(this.serverProduct);
+    this.initPrice = this.getDealPrice();
 
     if (bundleGroup.items.length === 1) {
       this.openProductDetails(bundleGroup.items[0]);
@@ -179,6 +182,12 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
       if (!storeSelected) return;
     }
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    if (this.cartItem) {
+      this.productWidgetAction.emit(
+        new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
+      );
+      return;
+    }
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
     );
@@ -200,6 +209,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     this.noOfRequiredGroups = 0;
     this.noOfSelectedGroups = 0;
     this.showAddToCart = false;
+    this.initPrice = this.getDealPrice();
     this.serverProduct.bundleGroups.map((group) => {
       this.noOfRequiredGroups = this.noOfRequiredGroups + 1;
     });
@@ -243,14 +253,16 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
         this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
           if (item.id === bundleItem.id) {
             item.add();
-            item.setVariantProductId(addedItem.data.variantProductId);
             item.setVarianValueIdMap(addedItem.data.varProductValueIdMap);
             if (isTrio) item.setBundleItems(addedItem.data.bundleItems);
+            item.setVariantProductId(addedItem.data.variantProductId);
           }
         });
 
+        this.setDealPriceDiff();
         this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
         this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
+        return;
       } catch (err) {
         console.error('Something went wrong in item selection : ', err);
       }
@@ -261,13 +273,40 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     return await modal.present();
   }
 
+  getDealPrice() {
+    let price = 0;
+    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
+      if (item.isSelected && !item.isIncludedInPrice) {
+        price = price + item.price;
+      }
+    });
+    price = this.clientProduct.price + price;
+    return price;
+  }
+
+  setDealPriceDiff() {
+    const laterPrice = this.getDealPrice();
+    const priceDiff = laterPrice - this.initPrice;
+    const added = this.translate.instant('deal.added');
+    const extra = this.translate.instant('deal.extra');
+    if(priceDiff && this.toppingsEnabled) {
+      this.alertService.presentToast(added + ' ' + this.currencyCode + ' ' + priceDiff.toFixed(3) + ' ' + extra + '!', 2000, 'top', 'top');
+    }
+  }
+
   async openDealShowcase() {
+    this.toppingsEnabled = true;
+    if (Product.getAttributeValueByName(this.serverProduct, AttributeName.IS_TOPPINGS_ENABLED)
+      === AttributeValue.TOPPING_NOT_ENABLED) {
+        this.toppingsEnabled = false;
+    }
     const modal = await this.modalController.create({
       component: DealShowcaseComponent,
       componentProps: {
         bundleGroup: this.bundleGroup,
         bundleGroupImage: this.bundleGroupImage,
         clientProduct: this.clientProduct,
+        toppingsEnabled: this.toppingsEnabled,
       }
     });
 
@@ -279,6 +318,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
         if (itemAdded.data) {
           this.noOfSelectedGroups = this.noOfSelectedGroups + 1;
           this.showAddToCart = this.noOfSelectedGroups === this.noOfRequiredGroups;
+          this.setDealPriceDiff();
         }
       } catch (error) {
         console.error('Something went wrong in item selection : ', error);
