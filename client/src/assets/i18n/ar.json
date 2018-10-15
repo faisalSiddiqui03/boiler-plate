@@ -39,12 +39,12 @@
 		"coupon_applied_successfully": "تم تطبيق القسيمة بنجاح",
 		"coupon_removed_successfully": "تمت إزالة الكوبون بنجاح",
 		"delivery_fee": "رسوم التوصيل",
+		"discount": " خص",
 		"dismiss": "رفض",
 		"empty_cart_message_1": "سلة الخاص بك تبدو فارغة قليلاً. لما لا",
 		"empty_cart_message_2": "تحقق من بعض صفقاتنا التي لا تقبل المنافسة؟",
 		"exclusive_offers": "عروض حصرية",
 		"got_a_voucher_code": "حصلت على رمز القسيمة؟",
-		"got_a_voucher_code_?": "",
 		"item_removed": "",
 		"item_removed_failure": "",
 		"no_voucher_message_1": "عذرًا ، لا ندعم حاليًا رمز القسيمة هذا. لا تقلق ، يمكنك ذلك",
@@ -59,8 +59,7 @@
 		"voucher_description": "لدينا صفقات الأعلى متاحة دائما على الإنترنت على صفحة صفقاتنا.",
 		"you_may_also_like": "",
 		"your_cart": "عربتك",
-		"your_total": "مجموعك",
-		"discount": " خص"
+		"your_total": "مجموعك"
 	},
 	"category_listing": {
 		"price_tag": "من عند"
@@ -148,8 +147,8 @@
 		"back_to_deals": "العودة للعروض",
 		"choose_any": "اختيار أي",
 		"choose_your": "إختر ما يخصك  بيتزا وسط",
-		"your_deal_details": "معلومات عروضك الخاصة",
-		"extra": "إضافي"
+		"extra": "إضافي",
+		"your_deal_details": "معلومات عروضك الخاصة"
 	},
 	"delivery_slot_selection_page": {
 		"CLOSE": "قريب",
@@ -506,7 +505,6 @@
 		"sure_remove_address": "هل أنت متأكد من رغبتك إزالة هذا العنوان؟"
 	},
 	"search_location_page": {
-		"min_charecters_not_passed": "",
 		"recent_searches": "أخر عملية بحث",
 		"search_placeholder": "البحث في منطقتك",
 		"use_current_location": " إستخدام الموقع الحالي",
@@ -557,21 +555,21 @@
 	},
 	"success_page": {
 		"confirm": "تأكيد الطلب",
-    "delivery_address": "Delivery Address:",
-    "go_to_deals": "Go to deals",
-    "immediate_delivery": "We're preparing your order & it'll be with you in  45 to 60 Minutes",
-    "immediate_takeaway": "We're preparing your order & You can pick it up in  45 to 60 Minutes",
-    "it_will_be_with_you_by": "You can pick it up by",
-    "liked_our_experience_click_to_register": "Liked our experience, click here to register.",
-    "on": "On",
-    "order": "Order#:",
-    "pickup_address": "Take-Away Address:",
-    "please_enter_emailid": "Please enter email id",
-    "register": "Register",
-    "sent_tracking_details_to": "We have sent your order & tracking details to",
-    "thanks_for_your_order": "Thanks for your order,",
-    "unable_to_fetch_order": "Unable to fetch order details",
-    "we_are_preparing_your_order": "We're preparing your order"
+		"delivery_address": "Delivery Address:",
+		"go_to_deals": "Go to deals",
+		"immediate_delivery": "We're preparing your order & it'll be with you in  45 to 60 Minutes",
+		"immediate_takeaway": "We're preparing your order & You can pick it up in  45 to 60 Minutes",
+		"it_will_be_with_you_by": "You can pick it up by",
+		"liked_our_experience_click_to_register": "Liked our experience, click here to register.",
+		"on": "On",
+		"order": "Order#:",
+		"pickup_address": "Take-Away Address:",
+		"please_enter_emailid": "Please enter email id",
+		"register": "Register",
+		"sent_tracking_details_to": "We have sent your order & tracking details to",
+		"thanks_for_your_order": "Thanks for your order,",
+		"unable_to_fetch_order": "Unable to fetch order details",
+		"we_are_preparing_your_order": "We're preparing your order"
 	},
 	"terms_page": {
 		"terms_accordion01_head1": "معلومات خاصة بالمواقع",

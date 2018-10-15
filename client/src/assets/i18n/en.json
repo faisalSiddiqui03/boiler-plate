@@ -39,12 +39,12 @@
 		"coupon_applied_successfully": "Coupon applied successfully",
 		"coupon_removed_successfully": "Coupon removed successfully",
 		"delivery_fee": "Delivery Fee",
+		"discount": "Discount",
 		"dismiss": "DISMISS",
 		"empty_cart_message_1": "Your basket looks a little empty. Why not ",
 		"empty_cart_message_2": "check out some of our unbeatable deals?",
 		"exclusive_offers": "exclusive offers",
 		"got_a_voucher_code": "Got a voucher code?",
-		"got_a_voucher_code_?": "",
 		"item_removed": "Removed cart items",
 		"item_removed_failure": "Failed to remove cart items",
 		"no_voucher_message_1": "Sorry, we don't currently support that voucher code. Don't worry, you can ",
@@ -59,8 +59,7 @@
 		"voucher_description": "Our top deals are always available online on our Deals page.",
 		"you_may_also_like": "You may also like",
 		"your_cart": "Your Cart",
-		"your_total": "Your Total",
-		"discount": "Discount"
+		"your_total": "Your Total"
 	},
 	"category_listing": {
 		"price_tag": "From"
@@ -148,8 +147,8 @@
 		"back_to_deals": "Back to Deals",
 		"choose_any": "Choose any ",
 		"choose_your": "Choose your",
-		"your_deal_details": "Your Deal Details",
-		"extra": "extra"
+		"extra": "extra",
+		"your_deal_details": "Your Deal Details"
 	},
 	"delivery_slot_selection_page": {
 		"CLOSE": "Close",
@@ -506,7 +505,6 @@
 		"sure_remove_address": "Are you sure you want to remove this address?"
 	},
 	"search_location_page": {
-		"min_charecters_not_passed": "We need at least four characters here",
 		"recent_searches": "Recent Searches",
 		"search_placeholder": "Search your location",
 		"use_current_location": "Use Current Location ",
