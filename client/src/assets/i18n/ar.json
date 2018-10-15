@@ -44,6 +44,7 @@
 		"empty_cart_message_2": "تحقق من بعض صفقاتنا التي لا تقبل المنافسة؟",
 		"exclusive_offers": "عروض حصرية",
 		"got_a_voucher_code": "حصلت على رمز القسيمة؟",
+		"got_a_voucher_code_?": "",
 		"item_removed": "",
 		"item_removed_failure": "",
 		"no_voucher_message_1": "عذرًا ، لا ندعم حاليًا رمز القسيمة هذا. لا تقلق ، يمكنك ذلك",
@@ -505,6 +506,7 @@
 		"sure_remove_address": "هل أنت متأكد من رغبتك إزالة هذا العنوان؟"
 	},
 	"search_location_page": {
+		"min_charecters_not_passed": "",
 		"recent_searches": "أخر عملية بحث",
 		"search_placeholder": "البحث في منطقتك",
 		"use_current_location": " إستخدام الموقع الحالي",
