@@ -403,6 +403,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     obj.orderAttributes = attributes;
 
     obj.deliverySlot = this.getDeliverySlot();
+    obj.giftMessage = this.checkoutForm.value.comment || '';
     const action = new Action(CheckoutWidgetActions.ACTION_PLACE_ORDER, obj);
     this.checkoutWidgetAction.emit(action);
   }
