@@ -9,6 +9,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../../translation.loader';
 import { SearchLocationPage } from './search-location.page';
+import { LocationWidgetModule } from '@capillarytech/pwa-framework';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    LocationWidgetModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {

@@ -21,7 +21,7 @@
     "@capillarytech/cap-loopback-api-customer": "0.0.16",
     "@capillarytech/cap-loopback-api-customer-address": "0.0.4",
     "@capillarytech/cap-loopback-api-delivery-slots": "0.0.4",
-    "@capillarytech/cap-loopback-api-geolocations": "0.0.3",
+    "@capillarytech/cap-loopback-api-geolocations": "0.0.4",
     "@capillarytech/cap-loopback-api-locations": "0.0.6",
     "@capillarytech/cap-loopback-api-navigations": "0.0.6",
     "@capillarytech/cap-loopback-api-orders": "0.2.5",
