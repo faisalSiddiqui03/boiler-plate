@@ -86,7 +86,7 @@ export class TrioComponent extends BaseComponent implements OnInit, OnWidgetLife
         console.log('Item added to cart : ', data);
         const isMobile = await this.hardwareService.isMobileApp();
         this.loaderService.stopLoading();
-        this.alertService.presentToast(this.clientProduct.title + ' ' +
+        await this.alertService.presentToast(this.clientProduct.title + ' ' +
           this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
         this.goBack();
         break;

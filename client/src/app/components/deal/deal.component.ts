@@ -104,11 +104,11 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         console.log('Item added to cart : ', data);
         const isDesktop = await this.hardwareService.isDesktopSite();
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
+        await this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
         this.goBack();
         break;
-      case ProductDetailsWidgetActions.ATION_EDIT_CART:
-        // this.alertService.presentToast(this.clientProduct.title + ' ' +
+      case ProductDetailsWidgetActions.ACTION_EDIT_CART:
+        // await this.alertService.presentToast(this.clientProduct.title + ' ' +
         // this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
         this.modalController.dismiss(true);
         break;
@@ -184,7 +184,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (this.cartItem) {
       this.productWidgetAction.emit(
-        new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
+        new Action(ProductDetailsWidgetActions.ACTION_EDIT_CART, this.clientProduct)
       );
       return;
     }
@@ -284,13 +284,13 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     return price;
   }
 
-  setDealPriceDiff() {
+  async setDealPriceDiff() {
     const laterPrice = this.getDealPrice();
     const priceDiff = laterPrice - this.initPrice;
     const added = this.translate.instant('deal.added');
     const extra = this.translate.instant('deal.extra');
     if(priceDiff && this.toppingsEnabled) {
-      this.alertService.presentToast(added + ' ' + this.currencyCode + ' ' + priceDiff.toFixed(3) + ' ' + extra + '!', 2000, 'top', 'top');
+      await this.alertService.presentToast(added + ' ' + this.currencyCode + ' ' + priceDiff.toFixed(3) + ' ' + extra + '!', 2000, 'top', 'top');
     }
   }
 

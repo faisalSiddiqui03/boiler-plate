@@ -94,12 +94,12 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     this.updateInProgress = false;
   }
 
-  widgetActionSuccess(name, data) {
+  async widgetActionSuccess(name, data) {
     this.loaderService.stopLoading();
     this.updateInProgress = false;
     if (data.isSuccessful) {
       console.log(this.translate.instant('change_password_page.change_password_success'));
-      this.alertService.presentToast(this.translate.instant('change_password_page.change_password_success'), 1000, 'top');
+      await this.alertService.presentToast(this.translate.instant('change_password_page.change_password_success'), 1000, 'top');
     } else {
       console.log(data.message);
     }

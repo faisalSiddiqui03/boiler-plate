@@ -85,7 +85,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         const isDesktop = await this.hardwareService.isDesktopSite();
-        this.alertService.presentToast(this.clientProduct.title + ' ' +
+        await this.alertService.presentToast(this.clientProduct.title + ' ' +
           this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
         if (this.fromSuggestion) {
           this.modalController.dismiss(true);
@@ -93,8 +93,8 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
         }
         this.goBack();
         break;
-      case ProductDetailsWidgetActions.ATION_EDIT_CART:
-        // this.alertService.presentToast(this.clientProduct.title + ' ' +
+      case ProductDetailsWidgetActions.ACTION_EDIT_CART:
+        // await this.alertService.presentToast(this.clientProduct.title + ' ' +
         // this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
         this.modalController.dismiss(true);
         // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=' +
@@ -232,7 +232,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (this.cartItem) {
       this.productWidgetAction.emit(
-        new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
+        new Action(ProductDetailsWidgetActions.ACTION_EDIT_CART, this.clientProduct)
       );
       return;
     }
