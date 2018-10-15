@@ -241,21 +241,21 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   getPrice() {
-    if (this.productFromDeal) {
-      let price = 0;
-      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-        if (variant.id === this.clientProduct.variantProductId) price = price + variant.webPrice;
-      });
-      this.clientProduct.bundleItems.forEach((bItem: BundleItem, key: number) => {
-        if (bItem.isSelected && !bItem.isDefault) price = price + bItem.price;
-      });
-      this.clientProduct.setPrice(price);
-      return;
-    }
-    this.updatingPrice = true;
-    this.productWidgetAction.emit(
-      new Action(ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE, this.clientProduct)
-    );
+    // if (this.productFromDeal) {
+    let price = 0;
+    this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+      if (variant.id === this.clientProduct.variantProductId) price = price + variant.webPrice;
+    });
+    this.clientProduct.bundleItems.forEach((bItem: BundleItem, key: number) => {
+      if (bItem.isSelected && !bItem.isDefault) price = price + bItem.price;
+    });
+    this.clientProduct.setPrice(price);
+    return;
+    // }
+    // this.updatingPrice = true;
+    // this.productWidgetAction.emit(
+    //   new Action(ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE, this.clientProduct)
+    // );
   }
 
   isSizeAvailabel(sizePropertyValueId) {
