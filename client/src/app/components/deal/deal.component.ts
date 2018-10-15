@@ -50,7 +50,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   showAddToCart: boolean;
   titleValue: string = '';
   dealCategoryId: string;
-  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -178,7 +178,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
       const storeSelected = await this.openStoreSelection();
       if (!storeSelected) return;
     }
-    this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
     );

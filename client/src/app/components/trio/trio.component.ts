@@ -205,7 +205,7 @@ export class TrioComponent extends BaseComponent implements OnInit, OnWidgetLife
       this.modalController.dismiss(this.clientProduct);
       return;
     }
-    this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.productWidgetAction.emit(
       new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
     );

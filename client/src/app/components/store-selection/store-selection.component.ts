@@ -99,7 +99,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     console.log('Widget loading failed' + name, data);
   }
 
-  // WARNING : Do not add loaderService.stopLoading(); before switch case or at any place except 
+  // WARNING : Do not add loaderService.stopLoading(); before switch case or at any place except
   // existing stop loading.
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
@@ -110,7 +110,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
           // TODO:: add alert-controller to confirm before emptying cart
           if (this.isStoreSelected() && this.getCurrentStore().id !== firstStore.id) {
             this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
-          }          
+          }
           this.setCurrentStore(firstStore);
           this.navigateToDeals();
           // }
@@ -196,17 +196,16 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     });
   }
 
-  findStore() {
+  async findStore() {
     this.isNavigationClicked = true;
     if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
-      this.loaderService.startLoadingByMode('', this.getDeliveryMode());
+      await this.loaderService.startLoadingByMode('', this.getDeliveryMode());
       this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
         [this.selectedAreaCode, this.getDeliveryMode()]));
     } else {
-      this.loaderService.startLoadingByMode('', this.getDeliveryMode());
+      await this.loaderService.startLoadingByMode('', this.getDeliveryMode());
+      if (!this.selectedCityCode) {
 
-      if( !this.selectedCityCode ) {
-        
         this.navigateToDeals();
         return;
       }
@@ -361,10 +360,10 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     return (cityList || []).filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
   }
 
-  locateMe(lat, lng) {
+  async locateMe(lat, lng) {
     this.lat = lat;
     this.lng = lng;
-    this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    await this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
       this.checkIfStoresAreAvailable(null, lat, lng);
       return;

@@ -56,8 +56,6 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     super();
 
     this.googleClientId = this.config.getConfig()['googleClientId'];
-
-    // this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
 
     this.widgetModels = {};
@@ -83,8 +81,8 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     this.isPasswordFiled = !this.isPasswordFiled;
   }
 
-  signIn() {
-    this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
+  async signIn() {
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.widgetModels.USERID_PWD_SIGNIN.userName = this.userIdSigninForm.value.email;
     this.widgetModels.USERID_PWD_SIGNIN.password = this.userIdSigninForm.value.password;
     this.useridPasswordSigninAction.emit(new Action(UserIdPwdSigninWidgetActions.ACTION_SIGN_IN));
@@ -94,8 +92,8 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     console.log(data);
   }
 
-  googleSignIn() {
-    this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
+  async googleSignIn() {
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.googleSignInActionEmitter.emit(new Action(GoogleSignInWidgetActions.ACTION_GPLUS_SIGN_IN));
   }
 
@@ -106,7 +104,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     }else {
       this.alertService.presentToast(data.isSuccessful ? this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top', 'top');
     }
-    
+
     this.capRouter.routeByUrlWithLanguage('/home');
   }
 
@@ -132,7 +130,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       }else {
         this.alertService.presentToast(data.message, 500, 'top', 'top');
       }
-      
+
     }
   }
 

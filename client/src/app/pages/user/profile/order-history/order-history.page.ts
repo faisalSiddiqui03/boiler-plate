@@ -47,8 +47,6 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
     private capRouter: CapRouterService
     ) {
     super();
-
-    // this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }

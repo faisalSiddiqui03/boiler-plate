@@ -39,7 +39,7 @@
             <div class="store-times"><ion-skeleton-text class="p-skeleton"></ion-skeleton-text></div>
           </div>
           <div text-right class="take-away-now">
-            <ion-button color="success" size="small" class="btn-success" text-uppercase mode="ios" (click)="selectStore(store)">
+            <ion-button [disabled]="!store.isOnline('S')" color="success" size="small" class="btn-success" text-uppercase mode="ios" (click)="selectStore(store)">
               {{'store_selection_page.take_away_now' | translate}}
             </ion-button>
           </div>

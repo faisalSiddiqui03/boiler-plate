@@ -207,7 +207,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       this.modalController.dismiss(this.clientProduct);
       return;
     }
-    this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (this.cartItem) {
       this.productWidgetAction.emit(
         new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)

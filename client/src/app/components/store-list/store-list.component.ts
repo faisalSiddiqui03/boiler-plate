@@ -41,8 +41,6 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
   ) {
     super();
     this.deliveryModes = DeliveryModes;
-
-    // this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.translate.use(this.getCurrentLanguageCode());
   }
 

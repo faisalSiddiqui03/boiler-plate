@@ -41,8 +41,6 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
     private utilService: UtilService
   ) {
     super();
-
-    // this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.slotSelected = true;
     this.slotContent = this.asSoonPossible ? this.asapText : '';
     this.activeTimeSlot = 0;
@@ -113,7 +111,7 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
       } else {
 
         this.setDeliverySlot(this.getDeliverySlot());
-      }      
+      }
     }
   }
 

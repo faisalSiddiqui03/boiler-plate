@@ -77,8 +77,8 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     this.subscriptions.push(translateSub);
   }
 
-  signUp() {
-    this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
+  async signUp() {
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     console.log(this.signUpForm.value);
     this.widgetModels.USERID_SIGNUP.firstName = this.signUpForm.value.fname;
     this.widgetModels.USERID_SIGNUP.lastName = this.signUpForm.value.lname;
