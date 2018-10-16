@@ -129,7 +129,7 @@
     }
   }
   .suggestions-wrap {
-    padding: 10px 5px;
+    padding: 10px 5px 0 5px;
     background: var(--ion-block-header-color);
     border-top: 2px solid var(--ion-color-medium-shade);
     border-bottom: 2px solid var(--ion-color-medium-shade);
@@ -318,10 +318,14 @@
           display: none;
         }
       }
-      .cart-list {
+      .scrolling-cart {
         flex: 1;
         overflow: auto;
       }
+      // .cart-list {
+        // flex: 1;
+        // overflow: auto;
+      // }
     }
   }
 }
