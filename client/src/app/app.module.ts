@@ -33,8 +33,8 @@ import {
   FulfilmentModeModule,
   SEOModule,
   LanguageService,
-  AppUpdateServiceModule,
-  AppUpdateServiceImpl,
+  // AppUpdateServiceModule,
+  // AppUpdateServiceImpl,
   CapRouterService,
   ServiceWorkerModule as PWAServiceWorkerModule
 } from '@capillarytech/pwa-framework';
@@ -91,8 +91,8 @@ export function getAppConfig(): Object {
     SearchLocationPageModule,
     EventTrackServiceModule.forRoot([EventTrackServiceModule.Tracker.GTM]),
     EventTrackWidgetModule,
-    CapRouterServiceModule,
-    AppUpdateServiceModule,
+    // CapRouterServiceModule,
+    // AppUpdateServiceModule,
     LanguageServiceModule.forRoot(languages),
     TranslateModule.forRoot({
       loader: {
@@ -126,7 +126,7 @@ export function getAppConfig(): Object {
     },
     RoutingState,
     UtilService,
-    AppUpdateServiceImpl
+    // AppUpdateServiceImpl
   ],
   bootstrap: [AppComponent]
 })

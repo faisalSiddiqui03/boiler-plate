@@ -97,7 +97,7 @@
 		"email_required": " يرجى إدخال بريدك الالكتروني",
 		"email_valid": "يرجى إدخال عنوان بريدك الالكتروني الصحيح",
 		"go_to_payment": "المتابعة للدفع",
-		"home": "",
+		"home": "Home",
 		"how_you_pay": "كيف تود أن تدفع؟",
 		"latest_discounts_offers_text": " يرجى إرسال أحدث الخصومات والعروض من بيتزا هت للتوصيل",
 		"mobile": "رقم الجوال",
@@ -113,7 +113,7 @@
 		"order_for": "الطلب لأجل :",
 		"order_successful": "",
 		"ordering_for_delivery_to": " الطلب للتسليم إلى",
-		"other": "",
+		"other": "Other",
 		"pick_a_time": "وقت تسليم الطلب",
 		"pickup_from": "",
 		"place_your_order": "تأكيد الطلب",
@@ -129,7 +129,7 @@
 		"where_we_deliver": "أين يجب علينا توصلها؟",
 		"who_we_delivering": "إلى من نسلم الطلب؟ ",
 		"with_cash": "نقدًا",
-		"work": ""
+		"work": "Work"
 	},
 	"contact_page": {
 		"address_1": "شركة الحميضي الغذائية",

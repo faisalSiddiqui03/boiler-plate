@@ -10,7 +10,7 @@ import {
   pwaLifeCycle,
   CapRouterService,
   ServiceWorkerServiceImpl,
-  AppUpdateServiceImpl
+  // AppUpdateServiceImpl
 } from '@capillarytech/pwa-framework';
 import { AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { UtilService } from './helpers/utils';
@@ -40,7 +40,7 @@ export class AppComponent extends BaseComponent {
     private capAlertService: AlertService,
     private capRouterService: CapRouterService,
     private serviceWorkerService: ServiceWorkerServiceImpl,
-    private appUpdateService: AppUpdateServiceImpl,
+    // private appUpdateService: AppUpdateServiceImpl,
     private hardwareService: HardwareService,
     // private market: Market
   ) {
@@ -61,13 +61,13 @@ export class AppComponent extends BaseComponent {
       this.splashScreen.hide();
       const mobilePlatform = await this.hardwareService.getPlatformDetails();
       let versionDetails;
-      if (mobilePlatform.includes('android')) {
-        versionDetails = await this.appUpdateService.getVersionDetails('android');
-        this.handleForceUpdateAlert(versionDetails);
-      } else if (mobilePlatform.includes('ios')) {
-        versionDetails = await this.appUpdateService.getVersionDetails('ios');
-        this.handleForceUpdateAlert(versionDetails);
-      }
+      // if (mobilePlatform.includes('android')) {
+      //   versionDetails = await this.appUpdateService.getVersionDetails('android');
+      //   this.handleForceUpdateAlert(versionDetails);
+      // } else if (mobilePlatform.includes('ios')) {
+      //   versionDetails = await this.appUpdateService.getVersionDetails('ios');
+      //   this.handleForceUpdateAlert(versionDetails);
+      // }
     });
 
     this.handleSWUpdates();
