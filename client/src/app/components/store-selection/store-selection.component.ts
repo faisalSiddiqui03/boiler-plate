@@ -105,14 +105,14 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
     switch (name) {
-        case LocationWidgetActions.LOCATE_ME:
-          const geometry = data.geometry;
-          await this.findStoreByLatLong(geometry.latitude, geometry.longitude);
-            //   geometry.latitude = position.coords.latitude;
-            //   geometry.longitude = position.coords.longitude;
-            //   location.geometry = geometry;
+      case LocationWidgetActions.LOCATE_ME:
+        const geometry = data.geometry;
+        await this.findStoreByLatLong(geometry.latitude, geometry.longitude);
+        //   geometry.latitude = position.coords.latitude;
+        //   geometry.longitude = position.coords.longitude;
+        //   location.geometry = geometry;
 
-            break;
+        break;
       case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
           const firstStore = data[0];
@@ -130,7 +130,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-      this.loaderService.stopLoading();
+        this.loaderService.stopLoading();
         if (!this.isModal) {
           if (data && data.length) {
             this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
@@ -199,7 +199,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
-      if(storeSelected.data){
+      if (storeSelected.data) {
         this.modalController.dismiss(true);
       }
     });
@@ -209,8 +209,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     this.clearCartToChange = 'store';
     // TODO:: add alert-controller to confirm before emptying cart
     if (this.isCartNotEmpty() &&
-        (this.selectedAreaCode !== this.getCurrentStore().area.code ||
-         this.selectedCityCode !== this.getCurrentStore().city.code)
+      (this.selectedAreaCode !== this.getCurrentStore().area.code ||
+        this.selectedCityCode !== this.getCurrentStore().city.code)
     ) {
       if (!force) {
         this.clearCartPopup = true;
@@ -256,8 +256,10 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
       case LocationWidgetActions.LOCATE_ME:
-          console.log('unable to find location', data);
-          break;
+        const msg = await this.translate.instant('home_page.allow_location_access');
+        this.alertService.presentToast(msg, 1000, 'bottom');
+        console.log('unable to find location', data);
+        break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         console.log('unable to find store', data);
         break;
@@ -388,9 +390,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   async locateMe() {
-
-      this.locationsWidgetAction.emit(new Action(LocationWidgetActions.LOCATE_ME, []));
-      await this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    await this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    this.locationsWidgetAction.emit(new Action(LocationWidgetActions.LOCATE_ME, []));
   }
 
   async findStoreByLatLong(lat, lng) {

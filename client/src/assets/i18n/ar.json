@@ -321,7 +321,8 @@
 		"take_away": "طلب خارجي",
 		"unable_to_get_stores": "غير قادر على الحصول على المتاجر",
 		"view_all_deals": "عرض جميع الصفقات",
-		"your_pickup_hut_is": "مكان إستلام الطلب"
+		"your_pickup_hut_is": "مكان إستلام الطلب",
+		"allow_location_access": "Please provide location access!"
 	},
 	"location_page": {
 		"confirm_and_proceed": "تأكيد والمتابعة",

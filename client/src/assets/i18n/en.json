@@ -321,7 +321,8 @@
 		"take_away": "Take away",
 		"unable_to_get_stores": "We've got some bad news... we currently don't deliver to your area",
 		"view_all_deals": "View All Deals",
-		"your_pickup_hut_is": "Your pickup hut is"
+		"your_pickup_hut_is": "Your pickup hut is",
+		"allow_location_access": "Please provide location access!"
 	},
 	"location_page": {
 		"confirm_and_proceed": "Confirm and Proceed",
