@@ -303,6 +303,7 @@
 		"take_away": "يبعد"
 	},
 	"home_page": {
+		"allow_location_access": "Please provide location access!",
 		"block_": "منع",
 		"change": "تغير العنوان",
 		"clear_cart_message": "Are you sure you want to clear cart items?",
@@ -322,8 +323,7 @@
 		"take_away": "طلب خارجي",
 		"unable_to_get_stores": "غير قادر على الحصول على المتاجر",
 		"view_all_deals": "عرض جميع الصفقات",
-		"your_pickup_hut_is": "مكان إستلام الطلب",
-		"allow_location_access": "Please provide location access!"
+		"your_pickup_hut_is": "مكان إستلام الطلب"
 	},
 	"location_page": {
 		"confirm_and_proceed": "تأكيد والمتابعة",
@@ -522,6 +522,7 @@
 		"email_required": "يجب إدخال البريد الإلكتروني",
 		"email_valid": "يرجى إدخال عنوان بريدك الالكتروني الصحيح",
 		"forgot_password": "نسيت كلمة المرور",
+		"invalid_username_and_password": "Invalid email/password. Don't be so quick. Type it nice and slowly, we can wait.",
 		"password": "كلمة المرور",
 		"password_minlength": "الحد الأدنى لكلمة المرور هو ستة رموز",
 		"password_placeholder": "أدخل كلمة المرور",
@@ -530,8 +531,7 @@
 		"remember_me": "تذكرنى",
 		"sign_in": "تسجيل دخول",
 		"signin_google": "تسجيل دخول قوقل",
-		"success_sign_in": "",
-		"invalid_username_and_password": "Invalid email/password. Don't be so quick. Type it nice and slowly, we can wait."
+		"success_sign_in": ""
 	},
 	"sign_up_page": {
 		"confirm_password": "تأكيد كلمة المرور",
