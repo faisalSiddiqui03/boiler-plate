@@ -71,10 +71,12 @@
 		"enter_password_length": "Password minimum length is 6 characters",
 		"enter_password_placeholder": "Enter your Password",
 		"enter_password_required": "It will be our little secret",
+		"password_set_successfully": "Password set successfully",
 		"re_enter_password": "Re-enter new password",
 		"re_enter_password_notmatch": "Password do not match",
 		"re_enter_password_placeholder": "Please confirm your password",
 		"re_enter_password_required": "Please confirm your password",
+		"start_ordering": "Start Ordering",
 		"submit": "submit"
 	},
 	"checkout_page": {
