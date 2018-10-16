@@ -528,7 +528,8 @@
 		"remember_me": "تذكرنى",
 		"sign_in": "تسجيل دخول",
 		"signin_google": "تسجيل دخول قوقل",
-		"success_sign_in": ""
+		"success_sign_in": "",
+		"invalid_username_and_password": "Invalid email/password. Don't be so quick. Type it nice and slowly, we can wait."
 	},
 	"sign_up_page": {
 		"confirm_password": "تأكيد كلمة المرور",
