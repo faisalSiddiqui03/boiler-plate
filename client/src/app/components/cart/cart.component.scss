@@ -297,6 +297,21 @@
     }
   }
 }
+.applied-voucher-block{
+  padding: 16px 9px 16px 16px;
+  border-top: 1px solid var(--ion-color-light-shade);
+  span{
+    background: var(--ion-color-success);
+    color: var(--ion-color-light);
+    padding: 6px;
+    font-size: 12px;
+  }
+  ion-icon{
+    cursor: pointer;
+    color: var(--ion-color-medium-shade);
+    font-size: 20px;
+  }
+}
 
 @media (min-width:992px) {
   .cart-page {
