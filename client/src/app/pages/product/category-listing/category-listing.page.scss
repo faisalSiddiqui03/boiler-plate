@@ -293,6 +293,33 @@
       }
     }
   }
+  .mobile-show-location{
+    background: var(--ion-color-light);
+    padding: 10px;
+    font-size: 14px;  
+    line-height: 30px;
+    .show-icon{
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+      color: var(--ion-color-danger);
+    }
+    .show-text{
+      color: var(--ion-color-danger);
+      padding-right: 3px;
+    }
+    small{
+      font-size: 100%;
+    }
+    .location-show{  
+      small{
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
   @media (max-width: 991px) {
     .showcase-tabs-one {
       background: rgba(var(--ion-color-cart-stripe-rgb), 0.96);

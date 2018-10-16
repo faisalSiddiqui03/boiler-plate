@@ -24,6 +24,24 @@
 
         <div class="container showcase-container full-height">
           <ion-content>
+            <ion-hide-when size="lg">
+              <div class="mobile-show-location">
+                <div class="delivey-show" (click)="goToPage('home')">
+                  <div class="show-icon" [ngClass]="{'icon-delivery': getDeliveryMode() === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getDeliveryMode() === deliveryModes.PICKUP}"></div>
+                  <span class="show-text" text-capitalize>{{ 'header.mode' | translate }}:</span>
+                  <small *ngIf="getDeliveryMode() === deliveryModes.HOME_DELIVERY" text-capitalize>{{ 'header.delivery' | translate }}
+                  </small>
+                  <small *ngIf="getDeliveryMode() === deliveryModes.PICKUP" text-capitalize>{{ 'header.take_away' | translate }}
+                  </small>
+                </div>
+                <div class="location-show" flex-center (click)="goToPage('home')">
+                  <div class="show-icon icon-location-pin"></div>
+                  <span class="show-text" text-capitalize>{{ 'header.location' | translate }}:</span>
+                  <small text-uppercase>{{getCurrentStore()?.address}}</small>
+                  <div class="arrow-icon icon-arrow-down-2"></div>
+                </div>
+              </div>
+            </ion-hide-when>
             <ng-container *ngFor="let item of navigations; let i = index;">
               <div [hidden]="!(item.categoryId === categoryId)">
                 <product-showcase-widget [componentId]="getComponentId()" [setSEOTags]=false pfWidgetImpressionTrack [filters]="getShowcaseFilter(item.categoryId)"
@@ -110,13 +128,8 @@
                               <ion-card no-margin no-padding no-border class="product-card deal-card" [pfProductClickTrack]="{products:[prod], position:idx}"
                                 (click)="openDeal(prod?.client)">
                                 <ion-card-header>
-                                  <img
-                                    height="170" src="{{getProductImageUrl(prod)}}"
-                                    img-preloader="{{getProductImageUrl(prod)}}"
-                                    defaultImage="assets/imgs/default/default.png"
-                                    loadingImage="assets/imgs/default/default.png"
-                                    alt="{{prod?.title}}"
-                                  />
+                                  <img height="170" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
+                                    loadingImage="assets/imgs/default/default.png" alt="{{prod?.title}}" />
                                 </ion-card-header>
                                 <ion-card-content>
                                   <p class="deal-item-name">{{prod.title}}</p>
@@ -136,12 +149,8 @@
                                 <div *ngIf="isLoggedIn()" class="icon" [ngClass]="{'icon-favourite-active': prod?.isFavorite,'icon-favourite': !prod?.isFavorite, 'fav-progress': favoriteInProgress.get(prod.id)}"
                                   (click)="updateFavorites(prod?.isFavorite, prod?.client); $event.stopPropagation();"></div>
                                 <ion-card-header no-padding>
-                                  <img height="100" src="{{getProductImageUrl(prod)}}"
-                                       img-preloader="{{getProductImageUrl(prod)}}"
-                                       defaultImage="assets/imgs/default/default.png"
-                                       loadingImage="assets/imgs/default/default.png"
-                                       alt="{{prod?.title}}"
-                                  />
+                                  <img height="100" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
+                                    loadingImage="assets/imgs/default/default.png" alt="{{prod?.title}}" />
                                 </ion-card-header>
 
                                 <ion-card-content padding>

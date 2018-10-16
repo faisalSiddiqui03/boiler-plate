@@ -13,7 +13,8 @@ import {
   DeliverySlot,
   CapRouterService,
   SeoInfoEntityType,
-  WidgetNames
+  WidgetNames,
+  DeliveryModes
 } from '@capillarytech/pwa-framework';
 import {TranslateService} from '@ngx-translate/core';
 import {BaseComponent} from '../../../base/base-component';
@@ -42,6 +43,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   favoriteInProgress = new Map();
   seoEntityType: SeoInfoEntityType = SeoInfoEntityType.CATEGORY;
   categorySeoMap = {};
+  deliveryModes: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -58,6 +60,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
     this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
+    this.deliveryModes = DeliveryModes;
   }
 
   ngOnInit() {
@@ -263,5 +266,9 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       const scrollPosition = selectedItem.offsetLeft;
       bottomDiv.scrollLeft += scrollPosition;
     }
+  }
+
+  goToPage(pageName) {
+    this.capRouter.routeByUrlWithLanguage(pageName);
   }
 }
