@@ -91,6 +91,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
       await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
       const action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
+      this.couponCode = null;
     } else {
       this.isWrongVoucher = true;
     }

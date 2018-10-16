@@ -215,6 +215,11 @@
     font-size: 14px;
     font-weight: 700;
     min-height: 32px;
+    .total-price-striked{
+      margin-right: 30px;
+      color: var(--ion-color-danger);
+      text-decoration: line-through;
+    }
   }
   ion-footer {
     padding: 6px 10px;
