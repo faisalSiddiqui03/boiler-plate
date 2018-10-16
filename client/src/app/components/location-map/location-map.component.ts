@@ -5,6 +5,7 @@ import { AgmCoreModule, MouseEvent, MarkerManager } from '@agm/core';
 import { UtilService } from '../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { SearchLocationPage } from '../../pages/user/profile/search-location/search-location.page';
+import { OverlayEventDetail } from '@ionic/core';
 
 @Component({
     selector: 'app-location-map',
@@ -18,9 +19,10 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
     zoom = 8;
     marker: Marker;
     agmMarkerSrc = 'assets/imgs/location-pin.png';
+    formattedAddress = 'Kuwait city, Kuwait';
 
     @Input() addressPageClass = false;
-    @Input() locationDetails = {latitude:0, longitude:0};
+    @Input() locationDetails = { latitude: 0, longitude: 0 };
     @Output() newLocationDetails = new EventEmitter();
 
     constructor(
@@ -80,7 +82,15 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
         const modal = await this.modalController.create({
             component: SearchLocationPage
         });
-        return await modal.present();
+        await modal.present();
+
+        modal.onDidDismiss().then((searchDetail: OverlayEventDetail) => {
+          if (!searchDetail) return;
+          this.marker.lat = searchDetail.data.latitude;
+          this.marker.lng = searchDetail.data.longitude;
+          this.formattedAddress = searchDetail.data.formattedAddress;
+          this.updateLocationAddress();
+        });
     }
 
 }
