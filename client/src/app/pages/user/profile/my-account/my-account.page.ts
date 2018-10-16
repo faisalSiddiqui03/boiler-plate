@@ -44,6 +44,14 @@ export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLife
     });
   }
 
+  ionViewWillEnter() {
+    this.closeToast();
+  }
+
+  async closeToast() {
+    await this.alertService.closeToast();;
+  }
+  
   goToPage(pageName) {
     if (pageName === 'logout') {
       const action = new Action(LogoutWidgetActions.ACTION_LOGOUT);

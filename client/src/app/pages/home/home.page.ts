@@ -73,6 +73,11 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
       { name: 'og:image', content: 'https://phindia-resources.cdn.martjack.io/azure/inc-yum-resources/98d18d82-ba59-4957-9c92-3f89207a34f6/Images/ProductImages/Source/Exotica.jpg?height=1200&width=1200&builder=freeimage' },
       { name: 'keywords', content: 'Pizza Hut Kuwait | Pizza Delivery Near You | Order Online' }
     ]);
+    this.closeToast();
+  }
+
+  async closeToast() {
+    await this.alertService.closeToast();;
   }
 
   ionViewWillLeave() {

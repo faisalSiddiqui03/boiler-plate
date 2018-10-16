@@ -53,6 +53,14 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     }, { validator: this.checkPasswords });
   }
 
+  ionViewWillEnter() {
+    this.closeToast();
+  }
+
+  async closeToast() {
+    await this.alertService.closeToast();;
+  }
+
   ngOnInit() {
     this.passwordChangeSuccess = false;
     const translateSub = this.translate.get('change_password_page.change_password').subscribe(value => {

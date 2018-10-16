@@ -118,6 +118,11 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
     this.checkSlots();
     this.checkCart();
+    this.closeToast();
+  }
+
+  async closeToast() {
+    await this.alertService.closeToast();;
   }
 
   async checkSlots() {

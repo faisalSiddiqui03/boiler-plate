@@ -67,6 +67,13 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
     });
   }
 
+  ionViewWillEnter() {
+    this.closeToast();
+  }
+
+  async closeToast() {
+    await this.alertService.closeToast();;
+  }
 
   async widgetActionFailed(name: string, data: any) {
     this.loaderService.stopLoading();

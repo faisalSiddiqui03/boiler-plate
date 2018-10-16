@@ -41,7 +41,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   constructor(
     private router: Router,
     private utilService: UtilService,
-    private loaderService: LoaderService,
+    private alertService: AlertService,
     private config: ConfigService,
     private translate: TranslateService,
     private capRouter: CapRouterService
@@ -55,6 +55,14 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
     this.translate.get('order_history_page.order_history').subscribe(value => {
       this.titleValue = value;
     });
+  }
+
+  ionViewWillEnter() {
+    this.closeToast();
+  }
+
+  async closeToast() {
+    await this.alertService.closeToast();;
   }
 
   handleOrdersResponse(data) {

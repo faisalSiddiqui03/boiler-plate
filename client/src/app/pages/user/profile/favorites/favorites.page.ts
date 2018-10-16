@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ProductDetailsComponent } from '../../../../components/product-details/product-details.component';
 import { PizzaComponent } from '../../../../components/pizza/pizza.component';
 import { ModalController } from '@ionic/angular';
+import { AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-favorites',
@@ -37,7 +38,8 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     private translate: TranslateService,
     private capRouter: CapRouterService,
     private config: ConfigService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private alertService: AlertService
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -48,6 +50,14 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
     this.translate.get('favorites_page.my_favorites').subscribe(value => {
       this.titleValue = value;
     });
+  }
+
+  ionViewWillEnter() {
+    this.closeToast();
+  }
+
+  async closeToast() {
+    await this.alertService.closeToast();;
   }
 
   goToPage(pageName) {

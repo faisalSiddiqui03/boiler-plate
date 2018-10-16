@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { BaseComponent } from '../../../base/base-component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,7 +24,8 @@ export class SuccessPage extends BaseComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private utilService: UtilService,
-    private capRouter: CapRouterService, private loader: LoaderService
+    private capRouter: CapRouterService,
+    private alertService: AlertService
   ) {
     super();
   }
@@ -47,6 +48,15 @@ export class SuccessPage extends BaseComponent implements OnInit {
       this.showEmailPopup = true;
     }
   }
+
+  ionViewWillEnter() {
+    this.closeToast();
+  }
+
+  async closeToast() {
+    await this.alertService.closeToast();;
+  }
+
 
   getOrderUsingEmail() {
     this.showEmailPopup = false;

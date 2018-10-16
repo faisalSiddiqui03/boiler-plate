@@ -7,8 +7,6 @@ import {
   Action,
   OnWidgetActionsLifecyle, OnWidgetLifecyle, CapRouterService
 } from '@capillarytech/pwa-framework';
-import { UtilService } from '../../../../helpers/utils';
-import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validator, Validators } from '@angular/forms';
@@ -30,13 +28,13 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
   titleValue = '';
   updateInProgress = false;
 
-  constructor(private router: Router,
+  constructor(
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
-    private utilService: UtilService,
     private formBuilder: FormBuilder,
-    private capRouter: CapRouterService,) {
+    private capRouter: CapRouterService
+  ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
 
@@ -48,6 +46,13 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
     })
   }
 
+  ionViewWillEnter() {
+    this.closeToast();
+  }
+
+  async closeToast() {
+    await this.alertService.closeToast();;
+  }
 
   ngOnInit() {
     this.translate.get('user_profile_page.my_profile').subscribe(value => {
@@ -56,7 +61,7 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   async updateProfile() {
-    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updateInProgress = true;
     this.widgetModel.firstName = this.profileForm.value.firstName;
     this.widgetModel.lastName = this.profileForm.value.lastName;

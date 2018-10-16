@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit, ViewEncapsulation, Inject} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Location, DOCUMENT} from '@angular/common';
+import { Component, EventEmitter, OnInit, ViewEncapsulation, Inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location, DOCUMENT } from '@angular/common';
 import {
   ConfigService,
   OnWidgetActionsLifecyle,
@@ -16,11 +16,11 @@ import {
   WidgetNames,
   DeliveryModes
 } from '@capillarytech/pwa-framework';
-import {TranslateService} from '@ngx-translate/core';
-import {BaseComponent} from '../../../base/base-component';
-import {ModalController} from '@ionic/angular';
-import {DeliverySlotSelectionPage} from '../../checkout/delivery-slot-selection/delivery-slot-selection.page';
-import {LoaderService} from '@capillarytech/pwa-ui-helpers';
+import { TranslateService } from '@ngx-translate/core';
+import { BaseComponent } from '../../../base/base-component';
+import { ModalController } from '@ionic/angular';
+import { DeliverySlotSelectionPage } from '../../checkout/delivery-slot-selection/delivery-slot-selection.page';
+import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-category-listing',
@@ -46,7 +46,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   deliveryModes: any;
 
   constructor(
-    private route: ActivatedRoute,
+    private alertService: AlertService,
     private router: Router,
     private translate: TranslateService,
     private config: ConfigService,
@@ -69,7 +69,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   ionViewWillEnter() {
     this.checkSlots();
-
+    this.closeToast();
     const urlData = this.location.path(false);
     const params = urlData.split('?')[1].split('&');
     const dataFromParams = {
@@ -87,6 +87,10 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   ionViewDidEnter() {
     this.loaderService.stopLoading();
+  }
+
+  async closeToast() {
+    await this.alertService.closeToast();;
   }
 
   async checkSlots() {
@@ -236,7 +240,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   switchCategories(data) {
     if (data.categoryId === this.categoryId) return;
-    this.router.navigate([], {queryParams: data})
+    this.router.navigate([], { queryParams: data })
       .then(data => {
       })
       .catch(err => {
