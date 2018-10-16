@@ -483,7 +483,8 @@
 	"product_details": {
 		"add_to_basket": "Add To My Basket",
 		"add_to_deal": "Add to my deal",
-		"added_to_cart": "added to cart"
+		"added_to_cart": "added to cart",
+		"quantity": "Quantity"
 	},
 	"reset_password_page": {
 		"email": "Email",

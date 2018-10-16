@@ -483,7 +483,8 @@
 	"product_details": {
 		"add_to_basket": "أضف إلى سلة بلدي",
 		"add_to_deal": "اضف إلى الصفقة",
-		"added_to_cart": "إضافة إلى السلة"
+		"added_to_cart": "إضافة إلى السلة",
+		"quantity": "الكمية"
 	},
 	"reset_password_page": {
 		"email": "البريد الإلكتروني",

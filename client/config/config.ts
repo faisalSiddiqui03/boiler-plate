@@ -24,6 +24,7 @@ export const config = {
     "dealCategoryId": 'CU00215646',
     "headerBannerRefCode": "ph-60th-years-",
     "footerBannerRefCode": "bogo-pwa-",
+    "quantityEnabledCategories": ['CU00215602'],
     "baseUrl": "/api/",
     "server": {
       "mw-static": {

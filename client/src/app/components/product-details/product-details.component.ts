@@ -38,13 +38,14 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   serverProduct;
   clientProduct: Product;
   currencyCode: string;
-  categoryId: string;
   productName: string;
   showAddToCart: boolean;
   noOfProperties: number;
   noOfSelectedProperties: number;
   showVariants: boolean;
   addingToCart: boolean;
+  quantityEnabled: boolean;
+  quantityEnabledCategories = [];
 
   constructor(
     private alertService: AlertService,
@@ -58,6 +59,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     super();
     this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
+    this.quantityEnabledCategories = this.config.getConfig()['quantityEnabledCategories'];
   }
 
   ngOnInit() {
@@ -110,6 +112,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   }
 
   setClient() {
+    this.quantityEnabled = this.quantityEnabledCategories.includes(this.serverProduct.categoryId);
     this.noOfProperties = 0;
     this.noOfSelectedProperties = 0;
     this.showAddToCart = !this.clientProduct.isParentProduct;
@@ -205,6 +208,11 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       });
     }
     return this.clientProduct.price;;
+  }
+
+  setQuantity(quantity, isAdd) {    
+    if(isAdd) this.clientProduct.setQuantity(this.clientProduct.quantity + 1);
+    if(!isAdd && quantity > 1) this.clientProduct.setQuantity(this.clientProduct.quantity - 1);
   }
 
   async openStoreSelection() {
