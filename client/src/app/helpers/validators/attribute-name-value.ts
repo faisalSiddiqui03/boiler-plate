@@ -3,6 +3,7 @@ export enum AttributeName {
     IS_CHEESE = "Ischeese",
     CUSTOMIZABLE = 'customizable',
     IS_TOPPINGS_ENABLED = 'isEnabledTopping',
+    MAX_TOPPING_COUNT = 'maxToppingCount',
 }
 
 export enum AttributeValue {

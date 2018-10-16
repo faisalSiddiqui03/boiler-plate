@@ -348,6 +348,8 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
 
   setToppingCountValidators() {
     try {
+      const maxToppingCount = Product.getAttributeValueByName(this.serverProduct, AttributeName.MAX_TOPPING_COUNT);
+      if(parseInt(maxToppingCount)) this.maxToppingLimit = parseInt(maxToppingCount);
       this.toppings.map((item) => {
         this.clientProduct.bundleItems.forEach((clientItem, number) => {
           if (item.id === clientItem.id && this.getItemType(item) === AttributeValue.TOPPING) {
@@ -361,6 +363,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     } catch (err) {
       console.error('Error setting validators');
     }
+  }
+
+  isCheese(item) {
+    return BundleItem.getAttributeValueByName(item, AttributeName.IS_CHEESE) === AttributeValue.TRUE;
   }
 
   setToppingStatus() {
