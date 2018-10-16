@@ -2,9 +2,9 @@ import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
+import {UtilService} from '../../../helpers/utils';
 import {BaseComponent} from '../../../base/base-component';
 import {CapRouterService, SurveyWidgetActions, Action, pwaLifeCycle} from '@capillarytech/pwa-framework';
-import { AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-feedback',
@@ -19,8 +19,9 @@ export class FeedbackPage extends BaseComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
+    private router: Router,
+    private utilService: UtilService,
     private formBuilder: FormBuilder,
-    private alertService: AlertService,
     private capRouter: CapRouterService,
   ) {
     super();
@@ -68,13 +69,4 @@ export class FeedbackPage extends BaseComponent implements OnInit {
       new Action(SurveyWidgetActions.ACTION_ADD_SURVEY, map)
     );
   }
-
-  ionViewWillEnter() {
-    this.closeToast();
-  }
-
-  async closeToast() {
-    await this.alertService.closeToast();;
-  }
-
 }

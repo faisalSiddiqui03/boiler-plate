@@ -49,14 +49,6 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
     });
   }
 
-  ionViewWillEnter() {
-    this.closeToast();
-  }
-
-  async closeToast() {
-    await this.alertService.closeToast();;
-  }
-
   widgetActionFailed(name: string, data: any): any {
   }
 

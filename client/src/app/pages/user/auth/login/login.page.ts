@@ -69,11 +69,6 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   ionViewWillEnter() {
     this.translate.use(this.getCurrentLanguageCode());
-    this.closeToast();
-  }
-
-  async closeToast() {
-    await this.alertService.closeToast();;
   }
 
   ngOnInit() {

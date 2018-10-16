@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../../../base/base-component';
+import { UtilService } from '../../../helpers/utils';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-product-details',
@@ -16,19 +16,10 @@ export class ProductDetailsPage extends BaseComponent implements OnInit {
   productName: string;
 
   constructor(private route: ActivatedRoute,
-    private alertService: AlertService,
+    private utilService: UtilService,
     private translate: TranslateService) {
     super();
   }
-
-  ionViewWillEnter() {
-    this.closeToast();
-  }
-
-  async closeToast() {
-    await this.alertService.closeToast();;
-  }
-
 
   ngOnInit() {
     this.translate.use(this.getCurrentLanguageCode());

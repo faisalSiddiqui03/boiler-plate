@@ -42,14 +42,6 @@ export class OrderDetailsPage extends BaseComponent implements OnInit, OnWidgetL
     this.orderId = this.actRoute.snapshot.params['orderId'];
   }
 
-  ionViewWillEnter() {
-    this.closeToast();
-  }
-
-  async closeToast() {
-    await this.alertService.closeToast();;
-  }
-
   goToPage(pageName) {
     this.capRouter.routeByUrlWithLanguage(pageName);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));

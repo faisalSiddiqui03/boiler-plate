@@ -77,14 +77,6 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     this.subscriptions.push(translateSub);
   }
 
-  ionViewWillEnter() {
-    this.closeToast();
-  }
-
-  async closeToast() {
-    await this.alertService.closeToast();;
-  }
-
   async signUp() {
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     console.log(this.signUpForm.value);

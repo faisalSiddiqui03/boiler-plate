@@ -8,7 +8,10 @@ import {
   OnWidgetLifecyle,
   LocationWidget,
   LocationWidgetActions,
+  ConfigService
 } from '@capillarytech/pwa-framework';
+import { UtilService } from '../../../../helpers/utils';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,9 +35,12 @@ export class SearchLocationPage extends BaseComponent implements OnInit, OnWidge
   @ViewChild(LocationWidget) locationWidgetTemplate;
 
   constructor(
+    private router: Router,
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
+    private utilService: UtilService,
+    private config: ConfigService,
     private modalController: ModalController) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -43,17 +49,9 @@ export class SearchLocationPage extends BaseComponent implements OnInit, OnWidge
   ngOnInit() {
   }
 
-  ionViewWillEnter() {
-    this.closeToast();
-  }
-
-  async closeToast() {
-    await this.alertService.closeToast();;
-  }
-
   ionViewDidLoad() {
     setTimeout(() => {
-      this.myInput.setFocus();
+        this.myInput.setFocus();
     }, 800);
   }
 

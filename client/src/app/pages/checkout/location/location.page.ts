@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../../base/base-component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilService } from '../../../helpers/utils';
+
 @Component({
   selector: 'app-location',
   templateUrl: './location.page.html',
@@ -14,7 +15,7 @@ export class LocationPage extends BaseComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private actRoute: ActivatedRoute,
-    private alertService: UtilService
+    private utilService: UtilService
   ) {
     super();
   }

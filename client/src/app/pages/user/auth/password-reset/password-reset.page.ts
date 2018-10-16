@@ -51,14 +51,6 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
     console.log(data);
   }
 
-  ionViewWillEnter() {
-    this.closeToast();
-  }
-  
-  async closeToast() {
-    await this.alertService.closeToast();;
-  }
-
   async resetPassword() {
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
     this.resetPasswordActionEmitter.emit(new Action(

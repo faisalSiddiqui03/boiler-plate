@@ -2,13 +2,16 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
+  Action,
+  DeliverySlotsWidget,
   OnWidgetActionsLifecyle, OnWidgetLifecyle
 } from '@capillarytech/pwa-framework';
-import { AlertService } from '@capillarytech/pwa-ui-helpers';
+import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../helpers/utils';
 import { BaseComponent } from '../../../base/base-component';
 import { ModalController } from '@ionic/angular';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-delivery-slot-selection',
@@ -19,6 +22,7 @@ import { ModalController } from '@ionic/angular';
 
 @pwaLifeCycle()
 @pageView()
+
 export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle  {
 
   asSoonPossible = false;
@@ -29,8 +33,10 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
   asapText:'';
 
   constructor(
+    private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
+    private actRoute: ActivatedRoute,
     public modalController: ModalController,
     private utilService: UtilService
   ) {
@@ -47,14 +53,6 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
     this.translate.get('delivery_slot_selection_page.asap').subscribe(value => {
       this.asapText = value;
     });
-  }
-
-  ionViewWillEnter() {
-    this.closeToast();
-  }
-
-  async closeToast() {
-    await this.alertService.closeToast();;
   }
 
   toggleCheckbox() {
