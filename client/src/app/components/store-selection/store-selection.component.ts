@@ -18,7 +18,6 @@ import {
   FulfilmentModeWidgetActions, LanguageService, CapRouterService
 } from '@capillarytech/pwa-framework';
 import { StoreListComponent } from '../store-list/store-list.component';
-import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 
 @Component({
   selector: 'app-store-selection',
@@ -106,6 +105,14 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
     switch (name) {
+        case LocationWidgetActions.LOCATE_ME:
+          const geometry = data.geometry;
+          await this.findStoreByLatLong(geometry.latitude, geometry.longitude);
+            //   geometry.latitude = position.coords.latitude;
+            //   geometry.longitude = position.coords.longitude;
+            //   location.geometry = geometry;
+
+            break;
       case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
           const firstStore = data[0];
@@ -248,6 +255,9 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     this.loaderService.stopLoading();
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
+      case LocationWidgetActions.LOCATE_ME:
+          console.log('unable to find location', data);
+          break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         console.log('unable to find store', data);
         break;
@@ -377,10 +387,15 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     return (cityList || []).filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
   }
 
-  async locateMe(lat, lng) {
+  async locateMe() {
+
+      this.locationsWidgetAction.emit(new Action(LocationWidgetActions.LOCATE_ME, []));
+      await this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+  }
+
+  async findStoreByLatLong(lat, lng) {
     this.lat = lat;
     this.lng = lng;
-    await this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
       this.checkIfStoresAreAvailable(null, lat, lng);
       return;
