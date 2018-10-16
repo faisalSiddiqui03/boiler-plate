@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { StoreSelectionModalComponent } from './store-selection-modal.component';
-import { AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
 import { HttpClient } from '@angular/common/http';
@@ -18,7 +17,6 @@ import { AppStoreSelectionModule } from '../store-selection/store-selection.modu
     CommonModule,
     FormsModule,
     IonicModule,
-    AlertServiceModule,
     SkeletonModule,
     AppStoreSelectionModule,
     TranslateModule.forRoot({

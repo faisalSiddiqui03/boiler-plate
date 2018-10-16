@@ -8,7 +8,7 @@ import { HttpLoaderFactory } from '../../translation.loader';
 import { CartComponent } from './cart.component';
 
 import { CartWidgetModule, VoucherWidgetModule, ImagePreloadModule, EventTrackServiceModule, SuggestionsWidget, SuggestionsWidgetModule } from '@capillarytech/pwa-framework';
-import { AlertServiceModule, AlertService, LoaderServiceModule, LoaderService, DebounceClickDirective } from '@capillarytech/pwa-ui-helpers';
+import { DebounceClickDirective } from '@capillarytech/pwa-ui-helpers';
 import { ProductDetailsComponent } from '../../components/product-details/product-details.component';
 import { ProductDetailsComponentModule } from '../../components/product-details/product-details.module';
 import { PizzaComponentModule } from '../../components/pizza/pizza.module';
@@ -40,10 +40,6 @@ import { DealComponent } from '../../components/deal/deal.component';
   ],
   declarations: [
     CartComponent,
-  ],
-  providers: [
-    AlertService,
-    LoaderService,
   ],
   exports: [
     CartComponent

@@ -12,7 +12,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateMessageFormatCompiler } from "ngx-translate-messageformat-compiler";
-import { AlertServiceModule, AlertService, LoaderServiceModule, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { LoaderServiceModule, AlertServiceModule, AlertService, HardWareServiceModule } from '@capillarytech/pwa-ui-helpers';
 import {
   ConfigServiceModule,
   HttpService,
@@ -30,7 +30,6 @@ import {
   SEOModule,
   LanguageService,
   CapRouterService,
-  CapRouterServiceModule,
   ServiceWorkerModule as PWAServiceWorkerModule
 } from '@capillarytech/pwa-framework';
 import { AuthGuard } from './auth.guard';
@@ -86,7 +85,6 @@ export function getAppConfig(): Object {
     SearchLocationPageModule,
     EventTrackServiceModule.forRoot([EventTrackServiceModule.Tracker.GTM]),
     EventTrackWidgetModule,
-    CapRouterServiceModule,
     LanguageServiceModule.forRoot(languages),
     TranslateModule.forRoot({
       loader: {
@@ -99,8 +97,9 @@ export function getAppConfig(): Object {
         useClass: TranslateMessageFormatCompiler
       }
     }),
-    LoaderServiceModule,
     AlertServiceModule,
+    LoaderServiceModule,
+    HardWareServiceModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     PWAServiceWorkerModule.forRoot()
   ],
@@ -117,8 +116,6 @@ export function getAppConfig(): Object {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
     },
-    AlertService,
-    LoaderService,
     RoutingState,
     UtilService
   ],

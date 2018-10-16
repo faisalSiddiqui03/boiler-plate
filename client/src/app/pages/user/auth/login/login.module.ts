@@ -13,7 +13,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
-import { AlertServiceModule, AlertService, HardWareServiceModule, LoaderService } from '@capillarytech/pwa-ui-helpers';
+
 const routes: Routes = [
   {
     path: '',
@@ -26,7 +26,6 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HardWareServiceModule,
     IonicModule,
     HeaderModule,
     SubHeaderModule,
@@ -43,9 +42,5 @@ const routes: Routes = [
     })
   ],
   declarations: [LoginPage],
-  providers: [
-    AlertService,
-    LoaderService
-  ]
 })
 export class LoginPageModule { }

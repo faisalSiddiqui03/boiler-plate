@@ -20,7 +20,6 @@ import { HeaderModule } from '../../../components/header/header.module';
 // import { CartModule } from '../../../components/cart/cart.module';
 import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
 import { CategoryRouterModule } from './category.router.module';
-import { LoaderServiceModule, AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
 
 const routes: Routes = [
   {
@@ -44,8 +43,6 @@ const routes: Routes = [
     ProductShowcaseWidgetModule,
     DeliverySlotsWidgetModule,
     SeoInfoWidgetModule,
-    LoaderServiceModule,
-    AlertServiceModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
