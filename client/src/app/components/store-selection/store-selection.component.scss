@@ -92,24 +92,13 @@
   }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 34rem) {
   .banner-home {
-    line-height: 200px;
+    line-height: 22rem;
     img {
       margin: -50% auto;
       vertical-align: middle;
     }
-  }
-}
-
-.banner-home {
-  display: block;
-  max-height: 200px;
-  overflow: hidden;
-  img {
-    position: relative;
-    width: 100%;
-    height: auto;
   }
 }
 
@@ -226,7 +215,7 @@
 
 .banner-home {
   display: block;
-  max-height: 200px;
+  max-height: 22rem;
   overflow: hidden;
   img {
     position: relative;
@@ -268,7 +257,6 @@
     color: #666;
   }
 }
-
 
 .collection-details {
   text-align: center;
@@ -313,16 +301,6 @@
         //  display: none;
         //}
       }
-    }
-  }
-}
-
-@media (min-width: 600px) {
-  .banner-home {
-    line-height: 200px;
-    img {
-      margin: -50% auto;
-      vertical-align: middle;
     }
   }
 }
