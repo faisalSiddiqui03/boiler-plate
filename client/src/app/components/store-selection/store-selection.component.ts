@@ -52,6 +52,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   lng;
   isCleared = false;
   clearCartPopup = false;
+  clearCartToChange = '';
 
   @Input() isModal: false;
   constructor(
@@ -196,7 +197,19 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     });
   }
 
-  async findStore() {
+  async findStore(force: boolean = false) {
+    this.clearCartToChange = 'store';
+    // TODO:: add alert-controller to confirm before emptying cart
+    if (this.isCartNotEmpty() &&
+        (this.selectedAreaCode !== this.getCurrentStore().area.code ||
+         this.selectedCityCode !== this.getCurrentStore().city.code)
+    ) {
+      if (!force) {
+        this.clearCartPopup = true;
+        return;
+      }
+      this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+    }
     this.isNavigationClicked = true;
     if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
       await this.loaderService.startLoadingByMode('', this.getDeliveryMode());
@@ -382,6 +395,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   changeOrderMode(mode, previousMode, force: boolean = false) {
+    this.clearCartToChange = 'orderMode';
     // TODO:: add alert-controller to confirm before emptying cart
     if (mode !== previousMode && this.isCartNotEmpty()) {
       if (!force) {
@@ -419,8 +433,13 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         : 'https://www.kuwait.pizzahut.me/assets/imgs/PH-60th-Years-FCDS-Deals-Banner-ar.jpg'
   }
 
-  dismissClearCartPopup() {
+  dismissClearCartPopup(change) {
     this.clearCartPopup = false;
+    if (change === 'orderMode') {
+      this.toggleOrderMode(true);
+    } else if (change === 'store') {
+      this.findStore(true);
+    }
   }
 
   toggleOrderMode(force: boolean = false) {
