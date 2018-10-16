@@ -71,10 +71,12 @@
 		"enter_password_length": "الحد الأدنى لكلمة المرور هو ستة رموز",
 		"enter_password_placeholder": "أدخل كلمة المرور",
 		"enter_password_required": "وسيكون سرنا المشترك",
+		"password_set_successfully": "",
 		"re_enter_password": "إعادة ادخال كلمة السر",
 		"re_enter_password_notmatch": "كلمة السر غير مطابقة",
 		"re_enter_password_placeholder": "يرجى تأكيد كلمة المرور",
 		"re_enter_password_required": "كلمة السر لا تتطابق",
+		"start_ordering": "",
 		"submit": "تأكيد الطلب"
 	},
 	"checkout_page": {
