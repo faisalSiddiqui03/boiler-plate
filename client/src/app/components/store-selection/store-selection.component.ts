@@ -53,7 +53,9 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   isCleared = false;
   clearCartPopup = false;
   clearCartToChange = '';
-
+  sizeConfig = [
+    { "height": 200, "width": 400, "type": "mobile" }, { "height": 400, "width": 1200, "type": "desktop" }
+  ];
   @Input() isModal: false;
   constructor(
     private config: ConfigService,

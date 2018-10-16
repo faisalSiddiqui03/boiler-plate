@@ -13,7 +13,8 @@
         <div>
           <img class="store-selection-banner" src="{{getFullBannerUrl(widget?.model)}}" alt="{{widget?.model[0]?.name || widget?.model[0]?.contentUrl}}"
             img-preloader="{{getFullBannerUrl(widget?.model[0]?.contentUrl)}}" defaultImage="assets/imgs/default/default.png"
-            loadingImage="assets/imgs/default/default.png" />
+            loadingImage="assets/imgs/default/default.png"
+            [sizeConfig]=sizeConfig />
         </div>
       </div>
     </ng-template>
