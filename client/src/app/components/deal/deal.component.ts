@@ -12,6 +12,7 @@ import {
   BundleItem,
   Product,
   Action,
+  CapRouterService,
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
@@ -62,7 +63,8 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
     private modalController: ModalController,
     private loaderService: LoaderService,
     private alertService: AlertService,
-    private hardwareService: HardwareService
+    private hardwareService: HardwareService,
+    private capRouter: CapRouterService,
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
@@ -105,7 +107,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
         console.log('Item added to cart : ', data);
         const isDesktop = await this.hardwareService.isDesktopSite();
         await this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
-        this.goBack();
+        this.capRouter.routeByUrlWithLanguage('/cart');
         break;
       case ProductDetailsWidgetActions.ACTION_EDIT_CART:
         // await this.alertService.presentToast(this.clientProduct.title + ' ' +
