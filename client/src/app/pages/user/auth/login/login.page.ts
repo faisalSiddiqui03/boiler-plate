@@ -127,9 +127,9 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     } else {
       this.isLoginSuccessful = false;
       if (isDesktop) {
-        await this.alertService.presentToast(data.message, 500, 'top');
+        await this.alertService.presentToast('Invalid username and password', 500, 'top');
       }else {
-        await this.alertService.presentToast(data.message, 500, 'top', 'top');
+        await this.alertService.presentToast('Invalid username and password', 500, 'top', 'top');
       }
 
     }
