@@ -10,6 +10,7 @@ import {
   OnWidgetLifecyle,
   ConfigService,
   DeliveryModes,
+  DeliverySlot,
   StoreLocatorWidgetActions,
   Action,
   LocationWidgetActions,
@@ -209,6 +210,9 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         return;
       }
       this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+      let deliverySlot = new DeliverySlot();
+      deliverySlot.id = -2;
+      this.setDeliverySlot(deliverySlot);
     }
     this.isNavigationClicked = true;
     if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
