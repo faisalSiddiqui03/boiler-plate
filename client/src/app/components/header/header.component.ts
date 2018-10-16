@@ -45,7 +45,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     private languageService: LanguageService,
     private utilService: UtilService,
     private capRouter: CapRouterService,
-    private loaderService: LoaderService,
+    private loaderService: LoaderService
   ) {
     super();
     this.deliveryModes = DeliveryModes;
@@ -169,11 +169,13 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   switchCategories(category, categoryId) {
+    this.enableUserDropdown = false;
     this.categoryId = categoryId;
     this.switchCategory.emit({ category, id: categoryId });
   }
 
   switchCategoryPage(category, categoryId) {
+    this.enableUserDropdown = false;
     this.categoryId = categoryId;
     if (this.isModalActive) {
       this.modalController.dismiss();
