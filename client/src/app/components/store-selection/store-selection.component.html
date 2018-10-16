@@ -236,7 +236,7 @@
     <p flex-center>{{'home_page.clear_cart_message' | translate}}</p>
     <div flex-center>
       <ion-button
-        (click)="dismissClearCartPopup()"
+        (click)="dismissClearCartPopup('')"
         color="medium"
         text-capitalize
         expand="block"
@@ -245,7 +245,7 @@
         {{ 'home_page.dismiss' | translate }}
       </ion-button>
       <ion-button
-        (click)="dismissClearCartPopup();toggleOrderMode(true)"
+        (click)="dismissClearCartPopup(clearCartToChange)"
         color="success"
         text-capitalize
         expand="block"
