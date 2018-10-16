@@ -40,6 +40,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   googleSignInActionEmitter = new EventEmitter();
   googleClientId = '';
   titleValue = '';
+  enteredPassword = '';
 
   constructor(
     private formBuilder: FormBuilder,
