@@ -339,7 +339,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   }
 
-  selectCity(city) {
+  selectCity(city, force = false) {
     this.isCleared = false;
     this.hasError.selectAreaFirst = false;
     const previousCity = this.selectedCity ? this.selectedCity : '';
@@ -351,6 +351,18 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
       this.toggleDropDown('area');
     }
     if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
+      this.clearCartToChange = 'store';
+      if (this.isCartNotEmpty() && this.selectedCityCode !== this.getCurrentStore().city.code) {
+        if (!force) {
+          this.clearCartPopup = true;
+          return;
+        }
+        this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+        let deliverySlot = new DeliverySlot();
+        deliverySlot.id = -2;
+        this.setDeliverySlot(deliverySlot);
+      }
+
       this.checkIfStoresAreAvailable(this.selectedCityCode);
       return;
     }
