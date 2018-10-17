@@ -38,13 +38,14 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   serverProduct;
   clientProduct: Product;
   currencyCode: string;
-  categoryId: string;
   productName: string;
   showAddToCart: boolean;
   noOfProperties: number;
   noOfSelectedProperties: number;
   showVariants: boolean;
   addingToCart: boolean;
+  quantityEnabled: boolean;
+  quantityEnabledCategories = [];
 
   constructor(
     private alertService: AlertService,
@@ -58,6 +59,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     super();
     this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
+    this.quantityEnabledCategories = this.config.getConfig()['quantityEnabledCategories'];
   }
 
   ngOnInit() {
@@ -84,17 +86,18 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     this.loaderService.stopLoading();
     switch (name) {
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
-        const isDesktop = await this.hardwareService.isDesktopSite();
-        this.alertService.presentToast(this.clientProduct.title + ' ' +
-        this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
-        if(this.fromSuggestion) {
+        let showCart = await this.hardwareService.isDesktopSite();
+        if(this.fromSuggestion) showCart = true;
+        await this.alertService.presentToast(this.clientProduct.title + ' ' +
+          this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', !showCart, this.getCurrentLanguageCode());
+        if (this.fromSuggestion) {
           this.modalController.dismiss(true);
           return;
         }
         this.goBack();
         break;
-      case ProductDetailsWidgetActions.ATION_EDIT_CART:
-        // this.alertService.presentToast(this.clientProduct.title + ' ' +
+      case ProductDetailsWidgetActions.ACTION_EDIT_CART:
+        // await this.alertService.presentToast(this.clientProduct.title + ' ' +
         // this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
         this.modalController.dismiss(true);
         // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=' +
@@ -109,9 +112,11 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
   }
 
   setClient() {
+    this.quantityEnabled = this.quantityEnabledCategories.includes(this.serverProduct.categoryId);
     this.noOfProperties = 0;
     this.noOfSelectedProperties = 0;
     this.showAddToCart = !this.clientProduct.isParentProduct;
+    if (this.productFromDeal) this.setProductFromDeal();
     this.clientProduct.selectedPropertyValueIdMap.forEach((valueId, propId) => {
       if (!this.cartItem) {
         this.noOfProperties = this.noOfProperties + 1;
@@ -154,7 +159,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       return this.getUrl(product.image);
     } else {
       let lastItem = product.multipleImages.slice().pop();
-      return lastItem.image ? this.getUrl(lastItem.image): this.getUrl(product.image);
+      return lastItem.image ? this.getUrl(lastItem.image) : this.getUrl(product.image);
     }
   }
 
@@ -184,6 +189,32 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     return isPropertyAvailable;
   }
 
+  setProductFromDeal() {
+    this.productFromDeal.variantProducts.map((variantFromDeal) => {
+      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+        if (variant.id === variantFromDeal.id) {
+          variant.isIncludedInBundleprice = variantFromDeal.isIncludedInBundleprice;
+          variant.webPrice = (variant.isIncludedInBundleprice ? 0 : variantFromDeal.webPrice);
+          return;
+        }
+      });
+    });
+  }
+
+  getPrice() {
+    if (this.productFromDeal) {
+      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+        if (variant.id === this.clientProduct.variantProductId) this.clientProduct.setPrice(variant.webPrice);
+      });
+    }
+    return this.clientProduct.price;;
+  }
+
+  setQuantity(quantity, isAdd) {    
+    if(isAdd) this.clientProduct.setQuantity(this.clientProduct.quantity + 1);
+    if(!isAdd && quantity > 1) this.clientProduct.setQuantity(this.clientProduct.quantity - 1);
+  }
+
   async openStoreSelection() {
     const modal = await this.modalController.create({
       component: StoreSelectionModalComponent
@@ -192,7 +223,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
 
     modal.onDidDismiss().then((storeSelected) => {
       this.loaderService.stopLoading();
-      if(storeSelected.data){
+      if (storeSelected.data) {
         this.addToCart();
       }
     });
@@ -210,7 +241,7 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (this.cartItem) {
       this.productWidgetAction.emit(
-        new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
+        new Action(ProductDetailsWidgetActions.ACTION_EDIT_CART, this.clientProduct)
       );
       return;
     }

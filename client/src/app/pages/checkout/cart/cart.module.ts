@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { CartPage } from './cart.page';
-import { AlertServiceModule, AlertService, LoaderServiceModule, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { CartComponentModule } from '../../../components/cart/cart.component.module';
 
 const routes: Routes = [
@@ -33,10 +32,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [CartPage],
-  providers: [
-    AlertService,
-    LoaderService,
-  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CartPageModule {}

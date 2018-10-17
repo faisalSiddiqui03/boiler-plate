@@ -17,7 +17,6 @@ import { SubHeaderModule } from '../sub-header/sub-header.module';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { TrioComponent } from '../trio/trio.component';
 import { TrioComponentModule } from '../trio/trio.module';
-import { HardWareServiceModule } from '@capillarytech/pwa-ui-helpers';
 
 @NgModule({
   imports: [
@@ -29,7 +28,6 @@ import { HardWareServiceModule } from '@capillarytech/pwa-ui-helpers';
     ImagePreloadModule,
     SkeletonModule,
     HeaderModule,
-    HardWareServiceModule,
     SubHeaderModule,
     DealShowcaseComponentModule,
     TrioComponentModule,

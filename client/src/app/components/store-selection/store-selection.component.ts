@@ -10,6 +10,7 @@ import {
   OnWidgetLifecyle,
   ConfigService,
   DeliveryModes,
+  DeliverySlot,
   StoreLocatorWidgetActions,
   Action,
   LocationWidgetActions,
@@ -17,7 +18,6 @@ import {
   FulfilmentModeWidgetActions, LanguageService, CapRouterService
 } from '@capillarytech/pwa-framework';
 import { StoreListComponent } from '../store-list/store-list.component';
-import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 
 @Component({
   selector: 'app-store-selection',
@@ -52,8 +52,12 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   lng;
   isCleared = false;
   clearCartPopup = false;
-
+  clearCartToChange = '';
+  sizeConfig = [
+    { "height": 200, "width": 400, "type": "mobile" }, { "height": 400, "width": 1200, "type": "desktop" }
+  ];
   @Input() isModal: false;
+  private cityData: any;
   constructor(
     private config: ConfigService,
     private loaderService: LoaderService,
@@ -78,12 +82,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   async ionViewWillEnter() {
     this.translate.use(this.getCurrentLanguageCode());
-    // this.selectedStore = this.getCurrentStore();
-  }
-
-  ionViewDidEnter() {
-    this.selectedStore = this.getCurrentStore();
-    console.error('selected store', this.getCurrentStore());
     this.changeRequested = false;
   }
 
@@ -104,6 +102,14 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   async widgetActionSuccess(name: string, data: any) {
     console.log('name = ', name, ' data = ', data);
     switch (name) {
+      case LocationWidgetActions.LOCATE_ME:
+        const geometry = data.geometry;
+        await this.findStoreByLatLong(geometry.latitude, geometry.longitude);
+        //   geometry.latitude = position.coords.latitude;
+        //   geometry.longitude = position.coords.longitude;
+        //   location.geometry = geometry;
+
+        break;
       case StoreLocatorWidgetActions.FIND_BY_AREA:
         if (data.length) {
           const firstStore = data[0];
@@ -117,17 +123,27 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         } else {
 
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-          this.alertService.presentToast(store_alert, 3000, 'top');
+          await this.alertService.presentToast(store_alert, 3000, 'top');
         }
         break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-      this.loaderService.stopLoading();
+        this.loaderService.stopLoading();
         if (!this.isModal) {
           if (data && data.length) {
+            if(this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY){
+              const firstStore = data[0];
+              if (this.isStoreSelected() && this.getCurrentStore().id !== firstStore.id) {
+                this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+              }
+              this.setCurrentStore(firstStore);
+              this.navigateToDeals();
+              return;
+            }
+            this.changeRequested = false;
             this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-            this.alertService.presentToast(store_alert, 3000, 'top');
+            await this.alertService.presentToast(store_alert, 3000, 'top');
           }
         } else {
           // open another modal with store selection
@@ -138,10 +154,11 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         this.loaderService.stopLoading();
         if (!this.isModal) {
           if (data && data.length) {
+            this.changeRequested = false;
             this.capRouter.routeByUrlWithLanguage('/store-selection?cityId=' + this.selectedCityCode);
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-            this.alertService.presentToast(store_alert, 3000, 'top');
+            await this.alertService.presentToast(store_alert, 3000, 'top');
           }
         } else {
           // open another modal with store selection
@@ -150,7 +167,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
         const alert_text = await this.translate.instant('cart.item_removed');
-        this.alertService.presentToast(alert_text, 3000, 'bottom');
+        await this.alertService.presentToast(alert_text, 3000, 'bottom');
         break;
       case LocationWidgetActions.FETCH_AREAS_BY_CITY_CODE:
         if (data && data.length === 1) {
@@ -190,13 +207,31 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     await modal.present();
 
     modal.onDidDismiss().then((storeSelected) => {
-      if(storeSelected.data){
+      if (storeSelected.data) {
         this.modalController.dismiss(true);
       }
     });
   }
 
-  async findStore() {
+  async findStore(force: boolean = false) {
+    this.clearCartToChange = 'store';
+    // TODO:: add alert-controller to confirm before emptying cart
+    if (this.selectedCityCode !== this.getCurrentStore().city.code) {
+      let deliverySlot = new DeliverySlot();
+      deliverySlot.id = -2;
+      deliverySlot.time = new Date();
+      this.setDeliverySlot(deliverySlot);
+    }
+    if (this.isCartNotEmpty() &&
+      (this.selectedAreaCode !== this.getCurrentStore().area.code ||
+        this.selectedCityCode !== this.getCurrentStore().city.code)
+    ) {
+      if (!force) {
+        this.clearCartPopup = true;
+        return;
+      }
+      this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+    }
     this.isNavigationClicked = true;
     if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
       await this.loaderService.startLoadingByMode('', this.getDeliveryMode());
@@ -224,6 +259,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
       return this.modalController.dismiss(true);
     }
     this.isNavigationClicked = true;
+    this.changeRequested = false;
     this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
@@ -231,6 +267,11 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     this.loaderService.stopLoading();
     console.log('failed name = ', name, ' data = ', data);
     switch (name) {
+      case LocationWidgetActions.LOCATE_ME:
+        const msg = await this.translate.instant('home_page.allow_location_access');
+        this.alertService.presentToast(msg, 1000, 'bottom');
+        console.log('unable to find location', data);
+        break;
       case StoreLocatorWidgetActions.FIND_BY_LOCATION:
         console.log('unable to find store', data);
         break;
@@ -239,7 +280,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         break;
       case CartWidgetActions.ACTION_CLEAR_CART:
         const alert_text = await this.translate.instant('cart.item_removed_failure');
-        this.alertService.presentToast(alert_text, 30000, 'bottom');
+        await this.alertService.presentToast(alert_text, 30000, 'bottom');
         break;
     }
   }
@@ -299,7 +340,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   }
 
-  selectCity(city) {
+  selectCity(city, force = false) {
     this.isCleared = false;
     this.hasError.selectAreaFirst = false;
     const previousCity = this.selectedCity ? this.selectedCity : '';
@@ -311,6 +352,22 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
       this.toggleDropDown('area');
     }
     if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
+      this.cityData = city;
+      this.clearCartToChange = 'takeaway-store';
+      if (this.selectedCityCode !== this.getCurrentStore().city.code) {
+        let deliverySlot = new DeliverySlot();
+        deliverySlot.id = -2;
+        deliverySlot.time = new Date();
+        this.setDeliverySlot(deliverySlot);
+      }
+      if (this.isCartNotEmpty() && this.selectedCityCode !== this.getCurrentStore().city.code) {
+        if (!force) {
+          this.clearCartPopup = true;
+          return;
+        }
+        this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+      }
+
       this.checkIfStoresAreAvailable(this.selectedCityCode);
       return;
     }
@@ -360,10 +417,14 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     return (cityList || []).filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
   }
 
-  async locateMe(lat, lng) {
+  async locateMe() {
+    await this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    this.locationsWidgetAction.emit(new Action(LocationWidgetActions.LOCATE_ME, []));
+  }
+
+  async findStoreByLatLong(lat, lng) {
     this.lat = lat;
     this.lng = lng;
-    await this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
       this.checkIfStoresAreAvailable(null, lat, lng);
       return;
@@ -382,6 +443,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   changeOrderMode(mode, previousMode, force: boolean = false) {
+    this.clearCartToChange = 'orderMode';
     // TODO:: add alert-controller to confirm before emptying cart
     if (mode !== previousMode && this.isCartNotEmpty()) {
       if (!force) {
@@ -419,8 +481,15 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         : 'https://www.kuwait.pizzahut.me/assets/imgs/PH-60th-Years-FCDS-Deals-Banner-ar.jpg'
   }
 
-  dismissClearCartPopup() {
+  dismissClearCartPopup(change) {
     this.clearCartPopup = false;
+    if (change === 'orderMode') {
+      this.toggleOrderMode(true);
+    } else if (change === 'store') {
+      this.findStore(true);
+    } else if (change === 'takeaway-store') {
+      this.selectCity(this.cityData, true);
+    }
   }
 
   toggleOrderMode(force: boolean = false) {

@@ -39,6 +39,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   @Input() productFromDeal;
   @Input() cartItem;
   @Input() fromFavorites;
+  @Input() toppingsEnabled: boolean = true;
 
   loaded = false;
   productWidgetExecutor = new EventEmitter();
@@ -104,16 +105,16 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
       case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
         const isDesktop = await this.hardwareService.isDesktopSite();
         console.log('Item added to cart : ', data);
-        this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
+        await this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
         this.goBack();
         break;
       case ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE:
         this.updatingPrice = false;
         console.log('Price for current combination : ', data);
         break;
-      case ProductDetailsWidgetActions.ATION_EDIT_CART:
-        // this.alertService.presentToast(this.clientProduct.title + ' ' +
-          // this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
+      case ProductDetailsWidgetActions.ACTION_EDIT_CART:
+        // await this.alertService.presentToast(this.clientProduct.title + ' ' +
+        // this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
         this.modalController.dismiss(true);
         // this.router.navigateByUrl('/products?category=' + this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);
         break;
@@ -140,19 +141,19 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     return item.isSelected;
   }
 
-  addItem(serverItem) {
+  async addItem(serverItem) {
     const item = this.clientProduct.bundleItems.get(serverItem.id);
     const isAdded = item.increment();
     if (!isAdded) {
       this.alertService.presentToast(this.translate.instant('pizza.add_topping_error'), 1000, 'top');
       return;
     }
-    this.alertService.presentToast(this.translate.instant('pizza.add_topping_success'), 1000, 'top');
+    await this.alertService.presentToast(this.translate.instant('pizza.add_topping_success'), 1000, 'top');
     this.setToppingStatus();
     this.getPrice();
   }
 
-  removeItem(serverItem, isExtra = false) {
+  async removeItem(serverItem, isExtra = false) {
     const item = this.clientProduct.bundleItems.get(serverItem.id);
     let isRemoved = true;
     if (isExtra) {
@@ -162,10 +163,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
       isRemoved = item.remove();
     }
     if (!isRemoved) {
-      this.alertService.presentToast(this.translate.instant('pizza.remove_topping_error'), 1000, 'top', 'top');
+      await this.alertService.presentToast(this.translate.instant('pizza.remove_topping_error'), 1000, 'top', 'top');
       return;
     }
-    this.alertService.presentToast(this.translate.instant('pizza.remove_topping_success'), 1000, 'top', 'top');
+    await this.alertService.presentToast(this.translate.instant('pizza.remove_topping_success'), 1000, 'top', 'top');
     this.setToppingStatus();
     this.getPrice();
   }
@@ -212,7 +213,7 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
 
     modal.onDidDismiss().then((storeSelected) => {
       this.loaderService.stopLoading();
-      if(storeSelected.data){
+      if (storeSelected.data) {
         this.addToCart();
       }
     });
@@ -227,10 +228,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
       this.modalController.dismiss(this.clientProduct);
       return;
     }
-    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
-    if(this.cartItem){
+    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    if (this.cartItem) {
       this.productWidgetAction.emit(
-        new Action(ProductDetailsWidgetActions.ATION_EDIT_CART, this.clientProduct)
+        new Action(ProductDetailsWidgetActions.ACTION_EDIT_CART, this.clientProduct)
       );
       return;
     }
@@ -240,13 +241,22 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
   }
 
   getPrice() {
-    if (this.productFromDeal) {
-      return;
-    }
-    this.updatingPrice = true;
-    this.productWidgetAction.emit(
-      new Action(ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE, this.clientProduct)
-    );
+    // commented this to set price in UI, front api data should be correct for this.
+    // if (this.productFromDeal) {
+    let price = 0;
+    this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+      if (variant.id === this.clientProduct.variantProductId) price = price + variant.webPrice;
+    });
+    this.clientProduct.bundleItems.forEach((bItem: BundleItem, key: number) => {
+      if (bItem.isSelected && (!bItem.isDefault || bItem.count === 2)) price = price + bItem.price;
+    });
+    this.clientProduct.setPrice(price);
+    return;
+    // }
+    // this.updatingPrice = true;
+    // this.productWidgetAction.emit(
+    //   new Action(ProductDetailsWidgetActions.ACTION_GET_BUNDLE_PRICE, this.clientProduct)
+    // );
   }
 
   isSizeAvailabel(sizePropertyValueId) {
@@ -331,12 +341,15 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     });
     this.setToppingCountValidators();
     this.setToppingStatus();
+    if (this.productFromDeal) this.setPizzaFromDeal();
     if (this.cartItem) this.showToppingsView = true;
     this.getPrice();
   };
 
   setToppingCountValidators() {
     try {
+      const maxToppingCount = Product.getAttributeValueByName(this.serverProduct, AttributeName.MAX_TOPPING_COUNT);
+      if(parseInt(maxToppingCount)) this.maxToppingLimit = parseInt(maxToppingCount);
       this.toppings.map((item) => {
         this.clientProduct.bundleItems.forEach((clientItem, number) => {
           if (item.id === clientItem.id && this.getItemType(item) === AttributeValue.TOPPING) {
@@ -350,6 +363,10 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
     } catch (err) {
       console.error('Error setting validators');
     }
+  }
+
+  isCheese(item) {
+    return BundleItem.getAttributeValueByName(item, AttributeName.IS_CHEESE) === AttributeValue.TRUE;
   }
 
   setToppingStatus() {
@@ -373,6 +390,18 @@ export class PizzaComponent extends BaseComponent implements OnInit, OnWidgetLif
 
           if (item.isDefault && !clientItem.isSelected)
             this.removedToppings.push(item.title);
+        }
+      });
+    });
+  }
+
+  setPizzaFromDeal() {
+    this.productFromDeal.variantProducts.map((variantFromDeal) => {
+      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
+        if (variant.id === variantFromDeal.id) {
+          variant.isIncludedInBundleprice = variantFromDeal.isIncludedInBundleprice;
+          variant.webPrice = (variant.isIncludedInBundleprice ? 0 : variantFromDeal.webPrice);
+          return;
         }
       });
     });

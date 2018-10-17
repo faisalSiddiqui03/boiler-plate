@@ -33,12 +33,13 @@
 		"apply": "تقديم الطلب",
 		"cart_clear": "",
 		"close": "قريب",
-		"confirm": "",
+		"confirm": "تأكيد الطلب",
 		"confirm_remove": "هل أنت متأكد من أنك تريد إزالة العنصر؟",
 		"continue": "استمر",
 		"coupon_applied_successfully": "تم تطبيق القسيمة بنجاح",
 		"coupon_removed_successfully": "تمت إزالة الكوبون بنجاح",
 		"delivery_fee": "رسوم التوصيل",
+		"discount": " خص",
 		"dismiss": "رفض",
 		"empty_cart_message_1": "سلة الخاص بك تبدو فارغة قليلاً. لما لا",
 		"empty_cart_message_2": "تحقق من بعض صفقاتنا التي لا تقبل المنافسة؟",
@@ -50,6 +51,7 @@
 		"no_voucher_message_2": "ابحث عن أفضل عروضنا على صفحة صفقاتنا ،",
 		"no_voucher_message_3": "أو اتصل بكوخ لمعرفة المزيد",
 		"not_editable": "العنصر غير قابل للتحرير",
+		"off": "إيقاف",
 		"unable_to_apply_coupon": "غير قادر على تطبيق القسيمة",
 		"unable_to_remove_coupon": "لا يمكن إزالة القسيمة",
 		"update_cart_message": "تريد إجراء تغييرات؟ فقط اضغط على أي عنصر.",
@@ -70,10 +72,12 @@
 		"enter_password_length": "الحد الأدنى لكلمة المرور هو ستة رموز",
 		"enter_password_placeholder": "أدخل كلمة المرور",
 		"enter_password_required": "وسيكون سرنا المشترك",
+		"password_set_successfully": "",
 		"re_enter_password": "إعادة ادخال كلمة السر",
 		"re_enter_password_notmatch": "كلمة السر غير مطابقة",
 		"re_enter_password_placeholder": "يرجى تأكيد كلمة المرور",
 		"re_enter_password_required": "كلمة السر لا تتطابق",
+		"start_ordering": "",
 		"submit": "تأكيد الطلب"
 	},
 	"checkout_page": {
@@ -94,7 +98,7 @@
 		"email_required": " يرجى إدخال بريدك الالكتروني",
 		"email_valid": "يرجى إدخال عنوان بريدك الالكتروني الصحيح",
 		"go_to_payment": "المتابعة للدفع",
-		"home": "",
+		"home": "Home",
 		"how_you_pay": "كيف تود أن تدفع؟",
 		"latest_discounts_offers_text": " يرجى إرسال أحدث الخصومات والعروض من بيتزا هت للتوصيل",
 		"mobile": "رقم الجوال",
@@ -110,7 +114,7 @@
 		"order_for": "الطلب لأجل :",
 		"order_successful": "",
 		"ordering_for_delivery_to": " الطلب للتسليم إلى",
-		"other": "",
+		"other": "Other",
 		"pick_a_time": "وقت تسليم الطلب",
 		"pickup_from": "",
 		"place_your_order": "تأكيد الطلب",
@@ -126,7 +130,7 @@
 		"where_we_deliver": "أين يجب علينا توصلها؟",
 		"who_we_delivering": "إلى من نسلم الطلب؟ ",
 		"with_cash": "نقدًا",
-		"work": ""
+		"work": "Work"
 	},
 	"contact_page": {
 		"address_1": "شركة الحميضي الغذائية",
@@ -146,6 +150,7 @@
 		"back_to_deals": "العودة للعروض",
 		"choose_any": "اختيار أي",
 		"choose_your": "إختر ما يخصك  بيتزا وسط",
+		"extra": "إضافي",
 		"your_deal_details": "معلومات عروضك الخاصة"
 	},
 	"delivery_slot_selection_page": {
@@ -298,14 +303,15 @@
 		"take_away": "يبعد"
 	},
 	"home_page": {
+		"allow_location_access": "Please provide location access!",
 		"block_": "منع",
 		"change": "تغير العنوان",
 		"clear_cart_message": "Are you sure you want to clear cart items?",
 		"collection": "الاستلام من فرع",
-		"confirm": "CONFIRM",
+		"confirm": "تأكيد الطلب",
 		"delivery": "توصيل",
 		"delivery_name": "التوصيل من فرع",
-		"dismiss": "DISMISS",
+		"dismiss": "موافق",
 		"find_my_nearest_hut": " إيجاد الفرع الأقر",
 		"language": "English",
 		"no_store_available": "لا يوجد متجر متاح",
@@ -479,7 +485,8 @@
 	"product_details": {
 		"add_to_basket": "أضف إلى سلة بلدي",
 		"add_to_deal": "اضف إلى الصفقة",
-		"added_to_cart": "إضافة إلى السلة"
+		"added_to_cart": "إضافة إلى السلة",
+		"quantity": "الكمية"
 	},
 	"reset_password_page": {
 		"email": "البريد الإلكتروني",
@@ -503,6 +510,7 @@
 		"sure_remove_address": "هل أنت متأكد من رغبتك إزالة هذا العنوان؟"
 	},
 	"search_location_page": {
+		"min_charecters_not_passed": "",
 		"recent_searches": "أخر عملية بحث",
 		"search_placeholder": "البحث في منطقتك",
 		"use_current_location": " إستخدام الموقع الحالي",
@@ -515,6 +523,7 @@
 		"email_required": "يجب إدخال البريد الإلكتروني",
 		"email_valid": "يرجى إدخال عنوان بريدك الالكتروني الصحيح",
 		"forgot_password": "نسيت كلمة المرور",
+		"invalid_username_and_password": "Invalid email/password. Don't be so quick. Type it nice and slowly, we can wait.",
 		"password": "كلمة المرور",
 		"password_minlength": "الحد الأدنى لكلمة المرور هو ستة رموز",
 		"password_placeholder": "أدخل كلمة المرور",
@@ -552,22 +561,22 @@
 		"take_away_now": "خذ بعيدا الآن"
 	},
 	"success_page": {
-		"confirm": "",
-		"delivery_address": "",
-		"go_to_deals": "",
-		"immediate_delivery": "",
-		"immediate_takeaway": "",
-		"it_will_be_with_you_by": "",
-		"liked_our_experience_click_to_register": "",
-		"on": "",
-		"order": "",
-		"pickup_address": "",
-		"please_enter_emailid": "",
-		"register": "",
-		"sent_tracking_details_to": "",
-		"thanks_for_your_order": "",
-		"unable_to_fetch_order": "",
-		"we_are_preparing_your_order": ""
+		"confirm": "تأكيد الطلب",
+		"delivery_address": "Delivery Address:",
+		"go_to_deals": "Go to deals",
+		"immediate_delivery": "We're preparing your order & it'll be with you in  45 to 60 Minutes",
+		"immediate_takeaway": "We're preparing your order & You can pick it up in  45 to 60 Minutes",
+		"it_will_be_with_you_by": "You can pick it up by",
+		"liked_our_experience_click_to_register": "Liked our experience, click here to register.",
+		"on": "On",
+		"order": "Order#:",
+		"pickup_address": "Take-Away Address:",
+		"please_enter_emailid": "Please enter email id",
+		"register": "Register",
+		"sent_tracking_details_to": "We have sent your order & tracking details to",
+		"thanks_for_your_order": "Thanks for your order,",
+		"unable_to_fetch_order": "Unable to fetch order details",
+		"we_are_preparing_your_order": "We're preparing your order"
 	},
 	"terms_page": {
 		"terms_accordion01_head1": "معلومات خاصة بالمواقع",

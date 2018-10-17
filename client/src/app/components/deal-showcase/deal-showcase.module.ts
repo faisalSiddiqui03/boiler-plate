@@ -13,7 +13,6 @@ import { PizzaComponent } from '../pizza/pizza.component';
 import { ProductDetailsComponentModule } from '../product-details/product-details.module';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 
-import { AlertServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
 import { HttpClient } from '@angular/common/http';
@@ -28,7 +27,6 @@ import { SubHeaderModule } from '../sub-header/sub-header.module';
     IonicModule,
     ProductDetailsWidgetModule,
     ImagePreloadModule,
-    AlertServiceModule,
     HeaderModule,
     SubHeaderModule,
     PizzaComponentModule,

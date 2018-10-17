@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, ViewEncapsulation, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location, DOCUMENT } from '@angular/common';
+import {Component, EventEmitter, OnInit, ViewEncapsulation, Inject} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Location, DOCUMENT} from '@angular/common';
 import {
   ConfigService,
   OnWidgetActionsLifecyle,
@@ -13,13 +13,14 @@ import {
   DeliverySlot,
   CapRouterService,
   SeoInfoEntityType,
-  WidgetNames
+  WidgetNames,
+  DeliveryModes
 } from '@capillarytech/pwa-framework';
-import { TranslateService } from '@ngx-translate/core';
-import { BaseComponent } from '../../../base/base-component';
-import { ModalController } from '@ionic/angular';
-import { DeliverySlotSelectionPage } from '../../checkout/delivery-slot-selection/delivery-slot-selection.page';
-import { LoaderService } from '@capillarytech/pwa-ui-helpers';
+import {TranslateService} from '@ngx-translate/core';
+import {BaseComponent} from '../../../base/base-component';
+import {ModalController} from '@ionic/angular';
+import {DeliverySlotSelectionPage} from '../../checkout/delivery-slot-selection/delivery-slot-selection.page';
+import {LoaderService} from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-category-listing',
@@ -42,6 +43,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   favoriteInProgress = new Map();
   seoEntityType: SeoInfoEntityType = SeoInfoEntityType.CATEGORY;
   categorySeoMap = {};
+  deliveryModes: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -58,6 +60,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
     this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
+    this.deliveryModes = DeliveryModes;
   }
 
   ngOnInit() {
@@ -90,16 +93,16 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
     const slot = await this.getDeliverySlotPromise();
     const store = await this.getCurrentStoreAsync();
-      
+
     if (slot.id === -2 && !store.isDefaultLocation) {
       if (store === null) {
-          this.presentSlotModal();
+        this.presentSlotModal();
       } else if (!store.isOnline(this.getDeliveryMode())) {
-          this.presentSlotModal();
+        this.presentSlotModal();
       } else {
-          this.setDeliverySlot(DeliverySlot.getAsap());
+        this.setDeliverySlot(DeliverySlot.getAsap());
       }
-    }      
+    }
   }
 
   updateCategories(data) {
@@ -148,12 +151,21 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       this.capRouter.routeByUrlWithLanguage('/pizza/' + product.title + '/' + product.id);
       return;
     }
-    this.capRouter.routeByUrlWithLanguage('/product/' + this.categoryNamesById.get(this.categoryId) + '/' + product.title + '/' + product.id);
+
+    const navigationUrl = '/product/' + this.categoryNamesById.get(this.categoryId) + '/' +
+      this.encodeURIComponent(product.title) + '/' + product.id;
+    this.capRouter.routeByUrlWithLanguage(navigationUrl);
   }
 
   openDeal(product) {
     this.capRouter.routeByUrlWithLanguage('/deal/' + product.title + '/' + product.id);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/deal/' + product.title + '/' + product.id));
+  }
+
+  encodeURIComponent(str) {
+    return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
+      return '%' + c.charCodeAt(0).toString(16);
+    });
   }
 
   updateFavorites(isFavorite, product) {
@@ -224,7 +236,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   switchCategories(data) {
     if (data.categoryId === this.categoryId) return;
-    this.router.navigate([], { queryParams: data })
+    this.router.navigate([], {queryParams: data})
       .then(data => {
       })
       .catch(err => {
@@ -254,5 +266,9 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
       const scrollPosition = selectedItem.offsetLeft;
       bottomDiv.scrollLeft += scrollPosition;
     }
+  }
+
+  goToPage(pageName) {
+    this.capRouter.routeByUrlWithLanguage(pageName);
   }
 }

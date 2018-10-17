@@ -85,7 +85,10 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
 
     this.checkoutForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
-      mobile: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('^[2,5,6,9][0-9]*$')])],
+      mobile: ['', Validators.compose([Validators.required,
+        Validators.pattern('^[2,5,6,9][0-9]*$'),
+        Validators.minLength(8),
+        Validators.maxLength(8)])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       building: ['', Validators.compose([Validators.required])],
       street: ['', Validators.compose([Validators.required])],
@@ -195,7 +198,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     // }
   }
 
-  widgetActionSuccess(name: string, data: any) {
+  async widgetActionSuccess(name: string, data: any) {
     switch (name) {
       case CheckoutWidgetActions.ACTION_PLACE_ORDER:
         console.log('Model data ', data);
@@ -220,7 +223,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
         break;
       case 'saveAddress':
         console.log(name, data);
-        this.alertService.presentToast(this.translate.instant('checkout_page.address_saved_successfully'), 500, 'bottom');
+        await this.alertService.presentToast(this.translate.instant('checkout_page.address_saved_successfully'), 500, 'bottom');
         break;
     }
   }
@@ -403,6 +406,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     obj.orderAttributes = attributes;
 
     obj.deliverySlot = this.getDeliverySlot();
+    obj.giftMessage = this.checkoutForm.value.comment || '';
     const action = new Action(CheckoutWidgetActions.ACTION_PLACE_ORDER, obj);
     this.checkoutWidgetAction.emit(action);
   }
@@ -418,7 +422,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     return type;
   }
 
-  handleOrderSuccess(data) {
+  async handleOrderSuccess(data) {
     this.loaderService.stopLoading();
     if (data.orderId) {
       this.eventTrackWidgetActions.emit(
@@ -430,7 +434,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
           ]
         )
       );
-      this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, 'top', 'top');
+      await this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, 'top', 'top');
       if (this.checkoutForm.value.saveAddress) {
         this.widgetModels['singleUserAddress'].detail = this.checkoutForm.value.building;
         this.widgetModels['singleUserAddress'].landmark = this.checkoutForm.value.street;
@@ -446,7 +450,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
       }
       this.goToPage('success/' + data.orderId + '/' + btoa(this.checkoutForm.value.email));
     } else {
-      this.alertService.presentToast(this.translate.instant('checkout_page.order_failure'), 500, 'top', 'top');
+      await this.alertService.presentToast(this.translate.instant('checkout_page.order_failure'), 500, 'top', 'top');
     }
 
   }

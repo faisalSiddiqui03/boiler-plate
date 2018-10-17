@@ -45,7 +45,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     private languageService: LanguageService,
     private utilService: UtilService,
     private capRouter: CapRouterService,
-    private loaderService: LoaderService,
+    private loaderService: LoaderService
   ) {
     super();
     this.deliveryModes = DeliveryModes;
@@ -127,7 +127,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     switch (name) {
       case LogoutWidgetActions.ACTION_LOGOUT:
         const coupon_remove_success = await this.translate.instant('my_account_page.error_logging_out');
-        this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
+        await this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
         break;
     }
   }
@@ -139,7 +139,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
         const coupon_remove_success = await this.translate.instant('my_account_page.successfully_loged_out');
         this.capRouter.routeByUrlWithLanguage('/home');
         // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
-        this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
+        await this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
         break;
     }
   }
@@ -169,11 +169,13 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   }
 
   switchCategories(category, categoryId) {
+    this.enableUserDropdown = false;
     this.categoryId = categoryId;
     this.switchCategory.emit({ category, id: categoryId });
   }
 
   switchCategoryPage(category, categoryId) {
+    this.enableUserDropdown = false;
     this.categoryId = categoryId;
     if (this.isModalActive) {
       this.modalController.dismiss();

@@ -24,6 +24,7 @@ export const config = {
     "dealCategoryId": 'CU00215646',
     "headerBannerRefCode": "ph-60th-years-",
     "footerBannerRefCode": "bogo-pwa-",
+    "quantityEnabledCategories": ['CU00215602'],
     "baseUrl": "/api/",
     "server": {
       "mw-static": {
@@ -35,6 +36,10 @@ export const config = {
       "host": "nightly-pwa-redis.8xcpns.ng.0001.euc1.cache.amazonaws.com",
       "port": "6379",
       "database": "1"
+    },
+    "tracker": {
+      "widgetImpression": false,
+      "apiTrack": false
     },
     "graphite": {
       "host": "192.168.33.103",

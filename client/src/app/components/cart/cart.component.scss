@@ -129,7 +129,7 @@
     }
   }
   .suggestions-wrap {
-    padding: 10px 5px;
+    padding: 10px 5px 0 5px;
     background: var(--ion-block-header-color);
     border-top: 2px solid var(--ion-color-medium-shade);
     border-bottom: 2px solid var(--ion-color-medium-shade);
@@ -215,6 +215,11 @@
     font-size: 14px;
     font-weight: 700;
     min-height: 32px;
+    .total-price-striked{
+      margin-right: 30px;
+      color: var(--ion-color-danger);
+      text-decoration: line-through;
+    }
   }
   ion-footer {
     padding: 6px 10px;
@@ -297,6 +302,21 @@
     }
   }
 }
+.applied-voucher-block{
+  padding: 16px 9px 16px 16px;
+  border-top: 1px solid var(--ion-color-light-shade);
+  span{
+    background: var(--ion-color-success);
+    color: var(--ion-color-light);
+    padding: 6px;
+    font-size: 12px;
+  }
+  ion-icon{
+    cursor: pointer;
+    color: var(--ion-color-medium-shade);
+    font-size: 20px;
+  }
+}
 
 @media (min-width:992px) {
   .cart-page {
@@ -318,10 +338,14 @@
           display: none;
         }
       }
-      .cart-list {
+      .scrolling-cart {
         flex: 1;
         overflow: auto;
       }
+      // .cart-list {
+        // flex: 1;
+        // overflow: auto;
+      // }
     }
   }
 }

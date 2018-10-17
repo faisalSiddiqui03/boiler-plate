@@ -7,7 +7,6 @@ import { BannerWidgetModule, CartWidgetModule, EventTrackServiceModule, ImagePre
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../translation.loader';
-import { LoaderServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { HttpClient } from '@angular/common/http';
 import { HeaderModule } from '../header/header.module';
 import { SubHeaderModule } from '../sub-header/sub-header.module';

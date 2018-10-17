@@ -25,6 +25,9 @@ const config = {
       "maxAge": "1 day"
     }
   },
+    "prerender": {
+      "token": "Aa9bwxzH40uPNZRBPpC9"
+    },
   "enableRedisCaching": false,
   "redis": {
     "host": "production-pwa-redis.8xcpns.ng.0001.euc1.cache.amazonaws.com",

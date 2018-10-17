@@ -31,16 +31,17 @@ export class BannerComponent extends BaseComponent implements OnInit {
 
   bannerRefCode: string;
   bannerUrl: string;
-
+  sizeConfig: Array<any> = [];
+  //  = [{ height: 200, width: 400, type: 'mobile' }, { height: 400, width: 1200, type: 'desktop' }];
   constructor(
     private router: Router,
     private config: ConfigService,
     private utilService: UtilService,
     private translate: TranslateService,
-    private capRouter: CapRouterService) {
+    private capRouter: CapRouterService
+  ) {
     super();
     this.bannerRefCode = this.config.getConfig()['footerBannerRefCode'];
-    // this.bannerUrl = this.config.getConfig()['banner_base_url'];
     this.translate.use(this.getCurrentLanguageCode());
   }
 

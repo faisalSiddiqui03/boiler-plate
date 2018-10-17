@@ -91,6 +91,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
       await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
       const action = new Action(CartWidgetActions.ACTION_APPLY_COUPON, this.couponCode);
       this.cartWidgetAction.emit(action);
+      this.couponCode = null;
     } else {
       this.isWrongVoucher = true;
     }
@@ -166,7 +167,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
       case ProductType.Product:
         if (!cartItem.variantProductId) {
           const itemNotEditable = await this.translateService.instant('cart.not_editable');
-          this.alertService.presentToast(itemNotEditable, 1000, 'top', 'top');
+          await this.alertService.presentToast(itemNotEditable, 1000, 'top', 'top');
           return;
         }
         component = ProductDetailsComponent;
@@ -223,20 +224,20 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
       case CartWidgetActions.ACTION_REMOVE_COUPON:
         if (data) {
           const coupon_remove_success = await this.translateService.instant('cart.coupon_removed_successfully');
-          this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
+          await this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
         } else {
           const coupon_remove_error = await this.translateService.instant('cart.unable_to_remove_coupon');
-          this.alertService.presentToast(coupon_remove_error, 3000, 'bottom');
+          await this.alertService.presentToast(coupon_remove_error, 3000, 'bottom');
         }
         break;
       case CartWidgetActions.ACTION_APPLY_COUPON:
         if (data) {
           const coupon_success = await this.translateService.instant('cart.coupon_applied_successfully');
-          this.alertService.presentToast(coupon_success, 3000, 'bottom');
+          await this.alertService.presentToast(coupon_success, 3000, 'bottom');
           this.showVoucherModal();
         } else {
           const coupon_error = await this.translateService.instant('cart.unable_to_apply_coupon');
-          this.alertService.presentToast(coupon_error, 3000, 'bottom');
+          await this.alertService.presentToast(coupon_error, 3000, 'bottom');
           this.isWrongVoucher = true;
         }
         break;
@@ -246,7 +247,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
       case CartWidgetActions.ACTION_CLEAR_CART:
         const cartClear = await
           this.translateService.instant('cart.cart_clear');
-        this.alertService.presentToast(cartClear, 3000, 'bottom');
+          await this.alertService.presentToast(cartClear, 3000, 'bottom');
         this.capRouter.routeByUrlWithLanguage('/home');
         // this.router.navigate(['/home']);
         break;

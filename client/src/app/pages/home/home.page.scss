@@ -119,17 +119,6 @@
   margin-top: 15px;
 }
 
-.banner-home {
-  display: block;
-  max-height: 200px;
-  overflow: hidden;
-  img {
-    position: relative;
-    width: 100%;
-    height: auto;
-  }
-}
-
 .find-hut {
   padding: 15px;
   font-size: 14px;
@@ -227,16 +216,6 @@
   }
 }
 
-@media (min-width: 600px) {
-  .banner-home {
-    line-height: 200px;
-    img {
-      margin: -50% auto;
-      vertical-align: middle;
-    }
-  }
-}
-// RTL Support Styles
 html {
   &[dir="rtl"] {
     .find-hut {

@@ -7,14 +7,10 @@ import {
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   FavoritesWidgetActions,
-  FavoritesWidget,
   CapRouterService,
   ConfigService,
   ProductType
 } from '@capillarytech/pwa-framework';
-import { UtilService } from '../../../../helpers/utils';
-import { Router } from '@angular/router';
-import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductDetailsComponent } from '../../../../components/product-details/product-details.component';
 import { PizzaComponent } from '../../../../components/pizza/pizza.component';
@@ -37,13 +33,12 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   currencyCode: string;
   favoriteInProgress = new Map();
 
-  constructor(private router: Router,
-    private utilService: UtilService,
-    private loaderService: LoaderService,
-    private alertService: AlertService, private translate: TranslateService,
+  constructor(
+    private translate: TranslateService,
     private capRouter: CapRouterService,
     private config: ConfigService,
-    private modalController: ModalController) {
+    private modalController: ModalController
+  ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { OrderDetailsWidgetModule } from '@capillarytech/pwa-framework';
-import { LoaderServiceModule } from '@capillarytech/pwa-ui-helpers';
 import { IonicModule } from '@ionic/angular';
 
 import { SuccessPage } from './success.page';
@@ -25,7 +24,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     OrderDetailsWidgetModule,
-    HeaderModule, LoaderServiceModule,
+    HeaderModule,
     RouterModule.forChild(routes),
     TranslateModule.forRoot({
       loader: {

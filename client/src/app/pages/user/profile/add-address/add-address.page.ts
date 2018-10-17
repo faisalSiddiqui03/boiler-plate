@@ -74,12 +74,12 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
     switch (name) {
       case 'saveAddress':
         const failedMsg1 = await this.translate.instant('add-address.failed_to_save');
-        this.alertService.presentToast(failedMsg1, 1000, 'top');
+        await this.alertService.presentToast(failedMsg1, 1000, 'top');
         console.log(name, 'error', data);
         break;
       case 'updateAddress':
         const failedMsg2 = await this.translate.instant('add-address.failed_to_update');
-        this.alertService.presentToast(failedMsg2, 1000, 'top');
+        await this.alertService.presentToast(failedMsg2, 1000, 'top');
         console.log(name, 'error', data);
         break;
     }

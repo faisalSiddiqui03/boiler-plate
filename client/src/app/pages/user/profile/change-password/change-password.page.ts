@@ -5,7 +5,8 @@ import {
   Action,
   pageView,
   OnWidgetActionsLifecyle,
-  OnWidgetLifecyle
+  OnWidgetLifecyle,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -33,6 +34,7 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
   updateInProgress = false;
   isPasswordFiled = true;
   isConfirmPasswordFiled = true;
+  passwordChangeSuccess = false;
 
   constructor(private router: Router,
     private utilService: UtilService,
@@ -40,6 +42,7 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
+    private capRouter: CapRouterService,
     private formBuilder: FormBuilder) {
     super();
 
@@ -51,7 +54,7 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
   }
 
   ngOnInit() {
-
+    this.passwordChangeSuccess = false;
     const translateSub = this.translate.get('change_password_page.change_password').subscribe(value => {
         this.titleValue = value;
     });
@@ -94,12 +97,17 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     this.updateInProgress = false;
   }
 
-  widgetActionSuccess(name, data) {
+  navigateToDeals() {
+    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+  }
+
+  async widgetActionSuccess(name, data) {
     this.loaderService.stopLoading();
     this.updateInProgress = false;
     if (data.isSuccessful) {
+      this.passwordChangeSuccess = true;
       console.log(this.translate.instant('change_password_page.change_password_success'));
-      this.alertService.presentToast(this.translate.instant('change_password_page.change_password_success'), 1000, 'top');
+      await this.alertService.presentToast(this.translate.instant('change_password_page.change_password_success'), 1000, 'top');
     } else {
       console.log(data.message);
     }
