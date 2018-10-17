@@ -107,7 +107,8 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
         console.log('Item added to cart : ', data);
         const isDesktop = await this.hardwareService.isDesktopSite();
         await this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
-        this.capRouter.routeByUrlWithLanguage('/cart');
+        if(!isDesktop) this.capRouter.routeByUrlWithLanguage('/cart');
+        if(isDesktop) this.goBack();
         break;
       case ProductDetailsWidgetActions.ACTION_EDIT_CART:
         // await this.alertService.presentToast(this.clientProduct.title + ' ' +
