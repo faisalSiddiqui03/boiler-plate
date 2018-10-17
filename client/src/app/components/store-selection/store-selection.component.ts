@@ -81,12 +81,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   async ionViewWillEnter() {
     this.translate.use(this.getCurrentLanguageCode());
-    // this.selectedStore = this.getCurrentStore();
-  }
-
-  ionViewDidEnter() {
-    this.selectedStore = this.getCurrentStore();
-    console.error('selected store', this.getCurrentStore());
     this.changeRequested = false;
   }
 
@@ -259,6 +253,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
       return this.modalController.dismiss(true);
     }
     this.isNavigationClicked = true;
+    this.changeRequested = false;
     this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
