@@ -37,6 +37,10 @@ export const config = {
       "port": "6379",
       "database": "1"
     },
+    "tracker": {
+      "widgetImpression": false,
+      "apiTrack": false
+    },
     "graphite": {
       "host": "192.168.33.103",
       "port": "2003"
