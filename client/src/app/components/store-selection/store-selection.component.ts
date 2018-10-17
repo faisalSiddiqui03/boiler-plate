@@ -135,6 +135,15 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         this.loaderService.stopLoading();
         if (!this.isModal) {
           if (data && data.length) {
+            if(this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY){
+              const firstStore = data[0];
+              if (this.isStoreSelected() && this.getCurrentStore().id !== firstStore.id) {
+                this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+              }
+              this.setCurrentStore(firstStore);
+              this.navigateToDeals();
+              return;
+            }
             this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
