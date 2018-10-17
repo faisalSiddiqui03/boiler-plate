@@ -304,7 +304,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   }
 
   toggleDropDown(name: string, force: boolean = false, forceValue?: boolean) {
-
     if (name === 'area' && !this.selectedCityCode) {
       return;
     } else if (name === 'area' && this.selectedCityCode) {
@@ -414,6 +413,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
 
   filterEntires(cityList, searchTerm) {
     const searchSubString = this.isCleared ? '' : searchTerm.toLowerCase();
+    this.isCleared = false;
     return (cityList || []).filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
   }
 
