@@ -57,6 +57,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     { "height": 200, "width": 400, "type": "mobile" }, { "height": 400, "width": 1200, "type": "desktop" }
   ];
   @Input() isModal: false;
+  private cityData: any;
   constructor(
     private config: ConfigService,
     private loaderService: LoaderService,
@@ -351,7 +352,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
       this.toggleDropDown('area');
     }
     if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
-      this.clearCartToChange = 'store';
+      this.cityData = city;
+      this.clearCartToChange = 'takeaway-store';
       if (this.isCartNotEmpty() && this.selectedCityCode !== this.getCurrentStore().city.code) {
         if (!force) {
           this.clearCartPopup = true;
@@ -482,6 +484,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
       this.toggleOrderMode(true);
     } else if (change === 'store') {
       this.findStore(true);
+    } else if (change === 'takeaway-store') {
+      this.selectCity(this.cityData, true);
     }
   }
 
