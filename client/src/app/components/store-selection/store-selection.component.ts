@@ -145,6 +145,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
               this.navigateToDeals();
               return;
             }
+            this.changeRequested = false;
             this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
@@ -159,6 +160,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         this.loaderService.stopLoading();
         if (!this.isModal) {
           if (data && data.length) {
+            this.changeRequested = false;
             this.capRouter.routeByUrlWithLanguage('/store-selection?cityId=' + this.selectedCityCode);
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
@@ -263,6 +265,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
       return this.modalController.dismiss(true);
     }
     this.isNavigationClicked = true;
+    this.changeRequested = false;
     this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
   }
 
