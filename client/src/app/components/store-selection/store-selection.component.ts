@@ -220,6 +220,12 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   async findStore(force: boolean = false) {
     this.clearCartToChange = 'store';
     // TODO:: add alert-controller to confirm before emptying cart
+    if (this.selectedCityCode !== this.getCurrentStore().city.code) {
+      let deliverySlot = new DeliverySlot();
+      deliverySlot.id = -2;
+      deliverySlot.time = new Date();
+      this.setDeliverySlot(deliverySlot);
+    }
     if (this.isCartNotEmpty() &&
       (this.selectedAreaCode !== this.getCurrentStore().area.code ||
         this.selectedCityCode !== this.getCurrentStore().city.code)
@@ -229,9 +235,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         return;
       }
       this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
-      let deliverySlot = new DeliverySlot();
-      deliverySlot.id = -2;
-      this.setDeliverySlot(deliverySlot);
     }
     this.isNavigationClicked = true;
     if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
@@ -354,15 +357,18 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
       this.cityData = city;
       this.clearCartToChange = 'takeaway-store';
+      if (this.selectedCityCode !== this.getCurrentStore().city.code) {
+        let deliverySlot = new DeliverySlot();
+        deliverySlot.id = -2;
+        deliverySlot.time = new Date();
+        this.setDeliverySlot(deliverySlot);
+      }
       if (this.isCartNotEmpty() && this.selectedCityCode !== this.getCurrentStore().city.code) {
         if (!force) {
           this.clearCartPopup = true;
           return;
         }
         this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
-        let deliverySlot = new DeliverySlot();
-        deliverySlot.id = -2;
-        this.setDeliverySlot(deliverySlot);
       }
 
       this.checkIfStoresAreAvailable(this.selectedCityCode);

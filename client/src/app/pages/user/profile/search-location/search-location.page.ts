@@ -55,10 +55,9 @@ export class SearchLocationPage extends BaseComponent implements OnInit, OnWidge
     }, 800);
   }
 
-  searchAddress(event) {
+  async searchAddress(event) {
     if (this.enteredSearchValue.length < this.minSearchLength) {
-      // const coupon_error = await this.translate.instant('search_location_page.min_charecters_not_passed');
-      const coupon_error = 'search_location_page.min_charecters_not_passed';
+      const coupon_error = await this.translate.instant('search_location_page.min_charecters_not_passed');
       this.alertService.presentToast(coupon_error, 3000, 'bottom');
       return;
     } else {

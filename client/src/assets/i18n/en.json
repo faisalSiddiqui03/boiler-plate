@@ -510,6 +510,7 @@
 		"sure_remove_address": "Are you sure you want to remove this address?"
 	},
 	"search_location_page": {
+		"min_charecters_not_passed": "Please pass atleast 4 charecters",
 		"recent_searches": "Recent Searches",
 		"search_placeholder": "Search your location",
 		"use_current_location": "Use Current Location ",
