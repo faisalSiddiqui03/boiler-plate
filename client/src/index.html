@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
+
   <!-- Google Tag Manager -->
   <script>
     (function (w, d, s, l, i) {
@@ -40,6 +41,11 @@
       alignment: 'rtl'
     }
     ];
+
+    window.prerenderReady = false;
+    setTimeout(function() {
+        window.prerenderReady = true;
+    }, 20000);
 
   </script>
 
