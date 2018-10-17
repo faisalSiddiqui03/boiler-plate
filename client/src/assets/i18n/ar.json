@@ -510,6 +510,7 @@
 		"sure_remove_address": "هل أنت متأكد من رغبتك إزالة هذا العنوان؟"
 	},
 	"search_location_page": {
+		"min_charecters_not_passed": "",
 		"recent_searches": "أخر عملية بحث",
 		"search_placeholder": "البحث في منطقتك",
 		"use_current_location": " إستخدام الموقع الحالي",
