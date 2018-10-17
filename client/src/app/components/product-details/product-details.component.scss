@@ -258,7 +258,11 @@
       display: flex;
       align-items: center;
       .product-main-image {
-        height: auto;
+        width: auto;
+        height: 650px;
+        max-width: inherit;
+        position: absolute;
+        top: 0;
       }
       ion-icon {
         color: var(--ion-color-dark-shade);
