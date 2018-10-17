@@ -7,7 +7,7 @@
         </ion-buttons>
         <ion-searchbar #focusInput class="location-search"
           [(ngModel)]="enteredSearchValue"
-          (ionInput)="searchAddress($event)" [debounce]="1000"
+          (ionChange)="searchAddress($event)" debounce="1000"
           placeholder="{{'search_location_page.search_placeholder' | translate }}">
         </ion-searchbar>
       </ion-toolbar>
