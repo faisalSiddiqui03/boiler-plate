@@ -72,6 +72,10 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     this.checkSlots();
 
     const urlData = this.location.path(false);
+    if (!urlData) {
+      return;
+    }
+
     const params = urlData.split('?')[1].split('&');
     const dataFromParams = {
       id: '',
@@ -79,7 +83,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     };
     params.forEach((param) => {
       const paramValues = param.split('=');
-      dataFromParams[paramValues[0]] = paramValues[1]
+      dataFromParams[paramValues[0]] = paramValues[1];
     });
     dataFromParams.category = dataFromParams.category.split('%20').join(' ');
     this.updateCategories(dataFromParams);
@@ -108,9 +112,9 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   updateCategories(data) {
     this.categoryId = data.id;
-    let seoInfo = this.categorySeoMap[this.categoryId];
+    const seoInfo = this.categorySeoMap[this.categoryId];
     if (seoInfo) {
-      //this.seoService.addPageTagsViaSeoInfo(seoInfo);
+      // this.seoService.addPageTagsViaSeoInfo(seoInfo);
       this.addPageTagsViaSeoInfo(seoInfo);
     }
   }
@@ -250,7 +254,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     return this.getUserModel() && this.getUserModel().type !== 'GUEST';
   }
 
-  async ionViewDidLeave(){
+  async ionViewDidLeave() {
     await this.alertService.closeToast();
   }
 
