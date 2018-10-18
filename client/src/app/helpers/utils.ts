@@ -5,11 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class UtilService {
 
-  constructor(
-    private langService: LanguageService,
-    private translate: TranslateService
-  ) {
-    this.translate.use('en');
+  constructor(private langService: LanguageService) {
   }
 
   private _languageCode: string;
@@ -55,7 +51,7 @@ export class UtilService {
     for(let i=0; i < 3; i++) {
       transLatedAddressTypes.push({
         "addressKey": typeValues[i],
-        "addressType": this.translate.instant('global.' + translationKeys[i])
+        "addressType": 'global.' + translationKeys[i]
       });
     }
     return transLatedAddressTypes;
