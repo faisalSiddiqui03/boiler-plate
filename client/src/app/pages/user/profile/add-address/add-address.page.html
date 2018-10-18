@@ -36,11 +36,15 @@
                   <ion-label class="login-label" for="addressType" text-capitalize>{{ 'add_address_page.address_type' | translate }}
                   </ion-label>
                   <div class="form-input">
-                    <ion-select id="addressType" formControlName="addressType" value="home" okText="{{ 'add_address_page.okay' | translate }}" cancelText="{{ 'add_address_page.dismiss' | translate }}">
+                    <!-- <ion-select id="addressType" formControlName="addressType" value="home" okText="{{ 'add_address_page.okay' | translate }}" cancelText="{{ 'add_address_page.dismiss' | translate }}">
                       <ion-select-option value="home">{{ 'add_address_page.home' | translate }}</ion-select-option>
                       <ion-select-option value="work">{{ 'add_address_page.work' | translate }}</ion-select-option>
                       <ion-select-option value="other">{{ 'add_address_page.other' | translate }}</ion-select-option>
-                    </ion-select>
+                    </ion-select> -->
+
+                    <ion-select *ngIf="addressTypes && addressTypes.length" id="addressType" formControlName="addressType" value="{{addressTypes[0]?.addressKey}}" okText="{{ 'add_address_page.okay' | translate }}" cancelText="{{ 'add_address_page.dismiss' | translate }}">
+                        <ion-select-option *ngFor="let addressType of addressTypes" [value]="addressType.addressKey">{{addressType.addressType}}</ion-select-option>
+                      </ion-select>
                   </div>
                 </div>
               </form>

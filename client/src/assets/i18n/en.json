@@ -290,6 +290,12 @@
 		"terms_and_conditions": "Terms & Conditions",
 		"user_message": "Order a delicious pizza on the go, anywhere, anytime. Pizza Hut is happy to assist you with your home delivery. Every time you order, you get a hot and fresh pizza delivered at your doorstep in less than thirty minutes. *T&C Apply."
 	},
+	"global": {
+		"showCart": "Show cart",
+		"address_type_home": "Home",
+		"address_type_work": "Work",
+		"address_type_other": "Other"
+	},
 	"header": {
 		"asap": "ASAP",
 		"delivery": "Delivery",

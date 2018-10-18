@@ -33,6 +33,7 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
   addressId: Number;
   singleUserAddressWidgetActions = new EventEmitter();
   addressModel;
+  addressTypes;
   newLatLngDetails = {
     latitude: '0',
     longitude: '0'
@@ -65,6 +66,7 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
     this.translate.get('add_address_page.add_address').subscribe(value => {
       this.titleValue = value;
     });
+    this.addressTypes = this.utilService.getAddressTypes();
   }
 
 
