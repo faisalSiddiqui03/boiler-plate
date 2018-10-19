@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Platform, NavController, ModalController } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+// import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+// import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from './base/base-component';
 import {
@@ -28,8 +28,8 @@ export class AppComponent extends BaseComponent {
 
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
+    // private splashScreen: SplashScreen,
+    // private statusBar: StatusBar,
     private navCtrl: NavController,
     private translate: TranslateService,
     private eventService: EventService,
@@ -57,10 +57,10 @@ export class AppComponent extends BaseComponent {
 
   initializeApp() {
     this.platform.ready().then( async() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      // this.statusBar.styleDefault();
+      // this.splashScreen.hide();
       const mobilePlatform = await this.hardwareService.getPlatformDetails();
-      let versionDetails;
+      //let versionDetails;
       // if (mobilePlatform.includes('android')) {
       //   versionDetails = await this.appUpdateService.getVersionDetails('android');
       //   this.handleForceUpdateAlert(versionDetails);
