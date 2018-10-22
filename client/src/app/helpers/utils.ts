@@ -42,4 +42,17 @@ export class UtilService {
     const year = date.getFullYear();
     return daySting + ' ' + month + ' ' + year;
   }
+
+  getAddressTypes() {
+    const translationKeys = ['address_type_home', 'address_type_work', 'address_type_other'];
+    const typeValues = ['home', 'work', 'other'];
+    let transLatedAddressTypes = [];
+    for(let i=0; i < 3; i++) {
+      transLatedAddressTypes.push({
+        "addressKey": typeValues[i],
+        "addressType": 'global.' + translationKeys[i]
+      });
+    }
+    return transLatedAddressTypes;
+  }
 }

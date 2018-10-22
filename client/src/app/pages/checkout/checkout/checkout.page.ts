@@ -63,6 +63,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   widgetModels = {};
   deliveryModes: any;
   isAddNewAddressClicked = false;
+  addressTypes = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -115,6 +116,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
       this.checkoutForm.controls['building'].setValue('T');
       this.checkoutForm.controls['street'].setValue('T');
     }
+
+    this.addressTypes = this.utilService.getAddressTypes();
   }
 
   ionViewWillEnter() {
