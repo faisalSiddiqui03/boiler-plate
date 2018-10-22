@@ -121,7 +121,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
           this.navigateToDeals();
           // }
         } else {
-
+          this.loaderService.stopLoading();
           const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
           await this.alertService.presentToast(store_alert, 3000, 'top');
         }
