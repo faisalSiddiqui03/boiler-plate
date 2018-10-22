@@ -63,7 +63,8 @@
 		"your_total": "Your Total"
 	},
 	"category_listing": {
-		"price_tag": "From"
+		"price_tag": "From",
+    "checkout" : "checkout"
 	},
 	"change_password_page": {
 		"change_password": "Change Password",
