@@ -63,7 +63,8 @@
 		"your_total": "مجموعك"
 	},
 	"category_listing": {
-		"price_tag": "من عند"
+		"price_tag": "من عند",
+    "checkout" : "الدفع"
 	},
 	"change_password_page": {
 		"change_password": "تغير رقم السري",
