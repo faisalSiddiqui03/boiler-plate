@@ -382,7 +382,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     objShipAddress.contactDetail = contactDetail;
 
 
-    objShipAddress.city = this.getCurrentStore().selectedCityId;
+    objShipAddress.city.code = this.getCurrentStore().selectedCityId.toString();
     objShipAddress.country = this.getCurrentStore().country;
     objShipAddress.state = this.getCurrentStore().state;
     objShipAddress.pinCode = parseInt(this.getCurrentStore().area.pincode, 10);
