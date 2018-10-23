@@ -5,13 +5,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import {
   pwaLifeCycle,
-  LifeCycle,
-  Action,
   pageView,
   ConfigService,
   DeliverySlot,
   ContactDetail,
-  OrderAttributes,
   CapRouterService,
   Address,
 } from '@capillarytech/pwa-framework';
