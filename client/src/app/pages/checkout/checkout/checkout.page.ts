@@ -368,7 +368,9 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     const obj: CheckoutDetails = new CheckoutDetails();
 
-    obj.paymentDetails = this.objPayment;
+    // obj.paymentDetails = this.objPayment;
+
+    obj.paymentProvider = 'COD';
 
     const objShipAddress: Address = new Address();
     if (this.getDeliveryMode() === this.deliveryModes.PICKUP) {
