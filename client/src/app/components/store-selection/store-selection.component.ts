@@ -1,9 +1,9 @@
-import { Component, OnInit, EventEmitter, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
-import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { BaseComponent } from '../../base/base-component';
+import {Component, OnInit, EventEmitter, Input} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AlertService, LoaderService} from '@capillarytech/pwa-ui-helpers';
+import {ModalController} from '@ionic/angular';
+import {TranslateService} from '@ngx-translate/core';
+import {BaseComponent} from '../../base/base-component';
 import {
   pwaLifeCycle,
   OnWidgetActionsLifecyle,
@@ -17,7 +17,7 @@ import {
   CartWidgetActions,
   FulfilmentModeWidgetActions, LanguageService, CapRouterService
 } from '@capillarytech/pwa-framework';
-import { StoreListComponent } from '../store-list/store-list.component';
+import {StoreListComponent} from '../store-list/store-list.component';
 
 @Component({
   selector: 'app-store-selection',
@@ -54,10 +54,12 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   clearCartPopup = false;
   clearCartToChange = '';
   sizeConfig = [
-    { "height": 200, "width": 400, "type": "mobile" }, { "height": 400, "width": 1200, "type": "desktop" }
+    {"height": 200, "width": 400, "type": "mobile"},
+    {"height": 400, "width": 1200, "type": "desktop"}
   ];
   @Input() isModal: false;
   private cityData: any;
+
   constructor(
     private config: ConfigService,
     private loaderService: LoaderService,
@@ -130,7 +132,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         this.loaderService.stopLoading();
         if (!this.isModal) {
           if (data && data.length) {
-            if(this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY){
+            if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
               const firstStore = data[0];
               if (this.isStoreSelected() && this.getCurrentStore().id !== firstStore.id) {
                 this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
