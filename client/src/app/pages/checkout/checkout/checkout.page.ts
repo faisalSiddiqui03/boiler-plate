@@ -12,9 +12,10 @@ import {
   DeliverySlot,
   ContactDetail,
   OrderAttributes,
-  CapRouterService, EventTrackWidgetActions,
+  CapRouterService,
+  Address,
 } from '@capillarytech/pwa-framework';
-import { CheckoutComponent, InputOrderDetails, UserDetails } from '../../../../comp-test/checkout/checkout.component';
+import { CheckoutComponent, UserIdentifier } from '@capillarytech/pwa-components';
 
 @Component({
   selector: 'app-checkout',
@@ -33,10 +34,6 @@ export class CheckoutPage extends CheckoutComponent implements OnInit, AfterView
   selectedSavedAddress;
   showdropdownAddressType = false;
   savedAddresses = [];
-
-  paymentOptionsWidgetAction = new EventEmitter();
-  eventTrackWidgetActions = new EventEmitter();
-
   checkoutWidgetAction = new EventEmitter();
   widgetModels = {};
   isAddNewAddressClicked = false;
@@ -50,10 +47,13 @@ export class CheckoutPage extends CheckoutComponent implements OnInit, AfterView
     private alertService: AlertService,
     private translate: TranslateService,
     private config: ConfigService,
-    private capRouter: CapRouterService
+    private capRouter: CapRouterService,
   ) {
-
     super();
+
+    this.options.handleGaEvent = true;
+    this.options.identifier = UserIdentifier.EMAIL;
+    this.options.handleEmptyPaymentOption = true;
 
     this.translate.use(this.getCurrentLanguageCode());
 
@@ -71,8 +71,7 @@ export class CheckoutPage extends CheckoutComponent implements OnInit, AfterView
       comment: [''],
       paymentMethod: ['COD'],
       addressType: ['home'],
-      saveAddress: [false]
-
+      saveAddress: [false],
     });
   }
 
@@ -110,9 +109,7 @@ export class CheckoutPage extends CheckoutComponent implements OnInit, AfterView
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.setLoggedInUserDetails();
-    }, 3000);
+    this.setLoggedInUserDetails();
   }
 
   ionViewWillLeave() {
@@ -128,47 +125,33 @@ export class CheckoutPage extends CheckoutComponent implements OnInit, AfterView
   }
 
   async placeOrder() {
-    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
 
-    const inputOrderDetails = new InputOrderDetails;
-    inputOrderDetails.address1 = this.checkoutForm.value.building;
-    inputOrderDetails.address2 = this.checkoutForm.value.street;
-    inputOrderDetails.firstName = this.checkoutForm.value.name;
-    inputOrderDetails.emailID = this.checkoutForm.value.email;
-    inputOrderDetails.mobileNumber = this.checkoutForm.value.mobile;
-    inputOrderDetails.giftMessage = this.checkoutForm.value.comment || '';
-    inputOrderDetails.addressType = this.checkoutForm.value.addressType || '';
+    const objShipAddress = new Address();
+    objShipAddress.address1 = this.checkoutForm.value.building;
+    objShipAddress.address2 = this.checkoutForm.value.street;
+    objShipAddress.addressType = this.checkoutForm.value.addressType || '';
+    
+    const contactDetail = new ContactDetail();
+    contactDetail.firstName = this.checkoutForm.value.name;
+    contactDetail.emailID = this.checkoutForm.value.email;
+    contactDetail.mobileNumber = this.checkoutForm.value.mobile;
+    objShipAddress.contactDetail = contactDetail;
 
-    // adding IsImmediateOrder attribute
-    const attributes: OrderAttributes[] = new Array<OrderAttributes>();
-    const attr: OrderAttributes = new OrderAttributes();
-    attr.name = 'IsImmediateOrder';
-    attr.value = 'true';
-    attributes.push(attr);
-
-    this.placeOrderComp(inputOrderDetails, attributes);
+    super.placeOrder(objShipAddress);
   }
 
   async handleOrderActionSuccess(data) {
     this.loaderService.stopLoading();
     if (data.orderId) {
-      this.eventTrackWidgetActions.emit(
-        new Action(
-          EventTrackWidgetActions.ACTION_PURCHASE,
-          [
-            data.orderId,
-            this.checkoutForm.value.email
-          ]
-        )
-      );
       await this.alertService.presentToast(this.translate.instant('checkout_page.order_successful'), 500, 'top', 'top');
       if (this.checkoutForm.value.saveAddress) {
-        const userDetails = new UserDetails();
-        userDetails.detail = this.checkoutForm.value.building;
-        userDetails.landmark = this.checkoutForm.value.street;
-        userDetails.addressType = this.checkoutForm.value.addressType;
-        userDetails.contactDetail = new ContactDetail();
-        this.saveAddress(userDetails);
+        const userAddress = new Address();
+        userAddress.detail = this.checkoutForm.value.building;
+        userAddress.landmark = this.checkoutForm.value.street;
+        userAddress.addressType = this.checkoutForm.value.addressType;
+        userAddress.contactDetail = new ContactDetail();
+        this.saveAddress(userAddress);
       }
       this.goToPage('success/' + data.orderId + '/' + btoa(this.checkoutForm.value.email));
     } else {
@@ -184,13 +167,12 @@ export class CheckoutPage extends CheckoutComponent implements OnInit, AfterView
     await this.alertService.presentToast(this.translate.instant('checkout_page.address_saved_successfully'), 500, 'bottom');
   }
 
-  setLoggedInUserDetails() {
-    const userData = this.getUserModel();
+  async setLoggedInUserDetails() {
+    const userData = await this.getUserPromise();
     if (userData && userData.type !== 'GUEST') {
       this.checkoutForm.controls['name'].setValue(userData.firstName + ' ' + userData.lastName);
       this.checkoutForm.controls['mobile'].setValue(userData.mobileNo);
       this.checkoutForm.controls['email'].setValue(userData.username);
-      // this.getSavedAddresses();
     }
   }
 
@@ -216,14 +198,6 @@ export class CheckoutPage extends CheckoutComponent implements OnInit, AfterView
 
   slectPaymentOption(option) {
     this.objPayment = option;
-  }
-
-  setDefaultPaymentOption(data) {
-    // try to move default payment option to config
-    const defaultPayment = 'COD';
-    data.forEach(element => {
-      if (element.paymentOption == defaultPayment) this.objPayment = element;
-    });
   }
 
   goToPage(pageName, navParams = {}) {

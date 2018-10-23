@@ -23,7 +23,8 @@ import { FormGroup } from "@angular/forms";
 import { appInjector } from "../../../../../pwa-framework/framework/dist/core/app.injector";
 import { HardwareService } from "@capillarytech/pwa-ui-helpers";
 
-export class InputOrderDetails {
+export class 
+InputOrderDetails {
   address1: string;
   address2: string;
   firstName: string;
@@ -118,6 +119,7 @@ export abstract class CheckoutComponent extends BaseComponent implements OnWidge
     console.log(name, ' action success ', data);
     switch (name) {
       case CheckoutWidgetActions.ACTION_PLACE_ORDER:
+
         this.handleOrderActionSuccess(data);
         break;
       case CheckoutWidgetActions.ACTION_RETRY_ORDER_PAYMENT:
@@ -222,6 +224,12 @@ export abstract class CheckoutComponent extends BaseComponent implements OnWidge
   }
 
   handleOrderActionSuccess(data) {
+    // this.before_placeOrderSuccessAction :- toast, start loading
+
+    // //actual code
+    // // ga/gtm
+
+    // this.after_placeOrderSucessAction :- stop loading
     // nothing
   }
 
