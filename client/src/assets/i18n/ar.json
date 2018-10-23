@@ -63,7 +63,8 @@
 		"your_total": "مجموعك"
 	},
 	"category_listing": {
-		"price_tag": "من عند"
+		"price_tag": "من عند",
+    "checkout" : "الدفع"
 	},
 	"change_password_page": {
 		"change_password": "تغير رقم السري",
@@ -98,7 +99,7 @@
 		"email_required": " يرجى إدخال بريدك الالكتروني",
 		"email_valid": "يرجى إدخال عنوان بريدك الالكتروني الصحيح",
 		"go_to_payment": "المتابعة للدفع",
-		"home": "Home",
+		"home": "العمل",
 		"how_you_pay": "كيف تود أن تدفع؟",
 		"latest_discounts_offers_text": " يرجى إرسال أحدث الخصومات والعروض من بيتزا هت للتوصيل",
 		"mobile": "رقم الجوال",
@@ -114,7 +115,7 @@
 		"order_for": "الطلب لأجل :",
 		"order_successful": "",
 		"ordering_for_delivery_to": " الطلب للتسليم إلى",
-		"other": "Other",
+		"other": "آخر",
 		"pick_a_time": "وقت تسليم الطلب",
 		"pickup_from": "",
 		"place_your_order": "تأكيد الطلب",
@@ -130,7 +131,7 @@
 		"where_we_deliver": "أين يجب علينا توصلها؟",
 		"who_we_delivering": "إلى من نسلم الطلب؟ ",
 		"with_cash": "نقدًا",
-		"work": "Work"
+		"work": "العمل"
 	},
 	"contact_page": {
 		"address_1": "شركة الحميضي الغذائية",
@@ -290,6 +291,12 @@
 		"terms_and_conditions": "الشروط & الأحكام",
 		"user_message": "اطلب بيتزا شهية، من أي مكان وفي أي وقت. نحن في بيتزا هت سعداء في توصيل طلبك للمنزل. كل مرة تقوم بها بالطلب ستحصل على بيتزا طازجة وساخنة تصلك إلى باب منزلك في أقل من ثلاثين دقيقة"
 	},
+	"global": {
+		"showCart": "عرض العربة",
+		"address_type_home": "العمل",
+		"address_type_work": "العمل",
+		"address_type_other": "آخر"
+	},
 	"header": {
 		"asap": "في أقرب وقت",
 		"delivery": "توصيل",
@@ -334,6 +341,7 @@
 	"my_account_page": {
 		"change_password": "تغير رقم السري",
 		"error_logging_out": "",
+		"hello": "مرحبا",
 		"logout": "خروج",
 		"my_account": "حسابي",
 		"my_favourites": "تفضيلاتي",

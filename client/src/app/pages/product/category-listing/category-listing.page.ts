@@ -20,7 +20,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {BaseComponent} from '../../../base/base-component';
 import {ModalController} from '@ionic/angular';
 import {DeliverySlotSelectionPage} from '../../checkout/delivery-slot-selection/delivery-slot-selection.page';
-import {LoaderService} from '@capillarytech/pwa-ui-helpers';
+import {LoaderService, AlertService} from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-category-listing',
@@ -54,6 +54,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     private location: Location,
     private loaderService: LoaderService,
     private capRouter: CapRouterService,
+    private alertService: AlertService,
     @Inject(DOCUMENT) document
   ) {
     super();
@@ -71,6 +72,10 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     this.checkSlots();
 
     const urlData = this.location.path(false);
+    if (!urlData) {
+      return;
+    }
+
     const params = urlData.split('?')[1].split('&');
     const dataFromParams = {
       id: '',
@@ -78,7 +83,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     };
     params.forEach((param) => {
       const paramValues = param.split('=');
-      dataFromParams[paramValues[0]] = paramValues[1]
+      dataFromParams[paramValues[0]] = paramValues[1];
     });
     dataFromParams.category = dataFromParams.category.split('%20').join(' ');
     this.updateCategories(dataFromParams);
@@ -107,9 +112,9 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   updateCategories(data) {
     this.categoryId = data.id;
-    let seoInfo = this.categorySeoMap[this.categoryId];
+    const seoInfo = this.categorySeoMap[this.categoryId];
     if (seoInfo) {
-      //this.seoService.addPageTagsViaSeoInfo(seoInfo);
+      // this.seoService.addPageTagsViaSeoInfo(seoInfo);
       this.addPageTagsViaSeoInfo(seoInfo);
     }
   }
@@ -235,6 +240,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   switchCategories(data) {
+    this.alertService.closeToast();
     if (data.categoryId === this.categoryId) return;
     this.router.navigate([], {queryParams: data})
       .then(data => {
@@ -246,6 +252,10 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   isLoggedIn() {
     return this.getUserModel() && this.getUserModel().type !== 'GUEST';
+  }
+
+  async ionViewDidLeave() {
+    await this.alertService.closeToast();
   }
 
   createMapsBasedOnCategory(items) {

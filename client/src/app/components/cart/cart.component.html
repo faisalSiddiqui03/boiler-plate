@@ -153,7 +153,7 @@
                   </button>
                 </div>
 
-                <suggestions-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [action]="suggestionWidgetAction">
+                <suggestions-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [action]="suggestionWidgetAction" (cartUpdated)="reloadSuggestions($event)">
                   <ng-template let-widget="widget">
                     <div class="suggestions-wrap" *ngIf="suggestionsLoaded && widget?.model?.length">
                       <h6 text-center>{{ 'cart.you_may_also_like' | translate}}</h6>

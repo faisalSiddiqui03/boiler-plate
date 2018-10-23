@@ -58,6 +58,10 @@ export class BaseComponent implements OnDestroy {
     return this.globalSharedService.getCurrentStore();
   }
 
+  getSelectedCityId() {
+    return this.getCurrentStore() ? this.getCurrentStore().selectedCityId ? this.getCurrentStore().selectedCityId.toString() : '' : '';
+  }
+
   async getCurrentStoreAsync() {
     return await this.globalSharedService.getCurrentStorePromise();
   }

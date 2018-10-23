@@ -224,10 +224,15 @@
                     <ion-label>{{'checkout_page.save_as' | translate}}</ion-label>
                   </ion-item>
                   <div class="form-group">
-                    <ion-select formControlName="addressType" ngDefaultControl>
+                    <!-- <ion-select formControlName="addressType" ngDefaultControl>
                       <ion-select-option value="Home">{{'checkout_page.home' | translate}}</ion-select-option>
                       <ion-select-option value="Work">{{'checkout_page.work' | translate}}</ion-select-option>
                       <ion-select-option value="Other">{{'checkout_page.other' | translate}}</ion-select-option>
+                    </ion-select> -->
+
+                    <ion-select *ngIf="addressTypes && addressTypes.length" value="{{addressTypes[0]?.addressKey}}" formControlName="addressType" ngDefaultControl
+                    okText="{{ 'add_address_page.okay' | translate }}" cancelText="{{ 'add_address_page.dismiss' | translate }}">
+                      <ion-select-option *ngFor="let address of addressTypes" [value]="address.addressKey">{{ address.addressType | translate }}</ion-select-option>
                     </ion-select>
                   </div>
                 </div>

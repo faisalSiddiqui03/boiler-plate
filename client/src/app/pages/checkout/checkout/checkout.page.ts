@@ -63,6 +63,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   widgetModels = {};
   deliveryModes: any;
   isAddNewAddressClicked = false;
+  addressTypes = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -115,6 +116,8 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
       this.checkoutForm.controls['building'].setValue('T');
       this.checkoutForm.controls['street'].setValue('T');
     }
+
+    this.addressTypes = this.utilService.getAddressTypes();
   }
 
   ionViewWillEnter() {
@@ -365,7 +368,9 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     const obj: CheckoutDetails = new CheckoutDetails();
 
-    obj.paymentDetails = this.objPayment;
+    // obj.paymentDetails = this.objPayment;
+
+    obj.paymentProvider = 'COD';
 
     const objShipAddress: Address = new Address();
     if (this.getDeliveryMode() === this.deliveryModes.PICKUP) {
@@ -382,10 +387,10 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
     objShipAddress.contactDetail = contactDetail;
 
 
-    objShipAddress.city = this.getCurrentStore().city;
+    objShipAddress.city.code = this.getSelectedCityId();
     objShipAddress.country = this.getCurrentStore().country;
     objShipAddress.state = this.getCurrentStore().state;
-    objShipAddress.pinCode = parseInt(this.getCurrentStore().area.pincode);
+    objShipAddress.pinCode = parseInt(this.getCurrentStore().area.pincode, 10);
     obj.shippingAddress = objShipAddress;
 
     this.checkoutWidgetAction.emit(new Action(CheckoutWidgetActions.ACTION_SAVE_SHIPPING_ADDRESS, objShipAddress));
@@ -438,7 +443,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
       if (this.checkoutForm.value.saveAddress) {
         this.widgetModels['singleUserAddress'].detail = this.checkoutForm.value.building;
         this.widgetModels['singleUserAddress'].landmark = this.checkoutForm.value.street;
-        this.widgetModels['singleUserAddress'].city = this.getCurrentStore().city;
+        this.widgetModels['singleUserAddress'].city = this.getCurrentStore().selectedCityId;
         this.widgetModels['singleUserAddress'].country = this.getCurrentStore().country;
         this.widgetModels['singleUserAddress'].state = this.getCurrentStore().state;
         this.widgetModels['singleUserAddress'].addressType = this.checkoutForm.value.addressType;
@@ -470,9 +475,9 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   getSavedAddresses(addresses) {
-    // this.savedAddresses = addresses;
+    // this.savedAddresses = addresses; TODO : check with faisale
     this.savedAddresses = addresses.filter(elem =>
-      elem.city.code === this.getCurrentStore().city.code
+      elem.city.code === this.getCurrentStore().selectedCityId
     );
     this.useSavedAddress = this.savedAddresses.length > 0;
     if (this.useSavedAddress) {

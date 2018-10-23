@@ -143,6 +143,10 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
     this.cartWidgetAction.emit(action);
   }
 
+  reloadSuggestions(data) {
+    this.suggestionWidgetAction.emit(new Action(SuggestionsWidgetActions.REFRESH));
+  }
+
   confirmRemove(item){
     this.removeItemPopup = true;
     this.itemToRemove = item;

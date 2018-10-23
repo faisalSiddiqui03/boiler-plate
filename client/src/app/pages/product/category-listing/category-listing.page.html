@@ -43,7 +43,7 @@
               </div>
             </ion-hide-when>
             <ng-container *ngFor="let item of navigations; let i = index;">
-              <div [hidden]="!(item.categoryId === categoryId)">
+              <div [hidden]="!(item.categoryId === categoryId)" [id]="item.categoryId">
                 <product-showcase-widget [componentId]="getComponentId()" [setSEOTags]=false pfWidgetImpressionTrack [filters]="getShowcaseFilter(item.categoryId)"
                   [executor]="productShowcaseWidgetExecutor" [action]="productShowcaseActionMap.get(item.categoryId)">
                   <ng-template let-widget="widget">
@@ -150,7 +150,7 @@
                                   (click)="updateFavorites(prod?.isFavorite, prod?.client); $event.stopPropagation();"></div>
                                 <ion-card-header no-padding>
                                   <img height="100" src="{{getProductImageUrl(prod)}}" img-preloader="{{getProductImageUrl(prod)}}" defaultImage="assets/imgs/default/default.png"
-                                    loadingImage="assets/imgs/default/default.png" alt="{{prod?.title}}" />
+                                       [parentId]="item.categoryId" loadingImage="assets/imgs/default/default.png" alt="{{prod?.title}}" />
                                 </ion-card-header>
 
                                 <ion-card-content padding>
@@ -195,7 +195,7 @@
       </div>
       <div class="checkout-btn">
         <ion-button (click)="goToCart()" color="success" text-capitalize expand="block" mode="ios" class="btn-success">
-          checkout
+          {{'category_listing.checkout' | translate }}
         </ion-button>
       </div>
     </ion-footer>

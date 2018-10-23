@@ -5,8 +5,8 @@ import { TranslateCompiler, TranslateLoader, TranslateModule } from '@ngx-transl
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+// import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+// import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
@@ -112,10 +112,8 @@ export function getAppConfig(): Object {
     PWAServiceWorkerModule.forRoot()
   ],
   providers: [
-    StatusBar,
     CacheStorageServiceImpl,
     HttpService,
-    SplashScreen,
     LifecycleHandler,
     Geolocation,
     AuthGuard,
@@ -161,7 +159,7 @@ export class AppModule {
     } else {
       // two possiblities: either lang code not provided
       // or wrong lang code is provided
-     
+
       // here check the browser language
       const browserLang = navigator.language;
       let mappedLang = languageService.getCodeByBrowserLanguage(browserLang);
