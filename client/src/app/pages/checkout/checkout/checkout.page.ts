@@ -12,7 +12,7 @@ import {
   CapRouterService,
   Address,
 } from '@capillarytech/pwa-framework';
-import { CheckoutComponent, UserIdentifier } from '@capillarytech/pwa-components';
+import { SinglePageCheckoutComponent, UserIdentifier } from '@capillarytech/pwa-components';
 
 @Component({
   selector: 'app-checkout',
@@ -23,18 +23,14 @@ import { CheckoutComponent, UserIdentifier } from '@capillarytech/pwa-components
 
 @pwaLifeCycle()
 @pageView()
-export class CheckoutPage extends CheckoutComponent implements OnInit, AfterViewInit {
+export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit, AfterViewInit {
 
   checkoutForm: FormGroup;
-  currencyCode: string;
   useSavedAddress = true;
   selectedSavedAddress;
-  showdropdownAddressType = false;
   savedAddresses = [];
-  checkoutWidgetAction = new EventEmitter();
   widgetModels = {};
   isAddNewAddressClicked = false;
-  addressTypes = [];
   titleValue = '';
 
   constructor(
@@ -45,16 +41,13 @@ export class CheckoutPage extends CheckoutComponent implements OnInit, AfterView
     private translate: TranslateService,
     private config: ConfigService,
     private capRouter: CapRouterService,
+    public hardwareService: HardwareService,
   ) {
-    super();
-
-    this.options.handleGaEvent = true;
-    this.options.identifier = UserIdentifier.EMAIL;
-    this.options.handleEmptyPaymentOption = true;
-
-    this.translate.use(this.getCurrentLanguageCode());
-
-    this.currencyCode = this.config.getConfig()['currencyCode'];
+    super({
+      handleGaEvent: true,
+      identifier: UserIdentifier.EMAIL,
+      handleEmptyPaymentOption: true
+    }, hardwareService, config);
 
     this.checkoutForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -73,8 +66,6 @@ export class CheckoutPage extends CheckoutComponent implements OnInit, AfterView
   }
 
   ngOnInit() {
-    this.translate.use(this.getCurrentLanguageCode());
-
     this.translate.get('checkout_page.secure_checkout').subscribe(value => {
       this.titleValue = value;
     });
@@ -84,8 +75,6 @@ export class CheckoutPage extends CheckoutComponent implements OnInit, AfterView
       this.checkoutForm.controls['building'].setValue('T');
       this.checkoutForm.controls['street'].setValue('T');
     }
-
-    this.addressTypes = this.utilService.getAddressTypes();
   }
 
   ionViewWillEnter() {
@@ -128,7 +117,7 @@ export class CheckoutPage extends CheckoutComponent implements OnInit, AfterView
     objShipAddress.address1 = this.checkoutForm.value.building;
     objShipAddress.address2 = this.checkoutForm.value.street;
     objShipAddress.addressType = this.checkoutForm.value.addressType || '';
-    
+
     const contactDetail = new ContactDetail();
     contactDetail.firstName = this.checkoutForm.value.name;
     contactDetail.emailID = this.checkoutForm.value.email;
