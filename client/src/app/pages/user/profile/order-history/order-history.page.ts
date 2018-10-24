@@ -4,7 +4,7 @@ import {
   pageView,
   ConfigService
 } from '@capillarytech/pwa-framework';
-import { Utils } from "@capillarytech/pwa-ui-helpers";
+import { Utils } from "@capillarytech/pwa-components";
 import { TranslateService } from '@ngx-translate/core';
 import { OrderHistoryComponent } from '@capillarytech/pwa-components';
 

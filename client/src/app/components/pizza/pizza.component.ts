@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   Product,
-  ConfigService,
 } from '@capillarytech/pwa-framework';
 import { IncrementValidator, DecrementValidator } from '../../helpers/validators/index';
 import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
@@ -25,12 +24,11 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     public translate: TranslateService,
-    public config: ConfigService,
     private loaderService: LoaderService,
     private modalController: ModalController,
     private hardwareService: HardwareService,
   ) {
-    super(translate, config);
+    super(translate);
     this.translate.use(this.getCurrentLanguageCode());
   }
 

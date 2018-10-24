@@ -3,7 +3,6 @@ import { Component, EventEmitter, ViewEncapsulation, Output } from '@angular/cor
 import { ViewCartComponent } from '@capillarytech/pwa-components';
 import {
   ConfigService,
-  CapRouterService,
   pwaLifeCycle,
   pageView,
   Product,
@@ -47,7 +46,6 @@ export class CartComponent extends ViewCartComponent {
     private alertService: AlertService,
     private loaderService: LoaderService,
     public config: ConfigService, public location: Location,
-    private capRouter: CapRouterService,
     private modalController: ModalController
   ) {
     super(config, location);
@@ -56,10 +54,10 @@ export class CartComponent extends ViewCartComponent {
 
   async applyCoupon(couponCode) {
 
-    if ( !couponCode ) {
+    if (!couponCode) {
       return;
     }
-    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode() );
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
     super.applyCoupon(couponCode);
   }
 
@@ -76,11 +74,11 @@ export class CartComponent extends ViewCartComponent {
 
   async handleApplyCouponActionSuccess(data) {
     if (data) {
-        this.loaderService.stopLoading();
-        const coupon_success = await this.translateService.instant('cart.coupon_applied_successfully');
-        await this.alertService.presentToast(coupon_success, 3000, 'bottom');
-        this.showVoucherModal();
-        return;
+      this.loaderService.stopLoading();
+      const coupon_success = await this.translateService.instant('cart.coupon_applied_successfully');
+      await this.alertService.presentToast(coupon_success, 3000, 'bottom');
+      this.showVoucherModal();
+      return;
     }
 
     this.handleApplyCouponActionFailed(data);
@@ -88,10 +86,10 @@ export class CartComponent extends ViewCartComponent {
 
   async removeCoupon(couponCode) {
 
-    if ( !couponCode ) {
-        return;
+    if (!couponCode) {
+      return;
     }
-    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode() );
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
     super.removeCoupon(couponCode);
   }
 
@@ -116,7 +114,7 @@ export class CartComponent extends ViewCartComponent {
 
   updateCartItem(event, item, isAddition) {
 
-    this.updateCart({clickNumber: event.clickNumber, isAddition: isAddition}, item);
+    this.updateCart({ clickNumber: event.clickNumber, isAddition: isAddition }, item);
   }
 
   confirmRemove(item) {
@@ -141,14 +139,14 @@ export class CartComponent extends ViewCartComponent {
     let component;
     switch (cartItem.getType()) {
       case ProductType.Product:
-          component = ProductDetailsComponent;
-          break;
+        component = ProductDetailsComponent;
+        break;
       case ProductType.Bundle:
-          component = PizzaComponent;
-          break;
+        component = PizzaComponent;
+        break;
       case ProductType.Deal:
-          component = DealComponent;
-          break;
+        component = DealComponent;
+        break;
     }
 
     const modal = await this.modalController.create({
@@ -177,7 +175,7 @@ export class CartComponent extends ViewCartComponent {
 
     const cartClear = await this.translateService.instant('cart.cart_clear');
     await this.alertService.presentToast(cartClear, 3000, 'bottom');
-    this.capRouter.routeByUrl('/home');
+    this.routeByUrl('/home');
   }
 
   showVoucherModal() {
@@ -190,7 +188,7 @@ export class CartComponent extends ViewCartComponent {
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrl('/' + pageName);
+    this.routeByUrl('/' + pageName);
   }
 
   async openProductDetails(product: Product) {
