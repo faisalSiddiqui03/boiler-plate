@@ -25,13 +25,7 @@ const routes: Routes = [
     IonicModule,
     LocationWidgetModule,
     RouterModule.forChild(routes),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [SearchLocationPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

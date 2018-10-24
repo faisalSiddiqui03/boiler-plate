@@ -43,13 +43,7 @@ const routes: Routes = [
     PaymentOptionsWidgetModule,
     UserAddressWidgetModule,
     CapRouterServiceModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [CheckoutPage]
 })

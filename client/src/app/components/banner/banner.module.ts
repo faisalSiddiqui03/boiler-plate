@@ -18,13 +18,7 @@ import { HttpClient } from '@angular/common/http';
     EventTrackServiceModule,
     ImagePreloadModule,
     SkeletonModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [
     BannerComponent,

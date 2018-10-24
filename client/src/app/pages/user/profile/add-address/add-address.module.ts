@@ -32,13 +32,7 @@ const routes: Routes = [
     LocationMapModule,
     UserAddressWidgetModule,
     RouterModule.forChild(routes),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [AddAddressPage]
 })

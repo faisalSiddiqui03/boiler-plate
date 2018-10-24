@@ -48,13 +48,7 @@ const routes: Routes = [
     StoreLocatorWidgetModule,
     CartWidgetModule,
     SEOModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [HomePage]
 })
