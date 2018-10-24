@@ -39,7 +39,7 @@ export class MyAccountPage extends MyAccountComponent implements OnInit {
     if (pageName === 'logout') {
       this.logout();
     } else {
-      this.capRouter.routeByUrlWithLanguage(pageName);
+      this.capRouter.routeByUrl(pageName);
     }
   }
 
@@ -55,7 +55,7 @@ export class MyAccountPage extends MyAccountComponent implements OnInit {
   async handleMyAccountActionLogoutSuccess(data) {
     const successfully_loged_out = await this.translate.instant('my_account_page.successfully_loged_out');
     await this.alertService.presentToast(successfully_loged_out, 3000, 'bottom');
-    this.capRouter.routeByUrlWithLanguage('/home');
+    this.capRouter.routeByUrl('/home');
   }
 
 }

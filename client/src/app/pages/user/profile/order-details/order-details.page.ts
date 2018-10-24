@@ -43,7 +43,7 @@ export class OrderDetailsPage extends OrderDetailsComponent implements OnInit {
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrlWithLanguage(pageName);
+    this.capRouter.routeByUrl(pageName);
   }
 
   handleOrderDetailsLoadingFailed(data) {
