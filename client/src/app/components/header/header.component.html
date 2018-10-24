@@ -58,18 +58,18 @@
       </div>
       <div class="signin-register loggedin-user" *ngIf="!dealsHeader && getUserModel()?.userId != 0">
         <div class="icon icon-user-circle" (click)="goToPage('login')"></div>
-        <span (click)="showDropDown()" text-uppercase>Hello {{getUserModel()?.firstName}}</span>
+        <span (click)="showDropDown()" text-uppercase>{{'my_account_page.hello' | translate}} {{getUserModel()?.firstName}}</span>
         <div (click)="showDropDown()" class="icon-arrow icon-arrow-down-2"></div>
         <div class="dropdown" [class.open]="enableUserDropdown">
           <ul>
-            <li (click)="goToPage('my-account'); showDropDown()">My Account</li>
-            <li (click)="logout(); showDropDown()">Logout
+            <li (click)="goToPage('my-account'); showDropDown()">{{'my_account_page.my_account' | translate}}</li>
+            <li (click)="logout(); showDropDown()">{{'my_account_page.logout' | translate}}
               <logout-widget [componentId]="getComponentId()" [action]="logoutWidgetAction"></logout-widget>
             </li>
-            <li (click)="goToPage('order-history'); showDropDown()">My Order History</li>
-            <li (click)="goToPage('saved-address'); showDropDown()">My Saved Address</li>
-            <li (click)="goToPage('favorites'); showDropDown()">My Favorites</li>
-            <li (click)="goToPage('change-password'); showDropDown()">Change Password</li>
+            <li (click)="goToPage('order-history'); showDropDown()">{{'my_account_page.order_history' | translate}}</li>
+            <li (click)="goToPage('saved-address'); showDropDown()">{{'my_account_page.saved_address' | translate}}</li>
+            <li (click)="goToPage('favorites'); showDropDown()">{{'my_account_page.my_favourites' | translate}}</li>
+            <li (click)="goToPage('change-password'); showDropDown()">{{'my_account_page.change_password' | translate}}</li>
           </ul>
         </div>
       </div>

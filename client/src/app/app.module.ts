@@ -33,6 +33,7 @@ import {
   FulfilmentModeModule,
   SEOModule,
   LanguageService,
+  CapRouterServiceModule,
   // AppUpdateServiceModule,
   // AppUpdateServiceImpl,
   CapRouterService,
@@ -91,7 +92,7 @@ export function getAppConfig(): Object {
     SearchLocationPageModule,
     EventTrackServiceModule.forRoot([EventTrackServiceModule.Tracker.GTM]),
     EventTrackWidgetModule,
-    // CapRouterServiceModule,
+    CapRouterServiceModule.forRoot(true),
     // AppUpdateServiceModule,
     LanguageServiceModule.forRoot(languages),
     TranslateModule.forRoot({
@@ -173,7 +174,7 @@ export class AppModule {
 
       languageService.initialize(mappedLang);
       //this.utilService.setLanguageCode(mappedLang);
-      this.capRouterService.routeByUrlWithLanguage(locationUrl);
+      this.capRouterService.routeByUrl(locationUrl);
     }
   }
 }

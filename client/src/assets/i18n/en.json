@@ -63,7 +63,8 @@
 		"your_total": "Your Total"
 	},
 	"category_listing": {
-		"price_tag": "From"
+		"price_tag": "From",
+    "checkout" : "checkout"
 	},
 	"change_password_page": {
 		"change_password": "Change Password",
@@ -340,6 +341,7 @@
 	"my_account_page": {
 		"change_password": "Change Password",
 		"error_logging_out": "Error occurred while logging out",
+		"hello": "Hello",
 		"logout": "Logout",
 		"my_account": "My Account",
 		"my_favourites": "My Favourites",

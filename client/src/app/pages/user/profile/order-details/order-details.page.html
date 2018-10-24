@@ -5,7 +5,7 @@
   <app-sub-header [title]="titleValue"></app-sub-header>
   <orders-details-widget [componentId]="getComponentId()" [orderId]="orderId">
     <ng-template let-widget="widget">
-      <div *ngIf="!widget || !widget.model">
+      <div *ngIf="(!widget || !widget.model) && !isOrderDetailsLoadingDone">
         <div class="orders-content w-700">
           <ion-list no-margin>
             <ion-item no-padding>
@@ -27,6 +27,24 @@
           </ion-list>
         </div>
 
+      </div>
+
+      <div *ngIf="(!widget || !widget.model) && isOrderDetailsLoadingDone">
+        <div class="orders-content w-700">
+          <ion-list no-margin>
+            <ion-item no-padding>
+              <ion-label no-margin>
+                <h2>Order # {{orderId}}</h2>
+                <div class="order-description">
+                  <p>
+                      Unable to fetch Order Details.
+                  </p>
+                </div>
+                
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
       </div>
       
       

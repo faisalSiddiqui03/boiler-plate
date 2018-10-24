@@ -1,21 +1,13 @@
-import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { BaseComponent } from '../../../../base/base-component';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
-  Action,
   pwaLifeCycle,
   pageView,
-  OnWidgetActionsLifecyle,
-  OnWidgetLifecyle,
-  LifeCycle,
-  OrderWidget,
   CapRouterService,
-  OrderWidgetActions,
   ConfigService
 } from '@capillarytech/pwa-framework';
-import { UtilService } from '../../../../helpers/utils';
-import { Router } from '@angular/router';
-import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
+import { Utils } from "@capillarytech/pwa-ui-helpers";
 import { TranslateService } from '@ngx-translate/core';
+import { OrderHistoryComponent } from '@capillarytech/pwa-components';
 
 @Component({
   selector: 'app-order-history',
@@ -26,28 +18,20 @@ import { TranslateService } from '@ngx-translate/core';
 
 @pwaLifeCycle()
 @pageView()
-
-export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class OrderHistoryPage extends OrderHistoryComponent implements OnInit {
 
   titleValue = '';
-  orderWidgetAction = new EventEmitter();
-  orderWidgetExecutor = new EventEmitter();
-  showingProductsForIndexs = [];
   isShowMoreButtonVisible = true;
-  isWidgetLoadingDone = false;
-  isNextLoading = false;
+  isOrderHistoryWidgetLoaded = false;
+  accordianMap = new Map();
   currencyCode: string;
 
   constructor(
-    private router: Router,
-    private utilService: UtilService,
-    private loaderService: LoaderService,
-    private config: ConfigService,
     private translate: TranslateService,
-    private capRouter: CapRouterService
-    ) {
+    private capRouter: CapRouterService,
+    private config: ConfigService
+  ) {
     super();
-    this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
@@ -57,98 +41,46 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
     });
   }
 
-  handleOrdersResponse(data) {
-    if (data.status === 204) {
-      console.log('There are no previous Orders');
-    }
-  }
-
-  widgetActionFailed(name: string, data: any): any {
-    console.log('name action failed: ' + name + ' data: ' + data);
-    switch (name) {
-      case OrderWidgetActions.NEXT:
-        this.isNextLoading = false;
-        console.log('no Data found, hiding the showmore button');
-        this.isShowMoreButtonVisible = false;
-        break;
-    }
-  }
-
-  widgetActionSuccess(name: string, data: any): any {
-    console.log('name action success: ' + name + ' data: ' + data);
-    switch (name) {
-      case OrderWidgetActions.NEXT:
-        this.isNextLoading = false;
-        if (data) {
-          console.log('got latest data');
-        } else {
-          console.log('no Data found, hiding the showmore button');
-          // this.isShowMoreButtonVisible = false;
-        }
-        break;
-    }
-  }
-
-  widgetLoadingFailed(name: string, data: any): any {
-    console.log(name, data);
-    this.isWidgetLoadingDone = true;
-    this.handleOrdersResponse(data);
-  }
-
-  widgetLoadingStarted(name: string, data: any): any {
-  }
-
-  widgetLoadingSuccess(name, data) {
-    console.log('widget loading success', name, data);
-    this.isWidgetLoadingDone = true;
-  }
-
   getOrderDetails(order) {
-    this.capRouter.routeByUrlWithLanguage('order-details/' + order.id);
+    this.capRouter.routeByUrl('order-details/' + order.id);
   }
 
-  handleWidgetLifecycle(x: LifeCycle) {
-    if (x.type === LifeCycle.WIDGET_LOADING_SUCCESS) {
-      this.isWidgetLoadingDone = true;
-    } else if (x.type === LifeCycle.PRIMARY_ACTION_SUCCESS) {
-      alert('Action Successful: ' + x.data);
+  toggleShowProduct(i) {
+    if (this.accordianMap.has(i)) {
+      this.accordianMap.delete(i);
     } else {
-      console.log(x);
+      this.accordianMap.set(i, true);
     }
-  }
-
-  loadNextOrders() {
-    this.isNextLoading = true;
-    this.orderWidgetAction.emit(new Action(OrderWidgetActions.NEXT));
-  }
-
-  // helper functions for the accordian
-  toggleShowingProducts(index) {
-    const position = this.showingProductsForIndexs.findIndex(x => x === index);
-    if (position === -1) {
-      this.showingProductsForIndexs.push(index);
-    } else {
-      this.showingProductsForIndexs.splice(position, 1);
-    }
-  }
-
-  isShowProducts(index) {
-    if (this.showingProductsForIndexs.includes(index)) {
-      return true;
-    }
-    return false;
   }
 
   getTimeHHMM(date) {
-    return this.utilService.getTimeHHMM(date);
+    return Utils.getTimeHHMM(date);
   }
 
   getDate(date) {
-    return this.utilService.getDate(date);
+    return Utils.getDate(date);
   }
 
   ionViewWillLeave() {
-    this.isWidgetLoadingDone = false;
+    this.isOrderHistoryWidgetLoaded = false;
+  }
+
+  handleWidgetActionNextFaliure(data) {
+    this.isShowMoreButtonVisible = false;
+  }
+
+  handleWidgetActionNextSuccess(data) {
+    if (!data) {
+      this.isShowMoreButtonVisible = false;
+    }
+  }
+  
+  handleOrderHistoryLoadingFailed(data) {
+    this.isOrderHistoryWidgetLoaded = true;
+  }
+
+  handleOrderHistoryLoadingSuccess(data) {
+    this.isOrderHistoryWidgetLoaded = true;
   }
 
 }

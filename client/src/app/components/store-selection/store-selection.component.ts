@@ -1,9 +1,9 @@
-import { Component, OnInit, EventEmitter, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
-import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { BaseComponent } from '../../base/base-component';
+import {Component, OnInit, EventEmitter, Input} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AlertService, LoaderService} from '@capillarytech/pwa-ui-helpers';
+import {ModalController} from '@ionic/angular';
+import {TranslateService} from '@ngx-translate/core';
+import {BaseComponent} from '../../base/base-component';
 import {
   pwaLifeCycle,
   OnWidgetActionsLifecyle,
@@ -17,7 +17,7 @@ import {
   CartWidgetActions,
   FulfilmentModeWidgetActions, LanguageService, CapRouterService
 } from '@capillarytech/pwa-framework';
-import { StoreListComponent } from '../store-list/store-list.component';
+import {StoreListComponent} from '../store-list/store-list.component';
 
 @Component({
   selector: 'app-store-selection',
@@ -54,10 +54,12 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   clearCartPopup = false;
   clearCartToChange = '';
   sizeConfig = [
-    { "height": 200, "width": 400, "type": "mobile" }, { "height": 400, "width": 1200, "type": "desktop" }
+    {"height": 200, "width": 400, "type": "mobile"},
+    {"height": 400, "width": 1200, "type": "desktop"}
   ];
   @Input() isModal: false;
   private cityData: any;
+
   constructor(
     private config: ConfigService,
     private loaderService: LoaderService,
@@ -130,7 +132,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         this.loaderService.stopLoading();
         if (!this.isModal) {
           if (data && data.length) {
-            if(this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY){
+            if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
               const firstStore = data[0];
               if (this.isStoreSelected() && this.getCurrentStore().id !== firstStore.id) {
                 this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
@@ -140,7 +142,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
               return;
             }
             this.changeRequested = false;
-            this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
+            this.capRouter.routeByUrl('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
             await this.alertService.presentToast(store_alert, 3000, 'top');
@@ -155,7 +157,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         if (!this.isModal) {
           if (data && data.length) {
             this.changeRequested = false;
-            this.capRouter.routeByUrlWithLanguage('/store-selection?cityId=' + this.selectedCityCode);
+            this.capRouter.routeByUrl('/store-selection?cityId=' + this.selectedCityCode);
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
             await this.alertService.presentToast(store_alert, 3000, 'top');
@@ -182,11 +184,11 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     switch (langCode) {
       case 'ar':
         await this.languageService.updateLanguageByCode('en');
-        this.capRouter.routeByUrlWithLanguage('home');
+        this.capRouter.routeByUrl('home');
         break;
       case 'en':
         await this.languageService.updateLanguageByCode('ar');
-        this.capRouter.routeByUrlWithLanguage('home');
+        this.capRouter.routeByUrl('home');
         break;
       default:
         // do nothing
@@ -260,7 +262,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     }
     this.isNavigationClicked = true;
     this.changeRequested = false;
-    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
   }
 
   async widgetActionFailed(name: string, data: any) {

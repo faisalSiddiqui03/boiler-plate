@@ -83,7 +83,7 @@
 
 .delivery-time {
   @extend .lang-selection;
-  font-size: 14px;
+  font-size: 0.78rem;
   ion-icon {
     font-size: 18px;
     vertical-align: sub;
@@ -299,6 +299,38 @@
   }
   .top-header-container {
     box-shadow: none;
+  }
+
+  .checkout-header {
+    .header-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex: 1;
+      .delivery-time-large {
+        display: none;
+      }
+      .delivery-mode {
+        display: none;
+      }
+      .delivery-location {
+        display: none;
+      }
+      .signin-register {
+        font-weight: 500;
+        font-family: 'Open Sans Condensed';
+        font-size: 15px;
+        .icon {
+          display: inline-block;
+          font-size: 24px;
+          vertical-align: middle;
+        }
+        span {
+          margin-left: 5px;
+          cursor: pointer;
+        }
+      }
+    }
   }
   .category-header {
     .desktop-logo {

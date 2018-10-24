@@ -1,19 +1,13 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
-import { BaseComponent } from '../../../../base/base-component';
+import { Component, OnInit } from '@angular/core';
 import {
   pwaLifeCycle,
-  Action,
   pageView,
-  OnWidgetActionsLifecyle,
-  OnWidgetLifecyle,
   CapRouterService
 } from '@capillarytech/pwa-framework';
-import { UtilService } from '../../../../helpers/utils';
-import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validator, Validators } from '@angular/forms';
-import { ResetPasswordWidgetActions } from '@capillarytech/pwa-framework';
+import { ChangePasswordComponent } from '@capillarytech/pwa-components';
 
 @Component({
   selector: 'app-change-password',
@@ -23,30 +17,25 @@ import { ResetPasswordWidgetActions } from '@capillarytech/pwa-framework';
 
 @pwaLifeCycle()
 @pageView()
-
-export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class ChangePasswordPage extends ChangePasswordComponent implements OnInit {
 
   resetPasswordForm: FormGroup;
-  resetPasswordWidgetActionEmitter = new EventEmitter();
   titleValue = '';
-  widgetmodel: any;
   userId: string;
   updateInProgress = false;
   isPasswordFiled = true;
   isConfirmPasswordFiled = true;
   passwordChangeSuccess = false;
 
-  constructor(private router: Router,
-    private utilService: UtilService,
-    private route: ActivatedRoute,
+  constructor(
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
     private capRouter: CapRouterService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder
+  ) {
     super();
 
-    this.translate.use(this.getCurrentLanguageCode());
     this.resetPasswordForm = this.formBuilder.group({
       newPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       confirmNewPassword: ['', Validators.compose([Validators.required])]
@@ -58,14 +47,10 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     const translateSub = this.translate.get('change_password_page.change_password').subscribe(value => {
         this.titleValue = value;
     });
-
-    this.subscriptions.push(translateSub);
     this.getUserPromise().then((user) => {
-
         this.userId = user.userId;
     });
   }
-
 
   checkPasswords(group: FormGroup) {
     const pass = group.controls.newPassword.value;
@@ -73,7 +58,7 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     return pass === confirmPass ? null : true;
   }
 
-  changeTextPassword(field) {
+  changeFieldType(field) {
     if (field === 'newPassword') {
       this.isPasswordFiled = !this.isPasswordFiled;
     } else if (field === 'confirmNewPassword') {
@@ -82,26 +67,23 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     return;
   }
 
-  async changePassword() {
+  async doChangePassword() {
     console.log('Password change');
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     this.updateInProgress = true;
-    this.widgetmodel.userId = this.userId;
-    this.widgetmodel.password = this.resetPasswordForm.value.newPassword;
-    const action = new Action(ResetPasswordWidgetActions.ACTION_CHANGE_PASSWORD);
-    this.resetPasswordWidgetActionEmitter.emit(action);
+    this.changePassword(this.userId, this.resetPasswordForm.value.newPassword);
   }
 
-  widgetActionFailed(name: string, data: any): any {
+  handleWidgetActionChangePasswordFaliure(data) {
     this.loaderService.stopLoading();
     this.updateInProgress = false;
-  }
+  } 
 
   navigateToDeals() {
-    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
   }
 
-  async widgetActionSuccess(name, data) {
+  async handleWidgetActionChangePasswordSuccess(data) {
     this.loaderService.stopLoading();
     this.updateInProgress = false;
     if (data.isSuccessful) {
@@ -111,21 +93,10 @@ export class ChangePasswordPage extends BaseComponent implements OnInit, OnWidge
     } else {
       console.log(data.message);
     }
-    console.log(data);
   }
 
-  widgetLoadingFailed(name: string, data: any): any {
+  handleResetPasswordLoadingFailed(data) {
+    console.log('reset password widget loading failed');
   }
 
-  widgetLoadingStarted(name: string, data: any): any {
-  }
-
-  widgetLoadingSuccess(name: string, data: any): any {
-    switch (name) {
-      case 'RESET_PASSWORD':
-        // this.loaderService.stopLoading();
-        this.widgetmodel = data;
-        break;
-    }
-  }
 }

@@ -60,7 +60,7 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
 
   async handleResetPasswordResponse(data) {
     this.loaderService.stopLoading();
-    this.capRouter.routeByUrlWithLanguage('/login');
+    this.capRouter.routeByUrl('/login');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/login'));
     if (data.isSuccessful) {
       await this.alertService.presentToast(this.translate.instant('reset_password_page.link_sent'), 1000, 'top', 'top');
@@ -89,7 +89,7 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrlWithLanguage(pageName);
+    this.capRouter.routeByUrl(pageName);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 

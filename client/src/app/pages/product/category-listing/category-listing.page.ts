@@ -153,17 +153,17 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   openProductDetails(product) {
     if (product.type === ProductType.Bundle) {
-      this.capRouter.routeByUrlWithLanguage('/pizza/' + product.title + '/' + product.id);
+      this.capRouter.routeByUrl('/pizza/' + product.title + '/' + product.id);
       return;
     }
 
     const navigationUrl = '/product/' + this.categoryNamesById.get(this.categoryId) + '/' +
       this.encodeURIComponent(product.title) + '/' + product.id;
-    this.capRouter.routeByUrlWithLanguage(navigationUrl);
+    this.capRouter.routeByUrl(navigationUrl);
   }
 
   openDeal(product) {
-    this.capRouter.routeByUrlWithLanguage('/deal/' + product.title + '/' + product.id);
+    this.capRouter.routeByUrl('/deal/' + product.title + '/' + product.id);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/deal/' + product.title + '/' + product.id));
   }
 
@@ -235,7 +235,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   goToCart() {
-    this.capRouter.routeByUrlWithLanguage('/cart');
+    this.capRouter.routeByUrl('/cart');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/cart'));
   }
 
@@ -279,6 +279,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrlWithLanguage(pageName);
+    this.capRouter.routeByUrl(pageName);
   }
 }

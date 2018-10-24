@@ -106,12 +106,12 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       await this.alertService.presentToast(data.isSuccessful ? this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top', 'top');
     }
 
-    this.capRouter.routeByUrlWithLanguage('/home');
+    this.capRouter.routeByUrl('/home');
   }
 
 
   goToPage(pageName) {
-    this.capRouter.routeByUrlWithLanguage(pageName);
+    this.capRouter.routeByUrl(pageName);
   }
 
   async handleUseridPasswordSigninResponse(data) {
@@ -123,7 +123,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       }else {
         await this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top', 'top');
       }
-      this.capRouter.routeByUrlWithLanguage('/home');
+      this.capRouter.routeByUrl('/home');
     } else {
       this.isLoginSuccessful = false;
       if (isDesktop) {

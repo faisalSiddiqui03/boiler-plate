@@ -31,12 +31,12 @@ export class FooterComponent extends BaseComponent implements OnInit {
   }
 
   navigatePage(page) {
-    this.capRouter.routeByUrlWithLanguage(page);
+    this.capRouter.routeByUrl(page);
     //this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(page));
   }
 
   navigateToCategory(item) {
-    this.capRouter.routeByUrlWithLanguage('/products?category=' + item.name + '&id=' + item.categoryId);
+    this.capRouter.routeByUrl('/products?category=' + item.name + '&id=' + item.categoryId);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=' + item.name + '&id=' + item.categoryId));
   }
 }
