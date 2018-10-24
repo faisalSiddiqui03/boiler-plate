@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,7 +23,6 @@ export class MyAccountPage extends MyAccountComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private translate: TranslateService,
-    private capRouter: CapRouterService
   ) {
     super();
   }
@@ -39,7 +37,7 @@ export class MyAccountPage extends MyAccountComponent implements OnInit {
     if (pageName === 'logout') {
       this.logout();
     } else {
-      this.capRouter.routeByUrl(pageName);
+      this.routeByUrl(pageName);
     }
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import {
   pwaLifeCycle,
@@ -9,7 +9,6 @@ import {
   ConfigService,
   DeliverySlot,
   ContactDetail,
-  CapRouterService,
   Address,
 } from '@capillarytech/pwa-framework';
 import { SinglePageCheckoutComponent, UserIdentifier } from '@capillarytech/pwa-components';
@@ -40,14 +39,13 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
     private alertService: AlertService,
     private translate: TranslateService,
     private config: ConfigService,
-    private capRouter: CapRouterService,
     public hardwareService: HardwareService,
   ) {
     super({
       handleGaEvent: true,
       identifier: UserIdentifier.EMAIL,
       handleEmptyPaymentOption: true
-    }, hardwareService, config);
+    }, hardwareService);
 
     this.checkoutForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -206,7 +204,7 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
   }
 
   goToDeals() {
-    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
+    this.routeByUrl('/products?category=deals&id=CU00215646');
   }
 
 }

@@ -49,6 +49,7 @@ import { SearchLocationPageModule } from './pages/user/profile/search-location/s
 import { RoutingState } from './routing-state';
 import { UtilService } from './helpers/utils';
 import { Location } from '@angular/common';
+import { CacheStorageServiceModule } from '@capillarytech/pwa-framework/services';
 
 export const languages = [
   {
@@ -92,6 +93,7 @@ export function getAppConfig(): Object {
     SearchLocationPageModule,
     EventTrackServiceModule.forRoot([EventTrackServiceModule.Tracker.GTM]),
     EventTrackWidgetModule,
+    CacheStorageServiceModule,
     CapRouterServiceModule.forRoot(true),
     // AppUpdateServiceModule,
     LanguageServiceModule.forRoot(languages),
@@ -113,7 +115,6 @@ export function getAppConfig(): Object {
     PWAServiceWorkerModule.forRoot()
   ],
   providers: [
-    CacheStorageServiceImpl,
     HttpService,
     LifecycleHandler,
     Geolocation,

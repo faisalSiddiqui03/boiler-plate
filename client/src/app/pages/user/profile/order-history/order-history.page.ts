@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  CapRouterService,
   ConfigService
 } from '@capillarytech/pwa-framework';
 import { Utils } from "@capillarytech/pwa-ui-helpers";
@@ -28,7 +27,6 @@ export class OrderHistoryPage extends OrderHistoryComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private capRouter: CapRouterService,
     private config: ConfigService
   ) {
     super();
@@ -42,7 +40,7 @@ export class OrderHistoryPage extends OrderHistoryComponent implements OnInit {
   }
 
   getOrderDetails(order) {
-    this.capRouter.routeByUrl('order-details/' + order.id);
+    this.routeByUrl('order-details/' + order.id);
   }
 
   toggleShowProduct(i) {

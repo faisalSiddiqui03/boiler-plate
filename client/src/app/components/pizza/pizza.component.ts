@@ -8,7 +8,6 @@ import { IncrementValidator, DecrementValidator } from '../../helpers/validators
 import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
 import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
-import { Location } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 import { PizzaBuilderComponent } from '@capillarytech/pwa-components';
@@ -23,16 +22,10 @@ import { PizzaBuilderComponent } from '@capillarytech/pwa-components';
 @pwaLifeCycle()
 export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
 
-  sizePropertyId: number;
-  currencyCode: string;
-  maxToppingLimit: number;
-  minToppingLimit: number;
-
   constructor(
     private alertService: AlertService,
     public translate: TranslateService,
     public config: ConfigService,
-    private location: Location,
     private loaderService: LoaderService,
     private modalController: ModalController,
     private hardwareService: HardwareService,
@@ -42,9 +35,7 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sizePropertyId = this.config.getConfig()['sizePropertyId'];
-    this.maxToppingLimit = this.config.getConfig()['maxToppingLimit'];
-    this.minToppingLimit = this.config.getConfig()['minToppingLimit'];
+    
   }
 
   async handleAddItemSuccess() {
@@ -80,6 +71,10 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
   async addToCart() {
     if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
       await this.openStoreSelection();
+      return;
+    }
+    if (this.productFromDeal) {
+      this.modalController.dismiss(this.clientProduct);
       return;
     }
     await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
@@ -125,11 +120,11 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
     this.loaderService.stopLoading();
   }
 
-  goBack() {
+  close() {
     if (this.productFromDeal || this.cartItem || this.fromFavorites) {
       this.modalController.dismiss();
       return;
     }
-    this.location.back();
+    this.goBack();
   }
 }

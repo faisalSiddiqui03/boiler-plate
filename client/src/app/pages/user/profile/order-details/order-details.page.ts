@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  CapRouterService,
   ConfigService
 } from '@capillarytech/pwa-framework';
 import { ActivatedRoute } from '@angular/router';
@@ -27,7 +26,6 @@ export class OrderDetailsPage extends OrderDetailsComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private actRoute: ActivatedRoute,
-    private capRouter: CapRouterService,
     private config: ConfigService
   ) {
     super();
@@ -43,7 +41,7 @@ export class OrderDetailsPage extends OrderDetailsComponent implements OnInit {
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrl(pageName);
+    this.routeByUrl(pageName);
   }
 
   handleOrderDetailsLoadingFailed(data) {
