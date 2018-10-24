@@ -47,20 +47,20 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
     this.minToppingLimit = this.config.getConfig()['minToppingLimit'];
   }
 
-  async addItem(serverItem): Promise<boolean> {
-    if (!super.addItem(serverItem)) {
-      this.alertService.presentToast(this.translate.instant('pizza.add_topping_error'), 1000, 'top');
-      return;
-    }
-    this.alertService.presentToast(this.translate.instant('pizza.add_topping_success'), 1000, 'top');
+  async handleAddItemSuccess() {
+    await this.alertService.presentToast(this.translate.instant('pizza.add_topping_success'), 1000, 'top');
   }
 
-  async removeItem(serverItem, isExtra = false): Promise<boolean> {
-    if (!super.removeItem(serverItem)) {
-      await this.alertService.presentToast(this.translate.instant('pizza.remove_topping_error'), 1000, 'top', 'top');
-      return;
-    }
+  async handleAddItemFailure() {
+    await this.alertService.presentToast(this.translate.instant('pizza.add_topping_error'), 1000, 'top');
+  }
+
+  async handleRemoveItemSuccess() {
     await this.alertService.presentToast(this.translate.instant('pizza.remove_topping_success'), 1000, 'top', 'top');
+  }
+  
+  async handleRemoveItemFailure() {
+    await this.alertService.presentToast(this.translate.instant('pizza.remove_topping_error'), 1000, 'top', 'top');
   }
 
   async openStoreSelection() {
