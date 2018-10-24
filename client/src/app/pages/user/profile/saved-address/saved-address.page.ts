@@ -1,19 +1,13 @@
-import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { BaseComponent } from '../../../../base/base-component';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
-    Action,
-    pwaLifeCycle,
-    pageView,
-    OnWidgetActionsLifecyle,
-    OnWidgetLifecyle,
-    UserAddressWidgetActions,
-    ConfigService,
-    CapRouterService
+  pwaLifeCycle,
+  pageView,
+  ConfigService,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
-import { UtilService } from '../../../../helpers/utils';
-import { Router } from '@angular/router';
-import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
+import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
+import { SavedAddressComponent } from '@capillarytech/pwa-components';
 
 @Component({
     selector: 'app-saved-address',
@@ -23,21 +17,19 @@ import { TranslateService } from '@ngx-translate/core';
 })
 @pwaLifeCycle()
 @pageView()
-export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class SavedAddressPage extends SavedAddressComponent implements OnInit {
 
     titleValue = '';
     toggleDeleteModal = false;
     addressToBeDeleted: '';
-    userAddressWidgetActions = new EventEmitter();
 
-    constructor(private router: Router,
-        private utilService: UtilService,
-        private loaderService: LoaderService, private alertService: AlertService,
-        private translate: TranslateService, private config: ConfigService,
-        private capRouter: CapRouterService) {
+    constructor(
+        private alertService: AlertService,
+        private translate: TranslateService,
+        private config: ConfigService,
+        private capRouter: CapRouterService
+    ) {
         super();
-
-        this.translate.use(this.getCurrentLanguageCode());
     }
 
     ngOnInit() {
@@ -46,18 +38,14 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
         });
     }
 
-
     getFlatAddress(address, index = 0) {
-
         const storeConfig = this.config.getConfig()['address'];
         const sep = storeConfig.storeSep;
-
         const addresses = address.split(sep);
-
         return addresses[index] ? addresses[index] : address.split(',')[index];
     }
 
-    deleteAddress(address) {
+    triggerDeleteAddress(address) {
         this.addressToBeDeleted = address.id;
         this.toggleDeleteModal = !this.toggleDeleteModal;
     }
@@ -73,44 +61,32 @@ export class SavedAddressPage extends BaseComponent implements OnInit, OnWidgetL
 
     dismissAddressModal(isTrue) {
         if (isTrue && this.addressToBeDeleted) {
-            const action = new Action(UserAddressWidgetActions.DELETE, [this.addressToBeDeleted]);
-            this.userAddressWidgetActions.emit(action);
+            this.deleteAddress(this.addressToBeDeleted);
         }
         this.toggleDeleteModal = !this.toggleDeleteModal;
     }
 
-    async widgetActionFailed(name: string, data: any) {
-        console.log(name, 'Action Failed');
-        switch (name) {
-            case UserAddressWidgetActions.DELETE:
-                const coupon_error = await this.translate.instant('saved_address_page.error_deleting_address');
-                await this.alertService.presentToast(coupon_error, 3000, 'bottom');
-                console.log('failed to delete the address');
-                break;
-        }
+    async handleWidgetActionDeleteAddressFailed(data) {
+        const error_deleting_address = await this.translate.instant('saved_address_page.error_deleting_address');
+        await this.alertService.presentToast(error_deleting_address, 3000, 'bottom');
     }
 
-    async widgetActionSuccess(name: string, data: any) {
-        console.log(name, 'Action Success');
-        switch (name) {
-            case UserAddressWidgetActions.DELETE:
-                const coupon_error = await this.translate.instant('saved_address_page.successfully_deleted_address');
-                await this.alertService.presentToast(coupon_error, 3000, 'bottom');
-                console.log('successfully deleted the address');
-                const action = new Action(UserAddressWidgetActions.REFRESH, []);
-                this.userAddressWidgetActions.emit(action);
-                break;
-        }
+    async handleWidgetActionDeleteAddressSuccess(data) {
+        const coupon_error = await this.translate.instant('saved_address_page.successfully_deleted_address');
+        await this.alertService.presentToast(coupon_error, 3000, 'bottom');
+        console.log('successfully deleted the address');
+        this.refreshAddresses();
     }
 
     ionViewDidEnter() {
-        const action = new Action(UserAddressWidgetActions.REFRESH, []);
-        this.userAddressWidgetActions.emit(action);
+        this.refreshAddresses();
     }
 
-    widgetLoadingFailed(name: string, data: any): any {}
+    handleUserAddressLoadingFailed(data) {
+        console.log('User Address widget loading failed');
+    }
 
-    widgetLoadingStarted(name: string, data: any): any {}
-
-    widgetLoadingSuccess(name: string, data: any): any {}
+    handleWidgetActionRefreshFailed(data) {
+        console.log('User Address widget Refresh action loading failed');
+    }
 }

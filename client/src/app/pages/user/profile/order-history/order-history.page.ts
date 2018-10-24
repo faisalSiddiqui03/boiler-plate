@@ -65,7 +65,7 @@ export class OrderHistoryPage extends OrderHistoryComponent implements OnInit {
     this.isOrderHistoryWidgetLoaded = false;
   }
 
-  handleWidgetActionNextFaliure(data) {
+  handleWidgetActionNextFailed(data) {
     this.isShowMoreButtonVisible = false;
   }
 
