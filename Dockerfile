@@ -42,10 +42,13 @@ COPY . .
 
 RUN npm run build:prod
 
+WORKDIR /var/log/capillary
+
 RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && mkdir -p /home/pptruser/Downloads \
     && chown -R pptruser:pptruser /home/pptruser \
-    && chown -R pptruser:pptruser /usr/src/app
+    && chown -R pptruser:pptruser /usr/src/app \
+    && chown -R pptruser:pptruser /var/log/capillary
 
 WORKDIR /usr/src/app/dist
 
