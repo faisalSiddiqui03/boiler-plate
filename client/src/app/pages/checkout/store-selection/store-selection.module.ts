@@ -31,13 +31,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     StoreLocatorWidgetModule,
     SubHeaderModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [StoreSelectionPage]

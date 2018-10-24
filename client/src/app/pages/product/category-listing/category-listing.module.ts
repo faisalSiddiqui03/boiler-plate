@@ -43,13 +43,7 @@ const routes: Routes = [
     ProductShowcaseWidgetModule,
     DeliverySlotsWidgetModule,
     SeoInfoWidgetModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule,
     IonicModule,
   ],
   declarations: [CategoryListingPage],

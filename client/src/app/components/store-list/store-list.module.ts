@@ -25,13 +25,7 @@ import { SubHeaderModule } from '../sub-header/sub-header.module';
     CartWidgetModule,
     ImagePreloadModule,
     SubHeaderModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule,
   ],
   declarations: [
     StoreListComponent,

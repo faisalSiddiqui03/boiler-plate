@@ -32,13 +32,7 @@ import { TrioComponentModule } from '../trio/trio.module';
     DealShowcaseComponentModule,
     TrioComponentModule,
     StoreSelectionModalModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [DealComponent],
   exports: [DealComponent],

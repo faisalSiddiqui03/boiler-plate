@@ -35,13 +35,7 @@ import { BannerModule } from '../banner/banner.module';
     ImagePreloadModule,
     SkeletonModule,
     BannerModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule,
   ],
   declarations: [
     StoreSelectionComponent,

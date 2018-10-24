@@ -30,13 +30,7 @@ const routes: Routes = [
     HeaderModule,
     SubHeaderModule,
     SurveyWidgetModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [FeedbackPage]
 })

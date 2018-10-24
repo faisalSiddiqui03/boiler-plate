@@ -30,13 +30,7 @@ const routes: Routes = [
     UserProfileWidgetModule,
     HeaderModule,
     SubHeaderModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [UserProfilePage]
 })

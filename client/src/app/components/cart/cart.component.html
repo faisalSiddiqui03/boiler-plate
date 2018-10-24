@@ -108,12 +108,10 @@
 
                       <div class="add-remove">
                         <ion-icon name="remove-circle" [pfRemoveFromCartTrack]="{cart: [item], quantity: 1}" appDebounceClick [inputDebounceTime]="'300'"
-                          (debounceClick)="updateCart($event, item?.client, false)"></ion-icon>
-                        <!-- <ion-icon name="remove-circle" (click)="updateCartItemQuantityNoDebounce(item?.client, -1);"></ion-icon> -->
+                          (debounceClick)="updateCartItem($event, item?.client, false)"></ion-icon>
                         <span>{{item.quantity}}</span>
                         <ion-icon name="add-circle" [pfAddToCartTrack]="{cart: [item], quantity: 1}" appDebounceClick [inputDebounceTime]="'300'"
-                          (debounceClick)="updateCart($event, item?.client, true)"></ion-icon>
-                        <!-- <ion-icon name="add-circle" (click)="updateCartItemQuantityNoDebounce(item?.client, 1);"></ion-icon> -->
+                          (debounceClick)="updateCartItem($event, item?.client, true)"></ion-icon>
                       </div>
                       <div class="product-price">{{(item?.getPrice() * item.quantity) | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}
                       </div>
@@ -122,10 +120,10 @@
                       </ion-icon>
                     </div>
                     <div class="toppings">
-                      <ng-container *ngIf="item.getType() === product">
+                      <ng-container *ngIf="item.getType() === ProductType.Product">
                         <div>{{item?.getVariant()}}</div>
                       </ng-container>
-                      <ng-container *ngIf="item.getType() === bundle || item.getType() === deal">
+                      <ng-container *ngIf="item.getType() === ProductType.Bundle || item.getType() === ProductType.Deal">
                         <ng-container *ngFor="let bundleItem of item?.bundleItems">
                           <div *ngIf="!bundleItem?.isPrimaryProduct && !bundleItem?.isDefaultBundleItem && !bundleItem?.webPrice">
                             {{bundleItem?.description}}
@@ -153,9 +151,9 @@
                   </button>
                 </div>
 
-                <suggestions-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [action]="suggestionWidgetAction" (cartUpdated)="reloadSuggestions($event)">
+                <suggestions-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [action]="suggestionWidgetAction" (cartUpdated)="refresh($event)">
                   <ng-template let-widget="widget">
-                    <div class="suggestions-wrap" *ngIf="suggestionsLoaded && widget?.model?.length">
+                    <div class="suggestions-wrap" *ngIf="widget?.model?.length">
                       <h6 text-center>{{ 'cart.you_may_also_like' | translate}}</h6>
                       <ion-slides [options]="slideOpts">
                         <ion-slide class="product-card-holder" *ngFor="let prod of widget?.model; let idx=index">
@@ -206,7 +204,7 @@
           </div>
           <div flex-center class="total-bill-block">
             <div class="total-bill">{{ 'cart.your_total' | translate}}</div>
-            <span *ngIf="!updatingPrice">
+            <span *ngIf="!updatingItemCount">
               <div class="total-price">
                 <span class="total-price-striked" *ngIf="(getCart()?.getPromotionDiscount()  + getCart()?.getVoucherDiscount()) > 0">
                   {{(getCart()?.getTotal() + getCart()?.getPromotionDiscount() + getCart()?.getVoucherDiscount()) | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}
@@ -214,17 +212,17 @@
                 {{getCart()?.getTotal() | currency: currencyCode : (' ' + currencyCode + ' ') :'1.3-3'}}
               </div>
             </span>
-            <span *ngIf="updatingPrice">
+            <span *ngIf="updatingItemCount">
               <ion-spinner name="crescent" color="dark"></ion-spinner>
             </span>
           </div>
           <ion-button (click)="goToPage('checkout')" [pfCheckoutTrack]="{cart: getCart()}" color="success" text-capitalize expand="block"
-            [class.disabled]="updatingPrice" mode="ios" class="btn-success">
+            [class.disabled]="updatingItemCount" mode="ios" class="btn-success">
             {{ 'cart.continue' | translate}} &nbsp;
-            <span class="btn-price" *ngIf="updatingPrice">
+            <span class="btn-price" *ngIf="updatingItemCount">
               <ion-spinner name="crescent" color="dark"></ion-spinner>
             </span>
-            <span class="btn-price" *ngIf="!updatingPrice">{{ getCart()?.getTotal() | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
+            <span class="btn-price" *ngIf="!updatingItemCount">{{ getCart()?.getTotal() | currency: currencyCode : (currencyCode + ' ') :'1.3-3'}}</span>
           </ion-button>
         </ion-footer>
       </div>
@@ -241,7 +239,7 @@
     </p>
     <div class="form-section" flex-center>
       <ion-input placeholder="{{ 'cart.voucher_code' | translate}}" inputmode="text" [(ngModel)]="couponCode"></ion-input>
-      <ion-button color="success" text-uppercase expand="block" mode="ios" class="btn-success" (click)="applyCoupon()">
+      <ion-button [disabled]="couponCode?false:true" color="success" text-uppercase expand="block" mode="ios" class="btn-success" (click)="applyCoupon(couponCode)">
         {{ 'cart.apply' | translate}}
       </ion-button>
     </div>
@@ -257,10 +255,10 @@
   <div class="clearcart-popup">
     <p flex-center>{{ 'cart.confirm_remove' | translate}}</p>
     <div flex-center>
-      <ion-button (click)="dismissRemoveItemPopup()" color="medium" text-capitalize expand="block" mode="ios" class="btn-dismiss clearcart-dismiss">
+      <ion-button (click)="closeRemoveItemPopUp()" color="medium" text-capitalize expand="block" mode="ios" class="btn-dismiss clearcart-dismiss">
         {{ 'cart.dismiss' | translate }}
       </ion-button>
-      <ion-button (click)="dismissRemoveItemPopup();removeCartItem(true)" color="success" text-capitalize expand="block" mode="ios"
+      <ion-button (click)="removeCartItem(itemToRemove);closeRemoveItemPopUp();" color="success" text-capitalize expand="block" mode="ios"
         class="btn-success clearcart-confirm ">
         {{ 'cart.confirm' | translate }}
       </ion-button>

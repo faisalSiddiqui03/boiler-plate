@@ -26,13 +26,7 @@ const routes: Routes = [
     OrderDetailsWidgetModule,
     HeaderModule,
     RouterModule.forChild(routes),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [SuccessPage]
 })

@@ -30,13 +30,7 @@ const routes: Routes = [
     HeaderModule,
     SubHeaderModule,
     ResetPasswordWidgetModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [ChangePasswordPage]
 })
