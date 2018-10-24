@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+
+<script id="prerenderer-loader" src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>
+
+<style id="prerenderer-style">
+    ion-show-when {
+        display: none;
+    }
+
+    ion-hide-when {
+        display: block;
+    }
+
+    :root {
+        --ion-grid-columns: 6;
+    }
+
+    ion-button {
+        --height: 42px;
+    }
+
+    @media (min-width: 992px) {
+        ion-show-when[size='lg'] {
+            display: block;
+        }
+
+        ion-hide-when[size='lg'] {
+            display: none;
+        }
+
+        :root {;
+            ion-grid-columns: 12;
+        }
+    }
+
+    .content-with-backdrop {
+        overflow: auto;
+    }
+
+
+</style>
+
+</html>
