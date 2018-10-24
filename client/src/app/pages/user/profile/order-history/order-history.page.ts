@@ -42,7 +42,7 @@ export class OrderHistoryPage extends OrderHistoryComponent implements OnInit {
   }
 
   getOrderDetails(order) {
-    this.capRouter.routeByUrlWithLanguage('order-details/' + order.id);
+    this.capRouter.routeByUrl('order-details/' + order.id);
   }
 
   toggleShowProduct(i) {

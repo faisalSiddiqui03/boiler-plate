@@ -52,9 +52,9 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
     this.checkoutForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       mobile: ['', Validators.compose([Validators.required,
-      Validators.pattern('^[2,5,6,9][0-9]*$'),
-      Validators.minLength(8),
-      Validators.maxLength(8)])],
+        Validators.pattern('^[2,5,6,9][0-9]*$'),
+        Validators.minLength(8),
+        Validators.maxLength(8)])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       building: ['', Validators.compose([Validators.required])],
       street: ['', Validators.compose([Validators.required])],
@@ -206,7 +206,7 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
   }
 
   goToDeals() {
-    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
   }
 
 }

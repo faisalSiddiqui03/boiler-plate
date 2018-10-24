@@ -59,9 +59,9 @@ export class SuccessPage extends BaseComponent implements OnInit {
 
   goToPage(pageName) {
     if (pageName === 'product') {
-      this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+      this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
     }
-    this.capRouter.routeByUrlWithLanguage(pageName);
+    this.capRouter.routeByUrl(pageName);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 

@@ -54,7 +54,7 @@ export class FeedbackPage extends BaseComponent implements OnInit {
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrlWithLanguage(pageName);
+    this.capRouter.routeByUrl(pageName);
     // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 

@@ -97,7 +97,7 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
       await this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful'), 500, 'top', 'top');
       this.useridSignUpAction.emit(
         new Action('SIGNUP_SIGNIN', [this.signUpForm.value.email, this.signUpForm.value.password]))
-        this.capRouter.routeByUrlWithLanguage('/home');
+        this.capRouter.routeByUrl('/home');
       // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
     } else {
       await this.alertService.presentToast(data.message, 500, 'top', 'top');
@@ -105,7 +105,7 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrlWithLanguage(pageName);
+    this.capRouter.routeByUrl(pageName);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 

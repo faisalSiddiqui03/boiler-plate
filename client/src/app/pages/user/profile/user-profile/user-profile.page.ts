@@ -69,7 +69,7 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
     this.loaderService.stopLoading();
     this.updateInProgress = false;
     await this.alertService.presentToast(this.translate.instant('user_profile_page.profile_updated_successfully'), 2000, 'top', 'top');
-    this.capRouter.routeByUrlWithLanguage('my-account');
+    this.capRouter.routeByUrl('my-account');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('my-account'));
   }
 
