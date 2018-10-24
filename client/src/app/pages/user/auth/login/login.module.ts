@@ -33,13 +33,7 @@ const routes: Routes = [
     EventTrackServiceModule,
     GoogleSigninWidgetModule,
     UseridPasswordSigninWidgetModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [LoginPage],
 })

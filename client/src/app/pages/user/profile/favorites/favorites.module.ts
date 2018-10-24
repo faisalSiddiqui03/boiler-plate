@@ -38,13 +38,7 @@ const routes: Routes = [
     SkeletonModule,
     ProductDetailsComponentModule,
     PizzaComponentModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [FavoritesPage],
   entryComponents: [

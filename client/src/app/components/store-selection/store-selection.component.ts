@@ -142,7 +142,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
               return;
             }
             this.changeRequested = false;
-            this.capRouter.routeByUrlWithLanguage('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
+            this.capRouter.routeByUrl('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
             await this.alertService.presentToast(store_alert, 3000, 'top');
@@ -157,7 +157,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
         if (!this.isModal) {
           if (data && data.length) {
             this.changeRequested = false;
-            this.capRouter.routeByUrlWithLanguage('/store-selection?cityId=' + this.selectedCityCode);
+            this.capRouter.routeByUrl('/store-selection?cityId=' + this.selectedCityCode);
           } else {
             const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
             await this.alertService.presentToast(store_alert, 3000, 'top');
@@ -184,11 +184,11 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     switch (langCode) {
       case 'ar':
         await this.languageService.updateLanguageByCode('en');
-        this.capRouter.routeByUrlWithLanguage('home');
+        this.capRouter.routeByUrl('home');
         break;
       case 'en':
         await this.languageService.updateLanguageByCode('ar');
-        this.capRouter.routeByUrlWithLanguage('home');
+        this.capRouter.routeByUrl('home');
         break;
       default:
         // do nothing
@@ -262,7 +262,7 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     }
     this.isNavigationClicked = true;
     this.changeRequested = false;
-    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
   }
 
   async widgetActionFailed(name: string, data: any) {

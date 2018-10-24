@@ -28,13 +28,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HeaderModule,
     SubHeaderModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [ContactUsPage]
 })

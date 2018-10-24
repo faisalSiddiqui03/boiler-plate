@@ -70,7 +70,7 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
       this.modalController.dismiss(true);
       return;
     }
-    this.capRouter.routeByUrlWithLanguage('/products?category=desls&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=desls&id=CU00215646');
   }
 
   widgetLoadingFailed(name: string, data: any): any {
@@ -135,7 +135,7 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
       this.modalController.dismiss(false);
       return;
     }
-    this.capRouter.routeByUrlWithLanguage('/home');
+    this.capRouter.routeByUrl('/home');
   }
 
   getTime(store, time) {

@@ -31,13 +31,7 @@ import { SubHeaderModule } from '../sub-header/sub-header.module';
     SubHeaderModule,
     PizzaComponentModule,
     ProductDetailsComponentModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [DealShowcaseComponent],
   exports: [DealShowcaseComponent],

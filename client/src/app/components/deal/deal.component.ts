@@ -20,7 +20,7 @@ import { ModalController } from '@ionic/angular';
 import { DealShowcaseComponent } from '../deal-showcase/deal-showcase.component'
 import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
-import { AttributeName, AttributeValue } from '../../helpers/validators';
+import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 import { TrioComponent } from '../trio/trio.component';
 
@@ -107,7 +107,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
         console.log('Item added to cart : ', data);
         const isDesktop = await this.hardwareService.isDesktopSite();
         await this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
-        if(!isDesktop) this.capRouter.routeByUrlWithLanguage('/cart');
+        if(!isDesktop) this.capRouter.routeByUrl('/cart');
         if(isDesktop) this.goBack();
         break;
       case ProductDetailsWidgetActions.ACTION_EDIT_CART:
@@ -182,7 +182,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   async addToCart() {
     if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
       const storeSelected = await this.openStoreSelection();
-      if (!storeSelected) return;
+      // if (!storeSelected) return;
     }
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (this.cartItem) {

@@ -15,13 +15,7 @@ import { LogoutWidgetModule, NavigationWidgetModule } from '@capillarytech/pwa-f
     IonicModule,
     LogoutWidgetModule,
     NavigationWidgetModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [
     HeaderComponent,

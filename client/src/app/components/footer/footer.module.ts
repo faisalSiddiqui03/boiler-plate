@@ -14,13 +14,7 @@ import { HttpClient } from '@angular/common/http';
     FormsModule,
     NavigationWidgetModule,
     IonicModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule,
   ],
   declarations: [
     FooterComponent,

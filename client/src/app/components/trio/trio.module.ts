@@ -22,13 +22,7 @@ import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
     ImagePreloadModule,
     StoreSelectionModalModule,
     SkeletonModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   entryComponents: [
     StoreSelectionModalComponent,

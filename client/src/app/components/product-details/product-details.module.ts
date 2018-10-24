@@ -21,13 +21,7 @@ import { StoreSelectionModalModule } from '../store-selection-modal/store-select
     StoreSelectionModalModule,
     EventTrackServiceModule,
     SkeletonModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   entryComponents: [
     StoreSelectionModalComponent,

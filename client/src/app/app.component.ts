@@ -49,8 +49,9 @@ export class AppComponent extends BaseComponent {
     this.sharedService = this.globalSharedService;
     // const langCode = 'ar';
     this.initializeApp();
+    this.translate.use(this.getCurrentLanguageCode());
     // console.log("---->>>>>", document.dir);
-    this.eventService.GetEvent("HttpError").subscribe(event => {
+    this.eventService.GetEvent('HttpError').subscribe(event => {
       this.handleError(event);
     });
   }
@@ -103,7 +104,7 @@ export class AppComponent extends BaseComponent {
         // show popup to user for signed out session
         // also redirect to sign in page
         //this.capAlertService.presentToast('Session timed out', null, null);
-        this.capRouterService.routeByUrlWithLanguage('/login');
+        this.capRouterService.routeByUrl('/login');
         break;
     }
   }

@@ -69,7 +69,7 @@ export class BannerComponent extends BaseComponent implements OnInit {
     console.log(banner);
     switch (banner.targetType) {
       case 'Category':
-        this.capRouter.routeByUrlWithLanguage('/products?category=banner&id=' + banner.targetId);
+        this.capRouter.routeByUrl('/products?category=banner&id=' + banner.targetId);
         // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=banner&id=' + banner.targetId));
         break;
       case 'URL':
@@ -80,7 +80,7 @@ export class BannerComponent extends BaseComponent implements OnInit {
 
   navigateToDeals() {
     // http://localhost:8100/en/products?category=deals&id=CU00215646
-    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
   }
 

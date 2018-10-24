@@ -1,7 +1,7 @@
 import { NgModule, APP_INITIALIZER, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
-import { TranslateCompiler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateCompiler, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -11,7 +11,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TranslateMessageFormatCompiler } from "ngx-translate-messageformat-compiler";
+import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 import {
   AlertServiceModule,
   LoaderServiceModule,
@@ -33,6 +33,7 @@ import {
   FulfilmentModeModule,
   SEOModule,
   LanguageService,
+  CapRouterServiceModule,
   // AppUpdateServiceModule,
   // AppUpdateServiceImpl,
   CapRouterService,
@@ -48,6 +49,7 @@ import { SearchLocationPageModule } from './pages/user/profile/search-location/s
 import { RoutingState } from './routing-state';
 import { UtilService } from './helpers/utils';
 import { Location } from '@angular/common';
+import { CacheStorageServiceModule } from '@capillarytech/pwa-framework/services';
 
 export const languages = [
   {
@@ -91,7 +93,8 @@ export function getAppConfig(): Object {
     SearchLocationPageModule,
     EventTrackServiceModule.forRoot([EventTrackServiceModule.Tracker.GTM]),
     EventTrackWidgetModule,
-    // CapRouterServiceModule,
+    CacheStorageServiceModule,
+    CapRouterServiceModule.forRoot(true),
     // AppUpdateServiceModule,
     LanguageServiceModule.forRoot(languages),
     TranslateModule.forRoot({
@@ -112,7 +115,6 @@ export function getAppConfig(): Object {
     PWAServiceWorkerModule.forRoot()
   ],
   providers: [
-    CacheStorageServiceImpl,
     HttpService,
     LifecycleHandler,
     Geolocation,
@@ -138,8 +140,8 @@ export class AppModule {
     setAppInjector(injector);
     const locationUrl = window.location.pathname;
 
-    var defaultLang = undefined;
-    var allowedLanguages = [];
+    let defaultLang;
+    const allowedLanguages = [];
     languages.forEach(async (lang) => {
       allowedLanguages.push(lang.code);
       if (lang.isDefault) {
@@ -148,14 +150,11 @@ export class AppModule {
         // this.utilService.setLanguageCode(lang.code);
         // this.capRouterService.routeByUrlWithLanguage(locationUrl);
       }
-    })
-
+    });
     if (locationUrl.startsWith('/ar')) {
       languageService.initialize('ar');
-      //this.utilService.setLanguageCode('ar');
     } else if (locationUrl.startsWith('/en')) {
       languageService.initialize('en');
-      //this.utilService.setLanguageCode('en');
     } else {
       // two possiblities: either lang code not provided
       // or wrong lang code is provided
@@ -172,8 +171,7 @@ export class AppModule {
       }
 
       languageService.initialize(mappedLang);
-      //this.utilService.setLanguageCode(mappedLang);
-      this.capRouterService.routeByUrlWithLanguage(locationUrl);
+      this.capRouterService.routeByUrl(locationUrl);
     }
   }
 }
