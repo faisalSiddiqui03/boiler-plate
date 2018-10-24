@@ -1,10 +1,13 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
-import { BaseComponent } from '../../../../base/base-component';
-import { pwaLifeCycle, pageView, OnWidgetActionsLifecyle, OnWidgetLifecyle, LifeCycle, ConfigService, CapRouterService } from '@capillarytech/pwa-framework';
-import { UtilService } from '../../../../helpers/utils';
-import { Router, ActivatedRoute } from '@angular/router';
-import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
+import { Component, OnInit } from '@angular/core';
+import {
+  pwaLifeCycle,
+  pageView,
+  CapRouterService,
+  ConfigService
+} from '@capillarytech/pwa-framework';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { OrderDetailsComponent } from '@capillarytech/pwa-components';
 
 @Component({
   selector: 'app-order-details',
@@ -14,24 +17,21 @@ import { TranslateService } from '@ngx-translate/core';
 
 @pwaLifeCycle()
 @pageView()
-
-export class OrderDetailsPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class OrderDetailsPage extends OrderDetailsComponent implements OnInit {
 
   titleValue = '';
   orderId;
+  isOrderDetailsLoadingDone = false;
   currencyCode;
-  constructor(private router: Router,
-    private utilService: UtilService,
-    private loaderService: LoaderService,
-    private alertService: AlertService,
+
+  constructor(
     private translate: TranslateService,
     private actRoute: ActivatedRoute,
-    private config: ConfigService,
     private capRouter: CapRouterService,
+    private config: ConfigService
   ) {
     super();
 
-    this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
@@ -44,27 +44,14 @@ export class OrderDetailsPage extends BaseComponent implements OnInit, OnWidgetL
 
   goToPage(pageName) {
     this.capRouter.routeByUrl(pageName);
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
-  widgetActionFailed(name: string, data: any): any {
-    console.log(name, 'Action Failed');
+  handleOrderDetailsLoadingFailed(data) {
+    this.isOrderDetailsLoadingDone = true;
   }
 
-  widgetActionSuccess(name: string, data: any): any {
-    console.log(name, 'Action Success');
-  }
-
-  widgetLoadingFailed(name: string, data: any): any {
-    console.log(name, 'Loading Failed');
-  }
-
-  widgetLoadingStarted(name: string, data: any): any {
-    console.log(name, 'Loading Started');
-  }
-
-  widgetLoadingSuccess(name: string, data: any): any {
-    console.log(name, 'Loading Success');
+  handleOrderDetailsLoadingSuccess(data) {
+    this.isOrderDetailsLoadingDone = true;
   }
 
 }
