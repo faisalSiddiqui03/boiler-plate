@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
@@ -17,9 +17,8 @@ import { SavedAddressComponent } from '@capillarytech/pwa-components/saved-addre
 })
 @pwaLifeCycle()
 @pageView()
-export class SavedAddressPage extends SavedAddressComponent implements OnInit {
+export class SavedAddressPage extends SavedAddressComponent {
 
-  titleValue = '';
   toggleDeleteModal = false;
   addressToBeDeleted: '';
 
@@ -32,17 +31,11 @@ export class SavedAddressPage extends SavedAddressComponent implements OnInit {
     super();
   }
 
-  ngOnInit() {
-    this.translate.get('saved_address_page.saved_address').subscribe(value => {
-      this.titleValue = value;
-    });
-  }
-
   getFlatAddress(address, index = 0) {
-    const storeConfig = this.config.getConfig()['address'];
-    const sep = storeConfig.storeSep;
-    const addresses = address.split(sep);
-    return addresses[index] ? addresses[index] : address.split(',')[index];
+      const storeConfig = this.config.getConfig()['address'];
+      const sep = storeConfig.storeSep;
+      const addresses = address.split(sep);
+      return addresses[index] ? addresses[index] : address.split(',')[index];
   }
 
   triggerDeleteAddress(address) {
