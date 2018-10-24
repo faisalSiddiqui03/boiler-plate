@@ -1,8 +1,5 @@
-import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { BaseComponent } from '../../../base/base-component';
-import { UtilService } from '../../../helpers/utils';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pizza',
@@ -11,20 +8,14 @@ import { TranslateService } from '@ngx-translate/core';
   encapsulation: ViewEncapsulation.None
 })
 
-export class PizzaPage extends BaseComponent implements OnInit {
+export class PizzaPage implements OnInit {
 
   productId: number;
   productName: string;
 
-  constructor(private route: ActivatedRoute,
-    private utilService: UtilService,
-    private translate: TranslateService) {
-    super();
-  }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.translate.use(this.getCurrentLanguageCode());
-
     this.productId = this.route.snapshot.params.productId;
     this.productName = this.route.snapshot.params.productName;
   }

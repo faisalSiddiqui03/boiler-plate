@@ -16,7 +16,7 @@ import { UtilService } from '../../helpers/utils';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PizzaComponent } from '../pizza/pizza.component';
-import { AttributeName, AttributeValue } from '../../helpers/validators';
+import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
 
 export enum BundleGroupInputType {
   RADIO = 'Radio button',
