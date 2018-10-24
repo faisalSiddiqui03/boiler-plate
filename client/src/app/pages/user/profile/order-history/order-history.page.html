@@ -3,8 +3,7 @@
 </ion-header>
 <ion-content class="order-history-page">
   <app-sub-header [title]="titleValue"></app-sub-header>
-  <orders-widget [componentId]="getComponentId()" [limit]=6 [executor]="orderWidgetExecutor" [action]="orderWidgetAction"
-    (lifecycle)="handleWidgetLifecycle($event)">
+  <orders-widget [componentId]="getComponentId()" [limit]=6 [executor]="orderWidgetExecutor" [action]="orderWidgetAction">
     <ng-template let-widget="widget">
       <ng-container *ngIf="(!widget || !widget.model) && !isOrderHistoryWidgetLoaded">
         <div class="orders-content w-700">
