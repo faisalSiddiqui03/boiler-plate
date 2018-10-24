@@ -25,6 +25,7 @@ import { DealComponent } from '../deal/deal.component';
 @pageView()
 export class CartComponent extends ViewCartComponent {
 
+  isLoaded = false;
   // show message for incorrect voucher
   isWrongVoucher = false;
   // the alert pop up for remove item
@@ -50,6 +51,10 @@ export class CartComponent extends ViewCartComponent {
   ) {
     super(config, location);
     this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
+  }
+
+  handleCartWidgetLoadingSuccess() {
+      this.isLoaded = true;
   }
 
   async applyCoupon(couponCode) {
@@ -158,11 +163,6 @@ export class CartComponent extends ViewCartComponent {
     });
 
     await modal.present();
-    modal.onDidDismiss().then((itemEdited) => {
-      if (itemEdited) {
-        this.refresh();
-      }
-    });
   }
 
   async clearCart() {

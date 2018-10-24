@@ -182,7 +182,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   async addToCart() {
     if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
       const storeSelected = await this.openStoreSelection();
-      if (!storeSelected) return;
+      // if (!storeSelected) return;
     }
     await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
     if (this.cartItem) {
