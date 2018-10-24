@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
@@ -17,9 +17,8 @@ import { SavedAddressComponent } from '@capillarytech/pwa-components';
 })
 @pwaLifeCycle()
 @pageView()
-export class SavedAddressPage extends SavedAddressComponent implements OnInit {
+export class SavedAddressPage extends SavedAddressComponent {
 
-    titleValue = '';
     toggleDeleteModal = false;
     addressToBeDeleted: '';
 
@@ -30,12 +29,6 @@ export class SavedAddressPage extends SavedAddressComponent implements OnInit {
         private capRouter: CapRouterService
     ) {
         super();
-    }
-
-    ngOnInit() {
-        this.translate.get('saved_address_page.saved_address').subscribe(value => {
-            this.titleValue = value;
-        });
     }
 
     getFlatAddress(address, index = 0) {

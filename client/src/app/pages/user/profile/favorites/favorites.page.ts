@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
@@ -11,6 +11,7 @@ import { ProductDetailsComponent } from '../../../../components/product-details/
 import { PizzaComponent } from '../../../../components/pizza/pizza.component';
 import { ModalController } from '@ionic/angular';
 import { FavoritesComponent } from '@capillarytech/pwa-components';
+import { AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-favorites',
@@ -21,54 +22,25 @@ import { FavoritesComponent } from '@capillarytech/pwa-components';
 
 @pwaLifeCycle()
 @pageView()
-export class FavoritesPage extends FavoritesComponent implements OnInit {
+export class FavoritesPage extends FavoritesComponent {
 
-  titleValue = '';
   currencyCode: string;
-  favoriteInProgress = new Map();
-
   constructor(
     private translate: TranslateService,
     private capRouter: CapRouterService,
     private config: ConfigService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private alertService: AlertService
   ) {
     super();
-    this.translate.use(this.getCurrentLanguageCode());
     this.currencyCode = this.config.getConfig()['currencyCode'];
-  }
-
-  ngOnInit() {
-    this.translate.get('favorites_page.my_favorites').subscribe(value => {
-      this.titleValue = value;
-    });
-  }
-
-  removeProductFromFavorites(product) {
-    this.favoriteInProgress.set(product.id, true);
-    this.removeFavorite(product);
   }
 
   goToPage(pageName) {
     this.capRouter.routeByUrl(pageName);
   }
 
-  getProductImageUrl(product) {
-    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
-      return this.getUrl(product.image);
-    } else {
-      let lastItem = product.multipleImages.slice().pop();
-      if (!lastItem.image) {
-        return this.getUrl(product.image);
-      }
-      return this.getUrl(lastItem.image);
-    }
-  }
-
-  getUrl(url: string) {
-    return `https://${url}`;
-  }
-
+  // TODO : create a helper in app only
   async openProduct(product) {
     let component;
     switch (product.type) {
@@ -91,20 +63,14 @@ export class FavoritesPage extends FavoritesComponent implements OnInit {
     await modal.present();
   }
 
-  handleWidgetActionRemoveItemFailed(data) {
-    this.favoriteInProgress.delete(data.product.id);
+  async handleWidgetActionRemoveItemFailed(data) {
     console.error('remove failed', data);
-    console.log('error removing item');
+    await this.alertService.presentToast(this.translate.instant('favorites_page.failed_to_unfavorite'), 1000, 'top');
   }
 
-  handleWidgetActionRemoveItemSuccess(data) {
-    this.favoriteInProgress.delete(data.product.id);
-    console.error('remove success', data);
-    console.log('successfully removed item');
-  }
-
-  handleFavoritesLoadingFailed(data) {
+  async handleFavoritesLoadingFailed(data) {
     console.log('favorites widget loading failed');
+    await this.alertService.presentToast(this.translate.instant('favorites_page.favorites_loading_failed'), 1000, 'top');
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
@@ -18,9 +18,8 @@ import { OrderHistoryComponent } from '@capillarytech/pwa-components';
 
 @pwaLifeCycle()
 @pageView()
-export class OrderHistoryPage extends OrderHistoryComponent implements OnInit {
+export class OrderHistoryPage extends OrderHistoryComponent {
 
-  titleValue = '';
   isShowMoreButtonVisible = true;
   isOrderHistoryWidgetLoaded = false;
   accordianMap = new Map();
@@ -33,12 +32,6 @@ export class OrderHistoryPage extends OrderHistoryComponent implements OnInit {
   ) {
     super();
     this.currencyCode = this.config.getConfig()['currencyCode'];
-  }
-
-  ngOnInit() {
-    this.translate.get('order_history_page.order_history').subscribe(value => {
-      this.titleValue = value;
-    });
   }
 
   getOrderDetails(order) {

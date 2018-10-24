@@ -2,7 +2,7 @@
   <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content class="page-bg">
-  <app-sub-header [title]="titleValue"></app-sub-header>
+  <app-sub-header [title]="'favorites_page.my_favorites' | translate"></app-sub-header>
   <favorites-widget [componentId]="getComponentId()" [action]="favoritesWidgetAction">
     <ng-template let-widget="widget">
       <div *ngIf="!widget.model">
@@ -45,7 +45,7 @@
                      [sizeXs]="6" [sizeMd]="4"
                      [sizeLg]="3" no-padding>
               <ion-card class="product-card non-deal-card" no-padding (click)="openProduct(prod?.client)">
-                <div class="icon icon-favourite-active" [ngClass]="{'fav-progress': favoriteInProgress.get(prod.id)}" (click)="removeProductFromFavorites(prod?.client); $event.stopPropagation();">
+                <div class="icon icon-favourite-active" [ngClass]="{'fav-progress': favoriteInProgress.get(prod.id)}" (click)="removeFavorite(prod?.client); $event.stopPropagation();">
                 </div>
                 <ion-card-header no-padding>
                   <img
