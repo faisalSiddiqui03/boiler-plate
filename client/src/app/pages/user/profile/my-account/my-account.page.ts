@@ -47,7 +47,7 @@ export class MyAccountPage extends MyAccountComponent implements OnInit {
     console.log('unable to load logout widget');
   }
 
-  async handleMyAccountActionLogoutFaliure(data) {
+  async handleMyAccountActionLogoutFailed(data) {
     const error_logging_out = await this.translate.instant('my_account_page.error_logging_out');
     await this.alertService.presentToast(error_logging_out, 3000, 'bottom');
   }
