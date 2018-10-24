@@ -43,7 +43,7 @@ export class OrderDetailsPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrlWithLanguage(pageName);
+    this.capRouter.routeByUrl(pageName);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 

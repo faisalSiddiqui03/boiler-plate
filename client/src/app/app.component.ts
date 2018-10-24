@@ -103,7 +103,7 @@ export class AppComponent extends BaseComponent {
         // show popup to user for signed out session
         // also redirect to sign in page
         //this.capAlertService.presentToast('Session timed out', null, null);
-        this.capRouterService.routeByUrlWithLanguage('/login');
+        this.capRouterService.routeByUrl('/login');
         break;
     }
   }

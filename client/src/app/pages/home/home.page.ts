@@ -104,7 +104,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
     this.isNavigationClicked = true;
     this.loaderService.stopLoading();
-    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
 
   }

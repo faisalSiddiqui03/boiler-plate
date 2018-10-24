@@ -252,7 +252,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
         const cartClear = await
           this.translateService.instant('cart.cart_clear');
           await this.alertService.presentToast(cartClear, 3000, 'bottom');
-        this.capRouter.routeByUrlWithLanguage('/home');
+        this.capRouter.routeByUrl('/home');
         // this.router.navigate(['/home']);
         break;
       case SuggestionsWidgetActions.ACTION_MARK_AS_FAVORITE:
@@ -305,7 +305,7 @@ export class CartComponent extends BaseComponent implements AfterViewInit, OnIni
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrlWithLanguage('/' + pageName);
+    this.capRouter.routeByUrl('/' + pageName);
   }
 
   isLoggedIn() {

@@ -149,7 +149,7 @@ export class CheckoutPage extends BaseComponent implements OnInit, AfterViewInit
   }
 
   goToDeals() {
-    this.capRouter.routeByUrlWithLanguage('/products?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
   }
 
   ngAfterViewInit() {

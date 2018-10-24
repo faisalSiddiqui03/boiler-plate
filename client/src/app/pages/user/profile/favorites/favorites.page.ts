@@ -51,7 +51,7 @@ export class FavoritesPage extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrlWithLanguage(pageName);
+    this.capRouter.routeByUrl(pageName);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 

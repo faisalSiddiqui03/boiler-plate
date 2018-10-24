@@ -26,7 +26,7 @@ export class AuthGuard extends BaseComponent implements CanActivate {
         return true;
       } else {
         console.log('access denied');
-        this.capRouter.routeByUrlWithLanguage('/login');
+        this.capRouter.routeByUrl('/login');
         return false;
       }
     });

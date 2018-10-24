@@ -49,7 +49,7 @@ export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLife
       const action = new Action(LogoutWidgetActions.ACTION_LOGOUT);
       this.logoutWidgetAction.emit(action);
     } else {
-      this.capRouter.routeByUrlWithLanguage(pageName);
+      this.capRouter.routeByUrl(pageName);
       // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
     }
   }
@@ -69,7 +69,7 @@ export class MyAccountPage extends BaseComponent implements OnInit, OnWidgetLife
     switch (name) {
       case LogoutWidgetActions.ACTION_LOGOUT:
         const coupon_remove_success = await this.translate.instant('my_account_page.successfully_loged_out');
-        this.capRouter.routeByUrlWithLanguage('/home');
+        this.capRouter.routeByUrl('/home');
         // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
         await this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
         break;

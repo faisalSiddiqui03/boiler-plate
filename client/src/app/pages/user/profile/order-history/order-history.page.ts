@@ -104,7 +104,7 @@ export class OrderHistoryPage extends BaseComponent implements OnInit, OnWidgetL
   }
 
   getOrderDetails(order) {
-    this.capRouter.routeByUrlWithLanguage('order-details/' + order.id);
+    this.capRouter.routeByUrl('order-details/' + order.id);
   }
 
   handleWidgetLifecycle(x: LifeCycle) {

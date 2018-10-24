@@ -55,12 +55,12 @@ export class CartPage extends BaseComponent implements OnInit {
   }
 
   goToDeals() {
-    this.capRouter.routeByUrlWithLanguage('/products/listing/(0:0)?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products/listing/(0:0)?category=deals&id=CU00215646');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products/listing/(0:0)?category=deals&id=CU00215646'));
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrlWithLanguage(pageName);
+    this.capRouter.routeByUrl(pageName);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 }
