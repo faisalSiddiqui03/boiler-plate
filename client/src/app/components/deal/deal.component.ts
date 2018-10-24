@@ -20,7 +20,7 @@ import { ModalController } from '@ionic/angular';
 import { DealShowcaseComponent } from '../deal-showcase/deal-showcase.component'
 import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
-import { AttributeName, AttributeValue } from '../../helpers/validators';
+import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 import { TrioComponent } from '../trio/trio.component';
 

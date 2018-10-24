@@ -1,6 +1,6 @@
 import { IValidator, Product, ValidatorAction, BundleItem } from '@capillarytech/pwa-framework';
 import { ToppingCounter } from './pizzahut.count.helper';
-import { AttributeName, AttributeValue } from './attribute-name-value';
+import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
 
 
 export class IncrementValidator implements IValidator {

@@ -74,7 +74,7 @@ export class ChangePasswordPage extends ChangePasswordComponent implements OnIni
     this.changePassword(this.userId, this.resetPasswordForm.value.newPassword);
   }
 
-  handleWidgetActionChangePasswordFaliure(data) {
+  handleWidgetActionChangePasswordFailed(data) {
     this.loaderService.stopLoading();
     this.updateInProgress = false;
   } 

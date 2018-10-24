@@ -163,13 +163,6 @@
           opacity: 0.6;
         }
       }
-      &:last-child {
-        li{
-          &:last-of-type:not(:empty){
-            opacity: 0.3;
-          }
-        }
-      }
     }
   }
   ul {
