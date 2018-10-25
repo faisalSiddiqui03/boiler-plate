@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {
-  ConfigService,
-  pwaLifeCycle,
-} from '@capillarytech/pwa-framework';
+import { pwaLifeCycle } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { ModalController } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
-import { SimpleProductComponent } from '@capillarytech/pwa-components';
+import { SimpleProductComponent } from '@capillarytech/pwa-components/simple-product/simple-product-component';
 
 @Component({
   selector: 'app-product-details-component',

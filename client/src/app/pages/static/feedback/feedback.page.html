@@ -2,7 +2,7 @@
   <app-header></app-header>
 </ion-header>
 <ion-content>
-  <app-sub-header [title]="titleValue"></app-sub-header>
+  <app-sub-header [title]="'feedback_page.feedback' | translate"></app-sub-header>
   <survey-widget [componentId]="getComponentId()"
                  [executor]="feedbackWidgetExecutor" [action]="feedbackWidgetAction">
     <ng-template let-widget="widget">

@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  ConfigService
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { OrderDetailsComponent } from '@capillarytech/pwa-components';
+import { OrderDetailsComponent } from '@capillarytech/pwa-components/order-details/order-details.component';
 
 @Component({
   selector: 'app-order-details',
@@ -16,32 +15,20 @@ import { OrderDetailsComponent } from '@capillarytech/pwa-components';
 
 @pwaLifeCycle()
 @pageView()
-export class OrderDetailsPage extends OrderDetailsComponent implements OnInit {
+export class OrderDetailsPage extends OrderDetailsComponent {
 
-  titleValue = '';
   orderId;
   isOrderDetailsLoadingDone = false;
-  currencyCode;
 
   constructor(
-    private translate: TranslateService,
     private actRoute: ActivatedRoute,
-    private config: ConfigService
+    private capRouter: CapRouterService,
   ) {
     super();
-
-    this.currencyCode = this.config.getConfig()['currencyCode'];
-  }
-
-  ngOnInit() {
-    this.translate.get('order_details_page.order_details').subscribe(value => {
-      this.titleValue = value;
-    });
-    this.orderId = this.actRoute.snapshot.params['orderId'];
   }
 
   goToPage(pageName) {
-    this.routeByUrl(pageName);
+    this.capRouter.routeByUrl(pageName);
   }
 
   handleOrderDetailsLoadingFailed(data) {

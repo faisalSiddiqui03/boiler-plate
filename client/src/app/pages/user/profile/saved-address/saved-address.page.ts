@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  ConfigService,
+  CapRouterService,
 } from '@capillarytech/pwa-framework';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
-import { SavedAddressComponent } from '@capillarytech/pwa-components';
+import { SavedAddressComponent } from '@capillarytech/pwa-components/saved-address/saved-address.component';
 
 @Component({
   selector: 'app-saved-address',
@@ -16,31 +16,24 @@ import { SavedAddressComponent } from '@capillarytech/pwa-components';
 })
 @pwaLifeCycle()
 @pageView()
-export class SavedAddressPage extends SavedAddressComponent implements OnInit {
+export class SavedAddressPage extends SavedAddressComponent {
 
-  titleValue = '';
   toggleDeleteModal = false;
   addressToBeDeleted: '';
 
   constructor(
     private alertService: AlertService,
     private translate: TranslateService,
-    private config: ConfigService,
+    private capRouter: CapRouterService,
   ) {
     super();
   }
 
-  ngOnInit() {
-    this.translate.get('saved_address_page.saved_address').subscribe(value => {
-      this.titleValue = value;
-    });
-  }
-
   getFlatAddress(address, index = 0) {
-    const storeConfig = this.config.getConfig()['address'];
-    const sep = storeConfig.storeSep;
-    const addresses = address.split(sep);
-    return addresses[index] ? addresses[index] : address.split(',')[index];
+      const storeConfig = this.configService.getConfig()['address'];
+      const sep = storeConfig.storeSep;
+      const addresses = address.split(sep);
+      return addresses[index] ? addresses[index] : address.split(',')[index];
   }
 
   triggerDeleteAddress(address) {
@@ -51,10 +44,10 @@ export class SavedAddressPage extends SavedAddressComponent implements OnInit {
   goToPage(pageName, params = null) {
     if (params || params === 0) {
       const route = pageName + '/' + params;
-      this.routeByUrl(route);
+      this.capRouter.routeByUrl(route);
       return;
     }
-    this.routeByUrl(pageName);
+    this.capRouter.routeByUrl(pageName);
   }
 
   dismissAddressModal(isTrue) {

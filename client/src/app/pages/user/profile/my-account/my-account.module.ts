@@ -6,11 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HeaderModule } from '../../../../components/header/header.module';
 import { MyAccountPage } from './my-account.page';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from '../../../../translation.loader';
+import { TranslateModule } from '@ngx-translate/core';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
-import { LogoutWidgetModule } from '@capillarytech/pwa-framework';
+import { LogoutWidgetModule } from '@cap-widget/authentication/logout';
 
 const routes: Routes = [
   {

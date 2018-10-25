@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { CapRouterService } from '@capillarytech/pwa-framework';
-import { BaseComponent } from '../../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({

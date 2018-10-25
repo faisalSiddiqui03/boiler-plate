@@ -1,14 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UtilService } from '../../helpers/utils';
-import { Location } from '@angular/common';
 import { ModalController } from '@ionic/angular';
+import { BaseComponent } from '@capillarytech/pwa-components';
 
 @Component({
   selector: 'app-sub-header',
   templateUrl: './sub-header.component.html',
   styleUrls: ['./sub-header.component.scss']
 })
-export class SubHeaderComponent implements OnInit {
+export class SubHeaderComponent extends BaseComponent implements OnInit {
 
   /**To get heading in the sub-header for each page */
   @Input() title: string;
@@ -16,17 +15,12 @@ export class SubHeaderComponent implements OnInit {
   @Input() isModal = false;
 
   constructor(
-    private location: Location,
-    private modalController: ModalController,
-    private utilService: UtilService
-  ) { }
-
-  ngOnInit() {
+    private modalController: ModalController
+  ) { 
+    super();
   }
 
-  /** Function to go to previous page */
-  goBack() {
-    this.location.back();
+  ngOnInit() {
   }
 
   closeModal() {

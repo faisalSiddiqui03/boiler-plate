@@ -1,5 +1,5 @@
-import { IValidator, Product, ValidatorAction, BundleItem } from '@capillarytech/pwa-framework';
-import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
+import { Product, BundleItem } from '@cap-widget/product-modules';
+import { AttributeName, AttributeValue } from '@capillarytech/pwa-components/pizza-builder/attribute-name-value';
 
 export class ToppingCounter {
   defaultItemCount: number;

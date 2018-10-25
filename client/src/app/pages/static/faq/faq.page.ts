@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../../helpers/utils';
-import { BaseComponent } from '../../../base/base-component';
 import { CapRouterService } from '@capillarytech/pwa-framework';
 
 @Component({
@@ -10,26 +6,12 @@ import { CapRouterService } from '@capillarytech/pwa-framework';
   templateUrl: './faq.page.html',
   styleUrls: ['./faq.page.scss'],
 })
-export class FaqPage extends BaseComponent implements OnInit {
+export class FaqPage {
 
-  constructor(
-    private translate: TranslateService,
-    private utilService: UtilService,
-    private router: Router,
-    private capRouter: CapRouterService,
-  ) {
-    super();
-    this.translate.use(this.getCurrentLanguageCode());
-  }
-
-  titleValue = '';
   activeAccordion: number = null;
-
-  ngOnInit() {
-    this.translate.get('faq_page.faq').subscribe(value => {
-      this.titleValue = value;
-    });
-  }
+  constructor(
+    private capRouter: CapRouterService
+  ) {}
 
   openAccordion(acc) {
     this.activeAccordion = acc;
@@ -37,6 +19,5 @@ export class FaqPage extends BaseComponent implements OnInit {
 
   goToPage(pageName) {
     this.capRouter.routeByUrl(pageName);
-    // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 }

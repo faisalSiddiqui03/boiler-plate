@@ -1,15 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {
-  pwaLifeCycle,
-  Product,
-} from '@capillarytech/pwa-framework';
+import { pwaLifeCycle } from '@capillarytech/pwa-framework';
 import { IncrementValidator, DecrementValidator } from '../../helpers/validators/index';
-import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
+import { AttributeName, AttributeValue } from '@capillarytech/pwa-components/pizza-builder/attribute-name-value';
 import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalController } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
-import { PizzaBuilderComponent } from '@capillarytech/pwa-components';
+import { PizzaBuilderComponent } from '@capillarytech/pwa-components/pizza-builder/pizza-builder.component';
+import { Product } from '@cap-widget/product-modules';
 
 @Component({
   selector: 'app-pizza-component',
@@ -33,7 +31,6 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
   }
 
   ngOnInit() {
-    
   }
 
   async handleAddItemSuccess() {
@@ -47,7 +44,7 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
   async handleRemoveItemSuccess() {
     await this.alertService.presentToast(this.translate.instant('pizza.remove_topping_success'), 1000, 'top', 'top');
   }
-  
+
   async handleRemoveItemFailure() {
     await this.alertService.presentToast(this.translate.instant('pizza.remove_topping_error'), 1000, 'top', 'top');
   }
@@ -99,6 +96,7 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
   }
 
   async handleAddToCartActionSuccess(data) {
+    this.loaderService.stopLoading();
     const isDesktop = await this.hardwareService.isDesktopSite();
     await this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
     this.goBack();
@@ -115,7 +113,7 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
 
   handleEditCartActionFailure(data) {
     this.loaderService.stopLoading();
-    this.loaderService.stopLoading();
+    this.modalController.dismiss(false);
   }
 
   close() {

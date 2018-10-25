@@ -3,7 +3,7 @@ import { Platform, NavController, ModalController } from '@ionic/angular';
 // import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
-import { BaseComponent } from './base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import {
   ConfigService,
   EventService,
@@ -13,7 +13,6 @@ import {
   // AppUpdateServiceImpl
 } from '@capillarytech/pwa-framework';
 import { AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
-import { UtilService } from './helpers/utils';
 import { RoutingState } from './routing-state';
 // import { Market } from '@ionic-native/market';
 
@@ -36,7 +35,6 @@ export class AppComponent extends BaseComponent {
     public modalController: ModalController,
     private config: ConfigService,
     private routingState: RoutingState,
-    private utilService: UtilService,
     private capAlertService: AlertService,
     private capRouterService: CapRouterService,
     private serviceWorkerService: ServiceWorkerServiceImpl,
@@ -109,19 +107,7 @@ export class AppComponent extends BaseComponent {
     }
   }
 
-  // logout() {
-  //   this.logoutActionEmitter.emit(new Action(LogoutWidgetActions.LOGOUT));
-  // }
-
   openPage(pageName) {
     // this.navCtrl.navigateForward(pageName, true);
   }
-
-  // async presentSignInModal() {
-  //   const modal = await this.modalController.create({
-  //     component: SignUpPage,
-  //   });
-  //   return await modal.present();
-  // }
-
 }

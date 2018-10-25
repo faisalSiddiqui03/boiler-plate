@@ -6,12 +6,11 @@ import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa
 import {
   pwaLifeCycle,
   pageView,
-  ConfigService,
   DeliverySlot,
-  ContactDetail,
-  Address,
+  CapRouterService,
 } from '@capillarytech/pwa-framework';
-import { SinglePageCheckoutComponent, UserIdentifier } from '@capillarytech/pwa-components';
+import { ContactDetail, Address } from '@cap-widget/user-address';
+import { SinglePageCheckoutComponent, UserIdentifier } from '@capillarytech/pwa-components/checkout/single-page-checkout.component';
 
 @Component({
   selector: 'app-checkout',
@@ -30,7 +29,6 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
   savedAddresses = [];
   widgetModels = {};
   isAddNewAddressClicked = false;
-  titleValue = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,8 +36,8 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
-    private config: ConfigService,
     public hardwareService: HardwareService,
+    private capRouter: CapRouterService,
   ) {
     super({
       handleGaEvent: true,
@@ -64,10 +62,6 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
   }
 
   ngOnInit() {
-    this.translate.get('checkout_page.secure_checkout').subscribe(value => {
-      this.titleValue = value;
-    });
-
     this.setLoggedInUserDetails();
     if (this.getDeliveryMode() === this.deliveryModes.PICKUP) {
       this.checkoutForm.controls['building'].setValue('T');
@@ -204,7 +198,7 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
   }
 
   goToDeals() {
-    this.routeByUrl('/products?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
   }
 
 }
