@@ -11,10 +11,7 @@ import { FavoritesPage } from './favorites.page';
 import { HeaderModule } from '../../../../components/header/header.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
-import { PizzaComponent } from '../../../../components/pizza/pizza.component';
-import { ProductDetailsComponent } from '../../../../components/product-details/product-details.component';
-import { PizzaComponentModule } from '../../../../components/pizza/pizza.module';
-import { ProductDetailsComponentModule } from '../../../../components/product-details/product-details.module';
+import { ProductModalModule, ProductModalService } from '../../../../helpers/product-modal';
 
 const routes: Routes = [
   {
@@ -34,14 +31,12 @@ const routes: Routes = [
     FavoritesWidgetModule,
     ImagePreloadModule,
     SkeletonModule,
-    ProductDetailsComponentModule,
-    PizzaComponentModule,
-    TranslateModule
+    TranslateModule,
+    ProductModalModule
   ],
   declarations: [FavoritesPage],
-  entryComponents: [
-    ProductDetailsComponent,
-    PizzaComponent,
+  providers: [
+    ProductModalService
   ]
 })
 export class FavoritesPageModule {}
