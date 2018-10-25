@@ -2,7 +2,7 @@
   <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
-  <app-sub-header [title]="titleValue"></app-sub-header>
+  <app-sub-header [title]="'sign_up_page.sign_up' | translate"></app-sub-header>
   <userid-signup-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [action]="useridSignUpAction">
     <ng-template let-widget="widget">
       <ng-container *ngIf="widget.model">

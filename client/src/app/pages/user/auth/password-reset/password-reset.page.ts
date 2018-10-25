@@ -22,7 +22,6 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
 
   resetPasswordForm: FormGroup;
   resetPasswordActionEmitter = new EventEmitter();
-  titleValue = '';
 
   constructor(private formBuilder: FormBuilder,
       private loaderService: LoaderService,
@@ -34,12 +33,7 @@ export class PasswordResetPage extends BaseComponent implements OnInit, OnWidget
         });
   }
 
-  ngOnInit() {
-    const translateSub = this.translate.get('reset_password_page.reset_password').subscribe(value => {
-      this.titleValue = value;
-    });
-    this.subscriptions.push(translateSub);
-  }
+  ngOnInit() {}
 
   handleResetPasswordActions(data) {
     console.log(data);

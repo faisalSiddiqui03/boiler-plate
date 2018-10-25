@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   pwaLifeCycle,
-  pageView,
-  CapRouterService
+  pageView
 } from '@capillarytech/pwa-framework';
 import { Utils } from '@capillarytech/pwa-components/util/utils';
 import { ActivatedRoute } from '@angular/router';
@@ -35,8 +34,7 @@ export class AddAddressPage extends AddEditAddressComponent implements OnInit {
     private alertService: AlertService,
     private translate: TranslateService,
     private formBuilder: FormBuilder,
-    private actRoute: ActivatedRoute,
-    private capRouter: CapRouterService
+    private actRoute: ActivatedRoute
   ) {
     super();
 
@@ -66,12 +64,12 @@ export class AddAddressPage extends AddEditAddressComponent implements OnInit {
 
   handleWidgetActionUpdateAddressSuccess(data) {
     this.loaderService.stopLoading();
-    this.capRouter.goBack();
+    this.goBack();
   }
 
   handleWidgetActionSaveAddressSuccess(data) {
     this.loaderService.stopLoading();
-    this.capRouter.goBack();
+    this.goBack();
   }
 
   async handleSingleUserAddressLoadingFailed(data) {

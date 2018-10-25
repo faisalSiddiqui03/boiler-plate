@@ -38,7 +38,6 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
   useridSignUpAction = new EventEmitter();
   useridSignUpActionEmitter = new EventEmitter();
   widgetModels: { [name: string]: any };
-  titleValue = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,13 +62,7 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     this.signUpForm.validator = this.matchingPasswords;
   }
 
-  ngOnInit() {
-    const translateSub = this.translate.get('sign_up_page.sign_up').subscribe(value => {
-      this.titleValue = value;
-    });
-
-    this.subscriptions.push(translateSub);
-  }
+  ngOnInit() {}
 
   async signUp() {
     await this.loaderService.startLoadingByMode(null, this.getDeliveryMode() );

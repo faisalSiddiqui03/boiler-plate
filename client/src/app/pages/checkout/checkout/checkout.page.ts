@@ -29,7 +29,6 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
   savedAddresses = [];
   widgetModels = {};
   isAddNewAddressClicked = false;
-  titleValue = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -63,10 +62,6 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
   }
 
   ngOnInit() {
-    this.translate.get('checkout_page.secure_checkout').subscribe(value => {
-      this.titleValue = value;
-    });
-
     this.setLoggedInUserDetails();
     if (this.getDeliveryMode() === this.deliveryModes.PICKUP) {
       this.checkoutForm.controls['building'].setValue('T');

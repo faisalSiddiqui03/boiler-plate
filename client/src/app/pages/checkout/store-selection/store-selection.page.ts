@@ -1,11 +1,9 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
-import { pwaLifeCycle, Action, DeliveryModes } from '@capillarytech/pwa-framework';
-import { TranslateService } from '@ngx-translate/core';
+import { pwaLifeCycle, DeliveryModes } from '@capillarytech/pwa-framework';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
-  StoreLocatorWidgetActions,
   OnWidgetLifecyle,
   OnWidgetActionsLifecyle,
   CapRouterService
@@ -23,17 +21,13 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
   cityId;
   latitude;
   longitude;
-  titleValue = '';
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private loaderService: LoaderService,
     private alertService: AlertService,
-    private translate: TranslateService,
   ) {
     super();
-    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {
@@ -41,9 +35,6 @@ export class StoreSelectionPage extends BaseComponent implements OnInit, OnWidge
       this.cityId = params.cityId;
       this.latitude = params.latitude;
       this.longitude = params.longitude;
-    });
-    this.translate.get('store_selection_page.stores_selection').subscribe(value => {
-      this.titleValue = value;
     });
   }
 

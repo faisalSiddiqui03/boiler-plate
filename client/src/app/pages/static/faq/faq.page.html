@@ -2,7 +2,7 @@
   <app-header></app-header>
 </ion-header>
 <ion-content>
-  <app-sub-header [title]="titleValue"></app-sub-header>
+  <app-sub-header [title]="'faq_page.faq' | translate"></app-sub-header>
   <div class="faq-content w-700">
     <div class="accordion-block">
       <h5 (click)="openAccordion(1)" [class.active]="activeAccordion == 1">
