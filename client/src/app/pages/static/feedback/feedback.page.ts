@@ -1,8 +1,8 @@
 import {Component, EventEmitter} from '@angular/core';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {BaseComponent} from '@capillarytech/pwa-components/base-component';
-import {CapRouterService, SurveyWidgetActions, Action, pwaLifeCycle} from '@capillarytech/pwa-framework';
-
+import {CapRouterService, Action, pwaLifeCycle} from '@capillarytech/pwa-framework';
+import {SurveyWidgetActions} from '@cap-widget/survey';
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.page.html',

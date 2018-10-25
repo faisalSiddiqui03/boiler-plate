@@ -3,15 +3,15 @@ import { ModalController } from '@ionic/angular';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { pwaLifeCycle, Action, DeliveryModes } from '@capillarytech/pwa-framework';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
-import { Router, ActivatedRoute } from '@angular/router';
-import { StoreLocatorWidgetActions, OnWidgetLifecyle, OnWidgetActionsLifecyle, CapRouterService } from '@capillarytech/pwa-framework';
+import { ActivatedRoute } from '@angular/router';
+import { OnWidgetLifecyle, OnWidgetActionsLifecyle, CapRouterService } from '@capillarytech/pwa-framework';
+import { StoreLocatorWidgetActions } from '@cap-widget/store-locator';
 
 @Component({
   selector: 'app-store-list',
   templateUrl: './store-list.component.html',
   styleUrls: ['./store-list.component.scss'],
 })
-
 @pwaLifeCycle()
 export class StoreListComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
@@ -25,7 +25,6 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private loaderService: LoaderService,
     private alertService: AlertService,
     private capRouter: CapRouterService,

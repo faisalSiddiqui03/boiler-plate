@@ -10,13 +10,13 @@ import {
   OnWidgetLifecyle,
   DeliveryModes,
   DeliverySlot,
-  StoreLocatorWidgetActions,
   Action,
-  LocationWidgetActions,
-  CartWidgetActions,
   FulfilmentModeWidgetActions, LanguageService, CapRouterService
 } from '@capillarytech/pwa-framework';
-import {StoreListComponent} from '../store-list/store-list.component';
+import { StoreLocatorWidgetActions } from '@cap-widget/store-locator';
+import { LocationWidgetActions } from '@cap-widget/location';
+import { CartWidgetActions } from '@cap-widget/cart';
+import { StoreListComponent } from '../store-list/store-list.component';
 
 @Component({
   selector: 'app-store-selection',

@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 import {
-  DeliverySlotsWidgetModule,
   PaymentOptionsWidgetModule,
   CheckoutWidgetModule,
   EventTrackServiceModule,
@@ -17,7 +16,7 @@ import { CheckoutPage } from './checkout.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../../../components/header/header.module';
 import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
-
+import { DeliverySlotsWidgetModule } from '@cap-widget/delivery-slots';
 const routes: Routes = [
   {
     path: '',

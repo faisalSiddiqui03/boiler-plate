@@ -11,12 +11,10 @@ import { FooterModule } from '../../components/footer/footer.module';
 import { HeaderModule } from '../../components/header/header.module';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  LocationWidgetModule,
-  FulfilmentModeModule,
-  StoreLocatorWidgetModule,
-  CartWidgetModule, SEOModule,
-} from '@capillarytech/pwa-framework';
+import { FulfilmentModeModule, SEOModule } from '@capillarytech/pwa-framework';
+import { CartWidgetModule } from '@cap-widget/cart';
+import { LocationWidgetModule } from '@cap-widget/location';
+import { StoreLocatorWidgetModule } from '@cap-widget/store-locator';
 import { EventTrackServiceModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
 import { BannerWidgetModule } from '@cap-widget/banner-widget';
 import { AppStoreSelectionModule } from '../../components/store-selection/store-selection.module';

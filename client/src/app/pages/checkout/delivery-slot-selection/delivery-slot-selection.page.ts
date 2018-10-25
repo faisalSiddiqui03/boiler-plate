@@ -2,8 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  Action,
-  DeliverySlotsWidget,
   OnWidgetActionsLifecyle, OnWidgetLifecyle
 } from '@capillarytech/pwa-framework';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -11,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '@capillarytech/pwa-components/util/utils';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { ModalController } from '@ionic/angular';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-delivery-slot-selection',
@@ -19,10 +17,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./delivery-slot-selection.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
-
 @pwaLifeCycle()
 @pageView()
-
 export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle  {
 
   asSoonPossible = false;
@@ -30,7 +26,7 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
   slotContent = '';
   activeTimeSlot: number;
   timeSlotObj;
-  asapText:'';
+  asapText = '';
 
   constructor(
     private loaderService: LoaderService,
