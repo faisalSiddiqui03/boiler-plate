@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
-import { BaseComponent } from '../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { TranslateService } from '@ngx-translate/core';
 import { AgmCoreModule, MouseEvent, MarkerManager } from '@agm/core';
 import { UtilService } from '../../helpers/utils';

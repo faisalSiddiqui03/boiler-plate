@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  ConfigService,
   CapRouterService
 } from '@capillarytech/pwa-framework';
 import { Utils } from "@capillarytech/pwa-components";
@@ -23,15 +22,12 @@ export class OrderHistoryPage extends OrderHistoryComponent {
   isShowMoreButtonVisible = true;
   isOrderHistoryWidgetLoaded = false;
   accordianMap = new Map();
-  currencyCode: string;
 
   constructor(
     private translate: TranslateService,
-    private config: ConfigService,
     private capRouter: CapRouterService,
   ) {
     super();
-    this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   getOrderDetails(order) {

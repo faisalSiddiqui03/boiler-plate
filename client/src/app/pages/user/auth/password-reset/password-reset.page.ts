@@ -6,8 +6,8 @@ import {
   Action,
   OnWidgetActionsLifecyle, OnWidgetLifecyle, CapRouterService
 } from '@capillarytech/pwa-framework';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { ForgotPasswordWidgetActions } from '@cap-widget/authentication/forgot-password';
-import { BaseComponent } from '../../../../base/base-component';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 

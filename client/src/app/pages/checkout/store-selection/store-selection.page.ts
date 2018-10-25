@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { BaseComponent } from '../../../base/base-component';
-import { ConfigService, pwaLifeCycle, Action, DeliveryModes } from '@capillarytech/pwa-framework';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
+import { pwaLifeCycle, Action, DeliveryModes } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,7 +11,6 @@ import {
   OnWidgetActionsLifecyle,
   CapRouterService
 } from '@capillarytech/pwa-framework';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-store-selection',

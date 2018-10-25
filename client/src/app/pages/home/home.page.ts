@@ -3,13 +3,12 @@ import {
   pwaLifeCycle,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
-  ConfigService,
   LanguageService,
   CapRouterService,
   BannerWidgetActions
 } from '@capillarytech/pwa-framework';
 import { ModalController } from '@ionic/angular';
-import { BaseComponent } from '../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   DeliveryModes,
@@ -39,7 +38,6 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
   clearCartPopup: boolean = false;
 
   constructor(
-    private config: ConfigService,
     private router: Router,
     private actRoute: ActivatedRoute,
     private translate: TranslateService,
@@ -51,7 +49,7 @@ export class HomePage extends BaseComponent implements OnInit, OnWidgetLifecyle,
     private capRouter: CapRouterService
   ) {
     super();
-    this.bannerRefCode = this.config.getConfig()['footerBannerRefCode'];
+    this.bannerRefCode = this.configService.getConfig()['footerBannerRefCode'];
   }
 
   ngOnInit() {

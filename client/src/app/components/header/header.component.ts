@@ -9,7 +9,7 @@ import {
   CapRouterService,
   DeliverySlot
 } from '@capillarytech/pwa-framework';
-import { BaseComponent } from '../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-selection/delivery-slot-selection.page';
 import { TranslateService } from '@ngx-translate/core';

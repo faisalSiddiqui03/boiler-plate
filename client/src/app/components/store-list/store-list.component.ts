@@ -1,13 +1,12 @@
 import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { BaseComponent } from '../../base/base-component';
-import { ConfigService, pwaLifeCycle, Action, DeliveryModes } from '@capillarytech/pwa-framework';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
+import { pwaLifeCycle, Action, DeliveryModes } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilService } from '../../helpers/utils';
 import { StoreLocatorWidgetActions, OnWidgetLifecyle, OnWidgetActionsLifecyle, CapRouterService } from '@capillarytech/pwa-framework';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-store-list',
@@ -33,8 +32,6 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
-    private config: ConfigService,
-    private location: Location,
     private utilService: UtilService,
     private capRouter: CapRouterService,
     private modalController: ModalController,

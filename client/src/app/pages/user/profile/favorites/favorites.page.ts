@@ -2,8 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  CapRouterService,
-  ConfigService,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { FavoritesComponent } from '@capillarytech/pwa-components/favorites/favorites.component';
@@ -21,16 +20,13 @@ import { ProductModalService } from '../../../../helpers/product-modal/product-m
 @pageView()
 export class FavoritesPage extends FavoritesComponent {
 
-  currencyCode: string;
   constructor(
     private translate: TranslateService,
     private capRouter: CapRouterService,
-    private config: ConfigService,
     private alertService: AlertService,
     private productModal: ProductModalService
   ) {
     super();
-    this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   goToPage(pageName) {

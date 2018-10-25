@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, EventEmitter, ViewChild } from '@angular/core';
-import { BaseComponent } from '../../../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import {
   Action,
   pwaLifeCycle,
@@ -8,7 +8,6 @@ import {
   OnWidgetLifecyle,
   LocationWidget,
   LocationWidgetActions,
-  ConfigService
 } from '@capillarytech/pwa-framework';
 import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
@@ -40,7 +39,6 @@ export class SearchLocationPage extends BaseComponent implements OnInit, OnWidge
     private alertService: AlertService,
     private translate: TranslateService,
     private utilService: UtilService,
-    private config: ConfigService,
     private modalController: ModalController) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
