@@ -2,7 +2,7 @@
   <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content class="page-bg">
-  <app-sub-header [title]="titleValue"></app-sub-header>
+  <app-sub-header [title]="'favorites_page.my_favorites' | translate"></app-sub-header>
   <favorites-widget [componentId]="getComponentId()" [action]="favoritesWidgetAction">
     <ng-template let-widget="widget">
       <div *ngIf="!widget.model">

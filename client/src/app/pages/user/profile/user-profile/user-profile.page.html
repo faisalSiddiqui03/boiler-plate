@@ -2,7 +2,7 @@
   <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
-  <app-sub-header [title]="titleValue"></app-sub-header>
+  <app-sub-header [title]="'user_profile_page.my_profile' | translate"></app-sub-header>
   <div class="main-content w-700">
     <user-profile-widget [componentId]="getComponentId()" [executor]="null" [action]="updateProfileActionEmitter">
       <ng-template let-widget="widget">
