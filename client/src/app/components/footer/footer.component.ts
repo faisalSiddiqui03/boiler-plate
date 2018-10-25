@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
-import { UtilService } from '../../helpers/utils';
 import { pwaLifeCycle } from "@cap-core/lifecycle";
 import { CapRouterService } from '@capillarytech/pwa-framework';
 
@@ -19,7 +18,6 @@ export class FooterComponent extends BaseComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private utilService: UtilService,
     private router: Router,
     private capRouter: CapRouterService,
   ) {

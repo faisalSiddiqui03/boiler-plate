@@ -13,7 +13,6 @@ import {
   // AppUpdateServiceImpl
 } from '@capillarytech/pwa-framework';
 import { AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';
-import { UtilService } from './helpers/utils';
 import { RoutingState } from './routing-state';
 // import { Market } from '@ionic-native/market';
 
@@ -36,7 +35,6 @@ export class AppComponent extends BaseComponent {
     public modalController: ModalController,
     private config: ConfigService,
     private routingState: RoutingState,
-    private utilService: UtilService,
     private capAlertService: AlertService,
     private capRouterService: CapRouterService,
     private serviceWorkerService: ServiceWorkerServiceImpl,

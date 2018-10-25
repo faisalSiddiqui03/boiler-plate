@@ -2,7 +2,6 @@ import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { pwaLifeCycle, WidgetNames, ConfigService, CapRouterService } from "@capillarytech/pwa-framework";
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../helpers/utils';
 
 @Component({
   selector: 'app-banner',
@@ -33,8 +32,6 @@ export class BannerComponent extends BaseComponent implements OnInit {
   sizeConfig: Array<any> = [];
   //  = [{ height: 200, width: 400, type: 'mobile' }, { height: 400, width: 1200, type: 'desktop' }];
   constructor(
-    private config: ConfigService,
-    private utilService: UtilService,
     private translate: TranslateService,
     private capRouter: CapRouterService
   ) {

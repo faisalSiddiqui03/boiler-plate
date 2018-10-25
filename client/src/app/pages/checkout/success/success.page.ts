@@ -3,7 +3,7 @@ import { LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../../helpers/utils';
+import { Utils } from '@capillarytech/pwa-components/util/utils';
 import {
   pwaLifeCycle,
   CapRouterService
@@ -23,7 +23,6 @@ export class SuccessPage extends BaseComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
-    private utilService: UtilService,
     private capRouter: CapRouterService, private loader: LoaderService
   ) {
     super();
@@ -84,7 +83,7 @@ export class SuccessPage extends BaseComponent implements OnInit {
   }
 
   getDate(date) {
-    return this.utilService.getDate(date);
+    return Utils.getDate(date);
   }
 
   widgetLoadingSuccess(name: string, data: any): any {

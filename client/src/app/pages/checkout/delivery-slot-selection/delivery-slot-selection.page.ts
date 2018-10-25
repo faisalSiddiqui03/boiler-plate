@@ -8,7 +8,7 @@ import {
 } from '@capillarytech/pwa-framework';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../../helpers/utils';
+import { Utils } from '@capillarytech/pwa-components/util/utils';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { ModalController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -38,7 +38,6 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
     private translate: TranslateService,
     private actRoute: ActivatedRoute,
     public modalController: ModalController,
-    private utilService: UtilService
   ) {
     super();
     this.slotSelected = true;
@@ -65,7 +64,7 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
   selectTime(timeslot, index) {
     this.asSoonPossible = !(timeslot.id !== -1);
     this.slotSelected = true;
-    this.slotContent = this.utilService.getTimeHHMM(timeslot.time);
+    this.slotContent = Utils.getTimeHHMM(timeslot.time);
     this.activeTimeSlot = index;
     this.timeSlotObj = timeslot;
   }
@@ -78,16 +77,16 @@ export class DeliverySlotSelectionPage extends BaseComponent implements OnInit, 
     console.log('loaded ' + name, data);
     switch (name) {
       case 'DELIVERYSLOTS':
-        if (!this.utilService.isEmpty(this.getDeliverySlot()) && this.getDeliverySlot().id > -2 ) {
+        if (!Utils.isEmpty(this.getDeliverySlot()) && this.getDeliverySlot().id > -2 ) {
           this.asSoonPossible = this.getDeliverySlot().id === -1;
-          this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(this.getDeliverySlot().time);
+          this.slotContent = this.asSoonPossible ? this.asapText : Utils.getTimeHHMM(this.getDeliverySlot().time);
           this.timeSlotObj = this.getDeliverySlot();
           this.activeTimeSlot = this.findIndexOfSlot(this.getDeliverySlot().id, data);
         } else {
           if( !Array.isArray(data) || data.length < 1 ) return;
 
           this.asSoonPossible = data[0].id === -1;
-          this.slotContent = this.asSoonPossible ? this.asapText : this.utilService.getTimeHHMM(data[0].time);
+          this.slotContent = this.asSoonPossible ? this.asapText : Utils.getTimeHHMM(data[0].time);
           this.timeSlotObj = data[0];
         }
     }

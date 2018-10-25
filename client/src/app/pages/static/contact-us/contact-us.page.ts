@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../../helpers/utils';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 
 @Component({
@@ -12,7 +11,6 @@ export class ContactUsPage extends BaseComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private utilService: UtilService
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());

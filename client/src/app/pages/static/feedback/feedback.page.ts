@@ -2,7 +2,6 @@ import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {UtilService} from '../../../helpers/utils';
 import {BaseComponent} from '@capillarytech/pwa-components/base-component';
 import {CapRouterService, SurveyWidgetActions, Action, pwaLifeCycle} from '@capillarytech/pwa-framework';
 
@@ -20,7 +19,6 @@ export class FeedbackPage extends BaseComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private router: Router,
-    private utilService: UtilService,
     private formBuilder: FormBuilder,
     private capRouter: CapRouterService,
   ) {
@@ -55,7 +53,6 @@ export class FeedbackPage extends BaseComponent implements OnInit {
 
   goToPage(pageName) {
     this.capRouter.routeByUrl(pageName);
-    // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/' + pageName);
   }
 
   sendFeedback() {

@@ -3,7 +3,6 @@ import {
   pwaLifeCycle,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
-  LanguageService,
   CapRouterService
 } from '@capillarytech/pwa-framework';
 import { ModalController } from '@ionic/angular';
@@ -13,7 +12,6 @@ import {
   DeliveryModes,
 } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../helpers/utils';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
@@ -42,8 +40,6 @@ export class HomePage extends BaseComponent implements OnWidgetLifecyle, OnWidge
     public modalController: ModalController,
     private loaderService: LoaderService,
     private alertService: AlertService,
-    private langService: LanguageService,
-    private utilService: UtilService,
     private capRouter: CapRouterService
   ) {
     super();
