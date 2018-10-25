@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {
   pwaLifeCycle,
-  pageView
+  pageView,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -30,7 +31,8 @@ export class ChangePasswordPage extends ChangePasswordComponent implements OnIni
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private capRouter: CapRouterService,
   ) {
     super();
 
@@ -78,7 +80,7 @@ export class ChangePasswordPage extends ChangePasswordComponent implements OnIni
   } 
 
   navigateToDeals() {
-    this.routeByUrl('/products?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
   }
 
   async handleWidgetActionChangePasswordSuccess(data) {

@@ -39,6 +39,7 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
     private translate: TranslateService,
     private config: ConfigService,
     public hardwareService: HardwareService,
+    private capRouter: CapRouterService,
   ) {
     super({
       handleGaEvent: true,
@@ -203,7 +204,7 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
   }
 
   goToDeals() {
-    this.routeByUrl('/products?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
   }
 
 }

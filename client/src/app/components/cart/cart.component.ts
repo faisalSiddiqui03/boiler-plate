@@ -6,6 +6,7 @@ import {
   pwaLifeCycle,
   pageView,
   Product,
+  CapRouterService,
 } from '@capillarytech/pwa-framework';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { ProductType } from '@capillarytech/pwa-framework';
@@ -47,7 +48,8 @@ export class CartComponent extends ViewCartComponent {
     private alertService: AlertService,
     private loaderService: LoaderService,
     public config: ConfigService, public location: Location,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private capRouter: CapRouterService,
   ) {
     super(config, location);
     this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
@@ -175,7 +177,7 @@ export class CartComponent extends ViewCartComponent {
 
     const cartClear = await this.translateService.instant('cart.cart_clear');
     await this.alertService.presentToast(cartClear, 3000, 'bottom');
-    this.routeByUrl('/home');
+    this.capRouter.routeByUrl('/home');
   }
 
   showVoucherModal() {
@@ -188,7 +190,7 @@ export class CartComponent extends ViewCartComponent {
   }
 
   goToPage(pageName) {
-    this.routeByUrl('/' + pageName);
+    this.capRouter.routeByUrl('/' + pageName);
   }
 
   async openProductDetails(product: Product) {

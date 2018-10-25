@@ -3,6 +3,7 @@ import {
   pwaLifeCycle,
   pageView,
   ConfigService,
+  CapRouterService,
 } from '@capillarytech/pwa-framework';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -26,6 +27,7 @@ export class SavedAddressPage extends SavedAddressComponent implements OnInit {
     private alertService: AlertService,
     private translate: TranslateService,
     private config: ConfigService,
+    private capRouter: CapRouterService,
   ) {
     super();
   }
@@ -51,10 +53,10 @@ export class SavedAddressPage extends SavedAddressComponent implements OnInit {
   goToPage(pageName, params = null) {
     if (params || params === 0) {
       const route = pageName + '/' + params;
-      this.routeByUrl(route);
+      this.capRouter.routeByUrl(route);
       return;
     }
-    this.routeByUrl(pageName);
+    this.capRouter.routeByUrl(pageName);
   }
 
   dismissAddressModal(isTrue) {
