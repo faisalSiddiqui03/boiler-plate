@@ -5,13 +5,10 @@ import {
   CapRouterService,
   ConfigService,
 } from '@capillarytech/pwa-framework';
-import { ProductType } from '@cap-widget/product-modules';
 import { TranslateService } from '@ngx-translate/core';
-import { ProductDetailsComponent } from '../../../../components/product-details/product-details.component';
-import { PizzaComponent } from '../../../../components/pizza/pizza.component';
-import { ModalController } from '@ionic/angular';
 import { FavoritesComponent } from '@capillarytech/pwa-components/favorites/favorites.component';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
+import { ProductModalService } from '../../../../helpers/product-modal/product-modal.component';
 
 @Component({
   selector: 'app-favorites',
@@ -29,8 +26,8 @@ export class FavoritesPage extends FavoritesComponent {
     private translate: TranslateService,
     private capRouter: CapRouterService,
     private config: ConfigService,
-    private modalController: ModalController,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private productModal: ProductModalService
   ) {
     super();
     this.currencyCode = this.config.getConfig()['currencyCode'];
@@ -40,27 +37,12 @@ export class FavoritesPage extends FavoritesComponent {
     this.capRouter.routeByUrl(pageName);
   }
 
-  // TODO : create a helper in app only
-  async openProduct(product) {
-    let component;
-    switch (product.type) {
-      case ProductType.Product:
-        component = ProductDetailsComponent
-        break;
-      case ProductType.Bundle:
-        component = PizzaComponent;
-        break;
-    }
-
-    const modal = await this.modalController.create({
-      component: component,
-      componentProps: {
-        productId: product.id,
-        fromFavorites: true,
-      }
-    });
-
-    await modal.present();
+  openProduct(product) {
+    let componentProps = {
+      productId: product.id,
+      fromFavorites: true,
+    };
+    this.productModal.openProductModal(product.type, componentProps);
   }
 
   async handleWidgetActionRemoveItemFailed(data) {
