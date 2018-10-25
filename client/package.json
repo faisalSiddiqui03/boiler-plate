@@ -69,6 +69,7 @@
     "gulp-util": "3.0.8",
     "messageformat": "^2.0.4",
     "ngx-translate-messageformat-compiler": "4.2.0",
+    "node-sass": "^4.9.4",
     "run-sequence": "^1.2.2",
     "rxjs": "6.3.3",
     "yargs": "10.0.3",
