@@ -4,8 +4,8 @@ import {
   pageView,
   CapRouterService,
   ConfigService,
-  ProductType
 } from '@capillarytech/pwa-framework';
+import { ProductType } from '@cap-widget/product-modules';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductDetailsComponent } from '../../../../components/product-details/product-details.component';
 import { PizzaComponent } from '../../../../components/pizza/pizza.component';

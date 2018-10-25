@@ -5,11 +5,12 @@ import { IonicModule } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 import { StoreSelectionModalModule } from '../store-selection-modal/store-selection-modal.module';
 import { TrioComponent } from './trio.component';
-import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackServiceModule } from "@capillarytech/pwa-framework";
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { ImagePreloadModule, EventTrackServiceModule } from "@capillarytech/pwa-framework";
+import { TranslateModule } from '@ngx-translate/core';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
+import {
+    ProductDetailsWidgetModule,
+} from '@cap-widget/product-details';
 
 
 @NgModule({

@@ -4,12 +4,10 @@ import { ViewCartComponent } from '@capillarytech/pwa-components';
 import {
   ConfigService,
   pwaLifeCycle,
-  pageView,
-  Product,
-  CapRouterService,
+  pageView
 } from '@capillarytech/pwa-framework';
+import { Product, ProductType } from '@cap-widget/product-modules';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
-import { ProductType } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { ModalController } from '@ionic/angular';

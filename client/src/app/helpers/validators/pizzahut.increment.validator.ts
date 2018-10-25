@@ -1,4 +1,4 @@
-import { IValidator, Product, ValidatorAction, BundleItem } from '@capillarytech/pwa-framework';
+import { IValidator, Product, ValidatorAction, BundleItem } from '@cap-widget/product-modules';
 import { ToppingCounter } from './pizzahut.count.helper';
 import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
 
@@ -22,7 +22,7 @@ export class IncrementValidator implements IValidator {
 
         const counter = new ToppingCounter();
         counter.setSelectedItemsCount(clientProduct);
-        
+
         let allowNextAddition = false;
         const limit = counter.defaultItemCount + this.itemAdditionLimit;
         if(counter.selectedItemCount < limit){
