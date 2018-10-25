@@ -97,6 +97,7 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
   }
 
   async handleAddToCartActionSuccess(data) {
+    this.loaderService.stopLoading();
     const isDesktop = await this.hardwareService.isDesktopSite();
     await this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
     this.goBack();
@@ -113,7 +114,7 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
 
   handleEditCartActionFailure(data) {
     this.loaderService.stopLoading();
-    this.loaderService.stopLoading();
+    this.modalController.dismiss(false);
   }
 
   close() {
