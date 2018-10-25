@@ -2,7 +2,7 @@
   <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
-  <app-sub-header [title]="titleValue"></app-sub-header>
+  <app-sub-header [title]="'order_details_page.order_details' | translate"></app-sub-header>
   <orders-details-widget [componentId]="getComponentId()" [orderId]="orderId">
     <ng-template let-widget="widget">
       <div *ngIf="(!widget || !widget.model) && !isOrderDetailsLoadingDone">
