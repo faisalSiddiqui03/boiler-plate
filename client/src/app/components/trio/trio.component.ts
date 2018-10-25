@@ -1,18 +1,16 @@
 import { Component, EventEmitter, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import {
   ConfigService,
   pwaLifeCycle,
   WidgetNames,
-  Product,
-  ProductDetailsWidgetActions,
   Action,
-  OnWidgetActionsLifecyle, OnWidgetLifecyle, BundleItem
+  OnWidgetActionsLifecyle, OnWidgetLifecyle
 } from '@capillarytech/pwa-framework';
+import { ProductDetailsWidgetActions } from '@cap-widget/product-details';
+import { Product, BundleItem } from '@cap-widget/product-modules';
 import { TranslateService } from '@ngx-translate/core';
 import { BaseComponent } from '../../base/base-component';
-import { UtilService } from '../../helpers/utils';
 import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { ModalController } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
@@ -45,8 +43,6 @@ export class TrioComponent extends BaseComponent implements OnInit, OnWidgetLife
   addingToCart: boolean;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
     private alertService: AlertService,
     private translate: TranslateService,
     private hardwareService: HardwareService,

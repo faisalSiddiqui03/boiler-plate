@@ -6,16 +6,20 @@ import {
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   pwaLifeCycle,
-  ProductDetailsWidgetActions,
   WidgetNames,
   ConfigService,
-  BundleItem,
-  Product,
   Action,
   CapRouterService,
 } from '@capillarytech/pwa-framework';
+import {
+    ProductDetailsWidgetActions,
+} from '@cap-widget/product-details';
+import {
+    BundleItem,
+    Product,
+} from '@cap-widget/product-modules';
+
 import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { DealShowcaseComponent } from '../deal-showcase/deal-showcase.component'
 import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';

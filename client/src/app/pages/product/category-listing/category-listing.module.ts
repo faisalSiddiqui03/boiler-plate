@@ -1,25 +1,21 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import {
   NavigationWidgetModule,
-  ProductShowcaseWidgetModule,
   ImagePreloadModule,
   DeliverySlotsWidgetModule,
   EventTrackServiceModule,
   SeoInfoWidgetModule
 } from '@capillarytech/pwa-framework';
 import { CartComponentModule } from '../../../components/cart/cart.component.module';
-import { HttpLoaderFactory } from '../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CategoryListingPage } from './category-listing.page';
 import { HeaderModule } from '../../../components/header/header.module';
-// import { CartModule } from '../../../components/cart/cart.module';
+
 import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
-import { CategoryRouterModule } from './category.router.module';
+import { ProductShowcaseWidgetModule } from '@cap-widget/product-showcase';
 
 const routes: Routes = [
   {
@@ -31,8 +27,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    // CategoryRouterModule,
     HeaderModule,
     SkeletonModule,
     ImagePreloadModule,

@@ -1,20 +1,15 @@
-import { Component, OnInit, EventEmitter, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
-  LifeCycle,
-  Action,
   pwaLifeCycle,
   ConfigService,
-  Product,
-  ProductType,
-  BundleItem,
 } from '@capillarytech/pwa-framework';
+import { Product, BundleItem } from '@cap-widget/product-modules';
 import { BaseComponent } from '../../base/base-component';
-import { NavParams, ModalController } from '@ionic/angular'
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { ModalController } from '@ionic/angular';
+import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
 import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
 import { PizzaComponent } from '../pizza/pizza.component';
 import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
 
@@ -54,10 +49,8 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
     private translate: TranslateService,
     private config: ConfigService,
     private location: Location,
-    public navParams: NavParams,
     private utilService: UtilService,
     private modalController: ModalController,
-    private router: Router,
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());

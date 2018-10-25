@@ -4,13 +4,13 @@ import {
   pageView,
   CapRouterService,
   ConfigService,
-  ProductType
 } from '@capillarytech/pwa-framework';
+import { ProductType } from '@cap-widget/product-modules';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductDetailsComponent } from '../../../../components/product-details/product-details.component';
 import { PizzaComponent } from '../../../../components/pizza/pizza.component';
 import { ModalController } from '@ionic/angular';
-import { FavoritesComponent } from '@capillarytech/pwa-components';
+import { FavoritesComponent } from '@capillarytech/pwa-components/favorites/favorites.component';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({

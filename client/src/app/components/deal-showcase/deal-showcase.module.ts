@@ -6,16 +6,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DealShowcaseComponent } from './deal-showcase.component';
-
-import { ProductDetailsWidgetModule, ImagePreloadModule } from "@capillarytech/pwa-framework";
+import { ProductDetailsWidgetModule } from '@cap-widget/product-details';
+import { ImagePreloadModule } from '@capillarytech/pwa-framework';
 import { PizzaComponentModule } from '../pizza/pizza.module';
 import { PizzaComponent } from '../pizza/pizza.component';
 import { ProductDetailsComponentModule } from '../product-details/product-details.module';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../header/header.module';
 import { SubHeaderModule } from '../sub-header/sub-header.module';
 

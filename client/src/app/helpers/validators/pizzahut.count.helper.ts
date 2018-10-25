@@ -1,4 +1,4 @@
-import { IValidator, Product, ValidatorAction, BundleItem } from '@capillarytech/pwa-framework';
+import { IValidator, Product, ValidatorAction, BundleItem } from '@cap-widget/product-modules';
 import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
 
 export class ToppingCounter {

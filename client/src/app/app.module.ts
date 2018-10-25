@@ -83,7 +83,6 @@ export function getAppConfig(): Object {
     HttpClientModule,
     FulfilmentModeModule,
     ImagePreloadModule,
-    LogoutWidgetModule,
     DeliverySlotSelectionModule,
     LocationPageModule,
     SearchLocationPageModule,
