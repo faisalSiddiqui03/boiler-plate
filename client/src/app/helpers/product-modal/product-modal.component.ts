@@ -1,7 +1,7 @@
 import { ModalController } from '@ionic/angular';
 import { PizzaComponent } from '../../components/pizza/pizza.component';
 import { ProductDetailsComponent } from '../../components/product-details/product-details.component';
-import { ProductType } from '@capillarytech/pwa-framework';
+import { ProductType } from '@cap-widget/product-modules';
 import { Injectable } from '@angular/core';
 
 @Injectable()
