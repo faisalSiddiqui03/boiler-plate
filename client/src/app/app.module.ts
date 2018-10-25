@@ -27,7 +27,6 @@ import {
   LifecycleHandler,
   LanguageServiceModule,
   ImagePreloadModule,
-  LogoutWidgetModule,
   FulfilmentModeModule,
   SEOModule,
   LanguageService,
@@ -46,7 +45,6 @@ import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
 import { UtilService } from './helpers/utils';
-import { CacheStorageServiceModule } from '@capillarytech/pwa-framework/services';
 
 export const languages = [
   {
