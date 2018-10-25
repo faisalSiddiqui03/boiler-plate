@@ -36,7 +36,8 @@ const config = {
   },
   "graphite": {
     "host": "192.168.33.103",
-    "port": "2003"
+    "port": "2003",
+    "prefix" : "pwa.phkuwait"
   },
   "logger": {
     "logging": {
