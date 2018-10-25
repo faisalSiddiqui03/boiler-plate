@@ -1,12 +1,12 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../../base/base-component';
 import {
   pwaLifeCycle,
   pageView,
-  UserProfileWidgetActions,
   Action,
   OnWidgetActionsLifecyle, OnWidgetLifecyle, CapRouterService
 } from '@capillarytech/pwa-framework';
+import { UserProfileWidgetActions } from '@cap-widget/user-profile';
 import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -22,12 +22,12 @@ import { FormGroup, FormBuilder, Validator, Validators } from '@angular/forms';
 @pwaLifeCycle()
 @pageView()
 
-export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class UserProfilePage extends BaseComponent implements OnWidgetLifecyle, OnWidgetActionsLifecyle {
+  
   updateProfileActionEmitter = new EventEmitter();
   profileForm: FormGroup;
   widgetModel: any;
   loaded: boolean;
-  titleValue = '';
   updateInProgress = false;
 
   constructor(private router: Router,
@@ -46,13 +46,6 @@ export class UserProfilePage extends BaseComponent implements OnInit, OnWidgetLi
       mobileNo: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('^[2,5,6,9][0-9]*$')])],
       alternateEmail: ['',],
     })
-  }
-
-
-  ngOnInit() {
-    this.translate.get('user_profile_page.my_profile').subscribe(value => {
-      this.titleValue = value;
-    });
   }
 
   async updateProfile() {

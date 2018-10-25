@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
+  CapRouterService,
 } from '@capillarytech/pwa-framework';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,33 +17,22 @@ import { MyAccountComponent } from '@capillarytech/pwa-components';
 
 @pwaLifeCycle()
 @pageView()
-export class MyAccountPage extends MyAccountComponent implements OnInit {
-
-  titleValue: string = '';
+export class MyAccountPage extends MyAccountComponent {
 
   constructor(
     private alertService: AlertService,
     private translate: TranslateService,
+    private capRouter: CapRouterService,
   ) {
     super();
-  }
-
-  ngOnInit() {
-    this.translate.get('my_account_page.my_account').subscribe(value => {
-      this.titleValue = value;
-    });
   }
 
   goToPage(pageName) {
     if (pageName === 'logout') {
       this.logout();
     } else {
-      this.routeByUrl(pageName);
+      this.capRouter.routeByUrl(pageName);
     }
-  }
-
-  handleMyAccountLoadingFailed(data) {
-    console.log('unable to load logout widget');
   }
 
   async handleMyAccountActionLogoutFailed(data) {

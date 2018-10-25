@@ -109,19 +109,7 @@ export class AppComponent extends BaseComponent {
     }
   }
 
-  // logout() {
-  //   this.logoutActionEmitter.emit(new Action(LogoutWidgetActions.LOGOUT));
-  // }
-
   openPage(pageName) {
     // this.navCtrl.navigateForward(pageName, true);
   }
-
-  // async presentSignInModal() {
-  //   const modal = await this.modalController.create({
-  //     component: SignUpPage,
-  //   });
-  //   return await modal.present();
-  // }
-
 }

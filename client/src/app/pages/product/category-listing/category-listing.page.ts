@@ -8,14 +8,14 @@ import {
   pageView,
   pwaLifeCycle,
   Action,
-  ProductShowcaseWidgetActions,
-  ProductType,
   DeliverySlot,
   CapRouterService,
   SeoInfoEntityType,
   WidgetNames,
   DeliveryModes
 } from '@capillarytech/pwa-framework';
+import { ProductShowcaseWidgetActions } from '@cap-widget/product-showcase';
+import { ProductType } from '@cap-widget/product-modules';
 import {TranslateService} from '@ngx-translate/core';
 import {BaseComponent} from '../../../base/base-component';
 import {ModalController} from '@ionic/angular';

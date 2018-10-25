@@ -20,7 +20,6 @@ import {
 import {
   ConfigServiceModule,
   HttpService,
-  CacheStorageServiceImpl,
   GlobalServiceModule,
   EventTrackServiceModule,
   EventTrackWidgetModule,
@@ -28,7 +27,6 @@ import {
   LifecycleHandler,
   LanguageServiceModule,
   ImagePreloadModule,
-  UserProfileWidgetModule,
   LogoutWidgetModule,
   FulfilmentModeModule,
   SEOModule,
@@ -48,7 +46,6 @@ import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
 import { UtilService } from './helpers/utils';
-import { Location } from '@angular/common';
 import { CacheStorageServiceModule } from '@capillarytech/pwa-framework/services';
 
 export const languages = [
@@ -86,14 +83,11 @@ export function getAppConfig(): Object {
     HttpClientModule,
     FulfilmentModeModule,
     ImagePreloadModule,
-    UserProfileWidgetModule,
-    LogoutWidgetModule,
     DeliverySlotSelectionModule,
     LocationPageModule,
     SearchLocationPageModule,
     EventTrackServiceModule.forRoot([EventTrackServiceModule.Tracker.GTM]),
     EventTrackWidgetModule,
-    CacheStorageServiceModule,
     CapRouterServiceModule.forRoot(true),
     // AppUpdateServiceModule,
     LanguageServiceModule.forRoot(languages),

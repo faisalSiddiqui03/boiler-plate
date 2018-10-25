@@ -8,9 +8,9 @@ import {
   pageView,
   ConfigService,
   DeliverySlot,
-  ContactDetail,
-  Address,
+  CapRouterService,
 } from '@capillarytech/pwa-framework';
+import { ContactDetail, Address } from '@cap-widget/user-address';
 import { SinglePageCheckoutComponent, UserIdentifier } from '@capillarytech/pwa-components';
 
 @Component({
@@ -40,6 +40,7 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
     private translate: TranslateService,
     private config: ConfigService,
     public hardwareService: HardwareService,
+    private capRouter: CapRouterService,
   ) {
     super({
       handleGaEvent: true,
@@ -204,7 +205,7 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
   }
 
   goToDeals() {
-    this.routeByUrl('/products?category=deals&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
   }
 
 }
