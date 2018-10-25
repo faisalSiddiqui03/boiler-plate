@@ -1,15 +1,11 @@
-import { Component, OnInit, EventEmitter, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import {
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   pwaLifeCycle,
   CapRouterService,
 } from '@capillarytech/pwa-framework';
-import {
-    BundleItem,
-    Product,
-} from '@cap-widget/product-modules';
-
+import { BundleItem, Product } from '@cap-widget/product-modules';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalController } from '@ionic/angular';
 import { DealShowcaseComponent } from '../deal-showcase/deal-showcase.component'
@@ -18,7 +14,7 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 import { TrioComponent } from '../trio/trio.component';
-import { DealBuilderComponent } from '@capillarytech/pwa-components';
+import { DealBuilderComponent } from '@capillarytech/pwa-components/deal-builder/deal-builder.component';
 
 @Component({
   selector: 'app-deal-component',
@@ -31,21 +27,8 @@ import { DealBuilderComponent } from '@capillarytech/pwa-components';
 export class DealComponent extends DealBuilderComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
   serverProduct;
-  productName: string;
-  loaded = false;
-  productWidgetAction = new EventEmitter();
-  currencyCode: string;
   bundleGroup: any;
   clientProduct: Product;
-  isShowBundleGroupItems: boolean;
-  bundleGroupImage: string;
-  noOfRequiredGroups: number;
-  noOfSelectedGroups: number;
-  showAddToCart: boolean;
-  titleValue: string = '';
-  dealCategoryId: string;
-  initPrice: number;
-  toppingsEnabled: boolean;
 
   constructor(
     private translate: TranslateService,
