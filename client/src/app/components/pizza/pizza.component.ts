@@ -6,7 +6,7 @@ import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa
 import { TranslateService } from '@ngx-translate/core';
 import { ModalController } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
-import { PizzaBuilderComponent } from '@capillarytech/pwa-components';
+import { PizzaBuilderComponent } from '@capillarytech/pwa-components/pizza-builder/pizza-builder.component';
 import { Product } from '@cap-widget/product-modules';
 
 @Component({
