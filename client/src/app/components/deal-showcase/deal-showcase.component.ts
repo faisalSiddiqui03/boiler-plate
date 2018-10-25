@@ -5,7 +5,6 @@ import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { ModalController } from '@ionic/angular';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../helpers/utils';
 import { PizzaComponent } from '../pizza/pizza.component';
 import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
 
@@ -42,7 +41,6 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   constructor(
     private alertService: AlertService,
     private translate: TranslateService,
-    private utilService: UtilService,
     private modalController: ModalController,
   ) {
     super();

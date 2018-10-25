@@ -4,7 +4,7 @@ import {
   pageView,
   CapRouterService
 } from '@capillarytech/pwa-framework';
-import { UtilService } from '../../../../helpers/utils';
+import { Utils } from '@capillarytech/pwa-components/util/utils';
 import { ActivatedRoute } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,7 +31,6 @@ export class AddAddressPage extends AddEditAddressComponent implements OnInit {
   };
 
   constructor(
-    private utilService: UtilService,
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
@@ -50,7 +49,7 @@ export class AddAddressPage extends AddEditAddressComponent implements OnInit {
 
   ngOnInit() {
     this.addressId = parseInt(this.actRoute.snapshot.params['addressId'], 10);
-    this.addressTypes = this.utilService.getAddressTypes();
+    this.addressTypes = Utils.getAddressTypes();
   }
 
   async handleWidgetActionSaveAddressFailed(data) {

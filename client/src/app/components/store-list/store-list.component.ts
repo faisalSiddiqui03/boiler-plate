@@ -5,7 +5,6 @@ import { pwaLifeCycle, Action, DeliveryModes } from '@capillarytech/pwa-framewor
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UtilService } from '../../helpers/utils';
 import { StoreLocatorWidgetActions, OnWidgetLifecyle, OnWidgetActionsLifecyle, CapRouterService } from '@capillarytech/pwa-framework';
 
 @Component({
@@ -32,7 +31,6 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
-    private utilService: UtilService,
     private capRouter: CapRouterService,
     private modalController: ModalController,
   ) {

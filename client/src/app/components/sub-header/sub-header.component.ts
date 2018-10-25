@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UtilService } from '../../helpers/utils';
-import { Location } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -16,9 +14,7 @@ export class SubHeaderComponent implements OnInit {
   @Input() isModal = false;
 
   constructor(
-    private location: Location,
-    private modalController: ModalController,
-    private utilService: UtilService
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -26,7 +22,7 @@ export class SubHeaderComponent implements OnInit {
 
   /** Function to go to previous page */
   goBack() {
-    this.location.back();
+    this.goBack();
   }
 
   closeModal() {

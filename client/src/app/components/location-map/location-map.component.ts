@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } fro
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { TranslateService } from '@ngx-translate/core';
 import { AgmCoreModule, MouseEvent, MarkerManager } from '@agm/core';
-import { UtilService } from '../../helpers/utils';
 import { ModalController } from '@ionic/angular';
 import { SearchLocationPage } from '../../pages/user/profile/search-location/search-location.page';
 import { OverlayEventDetail } from '@ionic/core';
@@ -28,7 +27,6 @@ export class LocationMapComponent extends BaseComponent implements OnInit {
     constructor(
         private translate: TranslateService,
         private modalController: ModalController,
-        private utilService: UtilService
     ) {
         super();
     }

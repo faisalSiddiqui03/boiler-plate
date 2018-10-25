@@ -4,7 +4,6 @@ import { pwaLifeCycle, Action, DeliveryModes } from '@capillarytech/pwa-framewor
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UtilService } from '../../../helpers/utils';
 import {
   StoreLocatorWidgetActions,
   OnWidgetLifecyle,

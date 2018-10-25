@@ -9,7 +9,6 @@ import {
   LocationWidget,
   LocationWidgetActions,
 } from '@capillarytech/pwa-framework';
-import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -38,7 +37,6 @@ export class SearchLocationPage extends BaseComponent implements OnInit, OnWidge
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
-    private utilService: UtilService,
     private modalController: ModalController) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
