@@ -3,10 +3,10 @@ import { BaseComponent } from '../../../../base/base-component';
 import {
   pwaLifeCycle,
   pageView,
-  UserProfileWidgetActions,
   Action,
   OnWidgetActionsLifecyle, OnWidgetLifecyle, CapRouterService
 } from '@capillarytech/pwa-framework';
+import { UserProfileWidgetActions } from '@cap-widget/user-profile';
 import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';

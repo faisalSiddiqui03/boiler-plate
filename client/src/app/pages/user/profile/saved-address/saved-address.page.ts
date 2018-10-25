@@ -6,7 +6,7 @@ import {
 } from '@capillarytech/pwa-framework';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
-import { SavedAddressComponent } from '@capillarytech/pwa-components';
+import { SavedAddressComponent } from '@capillarytech/pwa-components/saved-address/saved-address.component';
 
 @Component({
   selector: 'app-saved-address',
