@@ -1,11 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, EventEmitter, ViewEncapsulation, Output } from '@angular/core';
 import { ViewCartComponent } from '@capillarytech/pwa-components';
-import {
-  ConfigService,
-  pwaLifeCycle,
-  pageView
-} from '@capillarytech/pwa-framework';
+import { ConfigService, CapRouterService, pwaLifeCycle, pageView } from '@capillarytech/pwa-framework';
 import { Product, ProductType } from '@cap-widget/product-modules';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
