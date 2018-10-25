@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { BaseComponent } from '@capillarytech/pwa-components/base-component';
+import { Component } from '@angular/core';
 import { CapRouterService } from '@capillarytech/pwa-framework';
 
 @Component({
@@ -9,26 +6,13 @@ import { CapRouterService } from '@capillarytech/pwa-framework';
   templateUrl: './privacy-policy.page.html',
   styleUrls: ['./privacy-policy.page.scss'],
 })
-export class PrivacyPolicyPage extends BaseComponent implements OnInit {
+export class PrivacyPolicyPage {
 
   constructor(
-    private translate: TranslateService,
-    private router: Router,
     private capRouter: CapRouterService,
-  ) {
-    super();
-    this.translate.use(this.getCurrentLanguageCode());
-  }
+  ) {}
 
-  titleValue = '';
   activeAccordion: number = null;
-
-  ngOnInit() {
-    this.translate.get('privacy_page.privacy_policy').subscribe(value => {
-      this.titleValue = value;
-    });
-  }
-
   openAccordion(acc) {
     this.activeAccordion = acc;
   }

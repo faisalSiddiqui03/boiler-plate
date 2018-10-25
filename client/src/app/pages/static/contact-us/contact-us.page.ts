@@ -1,27 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { BaseComponent } from '@capillarytech/pwa-components/base-component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.page.html',
   styleUrls: ['./contact-us.page.scss'],
 })
-export class ContactUsPage extends BaseComponent implements OnInit {
+export class ContactUsPage {
 
-  constructor(
-    private translate: TranslateService,
-  ) {
-    super();
-    this.translate.use(this.getCurrentLanguageCode());
-  }
-
-  titleValue = '';
-
-  ngOnInit() {
-    this.translate.get('contact_page.contact_us').subscribe(value => {
-      this.titleValue = value;
-    });
-  }
-
+  constructor() {}
 }

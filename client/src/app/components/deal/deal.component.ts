@@ -45,11 +45,7 @@ export class DealComponent extends DealBuilderComponent implements OnInit, OnWid
     });
   }
 
-  ngOnInit() {
-    this.translate.get('deal.your_deal_details').subscribe(value => {
-      this.titleValue = value;
-    });
-  }
+  ngOnInit() {}
 
   async handleAddToCartActionSuccess(data) {
     this.loaderService.stopLoading();

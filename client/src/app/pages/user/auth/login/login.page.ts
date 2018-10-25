@@ -32,7 +32,6 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   googleSignInActionEmitter = new EventEmitter();
   googleClientId = '';
-  titleValue = '';
   enteredPassword = '';
 
   constructor(
@@ -46,18 +45,12 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     super();
 
     this.googleClientId = this.configService.getConfig()['googleClientId'];
-    this.translate.use(this.getCurrentLanguageCode());
-
     this.widgetModels = {};
 
     this.userIdSigninForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     });
-  }
-
-  ionViewWillEnter() {
-    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {}

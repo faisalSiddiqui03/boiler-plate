@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { pwaLifeCycle, Action, DeliveryModes } from '@capillarytech/pwa-framework';
-import { TranslateService } from '@ngx-translate/core';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StoreLocatorWidgetActions, OnWidgetLifecyle, OnWidgetActionsLifecyle, CapRouterService } from '@capillarytech/pwa-framework';
@@ -21,7 +20,6 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
   @Input() longitude;
   storeLocatorWidgetAction = new EventEmitter();
   stores: Array<any>;
-  titleValue = '';
   deliveryModes: any;
   @Input() isModal: false;
 
@@ -30,13 +28,11 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
     private router: Router,
     private loaderService: LoaderService,
     private alertService: AlertService,
-    private translate: TranslateService,
     private capRouter: CapRouterService,
     private modalController: ModalController,
   ) {
     super();
     this.deliveryModes = DeliveryModes;
-    this.translate.use(this.getCurrentLanguageCode());
   }
 
   ngOnInit() {
@@ -50,10 +46,6 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
         }
       });
     }
-
-    this.translate.get('store_selection_page.stores_selection').subscribe(value => {
-      this.titleValue = value;
-    });
   }
 
   ionViewDidEnter(){

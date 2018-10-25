@@ -1,7 +1,5 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter} from '@angular/core';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
-import {Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
 import {BaseComponent} from '@capillarytech/pwa-components/base-component';
 import {CapRouterService, SurveyWidgetActions, Action, pwaLifeCycle} from '@capillarytech/pwa-framework';
 
@@ -11,19 +9,16 @@ import {CapRouterService, SurveyWidgetActions, Action, pwaLifeCycle} from '@capi
   styleUrls: ['./feedback.page.scss'],
 })
 @pwaLifeCycle()
-export class FeedbackPage extends BaseComponent implements OnInit {
+export class FeedbackPage extends BaseComponent {
   feedBackForm: FormGroup;
   feedbackWidgetAction = new EventEmitter();
   feedbackWidgetExecutor = new EventEmitter();
 
   constructor(
-    private translate: TranslateService,
-    private router: Router,
     private formBuilder: FormBuilder,
     private capRouter: CapRouterService,
   ) {
     super();
-    this.translate.use(this.getCurrentLanguageCode());
 
     this.feedBackForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -32,14 +27,6 @@ export class FeedbackPage extends BaseComponent implements OnInit {
       orderNumber: ['', Validators.compose([Validators.required, Validators.pattern('^\\d+$')])],
       orderType: ['', Validators.compose([Validators.required])],
       message: ['', Validators.compose([Validators.required])],
-    });
-  }
-
-  titleValue = '';
-
-  ngOnInit() {
-    this.translate.get('feedback_page.feedback').subscribe(value => {
-      this.titleValue = value;
     });
   }
 
