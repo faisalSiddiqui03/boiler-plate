@@ -5,8 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CartComponent } from './cart.component';
 
-import { CartWidgetModule, VoucherWidgetModule, ImagePreloadModule, EventTrackServiceModule,
-    SuggestionsWidgetModule } from '@capillarytech/pwa-framework';
+import { ImagePreloadModule, EventTrackServiceModule } from '@capillarytech/pwa-framework';
+import { CartWidgetModule } from '@cap-widget/cart';
+import { VoucherWidgetModule } from '@cap-widget/voucher-widget';
+import { SuggestionsWidgetModule } from '@cap-widget/suggestions-widget';
 import { DebounceClickDirective } from '@capillarytech/pwa-ui-helpers';
 import { ProductDetailsComponent } from '../../components/product-details/product-details.component';
 import { ProductDetailsComponentModule } from '../../components/product-details/product-details.module';

@@ -7,7 +7,7 @@ import {
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ChangePasswordComponent } from '@capillarytech/pwa-components';
+import { ChangePasswordComponent } from '@capillarytech/pwa-components/change-password/change-password.component';
 
 @Component({
   selector: 'app-change-password',
@@ -80,7 +80,7 @@ export class ChangePasswordPage extends ChangePasswordComponent {
     this.loaderService.stopLoading();
     this.updateInProgress = false;
     await this.alertService.presentToast(this.translate.instant('change_password_page.change_password_failed'), 1000, 'top');
-  } 
+  }
 
   navigateToDeals() {
     this.capRouter.routeByUrl('/products?category=deals&id=' + this.dealCategoryId);
@@ -95,7 +95,7 @@ export class ChangePasswordPage extends ChangePasswordComponent {
       console.log(success_message);
       await this.alertService.presentToast(success_message, 1000, 'top');
       return;
-    } 
+    }
 
     this.handleWidgetActionChangePasswordFailed(data);
   }

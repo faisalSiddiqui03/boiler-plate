@@ -3,7 +3,9 @@ import { pwaLifeCycle } from '@capillarytech/pwa-framework';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { PizzaComponent } from '../pizza/pizza.component';
+
 import { DealBuilderShowcaseComponent } from '@capillarytech/pwa-components/deal-builder-showcase/deal-builder-showcase.component';
+
 
 @Component({
   selector: 'app-deal-showcase-component',

@@ -5,12 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 import {
-  PaymentOptionsWidgetModule,
-  CheckoutWidgetModule,
   EventTrackServiceModule,
   EventTrackWidgetModule,
   CapRouterServiceModule
 } from '@capillarytech/pwa-framework';
+import { CheckoutWidgetModule } from '@cap-widget/dummy-checkout-widget';
+import { PaymentOptionsWidgetModule } from '@cap-widget/payment-options';
+
 import { UserAddressWidgetModule } from '@cap-widget/user-address';
 import { CheckoutPage } from './checkout.page';
 import { TranslateModule } from '@ngx-translate/core';
