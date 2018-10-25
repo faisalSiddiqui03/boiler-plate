@@ -77,13 +77,16 @@ export class DealComponent extends DealBuilderComponent implements OnInit, OnWid
 
     modal.onDidDismiss().then((storeSelected) => {
       this.loaderService.stopLoading();
-      return storeSelected;
+      if (storeSelected.data) {
+        this.addToCart();
+      }
     });
   }
 
   async addToCart() {
     if (this.getCurrentStore() && this.getCurrentStore().isDefaultLocation) {
       await this.openStoreSelection();
+      return;
     }
     await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
     super.addToCart();
