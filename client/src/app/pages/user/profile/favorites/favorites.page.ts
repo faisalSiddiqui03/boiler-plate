@@ -23,8 +23,8 @@ export class FavoritesPage extends FavoritesComponent {
   constructor(
     private translate: TranslateService,
     private capRouter: CapRouterService,
-    private productModal: ProductModalService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private productModal: ProductModalService
   ) {
     super();
   }
