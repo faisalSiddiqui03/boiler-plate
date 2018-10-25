@@ -35,7 +35,7 @@
     "@angular/router": "7.0.1",
     "@angular/service-worker": "7.0.1",
     "@capillarytech/pwa-framework": "0.6.6",
-    "@capillarytech/pwa-components": "1.1.8",
+    "@capillarytech/pwa-components": "1.1.10",
     "@capillarytech/pwa-ui-helpers": "0.2.1",
     "@capillarytech/pwa-payment-providers": "0.0.1",
     "@ionic-native/app-version": "5.0.0-beta.21",
@@ -103,7 +103,6 @@
     "ts-node": "7.0.0",
     "tslint": "5.11.0",
     "typescript": "3.1.1",
-    "webpack": "^4.23.1",
     "webpack-bundle-analyzer": "^3.0.3"
   },
   "description": "An Ionic project",
