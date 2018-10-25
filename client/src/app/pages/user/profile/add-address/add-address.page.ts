@@ -4,13 +4,12 @@ import {
   pageView,
   CapRouterService
 } from '@capillarytech/pwa-framework';
-import { UserAddressWidgetActions } from '@cap-widget/user-address';
 import { UtilService } from '../../../../helpers/utils';
 import { ActivatedRoute } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AddEditAddressComponent } from '@capillarytech/pwa-components'
+import { AddEditAddressComponent } from '@capillarytech/pwa-components/add-edit-address/add-edit-address.component';
 
 @Component({
   selector: 'app-add-address',
@@ -109,7 +108,7 @@ export class AddAddressPage extends AddEditAddressComponent implements OnInit {
       this.addNewAddress(this.addressModel);
     } else if (type === 'update') {
       await this.loaderService.startLoading();
-      this.editAddress(this.addressModel);      
+      this.editAddress(this.addressModel);
     }
   }
 
