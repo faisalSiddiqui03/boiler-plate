@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Location } from '@angular/common';
 import {
   pwaLifeCycle,
   LifeCycle,
@@ -8,10 +7,9 @@ import {
   UserIdPwdSigninWidgetActions,
   pageView,
   GoogleSignInWidgetActions,
-  ConfigService,
   OnWidgetActionsLifecyle, OnWidgetLifecyle, CapRouterService
 } from '@capillarytech/pwa-framework';
-import { BaseComponent } from '../../../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -49,14 +47,12 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     private actRoute: ActivatedRoute,
     private alertService: AlertService,
     private translate: TranslateService,
-    private config: ConfigService,
     private hardwareService: HardwareService,
-    private location: Location,
     private capRouter: CapRouterService,
   ) {
     super();
 
-    this.googleClientId = this.config.getConfig()['googleClientId'];
+    this.googleClientId = this.configService.getConfig()['googleClientId'];
     this.translate.use(this.getCurrentLanguageCode());
 
     this.widgetModels = {};
@@ -71,12 +67,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     this.translate.use(this.getCurrentLanguageCode());
   }
 
-  ngOnInit() {
-    const translateSub = this.translate.get('sign_in_page.sign_in').subscribe(value => {
-      this.titleValue = value;
-    });
-    this.subscriptions.push(translateSub);
-  }
+  ngOnInit() {}
 
   changeTextPassword() {
     this.isPasswordFiled = !this.isPasswordFiled;

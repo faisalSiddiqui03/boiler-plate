@@ -1,5 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
-import { BaseComponent } from '../../../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import {
   pwaLifeCycle,
   pageView,

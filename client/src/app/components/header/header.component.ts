@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit, Input, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -12,7 +11,7 @@ import {
   CapRouterService,
   DeliverySlot
 } from '@capillarytech/pwa-framework';
-import { BaseComponent } from '../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-selection/delivery-slot-selection.page';
 import { TranslateService } from '@ngx-translate/core';
@@ -41,7 +40,6 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     public modalController: ModalController,
     private translate: TranslateService,
     private alertService: AlertService,
-    private location: Location,
     private languageService: LanguageService,
     private utilService: UtilService,
     private capRouter: CapRouterService,

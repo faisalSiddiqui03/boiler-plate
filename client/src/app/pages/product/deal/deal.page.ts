@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ComponentRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BaseComponent } from '../../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import {
   pwaLifeCycle,
 } from '@capillarytech/pwa-framework';

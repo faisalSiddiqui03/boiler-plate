@@ -1,13 +1,11 @@
 import { Component, OnInit, EventEmitter, ViewEncapsulation, ComponentRef, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { BaseComponent } from '../../base/base-component';
-import { Location } from '@angular/common';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import {
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   pwaLifeCycle,
   WidgetNames,
-  ConfigService,
   Action,
   CapRouterService,
 } from '@capillarytech/pwa-framework';
@@ -45,7 +43,6 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   productName: string;
   loaded = false;
   productWidgetAction = new EventEmitter();
-  currencyCode: string;
   bundleGroup: any;
   clientProduct: Product;
   isShowBundleGroupItems: boolean;
@@ -61,9 +58,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location,
     private translate: TranslateService,
-    private config: ConfigService,
     private modalController: ModalController,
     private loaderService: LoaderService,
     private alertService: AlertService,
@@ -75,8 +70,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
   }
 
   ngOnInit() {
-    this.currencyCode = this.config.getConfig()['currencyCode'];
-    this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
+    this.dealCategoryId = this.configService.getConfig()['dealCategoryId'];
 
     this.translate.get('deal.your_deal_details').subscribe(value => {
       this.titleValue = value;
@@ -386,7 +380,7 @@ export class DealComponent extends BaseComponent implements OnInit, OnWidgetLife
       this.modalController.dismiss();
       return;
     }
-    this.location.back();
+    this.goBack();
   }
 
 }

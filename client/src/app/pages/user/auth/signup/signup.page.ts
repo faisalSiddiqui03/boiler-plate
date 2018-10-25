@@ -18,7 +18,7 @@ import {
   UserIdSignUpWidgetActions,
   CapRouterService
 } from '@capillarytech/pwa-framework';
-import { BaseComponent } from '../../../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../../helpers/utils';

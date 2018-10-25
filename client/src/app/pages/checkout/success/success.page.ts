@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { LoaderService } from '@capillarytech/pwa-ui-helpers';
-import { BaseComponent } from '../../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../helpers/utils';

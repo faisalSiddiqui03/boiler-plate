@@ -3,7 +3,7 @@ import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {UtilService} from '../../../helpers/utils';
-import {BaseComponent} from '../../../base/base-component';
+import {BaseComponent} from '@capillarytech/pwa-components/base-component';
 import {CapRouterService, SurveyWidgetActions, Action, pwaLifeCycle} from '@capillarytech/pwa-framework';
 
 @Component({

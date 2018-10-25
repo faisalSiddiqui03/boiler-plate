@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BaseComponent } from '../../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

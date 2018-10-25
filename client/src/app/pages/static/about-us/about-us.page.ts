@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../../helpers/utils';
-import { BaseComponent } from '../../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 
 @Component({
   selector: 'app-about-us',

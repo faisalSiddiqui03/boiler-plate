@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  ConfigService,
   CapRouterService,
 } from '@capillarytech/pwa-framework';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -25,14 +24,13 @@ export class SavedAddressPage extends SavedAddressComponent {
   constructor(
     private alertService: AlertService,
     private translate: TranslateService,
-    private config: ConfigService,
     private capRouter: CapRouterService,
   ) {
     super();
   }
 
   getFlatAddress(address, index = 0) {
-      const storeConfig = this.config.getConfig()['address'];
+      const storeConfig = this.configService.getConfig()['address'];
       const sep = storeConfig.storeSep;
       const addresses = address.split(sep);
       return addresses[index] ? addresses[index] : address.split(',')[index];

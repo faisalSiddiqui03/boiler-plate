@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { BaseComponent } from './base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { CapRouterService } from '@capillarytech/pwa-framework';
 
 // import { GlobalSharedService } from '@cap-core/service/global-shared.service';

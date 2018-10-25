@@ -3,12 +3,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AlertService, LoaderService} from '@capillarytech/pwa-ui-helpers';
 import {ModalController} from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
-import {BaseComponent} from '../../base/base-component';
+import {BaseComponent} from '@capillarytech/pwa-components/base-component';
 import {
   pwaLifeCycle,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
-  ConfigService,
   DeliveryModes,
   DeliverySlot,
   StoreLocatorWidgetActions,
@@ -61,7 +60,6 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
   private cityData: any;
 
   constructor(
-    private config: ConfigService,
     private loaderService: LoaderService,
     private translate: TranslateService,
     private router: Router,
@@ -72,8 +70,8 @@ export class StoreSelectionComponent extends BaseComponent implements OnInit, On
     private capRouter: CapRouterService,
   ) {
     super();
-    this.bannerRefCode = this.config.getConfig()['headerBannerRefCode'];
-    this.bannerUrl = this.config.getConfig()['banner_base_url'];
+    this.bannerRefCode = this.configService.getConfig()['headerBannerRefCode'];
+    this.bannerUrl = this.configService.getConfig()['banner_base_url'];
     this.hasError = {
       selectAreaFirst: false
     };

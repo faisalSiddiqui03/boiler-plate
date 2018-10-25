@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  CapRouterService,
-  ConfigService
+  CapRouterService
 } from '@capillarytech/pwa-framework';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,14 +30,13 @@ export class ChangePasswordPage extends ChangePasswordComponent {
     private alertService: AlertService,
     private translate: TranslateService,
     private formBuilder: FormBuilder,
-    private capRouter: CapRouterService,
-    public config: ConfigService
+    private capRouter: CapRouterService
   ) {
     super();
 
     this.fieldTypeMap.set('passwordFieldType', 'password');
     this.fieldTypeMap.set('confirmPasswordFieldType', 'password');
-    this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
+    this.dealCategoryId = this.configService.getConfig()['dealCategoryId'];
 
     this.resetPasswordForm = this.formBuilder.group({
       newPassword: ['', Validators.compose([Validators.required, Validators.minLength(6)])],

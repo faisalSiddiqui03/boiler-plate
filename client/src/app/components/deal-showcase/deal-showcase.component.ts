@@ -1,15 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {
-  pwaLifeCycle,
-  ConfigService,
-} from '@capillarytech/pwa-framework';
+import { pwaLifeCycle } from '@capillarytech/pwa-framework';
 import { Product, BundleItem } from '@cap-widget/product-modules';
-import { BaseComponent } from '../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { ModalController } from '@ionic/angular';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
-import { Location } from '@angular/common';
 import { PizzaComponent } from '../pizza/pizza.component';
 import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
 
@@ -42,20 +38,16 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
   showAdd: boolean;
   inputType = BundleGroupInputType;
   disableAddToCart: boolean;
-  currencyCode: string;
   dealsCategoryId: string;
   constructor(
     private alertService: AlertService,
     private translate: TranslateService,
-    private config: ConfigService,
-    private location: Location,
     private utilService: UtilService,
     private modalController: ModalController,
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
-    this.currencyCode = this.config.getConfig()['currencyCode'];
-    this.dealsCategoryId = this.config.getConfig()['dealCategoryId'];
+    this.dealsCategoryId = this.configService.getConfig()['dealCategoryId'];
   }
 
   ngOnInit() {

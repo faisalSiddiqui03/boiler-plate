@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { pwaLifeCycle, LifeCycle, WidgetNames, ConfigService, CapRouterService } from "@capillarytech/pwa-framework";
+import { pwaLifeCycle, LifeCycle, WidgetNames, CapRouterService } from "@capillarytech/pwa-framework";
 import { Router } from '@angular/router';
-import { BaseComponent } from '../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
 
@@ -35,13 +35,12 @@ export class BannerComponent extends BaseComponent implements OnInit {
   //  = [{ height: 200, width: 400, type: 'mobile' }, { height: 400, width: 1200, type: 'desktop' }];
   constructor(
     private router: Router,
-    private config: ConfigService,
     private utilService: UtilService,
     private translate: TranslateService,
     private capRouter: CapRouterService
   ) {
     super();
-    this.bannerRefCode = this.config.getConfig()['footerBannerRefCode'];
+    this.bannerRefCode = this.configService.getConfig()['footerBannerRefCode'];
     this.translate.use(this.getCurrentLanguageCode());
   }
 

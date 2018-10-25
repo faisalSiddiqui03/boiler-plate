@@ -6,7 +6,6 @@ import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa
 import {
   pwaLifeCycle,
   pageView,
-  ConfigService,
   DeliverySlot,
   CapRouterService,
 } from '@capillarytech/pwa-framework';
@@ -38,7 +37,6 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
-    private config: ConfigService,
     public hardwareService: HardwareService,
     private capRouter: CapRouterService,
   ) {

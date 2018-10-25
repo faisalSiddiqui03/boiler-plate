@@ -3,7 +3,7 @@ import { Platform, NavController, ModalController } from '@ionic/angular';
 // import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from '@ngx-translate/core';
-import { BaseComponent } from './base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import {
   ConfigService,
   EventService,
