@@ -8,15 +8,13 @@ import {
   DeliverySlotsWidgetModule,
   PaymentOptionsWidgetModule,
   CheckoutWidgetModule,
-  UserAddressWidgetModule,
   EventTrackServiceModule,
   EventTrackWidgetModule,
   CapRouterServiceModule
-} from "@capillarytech/pwa-framework";
+} from '@capillarytech/pwa-framework';
+import { UserAddressWidgetModule } from '@cap-widget/user-address';
 import { CheckoutPage } from './checkout.page';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../../../components/header/header.module';
 import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
 

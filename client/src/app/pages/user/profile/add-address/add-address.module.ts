@@ -7,13 +7,10 @@ import { IonicModule } from '@ionic/angular';
 
 import { AddAddressPage } from './add-address.page';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from '../../../../translation.loader';
+import { TranslateModule } from '@ngx-translate/core';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 import { LocationMapModule } from '../../../../components/location-map/location-map.module';
-import { UserAddressWidgetModule } from '@capillarytech/pwa-framework';
-
+import { UserAddressWidgetModule } from '@cap-widget/user-address';
 const routes: Routes = [
   {
     path: '',

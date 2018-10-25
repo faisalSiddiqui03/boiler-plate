@@ -6,16 +6,15 @@ import {
   pageView,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
-  UserAddressWidgetActions,
   CapRouterService
 } from '@capillarytech/pwa-framework';
+import { UserAddressWidgetActions } from '@cap-widget/user-address';
 import { UtilService } from '../../../../helpers/utils';
 import { ActivatedRoute } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { SearchLocationPage } from '../search-location/search-location.page';
 
 @Component({
   selector: 'app-add-address',
@@ -66,7 +65,7 @@ export class AddAddressPage extends BaseComponent implements OnInit, OnWidgetLif
     this.translate.get('add_address_page.add_address').subscribe(value => {
       this.titleValue = value;
     });
-    
+
     this.addressTypes = this.utilService.getAddressTypes();
   }
 

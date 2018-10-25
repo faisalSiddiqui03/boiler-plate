@@ -7,10 +7,9 @@ import {
   pwaLifeCycle,
   pageView,
   ConfigService,
-  DeliverySlot,
-  ContactDetail,
-  Address,
+  DeliverySlot
 } from '@capillarytech/pwa-framework';
+import { ContactDetail, Address } from '@cap-widget/user-address';
 import { SinglePageCheckoutComponent, UserIdentifier } from '@capillarytech/pwa-components';
 
 @Component({
