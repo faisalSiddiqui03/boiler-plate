@@ -1,8 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { NavigationWidgetModule } from '@cap-widget/navigation-widget';
 import {
-  NavigationWidgetModule,
   ImagePreloadModule,
   DeliverySlotsWidgetModule,
   EventTrackServiceModule,

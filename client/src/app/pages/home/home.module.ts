@@ -10,16 +10,15 @@ import { BannerModule } from '../../components/banner/banner.module';
 import { FooterModule } from '../../components/footer/footer.module';
 import { HeaderModule } from '../../components/header/header.module';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 import {
   LocationWidgetModule,
   FulfilmentModeModule,
   StoreLocatorWidgetModule,
   CartWidgetModule, SEOModule,
 } from '@capillarytech/pwa-framework';
-import { BannerWidgetModule, EventTrackServiceModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
+import { EventTrackServiceModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
+import { BannerWidgetModule } from '@cap-widget/banner-widget';
 import { AppStoreSelectionModule } from '../../components/store-selection/store-selection.module';
 
 const routes: Routes = [

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { pwaLifeCycle, LifeCycle, WidgetNames, CapRouterService } from "@capillarytech/pwa-framework";
-import { Router } from '@angular/router';
+import { pwaLifeCycle, WidgetNames, ConfigService, CapRouterService } from "@capillarytech/pwa-framework";
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilService } from '../../helpers/utils';
@@ -17,24 +16,24 @@ export class BannerComponent extends BaseComponent implements OnInit {
   bundleWidgetAction = new EventEmitter();
   bundleWidgetExecutor = new EventEmitter();
 
-  @Input('type')
+  @Input()
   type: string;
 
-  @Input('value')
+  @Input()
   value: string;
 
-  @Input('isPager')
-  isPager: boolean = true;
+  @Input()
+  isPager = true;
 
-  @Input('bannerClass')
-  bannerClass: string = "";
+  @Input()
+  bannerClass = '';
 
   bannerRefCode: string;
   bannerUrl: string;
   sizeConfig: Array<any> = [];
   //  = [{ height: 200, width: 400, type: 'mobile' }, { height: 400, width: 1200, type: 'desktop' }];
   constructor(
-    private router: Router,
+    private config: ConfigService,
     private utilService: UtilService,
     private translate: TranslateService,
     private capRouter: CapRouterService
@@ -69,7 +68,6 @@ export class BannerComponent extends BaseComponent implements OnInit {
     switch (banner.targetType) {
       case 'Category':
         this.capRouter.routeByUrl('/products?category=banner&id=' + banner.targetId);
-        // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=banner&id=' + banner.targetId));
         break;
       case 'URL':
         this.navigateToDeals();
@@ -78,9 +76,7 @@ export class BannerComponent extends BaseComponent implements OnInit {
   }
 
   navigateToDeals() {
-    // http://localhost:8100/en/products?category=deals&id=CU00215646
     this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=deals&id=CU00215646'));
   }
 
   getFullBannerUrl(src) {
@@ -90,5 +86,4 @@ export class BannerComponent extends BaseComponent implements OnInit {
   getBannerRefCodeWithLangCode(refCode: string) {
     return refCode + this.getCurrentLanguageCode();
   }
-
 }

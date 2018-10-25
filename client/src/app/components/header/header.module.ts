@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { NavigationWidgetModule } from '@capillarytech/pwa-framework';
+import { NavigationWidgetModule } from '@cap-widget/navigation-widget';
 import { LogoutWidgetModule } from '@cap-widget/authentication/logout';
 
 @NgModule({

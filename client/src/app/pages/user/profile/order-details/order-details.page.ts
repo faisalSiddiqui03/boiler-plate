@@ -5,7 +5,7 @@ import {
   CapRouterService
 } from '@capillarytech/pwa-framework';
 import { ActivatedRoute } from '@angular/router';
-import { OrderDetailsComponent } from '@capillarytech/pwa-components';
+import { OrderDetailsComponent } from '@capillarytech/pwa-components/order-details/order-details.component';
 
 @Component({
   selector: 'app-order-details',
