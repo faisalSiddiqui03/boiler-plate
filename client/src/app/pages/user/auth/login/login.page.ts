@@ -2,18 +2,15 @@ import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/cor
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import {
   pwaLifeCycle,
-  LifeCycle,
   Action,
-  UserIdPwdSigninWidgetActions,
   pageView,
-  GoogleSignInWidgetActions,
   OnWidgetActionsLifecyle, OnWidgetLifecyle, CapRouterService
 } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
-import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../../../helpers/utils';
+import { UserIdPwdSigninWidgetActions } from '@cap-widget/authentication/userid-password-signin';
+import { GoogleSignInWidgetActions } from '@cap-widget/authentication/google-signin';
 
 @Component({
   selector: 'app-login',
@@ -21,10 +18,8 @@ import { UtilService } from '../../../../helpers/utils';
   styleUrls: ['./login.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
-
 @pwaLifeCycle()
 @pageView()
-
 export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   isPasswordFiled = true;
   userIdSigninForm: FormGroup;
@@ -42,9 +37,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private loaderService: LoaderService,
-    private actRoute: ActivatedRoute,
     private alertService: AlertService,
     private translate: TranslateService,
     private hardwareService: HardwareService,
@@ -74,7 +67,7 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   async signIn() {
-    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode() );
     this.widgetModels.USERID_PWD_SIGNIN.userName = this.userIdSigninForm.value.email;
     this.widgetModels.USERID_PWD_SIGNIN.password = this.userIdSigninForm.value.password;
     this.useridPasswordSigninAction.emit(new Action(UserIdPwdSigninWidgetActions.ACTION_SIGN_IN));
@@ -85,16 +78,18 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   async googleSignIn() {
-    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode() );
     this.googleSignInActionEmitter.emit(new Action(GoogleSignInWidgetActions.ACTION_GPLUS_SIGN_IN));
   }
 
   async handleGoogleSignInResponse(data) {
     const isDesktop = await this.hardwareService.isDesktopSite();
     if (isDesktop) {
-      await this.alertService.presentToast(data.isSuccessful ? this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top');
-    }else {
-      await this.alertService.presentToast(data.isSuccessful ? this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top', 'top');
+      await this.alertService.presentToast(data.isSuccessful ?
+          this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top');
+    } else {
+      await this.alertService.presentToast(data.isSuccessful ?
+          this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top', 'top');
     }
 
     this.capRouter.routeByUrl('/home');
@@ -107,11 +102,11 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
 
   async handleUseridPasswordSigninResponse(data) {
     const isDesktop = await this.hardwareService.isDesktopSite();
-    if (data.message === "Successful") {
+    if (data.message === 'Successful') {
       this.isLoginSuccessful = true;
       if (isDesktop) {
         await this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top');
-      }else {
+      } else {
         await this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top', 'top');
       }
       this.capRouter.routeByUrl('/home');
@@ -119,10 +114,9 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
       this.isLoginSuccessful = false;
       if (isDesktop) {
         await this.alertService.presentToast(this.translate.instant('sign_in_page.invalid_username_and_password'), 500, 'top');
-      }else {
+      } else {
         await this.alertService.presentToast(this.translate.instant('sign_in_page.invalid_username_and_password'), 500, 'top', 'top');
       }
-
     }
   }
 
@@ -184,7 +178,6 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
   }
 
   goBack() {
-    this.location.back();
+    this.capRouter.goBack();
   }
-
 }

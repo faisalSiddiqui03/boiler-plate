@@ -7,11 +7,11 @@ import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login.page';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { UseridPasswordSigninWidgetModule, EventTrackServiceModule, GoogleSigninWidgetModule } from '@capillarytech/pwa-framework';
+import { EventTrackServiceModule } from '@capillarytech/pwa-framework';
+import { UseridPasswordSigninWidgetModule } from '@cap-widget/authentication/userid-password-signin';
+import { GoogleSigninWidgetModule } from '@cap-widget/authentication/google-signin';
 
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 
 const routes: Routes = [

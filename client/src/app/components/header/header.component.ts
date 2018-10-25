@@ -5,9 +5,7 @@ import {
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   DeliveryModes,
-  LogoutWidgetActions,
-  LanguageService,
-  LogoutWidget, pwaLifeCycle,
+  LanguageService, pwaLifeCycle,
   CapRouterService,
   DeliverySlot
 } from '@capillarytech/pwa-framework';
@@ -15,8 +13,8 @@ import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { ModalController } from '@ionic/angular';
 import { DeliverySlotSelectionPage } from '../../pages/checkout/delivery-slot-selection/delivery-slot-selection.page';
 import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../helpers/utils';
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { AlertService } from '@capillarytech/pwa-ui-helpers';
+import { LogoutWidgetActions } from '@cap-widget/authentication/logout';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +22,6 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
   styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-
 @pwaLifeCycle()
 export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
 
@@ -35,19 +32,15 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   asapDeliverySlot = DeliverySlot.getAsap();
   fetchDeliverySlots = false;
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     public modalController: ModalController,
     private translate: TranslateService,
     private alertService: AlertService,
     private languageService: LanguageService,
-    private utilService: UtilService,
     private capRouter: CapRouterService,
-    private loaderService: LoaderService
   ) {
     super();
     this.deliveryModes = DeliveryModes;
-    this.translate.use(this.getCurrentLanguageCode());
   }
 
   /** Inputs to show only required tags in header */
@@ -62,44 +55,36 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
   @Input() dealsHeader = false;
   @Input() dealsHeadershowLocation = false;
   @Input() dealsHeadershowTime = false;
-  enableUserDropdown: boolean = false;
+  enableUserDropdown = false;
   @Output() switchCategory: EventEmitter<any> = new EventEmitter<any>();
   @Input() isModalActive = false;
   @Input() selectedCategoryId;
+
   ngOnInit() {
     const data = this.route.snapshot.queryParams;
     if (!this.selectedCategoryId) {
       this.categoryId = data.id;
     }
-
   }
 
   goToPage(pageName) {
-    //const page = this.utilService.getLanguageCode() + '/' + pageName;
     if (this.isModalActive) {
       this.modalController.dismiss();
     }
     this.capRouter.routeByUrl(pageName);
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(pageName));
   }
 
   async switchLanguage() {
     const langCode = this.getCurrentLanguageCode();
-    //console.log('Check this current lang to be changed: ', langCode);
     switch (langCode) {
       case 'ar':
         await this.languageService.updateLanguageByCode('en');
-        //this.utilService.setLanguageCode('en');
         this.capRouter.routeByUrl('home');
-        // this.router.navigateByUrl('en/home', { replaceUrl: true });
-
         break;
 
       case 'en':
         await this.languageService.updateLanguageByCode('ar');
-        //this.utilService.setLanguageCode('ar');
         this.capRouter.routeByUrl('home');
-        // this.router.navigateByUrl('ar/home', { replaceUrl: true });
         break;
 
       default:
@@ -136,7 +121,6 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
       case LogoutWidgetActions.ACTION_LOGOUT:
         const coupon_remove_success = await this.translate.instant('my_account_page.successfully_loged_out');
         this.capRouter.routeByUrl('/home');
-        // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
         await this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
         break;
     }
@@ -158,7 +142,6 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
 
   async openLocationModal() {
     this.capRouter.routeByUrl('/home');
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/home'));
   }
 
   logout() {
@@ -179,7 +162,5 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
       this.modalController.dismiss();
     }
     this.capRouter.routeByUrl(`/products?category=${category}&id=${categoryId}`);
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=${category}&id=${categoryId}'));
   }
-
 }
