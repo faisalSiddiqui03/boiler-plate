@@ -6,10 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DeliverySlotSelectionPage } from './delivery-slot-selection.page';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
-import { DeliverySlotsWidgetModule } from "@capillarytech/pwa-framework";
+import { TranslateModule } from '@ngx-translate/core';
+import { DeliverySlotsWidgetModule } from '@cap-widget/delivery-slots';
 import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
 
 const routes: Routes = [

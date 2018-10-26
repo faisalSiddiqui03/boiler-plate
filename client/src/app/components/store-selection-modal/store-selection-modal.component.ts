@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { BaseComponent } from '../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 
 @Component({
   selector: 'app-store-selection-modal',

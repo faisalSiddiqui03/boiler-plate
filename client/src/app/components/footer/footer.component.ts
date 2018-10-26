@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { BaseComponent } from '../../base/base-component';
-import { UtilService } from '../../helpers/utils';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { pwaLifeCycle } from "@cap-core/lifecycle";
 import { CapRouterService } from '@capillarytech/pwa-framework';
-
+import { Utils } from '@capillarytech/pwa-components';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -19,7 +18,6 @@ export class FooterComponent extends BaseComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private utilService: UtilService,
     private router: Router,
     private capRouter: CapRouterService,
   ) {
@@ -32,11 +30,9 @@ export class FooterComponent extends BaseComponent implements OnInit {
 
   navigatePage(page) {
     this.capRouter.routeByUrl(page);
-    //this.router.navigateByUrl(this.getNavigationUrlWithLangSupport(page));
   }
 
   navigateToCategory(item) {
-    this.capRouter.routeByUrl('/products?category=' + item.name + '&id=' + item.categoryId);
-    // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/products?category=' + item.name + '&id=' + item.categoryId));
+    this.capRouter.routeByUrl('/products?category=' + Utils.getHiphenatedString(item.name) + '&id=' + item.categoryId);
   }
 }

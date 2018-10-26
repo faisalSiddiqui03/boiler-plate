@@ -1,7 +1,5 @@
 import { Component, EventEmitter, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { Location } from '@angular/common';
 import {
-  ConfigService,
   pwaLifeCycle,
   WidgetNames,
   Action,
@@ -10,7 +8,7 @@ import {
 import { ProductDetailsWidgetActions } from '@cap-widget/product-details';
 import { Product, BundleItem } from '@cap-widget/product-modules';
 import { TranslateService } from '@ngx-translate/core';
-import { BaseComponent } from '../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { ModalController } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
@@ -33,7 +31,6 @@ export class TrioComponent extends BaseComponent implements OnInit, OnWidgetLife
   productWidgetAction = new EventEmitter();
   serverProduct;
   clientProduct: Product;
-  currencyCode: string;
   categoryId: string;
   productName: string;
   showAddToCart: boolean;
@@ -46,14 +43,11 @@ export class TrioComponent extends BaseComponent implements OnInit, OnWidgetLife
     private alertService: AlertService,
     private translate: TranslateService,
     private hardwareService: HardwareService,
-    private config: ConfigService,
-    private location: Location,
     private loaderService: LoaderService,
     private modalController: ModalController
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
-    this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   ngOnInit() {
@@ -210,7 +204,7 @@ export class TrioComponent extends BaseComponent implements OnInit, OnWidgetLife
   goBack() {
     this.setClient();
     if (!this.productFromDeal) {
-      this.location.back();
+      this.goBack();
       return;
     }
     this.modalController.dismiss();

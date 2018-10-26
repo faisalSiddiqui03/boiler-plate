@@ -1,6 +1,6 @@
 import { IValidator, Product, ValidatorAction, BundleItem } from '@cap-widget/product-modules';
 import { ToppingCounter } from './pizzahut.count.helper';
-import { AttributeName, AttributeValue } from '@capillarytech/pwa-components';
+import { AttributeName, AttributeValue } from '@capillarytech/pwa-components/pizza-builder/attribute-name-value';
 
 export class DecrementValidator implements IValidator {
     itemRemovalLimit: number;

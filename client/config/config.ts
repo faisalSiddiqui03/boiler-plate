@@ -25,7 +25,7 @@ export const config = {
     "headerBannerRefCode": "ph-60th-years-",
     "footerBannerRefCode": "bogo-pwa-",
     "quantityEnabledCategories": ['CU00215602'],
-    "baseUrl": "http://localhost:3000/api/",
+    "baseUrl": "/api/",
     "server": {
       "mw-static": {
         "maxAge": "1 day"

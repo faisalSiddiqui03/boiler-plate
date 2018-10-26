@@ -1,10 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { NavigationWidgetModule } from '@cap-widget/navigation-widget';
 import {
-  NavigationWidgetModule,
   ImagePreloadModule,
-  DeliverySlotsWidgetModule,
   EventTrackServiceModule,
   SeoInfoWidgetModule
 } from '@capillarytech/pwa-framework';
@@ -16,7 +15,7 @@ import { HeaderModule } from '../../../components/header/header.module';
 
 import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
 import { ProductShowcaseWidgetModule } from '@cap-widget/product-showcase';
-
+import { DeliverySlotsWidgetModule } from '@cap-widget/delivery-slots';
 const routes: Routes = [
   {
     path: '',

@@ -2,12 +2,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  ConfigService,
   CapRouterService
 } from '@capillarytech/pwa-framework';
-import { Utils } from "@capillarytech/pwa-components";
+import { Utils } from '@capillarytech/pwa-components';
 import { TranslateService } from '@ngx-translate/core';
-import { OrderHistoryComponent } from '@capillarytech/pwa-components';
+import { OrderHistoryComponent } from '@capillarytech/pwa-components/order-history/order-history.component';
 
 @Component({
   selector: 'app-order-history',
@@ -23,15 +22,12 @@ export class OrderHistoryPage extends OrderHistoryComponent {
   isShowMoreButtonVisible = true;
   isOrderHistoryWidgetLoaded = false;
   accordianMap = new Map();
-  currencyCode: string;
 
   constructor(
     private translate: TranslateService,
-    private config: ConfigService,
     private capRouter: CapRouterService,
   ) {
     super();
-    this.currencyCode = this.config.getConfig()['currencyCode'];
   }
 
   getOrderDetails(order) {
@@ -67,7 +63,7 @@ export class OrderHistoryPage extends OrderHistoryComponent {
       this.isShowMoreButtonVisible = false;
     }
   }
-  
+
   handleOrderHistoryLoadingFailed(data) {
     this.isOrderHistoryWidgetLoaded = true;
   }

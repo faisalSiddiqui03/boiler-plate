@@ -6,12 +6,10 @@ import {Routes, RouterModule} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
 
 import {FeedbackPage} from './feedback.page';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {HttpLoaderFactory} from '../../../translation.loader';
-import {HttpClient} from '@angular/common/http';
+import {TranslateModule} from '@ngx-translate/core';
 import {HeaderModule} from '../../../components/header/header.module';
 import {SubHeaderModule} from '../../../components/sub-header/sub-header.module';
-import {SurveyWidgetModule} from '@capillarytech/pwa-framework';
+import {SurveyWidgetModule} from '@cap-widget/survey';
 
 const routes: Routes = [
   {

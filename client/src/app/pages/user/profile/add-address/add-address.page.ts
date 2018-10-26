@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
   pwaLifeCycle,
-  pageView,
-  CapRouterService
+  pageView
 } from '@capillarytech/pwa-framework';
-import { UtilService } from '../../../../helpers/utils';
+import { Utils } from '@capillarytech/pwa-components/util/utils';
 import { ActivatedRoute } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,13 +30,11 @@ export class AddAddressPage extends AddEditAddressComponent implements OnInit {
   };
 
   constructor(
-    private utilService: UtilService,
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
     private formBuilder: FormBuilder,
-    private actRoute: ActivatedRoute,
-    private capRouter: CapRouterService
+    private actRoute: ActivatedRoute
   ) {
     super();
 
@@ -50,7 +47,7 @@ export class AddAddressPage extends AddEditAddressComponent implements OnInit {
 
   ngOnInit() {
     this.addressId = parseInt(this.actRoute.snapshot.params['addressId'], 10);
-    this.addressTypes = this.utilService.getAddressTypes();
+    this.addressTypes = Utils.getAddressTypes();
   }
 
   async handleWidgetActionSaveAddressFailed(data) {
@@ -67,12 +64,12 @@ export class AddAddressPage extends AddEditAddressComponent implements OnInit {
 
   handleWidgetActionUpdateAddressSuccess(data) {
     this.loaderService.stopLoading();
-    this.capRouter.goBack();
+    this.goBack();
   }
 
   handleWidgetActionSaveAddressSuccess(data) {
     this.loaderService.stopLoading();
-    this.capRouter.goBack();
+    this.goBack();
   }
 
   async handleSingleUserAddressLoadingFailed(data) {

@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
-  ConfigService,
   CapRouterService
 } from '@capillarytech/pwa-framework';
 import { ActivatedRoute } from '@angular/router';
-import { OrderDetailsComponent } from '@capillarytech/pwa-components';
+import { OrderDetailsComponent } from '@capillarytech/pwa-components/order-details/order-details.component';
 
 @Component({
   selector: 'app-order-details',
@@ -16,20 +15,20 @@ import { OrderDetailsComponent } from '@capillarytech/pwa-components';
 
 @pwaLifeCycle()
 @pageView()
-export class OrderDetailsPage extends OrderDetailsComponent {
+export class OrderDetailsPage extends OrderDetailsComponent implements OnInit {
 
   orderId;
   isOrderDetailsLoadingDone = false;
-  currencyCode;
 
   constructor(
     private actRoute: ActivatedRoute,
-    private config: ConfigService,
     private capRouter: CapRouterService,
   ) {
     super();
+  }
 
-    this.currencyCode = this.config.getConfig()['currencyCode'];
+  ngOnInit(){
+    this.orderId = this.actRoute.snapshot.params.orderId;
   }
 
   goToPage(pageName) {

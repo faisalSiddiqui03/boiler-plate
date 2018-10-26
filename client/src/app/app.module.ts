@@ -27,7 +27,6 @@ import {
   LifecycleHandler,
   LanguageServiceModule,
   ImagePreloadModule,
-  LogoutWidgetModule,
   FulfilmentModeModule,
   SEOModule,
   LanguageService,
@@ -45,8 +44,6 @@ import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-sele
 import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
-import { UtilService } from './helpers/utils';
-import { CacheStorageServiceModule } from '@capillarytech/pwa-framework/services';
 
 export const languages = [
   {
@@ -119,7 +116,6 @@ export function getAppConfig(): Object {
       useClass: IonicRouteStrategy
     },
     RoutingState,
-    UtilService,
     // AppUpdateServiceImpl
   ],
   bootstrap: [AppComponent]
@@ -128,7 +124,6 @@ export function getAppConfig(): Object {
 
 export class AppModule {
   constructor(injector: Injector,
-    private utilService: UtilService,
     private capRouterService: CapRouterService,
     languageService: LanguageService) {
     setAppInjector(injector);
@@ -141,7 +136,6 @@ export class AppModule {
       if (lang.isDefault) {
         defaultLang = lang.code;
         // await languageService.initialize(lang.code);
-        // this.utilService.setLanguageCode(lang.code);
         // this.capRouterService.routeByUrlWithLanguage(locationUrl);
       }
     });

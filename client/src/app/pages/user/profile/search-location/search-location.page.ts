@@ -1,16 +1,13 @@
 import { Component, OnInit, ViewEncapsulation, EventEmitter, ViewChild } from '@angular/core';
-import { BaseComponent } from '../../../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import {
   Action,
   pwaLifeCycle,
   pageView,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
-  LocationWidget,
-  LocationWidgetActions,
-  ConfigService
 } from '@capillarytech/pwa-framework';
-import { UtilService } from '../../../../helpers/utils';
+import { LocationWidget, LocationWidgetActions } from '@cap-widget/location';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
@@ -22,10 +19,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./search-location.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
-
 @pwaLifeCycle()
 @pageView()
-
 export class SearchLocationPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   locationWidgetAction = new EventEmitter();
   showRecentSearches = false;
@@ -39,8 +34,6 @@ export class SearchLocationPage extends BaseComponent implements OnInit, OnWidge
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
-    private utilService: UtilService,
-    private config: ConfigService,
     private modalController: ModalController) {
     super();
     this.translate.use(this.getCurrentLanguageCode());

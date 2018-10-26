@@ -1,5 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
-import { BaseComponent } from '../../../../base/base-component';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import {
   pwaLifeCycle,
   pageView,
@@ -7,7 +7,6 @@ import {
   OnWidgetActionsLifecyle, OnWidgetLifecyle, CapRouterService
 } from '@capillarytech/pwa-framework';
 import { UserProfileWidgetActions } from '@cap-widget/user-profile';
-import { UtilService } from '../../../../helpers/utils';
 import { Router } from '@angular/router';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -34,7 +33,6 @@ export class UserProfilePage extends BaseComponent implements OnWidgetLifecyle, 
     private loaderService: LoaderService,
     private alertService: AlertService,
     private translate: TranslateService,
-    private utilService: UtilService,
     private formBuilder: FormBuilder,
     private capRouter: CapRouterService,) {
     super();

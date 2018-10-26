@@ -7,11 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { OrderHistoryPage } from './order-history.page';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from '../../../../translation.loader';
+import { TranslateModule } from '@ngx-translate/core';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
-import { OrderWidgetModule } from '@capillarytech/pwa-framework';
+import { OrderWidgetModule } from '@cap-widget/order-widget';
 
 const routes: Routes = [
   {

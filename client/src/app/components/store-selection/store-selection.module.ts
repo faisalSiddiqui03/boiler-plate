@@ -5,21 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { StoreListComponent } from '../store-list/store-list.component';
 import { StoreSelectionComponent } from './store-selection.component';
 import {
-  BannerWidgetModule,
-  CartWidgetModule,
   EventTrackServiceModule,
   ImagePreloadModule,
-  FulfilmentModeModule,
-  LocationWidgetModule,
-  StoreLocatorWidgetModule
-} from '@capillarytech/pwa-framework';
+  FulfilmentModeModule } from '@capillarytech/pwa-framework';
+import { CartWidgetModule } from '@cap-widget/cart';
+import { LocationWidgetModule } from '@cap-widget/location';
+import { BannerWidgetModule } from '@cap-widget/banner-widget';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 import { StoreListModule } from '../store-list/store-list.module';
 import { BannerModule } from '../banner/banner.module';
-
+import { StoreLocatorWidgetModule } from '@cap-widget/store-locator';
 @NgModule({
   imports: [
     CommonModule,
