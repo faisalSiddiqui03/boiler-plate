@@ -1,6 +1,7 @@
 import { Injectable, ErrorHandler, Injector } from "@angular/core";
 import { IonicErrorHandler } from "ionic-angular";
 import { Pro } from "@ionic/pro";
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class MyErrorHandler implements ErrorHandler {
@@ -19,6 +20,8 @@ export class MyErrorHandler implements ErrorHandler {
     Pro.monitoring.handleNewError(err);
     // Remove this if you want to disable Ionic's auto exception handling
     // in development mode.
+    if (environment.production){
     this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
+    }
   }
 }

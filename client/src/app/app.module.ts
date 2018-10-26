@@ -48,7 +48,6 @@ import { SearchLocationPageModule } from './pages/user/profile/search-location/s
 import { RoutingState } from './routing-state';
 import { MyErrorHandler} from './IonicErrorHandler'
 
-environment
 Pro.init(environment.pro_id, {
   appVersion: environment.version
 })
