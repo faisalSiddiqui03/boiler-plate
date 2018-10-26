@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
@@ -15,7 +15,7 @@ import { OrderDetailsComponent } from '@capillarytech/pwa-components/order-detai
 
 @pwaLifeCycle()
 @pageView()
-export class OrderDetailsPage extends OrderDetailsComponent {
+export class OrderDetailsPage extends OrderDetailsComponent implements OnInit {
 
   orderId;
   isOrderDetailsLoadingDone = false;
@@ -25,6 +25,10 @@ export class OrderDetailsPage extends OrderDetailsComponent {
     private capRouter: CapRouterService,
   ) {
     super();
+  }
+
+  ngOnInit(){
+    this.orderId = this.actRoute.snapshot.params.orderId;
   }
 
   goToPage(pageName) {
