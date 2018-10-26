@@ -63,6 +63,7 @@ export class SuccessPage extends OrderDetailsComponent implements OnInit {
   }
 
   async handleOrderDetailsLoadingFailed(data) {
+    this.isLoadingFailed = true;	
     const coupon_remove_success = await this.translate.instant('success_page.failed_to_load_order_details');
     await this.alertService.presentToast(coupon_remove_success, 3000, 'bottom');
   }
