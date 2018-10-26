@@ -1,10 +1,12 @@
-import { NgModule, APP_INITIALIZER, Injector } from '@angular/core';
+import { NgModule, APP_INITIALIZER, Injector,ErrorHandler, Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
 import { TranslateCompiler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { Pro } from '@ionic/pro';
+import { IonicErrorHandler } from 'ionic-angular';
 // import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -48,6 +50,33 @@ import { SearchLocationPageModule } from './pages/user/profile/search-location/s
 import { RoutingState } from './routing-state';
 import { UtilService } from './helpers/utils';
 import { Location } from '@angular/common';
+
+var packageJson = require('../../package.json')
+var ionicConfigJson = require('../../ionic.config.json')
+Pro.init(ionicConfigJson.pro_id, {
+  appVersion: packageJson.version
+})
+
+@Injectable()
+export class MyErrorHandler implements ErrorHandler {
+  ionicErrorHandler: IonicErrorHandler;
+
+  constructor(injector: Injector) {
+    try {
+      this.ionicErrorHandler = injector.get(IonicErrorHandler);
+    } catch(e) {
+      // Unable to get the IonicErrorHandler provider, ensure
+      // IonicErrorHandler has been added to the providers list below
+    }
+  }
+
+  handleError(err: any): void {
+    Pro.monitoring.handleNewError(err);
+    // Remove this if you want to disable Ionic's auto exception handling
+    // in development mode.
+    this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
+  }
+}
 
 export const languages = [
   {
@@ -124,6 +153,8 @@ export function getAppConfig(): Object {
     },
     RoutingState,
     UtilService,
+    IonicErrorHandler,
+        [{ provide: ErrorHandler, useClass: MyErrorHandler }]
     // AppUpdateServiceImpl
   ],
   bootstrap: [AppComponent]
