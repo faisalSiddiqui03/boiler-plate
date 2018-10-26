@@ -31,7 +31,7 @@ export class OrderHistoryPage extends OrderHistoryComponent {
   }
 
   getOrderDetails(order) {
-    this.capRouter.routeByUrl('order-details/' + order.AddEditAddressComponent);
+    this.capRouter.routeByUrl('order-details/' + order.id);
   }
 
   toggleShowProduct(i) {
