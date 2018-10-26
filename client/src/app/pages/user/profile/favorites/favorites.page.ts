@@ -1,13 +1,13 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
   CapRouterService
 } from '@capillarytech/pwa-framework';
-import { TranslateService } from '@ngx-translate/core';
-import { FavoritesComponent } from '@capillarytech/pwa-components/favorites/favorites.component';
-import { AlertService } from '@capillarytech/pwa-ui-helpers';
-import { ProductModalService } from '../../../../helpers/product-modal/product-modal.component';
+import {TranslateService} from '@ngx-translate/core';
+import {FavoritesComponent} from '@capillarytech/pwa-components/favorites/favorites.component';
+import {AlertService} from '@capillarytech/pwa-ui-helpers';
+import {ProductModalService} from '../../../../helpers/product-modal/product-modal.component';
 
 @Component({
   selector: 'app-favorites',
@@ -46,6 +46,10 @@ export class FavoritesPage extends FavoritesComponent {
     await this.alertService.presentToast(this.translate.instant('favorites_page.failed_to_unfavorite'), 1000, 'top');
   }
 
+  async handleWidgetActionRemoveItemSuccess(data) {
+    console.log('Successfully removed item from favorites');
+  }
+  
   async handleFavoritesLoadingFailed(data) {
     console.log('favorites widget loading failed');
     await this.alertService.presentToast(this.translate.instant('favorites_page.favorites_loading_failed'), 1000, 'top');
