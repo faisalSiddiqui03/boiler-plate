@@ -6,7 +6,7 @@
     <div class="main-content w-700">
       <userid-password-signin-widget
         [componentId]="getComponentId()" class="w-400" pfWidgetImpressionTrack
-        [executor]="useridPasswordSigninExecutor" [action]="useridPasswordSigninAction"
+        [action]="useridPasswordSigninAction"
       >
         <ng-template let-widget="widget">
           <ng-container *ngIf="widget.model">
@@ -36,20 +36,20 @@
                 <ion-label class="login-label" for="password" text-capitalize>{{ 'sign_in_page.password' | translate }}
                 </ion-label>
                 <div class="form-input">
-                  <ion-input *ngIf="isPasswordFiled" [type]="'password'"
+                  <ion-input *ngIf="isPasswordField" [type]="'password'"
                              [inputmode]="'password'" no-border
                              placeholder="{{ 'sign_in_page.password_placeholder' | translate }}"
                              formControlName="password" id="password" value="{{enteredPassword}}"
                              [(ngModel)]="enteredPassword"
                   ></ion-input>
-                  <ion-input *ngIf="!isPasswordFiled" [type]="'text'"
+                  <ion-input *ngIf="!isPasswordField" [type]="'text'"
                              [inputmode]="'text'" no-border
                              placeholder="{{ 'sign_in_page.password_placeholder' | translate }}"
                              formControlName="password" id="password" value="{{enteredPassword}}"
                              [(ngModel)]="enteredPassword"
                   ></ion-input>
                   <div class="icons">
-                    <ion-icon (click)="changeTextPassword()" [name]="isPasswordFiled ? 'eye' : 'eye-off'"
+                    <ion-icon (click)="changePasswordFieldType()" [name]="isPasswordField ? 'eye' : 'eye-off'"
                               margin-end-half></ion-icon>
                     <ion-icon name="alert"></ion-icon>
                   </div>
@@ -73,12 +73,12 @@
               </div>
             </form>
             <google-signin-widget [componentId]="getComponentId()"
-                                  [executor]="null" [action]="googleSignInActionEmitter"
+                                  [executor]="null" [action]="googleSignInAction"
                                   (lifecycle)="handleGoogleSignInAction($event)"
                                   [appId]="googleClientId">
               <ng-template let-widget="widget">
                 <div class="login-with-google" text-center>
-                  <button class="btn-google" (click)="googleSignIn()">{{ 'sign_in_page.signin_google' | translate }}
+                  <button class="btn-google" (click)="signInWithGoogle()">{{ 'sign_in_page.signin_google' | translate }}
                   </button>
                 </div>
               </ng-template>
