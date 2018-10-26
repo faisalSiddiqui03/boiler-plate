@@ -10,6 +10,8 @@ COPY ./client/.npmrc ./
 
 RUN npm install
 
+RUN chmod +x ./scripts/patch-webpack.sh
+
 RUN ./scripts/patch-webpack.sh
 
 WORKDIR /usr/src/app/server

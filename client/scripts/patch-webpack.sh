@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 source="$(pwd)/scripts/browser.js"
 dest="$(pwd)/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/browser.js"
