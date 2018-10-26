@@ -7,7 +7,7 @@
 <ion-content no-padding>
   <orders-details-widget *ngIf="orderId>0"
                          [componentId]="getComponentId()"
-                         [orderId]="orderId" [identifier]="email" [action]="orderDetailWidgetAction">
+                         [orderId]="orderId" [identifier]="email">
     <ng-template let-widget="widget">
       <div *ngIf="(!widget || !widget.model) && !isLoadingFailed">
         <div class="order-success-page">
