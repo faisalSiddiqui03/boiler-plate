@@ -52,11 +52,11 @@ export class StoreListComponent extends BaseComponent implements OnInit, OnWidge
   }
 
   navigateToDeals() {
-    if(this.isModal) {
+    if (this.isModal) {
       this.modalController.dismiss(true);
       return;
     }
-    this.capRouter.routeByUrl('/products?category=desls&id=CU00215646');
+    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
   }
 
   widgetLoadingFailed(name: string, data: any): any {
