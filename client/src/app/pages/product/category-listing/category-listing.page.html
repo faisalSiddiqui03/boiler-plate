@@ -16,9 +16,7 @@
 
         <navigation-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [refCode]="'pwa-kuwait'" [level]=1 [executor]="null"
           [action]="null" (lifecycle)="null">
-
           <ng-template let-widget="widget">
-            <div *ngIf="widget.model">{{assignNav(widget.model)}}</div>
           </ng-template>
         </navigation-widget>
 
@@ -185,7 +183,7 @@
     </div>
   </div>
   <ion-hide-when size="lg">
-    <ion-footer no-border>
+    <ion-footer no-border >
       <div id="bottom-div" class="showcase-tabs-one">
         <ul id="bottom-list" no-margin no-padding>
           <li id={{item.categoryId}} *ngFor="let item of navigations; let i = index;" text-center class="hello" [class.selected]="item.categoryId==categoryId"
@@ -193,7 +191,12 @@
           </li>
         </ul>
       </div>
-      <div class="checkout-btn">
+      <div id="bottom-div" class="showcase-tabs-one" *ngIf="!showCheckout">
+        <ul id="bottom-list" no-margin no-padding>
+          <li id="dummy" *ngFor="let item of [1,2,3,4]; let i = index;" text-center class="hello">Deals</li>
+        </ul>
+      </div>
+      <div class="checkout-btn" >
         <ion-button (click)="goToCart()" color="success" text-capitalize expand="block" mode="ios" class="btn-success">
           {{'category_listing.checkout' | translate }}
         </ion-button>

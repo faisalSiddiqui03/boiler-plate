@@ -18,10 +18,9 @@ export class DealPage extends BaseComponent implements OnInit {
 
   productId: number;
   productName: string;
-  
+
   constructor(
     private route: ActivatedRoute,
-    private translate: TranslateService,
   ) {
     super();
   }

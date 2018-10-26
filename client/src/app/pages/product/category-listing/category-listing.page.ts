@@ -25,6 +25,7 @@ import { Utils } from '@capillarytech/pwa-components';
 @pageView()
 export class CategoryListingPage extends NavigationShowcase {
 
+  showCheckout = false;
   dealCategoryId: string;
   asapDeliverySlot = DeliverySlot.getAsap();
   categoryNamesById = new Map();
@@ -45,6 +46,14 @@ export class CategoryListingPage extends NavigationShowcase {
   ionViewWillEnter() {
     this.checkSlots();
     this.updateCategoriesFromUrl();
+  }
+
+  handleDefaultStoreSlotError() {
+    this.presentSlotModal();
+  }
+
+  handleDefaultStoreSlotSuccess() {
+    this.setDeliverySlot(DeliverySlot.getAsap());
   }
 
   ionViewDidEnter() {
@@ -68,11 +77,7 @@ export class CategoryListingPage extends NavigationShowcase {
   }
 
   openDeal(product) {
-    this.capRouter.routeByUrl('/deals/' + product.title + '/' + product.id);
-  }
-
-  assignNav(data) {
-//    this.navigations = data.items;
+    this.capRouter.routeByUrl('/deals/' + Utils.getHiphenatedString(product.title) + '/' + product.id);
   }
 
   goToCart() {
@@ -110,6 +115,10 @@ export class CategoryListingPage extends NavigationShowcase {
   handleWidgetLoadingNavigationFailed(data: any) {
 
     // overload navigations with default values for the app
+  }
+
+  handleWidgetLoadingNavigationSuccess() {
+    this.showCheckout = true;
   }
 
   handleWidgetLoadingProductShowcaseFailed(name: string, data: any): any {

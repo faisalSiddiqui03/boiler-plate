@@ -154,7 +154,7 @@ export class DealComponent extends DealBuilderComponent implements OnInit, OnWid
       this.modalController.dismiss();
       return;
     }
-    this.goBack();
+    super.goBack();
   }
 
 }
