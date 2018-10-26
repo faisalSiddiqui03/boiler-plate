@@ -4,7 +4,10 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 export const environment = {
   production: false,
-  env: 'dev'
+  env: 'dev',
+  pro_id: require('../../ionic.config.json').pro_id,
+  version: require('../../package.json').version
+
 };
 
 /*
