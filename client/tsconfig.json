@@ -43,6 +43,9 @@
       "@cap-service/*": [
         "../node_modules/@capillarytech/pwa-framework/services/*"
       ],
+      "@cap-widget/*": [
+        "../node_modules/@capillarytech/pwa-framework/widgets/*"
+      ],
       "@app/config": [
         "config/app/*.config"
       ],

@@ -5,11 +5,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from '../../../../translation.loader';
+import { TranslateModule } from '@ngx-translate/core';
 import { SearchLocationPage } from './search-location.page';
-import { LocationWidgetModule } from '@capillarytech/pwa-framework';
+import { LocationWidgetModule } from '@cap-widget/location';
 
 const routes: Routes = [
   {
@@ -25,13 +23,7 @@ const routes: Routes = [
     IonicModule,
     LocationWidgetModule,
     RouterModule.forChild(routes),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [SearchLocationPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

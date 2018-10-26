@@ -17,13 +17,7 @@ import { HttpClient } from '@angular/common/http';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAl29VXAA5U34fAKFaQ9dEaxTJbA-Mxo8A'
     }),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [
     LocationMapComponent,

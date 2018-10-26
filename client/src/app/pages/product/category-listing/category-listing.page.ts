@@ -1,26 +1,25 @@
 import {Component, EventEmitter, OnInit, ViewEncapsulation, Inject} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Location, DOCUMENT} from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
-  ConfigService,
   OnWidgetActionsLifecyle,
   OnWidgetLifecyle,
   pageView,
   pwaLifeCycle,
   Action,
-  ProductShowcaseWidgetActions,
-  ProductType,
   DeliverySlot,
   CapRouterService,
   SeoInfoEntityType,
   WidgetNames,
   DeliveryModes
 } from '@capillarytech/pwa-framework';
-import {TranslateService} from '@ngx-translate/core';
-import {BaseComponent} from '../../../base/base-component';
-import {ModalController} from '@ionic/angular';
-import {DeliverySlotSelectionPage} from '../../checkout/delivery-slot-selection/delivery-slot-selection.page';
-import {LoaderService, AlertService} from '@capillarytech/pwa-ui-helpers';
+import { ProductShowcaseWidgetActions } from '@cap-widget/product-showcase';
+import { ProductType } from '@cap-widget/product-modules';
+import { TranslateService } from '@ngx-translate/core';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
+import { ModalController } from '@ionic/angular';
+import { DeliverySlotSelectionPage } from '../../checkout/delivery-slot-selection/delivery-slot-selection.page';
+import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
   selector: 'app-category-listing',
@@ -35,7 +34,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   categoryId: string = null;
   productShowcaseWidgetExecutor = new EventEmitter();
   productShowcaseActionMap = new Map();
-  currencyCode: string;
   navigations = [];
   dealCategoryId: string;
   asapDeliverySlot = DeliverySlot.getAsap();
@@ -49,9 +47,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
-    private config: ConfigService,
     public modalController: ModalController,
-    private location: Location,
     private loaderService: LoaderService,
     private capRouter: CapRouterService,
     private alertService: AlertService,
@@ -59,8 +55,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   ) {
     super();
     this.translate.use(this.getCurrentLanguageCode());
-    this.currencyCode = this.config.getConfig()['currencyCode'];
-    this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
+    this.dealCategoryId = this.configService.getConfig()['dealCategoryId'];
     this.deliveryModes = DeliveryModes;
   }
 
@@ -153,17 +148,17 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
 
   openProductDetails(product) {
     if (product.type === ProductType.Bundle) {
-      this.capRouter.routeByUrlWithLanguage('/pizza/' + product.title + '/' + product.id);
+      this.capRouter.routeByUrl('/pizza/' + product.title + '/' + product.id);
       return;
     }
 
     const navigationUrl = '/product/' + this.categoryNamesById.get(this.categoryId) + '/' +
       this.encodeURIComponent(product.title) + '/' + product.id;
-    this.capRouter.routeByUrlWithLanguage(navigationUrl);
+    this.capRouter.routeByUrl(navigationUrl);
   }
 
   openDeal(product) {
-    this.capRouter.routeByUrlWithLanguage('/deal/' + product.title + '/' + product.id);
+    this.capRouter.routeByUrl('/deal/' + product.title + '/' + product.id);
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/deal/' + product.title + '/' + product.id));
   }
 
@@ -235,7 +230,7 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   goToCart() {
-    this.capRouter.routeByUrlWithLanguage('/cart');
+    this.capRouter.routeByUrl('/cart');
     // this.router.navigateByUrl(this.getNavigationUrlWithLangSupport('/cart'));
   }
 
@@ -279,6 +274,6 @@ export class CategoryListingPage extends BaseComponent implements OnInit, OnWidg
   }
 
   goToPage(pageName) {
-    this.capRouter.routeByUrlWithLanguage(pageName);
+    this.capRouter.routeByUrl(pageName);
   }
 }

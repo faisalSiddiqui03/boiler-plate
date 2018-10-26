@@ -2,14 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { ImagePreloadModule, ProductDetailsWidgetModule } from '@capillarytech/pwa-framework';
+import { ImagePreloadModule } from '@capillarytech/pwa-framework';
 import { IonicModule } from '@ionic/angular';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { ProductDetailsPage } from './product-details.page';
 import { ProductDetailsComponentModule } from '../../../components/product-details/product-details.module';
-import { HttpLoaderFactory } from '../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
-
+import { ProductDetailsWidgetModule } from '@cap-widget/product-details';
 const routes: Routes = [
   {
     path: '',
@@ -26,13 +24,7 @@ const routes: Routes = [
     ImagePreloadModule,
     ProductDetailsComponentModule,
     RouterModule.forChild(routes),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule,
   ],
   declarations: [ProductDetailsPage]
 })

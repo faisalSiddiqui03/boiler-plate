@@ -2,14 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { OrderDetailsWidgetModule } from '@capillarytech/pwa-framework';
+import { OrderDetailsWidgetModule } from '@cap-widget/order-details-widget';
 import { IonicModule } from '@ionic/angular';
 
 import { SuccessPage } from './success.page';
 import { HeaderModule } from '../../../components/header/header.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -26,13 +24,7 @@ const routes: Routes = [
     OrderDetailsWidgetModule,
     HeaderModule,
     RouterModule.forChild(routes),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [SuccessPage]
 })

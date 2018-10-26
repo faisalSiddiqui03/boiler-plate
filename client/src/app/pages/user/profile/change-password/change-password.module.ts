@@ -7,11 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { ChangePasswordPage } from './change-password.page';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from '../../../../translation.loader';
+import { TranslateModule } from '@ngx-translate/core';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
-import { ResetPasswordWidgetModule } from '@capillarytech/pwa-framework';
+import { ResetPasswordWidgetModule } from '@cap-widget/authentication/reset-password';
 
 const routes: Routes = [
   {
@@ -30,13 +28,7 @@ const routes: Routes = [
     HeaderModule,
     SubHeaderModule,
     ResetPasswordWidgetModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [ChangePasswordPage]
 })

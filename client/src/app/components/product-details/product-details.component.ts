@@ -1,20 +1,10 @@
-import { Component, EventEmitter, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import {
-  ConfigService,
-  pwaLifeCycle,
-  WidgetNames,
-  Product,
-  ProductDetailsWidgetActions,
-  Action,
-  OnWidgetActionsLifecyle, OnWidgetLifecyle, CartWidgetActions
-} from '@capillarytech/pwa-framework';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { pwaLifeCycle } from '@capillarytech/pwa-framework';
 import { TranslateService } from '@ngx-translate/core';
-import { BaseComponent } from '../../base/base-component';
 import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { ModalController } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
+import { SimpleProductComponent } from '@capillarytech/pwa-components/simple-product/simple-product-component';
 
 @Component({
   selector: 'app-product-details-component',
@@ -24,42 +14,18 @@ import { StoreSelectionModalComponent } from '../store-selection-modal/store-sel
 })
 
 @pwaLifeCycle()
-export class ProductDetailsComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
-
-  @Input() productId: number;
-  @Input() productFromDeal;
-  @Input() cartItem = null;
-  @Input() fromSuggestion;
-  @Input() fromFavorites;
-
-  loaded = false;
-  productWidgetExecutor = new EventEmitter();
-  productWidgetAction = new EventEmitter();
-  serverProduct;
-  clientProduct: Product;
-  currencyCode: string;
-  productName: string;
-  showAddToCart: boolean;
-  noOfProperties: number;
-  noOfSelectedProperties: number;
-  showVariants: boolean;
-  addingToCart: boolean;
-  quantityEnabled: boolean;
-  quantityEnabledCategories = [];
+export class ProductDetailsComponent extends SimpleProductComponent implements OnInit {
 
   constructor(
     private alertService: AlertService,
-    private translate: TranslateService,
+    public translate: TranslateService,
     private hardwareService: HardwareService,
-    private config: ConfigService,
-    private location: Location,
     private loaderService: LoaderService,
     private modalController: ModalController
   ) {
-    super();
-    this.translate.use(this.getCurrentLanguageCode());
-    this.currencyCode = this.config.getConfig()['currencyCode'];
-    this.quantityEnabledCategories = this.config.getConfig()['quantityEnabledCategories'];
+    super({
+      preSelectvariants: false
+    }, translate);
   }
 
   ngOnInit() {
@@ -69,150 +35,30 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
     console.log('Widget loading started' + name, data);
   }
 
-  widgetLoadingSuccess(name, data) {
-    if (name == WidgetNames.PRODUCT_DISPLAY) {
-      this.loaded = true;
-      this.serverProduct = data;
-      this.clientProduct = this.serverProduct.client;
-      this.setClient();
-    }
-  }
-
-  widgetLoadingFailed(name, data) {
-    console.log('Widget loading failed' + name, data);
-  }
-
-  async widgetActionSuccess(name: string, data: any) {
+  async handleAddToCartActionSuccess(data) {
     this.loaderService.stopLoading();
-    switch (name) {
-      case ProductDetailsWidgetActions.ACTION_ADD_TO_CART:
-        let showCart = await this.hardwareService.isDesktopSite();
-        if(this.fromSuggestion) showCart = true;
-        await this.alertService.presentToast(this.clientProduct.title + ' ' +
-          this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', !showCart, this.getCurrentLanguageCode());
-        if (this.fromSuggestion) {
-          this.modalController.dismiss(true);
-          return;
-        }
-        this.goBack();
-        break;
-      case ProductDetailsWidgetActions.ACTION_EDIT_CART:
-        // await this.alertService.presentToast(this.clientProduct.title + ' ' +
-        // this.translate.instant('product_details.added_to_cart'), 1000, 'top', 'top');
-        this.modalController.dismiss(true);
-        // this.router.navigateByUrl(this.utilService.getLanguageCode() + '/products?category=' +
-        // this.cartItem.categoryName + '&id=' + this.cartItem.categoryId);
-        break;
+    let showCart = await this.hardwareService.isDesktopSite();
+    if (this.fromSuggestion) showCart = true;
+    await this.alertService.presentToast(this.clientProduct.title + ' ' +
+      this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', !showCart, this.getCurrentLanguageCode());
+    if (this.fromSuggestion) {
+      this.modalController.dismiss(true);
+      return;
     }
+    this.goBack();
   }
 
-  widgetActionFailed(name: string, data: any) {
+  handleEditCartActionSuccess(data) {
     this.loaderService.stopLoading();
-    console.log('Widget action failed' + name, data);
+    this.modalController.dismiss(true);
   }
 
-  setClient() {
-    this.quantityEnabled = this.quantityEnabledCategories.includes(this.serverProduct.categoryId);
-    this.noOfProperties = 0;
-    this.noOfSelectedProperties = 0;
-    this.showAddToCart = !this.clientProduct.isParentProduct;
-    if (this.productFromDeal) this.setProductFromDeal();
-    this.clientProduct.selectedPropertyValueIdMap.forEach((valueId, propId) => {
-      if (!this.cartItem) {
-        this.noOfProperties = this.noOfProperties + 1;
-        this.clientProduct.selectedPropertyValueIdMap.set(propId, 0);
-      } else {
-        this.showAddToCart = true;
-      }
-    });
-    this.serverProduct.variantProperties.map((prop) => {
-      prop.showProperty = true;
-    });
+  handleAddToCartActionFailure() {
+    this.loaderService.stopLoading();
   }
 
-  isPropertyValueSelected(propertyId: number, propertyvalueId: number) {
-    return this.clientProduct.selectedPropertyValueIdMap.get(propertyId) === propertyvalueId;
-  }
-
-  setSelectedPropertyvalue(propVal, prop) {
-    if (!this.cartItem) {
-      if (this.clientProduct.selectedPropertyValueIdMap.get(propVal.propertyId) === 0) {
-        this.noOfSelectedProperties = this.noOfSelectedProperties + 1;
-      }
-      this.showAddToCart = this.noOfSelectedProperties === this.noOfProperties;
-    }
-    prop.showProperty = false;
-    this.clientProduct.setSelectedPropertyValueId(propVal.propertyId, propVal.id);
-  }
-
-  getSelectedPropValueName(property) {
-    let selectedValue = '';
-    let propValueId = this.clientProduct.selectedPropertyValueIdMap.get(property.id);
-    property.values.map((propVal) => {
-      if (propVal.id === propValueId) selectedValue = propVal.name;
-    });
-    return selectedValue;
-  }
-
-  getProductImageUrl(product) {
-    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
-      return this.getUrl(product.image);
-    } else {
-      let lastItem = product.multipleImages.slice().pop();
-      return lastItem.image ? this.getUrl(lastItem.image) : this.getUrl(product.image);
-    }
-  }
-
-  getUrl(url: string) {
-    return `https://${url}`;
-  }
-
-  isProeprtyAvailable(propertyValueId) {
-    let isPropertyAvailable = false;
-    if (!this.productFromDeal) {
-      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-        if (key.indexOf(propertyValueId.toString())) {
-          isPropertyAvailable = true;
-          return;
-        }
-      });
-    } else {
-      this.productFromDeal.variantProducts.map((variantFromDeal) => {
-        this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-          if (variant.id === variantFromDeal.id && key.indexOf(propertyValueId.toString()) > -1) {
-            isPropertyAvailable = true;
-            return;
-          }
-        });
-      });
-    }
-    return isPropertyAvailable;
-  }
-
-  setProductFromDeal() {
-    this.productFromDeal.variantProducts.map((variantFromDeal) => {
-      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-        if (variant.id === variantFromDeal.id) {
-          variant.isIncludedInBundleprice = variantFromDeal.isIncludedInBundleprice;
-          variant.webPrice = (variant.isIncludedInBundleprice ? 0 : variantFromDeal.webPrice);
-          return;
-        }
-      });
-    });
-  }
-
-  getPrice() {
-    if (this.productFromDeal) {
-      this.clientProduct.varProductValueIdMap.forEach((variant, key) => {
-        if (variant.id === this.clientProduct.variantProductId) this.clientProduct.setPrice(variant.webPrice);
-      });
-    }
-    return this.clientProduct.price;;
-  }
-
-  setQuantity(quantity, isAdd) {    
-    if(isAdd) this.clientProduct.setQuantity(this.clientProduct.quantity + 1);
-    if(!isAdd && quantity > 1) this.clientProduct.setQuantity(this.clientProduct.quantity - 1);
+  handleEditCartActionFailure() {
+    this.loaderService.stopLoading();
   }
 
   async openStoreSelection() {
@@ -238,24 +84,16 @@ export class ProductDetailsComponent extends BaseComponent implements OnInit, On
       this.modalController.dismiss(this.clientProduct);
       return;
     }
-    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
-    if (this.cartItem) {
-      this.productWidgetAction.emit(
-        new Action(ProductDetailsWidgetActions.ACTION_EDIT_CART, this.clientProduct)
-      );
-      return;
-    }
-    this.productWidgetAction.emit(
-      new Action(ProductDetailsWidgetActions.ACTION_ADD_TO_CART, this.clientProduct)
-    );
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
+    super.addToCart();
   }
 
-  goBack() {
+  close() {
     this.setClient();
     if (this.productFromDeal || this.cartItem || this.fromSuggestion || this.fromFavorites) {
       this.modalController.dismiss();
       return;
     }
-    this.location.back();
+    this.goBack();
   }
 }

@@ -9,7 +9,7 @@
             <ion-card no-padding no-margin>
               <ion-card-header no-padding class="product-img-block">
                 <ion-item text-center class="popup-title" no-margin>
-                  <ion-icon (click)="goBack()" name="close-circle" slot="start"></ion-icon>
+                  <ion-icon (click)="close()" name="close-circle" slot="start"></ion-icon>
                   <ion-label>
                     <div class="skeleton-warpper">
                       <ion-skeleton-text class="skeleton-text p-skeleton"></ion-skeleton-text>
@@ -36,7 +36,7 @@
           <div class="product-details-content-block">
 
             <div class="product-img-block">
-              <ion-icon name="close-circle" (click)="goBack()" slot="start"></ion-icon>
+              <ion-icon name="close-circle" (click)="close()" slot="start"></ion-icon>
               <img alt="{{widget?.model?.title}}" class="product-main-image" height="170" width="340" loadingImage="assets/imgs/default/default.png" img-preloader="{{getProductImageUrl(widget?.model)}}"
                 defaultImage="assets/imgs/default/default.png" />
             </div>
@@ -55,7 +55,7 @@
                       <ng-container *ngIf="varprop.showProperty">
                         <div class="block-header" text-capitalize>{{varprop?.name}}</div>
                         <ng-container *ngFor="let propValue of varprop?.values">
-                          <li flex-center text-capitalize *ngIf="isProeprtyAvailable(propValue?.id)" (click)="setSelectedPropertyvalue(propValue, varprop)">
+                          <li flex-center text-capitalize *ngIf="isPropertyAvailable(propValue?.id)" (click)="setSelectedPropertyvalue(propValue, varprop)">
                             <span class="block-text">{{propValue?.name}}</span>
                             <span class="block-icon">
                               <ion-icon *ngIf="isPropertyValueSelected(varprop?.id, propValue?.id)" color="dark" name="checkmark"></ion-icon>

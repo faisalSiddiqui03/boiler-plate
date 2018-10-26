@@ -10,16 +10,13 @@ import { BannerModule } from '../../components/banner/banner.module';
 import { FooterModule } from '../../components/footer/footer.module';
 import { HeaderModule } from '../../components/header/header.module';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../translation.loader';
-import { HttpClient } from '@angular/common/http';
-import {
-  LocationWidgetModule,
-  FulfilmentModeModule,
-  StoreLocatorWidgetModule,
-  CartWidgetModule, SEOModule,
-} from '@capillarytech/pwa-framework';
-import { BannerWidgetModule, EventTrackServiceModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
+import { TranslateModule } from '@ngx-translate/core';
+import { FulfilmentModeModule, SEOModule } from '@capillarytech/pwa-framework';
+import { CartWidgetModule } from '@cap-widget/cart';
+import { LocationWidgetModule } from '@cap-widget/location';
+import { StoreLocatorWidgetModule } from '@cap-widget/store-locator';
+import { EventTrackServiceModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
+import { BannerWidgetModule } from '@cap-widget/banner-widget';
 import { AppStoreSelectionModule } from '../../components/store-selection/store-selection.module';
 
 const routes: Routes = [
@@ -48,13 +45,7 @@ const routes: Routes = [
     StoreLocatorWidgetModule,
     CartWidgetModule,
     SEOModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [HomePage]
 })

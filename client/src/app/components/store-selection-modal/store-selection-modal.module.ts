@@ -19,13 +19,7 @@ import { AppStoreSelectionModule } from '../store-selection/store-selection.modu
     IonicModule,
     SkeletonModule,
     AppStoreSelectionModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [StoreSelectionModalComponent],
   exports: [StoreSelectionModalComponent],

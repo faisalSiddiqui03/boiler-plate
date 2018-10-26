@@ -1,49 +1,49 @@
-import { IValidator, Product, ValidatorAction, BundleItem} from '@capillarytech/pwa-framework';
-import { AttributeName, AttributeValue } from './attribute-name-value';
+import { Product, BundleItem } from '@cap-widget/product-modules';
+import { AttributeName, AttributeValue } from '@capillarytech/pwa-components/pizza-builder/attribute-name-value';
 
 export class ToppingCounter {
-    defaultItemCount: number;
-    defaultSelectedItemCount: number;
-    selectedItemCount: number;
+  defaultItemCount: number;
+  defaultSelectedItemCount: number;
+  selectedItemCount: number;
 
-    constructor(){
-        this.defaultItemCount = 0;
-        this.defaultSelectedItemCount = 0;
-        this.selectedItemCount = 0;
-    }
+  constructor() {
+    this.defaultItemCount = 0;
+    this.defaultSelectedItemCount = 0;
+    this.selectedItemCount = 0;
+  }
 
-    setSelectedItemsCount(clientProduct: Product){
-        const items = [];
-        clientProduct.baseProduct.bundleGroups.map((group) => { group.items.map((item) => { items.push(item); }); });
+  setSelectedItemsCount(clientProduct: Product) {
+    const items = [];
+    clientProduct.baseProduct.bundleGroups.map((group) => { group.items.map((item) => { items.push(item); }); });
 
-        items.map((item) => {
-          if (item.isDefault
-            && BundleItem.getAttributeValueByName(item, AttributeName.TYPE) !== AttributeValue.SAUCE
-            && BundleItem.getAttributeValueByName(item, AttributeName.IS_CHEESE) !== AttributeValue.TRUE) {
+    items.map((item) => {
+      if (item.isDefault
+        && BundleItem.getAttributeValueByName(item, AttributeName.TYPE) !== AttributeValue.SAUCE
+        && BundleItem.getAttributeValueByName(item, AttributeName.IS_CHEESE) !== AttributeValue.TRUE) {
 
-            this.defaultItemCount = this.defaultItemCount + 1;
-            clientProduct.bundleItems.forEach((clientItem: BundleItem, key: number) => {
-              if (item.id === clientItem.id && clientItem.isSelected)
-                this.defaultSelectedItemCount = this.defaultSelectedItemCount + clientItem.count;
-            });
-            
-          }
+        this.defaultItemCount = this.defaultItemCount + 1;
+        clientProduct.bundleItems.forEach((clientItem: BundleItem, key: number) => {
+          if (item.id === clientItem.id && clientItem.isSelected)
+            this.defaultSelectedItemCount = this.defaultSelectedItemCount + clientItem.count;
         });
 
-        items.map((item) => {
-            clientProduct.bundleItems.forEach((clientItem: BundleItem, key: number) => {
-            if (item.id === clientItem.id 
-                && clientItem.isSelected 
-                && BundleItem.getAttributeValueByName(item, AttributeName.TYPE) !== AttributeValue.SAUCE
-                && BundleItem.getAttributeValueByName(item, AttributeName.IS_CHEESE) !== AttributeValue.TRUE) 
-                  this.selectedItemCount = this.selectedItemCount + clientItem.count;
-          });
-        });
-    }
+      }
+    });
 
-    resetSelectedItemsCount(){
-        this.defaultItemCount = 0;
-        this.defaultSelectedItemCount = 0;
-        this.selectedItemCount = 0;
-    }
+    items.map((item) => {
+      clientProduct.bundleItems.forEach((clientItem: BundleItem, key: number) => {
+        if (item.id === clientItem.id
+          && clientItem.isSelected
+          && BundleItem.getAttributeValueByName(item, AttributeName.TYPE) !== AttributeValue.SAUCE
+          && BundleItem.getAttributeValueByName(item, AttributeName.IS_CHEESE) !== AttributeValue.TRUE)
+          this.selectedItemCount = this.selectedItemCount + clientItem.count;
+      });
+    });
+  }
+
+  resetSelectedItemsCount() {
+    this.defaultItemCount = 0;
+    this.defaultSelectedItemCount = 0;
+    this.selectedItemCount = 0;
+  }
 }

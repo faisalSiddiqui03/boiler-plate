@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content no-padding>
-  <app-sub-header [lockIcon]="true" [title]="titleValue"></app-sub-header>
+  <app-sub-header [lockIcon]="true" [title]="'checkout_page.secure_checkout' | translate"></app-sub-header>
   <div class="checkout-page">
     <div class="order-info border">
       <ion-item class="delivery-area">
@@ -322,7 +322,7 @@
           <div class="checkout-head" text-center>
             <h2 no-margin>{{ 'checkout_page.how_you_pay' | translate }}</h2>
           </div>
-          <payment-options-widget [componentId]="getComponentId()" [action]="paymentOptionsWidgetAction">
+          <payment-options-widget [componentId]="getComponentId()">
             <ng-template let-widget="widget">
               <ng-container *ngIf="widget?.model">
                 <ion-list *ngIf="widget?.model?.length === 0">
@@ -415,7 +415,7 @@
 
 <delivery-slots-widget *ngIf="showSlotsModal" class="full-height delivery-slots-page" [globalSlots]="true"
                        [deliveryMode]="getDeliveryMode()"
-                       [storeId]="getCurrentStore()?.id" [componentId]="getComponentId()">
+                       [storeId]="getCurrentStore()?.id" [action]="deliverySlotWidgetAction" [componentId]="getComponentId()">
   <ng-template let-widget="widget">
     <div class="checkout-modal">
       <div class="checkout-popup">

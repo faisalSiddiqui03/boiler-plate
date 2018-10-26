@@ -2,11 +2,10 @@
   <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content class="order-history-page">
-  <app-sub-header [title]="titleValue"></app-sub-header>
-  <orders-widget [componentId]="getComponentId()" [limit]=6 [executor]="orderWidgetExecutor" [action]="orderWidgetAction"
-    (lifecycle)="handleWidgetLifecycle($event)">
+  <app-sub-header [title]="'order_history_page.order_history' | translate"></app-sub-header>
+  <orders-widget [componentId]="getComponentId()" [limit]=6 [executor]="orderWidgetExecutor" [action]="orderWidgetAction">
     <ng-template let-widget="widget">
-      <ng-container *ngIf="(!widget || !widget.model) && !isWidgetLoadingDone">
+      <ng-container *ngIf="(!widget || !widget.model) && !isOrderHistoryWidgetLoaded">
         <div class="orders-content w-700">
           <ion-list no-margin>
             <ion-item no-padding>
@@ -40,7 +39,7 @@
           </ion-list>
         </div>
       </ng-container>
-      <ng-container *ngIf="(!widget || !widget.model) && isWidgetLoadingDone">
+      <ng-container *ngIf="(!widget || !widget.model) && isOrderHistoryWidgetLoaded">
         <div class="no-orders" flex align-items-center justify-content-center>{{'order_history_page.no_orders' | translate}}</div>
       </ng-container>
 
@@ -54,7 +53,7 @@
                 <h2>Order # {{order.id}}
                     <span class="order-date"><i>(</i>{{getDate(order.orderDate.locale)}}<i>)(</i> | {{getTimeHHMM(order.orderDate.locale)}}<i>)</i></span>
                 </h2>
-                <div class="view-order-details" *ngIf="isShowProducts(i)">
+                <div class="view-order-details" *ngIf="accordianMap.has(i)">
                   <ion-grid no-padding>
                     <ion-row *ngFor="let orderLineItem of order.getLineItemsOfMainProduct()">
                       <ion-col no-padding size-xs="10">{{orderLineItem.product.title}}</ion-col>
@@ -65,13 +64,13 @@
                 </div>
                 <div class="order-price" flex-center>
                   <span>{{order.priceDetails.payableAmount | currency: (currencyCode + ' '): true: '1.3-3'}}</span>
-                  <span class="icon icon-arrow-next-2" (click)="toggleShowingProducts(i)"></span>
+                  <span class="icon icon-arrow-next-2" (click)="toggleShowProduct(i)"></span>
                 </div>
               </ion-label>
             </ion-item>
           </ion-list>
-          <ion-button *ngIf="widget.model.length >= 6 && isShowMoreButtonVisible && !isNextLoading" (click)="loadNextOrders()" color="success" text-capitalize expand="block" mode="ios" class="btn-success" padding>{{'order_history_page.load_more_orders' | translate}}</ion-button>
-          <ion-button *ngIf="widget.model.length >= 6 && isShowMoreButtonVisible && isNextLoading" color="success" text-capitalize expand="block" mode="ios" class="btn-success" padding>
+          <ion-button *ngIf="widget.model.length >= 6 && isShowMoreButtonVisible && !isOrderHistoryPaginating" (click)="loadNextOrders()" color="success" text-capitalize expand="block" mode="ios" class="btn-success" padding>{{'order_history_page.load_more_orders' | translate}}</ion-button>
+          <ion-button *ngIf="widget.model.length >= 6 && isShowMoreButtonVisible && isOrderHistoryPaginating" color="success" text-capitalize expand="block" mode="ios" class="btn-success" padding>
             <ion-spinner name="crescent" color="dark"></ion-spinner>
           </ion-button>
         </div>

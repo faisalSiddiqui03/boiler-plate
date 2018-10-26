@@ -1,7 +1,7 @@
 import { NgModule, APP_INITIALIZER, Injector,ErrorHandler, Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
-import { TranslateCompiler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateCompiler, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -13,7 +13,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TranslateMessageFormatCompiler } from "ngx-translate-messageformat-compiler";
+import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 import {
   AlertServiceModule,
   LoaderServiceModule,
@@ -22,7 +22,6 @@ import {
 import {
   ConfigServiceModule,
   HttpService,
-  CacheStorageServiceImpl,
   GlobalServiceModule,
   EventTrackServiceModule,
   EventTrackWidgetModule,
@@ -30,11 +29,10 @@ import {
   LifecycleHandler,
   LanguageServiceModule,
   ImagePreloadModule,
-  UserProfileWidgetModule,
-  LogoutWidgetModule,
   FulfilmentModeModule,
   SEOModule,
   LanguageService,
+  CapRouterServiceModule,
   // AppUpdateServiceModule,
   // AppUpdateServiceImpl,
   CapRouterService,
@@ -48,8 +46,6 @@ import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-sele
 import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
-import { UtilService } from './helpers/utils';
-import { Location } from '@angular/common';
 
 var packageJson = require('../../package.json')
 var ionicConfigJson = require('../../ionic.config.json')
@@ -113,14 +109,12 @@ export function getAppConfig(): Object {
     HttpClientModule,
     FulfilmentModeModule,
     ImagePreloadModule,
-    UserProfileWidgetModule,
-    LogoutWidgetModule,
     DeliverySlotSelectionModule,
     LocationPageModule,
     SearchLocationPageModule,
     EventTrackServiceModule.forRoot([EventTrackServiceModule.Tracker.GTM]),
     EventTrackWidgetModule,
-    // CapRouterServiceModule,
+    CapRouterServiceModule.forRoot(true),
     // AppUpdateServiceModule,
     LanguageServiceModule.forRoot(languages),
     TranslateModule.forRoot({
@@ -141,7 +135,6 @@ export function getAppConfig(): Object {
     PWAServiceWorkerModule.forRoot()
   ],
   providers: [
-    CacheStorageServiceImpl,
     HttpService,
     LifecycleHandler,
     Geolocation,
@@ -152,7 +145,6 @@ export function getAppConfig(): Object {
       useClass: IonicRouteStrategy
     },
     RoutingState,
-    UtilService,
     IonicErrorHandler,
         [{ provide: ErrorHandler, useClass: MyErrorHandler }]
     // AppUpdateServiceImpl
@@ -163,30 +155,25 @@ export function getAppConfig(): Object {
 
 export class AppModule {
   constructor(injector: Injector,
-    private utilService: UtilService,
     private capRouterService: CapRouterService,
     languageService: LanguageService) {
     setAppInjector(injector);
     const locationUrl = window.location.pathname;
 
-    var defaultLang = undefined;
-    var allowedLanguages = [];
+    let defaultLang;
+    const allowedLanguages = [];
     languages.forEach(async (lang) => {
       allowedLanguages.push(lang.code);
       if (lang.isDefault) {
         defaultLang = lang.code;
         // await languageService.initialize(lang.code);
-        // this.utilService.setLanguageCode(lang.code);
         // this.capRouterService.routeByUrlWithLanguage(locationUrl);
       }
-    })
-
+    });
     if (locationUrl.startsWith('/ar')) {
       languageService.initialize('ar');
-      //this.utilService.setLanguageCode('ar');
     } else if (locationUrl.startsWith('/en')) {
       languageService.initialize('en');
-      //this.utilService.setLanguageCode('en');
     } else {
       // two possiblities: either lang code not provided
       // or wrong lang code is provided
@@ -203,8 +190,7 @@ export class AppModule {
       }
 
       languageService.initialize(mappedLang);
-      //this.utilService.setLanguageCode(mappedLang);
-      this.capRouterService.routeByUrlWithLanguage(locationUrl);
+      this.capRouterService.routeByUrl(locationUrl);
     }
   }
 }

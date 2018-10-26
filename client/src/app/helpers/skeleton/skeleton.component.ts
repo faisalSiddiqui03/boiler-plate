@@ -7,7 +7,7 @@ import { Component, OnInit, Input, ElementRef, AfterViewInit, ViewChild } from '
   `,
   styleUrls: ['./skeleton.component.scss']
 })
-export class SkeletonComponent implements OnInit {
+export class SkeletonComponent implements OnInit, AfterViewInit {
 
   @Input() aspectRatio: number;
   @Input() width = '';

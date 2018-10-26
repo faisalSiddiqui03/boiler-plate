@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { StoreListComponent } from './store-list.component';
-import { BannerWidgetModule, CartWidgetModule, EventTrackServiceModule, ImagePreloadModule, FulfilmentModeModule, LocationWidgetModule, StoreLocatorWidgetModule } from '@capillarytech/pwa-framework';
-import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { EventTrackServiceModule, ImagePreloadModule, FulfilmentModeModule } from '@capillarytech/pwa-framework';
+import { LocationWidgetModule } from '@cap-widget/location';
+import { BannerWidgetModule } from '@cap-widget/banner-widget';
+import { TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../header/header.module';
 import { SubHeaderModule } from '../sub-header/sub-header.module';
-
+import { StoreLocatorWidgetModule } from '@cap-widget/store-locator';
+import { CartWidgetModule } from '@cap-widget/cart';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,13 +25,7 @@ import { SubHeaderModule } from '../sub-header/sub-header.module';
     CartWidgetModule,
     ImagePreloadModule,
     SubHeaderModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule,
   ],
   declarations: [
     StoreListComponent,

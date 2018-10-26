@@ -7,10 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { SavedAddressPage } from './saved-address.page';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from '../../../../translation.loader';
-import { UserAddressWidgetModule } from '@capillarytech/pwa-framework';
+import { TranslateModule } from '@ngx-translate/core';
+import { UserAddressWidgetModule } from '@cap-widget/user-address';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 
 const routes: Routes = [
@@ -29,13 +27,7 @@ const routes: Routes = [
     SubHeaderModule,
     UserAddressWidgetModule,
     RouterModule.forChild(routes),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [SavedAddressPage]
 })

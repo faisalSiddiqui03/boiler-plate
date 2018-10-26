@@ -6,11 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { UserProfilePage } from './user-profile.page';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from '../../../../translation.loader';
+import { TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { UserProfileWidgetModule } from '@capillarytech/pwa-framework';
+import { UserProfileWidgetModule } from '@cap-widget/user-profile';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 
 const routes: Routes = [
@@ -30,13 +28,7 @@ const routes: Routes = [
     UserProfileWidgetModule,
     HeaderModule,
     SubHeaderModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [UserProfilePage]
 })

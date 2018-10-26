@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header.component';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../translation.loader';
-import { HttpClient } from '@angular/common/http';
-import { LogoutWidgetModule, NavigationWidgetModule } from '@capillarytech/pwa-framework';
+import { TranslateModule } from '@ngx-translate/core';
+import { NavigationWidgetModule } from '@cap-widget/navigation-widget';
+import { LogoutWidgetModule } from '@cap-widget/authentication/logout';
 
 @NgModule({
   imports: [
@@ -15,13 +14,7 @@ import { LogoutWidgetModule, NavigationWidgetModule } from '@capillarytech/pwa-f
     IonicModule,
     LogoutWidgetModule,
     NavigationWidgetModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [
     HeaderComponent,

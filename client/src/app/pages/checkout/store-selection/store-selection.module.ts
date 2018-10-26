@@ -7,10 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { StoreSelectionPage } from './store-selection.page';
 import { HeaderModule } from '../../../components/header/header.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
-import { StoreLocatorWidgetModule } from '@capillarytech/pwa-framework';
+import { TranslateModule } from '@ngx-translate/core';
+import { StoreLocatorWidgetModule } from '@cap-widget/store-locator';
 import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
 import { StoreListModule } from '../../../components/store-list/store-list.module';
 
@@ -31,13 +29,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     StoreLocatorWidgetModule,
     SubHeaderModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [StoreSelectionPage]

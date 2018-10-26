@@ -1,27 +1,11 @@
-import { Component, OnInit, EventEmitter, Input, ViewEncapsulation } from '@angular/core';
-import {
-  LifeCycle,
-  Action,
-  pwaLifeCycle,
-  ConfigService,
-  Product,
-  ProductType,
-  BundleItem,
-} from '@capillarytech/pwa-framework';
-import { BaseComponent } from '../../base/base-component';
-import { NavParams, ModalController } from '@ionic/angular'
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { pwaLifeCycle } from '@capillarytech/pwa-framework';
+import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { UtilService } from '../../helpers/utils';
-import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
 import { PizzaComponent } from '../pizza/pizza.component';
-import { AttributeName, AttributeValue } from '../../helpers/validators';
 
-export enum BundleGroupInputType {
-  RADIO = 'Radio button',
-  CHECKBOX = 'Checkbox',
-}
+import { DealBuilderShowcaseComponent } from '@capillarytech/pwa-components/deal-builder-showcase/deal-builder-showcase.component';
+
 
 @Component({
   selector: 'app-deal-showcase-component',
@@ -31,101 +15,26 @@ export enum BundleGroupInputType {
 })
 
 @pwaLifeCycle()
-export class DealShowcaseComponent extends BaseComponent implements OnInit {
+export class DealShowcaseComponent extends DealBuilderShowcaseComponent implements OnInit {
 
-  bundleGroupType: string;
-  bundleGroupItems: any;
-  bundleGroupTitle: string;
-  bundleGroupMinQuantity: number;
-  bundleGroupId: number;
-  toppingsEnabled: Boolean = true;
-
-  bundleGroup: any;
-  bundleGroupImage: string;
-  showPizza: boolean;
-  clientProduct: Product;
-  showAdd: boolean;
-  inputType = BundleGroupInputType;
-  disableAddToCart: boolean;
-  currencyCode: string;
-  dealsCategoryId: string;
   constructor(
-    private alertService: AlertService,
     private translate: TranslateService,
-    private config: ConfigService,
-    private location: Location,
-    public navParams: NavParams,
-    private utilService: UtilService,
     private modalController: ModalController,
-    private router: Router,
   ) {
-    super();
-    this.translate.use(this.getCurrentLanguageCode());
-    this.currencyCode = this.config.getConfig()['currencyCode'];
-    this.dealsCategoryId = this.config.getConfig()['dealCategoryId'];
+    super({
+      restrictQuantityForCheckBoxGroup: true
+    });
   }
 
   ngOnInit() {
-    this.bundleGroupItems = this.bundleGroup.items;
-    this.bundleGroupMinQuantity = this.bundleGroup.minQuantity;
-    this.bundleGroupTitle = this.bundleGroup.title;
-    this.bundleGroupType = this.bundleGroup.inputType;
-    this.bundleGroupId = this.bundleGroup.groupId;
+    this.setDefaults();
     this.translate.get('deal.choose_your').subscribe(value => {
       this.bundleGroupTitle = value + " " + this.bundleGroupTitle;
     });
-
-
-    if (this.bundleGroupType === BundleGroupInputType.CHECKBOX) {
-      this.disableAddToCart = true;
-      let count = 0;
-      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-        if(item.groupId !== this.bundleGroup.groupId) return;
-        item['disableInc'] = false;
-        item['disableDec'] = true;
-        count = count + item.quantity;
-      });
-      if (count === this.bundleGroupMinQuantity) {
-        this.disableAddToCart = false;
-        this.toggleQuantityDisable()
-      }
-    }
   }
 
-  getProductImageUrl(product) {
-    if (!product.multipleImages || !(product.multipleImages.length > 0)) {
-      return this.getUrl(product.image);
-    } else {
-      let lastItem = product.multipleImages.slice().pop();
-      return lastItem.image? this.getUrl(lastItem.image) : this.getUrl(product.image);
-    }
-  }
-
-  getUrl(url: string) {
-    return `https://${url}`;
-  }
-
-  isCustomizable(item) {
-    const customizable = BundleItem.getAttributeValueByName(item, AttributeName.CUSTOMIZABLE);
-    return customizable === AttributeValue.CUSTOMIZABLE
-  }
-
-  addProductToDeal(itemToAdd) {
-    if(this.bundleGroup.inputType === BundleGroupInputType.CHECKBOX){
-      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-        if (this.bundleGroup.groupId === item.groupId && item.quantity > 0) item.add();
-      });
-      this.modalController.dismiss(true);
-      return;
-    }
-    if (itemToAdd.variantProductId) {
-      console.error('Adding simple product with variant from deal showcase is not supported right now!');
-      return;
-    }
-    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-      if (item.id === itemToAdd.id) item.add();
-    });
-    this.modalController.dismiss(true);
+  handleAddProductToDealSuccess(productAdded) {
+    this.modalController.dismiss(productAdded);
   }
 
   async showProduct(bundleItem) {
@@ -143,92 +52,10 @@ export class DealShowcaseComponent extends BaseComponent implements OnInit {
     });
 
     modal.onDidDismiss().then((addedItem) => {
-      // WIP
-      if (!addedItem || !addedItem.data) {
-        console.error('Invalid configuration for added item!');
-        return;
-      }
-      try {
-        this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-          if (item.groupId === this.bundleGroupId) item.remove();
-        });
-        this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-          if (item.id === bundleItem.id && item.groupId === this.bundleGroupId) {
-            item.add();
-            item.setPrimaryProductId(addedItem.data.primaryProductId);
-            item.setVarianValueIdMap(addedItem.data.varProductValueIdMap);
-            item.setBundleItems(addedItem.data.bundleItems);
-            item.setVariantProductId(addedItem.data.variantProductId);
-          }
-        });
-      } catch (err) {
-        console.error('Something went wrong in item selection : ', err);
-      }
-      this.modalController.dismiss(true);
+      this.updateItemSelection(bundleItem, addedItem);
     });
 
     return await modal.present();
-  }
-
-  getClientBundleItem(serverBundleItem) {
-    let clientBundleItem;
-    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-      if(serverBundleItem.id === item.id) {
-        clientBundleItem = item;
-        return;
-      }
-    });
-    return clientBundleItem;
-  }
-
-  updateQuantity(product: BundleItem, quantity, isAdd) {
-    let count = 0;
-    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-      if(this.bundleGroup.groupId === item.groupId) count = count + item.quantity;
-    });
-    let itemQuantity = product.quantity;
-    if ((count + 1) === this.bundleGroupMinQuantity && isAdd) {
-      itemQuantity = itemQuantity + 1;
-      product.setQuantity(itemQuantity);
-      this.disableAddToCart = false;
-      return;
-    }
-    else if ((count + 1) > this.bundleGroupMinQuantity && isAdd) {
-      this.disableAddToCart = false;
-      return;
-    }
-    else if (count === this.bundleGroupMinQuantity && !isAdd && product.quantity !== 0) {
-      this.disableAddToCart = true;
-    }
-
-    if (isAdd) itemQuantity = itemQuantity + 1;
-    if (!isAdd && product.quantity >= 1) itemQuantity = itemQuantity - 1;
-    product.setQuantity(itemQuantity);
-  }
-
-  toggleQuantityDisable() {
-    if (this.disableAddToCart) {
-      this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-        item['disableInc'] = false;
-        if (item.quantity > 0) {
-          item['disableDec'] = false;
-        }
-        else {
-          item['disableDec'] = true;
-        }
-      });
-      return;
-    }
-    this.clientProduct.bundleItems.forEach((item: BundleItem, key: number) => {
-      if (item.quantity > 0) {
-        item['disableInc'] = true;
-        item['disableDec'] = false;
-      }
-      else {
-        item['disableInc'] = true;
-        item['disableDec'] = true;
-      }
-    });
   }
 
   closeModal() {

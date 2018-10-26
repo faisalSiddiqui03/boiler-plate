@@ -7,11 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { OrderDetailsPage } from './order-details.page';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from '../../../../translation.loader';
+import { TranslateModule } from '@ngx-translate/core';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
-import { OrderDetailsWidgetModule } from '@capillarytech/pwa-framework';
+import { OrderDetailsWidgetModule } from '@cap-widget/order-details-widget';
 
 const routes: Routes = [
   {
@@ -29,13 +27,7 @@ const routes: Routes = [
     HeaderModule,
     SubHeaderModule,
     OrderDetailsWidgetModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [OrderDetailsPage]
 })

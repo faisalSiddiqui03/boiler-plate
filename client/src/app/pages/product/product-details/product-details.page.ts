@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BaseComponent } from '../../../base/base-component';
-import { UtilService } from '../../../helpers/utils';
+import { ActivatedRoute } from '@angular/router';
+import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -16,7 +15,6 @@ export class ProductDetailsPage extends BaseComponent implements OnInit {
   productName: string;
 
   constructor(private route: ActivatedRoute,
-    private utilService: UtilService,
     private translate: TranslateService) {
     super();
   }

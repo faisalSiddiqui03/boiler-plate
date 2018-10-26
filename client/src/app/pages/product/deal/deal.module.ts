@@ -7,11 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { DealPage } from './deal.page';
 
-import { ProductDetailsWidgetModule, ImagePreloadModule, EventTrackServiceModule} from "@capillarytech/pwa-framework";
-
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { ImagePreloadModule, EventTrackServiceModule} from '@capillarytech/pwa-framework';
+import { ProductDetailsWidgetModule } from '@cap-widget/product-details';
+import { TranslateModule } from '@ngx-translate/core';
 import { DealComponentModule } from '../../../components/deal/deal.module';
 
 const routes: Routes = [
@@ -31,13 +29,7 @@ const routes: Routes = [
     ImagePreloadModule,
     DealComponentModule,
     RouterModule.forChild(routes),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [DealPage],
 })

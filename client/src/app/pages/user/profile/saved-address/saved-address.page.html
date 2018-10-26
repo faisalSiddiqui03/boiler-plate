@@ -2,7 +2,7 @@
   <app-header [showUserIcon]="false" [showHalalTag]="false" [showLanguage]="false"></app-header>
 </ion-header>
 <ion-content>
-  <app-sub-header [title]="titleValue"></app-sub-header>
+  <app-sub-header [title]="'saved_address_page.saved_address' | translate"></app-sub-header>
   <div class="saved-addresses w-700">
     <user-address-widget [componentId]="getComponentId()" [action]="userAddressWidgetActions">
       <ng-template let-widget="widget">
@@ -32,7 +32,7 @@
             <ion-item no-padding *ngFor="let address of widget.model">
               <ion-label>
                 <h6>{{address.addressType}}
-                  <ion-icon (click)="deleteAddress(address)" class="close" name="close-circle"></ion-icon>
+                  <ion-icon (click)="triggerDeleteAddress(address)" class="close" name="close-circle"></ion-icon>
                 </h6>
                 <div class="address-details">
                   <p text-capitalize>{{address.detail}}</p>

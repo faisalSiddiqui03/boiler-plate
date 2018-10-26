@@ -5,21 +5,19 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 import {
-  DeliverySlotsWidgetModule,
-  PaymentOptionsWidgetModule,
-  CheckoutWidgetModule,
-  UserAddressWidgetModule,
   EventTrackServiceModule,
   EventTrackWidgetModule,
   CapRouterServiceModule
-} from "@capillarytech/pwa-framework";
+} from '@capillarytech/pwa-framework';
+import { CheckoutWidgetModule } from '@cap-widget/dummy-checkout-widget';
+import { PaymentOptionsWidgetModule } from '@cap-widget/payment-options';
+
+import { UserAddressWidgetModule } from '@cap-widget/user-address';
 import { CheckoutPage } from './checkout.page';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 import { HeaderModule } from '../../../components/header/header.module';
 import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
-
+import { DeliverySlotsWidgetModule } from '@cap-widget/delivery-slots';
 const routes: Routes = [
   {
     path: '',
@@ -43,13 +41,7 @@ const routes: Routes = [
     PaymentOptionsWidgetModule,
     UserAddressWidgetModule,
     CapRouterServiceModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+    TranslateModule
   ],
   declarations: [CheckoutPage]
 })
