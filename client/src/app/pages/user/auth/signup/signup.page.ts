@@ -14,12 +14,12 @@ import {
   CapRouterService,
   WidgetNames
 } from '@capillarytech/pwa-framework';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {
   AlertService,
   LoaderService
 } from '@capillarytech/pwa-ui-helpers';
-import { SignupComponent } from '@capillarytech/pwa-components/signup/signup.component';
+import {SignupComponent} from '@capillarytech/pwa-components/signup/signup.component';
 
 @Component({
   selector: 'app-signup',
@@ -32,6 +32,7 @@ import { SignupComponent } from '@capillarytech/pwa-components/signup/signup.com
 export class SignupPage extends SignupComponent implements OnInit {
 
   signUpForm: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
     private translate: TranslateService,
@@ -42,10 +43,10 @@ export class SignupPage extends SignupComponent implements OnInit {
     super();
     this.signUpForm = this.formBuilder.group({
       fname: ['', Validators.compose([Validators.required,
-          Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ \.]*$')])],
+        Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ \.]*$')])],
       lname: [''],
       mobile: ['', Validators.compose([Validators.required,
-          Validators.pattern('^[2569][0-9]*$'), Validators.minLength(8), Validators.maxLength(8)])],
+        Validators.pattern('^[2569][0-9]*$'), Validators.minLength(8), Validators.maxLength(8)])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       confirmPassword: ['', Validators.compose([Validators.required])]
@@ -54,10 +55,11 @@ export class SignupPage extends SignupComponent implements OnInit {
     this.signUpForm.validator = this.matchingPasswords;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   async userSignUp() {
-    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode() );
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
     this.widgetModel.firstName = this.signUpForm.value.fname;
     this.widgetModel.lastName = this.signUpForm.value.lname;
     this.widgetModel.email = this.signUpForm.value.email;
@@ -65,7 +67,7 @@ export class SignupPage extends SignupComponent implements OnInit {
     this.widgetModel.password = this.signUpForm.value.password;
     this.widgetModel.userName = this.signUpForm.value.email;
     this.widgetModel.gender = 'M';
-    
+
     this.signup();
   }
 
@@ -95,12 +97,18 @@ export class SignupPage extends SignupComponent implements OnInit {
     await this.alertService.presentToast(this.translate.instant('sign_up_page.unable_to_user_data'), 500, 'top', 'top');
   }
 
+  handleSignupActionSigninFailed(data) {
+  }
+
+  handleSignupActionSigninSuccess(data) {
+  }
+
   matchingPasswords(AC: AbstractControl) {
     if (AC.get('password') && AC.get('confirmPassword')) {
       const password = AC.get('password').value; // to get value in input tag
       const confirmPassword = AC.get('confirmPassword').value; // to get value in input tag
       if (password !== confirmPassword) {
-        AC.get('confirmPassword').setErrors({ matchingPasswords: true });
+        AC.get('confirmPassword').setErrors({matchingPasswords: true});
       } else {
         return null;
       }

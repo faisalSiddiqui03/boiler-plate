@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { pwaLifeCycle } from '@capillarytech/pwa-framework';
-import { TranslateService } from '@ngx-translate/core';
-import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
-import { ModalController } from '@ionic/angular';
-import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
-import { SimpleProductComponent } from '@capillarytech/pwa-components/simple-product/simple-product-component';
+import {Component, OnInit, ViewEncapsulation, EventEmitter} from '@angular/core';
+import {pwaLifeCycle} from '@capillarytech/pwa-framework';
+import {TranslateService} from '@ngx-translate/core';
+import {AlertService, LoaderService, HardwareService} from '@capillarytech/pwa-ui-helpers';
+import {ModalController} from '@ionic/angular';
+import {StoreSelectionModalComponent} from '../store-selection-modal/store-selection-modal.component';
+import {SimpleProductComponent} from '@capillarytech/pwa-components/simple-product/simple-product-component';
 
 @Component({
   selector: 'app-product-details-component',
@@ -39,8 +39,19 @@ export class ProductDetailsComponent extends SimpleProductComponent implements O
     this.loaderService.stopLoading();
     let showCart = await this.hardwareService.isDesktopSite();
     if (this.fromSuggestion) showCart = true;
-    await this.alertService.presentToast(this.clientProduct.title + ' ' +
-      this.translate.instant('product_details.added_to_cart'), 3000, 'top', 'top', !showCart, this.getCurrentLanguageCode());
+
+    await this.alertService.presentToastWithShowCart(
+      this.clientProduct.title + ' ' + this.translate.instant('product_details.added_to_cart'),
+      3000, 'top', '/' + this.getCurrentLanguageCode() + '/cart', 'top');
+
+//     let testAction: EventEmitter<any> = new EventEmitter();
+//     testAction.subscribe(data => {
+//        // do action here
+//     });
+//     await this.alertService.presentToastWithShowCartAndAction(
+//       this.clientProduct.title + ' ' + this.translate.instant('product_details.added_to_cart'),
+//       3000, 'top', testAction, 'top');
+
     if (this.fromSuggestion) {
       this.modalController.dismiss(true);
       return;
