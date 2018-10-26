@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { CapRouterService } from '@capillarytech/pwa-framework';
-import { BaseComponent } from '@capillarytech/pwa-components/base-component';
+import { BaseComponent, Utils } from '@capillarytech/pwa-components';
 import { AlertService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({
@@ -27,7 +27,7 @@ export class CartPage extends BaseComponent {
   }
 
   goToDeals(event) {
-    this.capRouter.routeByUrl('/products?category=' + event.category + '&id=' + event.id);
+    this.capRouter.routeByUrl('/products?category=' + Utils.getHiphenatedString(event.category) + '&id=' + event.id);
   }
 
   goToPage(pageName) {

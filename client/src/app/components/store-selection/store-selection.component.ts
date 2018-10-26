@@ -23,7 +23,6 @@ import { StoreListComponent } from '../store-list/store-list.component';
   templateUrl: './store-selection.component.html',
   styleUrls: ['./store-selection.component.scss']
 })
-
 @pwaLifeCycle()
 export class StoreSelectionComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
   bannerRefCode: string;
