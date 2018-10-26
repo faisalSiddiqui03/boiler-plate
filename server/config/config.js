@@ -29,7 +29,23 @@ const config = {
       "token": "Aa9bwxzH40uPNZRBPpC9"
     },
 	"prerenderer": {
-		"enabled": true
+		"enabled": true,
+        "exclude": [
+            'product-details',
+            'cart',
+            'user-profile',
+            'change-password',
+            'order-history',
+            'saved-address',
+            'add-address',
+            'favorites',
+            'store-selection',
+            'my-account',
+            'delivery-slot-selection',
+            'order-details',
+            'checkout',
+            'success'
+        ]
 	},
   "enableRedisCaching": false,
   "redis": {
