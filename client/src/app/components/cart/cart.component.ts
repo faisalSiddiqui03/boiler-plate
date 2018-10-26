@@ -1,14 +1,14 @@
-import { Location } from '@angular/common';
-import { Component, EventEmitter, ViewEncapsulation, Output } from '@angular/core';
-import { ViewCartComponent } from '@capillarytech/pwa-components/cart/view-cart-component';
-import { ConfigService, CapRouterService, pwaLifeCycle, pageView } from '@capillarytech/pwa-framework';
-import { Product, ProductType } from '@cap-widget/product-modules';
-import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
-import { TranslateService } from '@ngx-translate/core';
-import { ProductDetailsComponent } from '../product-details/product-details.component';
-import { ModalController } from '@ionic/angular';
-import { PizzaComponent } from '../pizza/pizza.component';
-import { DealComponent } from '../deal/deal.component';
+import {Location} from '@angular/common';
+import {Component, EventEmitter, ViewEncapsulation, Output} from '@angular/core';
+import {ViewCartComponent} from '@capillarytech/pwa-components/cart/view-cart-component';
+import {ConfigService, CapRouterService, pwaLifeCycle, pageView} from '@capillarytech/pwa-framework';
+import {Product, ProductType} from '@cap-widget/product-modules';
+import {AlertService, LoaderService} from '@capillarytech/pwa-ui-helpers';
+import {TranslateService} from '@ngx-translate/core';
+import {ProductDetailsComponent} from '../product-details/product-details.component';
+import {ModalController} from '@ionic/angular';
+import {PizzaComponent} from '../pizza/pizza.component';
+import {DealComponent} from '../deal/deal.component';
 
 @Component({
   selector: 'app-cart',
@@ -38,19 +38,20 @@ export class CartComponent extends ViewCartComponent {
 
   ProductType = ProductType;
   @Output() switchCategory: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(private translateService: TranslateService,
-    private alertService: AlertService,
-    private loaderService: LoaderService,
-    public config: ConfigService, public location: Location,
-    private modalController: ModalController,
-    private capRouter: CapRouterService,
+              private alertService: AlertService,
+              private loaderService: LoaderService,
+              public config: ConfigService, public location: Location,
+              private modalController: ModalController,
+              private capRouter: CapRouterService,
   ) {
     super(config, location);
     this.dealCategoryId = this.config.getConfig()['dealCategoryId'];
   }
 
   handleCartWidgetLoadingSuccess() {
-      this.isLoaded = true;
+    this.isLoaded = true;
   }
 
   async applyCoupon(couponCode) {
@@ -115,7 +116,7 @@ export class CartComponent extends ViewCartComponent {
 
   updateCartItem(event, item, isAddition) {
 
-    this.updateCart({ clickNumber: event.clickNumber, isAddition: isAddition }, item);
+    this.updateCart({clickNumber: event.clickNumber, isAddition: isAddition}, item);
   }
 
   confirmRemove(item) {
@@ -180,11 +181,23 @@ export class CartComponent extends ViewCartComponent {
 
   goToDeals() {
     this.enableVoucherModal = false;
-    this.switchCategory.emit({ category: 'deals', id: this.dealCategoryId });
+    this.switchCategory.emit({category: 'deals', id: this.dealCategoryId});
   }
 
   goToPage(pageName) {
     this.capRouter.routeByUrl('/' + pageName);
+  }
+
+  handleClearCartActionFailed(data) {
+    // do nothing
+  }
+
+  handleCartUpdateActionSuccess(data) {
+    // do nothing
+  }
+
+  handleCartUpdateActionFailed(data) {
+    // do nothing
   }
 
   async openProductDetails(product: Product) {
