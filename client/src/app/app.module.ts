@@ -46,33 +46,11 @@ import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-sele
 import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
+import { MyErrorHandler} from './IonicErrorHandler'
 
-var packageJson = require('../../package.json')
-var ionicConfigJson = require('../../ionic.config.json')
-Pro.init(ionicConfigJson.pro_id, {
-  appVersion: packageJson.version
+Pro.init(environment.pro_id, {
+  appVersion: environment.version
 })
-
-@Injectable()
-export class MyErrorHandler implements ErrorHandler {
-  ionicErrorHandler: IonicErrorHandler;
-
-  constructor(injector: Injector) {
-    try {
-      this.ionicErrorHandler = injector.get(IonicErrorHandler);
-    } catch(e) {
-      // Unable to get the IonicErrorHandler provider, ensure
-      // IonicErrorHandler has been added to the providers list below
-    }
-  }
-
-  handleError(err: any): void {
-    Pro.monitoring.handleNewError(err);
-    // Remove this if you want to disable Ionic's auto exception handling
-    // in development mode.
-    this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
-  }
-}
 
 export const languages = [
   {
