@@ -151,6 +151,11 @@ export class SelectionComponent extends StoreSelectionComponent {
         return 'https://www.kuwait.pizzahut.me/assets/imgs/PH-60th-Years-FCDS-Deals-Banner-ar.jpg';
     }
 
+    getBannerRefCodeWithLangCode(refCode: string) {
+
+        return refCode + this.getCurrentLanguage().code;
+    }
+
     getBannerUrlBySrc(src) {
 
         return this.bannerUrl + src[0].contentUrl + '?height=170&width=340&builder=freeimage';
@@ -263,10 +268,10 @@ export class SelectionComponent extends StoreSelectionComponent {
         console.log('dismissed the pop up');
     }
 
-    removeCartItem(store, mode?: DeliveryModes, event?) {
+    async removeCartItem(store, mode?: DeliveryModes, event?) {
 
         this.clearCart();
-        this.loaderService.startLoadingByMode('', this.getDeliveryMode());
+        await this.loaderService.startLoadingByMode('', this.getDeliveryMode());
         const promise = new Promise((resolve, reject) => {
 
             this.clearCartPromise.resolve = resolve;
@@ -417,7 +422,7 @@ export class SelectionComponent extends StoreSelectionComponent {
 
         const firstStore = stores[0];
 
-        if (!this.isEmptyCart()) {
+        if (!this.isEmptyCart() && firstStore.id != this.getCurrentStore().id) {
             this.presentAlert(firstStore);
             return;
         }
