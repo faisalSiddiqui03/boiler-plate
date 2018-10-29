@@ -94,7 +94,7 @@ export class SignupPage extends SignupComponent implements OnInit {
 
   async handleSignupLoadingFailed(data) {
     this.loaderService.stopLoading();
-    await this.alertService.presentToast(this.translate.instant('sign_up_page.unable_to_user_data'), 500, 'top', 'top');
+    await this.alertService.presentToast(this.translate.instant('sign_up_page.unable_to_get_user_data'), 500, 'top', 'top');
   }
 
   handleSignupActionSigninFailed(data) {
