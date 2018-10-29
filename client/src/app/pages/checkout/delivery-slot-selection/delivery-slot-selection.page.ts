@@ -19,7 +19,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 @pwaLifeCycle()
 @pageView()
-export class DeliverySlotSelectionPage extends DeliverySlotComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle  {
+export class DeliverySlotSelectionPage extends DeliverySlotComponent implements OnInit  {
 
   constructor(
     private translate: TranslateService,
@@ -42,7 +42,7 @@ export class DeliverySlotSelectionPage extends DeliverySlotComponent implements 
 
   async loadText() {
 
-    this.asapText = await this.translate.get('delivery_slot_selection_page.asap');
+    this.asapText = await this.translate.get('delivery_slot_selection_page.asap').toString();
   }
 
   closeModal() {
