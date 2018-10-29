@@ -76,24 +76,24 @@ export class SelectionComponent extends StoreSelectionComponent {
     this.switchLanguage('en');
   }
 
-  handleCitySelectionStarted(city) {
-
-    this.hasError.selectAreaFirst = false;
-    this.searchTerm.city = city.name;
-    this.searchTerm.area = '';
-    this.clearSelectedArea(this.getDeliveryMode());
-    this.hasError.changeCity = true;
-
-    if (this.getDeliveryMode() === DeliveryModes.PICKUP) {
-      this.loaderService.startLoadingByMode('', this.getDeliveryMode());
-    }
-  }
-
   // to stop auto selection of store.
   handleAreaSelection(area) {}
   handleAreaSelectionStarted(area) {
 
     this.searchTerm.area = this.getAreaDisplayName(area);
+  }
+
+  async handleCitySelectionStarted(city) {
+
+      this.hasError.selectAreaFirst = false;
+      this.searchTerm.city = city.name;
+      this.searchTerm.area = '';
+      this.clearSelectedArea(this.getDeliveryMode());
+      this.hasError.changeCity = true;
+
+      if (this.getDeliveryMode() === DeliveryModes.PICKUP) {
+          await this.loaderService.startLoadingByMode('', this.getDeliveryMode());
+      }
   }
 
   toggleAreaView(status: ViewStatus) {
@@ -270,7 +270,6 @@ export class SelectionComponent extends StoreSelectionComponent {
 
   async removeCartItem(store, mode?: DeliveryModes, event?) {
 
-    this.clearCart();
     await this.loaderService.startLoadingByMode('', this.getDeliveryMode());
     const promise = new Promise((resolve, reject) => {
 
@@ -289,6 +288,7 @@ export class SelectionComponent extends StoreSelectionComponent {
 
       // this should show cart could not be cleared
     });
+    this.clearCart();
   }
 
   setStoreAndRedirect(store) {
