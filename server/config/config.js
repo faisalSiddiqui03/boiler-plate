@@ -148,7 +148,8 @@ const config = {
     },
     "to": "shanuj.bansal@capillarytech.com",
     "subject": "Order Feedback"
-  }
+  },
+  "defaultStoreId": 13264,
 };
 
 module.exports = config;
