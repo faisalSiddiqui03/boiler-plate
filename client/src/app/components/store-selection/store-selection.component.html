@@ -1,6 +1,5 @@
 <div class="banner-home container">
-  <banner-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [type]="'RefCode'" [value]="getBannerRefCodeWithLangCode(bannerRefCode)"
-    [executor]="bannerWidgetExecutor" [action]="bannerWidgetAction">
+  <banner-widget [componentId]="getComponentId()" pfWidgetImpressionTrack [type]="'RefCode'" [value]="getBannerRefCodeWithLangCode(bannerRefCode)">
     <ng-template let-widget="widget">
       <div *ngIf="widget.model == undefined">
         <ion-row margin-bottom justify-content-center>

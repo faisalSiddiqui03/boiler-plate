@@ -50,8 +50,8 @@ export class LoginPage extends LoginComponent {
   async signIn() {
 
     await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
-    this.widgetModels[WidgetNames.USERID_PWD_SIGNIN].userName = this.userIdSigninForm.value.email;
-    this.widgetModels[WidgetNames.USERID_PWD_SIGNIN].password = this.userIdSigninForm.value.password;
+    this.useridPasswordWidgetModels.userName = this.userIdSigninForm.value.email;
+    this.useridPasswordWidgetModels.password = this.userIdSigninForm.value.password;
     this.usernamePasswordSignIn();
   }
 

@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
-  pageView,
-  OnWidgetActionsLifecyle, OnWidgetLifecyle
+  pageView
 } from '@capillarytech/pwa-framework';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 @pwaLifeCycle()
 @pageView()
-export class DeliverySlotSelectionPage extends DeliverySlotComponent implements OnInit  {
+export class DeliverySlotSelectionPage extends DeliverySlotComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
@@ -42,7 +41,7 @@ export class DeliverySlotSelectionPage extends DeliverySlotComponent implements 
 
   async loadText() {
 
-    this.asapText = await this.translate.get('delivery_slot_selection_page.asap').toString();
+    this.asapText = await this.translate.instant('delivery_slot_selection_page.asap');
   }
 
   closeModal() {

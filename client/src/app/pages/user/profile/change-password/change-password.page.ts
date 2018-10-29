@@ -67,8 +67,9 @@ export class ChangePasswordPage extends ChangePasswordComponent {
 
   async doChangePassword() {
 
-    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode() );
-    this.changePassword(this.resetPasswordForm.value.newPassword);
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
+    this.changePasswordWidgetmodel.password = this.resetPasswordForm.value.newPassword;
+    this.changePassword();
   }
 
   async handleWidgetActionChangePasswordFailed(data) {
