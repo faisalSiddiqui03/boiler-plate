@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { StoreListComponent } from '../store-list/store-list.component';
-import { StoreSelectionComponent } from './store-selection.component';
+import { SelectionComponent } from './store-selection.component';
 import {
   EventTrackServiceModule,
   ImagePreloadModule,
@@ -34,10 +34,10 @@ import { StoreLocatorWidgetModule } from '@cap-widget/store-locator';
     TranslateModule,
   ],
   declarations: [
-    StoreSelectionComponent,
+    SelectionComponent,
   ],
   exports: [
-    StoreSelectionComponent
+    SelectionComponent
   ],
   entryComponents: [
     StoreListComponent,
