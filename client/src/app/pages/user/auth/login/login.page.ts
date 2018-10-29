@@ -1,16 +1,14 @@
-import { Component, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import {
   pwaLifeCycle,
-  Action,
   pageView,
-  OnWidgetActionsLifecyle, OnWidgetLifecyle, CapRouterService
+  CapRouterService,
+  WidgetNames
 } from '@capillarytech/pwa-framework';
-import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
-import { UserIdPwdSigninWidgetActions } from '@cap-widget/authentication/userid-password-signin';
-import { GoogleSignInWidgetActions } from '@cap-widget/authentication/google-signin';
+import { LoginComponent } from '@capillarytech/pwa-components/login/login.component';
 
 @Component({
   selector: 'app-login',
@@ -18,19 +16,13 @@ import { GoogleSignInWidgetActions } from '@cap-widget/authentication/google-sig
   styleUrls: ['./login.page.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 @pwaLifeCycle()
 @pageView()
-export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
-  isPasswordFiled = true;
+export class LoginPage extends LoginComponent {
+
+  isPasswordField = true;
   userIdSigninForm: FormGroup;
-  isLoginSuccessful = false;
-
-  useridPasswordSigninAction = new EventEmitter();
-  useridPasswordSigninActionEmitter = new EventEmitter();
-  useridPasswordSigninExecutor = new EventEmitter();
-  widgetModels: { [name: string]: any };
-
-  googleSignInActionEmitter = new EventEmitter();
   googleClientId = '';
   enteredPassword = '';
 
@@ -45,132 +37,85 @@ export class LoginPage extends BaseComponent implements OnInit, OnWidgetLifecyle
     super();
 
     this.googleClientId = this.configService.getConfig()['googleClientId'];
-    this.widgetModels = {};
-
     this.userIdSigninForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     });
   }
 
-  ngOnInit() {}
-
-  changeTextPassword() {
-    this.isPasswordFiled = !this.isPasswordFiled;
+  changePasswordFieldType() {
+    this.isPasswordField = !this.isPasswordField;
   }
 
   async signIn() {
-    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode() );
-    this.widgetModels.USERID_PWD_SIGNIN.userName = this.userIdSigninForm.value.email;
-    this.widgetModels.USERID_PWD_SIGNIN.password = this.userIdSigninForm.value.password;
-    this.useridPasswordSigninAction.emit(new Action(UserIdPwdSigninWidgetActions.ACTION_SIGN_IN));
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
+    this.widgetModels[WidgetNames.USERID_PWD_SIGNIN].userName = this.userIdSigninForm.value.email;
+    this.widgetModels[WidgetNames.USERID_PWD_SIGNIN].password = this.userIdSigninForm.value.password;
+    this.usernamePasswordSignIn();
   }
 
-  handleGoogleSignInAction(data) {
-    console.log(data);
+  async signInWithGoogle() {
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
+    this.googleSignIn();
   }
 
-  async googleSignIn() {
-    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode() );
-    this.googleSignInActionEmitter.emit(new Action(GoogleSignInWidgetActions.ACTION_GPLUS_SIGN_IN));
+  async handleUserIDPwdSigninLoadingFailed(data) {
+    this.loaderService.stopLoading();
+    let msg = await this.translate.instant('sign_in_page.invalid_username_and_password');
+    this.presentToast(msg);
   }
 
-  async handleGoogleSignInResponse(data) {
-    const isDesktop = await this.hardwareService.isDesktopSite();
-    if (isDesktop) {
-      await this.alertService.presentToast(data.isSuccessful ?
-          this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top');
+  async handleGoogleSignInLoadingFailed(data) {
+    this.loaderService.stopLoading();
+    let msg = await this.translate.instant('sign_in_page.invalid_username_and_password');
+    this.presentToast(msg);
+  }
+
+  async handleActionSignInSuccess(data) {
+    this.loaderService.stopLoading();
+    if (data.message === 'Successful') {
+      let msg = await this.translate.instant('sign_in_page.success_sign_in');
+      this.presentToast(msg);
+      this.capRouter.routeByUrl('/home');
     } else {
-      await this.alertService.presentToast(data.isSuccessful ?
-          this.translate.instant('sign_in_page.success_sign_in') : data.message, 500, 'top', 'top');
+      let msg = await this.translate.instant('sign_in_page.invalid_username_and_password');
+      this.presentToast(msg);
     }
+  }
 
+  async handleActionGoogleSignInSuccess(data) {
+    this.loaderService.stopLoading();
+    if(data.isSuccessful) {
+      let msg = await this.translate.instant('sign_in_page.success_sign_in');
+      this.presentToast(msg);
+    } else {
+      this.presentToast(data.message)
+    }
     this.capRouter.routeByUrl('/home');
   }
 
+  async handleActionSignInFailed(data) {
+    this.loaderService.stopLoading();
+    let msg = await this.translate.instant('sign_in_page.invalid_username_and_password');
+    this.presentToast(msg);
+  }
+  
+  async handleActionGoogleSignInFailed(data) {
+    this.loaderService.stopLoading();
+    this.presentToast(data.message);
+  }
+
+  async presentToast(message) {
+    const isDesktop = await this.hardwareService.isDesktopSite();
+    if (isDesktop) {
+      this.alertService.presentToast(message, 500, 'top');
+    } else {
+      this.alertService.presentToast(message, 500, 'top', 'top');
+    }
+    return;
+  }
 
   goToPage(pageName) {
     this.capRouter.routeByUrl(pageName);
-  }
-
-  async handleUseridPasswordSigninResponse(data) {
-    const isDesktop = await this.hardwareService.isDesktopSite();
-    if (data.message === 'Successful') {
-      this.isLoginSuccessful = true;
-      if (isDesktop) {
-        await this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top');
-      } else {
-        await this.alertService.presentToast(this.translate.instant('sign_in_page.success_sign_in'), 500, 'top', 'top');
-      }
-      this.capRouter.routeByUrl('/home');
-    } else {
-      this.isLoginSuccessful = false;
-      if (isDesktop) {
-        await this.alertService.presentToast(this.translate.instant('sign_in_page.invalid_username_and_password'), 500, 'top');
-      } else {
-        await this.alertService.presentToast(this.translate.instant('sign_in_page.invalid_username_and_password'), 500, 'top', 'top');
-      }
-    }
-  }
-
-  widgetLoadingSuccess(name, model) {
-    switch (name) {
-      case 'USERID_PWD_SIGNIN':
-        this.loaderService.stopLoading();
-        this.widgetModels[name] = model;
-        break;
-    }
-  }
-
-  widgetActionSuccess(name, data) {
-    this.loaderService.stopLoading();
-    switch (name) {
-      case UserIdPwdSigninWidgetActions.ACTION_SIGN_IN:
-        this.handleUseridPasswordSigninResponse(data);
-        break;
-      case 'GPLUS_SIGN_IN':
-        this.handleGoogleSignInResponse(data);
-        break;
-    }
-  }
-
-  widgetActionFailed(name, data) {
-    this.loaderService.stopLoading();
-    switch (name) {
-      case UserIdPwdSigninWidgetActions.ACTION_SIGN_IN:
-        this.handleUseridPasswordSigninResponse(data);
-        break;
-      case 'GPLUS_SIGN_IN':
-        this.handleGoogleSignInResponse({
-          isSuccessful: false,
-          message: 'Something went wrong please try again.'
-        });
-        break;
-    }
-  }
-
-  widgetLoadingFailed(name, model) {
-    this.loaderService.stopLoading();
-    switch (name) {
-      case 'USERID_PWD_SIGNIN':
-        this.handleUseridPasswordSigninResponse({
-          isSuccessful: false,
-          message: 'Something went wrong please try again.'
-        });
-        break;
-      case 'GOOGLE_SIGN_IN':
-        this.handleUseridPasswordSigninResponse({
-          isSuccessful: false,
-          message: 'Something went wrong please try again.'
-        });
-        break;
-    }
-  }
-
-  widgetLoadingStarted(name: string, data: any): any {
-  }
-
-  goBack() {
-    this.capRouter.goBack();
   }
 }

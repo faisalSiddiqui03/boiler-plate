@@ -1,12 +1,12 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
   CapRouterService
 } from '@capillarytech/pwa-framework';
-import { Utils } from '@capillarytech/pwa-components';
-import { TranslateService } from '@ngx-translate/core';
-import { OrderHistoryComponent } from '@capillarytech/pwa-components/order-history/order-history.component';
+import {Utils} from '@capillarytech/pwa-components';
+import {TranslateService} from '@ngx-translate/core';
+import {OrderHistoryComponent} from '@capillarytech/pwa-components/order-history/order-history.component';
 
 @Component({
   selector: 'app-order-history',
@@ -72,4 +72,9 @@ export class OrderHistoryPage extends OrderHistoryComponent {
     this.isOrderHistoryWidgetLoaded = true;
   }
 
+  handleOrderHistoryActionNextFailed(data) {
+  }
+
+  handleOrderHistoryActionNextSuccess(data) {
+  }
 }

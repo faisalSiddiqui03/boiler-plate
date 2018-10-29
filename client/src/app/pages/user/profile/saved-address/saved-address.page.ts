@@ -1,12 +1,12 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {
   pwaLifeCycle,
   pageView,
   CapRouterService,
 } from '@capillarytech/pwa-framework';
-import { AlertService } from '@capillarytech/pwa-ui-helpers';
-import { TranslateService } from '@ngx-translate/core';
-import { SavedAddressComponent } from '@capillarytech/pwa-components/saved-address/saved-address.component';
+import {AlertService} from '@capillarytech/pwa-ui-helpers';
+import {TranslateService} from '@ngx-translate/core';
+import {SavedAddressComponent} from '@capillarytech/pwa-components/saved-address/saved-address.component';
 
 @Component({
   selector: 'app-saved-address',
@@ -30,10 +30,10 @@ export class SavedAddressPage extends SavedAddressComponent {
   }
 
   getFlatAddress(address, index = 0) {
-      const storeConfig = this.configService.getConfig()['address'];
-      const sep = storeConfig.storeSep;
-      const addresses = address.split(sep);
-      return addresses[index] ? addresses[index] : address.split(',')[index];
+    const storeConfig = this.configService.getConfig()['address'];
+    const sep = storeConfig.storeSep;
+    const addresses = address.split(sep);
+    return addresses[index] ? addresses[index] : address.split(',')[index];
   }
 
   triggerDeleteAddress(address) {
@@ -79,5 +79,9 @@ export class SavedAddressPage extends SavedAddressComponent {
 
   handleWidgetActionRefreshFailed(data) {
     console.log('User Address widget Refresh action loading failed');
+  }
+
+  handleWidgetActionRefreshSuccess(data) {
+    console.log('User Address widget Refresh action loading success');
   }
 }

@@ -4,8 +4,8 @@ import {
   pageView,
   CapRouterService
 } from '@capillarytech/pwa-framework';
-import { ActivatedRoute } from '@angular/router';
-import { OrderDetailsComponent } from '@capillarytech/pwa-components/order-details/order-details.component';
+import {ActivatedRoute} from '@angular/router';
+import {OrderDetailsComponent} from '@capillarytech/pwa-components/order-details/order-details.component';
 
 @Component({
   selector: 'app-order-details',
@@ -27,7 +27,7 @@ export class OrderDetailsPage extends OrderDetailsComponent implements OnInit {
     super();
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.orderId = this.actRoute.snapshot.params.orderId;
   }
 

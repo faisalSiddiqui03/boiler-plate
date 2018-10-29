@@ -1,7 +1,6 @@
 import {
   Component,
-  OnInit,
-  EventEmitter
+  OnInit
 } from '@angular/core';
 import {
   Validators,
@@ -12,32 +11,27 @@ import {
 import {
   pwaLifeCycle,
   pageView,
-  OnWidgetActionsLifecyle,
-  OnWidgetLifecyle,
-  Action,
-  CapRouterService
+  CapRouterService,
+  WidgetNames
 } from '@capillarytech/pwa-framework';
-import { BaseComponent } from '@capillarytech/pwa-components/base-component';
-import { UserIdSignUpWidgetActions } from '@cap-widget/authentication/userid-signup';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 import {
   AlertService,
   LoaderService
 } from '@capillarytech/pwa-ui-helpers';
+import {SignupComponent} from '@capillarytech/pwa-components/signup/signup.component';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
 })
+
 @pwaLifeCycle()
 @pageView()
-export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
+export class SignupPage extends SignupComponent implements OnInit {
 
   signUpForm: FormGroup;
-  useridSignUpAction = new EventEmitter();
-  useridSignUpActionEmitter = new EventEmitter();
-  widgetModels: { [name: string]: any };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,13 +41,12 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     private capRouter: CapRouterService,
   ) {
     super();
-    this.widgetModels = {};
     this.signUpForm = this.formBuilder.group({
       fname: ['', Validators.compose([Validators.required,
-          Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ \.]*$')])],
+        Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ \.]*$')])],
       lname: [''],
       mobile: ['', Validators.compose([Validators.required,
-          Validators.pattern('^[2569][0-9]*$'), Validators.minLength(8), Validators.maxLength(8)])],
+        Validators.pattern('^[2569][0-9]*$'), Validators.minLength(8), Validators.maxLength(8)])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       confirmPassword: ['', Validators.compose([Validators.required])]
@@ -62,83 +55,52 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
     this.signUpForm.validator = this.matchingPasswords;
   }
 
-  ngOnInit() {}
-
-  async signUp() {
-    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode() );
-    console.log(this.signUpForm.value);
-    this.widgetModels.USERID_SIGNUP.firstName = this.signUpForm.value.fname;
-    this.widgetModels.USERID_SIGNUP.lastName = this.signUpForm.value.lname;
-    this.widgetModels.USERID_SIGNUP.email = this.signUpForm.value.email;
-    this.widgetModels.USERID_SIGNUP.mobile = this.signUpForm.value.mobile;
-    this.widgetModels.USERID_SIGNUP.password = this.signUpForm.value.password;
-    this.widgetModels.USERID_SIGNUP.userName = this.signUpForm.value.email;
-    this.widgetModels.USERID_SIGNUP.gender = 'M';
-
-    this.useridSignUpAction.emit(new Action(UserIdSignUpWidgetActions.ACTION_SIGN_UP));
+  ngOnInit() {
   }
 
-  async handleSignUpResponse(data) {
+  async userSignUp() {
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
+    this.widgetModel.firstName = this.signUpForm.value.fname;
+    this.widgetModel.lastName = this.signUpForm.value.lname;
+    this.widgetModel.email = this.signUpForm.value.email;
+    this.widgetModel.mobile = this.signUpForm.value.mobile;
+    this.widgetModel.password = this.signUpForm.value.password;
+    this.widgetModel.userName = this.signUpForm.value.email;
+    this.widgetModel.gender = 'M';
+
+    this.signup();
+  }
+
+  async handleSignupActionSignupFailed(data) {
+    this.loaderService.stopLoading();
+    await this.alertService.presentToast(data.message, 500, 'top', 'top');
+  }
+
+  async handleSignupActionSignupSuccess(data) {
     this.loaderService.stopLoading();
     if (data.message === 'Succesfull') {
       await this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful'), 500, 'top', 'top');
-      this.useridSignUpAction.emit(
-        new Action('SIGNUP_SIGNIN', [this.signUpForm.value.email, this.signUpForm.value.password]));
-        this.capRouter.routeByUrl('/home');
+      this.signin(this.signUpForm.value.email, this.signUpForm.value.password);
+      this.capRouter.routeByUrl('/home');
     } else {
       await this.alertService.presentToast(data.message, 500, 'top', 'top');
     }
   }
 
-  goToPage(pageName) {
-    this.capRouter.routeByUrl(pageName);
-  }
-
-  widgetActionFailed(name: string, data: any): any {
+  handleSignupLoadingSuccess(data) {
     this.loaderService.stopLoading();
-    switch (name) {
-      case UserIdSignUpWidgetActions.ACTION_SIGN_UP:
-        this.handleSignUpResponse(data);
-    }
+    this.widgetModel = data;
   }
 
-  widgetActionSuccess(name: string, data: any): any {
+  async handleSignupLoadingFailed(data) {
     this.loaderService.stopLoading();
-    switch (name) {
-      case UserIdSignUpWidgetActions.ACTION_SIGN_UP:
-        this.handleSignUpResponse(data);
-    }
+    await this.alertService.presentToast(this.translate.instant('sign_up_page.unable_to_get_user_data'), 500, 'top', 'top');
   }
 
-  widgetLoadingFailed(name: string, data: any): any {
+  handleSignupActionSigninFailed(data) {
   }
 
-  widgetLoadingStarted(name: string, data: any): any {
-  }
-
-  widgetLoadingSuccess(name: string, data: any): any {
-    switch (name) {
-      case 'USERID_SIGNUP':
-        this.loaderService.stopLoading();
-        this.widgetModels[name] = data;
-        break;
-    }
-  }
-
-  private mapValidators(validators) {
-    const formValidators = [];
-
-    if (validators) {
-      for (const validation of Object.keys(validators)) {
-        if (validators[validation] === true) {
-          formValidators.push(Validators[validation]);
-        } else {
-          formValidators.push(Validators[validation](validators[validation]));
-        }
-      }
-    }
-
-    return formValidators;
+  handleSignupActionSigninSuccess(data) {
   }
 
   matchingPasswords(AC: AbstractControl) {
@@ -146,10 +108,14 @@ export class SignupPage extends BaseComponent implements OnInit, OnWidgetLifecyl
       const password = AC.get('password').value; // to get value in input tag
       const confirmPassword = AC.get('confirmPassword').value; // to get value in input tag
       if (password !== confirmPassword) {
-        AC.get('confirmPassword').setErrors({ matchingPasswords: true });
+        AC.get('confirmPassword').setErrors({matchingPasswords: true});
       } else {
         return null;
       }
     }
+  }
+
+  goToPage(pageName) {
+    this.capRouter.routeByUrl(pageName);
   }
 }

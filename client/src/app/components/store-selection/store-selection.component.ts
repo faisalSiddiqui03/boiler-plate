@@ -1,506 +1,475 @@
-import {Component, OnInit, EventEmitter, Input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import { Store } from '@cap-service/store';
 import {AlertService, LoaderService} from '@capillarytech/pwa-ui-helpers';
-import {ModalController} from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
-import {BaseComponent} from '@capillarytech/pwa-components/base-component';
 import {
-  pwaLifeCycle,
-  OnWidgetActionsLifecyle,
-  OnWidgetLifecyle,
-  DeliveryModes,
-  DeliverySlot,
-  Action,
-  FulfilmentModeWidgetActions, LanguageService, CapRouterService
+    pwaLifeCycle,
+    LanguageService,
+    CapRouterService, DeliveryModes, Action
 } from '@capillarytech/pwa-framework';
-import { StoreLocatorWidgetActions } from '@cap-widget/store-locator';
-import { LocationWidgetActions } from '@cap-widget/location';
-import { CartWidgetActions } from '@cap-widget/cart';
 import { StoreListComponent } from '../store-list/store-list.component';
+import { StoreSelectionComponent, ViewStatus } from '@capillarytech/pwa-components/selection-component/store-selection';
 
 @Component({
-  selector: 'app-store-selection',
-  templateUrl: './store-selection.component.html',
-  styleUrls: ['./store-selection.component.scss']
+    selector: 'app-store-selection',
+    templateUrl: './store-selection.component.html',
+    styleUrls: ['./store-selection.component.scss']
 })
-
 @pwaLifeCycle()
-export class StoreSelectionComponent extends BaseComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle {
-  bannerRefCode: string;
-  bannerUrl: string;
-  bannerWidgetAction = new EventEmitter();
-  bannerWidgetExecutor = new EventEmitter();
-  fulfilmentModeWidgetAction = new EventEmitter();
-  locationsWidgetAction = new EventEmitter();
-  locationsWidgetActionGeometry = new EventEmitter();
-  storeLocatorWidgetAction = new EventEmitter();
-  cartWidgetAction = new EventEmitter();
-  // dataLoaded: any = {};
-  changeRequested = false;
-  deliveryModes = DeliveryModes;
-  dropdownViewStatus: Map<string, boolean> = new Map();
-  selectedCity = '';
-  selectedCityCode;
-  selectedArea = '';
-  selectedAreaCode;
-  selectedStore;
-  hasError: { [name: string]: string | boolean } = {};
-  citySelectionHistory: any = {};
-  isNavigationClicked = false;
-  lat;
-  lng;
-  isCleared = false;
-  clearCartPopup = false;
-  clearCartToChange = '';
-  sizeConfig = [
-    {"height": 200, "width": 400, "type": "mobile"},
-    {"height": 400, "width": 1200, "type": "desktop"}
-  ];
-  @Input() isModal: false;
-  private cityData: any;
+export class SelectionComponent extends StoreSelectionComponent {
 
-  constructor(
-    private loaderService: LoaderService,
-    private translate: TranslateService,
-    private router: Router,
-    private actRoute: ActivatedRoute,
-    private alertService: AlertService,
-    private modalController: ModalController,
-    private languageService: LanguageService,
-    private capRouter: CapRouterService,
-  ) {
-    super();
-    this.bannerRefCode = this.configService.getConfig()['headerBannerRefCode'];
-    this.bannerUrl = this.configService.getConfig()['banner_base_url'];
-    this.hasError = {
-      selectAreaFirst: false
+    bannerRefCode: string;
+    bannerUrl: string;
+
+    hasError: { [name: string]: string | boolean } = {};
+    sizeConfig = [
+        {'height': 200, 'width': 400, 'type': 'mobile'},
+        {'height': 400, 'width': 1200, 'type': 'desktop'}
+    ];
+    @Input() isModal: false;
+
+    searchTerm = { city: '', area: '' };
+    clearCartPromise = {
+        resolve: null,
+        reject: null
     };
-  }
+    private retryFailures = {
+        retryArea: 0,
+        retryStore: 0
+    };
 
-  ngOnInit() {
-  }
-
-  async ionViewWillEnter() {
-    this.translate.use(this.getCurrentLanguageCode());
-    this.changeRequested = false;
-  }
-
-  widgetLoadingStarted(name, data) {
-    console.log('Widget loading started' + name, data);
-  }
-
-  widgetLoadingSuccess(name, data) {
-
-  }
-
-  widgetLoadingFailed(name, data) {
-    console.log('Widget loading failed' + name, data);
-  }
-
-  // WARNING : Do not add loaderService.stopLoading(); before switch case or at any place except
-  // existing stop loading.
-  async widgetActionSuccess(name: string, data: any) {
-    console.log('name = ', name, ' data = ', data);
-    switch (name) {
-      case LocationWidgetActions.LOCATE_ME:
-        const geometry = data.geometry;
-        await this.findStoreByLatLong(geometry.latitude, geometry.longitude);
-        //   geometry.latitude = position.coords.latitude;
-        //   geometry.longitude = position.coords.longitude;
-        //   location.geometry = geometry;
-
-        break;
-      case StoreLocatorWidgetActions.FIND_BY_AREA:
-        if (data.length) {
-          const firstStore = data[0];
-          // TODO:: add alert-controller to confirm before emptying cart
-          if (this.isStoreSelected() && this.getCurrentStore().id !== firstStore.id) {
-            this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
-          }
-          this.setCurrentStore(firstStore);
-          this.navigateToDeals();
-          // }
-        } else {
-          this.loaderService.stopLoading();
-          const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-          await this.alertService.presentToast(store_alert, 3000, 'top');
-        }
-        break;
-      case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        this.loaderService.stopLoading();
-        if (!this.isModal) {
-          if (data && data.length) {
-            if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
-              const firstStore = data[0];
-              if (this.isStoreSelected() && this.getCurrentStore().id !== firstStore.id) {
-                this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
-              }
-              this.setCurrentStore(firstStore);
-              this.navigateToDeals();
-              return;
-            }
-            this.changeRequested = false;
-            this.capRouter.routeByUrl('/store-selection?latitude=' + this.lat + '&longitude=' + this.lng);
-          } else {
-            const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-            await this.alertService.presentToast(store_alert, 3000, 'top');
-          }
-        } else {
-          // open another modal with store selection
-          await this.openStoreListModal();
-        }
-        break;
-      case StoreLocatorWidgetActions.FIND_BY_CITY:
-        this.loaderService.stopLoading();
-        if (!this.isModal) {
-          if (data && data.length) {
-            this.changeRequested = false;
-            this.capRouter.routeByUrl('/store-selection?cityId=' + this.selectedCityCode);
-          } else {
-            const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
-            await this.alertService.presentToast(store_alert, 3000, 'top');
-          }
-        } else {
-          // open another modal with store selection
-          await this.openStoreListModal();
-        }
-        break;
-      case CartWidgetActions.ACTION_CLEAR_CART:
-        const alert_text = await this.translate.instant('cart.item_removed');
-        await this.alertService.presentToast(alert_text, 3000, 'bottom');
-        break;
-      case LocationWidgetActions.FETCH_AREAS_BY_CITY_CODE:
-        if (data && data.length === 1) {
-          this.selectArea(data[0]);
-        }
-        break;
-    }
-  }
-
-  async switchLanguage() {
-    const langCode = this.getCurrentLanguageCode();
-    switch (langCode) {
-      case 'ar':
-        await this.languageService.updateLanguageByCode('en');
-        this.capRouter.routeByUrl('home');
-        break;
-      case 'en':
-        await this.languageService.updateLanguageByCode('ar');
-        this.capRouter.routeByUrl('home');
-        break;
-      default:
-        // do nothing
-        break;
-    }
-  }
-
-  async openStoreListModal() {
-    const modal = await this.modalController.create({
-      component: StoreListComponent,
-      componentProps: {
-        cityId: this.selectedCityCode,
-        latitude: this.lat,
-        longitude: this.lng,
-        isModal: true
-      }
-    });
-    await modal.present();
-
-    modal.onDidDismiss().then((storeSelected) => {
-      if (storeSelected.data) {
-        this.modalController.dismiss(true);
-      }
-    });
-  }
-
-  async findStore(force: boolean = false) {
-    this.clearCartToChange = 'store';
-    // TODO:: add alert-controller to confirm before emptying cart
-    if (this.selectedCityCode !== this.getCurrentStore().city.code) {
-      let deliverySlot = new DeliverySlot();
-      deliverySlot.id = -2;
-      deliverySlot.time = new Date();
-      this.setDeliverySlot(deliverySlot);
-    }
-    if (this.isCartNotEmpty() &&
-      (this.selectedAreaCode !== this.getCurrentStore().area.code ||
-        this.selectedCityCode !== this.getCurrentStore().city.code)
+    constructor(
+        private loaderService: LoaderService,
+        private translate: TranslateService,
+        private router: Router,
+        private actRoute: ActivatedRoute,
+        private alertService: AlertService,
+        private modalController: ModalController,
+        private languageService: LanguageService,
+        private capRouter: CapRouterService,
+        private alertController: AlertController
     ) {
-      if (!force) {
-        this.clearCartPopup = true;
-        return;
-      }
-      this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+        super(capRouter);
+
+        this.bannerUrl = this.configService.getConfig()['banner_base_url'];
+        this.bannerRefCode = this.configService.getConfig()['headerBannerRefCode'];
+
+        this.hasError = {
+            selectAreaFirst: false
+        };
     }
-    this.isNavigationClicked = true;
-    if (this.getDeliveryMode() === this.deliveryModes.HOME_DELIVERY) {
-      await this.loaderService.startLoadingByMode('', this.getDeliveryMode());
-      this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_AREA,
-        [this.selectedAreaCode, this.getDeliveryMode()]));
-    } else {
-      await this.loaderService.startLoadingByMode('', this.getDeliveryMode());
-      if (!this.selectedCityCode) {
 
-        this.navigateToDeals();
-        return;
-      }
-
-      this.storeLocatorWidgetAction.emit(
-        new Action(
-          StoreLocatorWidgetActions.FIND_BY_CITY,
-          [this.selectedCityCode, this.getDeliveryMode()]
-        )
-      )
+    isDropDownShown() {
+        return false;
     }
-  }
 
-  navigateToDeals() {
-    if (this.isModal) {
-      return this.modalController.dismiss(true);
+    switchLanguage() {
+
+        const code = this.getCurrentLanguageCode();
+        if (code === 'en') {
+            super.switchLanguage('ar');
+            return;
+        }
+
+        super.switchLanguage('en');
     }
-    this.isNavigationClicked = true;
-    this.changeRequested = false;
-    this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
-  }
 
-  async widgetActionFailed(name: string, data: any) {
-    this.loaderService.stopLoading();
-    console.log('failed name = ', name, ' data = ', data);
-    switch (name) {
-      case LocationWidgetActions.LOCATE_ME:
-        const msg = await this.translate.instant('home_page.allow_location_access');
-        this.alertService.presentToast(msg, 1000, 'bottom');
-        console.log('unable to find location', data);
-        break;
-      case StoreLocatorWidgetActions.FIND_BY_LOCATION:
-        console.log('unable to find store', data);
-        break;
-      case StoreLocatorWidgetActions.FIND_BY_AREA:
-        console.log('unable to find store', data);
-        break;
-      case CartWidgetActions.ACTION_CLEAR_CART:
+    handleCitySelectionStarted(city) {
+
+        this.hasError.selectAreaFirst = false;
+        this.searchTerm.city = city.name;
+        this.searchTerm.area = '';
+        this.clearSelectedArea(this.getDeliveryMode());
+        this.hasError.changeCity = true;
+
+        if (this.getDeliveryMode() === DeliveryModes.PICKUP) {
+            this.loaderService.startLoadingByMode('', this.getDeliveryMode());
+        }
+    }
+
+    // to stop auto selection of store.
+    handleAreaSelection(area) {}
+    handleAreaSelectionStarted(area) {
+
+        this.searchTerm.area = this.getAreaDisplayName(area);
+    }
+
+    toggleAreaView(status: ViewStatus) {
+
+        if (!this.searchTerm.city && status === ViewStatus.DEFAULT) {
+            this.hasError.selectAreaFirst = true;
+            return;
+        }
+
+        super.toggleAreaView(status);
+    }
+
+    restoreCityName() {
+
+        if (!this.isCityVisible() && !this.searchTerm.city) {
+
+            if (this.getSelectedCity().code) {
+                this.searchTerm.city = this.getSelectedCity().name;
+            }
+        }
+    }
+
+    changeOrderModeOfApp(mode: DeliveryModes, event) {
+
+        if (!this.isEmptyCart()) {
+            this.presentAlert(null, mode, event);
+            return;
+        }
+
+        const cityName = this.getSelectedCity(mode).name;
+        this.searchTerm.city = cityName ? cityName : '';
+        this.searchTerm.area = this.getAreaDisplayName(this.getSelectedArea(mode));
+        this.changeOrderMode(mode);
+        // so that ngzone is triggered again
+        event.target.click();
+    }
+
+    getAreaDisplayName(area) {
+
+        if (area.pincode) {
+            return this.translate.instant('home_page.block_') + area.pincode;
+        } else if (area.name && area.name.indexOf('_') !== -1) {
+            return this.translate.instant('home_page.block_') + area.name.split('_')[1];
+        }
+        return area.name;
+    }
+
+    getDefaultUrl() {
+
+        if (this.getCurrentLanguageCode() === 'en') {
+
+            return'https://www.kuwait.pizzahut.me/assets/imgs/PH-60th-Years-FCDS-Deals-Banner-eng.jpg';
+        }
+
+        return 'https://www.kuwait.pizzahut.me/assets/imgs/PH-60th-Years-FCDS-Deals-Banner-ar.jpg';
+    }
+
+    getBannerUrlBySrc(src) {
+
+        return this.bannerUrl + src[0].contentUrl + '?height=170&width=340&builder=freeimage';
+    }
+
+    getFullBannerUrl(src) {
+
+        return (Array.isArray(src) && src.length > 0) ? this.getBannerUrlBySrc(src) : this.getDefaultUrl();
+    }
+
+    isStoreSelectionButtonEnabled() {
+
+        if ( this.searchTerm.area && this.searchTerm.city ) {
+            return true;
+        }
+
+        if ( this.getDeliveryMode() === DeliveryModes.PICKUP && this.searchTerm.city ) {
+            return true;
+        }
+
+        if ( this.getDeliveryMode() === DeliveryModes.PICKUP && !this.isDefaultLocation() ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    async handleWidgetActionClearCartFailed(data: any) {
+
         const alert_text = await this.translate.instant('cart.item_removed_failure');
         await this.alertService.presentToast(alert_text, 30000, 'bottom');
-        break;
-    }
-  }
 
-  isDropDownShown(name: string) {
-
-    const nameExists = this.dropdownViewStatus.has(name);
-    if (!nameExists) {
-      return false;
-    }
-
-    return this.dropdownViewStatus.get(name);
-  }
-
-  isStoreSelected() {
-    return this.getCurrentStore() && !this.getCurrentStore().isDefaultLocation && !this.changeRequested;
-  }
-
-  changeSelectedStore() {
-    this.changeRequested = true;
-  }
-
-  toggleDropDown(name: string, force: boolean = false, forceValue?: boolean) {
-    if (name === 'area' && !this.selectedCityCode) {
-      return;
-    } else if (name === 'area' && this.selectedCityCode) {
-      this.hasError.selectAreaInput = false;
-    }
-
-    const nameExists = this.dropdownViewStatus.has(name);
-
-    if (!nameExists) {
-      this.dropdownViewStatus.set(name, true);
-      return;
-    }
-
-    let dropdownViewStatus = this.dropdownViewStatus;
-    const value = !dropdownViewStatus.get(name);
-    this.dropdownViewStatus.forEach(function (value, key) {
-
-      dropdownViewStatus.set(key, false);
-    });
-
-    this.dropdownViewStatus = dropdownViewStatus;
-    this.dropdownViewStatus.set(name, value);
-
-    if (force) {
-
-      console.log(name, force, forceValue);
-      this.dropdownViewStatus.set(name, forceValue);
-      return;
-    }
-  }
-
-  filterEntity(e, type) {
-
-  }
-
-  selectCity(city, force = false) {
-    this.isCleared = false;
-    this.hasError.selectAreaFirst = false;
-    const previousCity = this.selectedCity ? this.selectedCity : '';
-    this.selectedCity = city.name;
-    this.selectedCityCode = city.code;
-    this.toggleDropDown('city', true, false);
-    if (previousCity !== this.selectedCity) {
-      this.selectedArea = '';
-      this.toggleDropDown('area');
-    }
-    if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
-      this.cityData = city;
-      this.clearCartToChange = 'takeaway-store';
-      if (this.selectedCityCode !== this.getCurrentStore().city.code) {
-        let deliverySlot = new DeliverySlot();
-        deliverySlot.id = -2;
-        deliverySlot.time = new Date();
-        this.setDeliverySlot(deliverySlot);
-      }
-      if (this.isCartNotEmpty() && this.selectedCityCode !== this.getCurrentStore().city.code) {
-        if (!force) {
-          this.clearCartPopup = true;
-          return;
+        if (this.clearCartPromise.reject !== null) {
+            this.clearCartPromise.reject();
         }
-        this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
-      }
-
-      this.checkIfStoresAreAvailable(this.selectedCityCode);
-      return;
     }
 
-    const getAreasByCityName = new Action(LocationWidgetActions.FETCH_AREAS_BY_CITY_CODE, [city]);
-    this.locationsWidgetAction.emit(getAreasByCityName);
-  }
+    async handleWidgetActionClearCartSuccess(data: any) {
 
-  checkIfStoresAreAvailable(cityId, lat = 0, lng = 0) {
-    if (cityId) {
-      const stores = this.storeLocatorWidgetAction.emit(new Action(
-        StoreLocatorWidgetActions.FIND_BY_CITY, [cityId, this.getDeliveryMode()])
-      );
+        const alert_text = await this.translate.instant('cart.item_removed');
+        await this.alertService.presentToast(alert_text, 3000, 'bottom');
 
-    } else if (lat && lng) {
-      const stores = this.storeLocatorWidgetAction.emit(new Action(
-        StoreLocatorWidgetActions.FIND_BY_LOCATION, [lat, lng, this.getDeliveryMode()])
-      );
-    }
-    return;
-  }
-
-  selectArea(area) {
-    this.selectedArea = this.getAreaDisplayName(area);
-    this.selectedAreaCode = area.code;
-
-    console.log('selected area ', area);
-    this.toggleDropDown('area', true, false);
-
-  }
-
-  getAreaDisplayName(area) {
-    if (area.pincode) {
-      return this.translate.instant('home_page.block_') + area.pincode;
-    } else if (area.name && area.name.indexOf('_') !== -1) {
-      return this.translate.instant('home_page.block_') + area.name.split('_')[1];
-    }
-    return area.name;
-  }
-
-  filterEmptyCities(cityList) {
-    return cityList.filter(city => city.name !== '');
-  }
-
-  filterEntires(cityList, searchTerm) {
-    const searchSubString = this.isCleared ? '' : searchTerm.toLowerCase();
-    this.isCleared = false;
-    return (cityList || []).filter(city => (city.name.toLowerCase() || '').includes(searchSubString) && city.name);
-  }
-
-  async locateMe() {
-    await this.loaderService.startLoading('Fetching Stores', this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
-    this.locationsWidgetAction.emit(new Action(LocationWidgetActions.LOCATE_ME, []));
-  }
-
-  async findStoreByLatLong(lat, lng) {
-    this.lat = lat;
-    this.lng = lng;
-    if (this.getDeliveryMode() && this.getDeliveryMode() === this.deliveryModes.PICKUP) {
-      this.checkIfStoresAreAvailable(null, lat, lng);
-      return;
+        if (this.clearCartPromise.resolve !== null) {
+            this.clearCartPromise.resolve();
+        }
     }
 
-    this.storeLocatorWidgetAction.emit(new Action(StoreLocatorWidgetActions.FIND_BY_LOCATION,
-      [lat, lng, this.getDeliveryMode()]));
-  }
+    async handleWidgetActionFindAreasByCityFailed(data: any) {
 
-  isCitySelected() {
-    this.hasError.selectAreaFirst = !this.selectedCity;
-  }
+        if ( this.retryFailures.retryArea >= 3 ) {
 
-  isCartNotEmpty() {
-    return this.getCart() && this.getCart().items.length;
-  }
+            const store_alert = await this.translate.instant('home_page.unable_to_get_areas');
+            await this.alertService.presentToast(store_alert, 3000, 'top');
 
-  changeOrderMode(mode, previousMode, force: boolean = false) {
-    this.clearCartToChange = 'orderMode';
-    // TODO:: add alert-controller to confirm before emptying cart
-    if (mode !== previousMode && this.isCartNotEmpty()) {
-      if (!force) {
-        this.clearCartPopup = true;
-        return;
-      }
-      this.cartWidgetAction.emit(new Action(CartWidgetActions.ACTION_CLEAR_CART));
+            return;
+        }
+
+        this.retryFailures.retryArea = this.retryFailures.retryArea + 1;
+        const city = this.getSelectedCity();
+        this.findAreasByCity(city);
     }
 
-    this.toggleDropDown('area', true, false);
-    this.toggleDropDown('city', true, false);
-    this.citySelectionHistory[previousMode] = {
-      selectedCity: this.selectedCity || '',
-      selectedCityCode: this.selectedCityCode || '',
-      selectedArea: this.selectedArea || '',
-      selectedAreaCode: this.selectedAreaCode || ''
-    };
+    handleWidgetActionFindAreasByCitySuccess(data: any): any {
 
-    this.fulfilmentModeWidgetAction.emit(new Action(FulfilmentModeWidgetActions.ACTION_CHANGE_MODE, mode));
-    const selected = this.citySelectionHistory[mode] || {};
-    this.selectedCity = selected.selectedCity || '';
-    this.selectedCityCode = selected.selectedCityCode || '';
-    this.selectedArea = selected.selectedArea || '';
-    this.selectedAreaCode = selected.selectedAreaCode || '';
-  }
+        this.hasError.changeCity = false;
+        if ( data && data.length === 1 ) {
 
-  getBannerRefCodeWithLangCode(refCode: string) {
-    return refCode + this.getCurrentLanguage().code;
-  }
-
-  getFullBannerUrl(src) {
-    return (Array.isArray(src) && src.length > 0)
-      ? this.bannerUrl + src[0].contentUrl + '?height=170&width=340&builder=freeimage'
-      : this.getCurrentLanguageCode() === 'en' ? 'https://www.kuwait.pizzahut.me/assets/imgs/PH-60th-Years-FCDS-Deals-Banner-eng.jpg'
-        : 'https://www.kuwait.pizzahut.me/assets/imgs/PH-60th-Years-FCDS-Deals-Banner-ar.jpg'
-  }
-
-  dismissClearCartPopup(change) {
-    this.clearCartPopup = false;
-    if (change === 'orderMode') {
-      this.toggleOrderMode(true);
-    } else if (change === 'store') {
-      this.findStore(true);
-    } else if (change === 'takeaway-store') {
-      this.selectCity(this.cityData, true);
+            this.selectArea(data[0]);
+        }
     }
-  }
 
-  toggleOrderMode(force: boolean = false) {
-    const presentMode = this.getDeliveryMode();
-    const toMode = presentMode === this.deliveryModes.HOME_DELIVERY ? this.deliveryModes.PICKUP : this.deliveryModes.HOME_DELIVERY;
-    this.changeOrderMode(toMode, presentMode, force);
-  }
+    async handleWidgetActionFindByAreaFailed(data: any) {
 
-  preventPropogation(e) {
-    e.preventDefault();
-    e.stopPropagation();
-  }
+        if ( this.retryFailures.retryStore >= 3 ) {
 
+            const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+            await this.alertService.presentToast(store_alert, 3000, 'top');
+
+            return;
+        }
+
+        this.retryFailures.retryStore = this.retryFailures.retryStore + 1;
+        const area = this.getSelectedArea();
+        this.findStoresByArea(area);
+    }
+
+    async fetchStore() {
+
+        await this.loaderService.startLoadingByMode('', this.getDeliveryMode());
+        if (this.getDeliveryMode() === DeliveryModes.HOME_DELIVERY) {
+
+            const area = this.getSelectedArea();
+            this.findStoresByArea(area);
+            return;
+        }
+
+        // if store is selected then just use it
+        if (!this.isDefaultLocation()) {
+
+            this.navigateToDeals();
+            return;
+        }
+
+        const city = this.getSelectedCity();
+        this.findStoresByCity(city);
+    }
+
+    dismissRemoveItemPopup(store) {
+
+        console.log('dismissed the pop up');
+    }
+
+    removeCartItem(store, mode?: DeliveryModes, event?) {
+
+        this.clearCart();
+        this.loaderService.startLoadingByMode('', this.getDeliveryMode());
+        const promise = new Promise((resolve, reject) => {
+
+            this.clearCartPromise.resolve = resolve;
+            this.clearCartPromise.reject = reject;
+        }).then(() => {
+
+            if ( store !== null ) {
+                this.setStoreAndRedirect(store);
+                return;
+            }
+            // toggling mode
+            this.loaderService.stopLoading();
+            this.changeOrderModeOfApp(mode, event);
+        }).catch( error => {
+
+            // this should show cart could not be cleared
+        });
+    }
+
+    setStoreAndRedirect(store) {
+
+        this.setCurrentStore(store);
+        this.navigateToDeals();
+    }
+
+    async presentAlert(store, mode: DeliveryModes = null, event = null) {
+
+        const cartConfirm = await this.translate.instant('cart.confirm');
+        const cartDismiss = await this.translate.instant('cart.dismiss');
+        const confirmRemove = await this.translate.instant('cart.confirm_remove');
+        const alert = await this.alertController.create({
+            message: confirmRemove,
+            cssClass: 'alert-modal',
+            buttons: [
+                {
+                    text: cartDismiss,
+                    role: 'cancel',
+                    cssClass: 'btn-dismiss',
+                    handler: () => {
+                        this.dismissRemoveItemPopup(store);
+                    }
+                }, {
+                    text: cartConfirm,
+                    cssClass: 'btn-success',
+                    handler: () => {
+                        this.dismissRemoveItemPopup(store);
+                        this.removeCartItem(store, mode, event);
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
+    }
+
+    async handleWidgetActionFindByAreaSuccess(data: any) {
+
+        if (data.length) {
+
+            const firstStore = data[0];
+            if (this.getCurrentStore().id !== firstStore.id && !this.isEmptyCart()) {
+                await this.loaderService.stopLoading();
+                await this.presentAlert(firstStore);
+                return;
+            }
+
+            this.setStoreAndRedirect(firstStore);
+            return;
+        }
+
+        await this.loaderService.stopLoading();
+        const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+        await this.alertService.presentToast(store_alert, 3000, 'top');
+
+    }
+
+    async handleWidgetActionFindByCityFailed(data: any) {
+
+        this.loaderService.stopLoading();
+        const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+        await this.alertService.presentToast(store_alert, 3000, 'top');
+    }
+
+    filterStores(data: Array<Store>) {
+
+        const stores = [];
+
+        if ( !data ) {
+            return [];
+        }
+        Array.from(data).forEach(store => {
+            if (store.deliveryModes.indexOf(this.getDeliveryMode()) > -1) {
+                stores.push(store);
+            }
+        });
+
+        return stores;
+    }
+
+    handleWidgetActionFindByCitySuccess(fetchedStores: any) {
+
+        const data = this.filterStores(fetchedStores);
+        if (data && data.length) {
+
+            // check if store has available takeaway store
+            this.clearStoreChangeRequest();
+
+            if (this.isModal) {
+                this.openStoreListModal();
+            } else {
+
+                this.capRouter.routeByUrl('/store-selection?cityId=' + this.getSelectedCity(this.getDeliveryMode()).code);
+            }
+
+            return;
+        }
+
+        this.handleWidgetActionFindByCityFailed(data);
+    }
+
+    async handleWidgetActionFindByLocationFailed(data: any) {
+        this.loaderService.stopLoading();
+        const store_alert = await this.translate.instant('home_page.unable_to_get_stores');
+        await this.alertService.presentToast(store_alert, 3000, 'top');
+    }
+
+    async handleWidgetActionFindByLocationSuccess(data: any) {
+
+        const stores = this.filterStores(data);
+        if (!stores || stores.length < 1) {
+            await this.handleWidgetActionFindByLocationFailed(data);
+            return;
+        }
+
+        const locationDetails = this.getSelectedLocation();
+        if (this.getDeliveryMode() === DeliveryModes.PICKUP) {
+
+            if (!this.isModal) {
+
+                this.capRouter.routeByUrl('/storeselection?latitude=' + locationDetails.latitude +
+                    '&longitude=' + locationDetails.longitude);
+                return;
+            }
+
+            await this.openStoreListModal(locationDetails);
+            return;
+        }
+
+        const firstStore = stores[0];
+
+        if (!this.isEmptyCart()) {
+            this.presentAlert(firstStore);
+            return;
+        }
+
+        this.setStoreAndRedirect(firstStore);
+    }
+
+    async handleWidgetActionLocateMeFailed(data: any) {
+
+        const msg = await this.translate.instant('home_page.allow_location_access');
+        this.alertService.presentToast(msg, 1000, 'bottom');
+    }
+
+    async locateDevice() {
+        await this.loaderService.startLoadingByMode('Fetching Stores', this.getDeliveryMode());
+        this.locateMe();
+    }
+
+    async openStoreListModal(locationDetails = null) {
+
+        let latitude = '';
+        let longitude = '';
+        if (locationDetails !== null) {
+            latitude = locationDetails.latitude;
+            longitude = locationDetails.longitude;
+        }
+
+        const modal = await this.modalController.create({
+            component: StoreListComponent,
+            componentProps: {
+                cityId: this.getSelectedCity(),
+                latitude: latitude,
+                longitude: longitude,
+                isModal: true
+            }
+        });
+
+        await modal.present();
+        this.loaderService.stopLoading();
+        modal.onDidDismiss().then((storeSelected) => {
+            if (storeSelected.data) {
+                this.modalController.dismiss(true);
+            }
+        });
+    }
+
+    navigateToDeals() {
+
+        if (this.isModal) {
+            return this.modalController.dismiss(true);
+        }
+        this.clearStoreChangeRequest();
+        this.capRouter.routeByUrl('/products?category=deals&id=CU00215646');
+    }
 }

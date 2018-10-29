@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Utils } from '@capillarytech/pwa-components';
 import {
   Action,
   OnWidgetActionsLifecyle,
@@ -161,6 +162,7 @@ export class HeaderComponent extends BaseComponent implements OnInit, OnWidgetLi
     if (this.isModalActive) {
       this.modalController.dismiss();
     }
-    this.capRouter.routeByUrl(`/products?category=${category}&id=${categoryId}`);
+    const categoryName = Utils.getHiphenatedString(category);
+    this.capRouter.routeByUrl(`/products?category=${categoryName}&id=${categoryId}`);
   }
 }

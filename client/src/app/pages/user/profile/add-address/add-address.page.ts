@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   pwaLifeCycle,
   pageView
 } from '@capillarytech/pwa-framework';
-import { Utils } from '@capillarytech/pwa-components/util/utils';
-import { ActivatedRoute } from '@angular/router';
-import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
-import { TranslateService } from '@ngx-translate/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AddEditAddressComponent } from '@capillarytech/pwa-components/add-edit-address/add-edit-address.component';
+import {Utils} from '@capillarytech/pwa-components/util/utils';
+import {ActivatedRoute} from '@angular/router';
+import {LoaderService, AlertService} from '@capillarytech/pwa-ui-helpers';
+import {TranslateService} from '@ngx-translate/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {AddEditAddressComponent} from '@capillarytech/pwa-components/add-edit-address/add-edit-address.component';
 
 @Component({
   selector: 'app-add-address',
@@ -81,7 +81,7 @@ export class AddAddressPage extends AddEditAddressComponent implements OnInit {
     if (data) {
       this.addAddressForm.setValue({
         addressDetails: data.detail || '',
-        landMark: data.landmark || '' ,
+        landMark: data.landmark || '',
         addressType: data.addressType ? data.addressType.toLowerCase() : ''
       });
       this.addressModel = data;
@@ -112,5 +112,11 @@ export class AddAddressPage extends AddEditAddressComponent implements OnInit {
   updateLatLongDetails(event) {
     this.newLatLngDetails.latitude = event.latitude;
     this.newLatLngDetails.longitude = event.longitude;
+  }
+
+  handleWidgetActionDeleteAddressFailed(data) {
+  }
+
+  handleWidgetActionDeleteAddressSuccess(data) {
   }
 }
