@@ -157,7 +157,7 @@ export class CheckoutPage extends SinglePageCheckoutComponent implements OnInit,
   getSavedAddresses(addresses) {
     // this.savedAddresses = addresses; TODO : check with faisale
     this.savedAddresses = addresses.filter(elem =>
-      elem.city.code === this.getCurrentStore().selectedCityId
+      elem.city.code === this.getCurrentStore().selectedCity.code
     );
     this.useSavedAddress = this.savedAddresses.length > 0;
     if (this.useSavedAddress) {
