@@ -36,10 +36,6 @@ export class StoreListComponent extends StoreListingComponent implements OnInit 
     }
   }
 
-  ionViewDidEnter(){
-    this.loaderService.stopLoading();
-  }
-
   navigateToDeals() {
     if (this.isModal) {
       this.modalController.dismiss(true);
