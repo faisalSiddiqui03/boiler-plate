@@ -42,11 +42,18 @@ export class SignupPage extends SignupComponent implements OnInit {
   ) {
     super();
     this.signUpForm = this.formBuilder.group({
-      fname: ['', Validators.compose([Validators.required,
-        Validators.pattern('^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ \.]*$')])],
+      fname: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern(
+          '^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ \.]*$'
+        )
+      ])],
       lname: [''],
-      mobile: ['', Validators.compose([Validators.required,
-        Validators.pattern('^[2569][0-9]*$'), Validators.minLength(8), Validators.maxLength(8)])],
+      mobile: ['', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[2569][0-9]*$'),
+        Validators.minLength(8), Validators.maxLength(8)
+      ])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       confirmPassword: ['', Validators.compose([Validators.required])]
@@ -60,13 +67,13 @@ export class SignupPage extends SignupComponent implements OnInit {
 
   async userSignUp() {
     await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
-    this.widgetModel.firstName = this.signUpForm.value.fname;
-    this.widgetModel.lastName = this.signUpForm.value.lname;
-    this.widgetModel.email = this.signUpForm.value.email;
-    this.widgetModel.mobile = this.signUpForm.value.mobile;
-    this.widgetModel.password = this.signUpForm.value.password;
-    this.widgetModel.userName = this.signUpForm.value.email;
-    this.widgetModel.gender = 'M';
+    this.signupWidgetModel.firstName = this.signUpForm.value.fname;
+    this.signupWidgetModel.lastName = this.signUpForm.value.lname;
+    this.signupWidgetModel.email = this.signUpForm.value.email;
+    this.signupWidgetModel.mobile = this.signUpForm.value.mobile;
+    this.signupWidgetModel.password = this.signUpForm.value.password;
+    this.signupWidgetModel.userName = this.signUpForm.value.email;
+    this.signupWidgetModel.gender = 'M';
 
     this.signup();
   }
@@ -77,24 +84,30 @@ export class SignupPage extends SignupComponent implements OnInit {
   }
 
   async handleSignupActionSignupSuccess(data) {
+
     this.loaderService.stopLoading();
     if (data.message === 'Succesfull') {
-      await this.alertService.presentToast(this.translate.instant('sign_up_page.registration_successful'), 500, 'top', 'top');
+      const text = await this.translate.instant('sign_up_page.registration_successful');
+      await this.alertService.presentToast(text, 500, 'top', 'top');
       this.signin(this.signUpForm.value.email, this.signUpForm.value.password);
       this.capRouter.routeByUrl('/home');
-    } else {
-      await this.alertService.presentToast(data.message, 500, 'top', 'top');
+      return;
     }
+    await this.alertService.presentToast(data.message, 500, 'top', 'top');
   }
 
   handleSignupLoadingSuccess(data) {
+
     this.loaderService.stopLoading();
-    this.widgetModel = data;
+    return;
   }
 
   async handleSignupLoadingFailed(data) {
+
     this.loaderService.stopLoading();
-    await this.alertService.presentToast(this.translate.instant('sign_up_page.unable_to_get_user_data'), 500, 'top', 'top');
+    const text = await this.translate.instant('sign_up_page.unable_to_get_user_data');
+    await this.alertService.presentToast(text, 500, 'top', 'top');
+    return;
   }
 
   handleSignupActionSigninFailed(data) {
@@ -105,8 +118,8 @@ export class SignupPage extends SignupComponent implements OnInit {
 
   matchingPasswords(AC: AbstractControl) {
     if (AC.get('password') && AC.get('confirmPassword')) {
-      const password = AC.get('password').value; // to get value in input tag
-      const confirmPassword = AC.get('confirmPassword').value; // to get value in input tag
+      const password = AC.get('password').value;
+      const confirmPassword = AC.get('confirmPassword').value;
       if (password !== confirmPassword) {
         AC.get('confirmPassword').setErrors({matchingPasswords: true});
       } else {

@@ -43,9 +43,9 @@ export class UserProfilePage extends UserProfileComponent {
   async updateProfile() {
 
     await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
-    this.widgetModel.lastName = this.profileForm.value.lastName;
-    this.widgetModel.mobileNo = this.profileForm.value.mobileNo;
-    this.widgetModel.firstName = this.profileForm.value.firstName;
+    this.userProfileWidgetModel.lastName = this.profileForm.value.lastName;
+    this.userProfileWidgetModel.mobileNo = this.profileForm.value.mobileNo;
+    this.userProfileWidgetModel.firstName = this.profileForm.value.firstName;
     this.updateUserProfile();
   }
 

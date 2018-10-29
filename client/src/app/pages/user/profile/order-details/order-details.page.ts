@@ -18,8 +18,6 @@ import {OrderDetailsComponent} from '@capillarytech/pwa-components/order-details
 export class OrderDetailsPage extends OrderDetailsComponent implements OnInit {
 
   orderId;
-  isOrderDetailsLoadingDone = false;
-
   constructor(
     private actRoute: ActivatedRoute,
     private capRouter: CapRouterService,
@@ -36,11 +34,11 @@ export class OrderDetailsPage extends OrderDetailsComponent implements OnInit {
   }
 
   handleOrderDetailsLoadingFailed(data) {
-    this.isOrderDetailsLoadingDone = true;
+    this.isOrderDetailsWidgetLoaded = true;
   }
 
   handleOrderDetailsLoadingSuccess(data) {
-    this.isOrderDetailsLoadingDone = true;
+    this.isOrderDetailsWidgetLoaded = true;
   }
 
 }
