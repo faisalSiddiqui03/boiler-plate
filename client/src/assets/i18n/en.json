@@ -666,5 +666,11 @@
 		"profile_update_failed": "Profile could not be updated",
 		"profile_updated_successfully": "Profile updated successfully",
 		"save_profile": "Save Profile"
-	}
+	},
+  "global": {
+    "showCart": "Show cart",
+    "address_type_home": "Home",
+    "address_type_work": "Work",
+    "address_type_other": "Other"
+  }
 }
