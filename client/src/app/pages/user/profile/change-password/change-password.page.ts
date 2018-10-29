@@ -20,9 +20,8 @@ import { ChangePasswordComponent } from '@capillarytech/pwa-components/change-pa
 export class ChangePasswordPage extends ChangePasswordComponent {
 
   resetPasswordForm: FormGroup;
-  updateInProgress = false;
   passwordChangeSuccess = false;
-  fieldTypeMap = new Map();
+  fieldTypeMap = new Map(); // field map, true then password if false then text
   dealCategoryId: string;
 
   constructor(
@@ -34,8 +33,8 @@ export class ChangePasswordPage extends ChangePasswordComponent {
   ) {
     super();
 
-    this.fieldTypeMap.set('passwordFieldType', 'password');
-    this.fieldTypeMap.set('confirmPasswordFieldType', 'password');
+    this.fieldTypeMap.set('newPassword', true);
+    this.fieldTypeMap.set('confirmNewPassword', true);
     this.dealCategoryId = this.configService.getConfig()['dealCategoryId'];
 
     this.resetPasswordForm = this.formBuilder.group({
@@ -45,41 +44,38 @@ export class ChangePasswordPage extends ChangePasswordComponent {
   }
 
   checkPasswords(group: FormGroup) {
+
     const pass = group.controls.newPassword.value;
     const confirmPass = group.controls.confirmNewPassword.value;
-    return pass === confirmPass ? null : true;
+    return pass === confirmPass ? false : true;
   }
 
   changeFieldType(field) {
-    switch(field) {
-      case 'newPassword':
-        if (this.fieldTypeMap.get('passwordFieldType') === 'password') {
-          this.fieldTypeMap.set('passwordFieldType', 'text');
-        } else {
-          this.fieldTypeMap.set('passwordFieldType', 'password');
-        }
-        break;
-      case 'confirmNewPassword':
-        if (this.fieldTypeMap.get('confirmPasswordFieldType') === 'password') {
-          this.fieldTypeMap.set('confirmPasswordFieldType', 'text');
-        } else {
-          this.fieldTypeMap.set('confirmPasswordFieldType', 'password');
-        }
-        break;
+
+      const value = this.fieldTypeMap.get(field);
+      this.fieldTypeMap.set(field, !value);
+  }
+
+  getFieldType(field) {
+
+    if (this.fieldTypeMap.get(field)) {
+      return 'password';
     }
-    return;
+
+    return 'text';
   }
 
   async doChangePassword() {
-    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader' : 'pickup-loader');
-    this.updateInProgress = true;
+
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode() );
     this.changePassword(this.resetPasswordForm.value.newPassword);
   }
 
   async handleWidgetActionChangePasswordFailed(data) {
+
     this.loaderService.stopLoading();
-    this.updateInProgress = false;
-    await this.alertService.presentToast(this.translate.instant('change_password_page.change_password_failed'), 1000, 'top');
+    const text = await this.translate.instant('change_password_page.change_password_failed');
+    await this.alertService.presentToast(text, 1000, 'top');
   }
 
   navigateToDeals() {
@@ -87,11 +83,12 @@ export class ChangePasswordPage extends ChangePasswordComponent {
   }
 
   async handleWidgetActionChangePasswordSuccess(data) {
-    this.loaderService.stopLoading();
-    this.updateInProgress = false;
+
     if (data.isSuccessful) {
+
+      this.loaderService.stopLoading();
       this.passwordChangeSuccess = true;
-      let success_message = await this.translate.instant('change_password_page.change_password_success');
+      const success_message = await this.translate.instant('change_password_page.change_password_success');
       console.log(success_message);
       await this.alertService.presentToast(success_message, 1000, 'top');
       return;

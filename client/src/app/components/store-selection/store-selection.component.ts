@@ -65,15 +65,15 @@ export class SelectionComponent extends StoreSelectionComponent {
         return false;
     }
 
-    switchLanguage() {
+    switchLanguageForApp() {
 
         const code = this.getCurrentLanguageCode();
         if (code === 'en') {
-            super.switchLanguage('ar');
+            this.switchLanguage('ar');
             return;
         }
 
-        super.switchLanguage('en');
+        this.switchLanguage('en');
     }
 
     handleCitySelectionStarted(city) {
