@@ -12,6 +12,7 @@ const config = {
     "db": "kt99-loopback"
   },
   "baseUrl": "http://localhost:3000/api/",
+  "languageCodeForBanner": "en",
   "server": {
     "mw-static": {
       "maxAge": "1 day"
