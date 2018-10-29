@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@cap-service/store';
+import { Utils } from '@capillarytech/pwa-components';
 import { AlertController, ModalController } from '@ionic/angular';
 import { pwaLifeCycle } from '@capillarytech/pwa-framework';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
@@ -58,6 +59,10 @@ export class StoreListComponent extends StoreSelectionComponent implements OnIni
         if (!this.cityId && (!this.latitude || !this.longitude) ) {
             this.goToHome();
         }
+    }
+
+    getTime(store, time) {
+        return Utils.getTimeDelSlotTime(store, time, this.deliveryModes);
     }
 
     handleStoreLocatorWidgetLoadingSuccess() {
