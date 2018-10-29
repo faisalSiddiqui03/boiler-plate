@@ -15,7 +15,7 @@
     "@capillarytech/cap-loopback-api-app-details": "0.0.3",
     "@capillarytech/cap-loopback-api-areas": "1.0.1",
     "@capillarytech/cap-loopback-api-authentication": "0.0.3",
-    "@capillarytech/cap-loopback-api-banners": "0.0.11",
+    "@capillarytech/cap-loopback-api-banners": "0.0.12",
     "@capillarytech/cap-loopback-api-cart": "0.0.17",
     "@capillarytech/cap-loopback-api-cities": "1.0.2",
     "@capillarytech/cap-loopback-api-countries": "0.0.5",
