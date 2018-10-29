@@ -29,18 +29,30 @@ export class DeliverySlotSelectionPage extends DeliverySlotComponent implements 
   }
 
   ngOnInit() {
-    this.translate.get('delivery_slot_selection_page.asap').subscribe(value => {
-      this.asapText = value;
-    });
+    this.loadText();
+  }
+
+  toggleCheckbox() {
+
+      this.asSoonPossible = !this.asSoonPossible;
+      this.slotSelected = this.asSoonPossible;
+      this.slotContent = this.asSoonPossible ? this.asapText : '';
+      this.activeTimeSlot = this.asSoonPossible ? 0 : null;
+  }
+
+  async loadText() {
+
+    this.asapText = await this.translate.get('delivery_slot_selection_page.asap');
   }
 
   closeModal() {
-    this.handleDeliverySlotCloseModel();
+
+    this.handleDefaultSlotSelection();
   }
 
-  handleDeliverySlotCloseModel() {
+  selectTimeSlot() {
+
+    super.selectTimeSlot();
     this.modalController.dismiss();
-    super.handleDeliverySlotCloseModel();
   }
-
 }

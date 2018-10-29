@@ -18,9 +18,8 @@ import { UserProfileComponent } from '@capillarytech/pwa-components/user-profile
 @pwaLifeCycle()
 @pageView()
 export class UserProfilePage extends UserProfileComponent {
-  
+
   profileForm: FormGroup;
-  loaded: boolean;
   updateInProgress = false;
 
   constructor(
@@ -35,29 +34,31 @@ export class UserProfilePage extends UserProfileComponent {
     this.profileForm = this.formBuilder.group({
       firstName: ['', Validators.compose([Validators.required])],
       lastName: [''],
-      mobileNo: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('^[2,5,6,9][0-9]*$')])],
-      alternateEmail: ['',],
-    })
+      mobileNo: ['', Validators.compose([Validators.required, Validators.minLength(8),
+          Validators.maxLength(8), Validators.pattern('^[2,5,6,9][0-9]*$')])],
+      alternateEmail: ['', ],
+    });
   }
 
   async updateProfile() {
-    await this.loaderService.startLoading(null, this.getDeliveryMode() === 'H' ? 'delivery-loader': 'pickup-loader');
-    this.updateInProgress = true;
-    this.widgetModel.firstName = this.profileForm.value.firstName;
+
+    await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
     this.widgetModel.lastName = this.profileForm.value.lastName;
     this.widgetModel.mobileNo = this.profileForm.value.mobileNo;
+    this.widgetModel.firstName = this.profileForm.value.firstName;
     this.updateUserProfile();
   }
 
   async handleUpdateUserActionLogoutSuccess(data) {
+
     this.loaderService.stopLoading();
-    this.updateInProgress = false;
-    await this.alertService.presentToast(this.translate.instant('user_profile_page.profile_updated_successfully'), 2000, 'top', 'top');
+    const text = this.translate.instant('user_profile_page.profile_updated_successfully');
+    await this.alertService.presentToast(text, 2000, 'top', 'top');
     this.capRouter.routeByUrl('my-account');
   }
 
   handleUserProfileLoadingSuccess(data) {
-    this.loaded = true;
+
     this.profileForm.get('firstName').setValue(data.firstName);
     this.profileForm.get('lastName').setValue(data.lastName);
     this.profileForm.get('mobileNo').setValue(data.mobileNo);
@@ -65,8 +66,10 @@ export class UserProfilePage extends UserProfileComponent {
   }
 
   async handleUpdateUserActionLogoutFailed(data) {
+
     this.updateInProgress = false;
     this.loaderService.stopLoading();
-    await this.alertService.presentToast(this.translate.instant('user_profile_page.profile_update_failed'), 2000, 'top', 'top');
+    const text = this.translate.instant('user_profile_page.profile_update_failed');
+    await this.alertService.presentToast(text, 2000, 'top', 'top');
   }
 }
