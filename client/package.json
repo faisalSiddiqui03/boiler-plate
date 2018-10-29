@@ -8,7 +8,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod --aot",
-    "postbuild": " rm ./.sourcemaps/* && cp ./www/*.map ./.sourcemaps ",
+    "postbuild": "sh ./scripts/sourcemaps-move.sh",
     "build:stage": "ng build --prod --aot --env=stage",
     "test": "ng test",
     "lint": "ng lint",
