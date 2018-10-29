@@ -550,6 +550,51 @@ ion-item {
   }
 }
 
+.alert-modal{
+  padding: 10px;
+  .alert-head{
+    padding: 0;
+    &:empty{
+      display: none;
+    }
+  }
+  .alert-message{
+    padding: 10px 0px 20px 0px;
+    color: rgba(var(--ion-color-dark-rgb), 0.5);
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
+  .alert-button-group{
+    padding: 10px;
+  }
+  .alert-button{
+    flex: 1;
+    margin: 0;
+    color: var(--ion-color-light);
+    font-size: 15px;
+    line-height: 22px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    span{
+      justify-content: center;
+    }
+    &.btn-dismiss{
+      background: var(--ion-account-border-color);
+      &:hover{
+        background: var(--ion-color-medium-contrast);
+      }
+    }
+    &.btn-success{
+      background: var(--ion-color-success);
+      margin-left: 10px;
+      &:hover{
+        background: var(--ion-color-success-shade);
+      }
+    }
+  }
+}
+
 // Loading animation
 .loading {
   .loading-wrapper {
