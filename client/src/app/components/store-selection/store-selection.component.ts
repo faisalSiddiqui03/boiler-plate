@@ -270,7 +270,6 @@ export class SelectionComponent extends StoreSelectionComponent {
 
   async removeCartItem(store, mode?: DeliveryModes, event?) {
 
-    this.clearCart();
     await this.loaderService.startLoadingByMode('', this.getDeliveryMode());
     const promise = new Promise((resolve, reject) => {
 
@@ -289,6 +288,7 @@ export class SelectionComponent extends StoreSelectionComponent {
 
       // this should show cart could not be cleared
     });
+    this.clearCart();
   }
 
   setStoreAndRedirect(store) {
