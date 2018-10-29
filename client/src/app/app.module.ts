@@ -1,12 +1,10 @@
-import { NgModule, APP_INITIALIZER, Injector,ErrorHandler, Injectable } from '@angular/core';
+import { NgModule, APP_INITIALIZER, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
 import { TranslateCompiler, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { Pro } from '@ionic/pro';
-import { IonicErrorHandler } from 'ionic-angular';
 // import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -46,11 +44,6 @@ import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-sele
 import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
-import { MyErrorHandler} from './IonicErrorHandler'
-
-Pro.init(environment.pro_id, {
-  appVersion: environment.version
-})
 
 export const languages = [
   {
@@ -123,8 +116,6 @@ export function getAppConfig(): Object {
       useClass: IonicRouteStrategy
     },
     RoutingState,
-    IonicErrorHandler,
-        [{ provide: ErrorHandler, useClass: MyErrorHandler }]
     // AppUpdateServiceImpl
   ],
   bootstrap: [AppComponent]
