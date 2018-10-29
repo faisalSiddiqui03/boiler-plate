@@ -9,6 +9,7 @@
     //}
     background-image: url("../../../../assets/imgs/backdrop.jpg");
     flex: 1;
+    overflow-y: auto;
   }
   ion-content {
     --background: transparent;

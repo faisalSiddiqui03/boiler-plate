@@ -30,7 +30,7 @@
       border-radius: 5px 5px 0 0;
       font-weight: 700;
       opacity: 1;
-      height: auto;
+      height: 46px;
       font-family: 'Open Sans Condensed';
       align-self: flex-end;
       transition: all 0.3s ease-in-out;
@@ -41,6 +41,7 @@
       }
 
       &.segment-checked {
+        height: 55px;
         color: var(--ion-color-danger);
         background: var(--ion-color-light);
         filter: none;
