@@ -20,7 +20,6 @@ import {OrderHistoryComponent} from '@capillarytech/pwa-components/order-history
 export class OrderHistoryPage extends OrderHistoryComponent {
 
   isShowMoreButtonVisible = true;
-  isOrderHistoryWidgetLoaded = false;
   accordianMap = new Map();
 
   constructor(

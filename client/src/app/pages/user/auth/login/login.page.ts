@@ -48,9 +48,10 @@ export class LoginPage extends LoginComponent {
   }
 
   async signIn() {
+
     await this.loaderService.startLoadingByMode(null, this.getDeliveryMode());
-    this.widgetModels[WidgetNames.USERID_PWD_SIGNIN].userName = this.userIdSigninForm.value.email;
-    this.widgetModels[WidgetNames.USERID_PWD_SIGNIN].password = this.userIdSigninForm.value.password;
+    this.useridPasswordWidgetModels.userName = this.userIdSigninForm.value.email;
+    this.useridPasswordWidgetModels.password = this.userIdSigninForm.value.password;
     this.usernamePasswordSignIn();
   }
 
@@ -60,59 +61,73 @@ export class LoginPage extends LoginComponent {
   }
 
   async handleUserIDPwdSigninLoadingFailed(data) {
-    this.loaderService.stopLoading();
-    let msg = await this.translate.instant('sign_in_page.invalid_username_and_password');
-    this.presentToast(msg);
+      await this.handleFailedToast();
+  }
+
+  async handleFailedToast() {
+
+      this.loaderService.stopLoading();
+      const msg = await this.translate.instant('sign_in_page.invalid_username_and_password');
+      await this.presentToast(msg);
   }
 
   async handleGoogleSignInLoadingFailed(data) {
-    this.loaderService.stopLoading();
-    let msg = await this.translate.instant('sign_in_page.invalid_username_and_password');
-    this.presentToast(msg);
+      await this.handleFailedToast();
+  }
+
+  async handleSuccessToastAndRedirection() {
+
+      this.loaderService.stopLoading();
+      const msg = await this.translate.instant('sign_in_page.success_sign_in');
+      await this.presentToast(msg);
+      this.capRouter.routeByUrl('/home');
   }
 
   async handleActionSignInSuccess(data) {
-    this.loaderService.stopLoading();
+
     if (data.message === 'Successful') {
-      let msg = await this.translate.instant('sign_in_page.success_sign_in');
-      this.presentToast(msg);
-      this.capRouter.routeByUrl('/home');
-    } else {
-      let msg = await this.translate.instant('sign_in_page.invalid_username_and_password');
-      this.presentToast(msg);
+
+      await this.handleSuccessToastAndRedirection();
+      return;
     }
+
+      await this.handleActionSignInFailed(data);
   }
 
   async handleActionGoogleSignInSuccess(data) {
-    this.loaderService.stopLoading();
-    if(data.isSuccessful) {
-      let msg = await this.translate.instant('sign_in_page.success_sign_in');
-      this.presentToast(msg);
-    } else {
-      this.presentToast(data.message)
+
+    if (data.isSuccessful) {
+        await this.handleSuccessToastAndRedirection();
+      return;
     }
-    this.capRouter.routeByUrl('/home');
+
+    if (data && data.message) {
+        await this.handleActionGoogleSignInFailed(data);
+        return;
+    }
+
+      await this.handleFailedToast();
   }
 
   async handleActionSignInFailed(data) {
-    this.loaderService.stopLoading();
-    let msg = await this.translate.instant('sign_in_page.invalid_username_and_password');
-    this.presentToast(msg);
+      await this.handleFailedToast();
   }
-  
+
   async handleActionGoogleSignInFailed(data) {
+
     this.loaderService.stopLoading();
-    this.presentToast(data.message);
+    await this.presentToast(data.message);
   }
 
   async presentToast(message) {
+
     const isDesktop = await this.hardwareService.isDesktopSite();
     if (isDesktop) {
       this.alertService.presentToast(message, 500, 'top');
-    } else {
-      this.alertService.presentToast(message, 500, 'top', 'top');
+      return;
     }
-    return;
+
+    this.alertService.presentToast(message, 500, 'top', 'top');
   }
 
   goToPage(pageName) {

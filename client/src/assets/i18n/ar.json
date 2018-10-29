@@ -63,7 +63,7 @@
 		"your_total": "المجموع"
 	},
 	"category_listing": {
-		"checkout": "",
+		"checkout": "تأكيد الطلب",
 		"price_tag": "من"
 	},
 	"change_password_page": {
@@ -666,5 +666,11 @@
 		"profile_update_failed": "تعذر تحديث الملف الشخصي",
 		"profile_updated_successfully": "تحديث الملف الشخصي",
 		"save_profile": "حفظ الملف الشخصي"
-	}
+	},
+  "global": {
+    "showCart": "عرض العربة",
+    "address_type_home": "العمل",
+    "address_type_work": "العمل",
+    "address_type_other": "آخر"
+  }
 }

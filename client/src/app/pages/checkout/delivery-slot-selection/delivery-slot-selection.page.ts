@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   pwaLifeCycle,
-  pageView,
-  OnWidgetActionsLifecyle, OnWidgetLifecyle
+  pageView
 } from '@capillarytech/pwa-framework';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 @pwaLifeCycle()
 @pageView()
-export class DeliverySlotSelectionPage extends DeliverySlotComponent implements OnInit, OnWidgetLifecyle, OnWidgetActionsLifecyle  {
+export class DeliverySlotSelectionPage extends DeliverySlotComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
@@ -29,18 +28,30 @@ export class DeliverySlotSelectionPage extends DeliverySlotComponent implements 
   }
 
   ngOnInit() {
-    this.translate.get('delivery_slot_selection_page.asap').subscribe(value => {
-      this.asapText = value;
-    });
+    this.loadText();
+  }
+
+  toggleCheckbox() {
+
+      this.asSoonPossible = !this.asSoonPossible;
+      this.slotSelected = this.asSoonPossible;
+      this.slotContent = this.asSoonPossible ? this.asapText : '';
+      this.activeTimeSlot = this.asSoonPossible ? 0 : null;
+  }
+
+  async loadText() {
+
+    this.asapText = await this.translate.instant('delivery_slot_selection_page.asap');
   }
 
   closeModal() {
-    this.handleDeliverySlotCloseModel();
+
+    this.handleDefaultSlotSelection();
   }
 
-  handleDeliverySlotCloseModel() {
+  selectTimeSlot() {
+
+    super.selectTimeSlot();
     this.modalController.dismiss();
-    super.handleDeliverySlotCloseModel();
   }
-
 }
