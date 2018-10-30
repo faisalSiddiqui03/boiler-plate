@@ -47,7 +47,7 @@ const config = {
     "database": "1"
   },
   "graphite": {
-    "host": "192.168.33.103",
+    "host": "graphite-carbon.deis",
     "port": "2003",
     "prefix" : "pwa.phkuwait"
   },
