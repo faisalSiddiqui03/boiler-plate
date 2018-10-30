@@ -37,20 +37,21 @@ export class ProductDetailsComponent extends SimpleProductComponent implements O
 
   async handleAddToCartActionSuccess(data) {
     this.loaderService.stopLoading();
-    let showCart = await this.hardwareService.isDesktopSite();
-    if (this.fromSuggestion) showCart = true;
 
-    await this.alertService.presentToastWithShowCart(
-      this.clientProduct.title + ' ' + this.translate.instant('product_details.added_to_cart'),
-      3000, 'top', '/' + this.getCurrentLanguageCode() + '/cart', 'top');
+    let isDesktop = await this.hardwareService.isDesktopSite();
+    if (this.fromSuggestion) {
+      isDesktop = true;
+    }
 
-//     let testAction: EventEmitter<any> = new EventEmitter();
-//     testAction.subscribe(data => {
-//        // do action here
-//     });
-//     await this.alertService.presentToastWithShowCartAndAction(
-//       this.clientProduct.title + ' ' + this.translate.instant('product_details.added_to_cart'),
-//       3000, 'top', testAction, 'top');
+    if (!isDesktop) {
+      await this.alertService.presentToastWithShowCart(
+        this.clientProduct.title + ' ' + this.translate.instant('product_details.added_to_cart'),
+        3000, 'top', '/' + this.getCurrentLanguageCode() + '/cart', 'top');
+    } else {
+      await this.alertService.presentToast(
+        this.clientProduct.title + ' ' + this.translate.instant('product_details.added_to_cart'),
+        3000, 'top', 'top', false);
+    }
 
     if (this.fromSuggestion) {
       this.modalController.dismiss(true);
