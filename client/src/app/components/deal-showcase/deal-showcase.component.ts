@@ -33,8 +33,8 @@ export class DealShowcaseComponent extends DealBuilderShowcaseComponent implemen
     });
   }
 
-  handleAddProductToDealSuccess(productAdded) {
-    this.modalController.dismiss(productAdded);
+  handleAddProductToDeal(productAdded) {
+    if(productAdded) this.modalController.dismiss(productAdded);
   }
 
   async showProduct(bundleItem) {

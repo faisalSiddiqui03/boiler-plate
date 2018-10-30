@@ -15,6 +15,7 @@ import { AttributeName, AttributeValue } from '@capillarytech/pwa-components/piz
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 import { TrioComponent } from '../trio/trio.component';
 import { DealBuilderComponent } from '@capillarytech/pwa-components/deal-builder/deal-builder.component';
+import { PizzaComponent } from '../pizza/pizza.component';
 
 @Component({
   selector: 'app-deal-component',
@@ -95,10 +96,14 @@ export class DealComponent extends DealBuilderComponent implements OnInit, OnWid
   async openProductDetails(bundleItem) {
     let component;
     let isTrio = false;
-    if (BundleItem.getAttributeValueByName(bundleItem, AttributeName.CUSTOMIZABLE) === AttributeValue.CUSTOMIZABLE
-      && BundleItem.getAttributeValueByName(bundleItem, AttributeName.TYPE) === AttributeValue.TRIO) {
+    let isPizza = false;
+    if (BundleItem.getAttributeValueByName(bundleItem, AttributeName.TYPE) === AttributeValue.TRIO) {
       component = TrioComponent;
       isTrio = true;
+    }
+    else if (BundleItem.getAttributeValueByName(bundleItem, AttributeName.CUSTOMIZABLE) === AttributeValue.CUSTOMIZABLE) {
+      isPizza = true;
+      component = PizzaComponent;
     } else {
       component = ProductDetailsComponent;
     }
@@ -112,7 +117,7 @@ export class DealComponent extends DealBuilderComponent implements OnInit, OnWid
     });
 
     modal.onDidDismiss().then((addedItem) => {
-      this.updateItemSelectionFromSingleItem(bundleItem, addedItem, isTrio);
+      this.updateItemSelectionFromSingleItem(bundleItem, addedItem, isTrio, isPizza);
     });
 
     return await modal.present();
