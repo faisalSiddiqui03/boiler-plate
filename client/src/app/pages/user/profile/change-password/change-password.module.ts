@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ChangePasswordPage } from './change-password.page';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 import { ResetPasswordWidgetModule } from '@cap-widget/authentication/reset-password';
 

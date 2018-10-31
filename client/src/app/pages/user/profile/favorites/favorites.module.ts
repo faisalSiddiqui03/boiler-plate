@@ -9,7 +9,7 @@ import { SkeletonModule } from '../../../../helpers/skeleton/skeleton.module';
 
 import { FavoritesPage } from './favorites.page';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 import { ProductModalModule, ProductModalService } from '../../../../helpers/product-modal';
 

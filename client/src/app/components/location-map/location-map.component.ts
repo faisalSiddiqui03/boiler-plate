@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@capillarytech/pwa-framework';
 import { AgmCoreModule, MouseEvent, MarkerManager } from '@agm/core';
 import { ModalController } from '@ionic/angular';
 import { SearchLocationPage } from '../../pages/user/profile/search-location/search-location.page';

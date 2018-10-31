@@ -6,7 +6,7 @@ import {
 import {Utils} from '@capillarytech/pwa-components/util/utils';
 import {ActivatedRoute} from '@angular/router';
 import {LoaderService, AlertService} from '@capillarytech/pwa-ui-helpers';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@capillarytech/pwa-framework';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {AddEditAddressComponent} from '@capillarytech/pwa-components/add-edit-address/add-edit-address.component';
 

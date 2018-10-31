@@ -6,7 +6,7 @@ import { StoreListComponent } from './store-list.component';
 import { EventTrackServiceModule, ImagePreloadModule, FulfilmentModeModule } from '@capillarytech/pwa-framework';
 import { LocationWidgetModule } from '@cap-widget/location';
 import { BannerWidgetModule } from '@cap-widget/banner-widget';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { HeaderModule } from '../header/header.module';
 import { SubHeaderModule } from '../sub-header/sub-header.module';
 import { StoreLocatorWidgetModule } from '@cap-widget/store-locator';

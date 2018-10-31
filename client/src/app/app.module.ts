@@ -1,7 +1,7 @@
 import { NgModule, APP_INITIALIZER, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
-import { TranslateCompiler, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+// import { TranslateCompiler, TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -11,7 +11,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
+// import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 import {
   AlertServiceModule,
   LoaderServiceModule,
@@ -34,7 +34,8 @@ import {
   // AppUpdateServiceModule,
   // AppUpdateServiceImpl,
   CapRouterService,
-  ServiceWorkerModule as PWAServiceWorkerModule
+  ServiceWorkerModule as PWAServiceWorkerModule,
+  TranslateModule as PWATranslateModule
 } from '@capillarytech/pwa-framework';
 import { AuthGuard } from './auth.guard';
 import { HttpLoaderFactory } from './translation.loader';
@@ -44,6 +45,8 @@ import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-sele
 import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
+import { Text as ArabicTranslationText } from '@assets/i18n/ar'
+import { Text as EnglishTranslationText } from '@assets/i18n/en'
 
 export const languages = [
   {
@@ -64,13 +67,26 @@ export function getAppConfig(): Object {
   return appConfig || {};
 }
 
+export function getTranslationText() {
+  return [
+    {
+      language: 'en',
+      text: EnglishTranslationText
+    },
+    {
+      language: 'ar',
+      text: ArabicTranslationText
+    }
+    ];
+}
+
 @NgModule({
   declarations: [
     AppComponent,
   ],
   entryComponents: [],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'ph-kuwait'}),
     IonicModule.forRoot({mode: 'md'}),
     ConfigServiceModule.forRoot(getAppConfig),
     GlobalServiceModule.forRoot(),
@@ -88,22 +104,26 @@ export function getAppConfig(): Object {
     CapRouterServiceModule.forRoot(true),
     // AppUpdateServiceModule,
     LanguageServiceModule.forRoot(languages),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      },
-      compiler: {
-        provide: TranslateCompiler,
-        useClass: TranslateMessageFormatCompiler
-      }
-    }),
+    // TranslateModule.forRoot({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: HttpLoaderFactory,
+    //     deps: [HttpClient]
+    //   },
+    //   compiler: {
+    //     provide: TranslateCompiler,
+    //     useClass: TranslateMessageFormatCompiler
+    //   }
+    // }),
     AlertServiceModule,
     LoaderServiceModule,
     HardWareServiceModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    PWAServiceWorkerModule.forRoot()
+    PWAServiceWorkerModule.forRoot(),
+    PWATranslateModule.forRoot({
+      languages: ['en', 'ar'],
+      factory: getTranslationText,
+    })
   ],
   providers: [
     HttpService,

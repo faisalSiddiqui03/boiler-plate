@@ -4,7 +4,7 @@ import {ViewCartComponent} from '@capillarytech/pwa-components/cart/view-cart-co
 import {ConfigService, CapRouterService, pwaLifeCycle, pageView} from '@capillarytech/pwa-framework';
 import {Product, ProductType} from '@cap-widget/product-modules';
 import {AlertService, LoaderService} from '@capillarytech/pwa-ui-helpers';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@capillarytech/pwa-framework';
 import {ProductDetailsComponent} from '../product-details/product-details.component';
 import {ModalController} from '@ionic/angular';
 import {PizzaComponent} from '../pizza/pizza.component';

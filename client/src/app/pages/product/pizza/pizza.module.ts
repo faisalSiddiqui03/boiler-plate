@@ -7,9 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PizzaPage } from './pizza.page';
 
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { TranslateModule  } from '@capillarytech/pwa-framework';
 import { PizzaComponentModule } from '../../../components/pizza/pizza.module';
 
 const routes: Routes = [

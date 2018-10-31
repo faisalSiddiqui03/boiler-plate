@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { ImagePreloadModule } from '@capillarytech/pwa-framework';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { ProductDetailsPage } from './product-details.page';
 import { ProductDetailsComponentModule } from '../../../components/product-details/product-details.module';
 import { ProductDetailsWidgetModule } from '@cap-widget/product-details';

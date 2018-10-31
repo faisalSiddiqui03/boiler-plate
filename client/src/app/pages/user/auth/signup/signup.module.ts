@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { HeaderModule } from '../../../../components/header/header.module';
 import { EventTrackServiceModule} from '@capillarytech/pwa-framework';
 import { UseridSignupWidgetModule } from '@cap-widget/authentication/userid-signup';

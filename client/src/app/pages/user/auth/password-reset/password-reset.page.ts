@@ -9,7 +9,7 @@ import {
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { ForgotPasswordWidgetActions } from '@cap-widget/authentication/forgot-password';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-password-reset',

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { pwaLifeCycle, WidgetNames, ConfigService, CapRouterService } from "@capillarytech/pwa-framework";
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-banner',

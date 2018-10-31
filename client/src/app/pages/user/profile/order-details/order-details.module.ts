@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { OrderDetailsPage } from './order-details.page';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 import { OrderDetailsWidgetModule } from '@cap-widget/order-details-widget';
 

@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DeliverySlotSelectionPage } from './delivery-slot-selection.page';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { DeliverySlotsWidgetModule } from '@cap-widget/delivery-slots';
 import { SkeletonModule } from '../../../helpers/skeleton/skeleton.module';
 

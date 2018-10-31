@@ -6,7 +6,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
 
 import {FeedbackPage} from './feedback.page';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateModule} from '@capillarytech/pwa-framework';
 import {HeaderModule} from '../../../components/header/header.module';
 import {SubHeaderModule} from '../../../components/sub-header/sub-header.module';
 import {SurveyWidgetModule} from '@cap-widget/survey';

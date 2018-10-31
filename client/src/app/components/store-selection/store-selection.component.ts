@@ -3,11 +3,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { Store } from '@cap-service/store';
 import {AlertService, LoaderService} from '@capillarytech/pwa-ui-helpers';
 import { AlertController, ModalController } from '@ionic/angular';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@capillarytech/pwa-framework';
 import {
   pwaLifeCycle,
   LanguageService,
-  CapRouterService, DeliveryModes, Action
+  CapRouterService, DeliveryModes
 } from '@capillarytech/pwa-framework';
 import { StoreListComponent } from '../store-list/store-list.component';
 import { StoreSelectionComponent, ViewStatus } from '@capillarytech/pwa-components/selection-component/store-selection';
@@ -49,7 +49,7 @@ export class SelectionComponent extends StoreSelectionComponent {
     private modalController: ModalController,
     private languageService: LanguageService,
     private capRouter: CapRouterService,
-    private alertController: AlertController
+    private alertController: AlertController,
   ) {
     super(capRouter);
 

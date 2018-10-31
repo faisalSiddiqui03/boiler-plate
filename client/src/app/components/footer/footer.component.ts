@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@capillarytech/pwa-framework';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { pwaLifeCycle } from "@cap-core/lifecycle";

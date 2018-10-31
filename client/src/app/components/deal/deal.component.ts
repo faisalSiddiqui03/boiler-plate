@@ -6,7 +6,7 @@ import {
   CapRouterService,
 } from '@capillarytech/pwa-framework';
 import { BundleItem, Product } from '@cap-widget/product-modules';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@capillarytech/pwa-framework';
 import { ModalController } from '@ionic/angular';
 import { DealShowcaseComponent } from '../deal-showcase/deal-showcase.component'
 import { LoaderService, AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';

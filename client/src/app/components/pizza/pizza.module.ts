@@ -6,7 +6,7 @@ import { StoreSelectionModalComponent } from '../store-selection-modal/store-sel
 import { StoreSelectionModalModule } from '../store-selection-modal/store-selection-modal.module';
 import { PizzaComponent } from './pizza.component';
 import { ImagePreloadModule, EventTrackServiceModule } from "@capillarytech/pwa-framework";
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
 import {
     ProductDetailsWidgetModule,

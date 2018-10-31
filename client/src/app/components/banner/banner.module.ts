@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { EventTrackServiceModule, ImagePreloadModule } from '@capillarytech/pwa-framework';
 import { BannerComponent } from './banner.component';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { BannerWidgetModule } from '@cap-widget/banner-widget';
 @NgModule({
   imports: [
