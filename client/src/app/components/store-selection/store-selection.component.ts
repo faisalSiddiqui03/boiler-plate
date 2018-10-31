@@ -221,6 +221,7 @@ export class SelectionComponent extends StoreSelectionComponent {
   handleWidgetActionFindAreasByCitySuccess(data: any): any {
 
     this.hasError.changeCity = false;
+    this.searchTerm.area = '';
     if ( data && data.length === 1 ) {
 
       this.selectArea(data[0]);
