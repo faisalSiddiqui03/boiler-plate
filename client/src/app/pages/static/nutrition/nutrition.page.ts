@@ -1,19 +1,32 @@
 import { Component } from '@angular/core';
-import { CapRouterService } from '@capillarytech/pwa-framework';
+import { CapRouterService, TranslateService } from '@capillarytech/pwa-framework';
+import {BaseComponent} from "@capillarytech/pwa-components";
+import { ArabicNutritionPageText, EnglishNutritionPageText} from '@assets/i18n/nutrition.text';
 
 @Component({
   selector: 'app-nutrition',
   templateUrl: './nutrition.page.html',
   styleUrls: ['./nutrition.page.scss'],
 })
-export class NutritionPage {
+export class NutritionPage extends BaseComponent {
 
   constructor(
-    private capRouter: CapRouterService
-  ) {}
+    private capRouter: CapRouterService,
+    private translate: TranslateService
+  ) {
+    super();
+  }
 
   activeAccordion: number = null;
-  
+
+  async ionViewWillEnter() {
+    this.translate.use(this.getCurrentLanguageCode());
+    this.translate.append([
+      {language: 'en', text: EnglishNutritionPageText},
+      {language: 'ar', text: ArabicNutritionPageText}
+    ]);
+  }
+
   openAccordion(acc) {
     this.activeAccordion = acc;
   }

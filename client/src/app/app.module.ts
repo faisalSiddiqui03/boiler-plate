@@ -45,8 +45,8 @@ import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-sele
 import { LocationPageModule } from './pages/checkout/location/location.module';
 import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
-import { Text as ArabicTranslationText } from '@assets/i18n/ar'
-import { Text as EnglishTranslationText } from '@assets/i18n/en'
+import { MainPageText as ArabicTranslationText } from '@assets/i18n/ar'
+import { MainPageText as EnglishTranslationText } from '@assets/i18n/en'
 
 export const languages = [
   {
