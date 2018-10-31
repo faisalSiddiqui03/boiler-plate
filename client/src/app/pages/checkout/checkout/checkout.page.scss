@@ -82,10 +82,11 @@
   .terms-check {
     cursor: pointer;
     display: inline-flex;
+    margin-bottom: -10px;
 
     ion-checkbox {
       margin-right: 10px;
-      --size: 21px;
+      --size: 18px;
       --border-color-checked: var(--ion-color-medium-shade);
       --background-checked: transparent;
       --ion-color-primary-tint: transparent;
