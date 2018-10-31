@@ -4,7 +4,7 @@ import {
   pageView,
   CapRouterService
 } from '@capillarytech/pwa-framework';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@capillarytech/pwa-framework';
 import {FavoritesComponent} from '@capillarytech/pwa-components/favorites/favorites.component';
 import {AlertService} from '@capillarytech/pwa-ui-helpers';
 import {ProductModalService} from '../../../../helpers/product-modal/product-modal.component';

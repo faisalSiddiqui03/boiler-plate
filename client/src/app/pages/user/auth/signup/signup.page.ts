@@ -14,7 +14,7 @@ import {
   CapRouterService,
   WidgetNames
 } from '@capillarytech/pwa-framework';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@capillarytech/pwa-framework';
 import {
   AlertService,
   LoaderService

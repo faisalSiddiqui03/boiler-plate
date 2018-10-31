@@ -7,7 +7,7 @@ import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 import { ActivatedRoute } from '@angular/router';
 import { CapRouterService } from '@capillarytech/pwa-framework';
 import { StoreSelectionComponent } from '@capillarytech/pwa-components/selection-component/store-selection';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@capillarytech/pwa-framework';
 
 @Component({
     selector: 'app-store-list',

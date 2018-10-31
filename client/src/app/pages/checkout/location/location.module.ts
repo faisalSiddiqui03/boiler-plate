@@ -7,9 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { LocationPage } from './location.page';
 import { LocationMapModule } from '../../../components/location-map/location-map.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 
 const routes: Routes = [
   {

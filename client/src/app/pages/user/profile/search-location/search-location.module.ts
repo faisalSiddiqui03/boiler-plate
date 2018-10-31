@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { SearchLocationPage } from './search-location.page';
 import { LocationWidgetModule } from '@cap-widget/location';
 

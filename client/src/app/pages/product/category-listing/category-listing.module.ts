@@ -9,7 +9,7 @@ import {
 } from '@capillarytech/pwa-framework';
 import { CartComponentModule } from '../../../components/cart/cart.component.module';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { CategoryListingPage } from './category-listing.page';
 import { HeaderModule } from '../../../components/header/header.module';
 

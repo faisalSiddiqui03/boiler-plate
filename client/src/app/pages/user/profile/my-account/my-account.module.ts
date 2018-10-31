@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HeaderModule } from '../../../../components/header/header.module';
 import { MyAccountPage } from './my-account.page';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 import { LogoutWidgetModule } from '@cap-widget/authentication/logout';
 

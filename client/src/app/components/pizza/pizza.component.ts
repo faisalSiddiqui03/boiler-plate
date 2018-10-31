@@ -3,7 +3,7 @@ import {pwaLifeCycle} from '@capillarytech/pwa-framework';
 import {IncrementValidator, DecrementValidator} from '../../helpers/validators/index';
 import {AttributeName, AttributeValue} from '@capillarytech/pwa-components/pizza-builder/attribute-name-value';
 import {AlertService, LoaderService, HardwareService} from '@capillarytech/pwa-ui-helpers';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@capillarytech/pwa-framework';
 import {ModalController} from '@ionic/angular';
 import {StoreSelectionModalComponent} from '../store-selection-modal/store-selection-modal.component';
 import {PizzaBuilderComponent} from '@capillarytech/pwa-components/pizza-builder/pizza-builder.component';

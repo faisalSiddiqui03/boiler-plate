@@ -9,7 +9,7 @@ import { DealPage } from './deal.page';
 
 import { ImagePreloadModule, EventTrackServiceModule} from '@capillarytech/pwa-framework';
 import { ProductDetailsWidgetModule } from '@cap-widget/product-details';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { DealComponentModule } from '../../../components/deal/deal.module';
 
 const routes: Routes = [

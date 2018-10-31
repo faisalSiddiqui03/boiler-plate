@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { LocationMapComponent } from './location-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { appConfig } from '../../../../config/config';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { HttpLoaderFactory } from '../../translation.loader';
 import { HttpClient } from '@angular/common/http';
 

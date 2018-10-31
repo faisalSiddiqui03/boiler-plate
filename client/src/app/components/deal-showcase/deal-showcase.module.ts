@@ -13,7 +13,7 @@ import { PizzaComponent } from '../pizza/pizza.component';
 import { ProductDetailsComponentModule } from '../product-details/product-details.module';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { HeaderModule } from '../header/header.module';
 import { SubHeaderModule } from '../sub-header/sub-header.module';
 

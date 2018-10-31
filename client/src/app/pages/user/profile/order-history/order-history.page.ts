@@ -5,7 +5,7 @@ import {
   CapRouterService
 } from '@capillarytech/pwa-framework';
 import {Utils} from '@capillarytech/pwa-components';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@capillarytech/pwa-framework';
 import {OrderHistoryComponent} from '@capillarytech/pwa-components/order-history/order-history.component';
 
 @Component({

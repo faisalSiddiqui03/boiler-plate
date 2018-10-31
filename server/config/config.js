@@ -22,7 +22,7 @@ const config = {
       "token": "Aa9bwxzH40uPNZRBPpC9"
     },
 	"prerenderer": {
-		"enabled": true,
+		"enabled": false,
         "exclude": [
             'product-details',
             'cart',

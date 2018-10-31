@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SavedAddressPage } from './saved-address.page';
 import { HeaderModule } from '../../../../components/header/header.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { UserAddressWidgetModule } from '@cap-widget/user-address';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 

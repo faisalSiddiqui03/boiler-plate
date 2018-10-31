@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { StoreSelectionPage } from './store-selection.page';
 import { HeaderModule } from '../../../components/header/header.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { StoreLocatorWidgetModule } from '@cap-widget/store-locator';
 import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
 import { StoreListModule } from '../../../components/store-list/store-list.module';

@@ -11,7 +11,7 @@ import { LocationWidget, LocationWidgetActions } from '@cap-widget/location';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@capillarytech/pwa-framework';
 
 @Component({
   selector: 'app-search-location',

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SuccessPage } from './success.page';
 import { HeaderModule } from '../../../components/header/header.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 
 const routes: Routes = [
   {

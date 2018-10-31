@@ -14,7 +14,7 @@ import { PaymentOptionsWidgetModule } from '@cap-widget/payment-options';
 
 import { UserAddressWidgetModule } from '@cap-widget/user-address';
 import { CheckoutPage } from './checkout.page';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { HeaderModule } from '../../../components/header/header.module';
 import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
 import { DeliverySlotsWidgetModule } from '@cap-widget/delivery-slots';

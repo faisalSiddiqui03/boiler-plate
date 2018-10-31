@@ -4,7 +4,6 @@ import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import {
   pwaLifeCycle,
 } from '@capillarytech/pwa-framework';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-deal',

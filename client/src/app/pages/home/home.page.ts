@@ -10,8 +10,9 @@ import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   DeliveryModes,
+  TranslateService
 } from '@capillarytech/pwa-framework';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@capillarytech/pwa-framework';
 import { AlertService, LoaderService } from '@capillarytech/pwa-ui-helpers';
 
 @Component({

@@ -7,7 +7,7 @@ import {
   WidgetNames
 } from '@capillarytech/pwa-framework';
 import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@capillarytech/pwa-framework';
 import { LoginComponent } from '@capillarytech/pwa-components/login/login.component';
 
 @Component({

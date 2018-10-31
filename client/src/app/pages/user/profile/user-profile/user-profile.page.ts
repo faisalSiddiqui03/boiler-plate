@@ -5,7 +5,7 @@ import {
   CapRouterService
 } from '@capillarytech/pwa-framework';
 import { LoaderService, AlertService } from '@capillarytech/pwa-ui-helpers';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@capillarytech/pwa-framework';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserProfileComponent } from '@capillarytech/pwa-components/user-profile/user-profile.component'
 

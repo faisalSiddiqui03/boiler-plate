@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ContactUsPage } from './contact-us.page';
 
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { HttpLoaderFactory } from '../../../translation.loader';
 import { HttpClient } from '@angular/common/http';
 import { HeaderModule } from '../../../components/header/header.module';

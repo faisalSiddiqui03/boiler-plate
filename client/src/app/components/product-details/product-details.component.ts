@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation, EventEmitter} from '@angular/core';
 import {pwaLifeCycle} from '@capillarytech/pwa-framework';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@capillarytech/pwa-framework';
 import {AlertService, LoaderService, HardwareService} from '@capillarytech/pwa-ui-helpers';
 import {ModalController} from '@ionic/angular';
 import {StoreSelectionModalComponent} from '../store-selection-modal/store-selection-modal.component';

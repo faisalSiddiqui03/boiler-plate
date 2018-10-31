@@ -6,9 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { FaqPage } from './faq.page';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../../../translation.loader';
-import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { HeaderModule } from '../../../components/header/header.module';
 import { SubHeaderModule } from '../../../components/sub-header/sub-header.module';
 

@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
 import { ProductDetailsComponent } from './product-details.component';
 import { ImagePreloadModule, EventTrackServiceModule} from '@capillarytech/pwa-framework';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
 import { StoreSelectionModalModule } from '../store-selection-modal/store-selection-modal.module';
 import {

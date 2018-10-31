@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { pwaLifeCycle } from '@capillarytech/pwa-framework';
 import { ModalController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@capillarytech/pwa-framework';
 import { PizzaComponent } from '../pizza/pizza.component';
 
 import { DealBuilderShowcaseComponent } from '@capillarytech/pwa-components/deal-builder-showcase/deal-builder-showcase.component';
@@ -28,9 +28,11 @@ export class DealShowcaseComponent extends DealBuilderShowcaseComponent implemen
 
   ngOnInit() {
     this.setDefaults();
-    this.translate.get('deal.choose_your').subscribe(value => {
-      this.bundleGroupTitle = value + " " + this.bundleGroupTitle;
-    });
+    this.bundleGroupTitle = this.translate.instant('deal.choose_your') + " " + this.bundleGroupTitle;
+  }
+
+  handleAddProductToDealSuccess(productAdded) {
+    // Do nothing
   }
 
   handleAddProductToDeal(productAdded) {

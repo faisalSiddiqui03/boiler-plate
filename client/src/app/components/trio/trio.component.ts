@@ -7,7 +7,7 @@ import {
 } from '@capillarytech/pwa-framework';
 import { ProductDetailsWidgetActions } from '@cap-widget/product-details';
 import { Product, BundleItem } from '@cap-widget/product-modules';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import { AlertService, LoaderService, HardwareService } from '@capillarytech/pwa-ui-helpers';
 import { ModalController } from '@ionic/angular';

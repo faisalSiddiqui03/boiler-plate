@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Platform, NavController, ModalController } from '@ionic/angular';
 // import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@capillarytech/pwa-framework';
 import { BaseComponent } from '@capillarytech/pwa-components/base-component';
 import {
   ConfigService,
@@ -10,6 +10,7 @@ import {
   pwaLifeCycle,
   CapRouterService,
   ServiceWorkerServiceImpl,
+  TranslateService
   // AppUpdateServiceImpl
 } from '@capillarytech/pwa-framework';
 import { AlertService, HardwareService } from '@capillarytech/pwa-ui-helpers';

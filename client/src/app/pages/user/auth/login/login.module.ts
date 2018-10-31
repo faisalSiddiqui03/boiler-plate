@@ -11,7 +11,7 @@ import { EventTrackServiceModule } from '@capillarytech/pwa-framework';
 import { UseridPasswordSigninWidgetModule } from '@cap-widget/authentication/userid-password-signin';
 import { GoogleSigninWidgetModule } from '@cap-widget/authentication/google-signin';
 
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { SubHeaderModule } from '../../../../components/sub-header/sub-header.module';
 
 const routes: Routes = [

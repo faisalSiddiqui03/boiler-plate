@@ -5,7 +5,7 @@ import { StoreSelectionModalComponent } from '../store-selection-modal/store-sel
 import { StoreSelectionModalModule } from '../store-selection-modal/store-selection-modal.module';
 import { DealComponent } from './deal.component';
 import { ImagePreloadModule, EventTrackServiceModule} from '@capillarytech/pwa-framework';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@capillarytech/pwa-framework';
 import { SkeletonModule } from '../../helpers/skeleton/skeleton.module';
 import { DealShowcaseComponentModule } from '../deal-showcase/deal-showcase.module';
 import { DealShowcaseComponent } from '../deal-showcase/deal-showcase.component';

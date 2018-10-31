@@ -5,7 +5,7 @@ import {
   CapRouterService,
 } from '@capillarytech/pwa-framework';
 import {AlertService} from '@capillarytech/pwa-ui-helpers';
-import {TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@capillarytech/pwa-framework';
 import {SavedAddressComponent} from '@capillarytech/pwa-components/saved-address/saved-address.component';
 
 @Component({
