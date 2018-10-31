@@ -49,7 +49,8 @@ const config = {
   "graphite": {
     "host": "graphite-carbon.deis",
     "port": "2003",
-    "prefix" : "pwa.phkuwait"
+    "prefix" : "pwa.phkuwait",
+    "log" : true,
   },
   "logger": {
     "logging": {
