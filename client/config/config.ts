@@ -22,46 +22,102 @@ export const config = {
   },
   'seo': {
     'aboutUs': {
-      'keywords': ['About Pizzahut'],
-      'title': 'About Us - Pizzahut Kuwait',
-      'description': 'This needs to be updated.',
-      'urlKey': ''
+      'en': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      },
+      'ar': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      }
     },
     'contactUs': {
-      'keywords': ['Contact Pizzahut'],
-      'title': 'Contact Us - Pizzahut Kuwait',
-      'description': 'This needs to be updated.',
-      'urlKey': ''
+      'en': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      },
+      'ar': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      }
     },
     'faq': {
-      'keywords': ['About Pizzahut'],
-      'title': 'Frequently Asked Questions - Pizzahut Kuwait',
-      'description': 'This needs to be updated.',
-      'urlKey': ''
+      'en': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      },
+      'ar': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      }
     },
     'feedback': {
-      'keywords': ['About Pizzahut'],
-      'title': 'Feedback - Pizzahut Kuwait',
-      'description': 'This needs to be updated.',
-      'urlKey': ''
+      'en': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      },
+      'ar': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      }
     },
     'nutrition': {
-      'keywords': ['About Pizzahut'],
-      'title': 'Nutirion Information - Pizzahut Kuwait',
-      'description': 'This needs to be updated.',
-      'urlKey': ''
+      'en': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      },
+      'ar': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      }
     },
     'privacyPolicy': {
-      'keywords': ['About Pizzahut'],
-      'title': 'Privacy Policy - Pizzahut Kuwait',
-      'description': 'This needs to be updated.',
-      'urlKey': ''
+      'en': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      },
+      'ar': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      }
     },
     'termsAndConditions': {
-      'keywords': ['About Pizzahut'],
-      'title': 'Terms & Conditions - Pizzahut Kuwait',
-      'description': 'This needs to be updated.',
-      'urlKey': ''
+      'en': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      },
+      'ar': {
+        'keywords': ['About Pizzahut'],
+        'title': 'About Us - Pizzahut Kuwait',
+        'description': 'This needs to be updated.',
+        'urlKey': ''
+      }
     }
   }
 };

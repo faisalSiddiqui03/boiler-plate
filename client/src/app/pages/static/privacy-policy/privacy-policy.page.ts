@@ -20,7 +20,7 @@ export class PrivacyPolicyPage extends BaseComponent {
   }
 
   async ionViewWillEnter() {
-    this.addPageTagsViaSeoInfo(this.seoInfo);
+    this.addPageTagsViaSeoInfo(this.seoInfo[this.getCurrentLanguageCode()]);
     this.translate.use(this.getCurrentLanguageCode());
     this.translate.append([
       { language: 'en', text: EnglishPrivacyPageText },

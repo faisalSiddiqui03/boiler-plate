@@ -15,6 +15,6 @@ export class ContactUsPage extends BaseComponent {
   }
 
   ionViewWillEnter() {
-    this.addPageTagsViaSeoInfo(this.seoInfo);
+    this.addPageTagsViaSeoInfo(this.seoInfo[this.getCurrentLanguageCode()]);
   }
 }
