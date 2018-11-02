@@ -1,7 +1,7 @@
 import { Component, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { BaseComponent } from '@capillarytech/pwa-components/base-component';
-import { CapRouterService, Action, pwaLifeCycle, SeoInfo } from '@capillarytech/pwa-framework';
+import { SeoComponent } from '@capillarytech/pwa-components/base-component';
+import { CapRouterService, Action, pwaLifeCycle } from '@capillarytech/pwa-framework';
 import { SurveyWidgetActions } from '@cap-widget/survey';
 
 @Component({
@@ -11,18 +11,16 @@ import { SurveyWidgetActions } from '@cap-widget/survey';
 })
 
 @pwaLifeCycle()
-export class FeedbackPage extends BaseComponent {
+export class FeedbackPage extends SeoComponent {
   feedBackForm: FormGroup;
   feedbackWidgetAction = new EventEmitter();
   feedbackWidgetExecutor = new EventEmitter();
-  seoInfo: SeoInfo;
 
   constructor(
     private formBuilder: FormBuilder,
     private capRouter: CapRouterService,
   ) {
-    super();
-    this.seoInfo = this.configService.getConfig()['seo']['feedback'];
+    super({ pageKey: 'feedback' });
     this.feedBackForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -35,10 +33,6 @@ export class FeedbackPage extends BaseComponent {
       orderType: ['', Validators.compose([Validators.required])],
       message: ['', Validators.compose([Validators.required])],
     });
-  }
-
-  ionViewWillEnter() {
-    this.addPageTagsViaSeoInfo(this.seoInfo[this.getCurrentLanguageCode()]);
   }
 
   widgetActionSuccess(name: string, data: any) {

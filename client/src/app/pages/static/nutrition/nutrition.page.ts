@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CapRouterService, TranslateService, SeoInfo } from '@capillarytech/pwa-framework';
-import { BaseComponent } from "@capillarytech/pwa-components";
+import { CapRouterService, TranslateService } from '@capillarytech/pwa-framework';
+import { SeoComponent } from "@capillarytech/pwa-components";
 import { ArabicNutritionPageText, EnglishNutritionPageText } from '@assets/i18n/nutrition.text';
 
 @Component({
@@ -8,20 +8,17 @@ import { ArabicNutritionPageText, EnglishNutritionPageText } from '@assets/i18n/
   templateUrl: './nutrition.page.html',
   styleUrls: ['./nutrition.page.scss'],
 })
-export class NutritionPage extends BaseComponent {
-  seoInfo: SeoInfo;
+export class NutritionPage extends SeoComponent {
   constructor(
     private capRouter: CapRouterService,
     private translate: TranslateService
   ) {
-    super();
-    this.seoInfo = this.configService.getConfig()['seo']['nutrition'];
+    super({ pageKey: 'nutrition' });
   }
 
   activeAccordion: number = null;
 
   async ionViewWillEnter() {
-    this.addPageTagsViaSeoInfo(this.seoInfo[this.getCurrentLanguageCode()]);
     this.translate.use(this.getCurrentLanguageCode());
     this.translate.append([
       { language: 'en', text: EnglishNutritionPageText },

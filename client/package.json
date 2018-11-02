@@ -36,7 +36,7 @@
     "@angular/router": "7.0.1",
     "@angular/service-worker": "7.0.1",
     "@capillarytech/pwa-framework": "0.6.19",
-    "@capillarytech/pwa-components": "1.1.36",
+    "@capillarytech/pwa-components": "1.1.37",
     "@capillarytech/pwa-ui-helpers": "0.2.8",
     "@capillarytech/pwa-payment-providers": "0.0.1",
     "@ionic-native/app-version": "5.0.0-beta.21",

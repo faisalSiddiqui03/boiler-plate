@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@capillarytech/pwa-framework';
-import { BaseComponent } from "@capillarytech/pwa-components";
-import { SeoInfo } from '@capillarytech/pwa-framework';
+import { SeoComponent } from "@capillarytech/pwa-components";
 import { ArabicAboutUsPageText, EnglishAboutUsPageText } from '@assets/i18n/aboutus.text';
 
 @Component({
@@ -9,15 +8,12 @@ import { ArabicAboutUsPageText, EnglishAboutUsPageText } from '@assets/i18n/abou
   templateUrl: './about-us.page.html',
   styleUrls: ['./about-us.page.scss'],
 })
-export class AboutUsPage extends BaseComponent {
-  seoInfo: SeoInfo;
+export class AboutUsPage extends SeoComponent {
   constructor(private translate: TranslateService) {
-    super();
-    this.seoInfo = this.configService.getConfig()['seo']['aboutUs'];
+    super({ pageKey: 'aboutUs' });
   }
 
   async ionViewWillEnter() {
-    this.addPageTagsViaSeoInfo(this.seoInfo[this.getCurrentLanguageCode()]);
     this.translate.use(this.getCurrentLanguageCode());
     this.translate.append([
       { language: 'en', text: EnglishAboutUsPageText },

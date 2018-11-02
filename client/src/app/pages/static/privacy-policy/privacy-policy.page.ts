@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CapRouterService, TranslateService, SeoInfo } from '@capillarytech/pwa-framework';
-import { BaseComponent } from "@capillarytech/pwa-components";
+import { CapRouterService, TranslateService } from '@capillarytech/pwa-framework';
+import { SeoComponent } from "@capillarytech/pwa-components";
 import { ArabicPrivacyPageText, EnglishPrivacyPageText } from '@assets/i18n/privacy.text';
 
 @Component({
@@ -8,19 +8,16 @@ import { ArabicPrivacyPageText, EnglishPrivacyPageText } from '@assets/i18n/priv
   templateUrl: './privacy-policy.page.html',
   styleUrls: ['./privacy-policy.page.scss'],
 })
-export class PrivacyPolicyPage extends BaseComponent {
-  seoInfo: SeoInfo;
+export class PrivacyPolicyPage extends SeoComponent {
   activeAccordion: number = null;
   constructor(
     private capRouter: CapRouterService,
     private translate: TranslateService
   ) {
-    super();
-    this.seoInfo = this.configService.getConfig()['seo']['privacyPolicy'];
+    super({ pageKey: 'privacyPolicy' });
   }
 
   async ionViewWillEnter() {
-    this.addPageTagsViaSeoInfo(this.seoInfo[this.getCurrentLanguageCode()]);
     this.translate.use(this.getCurrentLanguageCode());
     this.translate.append([
       { language: 'en', text: EnglishPrivacyPageText },
