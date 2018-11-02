@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CapRouterService, TranslateService } from '@capillarytech/pwa-framework';
+import { CapRouterService, TranslateService, SeoInfo } from '@capillarytech/pwa-framework';
 import {BaseComponent} from "@capillarytech/pwa-components";
 import { ArabicFAQPageText, EnglishFAQPageText } from '@assets/i18n/faq.text';
-
 
 @Component({
   selector: 'app-faq',
@@ -10,16 +9,18 @@ import { ArabicFAQPageText, EnglishFAQPageText } from '@assets/i18n/faq.text';
   styleUrls: ['./faq.page.scss'],
 })
 export class FaqPage extends BaseComponent {
-
+  seoInfo: SeoInfo;
   activeAccordion: number = null;
   constructor(
     private capRouter: CapRouterService,
     private translate: TranslateService
   ) {
     super();
+    this.seoInfo = this.configService.getConfig()['seo']['faq'];
   }
 
   async ionViewWillEnter() {
+    this.addPageTagsViaSeoInfo(this.seoInfo);
     this.translate.use(this.getCurrentLanguageCode());
     this.translate.append([
       {language: 'en', text: EnglishFAQPageText},
