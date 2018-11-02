@@ -1,6 +1,6 @@
 import { Component, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { SeoComponent } from '@capillarytech/pwa-components/base-component';
+import { SeoComponent } from '@capillarytech/pwa-components/seo-component';
 import { CapRouterService, Action, pwaLifeCycle } from '@capillarytech/pwa-framework';
 import { SurveyWidgetActions } from '@cap-widget/survey';
 

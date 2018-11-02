@@ -13,7 +13,7 @@ export class AboutUsPage extends SeoComponent {
     super({ pageKey: 'aboutUs' });
   }
 
-  async ionViewWillEnter() {
+  ionViewWillEnter() {
     this.translate.use(this.getCurrentLanguageCode());
     this.translate.append([
       { language: 'en', text: EnglishAboutUsPageText },

@@ -17,7 +17,7 @@ export class FaqPage extends SeoComponent {
     super({ pageKey: 'faq' });
   }
 
-  async ionViewWillEnter() {
+  ionViewWillEnter() {
     this.translate.use(this.getCurrentLanguageCode());
     this.translate.append([
       { language: 'en', text: EnglishFAQPageText },

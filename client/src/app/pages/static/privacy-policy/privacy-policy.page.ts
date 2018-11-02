@@ -17,7 +17,7 @@ export class PrivacyPolicyPage extends SeoComponent {
     super({ pageKey: 'privacyPolicy' });
   }
 
-  async ionViewWillEnter() {
+  ionViewWillEnter() {
     this.translate.use(this.getCurrentLanguageCode());
     this.translate.append([
       { language: 'en', text: EnglishPrivacyPageText },

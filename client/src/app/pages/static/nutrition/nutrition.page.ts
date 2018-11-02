@@ -18,7 +18,7 @@ export class NutritionPage extends SeoComponent {
 
   activeAccordion: number = null;
 
-  async ionViewWillEnter() {
+  ionViewWillEnter() {
     this.translate.use(this.getCurrentLanguageCode());
     this.translate.append([
       { language: 'en', text: EnglishNutritionPageText },
