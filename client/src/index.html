@@ -3,6 +3,27 @@
 
 <head>
 
+  <style>
+    ion-show-when {
+      display: none;
+    }
+
+    ion-hide-when {
+      display: block;
+    }
+
+    @media (min-width: 992px) {
+      ion-show-when[size='lg'] {
+        display: block;
+      }
+
+      ion-hide-when[size='lg'] {
+        display: none;
+      }
+    }
+
+  </style>
+
   <!-- Google Tag Manager -->
   <script>
     (function (w, d, s, l, i) {

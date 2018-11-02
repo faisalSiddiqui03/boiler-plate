@@ -47,6 +47,7 @@ export class DeliverySlotSelectionPage extends DeliverySlotComponent implements 
   closeModal() {
 
     this.handleDefaultSlotSelection();
+    this.modalController.dismiss();
   }
 
   selectTimeSlot() {

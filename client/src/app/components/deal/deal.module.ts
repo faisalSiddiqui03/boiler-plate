@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { StoreSelectionModalComponent } from '../store-selection-modal/store-selection-modal.component';
@@ -38,6 +38,7 @@ import { ProductDetailsWidgetModule } from '@cap-widget/product-details';
     ProductDetailsComponent,
     TrioComponent,
     StoreSelectionModalComponent,
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DealComponentModule {}
