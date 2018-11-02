@@ -115,8 +115,11 @@ export class CartComponent extends ViewCartComponent {
   }
 
   updateCartItem(event, item, isAddition) {
-
-    this.updateCart({clickNumber: event.clickNumber, isAddition: isAddition}, item);
+    if ((item.quantity - event.clickNumber) < 1 && !isAddition) {
+      this.confirmRemove(item);
+    } else {
+      this.updateCart({clickNumber: event.clickNumber, isAddition: isAddition}, item);
+    }
   }
 
   confirmRemove(item) {
