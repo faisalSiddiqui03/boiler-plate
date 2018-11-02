@@ -38,7 +38,7 @@ export class FeedbackPage extends BaseComponent {
   }
 
   ionViewWillEnter() {
-    this.addPageTagsViaSeoInfo(this.seoInfo);
+    this.addPageTagsViaSeoInfo(this.seoInfo[this.getCurrentLanguageCode()]);
   }
 
   widgetActionSuccess(name: string, data: any) {
