@@ -23,23 +23,24 @@
         <div class="container showcase-container full-height">
           <!--<ion-content>-->
             <ion-hide-when size="lg">
-              <div class="mobile-show-location">
+            <!--<div class="mobile-show-location">-->
+            <ion-item class="mobile-show-location" slot="start">
+              <ion-label>
                 <div class="delivey-show" (click)="goToPage('home')">
-                  <div class="show-icon" [ngClass]="{'icon-delivery': getDeliveryMode() === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getDeliveryMode() === deliveryModes.PICKUP}"></div>
+                  <div class="show-icon" [ngClass]="{'icon-delivery icon-bottom': getDeliveryMode() === deliveryModes.HOME_DELIVERY, 'icon-takeaway': getDeliveryMode() === deliveryModes.PICKUP}"></div>
                   <span class="show-text" text-capitalize>{{ 'header.mode' | translate }}:</span>
                   <small *ngIf="getDeliveryMode() === deliveryModes.HOME_DELIVERY" text-capitalize>{{ 'header.delivery' | translate }}
                   </small>
                   <small *ngIf="getDeliveryMode() === deliveryModes.PICKUP" text-capitalize>{{ 'header.take_away' | translate }}
                   </small>
-                </div>
-                <div class="location-show" flex-center (click)="goToPage('home')">
-                  <div class="show-icon icon-location-pin"></div>
+                  <ion-icon class="show-icon icon-location-pin" name="pin"></ion-icon>
                   <span class="show-text" text-capitalize>{{ 'header.location' | translate }}:</span>
                   <small text-uppercase>{{getCurrentStore()?.address}}</small>
-                  <div class="arrow-icon icon-arrow-down-2"></div>
                 </div>
-              </div>
-            </ion-hide-when>
+              </ion-label>
+              <ion-button slot="end" class="edit-btn" color="medium" mode="ios" (click)="goToPage('home')">{{ 'header.edit' | translate }}</ion-button>
+            </ion-item>
+          </ion-hide-when>
             <ng-container *ngFor="let item of navigations; let i = index;">
               <div [hidden]="!(item.categoryId === categoryId)" [id]="item.categoryId">
                 <product-showcase-widget [componentId]="getComponentId()" [setSEOTags]=false pfWidgetImpressionTrack [filters]="getShowcaseFilter(item.categoryId)"

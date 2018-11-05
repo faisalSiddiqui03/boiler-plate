@@ -301,32 +301,55 @@
     }
   }
   .mobile-show-location {
-    background: var(--ion-color-light);
-    padding: 8px;
     font-size: 14px;
-    line-height: 16px;
+    .icon-bottom{
+      vertical-align: bottom;
+    }
+    .edit-btn{
+      --height: 24px;
+      --border-radius: 5px;
+      font-size: 12px;
+      --box-shadow: none;
+      --color: black;
+      --background-focused:var(--ion-color-success);
+      --background-activated:var(--ion-color-success);
+      --border-width: 1px;
+      --border-style: solid;
+    }
+    .delivey-show{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .show-icon {
       display: inline-block;
-      vertical-align: middle;
-      margin-right: 10px;
-      color: var(--ion-color-danger);
+      margin-right: 4px;
+      font-size: 16px;
+      color: var(--ion-tabs-color);
+    }
+    .icon-location-pin{
+      margin: 0;
     }
     .show-text {
-      color: var(--ion-color-danger);
+      display: inline-block;
+      color: var(--ion-tabs-color);
       padding-right: 3px;
     }
     small {
-      font-size: 100%;
+      font-size: 80%;
+      color: var(--ion-tabs-color);
     }
-    .location-show {
-      small {
-        flex: 1;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
+    //.location-show {
+    //  small {
+    //    flex: 1;
+    //    white-space: nowrap;
+    //    overflow: hidden;
+    //    text-overflow: ellipsis;
+    //  }
+    //}
   }
+
   @media (max-width: 991px) {
     .showcase-tabs-one {
       background: rgba(var(--ion-color-cart-stripe-rgb), 0.96);
@@ -440,6 +463,27 @@ html {
               border-left: none;
             }
           }
+        }
+      }
+      .mobile-show-location {
+        .show-icon {
+          display: inline-block;
+          margin-left: 4px;
+          font-size: 16px;
+          color: var(--ion-tabs-color);
+        }
+        .icon-location-pin{
+          margin: 0;
+        }
+        .show-text {
+          display: inline-block;
+          color: var(--ion-tabs-color);
+          padding-left: 3px;
+        }
+        small {
+          display: inline-block;
+          font-size: 80%;
+          color: var(--ion-tabs-color);
         }
       }
     }

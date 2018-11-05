@@ -11,7 +11,7 @@ export const config = {
   'headerBannerRefCode': 'ph-60th-years-',
   'footerBannerRefCode': 'bogo-pwa-',
   'quantityEnabledCategories': ['CU00215602'],
-  'baseUrl': '/api/',
+	'baseUrl': '/api/',
   'tracker': {
     'widgetImpression': false,
     'apiTrack': false
