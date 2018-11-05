@@ -86,7 +86,7 @@ export function getTranslationText() {
   ],
   entryComponents: [],
   imports: [
-    BrowserModule.withServerTransition({appId: 'ph-kuwait'}),
+    BrowserModule.withServerTransition({appId: 'cappwa'}),
     IonicModule.forRoot({mode: 'md'}),
     ConfigServiceModule.forRoot(getAppConfig),
     GlobalServiceModule.forRoot(),
