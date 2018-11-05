@@ -15,7 +15,8 @@
               <div class="form-input">
                 <ion-input id="fname" placeholder="{{'sign_up_page.fname_placeholder' | translate}}" inputmode="text" formControlName="fname"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                  <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                  <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="signUpForm.get('fname').touched && !signUpForm.get('fname').valid" class="error-msg">{{'sign_up_page.fname_error' | translate}}</div>
@@ -34,7 +35,8 @@
                 <span>965</span>
                 <ion-input id="mobile" placeholder="{{'sign_up_page.mobile_placehlder' | translate}}" inputmode="text" formControlName="mobile"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                  <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                  <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="signUpForm.get('mobile')?.touched">
@@ -53,7 +55,8 @@
               <div class="form-input">
                 <ion-input id="email" placeholder="{{'sign_up_page.email_placeholder' | translate}}" inputmode="email" formControlName="email"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                  <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                  <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="signUpForm.get('email').touched">
@@ -71,7 +74,8 @@
                 <ion-input [type]="'password'" [inputmode]="'password'" no-border placeholder="{{ 'sign_in_page.password_placeholder' | translate }}"
                   formControlName="password" id="password"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                  <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                  <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="signUpForm.get('password').touched">
@@ -87,7 +91,8 @@
                 <ion-input id="confirmPassword" placeholder="{{'sign_up_page.confirm_password_placeholder' | translate}}" inputmode="password" type="password"
                   formControlName="confirmPassword"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                  <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                  <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="signUpForm.get('confirmPassword').touched && !signUpForm.get('confirmPassword').valid" class="error-msg">{{'sign_up_page.confirm_password_error_match' | translate}}</div>

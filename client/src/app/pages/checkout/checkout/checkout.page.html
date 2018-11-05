@@ -50,7 +50,8 @@
                 <ion-input id="name" placeholder="{{ 'checkout_page.name_placeholder' | translate }}" inputmode="text"
                            formControlName="name"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                   <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                  <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="checkoutForm.get('name').touched">
@@ -69,7 +70,8 @@
                 <ion-input id="mobile" placeholder="{{ 'checkout_page.mobile_placeholder' | translate }}"
                            inputmode="text" formControlName="mobile"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                   <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                   <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="checkoutForm.get('mobile').dirty && !checkoutForm.get('mobile').valid">
@@ -94,7 +96,8 @@
                 <ion-input id="email" placeholder="{{ 'checkout_page.email_placeholder' | translate }}"
                            inputmode="email" formControlName="email"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                   <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                   <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="checkoutForm.get('email').touched">
@@ -173,7 +176,8 @@
                 <ion-input id="building" placeholder="{{ 'checkout_page.building_placeholder' | translate }}"
                            inputmode="text" formControlName="building"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                   <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                   <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="checkoutForm.get('building').touched">
@@ -191,7 +195,8 @@
                 <ion-input id="street" placeholder="{{ 'checkout_page.street_placeholder' | translate }}"
                            inputmode="text" formControlName="street"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                   <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                   <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="checkoutForm.get('street').touched">
