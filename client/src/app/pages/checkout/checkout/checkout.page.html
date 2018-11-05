@@ -43,14 +43,15 @@
             <h2 no-margin>{{ 'checkout_page.who_we_delivering' | translate }} </h2>
           </div>
           <div *ngIf="getUserModel()?.type === 'GUEST'">
-            <div class="form-group" [class.error]="checkoutForm.get('name').touched && !checkoutForm.get('name').valid">
+            <div class="form-group full-border" [class.error]="checkoutForm.get('name').touched && !checkoutForm.get('name').valid">
               <ion-label class="login-label" for="name" text-capitalize>{{ 'checkout_page.name' | translate }}*
               </ion-label>
               <div class="form-input">
                 <ion-input id="name" placeholder="{{ 'checkout_page.name_placeholder' | translate }}" inputmode="text"
                            formControlName="name"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                   <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                  <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="checkoutForm.get('name').touched">
@@ -60,7 +61,7 @@
               </div>
             </div>
 
-            <div class="form-group"
+            <div class="form-group full-border"
                  [class.error]="checkoutForm.get('mobile').dirty && !checkoutForm.get('mobile').valid">
               <ion-label class="login-label" for="mobile" text-capitalize>{{ 'checkout_page.mobile' | translate }}*
               </ion-label>
@@ -69,7 +70,8 @@
                 <ion-input id="mobile" placeholder="{{ 'checkout_page.mobile_placeholder' | translate }}"
                            inputmode="text" formControlName="mobile"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                   <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                   <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="checkoutForm.get('mobile').dirty && !checkoutForm.get('mobile').valid">
@@ -86,7 +88,7 @@
               </div>
             </div>
 
-            <div class="form-group"
+            <div class="form-group full-border"
                  [class.error]="checkoutForm.get('email').touched && !checkoutForm.get('email').valid">
               <ion-label class="login-label" for="email" text-capitalize>{{ 'checkout_page.email' | translate }}*
               </ion-label>
@@ -94,7 +96,8 @@
                 <ion-input id="email" placeholder="{{ 'checkout_page.email_placeholder' | translate }}"
                            inputmode="email" formControlName="email"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                   <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                   <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="checkoutForm.get('email').touched">
@@ -108,7 +111,7 @@
             </div>
           </div>
           <div *ngIf="getUserModel()?.type !== 'GUEST'" class="logged-user-form">
-            <div class="form-group">
+            <div class="form-group full-border">
               <ion-label class="login-label" for="name" text-capitalize>{{ 'checkout_page.name' | translate }}
               </ion-label>
               <p no-margin>
@@ -116,7 +119,7 @@
               </p>
             </div>
 
-            <div class="form-group">
+            <div class="form-group full-border">
               <ion-label class="login-label" for="mobile" text-capitalize>{{ 'checkout_page.mobile' | translate }}*
               </ion-label>
               <p no-margin>
@@ -124,7 +127,7 @@
               </p>
             </div>
 
-            <div class="form-group">
+            <div class="form-group full-border">
               <ion-label class="login-label" for="email" text-capitalize>{{ 'checkout_page.email' | translate }}*
               </ion-label>
               <p no-margin>
@@ -147,7 +150,7 @@
               </ion-label>
             </div>
 
-            <div class="form-group">
+            <div class="form-group full-border">
               <ion-label class="login-label" for="comment" text-capitalize>{{ 'checkout_page.comment' | translate }}
               </ion-label>
               <div class="form-input">
@@ -165,7 +168,7 @@
               <h2 no-margin>{{ 'checkout_page.where_we_deliver' | translate }}</h2>
             </div>
 
-            <div class="form-group"
+            <div class="form-group full-border"
                  [class.error]="checkoutForm.get('building').touched && !checkoutForm.get('building').valid">
               <ion-label class="login-label" for="building" text-capitalize>{{ 'checkout_page.building' | translate }}*
               </ion-label>
@@ -173,7 +176,8 @@
                 <ion-input id="building" placeholder="{{ 'checkout_page.building_placeholder' | translate }}"
                            inputmode="text" formControlName="building"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                   <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                   <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="checkoutForm.get('building').touched">
@@ -183,7 +187,7 @@
               </div>
             </div>
 
-            <div class="form-group"
+            <div class="form-group full-border"
                  [class.error]="checkoutForm.get('street').touched && !checkoutForm.get('street').valid">
               <ion-label class="login-label" for="street" text-capitalize>{{ 'checkout_page.street' | translate }}*
               </ion-label>
@@ -191,7 +195,8 @@
                 <ion-input id="street" placeholder="{{ 'checkout_page.street_placeholder' | translate }}"
                            inputmode="text" formControlName="street"></ion-input>
                 <div class="icons">
-                  <ion-icon name="alert"></ion-icon>
+                   <ion-icon name="alert" ios="ios-alert" md="ios-alert"></ion-icon>
+                   <ion-icon name="checkmark-circle" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
                 </div>
               </div>
               <div *ngIf="checkoutForm.get('street').touched">
@@ -201,7 +206,7 @@
               </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group full-border">
               <ion-label class="login-label" for="comment" text-capitalize>{{ 'checkout_page.comment' | translate }}
               </ion-label>
               <div class="form-input">
@@ -223,7 +228,7 @@
                     <ion-checkbox formControlName="saveAddress" color="medium" slot="start"></ion-checkbox>
                     <ion-label>{{'checkout_page.save_as' | translate}}</ion-label>
                   </ion-item>
-                  <div class="form-group">
+                  <div class="form-group full-border">
                     <!-- <ion-select formControlName="addressType" ngDefaultControl>
                       <ion-select-option value="Home">{{'checkout_page.home' | translate}}</ion-select-option>
                       <ion-select-option value="Work">{{'checkout_page.work' | translate}}</ion-select-option>
@@ -254,7 +259,7 @@
               <h2 no-margin>{{ 'checkout_page.where_we_deliver' | translate }}</h2>
             </div>
 
-            <div class="form-group">
+            <div class="form-group full-border">
               <ion-label class="login-label" for="building" text-capitalize>{{ 'checkout_page.building' | translate }}
               </ion-label>
               <p no-margin>
@@ -262,7 +267,7 @@
               </p>
             </div>
 
-            <div class="form-group">
+            <div class="form-group full-border">
               <ion-label class="login-label" for="street" text-capitalize>{{ 'checkout_page.street' | translate }}*
               </ion-label>
               <p no-margin>
@@ -270,7 +275,7 @@
               </p>
             </div>
 
-            <div class="form-group">
+            <div class="form-group full-border">
               <ion-label class="login-label" for="comment" text-capitalize>{{ 'checkout_page.comment' | translate }}
               </ion-label>
               <p no-margin>
@@ -296,7 +301,7 @@
                     <p no-margin>{{'checkout_page.change_address' | translate}}</p>
                   </ion-col>
                   <ion-col col-6>
-                    <div class="form-group">
+                    <div class="form-group full-border">
                       <ion-select formControlName="addressType">
                         <ion-select-option (click)="selectAddress(i)"
                                            *ngFor="let address of savedAddresses; let i = index"

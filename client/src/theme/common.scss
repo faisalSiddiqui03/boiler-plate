@@ -153,93 +153,80 @@ body {
 
 .form-group {
   padding-bottom: 5px;
-
+  
   ion-label {
     margin: 10px 0 5px;
-    font-size: 15px;
+    font-size: 14px;
     color: var(--ion-color-dark);
-
-    &.login-label {
-      margin: 5px 0;
-      font-weight: 600;
-      font-size: 13px;
-      color: var(--ion-color-secondary);
-
-      sup {
-        font-size: 18px;
-      }
-    }
-
     sup {
-      font-size: 24px;
-      top: 0.1em;
+      font-size: 14px;
+      top: 0em;
     }
   }
-
+  .form-input {
+    position: relative;
+  }
+  .icons {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: 2px;
+    font-size: 20px;
+    ion-icon[name="alert"] {
+      color: var(--ion-color-danger);
+    }
+    ion-icon[name="checkmark-circle"] {
+      color: var(--ion-color-success);
+    }
+    ion-icon {
+      display: none;
+      color: var(--ion-color-secondary-tint);
+    }
+  }
   ion-input,
   ion-textarea,
   ion-select {
-    font-size: 15px;
-    border: 2px solid rgba(var(--ion-color-secondary-rgb), 0.5);
-    border-radius: 4px;
+    position: relative;
+    font-size: 13px;
+    border: 1px solid rgba(var(--ion-color-secondary-rgb), 0.5);
+    border-radius: 5px;
     transition: all 0.3s ease-in-out;
-
     &.has-focus {
       border-color: var(--ion-color-dark);
     }
-
     --padding-top: 13px;
     --padding-bottom: 13px;
     --padding-start:10px;
     --padding-end:10px;
-
     &[disabled] {
       border-color: rgba(var(--ion-color-secondary-rgb), 0.3);
     }
   }
-
-  .form-input {
-    position: relative;
-
-    .icons {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      margin-top: 2px;
-      font-size: 20px;
-
-      ion-icon[name="alert"] {
-        color: var(--ion-color-danger);
-        display: none;
+  .error-msg {
+    margin: 5px 0 0;
+    font-size: 12px;
+    color: var(--ion-color-danger);
+  }
+  &.error {
+    .form-input {
+      ion-input {
+        border-color: var(--ion-color-danger);
       }
-
-      ion-icon {
-        color: var(--ion-color-secondary-tint);
-      }
-
-      ion-icon {
-        &+ion-icon {
-          margin-left: 10px;
+      .icons {
+        ion-icon[name="alert"] {
+          display: inline-block;
         }
       }
     }
-
-    &.mobile-input {
-      ion-input {
-        --padding-start: 68px;
-      }
-
-      span {
-        position: absolute;
-        left: 2px;
-        top: 2px;
-        bottom: 2px;
-        background: var(--ion-color-medium);
-        width: 60px;
-        line-height: 40px;
-        text-align: center;
-        font-size: 15px;
+  }
+  ion-input {
+    &.ng-touched.ng-valid {
+      border-color: var(--ion-color-success);
+      &~.icons {
+        ion-icon[name="checkmark-circle"] {
+          display: inline-block;
+        }
       }
     }
   }
@@ -252,14 +239,21 @@ body {
 
   &.error {
     .form-input {
-
-      ion-input,
-      ion-textarea {
+      ion-input {
         border-color: var(--ion-color-danger);
       }
-
       .icons {
         ion-icon[name="alert"] {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  ion-input {
+    &.ng-touched.ng-valid {
+      border-color: var(--ion-color-success);
+      &~.icons {
+        ion-icon[name="checkmark-circle"] {
           display: inline-block;
         }
       }
@@ -674,6 +668,22 @@ html {
     }
 
     .form-group {
+      &:not(.full-border) {
+        padding-bottom: 5px;
+        ion-label {
+          padding-left: 10px;
+          margin-bottom: 0;
+        }
+        ion-input,
+        ion-textarea,
+        ion-select {
+          border-width: 0 0 1px;
+          border-radius: 0px;
+          --padding-top: 8px;
+          --padding-bottom: 8px;
+          font-size: 15px;
+        }
+      }
       .form-input {
         .icons {
           left: 10px;
