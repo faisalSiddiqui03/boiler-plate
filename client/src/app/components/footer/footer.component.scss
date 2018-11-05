@@ -1,4 +1,10 @@
 .footer-content {
+  .footer-icon {
+    padding: 0;
+    color: #ffffff;
+    font-size: 32px;
+  }
+
   background: var(--ion-color-dark);
   ion-col {
     --ion-grid-column-padding: 0px;

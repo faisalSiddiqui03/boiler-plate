@@ -98,7 +98,7 @@
                 </ion-item>
               </ion-list>
               <ion-list *ngIf="isCityVisible()" class="location-block-list citydrp">
-                <ion-item (click)="preventPropogation($event);selectCity(city)"
+                <ion-item (click)="preventPropogation($event);selectCity(city);restoreCityName();"
                           no-padding *ngFor="let city of filterEntries(widget.model.cities, searchTerm.city)">
                   <span>{{ city.name }}</span>
                 </ion-item>
