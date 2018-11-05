@@ -220,6 +220,25 @@ body {
       }
     }
   }
+  
+  .mobile-input {
+    ion-input {
+      --padding-start: 68px;
+    }
+
+    span {
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      bottom: 2px;
+      background: var(--ion-color-medium);
+      width: 60px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 15px;
+    }
+  }
+
   ion-input {
     &.ng-touched.ng-valid {
       border-color: var(--ion-color-success);
