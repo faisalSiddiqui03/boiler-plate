@@ -4,13 +4,10 @@
 
 <script id="prerenderer-loader" src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>
 
-<style id="prerenderer-style">
-    ion-show-when {
-        display: none;
-    }
+<style type="text/css" id="prerenderer-style">
 
-    ion-hide-when {
-        display: block;
+    ion-button {
+        height: 42px;
     }
 
     :root {
@@ -18,13 +15,6 @@
     }
 
     @media (min-width: 992px) {
-        ion-show-when[size='lg'] {
-            display: block;
-        }
-
-        ion-hide-when[size='lg'] {
-            display: none;
-        }
 
         :root {
             ion-grid-columns: 12;
