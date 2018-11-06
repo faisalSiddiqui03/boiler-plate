@@ -51,9 +51,17 @@ export class DealComponent extends DealBuilderComponent implements OnInit, OnWid
   async handleAddToCartActionSuccess(data) {
     this.loaderService.stopLoading();
     const isDesktop = await this.hardwareService.isDesktopSite();
-    await this.alertService.presentToast(this.clientProduct.title + ' ' + this.translate.instant('deal.added_to_cart'), 3000, 'top', 'top', !isDesktop, this.getCurrentLanguageCode());
-    if (!isDesktop) this.capRouter.routeByUrl('/cart');
-    if (isDesktop) this.goBack();
+    await this.alertService.presentToast(this.clientProduct.title + ' ' +
+        this.translate.instant('deal.added_to_cart'), 3000, 'top',
+        'top', !isDesktop, this.getCurrentLanguageCode());
+
+    if (!isDesktop) {
+
+      this.capRouter.routeByUrl('/cart');
+      return;
+    }
+
+    this.goBack();
   }
 
   handleEditCartActionSuccess(data) {
@@ -61,13 +69,19 @@ export class DealComponent extends DealBuilderComponent implements OnInit, OnWid
     this.modalController.dismiss(true);
   }
 
-  handleAddToCartActionFailure(data) {
+  async handleAddToCartActionFailure(data) {
     this.loaderService.stopLoading();
+    const isDesktop = await this.hardwareService.isDesktopSite();
+    this.alertService.presentToast(this.translate.instant('reset_password_page.error'), 3000, 'top',
+        'top', !isDesktop, this.getCurrentLanguageCode());
   }
 
-  handleEditCartActionFailure(data) {
+  async handleEditCartActionFailure(data) {
     this.loaderService.stopLoading();
     this.modalController.dismiss(false);
+    const isDesktop = await this.hardwareService.isDesktopSite();
+    this.alertService.presentToast(this.translate.instant('reset_password_page.error'), 3000, 'top',
+        'top', !isDesktop, this.getCurrentLanguageCode());
   }
 
   async openStoreSelection() {

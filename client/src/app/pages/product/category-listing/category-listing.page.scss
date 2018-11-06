@@ -306,15 +306,19 @@
       vertical-align: bottom;
     }
     .edit-btn{
-      --height: 24px;
-      --border-radius: 5px;
+      color: var(--ion-tabs-color);
+      text-decoration: underline;
+      font-weight: 600;
       font-size: 12px;
-      --box-shadow: none;
-      --color: black;
-      --background-focused:var(--ion-color-success);
-      --background-activated:var(--ion-color-success);
-      --border-width: 1px;
-      --border-style: solid;
+      //--height: 24px;
+      //--border-radius: 5px;
+      //font-size: 12px;
+      //--box-shadow: none;
+      //--color: black;
+      //--background-focused:var(--ion-color-success);
+      //--background-activated:var(--ion-color-success);
+      //--border-width: 1px;
+      //--border-style: solid;
     }
     .delivey-show{
       white-space: nowrap;

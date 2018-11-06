@@ -38,7 +38,7 @@
                   <small text-uppercase>{{getCurrentStore()?.address}}</small>
                 </div>
               </ion-label>
-              <ion-button slot="end" class="edit-btn" color="medium" mode="ios" (click)="goToPage('home')">{{ 'header.edit' | translate }}</ion-button>
+              <div slot="end" class="edit-btn" color="medium" mode="ios" (click)="goToPage('home')">{{ 'header.edit' | translate }}</div>
             </ion-item>
           </ion-hide-when>
             <ng-container *ngFor="let item of navigations; let i = index;">

@@ -65,12 +65,18 @@ export class ProductDetailsComponent extends SimpleProductComponent implements O
     this.modalController.dismiss(true);
   }
 
-  handleAddToCartActionFailure() {
+  async handleAddToCartActionFailure() {
     this.loaderService.stopLoading();
+    const isDesktop = await this.hardwareService.isDesktopSite();
+    this.alertService.presentToast(this.translate.instant('reset_password_page.error'), 3000, 'top',
+        'top', !isDesktop, this.getCurrentLanguageCode());
   }
 
-  handleEditCartActionFailure() {
+  async handleEditCartActionFailure() {
     this.loaderService.stopLoading();
+    const isDesktop = await this.hardwareService.isDesktopSite();
+    this.alertService.presentToast(this.translate.instant('reset_password_page.error'), 3000, 'top',
+        'top', !isDesktop, this.getCurrentLanguageCode());
   }
 
   async openStoreSelection() {

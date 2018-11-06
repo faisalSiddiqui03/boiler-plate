@@ -494,13 +494,6 @@ ion-item {
       display: block;
     }
   }
-
-  .toast {
-    .toast-wrapper {
-      text-align: center;
-      max-width: inherit;
-    }
-  }
 }
 
 .voucher-modal-wrap {
@@ -629,11 +622,6 @@ ion-item {
 
 // Toast
 ion-toast {
-
-  --background: var(--ion-color-secondary);
-  --button-color: var(--ion-color-light);
-  --color: var(--ion-color-light);
-
   &.top {
     top: 50px;
   }
@@ -642,14 +630,6 @@ ion-toast {
 // RTL Styles
 html {
   &[dir="rtl"] {
-    .toast {
-      .toast-button {
-        &::before {
-          content: 'عرض العربة';
-        }
-      }
-    }
-
     .voucher-modal-wrap {
       .voucher-modal {
         .close-icon {

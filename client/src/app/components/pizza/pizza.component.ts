@@ -111,8 +111,11 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
     this.goBack();
   }
 
-  handleAddToCartActionFailure(data) {
+  async handleAddToCartActionFailure(data) {
     this.loaderService.stopLoading();
+    const isDesktop = await this.hardwareService.isDesktopSite();
+    this.alertService.presentToast(this.translate.instant('reset_password_page.error'), 3000, 'top',
+        'top', !isDesktop, this.getCurrentLanguageCode());
   }
 
   handleEditCartActionSuccess(data) {
@@ -120,9 +123,12 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
     this.modalController.dismiss(true);
   }
 
-  handleEditCartActionFailure(data) {
+  async handleEditCartActionFailure(data) {
     this.loaderService.stopLoading();
     this.modalController.dismiss(false);
+    const isDesktop = await this.hardwareService.isDesktopSite();
+    this.alertService.presentToast(this.translate.instant('reset_password_page.error'), 3000, 'top',
+        'top', !isDesktop, this.getCurrentLanguageCode());
   }
 
   close() {
