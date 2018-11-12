@@ -57,7 +57,7 @@
         <span text-uppercase (click)="goToPage('signup')">{{ 'header.register' | translate }}</span>
       </div>
       <div class="signin-register loggedin-user" *ngIf="!dealsHeader && getUserModel()?.userId != 0">
-        <div class="icon icon-user-circle" (click)="goToPage('login')"></div>
+        <div class="icon icon-user-circle"></div>
         <span (click)="showDropDown()" text-uppercase>{{'my_account_page.hello' | translate}} {{getUserModel()?.firstName}}</span>
         <div (click)="showDropDown()" class="icon-arrow icon-arrow-down-2"></div>
         <div class="dropdown" [class.open]="enableUserDropdown">

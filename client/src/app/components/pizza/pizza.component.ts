@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, EventEmitter} from '@angular/core';
 import {pwaLifeCycle} from '@capillarytech/pwa-framework';
 import {IncrementValidator, DecrementValidator} from '../../helpers/validators/index';
 import {AttributeName, AttributeValue} from '@capillarytech/pwa-components/pizza-builder/attribute-name-value';
 import {AlertService, LoaderService, HardwareService} from '@capillarytech/pwa-ui-helpers';
-import {TranslateService} from '@capillarytech/pwa-framework';
+import {TranslateService, CapRouterService} from '@capillarytech/pwa-framework';
 import {ModalController} from '@ionic/angular';
 import {StoreSelectionModalComponent} from '../store-selection-modal/store-selection-modal.component';
 import {PizzaBuilderComponent} from '@capillarytech/pwa-components/pizza-builder/pizza-builder.component';
@@ -25,6 +25,7 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
     private loaderService: LoaderService,
     private modalController: ModalController,
     private hardwareService: HardwareService,
+    private capRouterService: CapRouterService
   ) {
     super(translate);
     this.translate.use(this.getCurrentLanguageCode());
@@ -98,11 +99,22 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
 
   async handleAddToCartActionSuccess(data) {
     this.loaderService.stopLoading();
+    const showcartAction = new EventEmitter<any>();
+    showcartAction.subscribe(data => {
+      if (this.productFromDeal || this.cartItem || this.fromFavorites) {
+        this.modalController.dismiss();
+      }
+      this.capRouterService.routeByUrl('/cart');
+    });
+
     const isDesktop = await this.hardwareService.isDesktopSite();
     if (!isDesktop) {
-      await this.alertService.presentToastWithShowCart(
+      // await this.alertService.presentToastWithShowCart(
+      //   this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'),
+      //   3000, 'top', '/' + this.getCurrentLanguageCode() + '/cart', 'top');
+      await this.alertService.presentToastWithShowCartAndAction(
         this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'),
-        3000, 'top', '/' + this.getCurrentLanguageCode() + '/cart', 'top');
+        3000, 'top', showcartAction, 'top');
     } else {
       await this.alertService.presentToast(
         this.clientProduct.title + ' ' + this.translate.instant('pizza.added_to_cart'),
@@ -115,7 +127,7 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
     this.loaderService.stopLoading();
     const isDesktop = await this.hardwareService.isDesktopSite();
     this.alertService.presentToast(this.translate.instant('reset_password_page.error'), 3000, 'top',
-        'top', !isDesktop, this.getCurrentLanguageCode());
+      'top', !isDesktop, this.getCurrentLanguageCode());
   }
 
   handleEditCartActionSuccess(data) {
@@ -128,7 +140,7 @@ export class PizzaComponent extends PizzaBuilderComponent implements OnInit {
     this.modalController.dismiss(false);
     const isDesktop = await this.hardwareService.isDesktopSite();
     this.alertService.presentToast(this.translate.instant('reset_password_page.error'), 3000, 'top',
-        'top', !isDesktop, this.getCurrentLanguageCode());
+      'top', !isDesktop, this.getCurrentLanguageCode());
   }
 
   close() {
