@@ -434,6 +434,7 @@ export class SelectionComponent extends StoreSelectionComponent {
   async handleWidgetActionLocateMeFailed(data: any) {
 
     const msg = await this.translate.instant('home_page.allow_location_access');
+    await this.loaderService.stopLoading();
     this.alertService.presentToast(msg, 1000, 'bottom');
   }
 
