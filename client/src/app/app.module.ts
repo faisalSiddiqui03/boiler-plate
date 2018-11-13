@@ -41,9 +41,9 @@ import { AuthGuard } from './auth.guard';
 import { HttpLoaderFactory } from './translation.loader';
 import { appConfig } from '../../config/config';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-selection/delivery-slot-selection.module';
-import { LocationPageModule } from './pages/checkout/location/location.module';
-import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
+// import { DeliverySlotSelectionModule } from './pages/checkout/delivery-slot-selection/delivery-slot-selection.module';
+// import { LocationPageModule } from './pages/checkout/location/location.module';
+// import { SearchLocationPageModule } from './pages/user/profile/search-location/search-location.module';
 import { RoutingState } from './routing-state';
 import { MainPageText as ArabicTranslationText } from '@assets/i18n/ar'
 import { MainPageText as EnglishTranslationText } from '@assets/i18n/en'
@@ -96,9 +96,9 @@ export function getTranslationText() {
     HttpClientModule,
     FulfilmentModeModule,
     ImagePreloadModule,
-    DeliverySlotSelectionModule,
-    LocationPageModule,
-    SearchLocationPageModule,
+    // DeliverySlotSelectionModule,
+    // LocationPageModule,
+    // SearchLocationPageModule,
     EventTrackServiceModule.forRoot([EventTrackServiceModule.Tracker.GTM]),
     EventTrackWidgetModule,
     CapRouterServiceModule.forRoot(true),

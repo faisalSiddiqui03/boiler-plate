@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <userid-password-signin-widget
+        [componentId]="getComponentId()" class="w-400"
+        [action]="useridPasswordSigninAction"
+      >
+    <ng-template let-widget="widget">
+      <ng-container>
+
+        <div *ngIf="!widget || !widget.model">
+          sign in widget is loading
+        </div>
+        <div *ngIf="widget && widget.model">
+          <form padding [formGroup]="userIdSigninForm">
+            <div>
+              <ion-label for="email" text-capitalize>email</ion-label>
+              <div class="form-input">
+                <ion-input id="email" placeholder="sign in placeholder" inputmode="email"
+                          formControlName="email"></ion-input>
+              </div>
+            </div>
+          
+            <div>
+              <ion-label for="password" text-capitalize>password</ion-label>
+              <div class="form-input">
+                <ion-input id="password" placeholder="sign in password" inputmode="password"
+                          formControlName="password"></ion-input>
+              </div>
+            </div>
+
+          </form>
+
+          <ion-button color="success" class="btn-success" text-capitalize expand="block" mode="ios" (click)="signIn()">Sign In
+          </ion-button>
+        </div>
+        
+
+
+      </ng-container>
+    </ng-template>
+  </userid-password-signin-widget>
+  
+
+</ion-content>
