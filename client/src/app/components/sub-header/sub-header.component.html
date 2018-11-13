@@ -1,7 +1,0 @@
-<ion-toolbar class="page-header">
-    <ion-buttons slot="start">
-      <div *ngIf="!isModal" class="icon icon-arrow-prev-2" (click)="goBack()"></div>
-      <div *ngIf="isModal" class="icon icon-arrow-prev-2" (click)="closeModal()"></div>
-    </ion-buttons>
-    <ion-title text-center text-uppercase><span *ngIf="lockIcon" class="icon-lock"></span>{{ title }}</ion-title>
-  </ion-toolbar>
