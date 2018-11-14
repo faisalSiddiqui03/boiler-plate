@@ -1,29 +1,26 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import {
+  Action,
   pwaLifeCycle,
   pageView,
   CapRouterService,
   WidgetNames,
-  Action,
-  OnWidgetActionsLifecyle,
-  OnWidgetLifecyle,
 } from '@capillarytech/pwa-framework';
 import { UserIdPwdSigninWidgetActions } from '@cap-widget/authentication/userid-password-signin';
 import { BaseComponent } from './../../base-component';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 
-@pwaLifeCycle()
 @pageView()
+@pwaLifeCycle()
 export class LoginPage extends BaseComponent implements OnInit {
   userIdSigninForm: FormGroup;
-  public useridPasswordWidgetModels: any;
-  public useridPasswordSigninAction = new EventEmitter();
+  loginWidgetModel: any;
+  useridPasswordSigninAction = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,46 +36,46 @@ export class LoginPage extends BaseComponent implements OnInit {
   ngOnInit() {
   }
 
-  signIn(){
-    this.useridPasswordWidgetModels.userName = this.userIdSigninForm.value.email;
-    this.useridPasswordWidgetModels.password = this.userIdSigninForm.value.password;
-
+  signIn() {
+    console.log('in signin');
+    this.loginWidgetModel.userName = this.userIdSigninForm.value.email;
+    this.loginWidgetModel.password = this.userIdSigninForm.value.password;
     this.useridPasswordSigninAction.emit(new Action(UserIdPwdSigninWidgetActions.ACTION_SIGN_IN));
   }
 
-  widgetLoadingSuccess(name: string, data: any) {
+  widgetLoadingFailed(name: string, data: any) {
     switch(name) {
       case WidgetNames.USERID_PWD_SIGNIN:
-        console.log('sign in widget loadin success');
-        this.useridPasswordWidgetModels = data;
+        console.log('widget failed');
     }
   }
 
   widgetLoadingStarted(name: string, data: any) {
     switch(name) {
       case WidgetNames.USERID_PWD_SIGNIN:
-        console.log('sign in widget loadin started');
+        console.log('widget started');
     }
   }
-
-  widgetLoadingFailed(name: string, data: any) {
+  
+  widgetLoadingSuccess(name: string, data: any) {
     switch(name) {
       case WidgetNames.USERID_PWD_SIGNIN:
-        console.log('sign in widget loadin failed');
+        console.log('widget success');
+        this.loginWidgetModel = data;
     }
   }
 
-  widgetActionFailed(name: string, data: any) {
+  widgetActionFaliure(name: string, data: any) {
     switch(name) {
       case UserIdPwdSigninWidgetActions.ACTION_SIGN_IN:
-        console.log('sign in action failed');
+        console.log('widget action failed');
     }
   }
 
   widgetActionSuccess(name: string, data: any) {
     switch(name) {
       case UserIdPwdSigninWidgetActions.ACTION_SIGN_IN:
-        console.log('sign in action success');
+        console.log('widget action success');
         this.capRouter.routeByUrl('/home');
     }
   }
