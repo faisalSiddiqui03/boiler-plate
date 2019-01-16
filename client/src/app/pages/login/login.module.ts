@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login.page';
-import { UseridPasswordSigninWidgetModule } from '@cap-widget/authentication/userid-password-signin';
+import { UseridPasswordSigninWidgetModule } from '@capillarytech/pwa-framework/widgets/authentication';
 
 const routes: Routes = [
   {

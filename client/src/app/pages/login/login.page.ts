@@ -1,13 +1,12 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import {UserIdPwdSigninWidgetActions } from '@capillarytech/pwa-framework/widgets/authentication';
 import {
   Action,
   pwaLifeCycle,
-  pageView,
-  CapRouterService,
   WidgetNames,
+  CapRouterService
 } from '@capillarytech/pwa-framework';
-import { UserIdPwdSigninWidgetActions } from '@cap-widget/authentication/userid-password-signin';
 import { BaseComponent } from './../../base-component';
 @Component({
   selector: 'app-login',
@@ -15,12 +14,11 @@ import { BaseComponent } from './../../base-component';
   styleUrls: ['./login.page.scss'],
 })
 
-@pageView()
 @pwaLifeCycle()
 export class LoginPage extends BaseComponent implements OnInit {
   userIdSigninForm: FormGroup;
-  loginWidgetModel: any;
-  useridPasswordSigninAction = new EventEmitter();
+  signInAction = new EventEmitter();
+  loginModel: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,10 +36,11 @@ export class LoginPage extends BaseComponent implements OnInit {
 
   signIn() {
     console.log('in signin');
-    this.loginWidgetModel.userName = this.userIdSigninForm.value.email;
-    this.loginWidgetModel.password = this.userIdSigninForm.value.password;
-    this.useridPasswordSigninAction.emit(new Action(UserIdPwdSigninWidgetActions.ACTION_SIGN_IN));
+    this.loginModel.userName = this.userIdSigninForm.value.email;
+    this.loginModel.password = this.userIdSigninForm.value.password;
+    this.signInAction.emit(new Action(UserIdPwdSigninWidgetActions.ACTION_SIGN_IN));
   }
+
 
   widgetLoadingFailed(name: string, data: any) {
     switch(name) {
@@ -53,31 +52,32 @@ export class LoginPage extends BaseComponent implements OnInit {
   widgetLoadingStarted(name: string, data: any) {
     switch(name) {
       case WidgetNames.USERID_PWD_SIGNIN:
-        console.log('widget started');
+        console.log('widget strartign');
     }
   }
-  
+
   widgetLoadingSuccess(name: string, data: any) {
     switch(name) {
       case WidgetNames.USERID_PWD_SIGNIN:
         console.log('widget success');
-        this.loginWidgetModel = data;
+        this.loginModel = data;
     }
   }
 
-  widgetActionFaliure(name: string, data: any) {
+  widgetActionFailed(name: string, data: any) {
     switch(name) {
       case UserIdPwdSigninWidgetActions.ACTION_SIGN_IN:
-        console.log('widget action failed');
+        console.log('widget failed', data);
     }
   }
 
   widgetActionSuccess(name: string, data: any) {
     switch(name) {
       case UserIdPwdSigninWidgetActions.ACTION_SIGN_IN:
-        console.log('widget action success');
+        console.log('widget success');
         this.capRouter.routeByUrl('/home');
     }
   }
+
 
 }
